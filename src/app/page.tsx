@@ -1,139 +1,177 @@
-import { prisma } from "@/lib/prisma";
+import { Building2, CreditCard, Shield, Users } from "lucide-react";
+import { AppShell } from "@/components/layout/AppShell";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
+import { Card, CardBody } from "@/components/ui/Card";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Table } from "@/components/ui/Table";
 
-export default async function HomePage() {
-    const totalUsuarios = await prisma.sysUsuario.count({
-        where: {
-            ativo: 1,
-            deleted_at: null,
-        },
-    });
+const metricas = [
+    {
+        label: "Atléticas ativas",
+        value: "1",
+        icon: Shield,
+        helper: "Plano DEV ativo",
+    },
+    {
+        label: "Usuários",
+        value: "1",
+        icon: Users,
+        helper: "Admin inicial",
+    },
+    {
+        label: "Parceiros",
+        value: "0",
+        icon: Building2,
+        helper: "Fase futura",
+    },
+    {
+        label: "Assinaturas",
+        value: "1",
+        icon: CreditCard,
+        helper: "Ambiente dev",
+    },
+];
 
-    const totalAtleticas = await prisma.atlAtletica.count({
-        where: {
-            ativo: 1,
-            deleted_at: null,
-        },
-    });
+const atleticas = [
+    {
+        nome: "Computaria",
+        sigla: "AAACCU",
+        instituicao: "UNIVALI",
+        plano: "Dev",
+        status: "Ativa",
+    },
+];
 
-    const totalCursos = await prisma.eduCurso.count({
-        where: {
-            ativo: 1,
-            deleted_at: null,
-        },
-    });
-
-    const atleticas = await prisma.atlAtletica.findMany({
-        where: {
-            ativo: 1,
-            deleted_at: null,
-        },
-        include: {
-            edu_instituicao: true,
-            atl_atletica_tema: true,
-            atl_atletica_assinatura: {
-                include: {
-                    sys_assinatura_plano: true,
-                    atl_atletica_assinatura_status: true,
-                },
-            },
-        },
-        orderBy: {
-            nome: "asc",
-        },
-    });
-
+export default function HomePage() {
     return (
-        <main style={{ padding: 32, fontFamily: "Arial, sans-serif" }}>
-            <h1>Brava Pass</h1>
+        <AppShell>
+            <PageHeader
+                title="Dashboard Brava Pass"
+                subtitle="Painel principal do sistema. Aqui sempre usamos a identidade visual oficial do Brava Pass."
+                actions={
+                    <>
+                        <Button variant="secondary">Configurar sistema</Button>
+                        <Button>Nova atlética</Button>
+                    </>
+                }
+            />
 
-            <p>
-                Base inicial do sistema carregada com Next, Prisma e MariaDB.
-            </p>
+            <section className="bp-grid bp-grid-4" style={{ marginBottom: 24 }}>
+                {metricas.map((metrica) => {
+                    const Icon = metrica.icon;
 
-            <section
-                style={{
-                    display: "flex",
-                    gap: 16,
-                    marginTop: 24,
-                    marginBottom: 32,
-                }}
-            >
-                <div style={cardStyle}>
-                    <strong>Usuários</strong>
-                    <p style={numberStyle}>{totalUsuarios}</p>
-                </div>
+                    return (
+                        <Card key={metrica.label}>
+                            <CardBody>
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        gap: 16,
+                                    }}
+                                >
+                                    <div>
+                                        <p
+                                            style={{
+                                                margin: 0,
+                                                color: "var(--color-text-muted)",
+                                                fontSize: 13,
+                                            }}
+                                        >
+                                            {metrica.label}
+                                        </p>
+                                        <strong
+                                            style={{
+                                                display: "block",
+                                                marginTop: 10,
+                                                fontSize: 30,
+                                            }}
+                                        >
+                                            {metrica.value}
+                                        </strong>
+                                        <span
+                                            style={{
+                                                display: "block",
+                                                marginTop: 6,
+                                                color: "var(--color-text-soft)",
+                                                fontSize: 13,
+                                            }}
+                                        >
+                      {metrica.helper}
+                    </span>
+                                    </div>
 
-                <div style={cardStyle}>
-                    <strong>Atléticas</strong>
-                    <p style={numberStyle}>{totalAtleticas}</p>
-                </div>
-
-                <div style={cardStyle}>
-                    <strong>Cursos</strong>
-                    <p style={numberStyle}>{totalCursos}</p>
-                </div>
+                                    <div
+                                        style={{
+                                            width: 44,
+                                            height: 44,
+                                            borderRadius: 16,
+                                            background: "var(--color-primary-soft)",
+                                            color: "var(--color-primary)",
+                                            display: "grid",
+                                            placeItems: "center",
+                                        }}
+                                    >
+                                        <Icon size={21} />
+                                    </div>
+                                </div>
+                            </CardBody>
+                        </Card>
+                    );
+                })}
             </section>
 
-            <section>
-                <h2>Atléticas cadastradas</h2>
+            <section className="bp-grid bp-grid-3" style={{ marginBottom: 24 }}>
+                <Card style={{ gridColumn: "span 2" }}>
+                    <CardBody>
+                        <div style={{ marginBottom: 18 }}>
+                            <h2 className="bp-section-title">Atléticas recentes</h2>
+                            <p className="bp-section-subtitle">
+                                Primeiras organizações cadastradas no Brava Pass.
+                            </p>
+                        </div>
 
-                {atleticas.length === 0 && (
-                    <p>Nenhuma atlética cadastrada ainda.</p>
-                )}
+                        <Table
+                            headers={["Atlética", "Instituição", "Plano", "Status"]}
+                        >
+                            {atleticas.map((atletica) => (
+                                <tr key={atletica.sigla}>
+                                    <td>
+                                        <strong>{atletica.nome}</strong>
+                                        <br />
+                                        <span style={{ color: "var(--color-text-muted)" }}>
+                      {atletica.sigla}
+                    </span>
+                                    </td>
+                                    <td>{atletica.instituicao}</td>
+                                    <td>{atletica.plano}</td>
+                                    <td>
+                                        <Badge variant="success">{atletica.status}</Badge>
+                                    </td>
+                                </tr>
+                            ))}
+                        </Table>
+                    </CardBody>
+                </Card>
 
-                <div style={{ display: "grid", gap: 16 }}>
-                    {atleticas.map((atletica) => {
-                        const assinaturaAtual = atletica.atl_atletica_assinatura[0];
+                <Card>
+                    <CardBody>
+                        <h2 className="bp-section-title">Próximas ações</h2>
+                        <p className="bp-section-subtitle">
+                            Checklist visual para validar a base inicial.
+                        </p>
 
-                        return (
-                            <article key={atletica.id} style={cardStyle}>
-                                <h3>{atletica.nome}</h3>
-
-                                <p>
-                                    <strong>Sigla:</strong> {atletica.sigla}
-                                </p>
-
-                                <p>
-                                    <strong>Slug:</strong> {atletica.slug}
-                                </p>
-
-                                <p>
-                                    <strong>Instituição:</strong>{" "}
-                                    {atletica.edu_instituicao.nome}
-                                </p>
-
-                                <p>
-                                    <strong>Tema:</strong>{" "}
-                                    {atletica.atl_atletica_tema
-                                        ? `${atletica.atl_atletica_tema.cor_primaria} / ${atletica.atl_atletica_tema.cor_secundaria}`
-                                        : "Sem tema"}
-                                </p>
-
-                                <p>
-                                    <strong>Assinatura:</strong>{" "}
-                                    {assinaturaAtual
-                                        ? `${assinaturaAtual.sys_assinatura_plano.nome} - ${assinaturaAtual.atl_atletica_assinatura_status.nome}`
-                                        : "Sem assinatura"}
-                                </p>
-                            </article>
-                        );
-                    })}
-                </div>
+                        <div style={{ display: "grid", gap: 12, marginTop: 18 }}>
+                            <Badge variant="success">SYS criado</Badge>
+                            <Badge variant="success">EDU criado</Badge>
+                            <Badge variant="success">ATL criado</Badge>
+                            <Badge variant="warning">Autenticação pendente</Badge>
+                            <Badge>Parceiros futuro</Badge>
+                        </div>
+                    </CardBody>
+                </Card>
             </section>
-        </main>
+        </AppShell>
     );
 }
-
-const cardStyle: React.CSSProperties = {
-    border: "1px solid #ddd",
-    borderRadius: 12,
-    padding: 16,
-    background: "#fff",
-    minWidth: 160,
-};
-
-const numberStyle: React.CSSProperties = {
-    fontSize: 28,
-    fontWeight: "bold",
-    margin: "8px 0 0",
-};
