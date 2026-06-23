@@ -9,6 +9,7 @@ import {
     useState,
 } from "react";
 import { Check, ChevronDown, Loader2, Search, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export type AsyncSelectOption = {
     id: number | string;
@@ -32,6 +33,7 @@ type AsyncSelectBaseProps = {
     emptyMessage?: string;
     loadingMessage?: string;
     maxSelected?: number;
+    className?: string;
 };
 
 type AsyncSelectSingleProps = AsyncSelectBaseProps & {
@@ -68,6 +70,7 @@ export function AsyncSelect(props: AsyncSelectProps) {
         emptyMessage = "Nenhum resultado encontrado.",
         loadingMessage = "Buscando...",
         maxSelected,
+        className,
     } = props;
 
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -344,7 +347,7 @@ export function AsyncSelect(props: AsyncSelectProps) {
     }, []);
 
     return (
-        <div ref={containerRef} className="bp-async-select">
+        <div ref={containerRef} className={cn("bp-async-select", className)}>
             {label && <span className="bp-label">{label}</span>}
 
             {isMultiple && multipleValue.length > 0 && (
@@ -434,9 +437,10 @@ export function AsyncSelect(props: AsyncSelectProps) {
                                 <button
                                     key={option.id}
                                     type="button"
-                                    className={`bp-async-select-option ${
-                                        active ? "active" : ""
-                                    }`}
+                                    className={cn(
+                                        "bp-async-select-option",
+                                        active && "active"
+                                    )}
                                     onMouseEnter={() => setHighlightIndex(index)}
                                     onClick={() => handleSelect(option)}
                                 >

@@ -1,0 +1,217 @@
+.bp-card {
+    border: 1px solid var(--color-border);
+    background: rgba(23, 26, 35, 0.88);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    color: var(--color-text);
+}
+
+.bp-card-elevated {
+    background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.055), transparent 42%),
+            rgba(23, 26, 35, 0.92);
+    box-shadow: var(--shadow-lg);
+}
+
+.bp-card-soft {
+    background: var(--color-primary-soft);
+    border-color: var(--color-primary-border);
+}
+
+/*
+ * Card com fundo primary.
+ * Resolve o problema de primary branco + texto branco usando foreground.
+ */
+.bp-card-primary {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-primary-foreground);
+    box-shadow: 0 18px 60px var(--color-primary-soft);
+}
+
+.bp-card-primary .bp-card-body,
+.bp-card-primary h1,
+.bp-card-primary h2,
+.bp-card-primary h3,
+.bp-card-primary h4,
+.bp-card-primary p,
+.bp-card-primary span,
+.bp-card-primary strong,
+.bp-card-primary small {
+    color: inherit;
+}
+
+.bp-card-primary .bp-section-subtitle,
+.bp-card-primary .bp-page-subtitle {
+    color: color-mix(in srgb, var(--color-primary-foreground) 72%, transparent);
+}
+
+.bp-card-body {
+    padding: var(--space-card-desktop);
+}
+
+.bp-button {
+    border: 0;
+    border-radius: var(--radius-md);
+    min-height: 42px;
+    padding: 0 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: 0.18s ease;
+    font-weight: 700;
+    font-size: var(--font-size-md);
+    white-space: nowrap;
+}
+
+.bp-button:disabled {
+    opacity: 0.58;
+    cursor: not-allowed;
+}
+
+.bp-button-primary {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+}
+
+.bp-button-primary:hover:not(:disabled) {
+    background: var(--color-primary-hover);
+}
+
+.bp-button-secondary {
+    background: var(--color-secondary);
+    color: var(--color-secondary-foreground);
+    border: 1px solid var(--color-border);
+}
+
+.bp-button-secondary:hover:not(:disabled) {
+    background: var(--color-secondary-hover);
+}
+
+.bp-button-ghost {
+    background: transparent;
+    color: var(--color-text-muted);
+}
+
+.bp-button-ghost:hover:not(:disabled) {
+    background: var(--color-secondary);
+    color: var(--color-text);
+}
+
+.bp-button-warning {
+    background: var(--color-warning);
+    color: var(--color-warning-foreground);
+}
+
+.bp-button-danger {
+    background: var(--color-danger);
+    color: var(--color-danger-foreground);
+}
+
+.bp-button-info {
+    background: var(--color-info);
+    color: var(--color-info-foreground);
+}
+
+.bp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;
+    max-width: 100%;
+    border-radius: var(--radius-full);
+    padding: 5px 10px;
+    font-size: var(--font-size-xs);
+    font-weight: 800;
+    line-height: 1.2;
+    border: 1px solid var(--color-border);
+    background: var(--color-secondary);
+    color: var(--color-text-muted);
+}
+
+.bp-badge-primary {
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    border-color: var(--color-primary-border);
+}
+
+.bp-badge-success {
+    background: var(--color-success-soft);
+    color: var(--color-success);
+    border-color: var(--color-success-border);
+}
+
+.bp-badge-warning {
+    background: var(--color-warning-soft);
+    color: var(--color-warning);
+    border-color: var(--color-warning-border);
+}
+
+.bp-badge-danger {
+    background: var(--color-danger-soft);
+    color: var(--color-danger);
+    border-color: var(--color-danger-border);
+}
+
+.bp-badge-info {
+    background: var(--color-info-soft);
+    color: var(--color-info);
+    border-color: var(--color-info-border);
+}
+
+.bp-page-title {
+    margin: 0;
+    font-size: var(--page-title-size);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+}
+
+.bp-page-subtitle {
+    margin: 8px 0 0;
+    color: var(--color-text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.bp-section-title {
+    margin: 0;
+    font-size: var(--section-title-size);
+    line-height: 1.2;
+}
+
+.bp-section-subtitle {
+    margin: 6px 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-md);
+    line-height: 1.55;
+}
+
+.bp-empty {
+    text-align: center;
+    padding: 44px 24px;
+    color: var(--color-text-muted);
+}
+
+.bp-skeleton {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-secondary);
+    border-radius: var(--radius-md);
+}
+
+.bp-skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    animation: bp-skeleton 1.3s infinite;
+}
+
+@keyframes bp-skeleton {
+    100% {
+        transform: translateX(100%);
+    }
+}

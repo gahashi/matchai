@@ -1,0 +1,187 @@
+:root,
+[data-theme="brava-system"] {
+    /*
+     * Tema padrão do sistema Brava Pass.
+     * Usado em telas globais: login, dashboard principal, admin, sistema, configurações globais.
+     * Somente versão dark.
+     */
+
+    --bp-background: #0b0c12;
+    --bp-background-2: #090a10;
+    --bp-surface: #11131b;
+    --bp-surface-2: #151823;
+    --bp-card: #171a23;
+    --bp-card-strong: #1d212d;
+    --bp-border: #272b36;
+    --bp-border-soft: rgba(255, 255, 255, 0.08);
+
+    /*
+     * Primary do sistema oficial.
+     * No tema padrão, primary é claro/branco premium.
+     * Sempre usar --color-primary-foreground quando o fundo for primary.
+     */
+    --bp-primary: #f4f4f5;
+    --bp-primary-hover: #e4e4e7;
+    --bp-primary-soft: rgba(244, 244, 245, 0.10);
+    --bp-primary-border: rgba(244, 244, 245, 0.24);
+    --bp-primary-foreground: #0b0c12;
+
+    --bp-secondary: #242938;
+    --bp-secondary-hover: #2d3344;
+    --bp-secondary-foreground: #f7f7f8;
+
+    --bp-text: #f7f7f8;
+    --bp-text-muted: #a6abb7;
+    --bp-text-soft: #707684;
+    --bp-text-disabled: #555b68;
+
+    --bp-success: #22c55e;
+    --bp-success-soft: rgba(34, 197, 94, 0.12);
+    --bp-success-border: rgba(34, 197, 94, 0.24);
+    --bp-success-foreground: #062a15;
+
+    --bp-warning: #f59e0b;
+    --bp-warning-soft: rgba(245, 158, 11, 0.12);
+    --bp-warning-border: rgba(245, 158, 11, 0.24);
+    --bp-warning-foreground: #301b00;
+
+    --bp-danger: #ef4444;
+    --bp-danger-soft: rgba(239, 68, 68, 0.12);
+    --bp-danger-border: rgba(239, 68, 68, 0.24);
+    --bp-danger-foreground: #2c0707;
+
+    --bp-info: #38bdf8;
+    --bp-info-soft: rgba(56, 189, 248, 0.12);
+    --bp-info-border: rgba(56, 189, 248, 0.24);
+    --bp-info-foreground: #031f2f;
+
+    --bp-background-glow: rgba(244, 244, 245, 0.10);
+
+    --radius-xs: 6px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 22px;
+    --radius-2xl: 28px;
+    --radius-full: 999px;
+
+    --shadow-sm: 0 8px 28px rgba(0, 0, 0, 0.18);
+    --shadow-md: 0 18px 60px rgba(0, 0, 0, 0.22);
+    --shadow-lg: 0 24px 80px rgba(0, 0, 0, 0.38);
+
+    --font-size-xs: 12px;
+    --font-size-sm: 13px;
+    --font-size-md: 14px;
+    --font-size-lg: 16px;
+    --font-size-xl: 18px;
+
+    --page-title-size: clamp(24px, 2.4vw, 30px);
+    --section-title-size: clamp(16px, 1.7vw, 18px);
+
+    --space-page-desktop: 24px;
+    --space-page-mobile: 14px;
+    --space-card-desktop: 20px;
+    --space-card-mobile: 15px;
+
+    /*
+     * Alias usados pelos componentes.
+     */
+    --color-background: var(--bp-background);
+    --color-background-2: var(--bp-background-2);
+    --color-background-glow: var(--bp-background-glow);
+
+    --color-surface: var(--bp-surface);
+    --color-surface-2: var(--bp-surface-2);
+    --color-card: var(--bp-card);
+    --color-card-strong: var(--bp-card-strong);
+    --color-border: var(--bp-border);
+    --color-border-soft: var(--bp-border-soft);
+
+    --color-primary: var(--bp-primary);
+    --color-primary-hover: var(--bp-primary-hover);
+    --color-primary-soft: var(--bp-primary-soft);
+    --color-primary-border: var(--bp-primary-border);
+    --color-primary-foreground: var(--bp-primary-foreground);
+
+    --color-secondary: var(--bp-secondary);
+    --color-secondary-hover: var(--bp-secondary-hover);
+    --color-secondary-foreground: var(--bp-secondary-foreground);
+
+    --color-text: var(--bp-text);
+    --color-text-muted: var(--bp-text-muted);
+    --color-text-soft: var(--bp-text-soft);
+    --color-text-disabled: var(--bp-text-disabled);
+
+    --color-success: var(--bp-success);
+    --color-success-soft: var(--bp-success-soft);
+    --color-success-border: var(--bp-success-border);
+    --color-success-foreground: var(--bp-success-foreground);
+
+    --color-warning: var(--bp-warning);
+    --color-warning-soft: var(--bp-warning-soft);
+    --color-warning-border: var(--bp-warning-border);
+    --color-warning-foreground: var(--bp-warning-foreground);
+
+    --color-danger: var(--bp-danger);
+    --color-danger-soft: var(--bp-danger-soft);
+    --color-danger-border: var(--bp-danger-border);
+    --color-danger-foreground: var(--bp-danger-foreground);
+
+    --color-info: var(--bp-info);
+    --color-info-soft: var(--bp-info-soft);
+    --color-info-border: var(--bp-info-border);
+    --color-info-foreground: var(--bp-info-foreground);
+}
+
+/*
+ * Exemplo de tema de entidade.
+ * Usado em páginas internas/públicas de uma atlética específica.
+ * Futuramente esses valores podem vir do banco.
+ */
+[data-theme="dev-atletica"] {
+    --color-background: #07130e;
+    --color-background-2: #06100c;
+    --color-background-glow: rgba(57, 255, 20, 0.14);
+
+    --color-surface: #0d1f17;
+    --color-surface-2: #10281d;
+    --color-card: #132b20;
+    --color-card-strong: #173a29;
+    --color-border: #24513b;
+    --color-border-soft: rgba(168, 201, 181, 0.14);
+
+    --color-primary: #39ff14;
+    --color-primary-hover: #2bd80f;
+    --color-primary-soft: rgba(57, 255, 20, 0.14);
+    --color-primary-border: rgba(57, 255, 20, 0.30);
+    --color-primary-foreground: #07130e;
+
+    --color-secondary: #183527;
+    --color-secondary-hover: #214733;
+    --color-secondary-foreground: #f4fff8;
+
+    --color-text: #f4fff8;
+    --color-text-muted: #a8c9b5;
+    --color-text-soft: #71917c;
+    --color-text-disabled: #4c6756;
+
+    --color-success: #22c55e;
+    --color-success-soft: rgba(34, 197, 94, 0.12);
+    --color-success-border: rgba(34, 197, 94, 0.24);
+    --color-success-foreground: #062a15;
+
+    --color-warning: #f59e0b;
+    --color-warning-soft: rgba(245, 158, 11, 0.12);
+    --color-warning-border: rgba(245, 158, 11, 0.24);
+    --color-warning-foreground: #301b00;
+
+    --color-danger: #ef4444;
+    --color-danger-soft: rgba(239, 68, 68, 0.12);
+    --color-danger-border: rgba(239, 68, 68, 0.24);
+    --color-danger-foreground: #2c0707;
+
+    --color-info: #38bdf8;
+    --color-info-soft: rgba(56, 189, 248, 0.12);
+    --color-info-border: rgba(56, 189, 248, 0.24);
+    --color-info-foreground: #031f2f;
+}

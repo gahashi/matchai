@@ -2,6 +2,7 @@ import "dotenv/config";
 import crypto from "node:crypto";
 import { PrismaClient } from "../src/generated/prisma/client";
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
+import { auth } from "../src/lib/auth/auth";
 
 const adapter = new PrismaMariaDb({
     host: process.env.DB_HOST ?? "localhost",
@@ -56,6 +57,60 @@ async function upsertByCodigo<T extends { id: number }>(
             updated_at: now(),
         },
     });
+}
+
+async function ensureBetterAuthUser(params: {
+    sysUsuarioId: number;
+    nome: string;
+    email: string;
+    senha: string;
+}) {
+    const authUserExistente = await prisma.user.findUnique({
+        where: {
+            email: params.email,
+        },
+    });
+
+    if (authUserExistente) {
+        await prisma.user.update({
+            where: {
+                id: authUserExistente.id,
+            },
+            data: {
+                name: params.nome,
+                emailVerified: true,
+                sysUsuarioId: params.sysUsuarioId,
+                updatedAt: now(),
+            },
+        });
+
+        console.log(`Auth user já existia: ${params.email}`);
+        return authUserExistente;
+    }
+
+    const authUserCriado = await auth.api.signUpEmail({
+        body: {
+            name: params.nome,
+            email: params.email,
+            password: params.senha,
+            sysUsuarioId: params.sysUsuarioId,
+        },
+    });
+
+    await prisma.user.update({
+        where: {
+            email: params.email,
+        },
+        data: {
+            emailVerified: true,
+            sysUsuarioId: params.sysUsuarioId,
+            updatedAt: now(),
+        },
+    });
+
+    console.log(`Auth user criado: ${params.email}`);
+
+    return authUserCriado;
 }
 
 async function main() {
@@ -506,6 +561,13 @@ async function main() {
             },
         }));
 
+
+    await ensureBetterAuthUser({
+        sysUsuarioId: usuarioDev.id,
+        nome: usuarioDev.nome,
+        email: usuarioDev.email,
+        senha: "admin123",
+    });
     /**
      * ATL - Cargos padrão
      */
@@ -967,8 +1029,11 @@ async function main() {
     console.log("Seed executado com sucesso.");
     console.log("Usuário dev:");
     console.log("Email: admin@bravapass.dev");
+    console.log("Nickname: admin_dev");
     console.log("Senha dev: admin123");
-    console.log("Atenção: senha_hash inicial usa SHA-256 apenas para desenvolvimento.");
+    console.log("Auth real criado no Better Auth.");
+    console.log("Atenção: sys_usuario.senha_hash ainda é legado/dev e não será usado para login real.");
+
 }
 
 main()

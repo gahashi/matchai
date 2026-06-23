@@ -1,7 +1,13 @@
 import { HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
-type BadgeVariant = "default" | "success" | "warning";
+type BadgeVariant =
+    | "default"
+    | "primary"
+    | "success"
+    | "warning"
+    | "danger"
+    | "info";
 
 type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
     variant?: BadgeVariant;

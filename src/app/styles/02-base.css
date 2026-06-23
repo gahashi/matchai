@@ -1,0 +1,54 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    background: var(--color-background);
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+            radial-gradient(circle at top left, var(--color-background-glow), transparent 28rem),
+            var(--color-background);
+    color: var(--color-text);
+    font-family:
+            Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+            sans-serif;
+    font-size: var(--font-size-md);
+    line-height: 1.45;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    color: inherit;
+}
+
+img,
+svg {
+    flex-shrink: 0;
+}
+
+::selection {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+}
+
+.hide-mobile {
+    display: inline;
+}

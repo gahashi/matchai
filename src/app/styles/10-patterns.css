@@ -1,0 +1,379 @@
+/*
+ * Padrões reutilizáveis do Brava Pass.
+ * Usar em várias telas antes de criar CSS específico por página.
+ */
+
+/* Espaçamento utilitário simples */
+
+.bp-mb-16 {
+    margin-bottom: 16px;
+}
+
+.bp-mb-24 {
+    margin-bottom: 24px;
+}
+
+.bp-mt-16 {
+    margin-top: 16px;
+}
+
+.bp-mt-18 {
+    margin-top: 18px;
+}
+
+.bp-mt-24 {
+    margin-top: 24px;
+}
+
+/* Linhas, ações e grupos */
+
+.bp-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.bp-row-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.bp-action-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.bp-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Grids reutilizáveis */
+
+.bp-page-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+    gap: 16px;
+}
+
+.bp-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.bp-section-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.bp-span-2 {
+    grid-column: span 2;
+}
+
+/* Hero / destaque principal */
+
+.bp-hero-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.bp-hero-glow {
+    position: absolute;
+    inset: 0;
+    background:
+            radial-gradient(circle at 18% 20%, var(--color-primary-soft), transparent 24rem),
+            linear-gradient(135deg, rgba(255, 255, 255, 0.07), transparent 42%);
+    pointer-events: none;
+}
+
+.bp-hero-content {
+    position: relative;
+    display: grid;
+    gap: 22px;
+}
+
+.bp-hero-title {
+    margin: 0;
+    max-width: 780px;
+    font-size: clamp(30px, 4vw, 52px);
+    line-height: 1;
+    letter-spacing: -0.06em;
+}
+
+.bp-hero-text {
+    margin: 0;
+    max-width: 660px;
+    color: var(--color-text-muted);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.bp-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Card de destaque */
+
+.bp-highlight-card {
+    min-height: 100%;
+}
+
+.bp-highlight-card .bp-card-body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.bp-highlight-card h2 {
+    margin: 14px 0 0;
+    font-size: 26px;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+}
+
+.bp-highlight-card p {
+    margin: 8px 0 0;
+    font-size: 13px;
+    line-height: 1.6;
+    opacity: 0.78;
+}
+
+.bp-pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.bp-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    border-radius: var(--radius-full);
+    border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+    padding: 7px 10px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+/* Métricas */
+
+.bp-metric-card .bp-card-body {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.bp-metric-label {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 13px;
+}
+
+.bp-metric-value {
+    display: block;
+    margin-top: 10px;
+    font-size: 30px;
+    line-height: 1;
+    letter-spacing: -0.05em;
+}
+
+.bp-metric-helper {
+    display: block;
+    margin-top: 6px;
+    color: var(--color-text-soft);
+    font-size: 13px;
+}
+
+.bp-icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 16px;
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    display: grid;
+    place-items: center;
+}
+
+/* Lista de features / módulos */
+
+.bp-feature-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.bp-feature-item {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.035);
+}
+
+.bp-feature-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 15px;
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    display: grid;
+    place-items: center;
+}
+
+.bp-feature-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.bp-feature-head strong {
+    font-size: 14px;
+}
+
+.bp-feature-item p {
+    margin: 5px 0 0;
+    color: var(--color-text-muted);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+/* Checklist */
+
+.bp-check-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.bp-check-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 11px 12px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--color-text-muted);
+    font-size: 13px;
+}
+
+/* Cards de planos */
+
+.bp-plan-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.bp-plan-card h3 {
+    margin: 12px 0 0;
+    font-size: 20px;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+}
+
+.bp-plan-card p {
+    margin: 8px 0 0;
+    color: var(--color-text-muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.bp-plan-price {
+    display: block;
+    margin-top: 18px;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.05em;
+}
+
+.bp-plan-list {
+    display: grid;
+    gap: 8px;
+    margin-top: 16px;
+    color: var(--color-text-muted);
+    font-size: 13px;
+}
+
+/* Texto em tabela */
+
+.bp-table-title strong {
+    display: block;
+}
+
+.bp-table-title span {
+    color: var(--color-text-muted);
+}
+
+/* Responsivo dos padrões */
+
+@media (max-width: 1180px) {
+    .bp-plan-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 980px) {
+    .bp-page-grid,
+    .bp-hero-grid,
+    .bp-section-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bp-span-2 {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 720px) {
+    .bp-hero-title {
+        font-size: 30px;
+    }
+
+    .bp-hero-text {
+        font-size: 14px;
+    }
+
+    .bp-feature-head {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .bp-check-item {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .bp-metric-value {
+        font-size: 26px;
+    }
+
+    .bp-icon-box {
+        width: 40px;
+        height: 40px;
+        border-radius: 14px;
+    }
+}
