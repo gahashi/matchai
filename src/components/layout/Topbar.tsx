@@ -5,8 +5,33 @@ import { Input } from "@/components/ui/Input";
 
 export function Topbar() {
     return (
-        <div className="bp-topbar">
-            <div style={{ flex: 1, maxWidth: 460 }}>
+        <header className="bp-topbar">
+            <div className="bp-topbar-mobile-header">
+                <a href="/" className="bp-topbar-mobile-brand" aria-label="Brava Pass">
+                    <span className="bp-topbar-mobile-logo-box">
+                        <img
+                            src="/brand/brava-pass-symbol-dark.png"
+                            alt=""
+                            className="bp-topbar-mobile-logo"
+                        />
+                    </span>
+
+                    <span className="bp-topbar-mobile-title">
+                        <strong>Brava Pass</strong>
+                        <small>Painel administrativo</small>
+                    </span>
+                </a>
+
+                <div className="bp-topbar-mobile-actions">
+                    <Button variant="secondary" aria-label="Notificações">
+                        <Bell size={17} />
+                    </Button>
+
+                    <Avatar name="Admin Dev" />
+                </div>
+            </div>
+
+            <div className="bp-topbar-search">
                 <div style={{ position: "relative" }}>
                     <Search
                         size={17}
@@ -18,6 +43,7 @@ export function Topbar() {
                             color: "var(--color-text-soft)",
                         }}
                     />
+
                     <Input
                         placeholder="Buscar atléticas, parceiros, eventos..."
                         style={{ paddingLeft: 38 }}
@@ -25,8 +51,8 @@ export function Topbar() {
                 </div>
             </div>
 
-            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <Button variant="secondary">
+            <div className="bp-topbar-actions">
+                <Button variant="secondary" aria-label="Notificações">
                     <Bell size={17} />
                 </Button>
 
@@ -37,6 +63,6 @@ export function Topbar() {
 
                 <Avatar name="Admin Dev" />
             </div>
-        </div>
+        </header>
     );
 }

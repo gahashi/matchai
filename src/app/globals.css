@@ -123,6 +123,7 @@ textarea {
 }
 
 .bp-main {
+    position: relative;
     min-width: 0;
     padding: 24px;
 }
@@ -149,6 +150,71 @@ textarea {
     justify-content: space-between;
     gap: 16px;
     margin-bottom: 24px;
+}
+
+.bp-topbar-search {
+    flex: 1;
+    max-width: 460px;
+}
+
+.bp-topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bp-topbar-mobile-header {
+    display: none;
+}
+
+.bp-topbar-mobile-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.bp-topbar-mobile-logo-box {
+    width: 38px;
+    height: 38px;
+    border-radius: 14px;
+    background: var(--color-primary-soft);
+    border: 1px solid var(--color-border);
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    overflow: hidden;
+}
+
+.bp-topbar-mobile-logo {
+    display: block;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.bp-topbar-mobile-title {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+}
+
+.bp-topbar-mobile-title strong {
+    color: var(--color-text);
+    font-size: 14px;
+    line-height: 1.1;
+}
+
+.bp-topbar-mobile-title small {
+    color: var(--color-text-soft);
+    font-size: 11px;
+    line-height: 1.1;
+}
+
+.bp-topbar-mobile-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .bp-mobile-nav {
@@ -185,6 +251,31 @@ textarea {
     color: var(--color-text-muted);
     font-size: 12px;
     margin-top: 2px;
+}
+
+.bp-sidebar-brand {
+    margin-bottom: 28px;
+}
+
+.bp-sidebar-logo-link {
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+}
+
+.bp-sidebar-logo {
+    display: block;
+    width: 180px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.bp-sidebar-brand-subtitle {
+    display: block;
+    margin-top: 8px;
+    color: var(--color-text-soft);
+    font-size: 12px;
 }
 
 .bp-nav {
@@ -471,13 +562,38 @@ textarea {
         display: none;
     }
 
-    .bp-topbar {
-        align-items: stretch;
-        flex-direction: column;
+    .bp-main {
+        padding: 16px 16px 88px;
     }
 
-    .bp-topbar > div {
-        max-width: none !important;
+    .bp-topbar {
+        height: auto;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 18px;
+    }
+
+    .bp-topbar-mobile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .bp-topbar-search {
+        max-width: none;
+        width: 100%;
+    }
+
+    .bp-topbar-actions {
+        display: none;
+    }
+
+    .bp-topbar-mobile-actions .bp-button {
+        min-height: 36px;
+        width: 36px;
+        padding: 0;
     }
 
     .bp-card-body {
@@ -492,6 +608,9 @@ textarea {
         grid-template-columns: 1fr !important;
     }
 }
+
+
+
 .bp-async-select {
     position: relative;
     width: 100%;
@@ -677,4 +796,156 @@ textarea {
     top: 50%;
     transform: translateY(-50%);
     color: var(--color-primary);
+}
+
+.bp-status-page {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background:
+            radial-gradient(circle at top left, var(--color-background-glow), transparent 28rem),
+            var(--color-background);
+}
+
+.bp-status-card {
+    width: min(100%, 460px);
+    border: 1px solid var(--color-border);
+    background: rgba(23, 26, 35, 0.9);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+    padding: 32px;
+    text-align: center;
+}
+
+.bp-status-logo-wrap {
+    width: 58px;
+    height: 58px;
+    border-radius: 20px;
+    background: var(--color-primary-soft);
+    border: 1px solid var(--color-border);
+    display: grid;
+    place-items: center;
+    margin: 0 auto 18px;
+}
+
+.bp-status-logo {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+}
+
+.bp-status-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 14px;
+    color: var(--color-primary);
+    background: var(--color-primary-soft);
+    border: 1px solid var(--color-border);
+}
+
+.bp-status-icon.danger {
+    color: var(--color-danger);
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.24);
+}
+
+.bp-status-code {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: var(--color-secondary);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.bp-status-card h1 {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 28px;
+    letter-spacing: -0.04em;
+}
+
+.bp-status-card p {
+    margin: 12px auto 0;
+    max-width: 360px;
+    color: var(--color-text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.bp-status-actions {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.bp-status-loading-dots {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin: 0 0 16px;
+}
+
+.bp-status-loading-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--color-primary);
+    animation: bp-status-dot 0.9s infinite ease-in-out;
+}
+
+.bp-status-loading-dots span:nth-child(2) {
+    animation-delay: 0.12s;
+}
+
+.bp-status-loading-dots span:nth-child(3) {
+    animation-delay: 0.24s;
+}
+
+.bp-status-error-debug {
+    margin: 18px 0 0;
+    padding: 12px;
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: left;
+    overflow-x: auto;
+}
+
+@keyframes bp-status-dot {
+    0%,
+    80%,
+    100% {
+        opacity: 0.35;
+        transform: translateY(0);
+    }
+
+    40% {
+        opacity: 1;
+        transform: translateY(-5px);
+    }
+}
+
+@media (max-width: 720px) {
+    .bp-status-card {
+        padding: 24px;
+    }
+
+    .bp-status-card h1 {
+        font-size: 24px;
+    }
 }
