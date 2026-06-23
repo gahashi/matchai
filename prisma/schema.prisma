@@ -26,6 +26,8 @@ model SysUsuario {
   sys_usuario_permission SysUsuarioPermission[]
   atl_atletica_membro    AtlAtleticaMembro[]
 
+  sys_auth_user User?
+
   @@map("sys_usuario")
 }
 
@@ -511,4 +513,72 @@ model AtlAtleticaAssinatura {
   @@index([sys_assinatura_plano_id], map: "atl_atletica_assinatura_fk2")
   @@index([atl_atletica_assinatura_status_id], map: "atl_atletica_assinatura_fk3")
   @@map("atl_atletica_assinatura")
+}
+
+model User {
+  id            String   @id @db.VarChar(191)
+  name          String   @db.VarChar(150)
+  email         String   @unique @db.VarChar(150)
+  emailVerified Boolean  @default(false)
+  image         String?  @db.VarChar(255)
+  createdAt     DateTime @default(now()) @db.DateTime(0)
+  updatedAt     DateTime @updatedAt @db.DateTime(0)
+
+  sysUsuarioId Int        @unique @map("sys_usuario_id")
+  sys_usuario  SysUsuario @relation(fields: [sysUsuarioId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  sessions Session[]
+  accounts Account[]
+
+  @@index([sysUsuarioId], map: "sys_auth_user_fk1")
+  @@map("sys_auth_user")
+}
+
+model Session {
+  id        String   @id @db.VarChar(191)
+  expiresAt DateTime @db.DateTime(0)
+  token     String   @unique @db.VarChar(191)
+  createdAt DateTime @default(now()) @db.DateTime(0)
+  updatedAt DateTime @updatedAt @db.DateTime(0)
+  ipAddress String?  @db.VarChar(45)
+  userAgent String?  @db.Text
+
+  userId String @map("user_id") @db.VarChar(191)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+
+  @@index([userId], map: "sys_auth_session_fk1")
+  @@map("sys_auth_session")
+}
+
+model Account {
+  id                    String    @id @db.VarChar(191)
+  accountId             String    @map("account_id") @db.VarChar(191)
+  providerId            String    @map("provider_id") @db.VarChar(191)
+  userId                String    @map("user_id") @db.VarChar(191)
+  accessToken           String?   @map("access_token") @db.Text
+  refreshToken          String?   @map("refresh_token") @db.Text
+  idToken               String?   @map("id_token") @db.Text
+  accessTokenExpiresAt  DateTime? @map("access_token_expires_at") @db.DateTime(0)
+  refreshTokenExpiresAt DateTime? @map("refresh_token_expires_at") @db.DateTime(0)
+  scope                 String?   @db.Text
+  password              String?   @db.Text
+  createdAt             DateTime  @default(now()) @db.DateTime(0)
+  updatedAt             DateTime  @updatedAt @db.DateTime(0)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+
+  @@index([userId], map: "sys_auth_account_fk1")
+  @@map("sys_auth_account")
+}
+
+model Verification {
+  id         String    @id @db.VarChar(191)
+  identifier String    @db.VarChar(191)
+  value      String    @db.Text
+  expiresAt  DateTime  @db.DateTime(0)
+  createdAt  DateTime? @default(now()) @db.DateTime(0)
+  updatedAt  DateTime? @updatedAt @db.DateTime(0)
+
+  @@index([identifier])
+  @@map("sys_auth_verification")
 }
