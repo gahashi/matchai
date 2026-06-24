@@ -36,6 +36,10 @@ export const routeAccessRules: RouteAccessRule[] = [
         path: "/recuperar-senha",
         access: "guest",
     },
+    {
+        path: "/cadastro",
+        access: "guest",
+    },
 
     /**
      * AUTH

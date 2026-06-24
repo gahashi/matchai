@@ -1,0 +1,18 @@
+.bp-entity-theme {
+    min-height: 100%;
+    background:
+            radial-gradient(circle at top left, var(--color-background-glow), transparent 28rem),
+            var(--color-background);
+    color: var(--color-text);
+}
+
+.bp-entity-theme-surface {
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+.bp-entity-theme-card {
+    background: var(--color-card);
+    color: var(--color-text);
+    border-color: var(--color-border);
+}

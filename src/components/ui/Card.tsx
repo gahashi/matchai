@@ -1,18 +1,28 @@
 import { HTMLAttributes } from "react";
+
 import { cn } from "@/lib/utils";
 
-type CardVariant = "default" | "elevated" | "soft" | "primary";
+type CardVariant =
+    | "default"
+    | "elevated"
+    | "soft"
+    | "solid"
+    | "outline";
 
 type CardProps = HTMLAttributes<HTMLDivElement> & {
     variant?: CardVariant;
 };
 
-export function Card({ className, variant = "default", ...props }: CardProps) {
+export function Card({
+                         className,
+                         variant = "default",
+                         ...props
+                     }: CardProps) {
     return (
         <div
             className={cn(
                 "bp-card",
-                variant !== "default" && `bp-card-${variant}`,
+                `bp-card-${variant}`,
                 className
             )}
             {...props}

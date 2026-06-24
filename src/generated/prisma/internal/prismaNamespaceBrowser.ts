@@ -80,7 +80,10 @@ export const ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  SysEmailLog: 'SysEmailLog',
+  SysEmailVerificationCode: 'SysEmailVerificationCode',
+  SysAuthLoginLog: 'SysAuthLoginLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -110,6 +113,9 @@ export const SysUsuarioScalarFieldEnum = {
   documento: 'documento',
   avatar_url: 'avatar_url',
   ativo: 'ativo',
+  perfil_completo: 'perfil_completo',
+  email_verificado_at: 'email_verificado_at',
+  ultimo_login_at: 'ultimo_login_at',
   created_at: 'created_at',
   updated_at: 'updated_at',
   deleted_at: 'deleted_at'
@@ -553,6 +559,62 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
+export const SysEmailLogScalarFieldEnum = {
+  id: 'id',
+  sys_usuario_id: 'sys_usuario_id',
+  email_to: 'email_to',
+  email_from: 'email_from',
+  subject: 'subject',
+  template: 'template',
+  provider: 'provider',
+  status: 'status',
+  message_id: 'message_id',
+  error_message: 'error_message',
+  metadata_text: 'metadata_text',
+  sent_at: 'sent_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysEmailLogScalarFieldEnum = (typeof SysEmailLogScalarFieldEnum)[keyof typeof SysEmailLogScalarFieldEnum]
+
+
+export const SysEmailVerificationCodeScalarFieldEnum = {
+  id: 'id',
+  sys_usuario_id: 'sys_usuario_id',
+  email: 'email',
+  tipo: 'tipo',
+  codigo_hash: 'codigo_hash',
+  tentativas: 'tentativas',
+  max_tentativas: 'max_tentativas',
+  expires_at: 'expires_at',
+  used_at: 'used_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type SysEmailVerificationCodeScalarFieldEnum = (typeof SysEmailVerificationCodeScalarFieldEnum)[keyof typeof SysEmailVerificationCodeScalarFieldEnum]
+
+
+export const SysAuthLoginLogScalarFieldEnum = {
+  id: 'id',
+  sys_usuario_id: 'sys_usuario_id',
+  email: 'email',
+  evento: 'evento',
+  status: 'status',
+  ip_address: 'ip_address',
+  user_agent: 'user_agent',
+  device_text: 'device_text',
+  location_text: 'location_text',
+  error_message: 'error_message',
+  metadata_text: 'metadata_text',
+  created_at: 'created_at'
+} as const
+
+export type SysAuthLoginLogScalarFieldEnum = (typeof SysAuthLoginLogScalarFieldEnum)[keyof typeof SysAuthLoginLogScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -817,4 +879,43 @@ export const VerificationOrderByRelevanceFieldEnum = {
 } as const
 
 export type VerificationOrderByRelevanceFieldEnum = (typeof VerificationOrderByRelevanceFieldEnum)[keyof typeof VerificationOrderByRelevanceFieldEnum]
+
+
+export const SysEmailLogOrderByRelevanceFieldEnum = {
+  email_to: 'email_to',
+  email_from: 'email_from',
+  subject: 'subject',
+  template: 'template',
+  provider: 'provider',
+  status: 'status',
+  message_id: 'message_id',
+  error_message: 'error_message',
+  metadata_text: 'metadata_text'
+} as const
+
+export type SysEmailLogOrderByRelevanceFieldEnum = (typeof SysEmailLogOrderByRelevanceFieldEnum)[keyof typeof SysEmailLogOrderByRelevanceFieldEnum]
+
+
+export const SysEmailVerificationCodeOrderByRelevanceFieldEnum = {
+  email: 'email',
+  tipo: 'tipo',
+  codigo_hash: 'codigo_hash'
+} as const
+
+export type SysEmailVerificationCodeOrderByRelevanceFieldEnum = (typeof SysEmailVerificationCodeOrderByRelevanceFieldEnum)[keyof typeof SysEmailVerificationCodeOrderByRelevanceFieldEnum]
+
+
+export const SysAuthLoginLogOrderByRelevanceFieldEnum = {
+  email: 'email',
+  evento: 'evento',
+  status: 'status',
+  ip_address: 'ip_address',
+  user_agent: 'user_agent',
+  device_text: 'device_text',
+  location_text: 'location_text',
+  error_message: 'error_message',
+  metadata_text: 'metadata_text'
+} as const
+
+export type SysAuthLoginLogOrderByRelevanceFieldEnum = (typeof SysAuthLoginLogOrderByRelevanceFieldEnum)[keyof typeof SysAuthLoginLogOrderByRelevanceFieldEnum]
 

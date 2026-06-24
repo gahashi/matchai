@@ -8,25 +8,34 @@ datasource db {
 }
 
 model SysUsuario {
-  id           Int       @id @default(autoincrement())
-  nome         String    @db.VarChar(150)
-  nickname     String    @unique @db.VarChar(50)
-  email        String    @unique @db.VarChar(150)
-  telefone     String?   @db.VarChar(30)
-  senha_hash   String    @db.VarChar(255)
-  codigo_aluno String?   @db.VarChar(50)
-  documento    String?   @db.VarChar(30)
-  avatar_url   String?   @db.VarChar(255)
-  ativo        Int       @default(1)
-  created_at   DateTime? @db.DateTime(0)
-  updated_at   DateTime? @db.DateTime(0)
-  deleted_at   DateTime? @db.DateTime(0)
+  id           Int     @id @default(autoincrement())
+  nome         String  @db.VarChar(150)
+  nickname     String  @unique @db.VarChar(50)
+  email        String  @unique @db.VarChar(150)
+  telefone     String? @db.VarChar(30)
+  senha_hash   String? @db.VarChar(255)
+  codigo_aluno String? @db.VarChar(50)
+  documento    String? @db.VarChar(30)
+  avatar_url   String? @db.VarChar(255)
+  ativo        Int     @default(1)
+
+  perfil_completo     Int       @default(0)
+  email_verificado_at DateTime? @db.DateTime(0)
+  ultimo_login_at     DateTime? @db.DateTime(0)
+
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+  deleted_at DateTime? @db.DateTime(0)
 
   sys_usuario_role       SysUsuarioRole[]
   sys_usuario_permission SysUsuarioPermission[]
   atl_atletica_membro    AtlAtleticaMembro[]
 
-  sys_auth_user User?
+  sys_auth_login_log SysAuthLoginLog[]
+
+  sys_auth_user             User?
+  sysEmailLogs              SysEmailLog[]
+  sysEmailVerificationCodes SysEmailVerificationCode[]
 
   @@map("sys_usuario")
 }
@@ -581,4 +590,76 @@ model Verification {
 
   @@index([identifier])
   @@map("sys_auth_verification")
+}
+
+model SysEmailLog {
+  id             Int       @id @default(autoincrement())
+  sys_usuario_id Int?
+  email_to       String    @db.VarChar(180)
+  email_from     String    @db.VarChar(180)
+  subject        String    @db.VarChar(255)
+  template       String?   @db.VarChar(100)
+  provider       String    @default("smtp") @db.VarChar(50)
+  status         String    @default("sent") @db.VarChar(50)
+  message_id     String?   @db.VarChar(255)
+  error_message  String?   @db.Text
+  metadata_text  String?   @db.Text
+  sent_at        DateTime? @db.DateTime(0)
+  created_at     DateTime? @db.DateTime(0)
+  updated_at     DateTime? @db.DateTime(0)
+
+  sys_usuario SysUsuario? @relation(fields: [sys_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@index([sys_usuario_id], map: "sys_email_log_fk1")
+  @@index([email_to])
+  @@index([status])
+  @@index([created_at])
+  @@map("sys_email_log")
+}
+
+model SysEmailVerificationCode {
+  id             Int       @id @default(autoincrement())
+  sys_usuario_id Int?
+  email          String    @db.VarChar(180)
+  tipo           String    @default("email_verification") @db.VarChar(80)
+  codigo_hash    String    @db.VarChar(255)
+  tentativas     Int       @default(0)
+  max_tentativas Int       @default(5)
+  expires_at     DateTime  @db.DateTime(0)
+  used_at        DateTime? @db.DateTime(0)
+  created_at     DateTime? @db.DateTime(0)
+  updated_at     DateTime? @db.DateTime(0)
+  deleted_at     DateTime? @db.DateTime(0)
+
+  sys_usuario SysUsuario? @relation(fields: [sys_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@index([sys_usuario_id], map: "sys_email_verification_code_fk1")
+  @@index([email])
+  @@index([tipo])
+  @@index([expires_at])
+  @@map("sys_email_verification_code")
+}
+
+model SysAuthLoginLog {
+  id             Int       @id @default(autoincrement())
+  sys_usuario_id Int?
+  email          String?   @db.VarChar(150)
+  evento         String    @db.VarChar(80)
+  status         String    @db.VarChar(50)
+  ip_address     String?   @db.VarChar(45)
+  user_agent     String?   @db.Text
+  device_text    String?   @db.VarChar(255)
+  location_text  String?   @db.VarChar(255)
+  error_message  String?   @db.Text
+  metadata_text  String?   @db.Text
+  created_at     DateTime? @db.DateTime(0)
+
+  sys_usuario SysUsuario? @relation(fields: [sys_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@index([sys_usuario_id], map: "sys_auth_login_log_fk1")
+  @@index([email])
+  @@index([evento])
+  @@index([status])
+  @@index([created_at])
+  @@map("sys_auth_login_log")
 }

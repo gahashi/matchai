@@ -29,11 +29,13 @@ export type AggregateSysUsuario = {
 export type SysUsuarioAvgAggregateOutputType = {
   id: number | null
   ativo: number | null
+  perfil_completo: number | null
 }
 
 export type SysUsuarioSumAggregateOutputType = {
   id: number | null
   ativo: number | null
+  perfil_completo: number | null
 }
 
 export type SysUsuarioMinAggregateOutputType = {
@@ -47,6 +49,9 @@ export type SysUsuarioMinAggregateOutputType = {
   documento: string | null
   avatar_url: string | null
   ativo: number | null
+  perfil_completo: number | null
+  email_verificado_at: Date | null
+  ultimo_login_at: Date | null
   created_at: Date | null
   updated_at: Date | null
   deleted_at: Date | null
@@ -63,6 +68,9 @@ export type SysUsuarioMaxAggregateOutputType = {
   documento: string | null
   avatar_url: string | null
   ativo: number | null
+  perfil_completo: number | null
+  email_verificado_at: Date | null
+  ultimo_login_at: Date | null
   created_at: Date | null
   updated_at: Date | null
   deleted_at: Date | null
@@ -79,6 +87,9 @@ export type SysUsuarioCountAggregateOutputType = {
   documento: number
   avatar_url: number
   ativo: number
+  perfil_completo: number
+  email_verificado_at: number
+  ultimo_login_at: number
   created_at: number
   updated_at: number
   deleted_at: number
@@ -89,11 +100,13 @@ export type SysUsuarioCountAggregateOutputType = {
 export type SysUsuarioAvgAggregateInputType = {
   id?: true
   ativo?: true
+  perfil_completo?: true
 }
 
 export type SysUsuarioSumAggregateInputType = {
   id?: true
   ativo?: true
+  perfil_completo?: true
 }
 
 export type SysUsuarioMinAggregateInputType = {
@@ -107,6 +120,9 @@ export type SysUsuarioMinAggregateInputType = {
   documento?: true
   avatar_url?: true
   ativo?: true
+  perfil_completo?: true
+  email_verificado_at?: true
+  ultimo_login_at?: true
   created_at?: true
   updated_at?: true
   deleted_at?: true
@@ -123,6 +139,9 @@ export type SysUsuarioMaxAggregateInputType = {
   documento?: true
   avatar_url?: true
   ativo?: true
+  perfil_completo?: true
+  email_verificado_at?: true
+  ultimo_login_at?: true
   created_at?: true
   updated_at?: true
   deleted_at?: true
@@ -139,6 +158,9 @@ export type SysUsuarioCountAggregateInputType = {
   documento?: true
   avatar_url?: true
   ativo?: true
+  perfil_completo?: true
+  email_verificado_at?: true
+  ultimo_login_at?: true
   created_at?: true
   updated_at?: true
   deleted_at?: true
@@ -237,11 +259,14 @@ export type SysUsuarioGroupByOutputType = {
   nickname: string
   email: string
   telefone: string | null
-  senha_hash: string
+  senha_hash: string | null
   codigo_aluno: string | null
   documento: string | null
   avatar_url: string | null
   ativo: number
+  perfil_completo: number
+  email_verificado_at: Date | null
+  ultimo_login_at: Date | null
   created_at: Date | null
   updated_at: Date | null
   deleted_at: Date | null
@@ -276,18 +301,24 @@ export type SysUsuarioWhereInput = {
   nickname?: Prisma.StringFilter<"SysUsuario"> | string
   email?: Prisma.StringFilter<"SysUsuario"> | string
   telefone?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
-  senha_hash?: Prisma.StringFilter<"SysUsuario"> | string
+  senha_hash?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
   codigo_aluno?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
   documento?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
   avatar_url?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
   ativo?: Prisma.IntFilter<"SysUsuario"> | number
+  perfil_completo?: Prisma.IntFilter<"SysUsuario"> | number
+  email_verificado_at?: Prisma.DateTimeNullableFilter<"SysUsuario"> | Date | string | null
+  ultimo_login_at?: Prisma.DateTimeNullableFilter<"SysUsuario"> | Date | string | null
   created_at?: Prisma.DateTimeNullableFilter<"SysUsuario"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"SysUsuario"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableFilter<"SysUsuario"> | Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleListRelationFilter
   sys_usuario_permission?: Prisma.SysUsuarioPermissionListRelationFilter
   atl_atletica_membro?: Prisma.AtlAtleticaMembroListRelationFilter
+  sys_auth_login_log?: Prisma.SysAuthLoginLogListRelationFilter
   sys_auth_user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  sysEmailLogs?: Prisma.SysEmailLogListRelationFilter
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeListRelationFilter
 }
 
 export type SysUsuarioOrderByWithRelationInput = {
@@ -296,18 +327,24 @@ export type SysUsuarioOrderByWithRelationInput = {
   nickname?: Prisma.SortOrder
   email?: Prisma.SortOrder
   telefone?: Prisma.SortOrderInput | Prisma.SortOrder
-  senha_hash?: Prisma.SortOrder
+  senha_hash?: Prisma.SortOrderInput | Prisma.SortOrder
   codigo_aluno?: Prisma.SortOrderInput | Prisma.SortOrder
   documento?: Prisma.SortOrderInput | Prisma.SortOrder
   avatar_url?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
+  perfil_completo?: Prisma.SortOrder
+  email_verificado_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  ultimo_login_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   sys_usuario_role?: Prisma.SysUsuarioRoleOrderByRelationAggregateInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionOrderByRelationAggregateInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroOrderByRelationAggregateInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogOrderByRelationAggregateInput
   sys_auth_user?: Prisma.UserOrderByWithRelationInput
+  sysEmailLogs?: Prisma.SysEmailLogOrderByRelationAggregateInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeOrderByRelationAggregateInput
   _relevance?: Prisma.SysUsuarioOrderByRelevanceInput
 }
 
@@ -320,18 +357,24 @@ export type SysUsuarioWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SysUsuarioWhereInput | Prisma.SysUsuarioWhereInput[]
   nome?: Prisma.StringFilter<"SysUsuario"> | string
   telefone?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
-  senha_hash?: Prisma.StringFilter<"SysUsuario"> | string
+  senha_hash?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
   codigo_aluno?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
   documento?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
   avatar_url?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
   ativo?: Prisma.IntFilter<"SysUsuario"> | number
+  perfil_completo?: Prisma.IntFilter<"SysUsuario"> | number
+  email_verificado_at?: Prisma.DateTimeNullableFilter<"SysUsuario"> | Date | string | null
+  ultimo_login_at?: Prisma.DateTimeNullableFilter<"SysUsuario"> | Date | string | null
   created_at?: Prisma.DateTimeNullableFilter<"SysUsuario"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"SysUsuario"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableFilter<"SysUsuario"> | Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleListRelationFilter
   sys_usuario_permission?: Prisma.SysUsuarioPermissionListRelationFilter
   atl_atletica_membro?: Prisma.AtlAtleticaMembroListRelationFilter
+  sys_auth_login_log?: Prisma.SysAuthLoginLogListRelationFilter
   sys_auth_user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  sysEmailLogs?: Prisma.SysEmailLogListRelationFilter
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeListRelationFilter
 }, "id" | "nickname" | "email">
 
 export type SysUsuarioOrderByWithAggregationInput = {
@@ -340,11 +383,14 @@ export type SysUsuarioOrderByWithAggregationInput = {
   nickname?: Prisma.SortOrder
   email?: Prisma.SortOrder
   telefone?: Prisma.SortOrderInput | Prisma.SortOrder
-  senha_hash?: Prisma.SortOrder
+  senha_hash?: Prisma.SortOrderInput | Prisma.SortOrder
   codigo_aluno?: Prisma.SortOrderInput | Prisma.SortOrder
   documento?: Prisma.SortOrderInput | Prisma.SortOrder
   avatar_url?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
+  perfil_completo?: Prisma.SortOrder
+  email_verificado_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  ultimo_login_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -364,11 +410,14 @@ export type SysUsuarioScalarWhereWithAggregatesInput = {
   nickname?: Prisma.StringWithAggregatesFilter<"SysUsuario"> | string
   email?: Prisma.StringWithAggregatesFilter<"SysUsuario"> | string
   telefone?: Prisma.StringNullableWithAggregatesFilter<"SysUsuario"> | string | null
-  senha_hash?: Prisma.StringWithAggregatesFilter<"SysUsuario"> | string
+  senha_hash?: Prisma.StringNullableWithAggregatesFilter<"SysUsuario"> | string | null
   codigo_aluno?: Prisma.StringNullableWithAggregatesFilter<"SysUsuario"> | string | null
   documento?: Prisma.StringNullableWithAggregatesFilter<"SysUsuario"> | string | null
   avatar_url?: Prisma.StringNullableWithAggregatesFilter<"SysUsuario"> | string | null
   ativo?: Prisma.IntWithAggregatesFilter<"SysUsuario"> | number
+  perfil_completo?: Prisma.IntWithAggregatesFilter<"SysUsuario"> | number
+  email_verificado_at?: Prisma.DateTimeNullableWithAggregatesFilter<"SysUsuario"> | Date | string | null
+  ultimo_login_at?: Prisma.DateTimeNullableWithAggregatesFilter<"SysUsuario"> | Date | string | null
   created_at?: Prisma.DateTimeNullableWithAggregatesFilter<"SysUsuario"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableWithAggregatesFilter<"SysUsuario"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"SysUsuario"> | Date | string | null
@@ -379,18 +428,24 @@ export type SysUsuarioCreateInput = {
   nickname: string
   email: string
   telefone?: string | null
-  senha_hash: string
+  senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
   avatar_url?: string | null
   ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
+  sysEmailLogs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeCreateNestedManyWithoutSys_usuarioInput
 }
 
 export type SysUsuarioUncheckedCreateInput = {
@@ -399,18 +454,24 @@ export type SysUsuarioUncheckedCreateInput = {
   nickname: string
   email: string
   telefone?: string | null
-  senha_hash: string
+  senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
   avatar_url?: string | null
   ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
+  sysEmailLogs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUncheckedCreateNestedManyWithoutSys_usuarioInput
 }
 
 export type SysUsuarioUpdateInput = {
@@ -418,18 +479,24 @@ export type SysUsuarioUpdateInput = {
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  senha_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
+  sysEmailLogs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUpdateManyWithoutSys_usuarioNestedInput
 }
 
 export type SysUsuarioUncheckedUpdateInput = {
@@ -438,18 +505,24 @@ export type SysUsuarioUncheckedUpdateInput = {
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  senha_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
+  sysEmailLogs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUncheckedUpdateManyWithoutSys_usuarioNestedInput
 }
 
 export type SysUsuarioCreateManyInput = {
@@ -458,11 +531,14 @@ export type SysUsuarioCreateManyInput = {
   nickname: string
   email: string
   telefone?: string | null
-  senha_hash: string
+  senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
   avatar_url?: string | null
   ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
@@ -473,11 +549,14 @@ export type SysUsuarioUpdateManyMutationInput = {
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  senha_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -489,11 +568,14 @@ export type SysUsuarioUncheckedUpdateManyInput = {
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  senha_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -516,6 +598,9 @@ export type SysUsuarioCountOrderByAggregateInput = {
   documento?: Prisma.SortOrder
   avatar_url?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
+  perfil_completo?: Prisma.SortOrder
+  email_verificado_at?: Prisma.SortOrder
+  ultimo_login_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
@@ -524,6 +609,7 @@ export type SysUsuarioCountOrderByAggregateInput = {
 export type SysUsuarioAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
+  perfil_completo?: Prisma.SortOrder
 }
 
 export type SysUsuarioMaxOrderByAggregateInput = {
@@ -537,6 +623,9 @@ export type SysUsuarioMaxOrderByAggregateInput = {
   documento?: Prisma.SortOrder
   avatar_url?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
+  perfil_completo?: Prisma.SortOrder
+  email_verificado_at?: Prisma.SortOrder
+  ultimo_login_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
@@ -553,6 +642,9 @@ export type SysUsuarioMinOrderByAggregateInput = {
   documento?: Prisma.SortOrder
   avatar_url?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
+  perfil_completo?: Prisma.SortOrder
+  email_verificado_at?: Prisma.SortOrder
+  ultimo_login_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
@@ -561,11 +653,17 @@ export type SysUsuarioMinOrderByAggregateInput = {
 export type SysUsuarioSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
+  perfil_completo?: Prisma.SortOrder
 }
 
 export type SysUsuarioScalarRelationFilter = {
   is?: Prisma.SysUsuarioWhereInput
   isNot?: Prisma.SysUsuarioWhereInput
+}
+
+export type SysUsuarioNullableScalarRelationFilter = {
+  is?: Prisma.SysUsuarioWhereInput | null
+  isNot?: Prisma.SysUsuarioWhereInput | null
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -644,22 +742,76 @@ export type SysUsuarioUpdateOneRequiredWithoutSys_auth_userNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SysUsuarioUpdateToOneWithWhereWithoutSys_auth_userInput, Prisma.SysUsuarioUpdateWithoutSys_auth_userInput>, Prisma.SysUsuarioUncheckedUpdateWithoutSys_auth_userInput>
 }
 
+export type SysUsuarioCreateNestedOneWithoutSysEmailLogsInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioCreateWithoutSysEmailLogsInput, Prisma.SysUsuarioUncheckedCreateWithoutSysEmailLogsInput>
+  connectOrCreate?: Prisma.SysUsuarioCreateOrConnectWithoutSysEmailLogsInput
+  connect?: Prisma.SysUsuarioWhereUniqueInput
+}
+
+export type SysUsuarioUpdateOneWithoutSysEmailLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioCreateWithoutSysEmailLogsInput, Prisma.SysUsuarioUncheckedCreateWithoutSysEmailLogsInput>
+  connectOrCreate?: Prisma.SysUsuarioCreateOrConnectWithoutSysEmailLogsInput
+  upsert?: Prisma.SysUsuarioUpsertWithoutSysEmailLogsInput
+  disconnect?: Prisma.SysUsuarioWhereInput | boolean
+  delete?: Prisma.SysUsuarioWhereInput | boolean
+  connect?: Prisma.SysUsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SysUsuarioUpdateToOneWithWhereWithoutSysEmailLogsInput, Prisma.SysUsuarioUpdateWithoutSysEmailLogsInput>, Prisma.SysUsuarioUncheckedUpdateWithoutSysEmailLogsInput>
+}
+
+export type SysUsuarioCreateNestedOneWithoutSysEmailVerificationCodesInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioCreateWithoutSysEmailVerificationCodesInput, Prisma.SysUsuarioUncheckedCreateWithoutSysEmailVerificationCodesInput>
+  connectOrCreate?: Prisma.SysUsuarioCreateOrConnectWithoutSysEmailVerificationCodesInput
+  connect?: Prisma.SysUsuarioWhereUniqueInput
+}
+
+export type SysUsuarioUpdateOneWithoutSysEmailVerificationCodesNestedInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioCreateWithoutSysEmailVerificationCodesInput, Prisma.SysUsuarioUncheckedCreateWithoutSysEmailVerificationCodesInput>
+  connectOrCreate?: Prisma.SysUsuarioCreateOrConnectWithoutSysEmailVerificationCodesInput
+  upsert?: Prisma.SysUsuarioUpsertWithoutSysEmailVerificationCodesInput
+  disconnect?: Prisma.SysUsuarioWhereInput | boolean
+  delete?: Prisma.SysUsuarioWhereInput | boolean
+  connect?: Prisma.SysUsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SysUsuarioUpdateToOneWithWhereWithoutSysEmailVerificationCodesInput, Prisma.SysUsuarioUpdateWithoutSysEmailVerificationCodesInput>, Prisma.SysUsuarioUncheckedUpdateWithoutSysEmailVerificationCodesInput>
+}
+
+export type SysUsuarioCreateNestedOneWithoutSys_auth_login_logInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioCreateWithoutSys_auth_login_logInput, Prisma.SysUsuarioUncheckedCreateWithoutSys_auth_login_logInput>
+  connectOrCreate?: Prisma.SysUsuarioCreateOrConnectWithoutSys_auth_login_logInput
+  connect?: Prisma.SysUsuarioWhereUniqueInput
+}
+
+export type SysUsuarioUpdateOneWithoutSys_auth_login_logNestedInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioCreateWithoutSys_auth_login_logInput, Prisma.SysUsuarioUncheckedCreateWithoutSys_auth_login_logInput>
+  connectOrCreate?: Prisma.SysUsuarioCreateOrConnectWithoutSys_auth_login_logInput
+  upsert?: Prisma.SysUsuarioUpsertWithoutSys_auth_login_logInput
+  disconnect?: Prisma.SysUsuarioWhereInput | boolean
+  delete?: Prisma.SysUsuarioWhereInput | boolean
+  connect?: Prisma.SysUsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SysUsuarioUpdateToOneWithWhereWithoutSys_auth_login_logInput, Prisma.SysUsuarioUpdateWithoutSys_auth_login_logInput>, Prisma.SysUsuarioUncheckedUpdateWithoutSys_auth_login_logInput>
+}
+
 export type SysUsuarioCreateWithoutSys_usuario_roleInput = {
   nome: string
   nickname: string
   email: string
   telefone?: string | null
-  senha_hash: string
+  senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
   avatar_url?: string | null
   ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
+  sysEmailLogs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeCreateNestedManyWithoutSys_usuarioInput
 }
 
 export type SysUsuarioUncheckedCreateWithoutSys_usuario_roleInput = {
@@ -668,17 +820,23 @@ export type SysUsuarioUncheckedCreateWithoutSys_usuario_roleInput = {
   nickname: string
   email: string
   telefone?: string | null
-  senha_hash: string
+  senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
   avatar_url?: string | null
   ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
+  sysEmailLogs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUncheckedCreateNestedManyWithoutSys_usuarioInput
 }
 
 export type SysUsuarioCreateOrConnectWithoutSys_usuario_roleInput = {
@@ -702,17 +860,23 @@ export type SysUsuarioUpdateWithoutSys_usuario_roleInput = {
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  senha_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
+  sysEmailLogs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUpdateManyWithoutSys_usuarioNestedInput
 }
 
 export type SysUsuarioUncheckedUpdateWithoutSys_usuario_roleInput = {
@@ -721,17 +885,23 @@ export type SysUsuarioUncheckedUpdateWithoutSys_usuario_roleInput = {
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  senha_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
+  sysEmailLogs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUncheckedUpdateManyWithoutSys_usuarioNestedInput
 }
 
 export type SysUsuarioCreateWithoutSys_usuario_permissionInput = {
@@ -739,17 +909,23 @@ export type SysUsuarioCreateWithoutSys_usuario_permissionInput = {
   nickname: string
   email: string
   telefone?: string | null
-  senha_hash: string
+  senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
   avatar_url?: string | null
   ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
+  sysEmailLogs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeCreateNestedManyWithoutSys_usuarioInput
 }
 
 export type SysUsuarioUncheckedCreateWithoutSys_usuario_permissionInput = {
@@ -758,17 +934,23 @@ export type SysUsuarioUncheckedCreateWithoutSys_usuario_permissionInput = {
   nickname: string
   email: string
   telefone?: string | null
-  senha_hash: string
+  senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
   avatar_url?: string | null
   ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
+  sysEmailLogs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUncheckedCreateNestedManyWithoutSys_usuarioInput
 }
 
 export type SysUsuarioCreateOrConnectWithoutSys_usuario_permissionInput = {
@@ -792,17 +974,23 @@ export type SysUsuarioUpdateWithoutSys_usuario_permissionInput = {
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  senha_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
+  sysEmailLogs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUpdateManyWithoutSys_usuarioNestedInput
 }
 
 export type SysUsuarioUncheckedUpdateWithoutSys_usuario_permissionInput = {
@@ -811,17 +999,23 @@ export type SysUsuarioUncheckedUpdateWithoutSys_usuario_permissionInput = {
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  senha_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
+  sysEmailLogs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUncheckedUpdateManyWithoutSys_usuarioNestedInput
 }
 
 export type SysUsuarioCreateWithoutAtl_atletica_membroInput = {
@@ -829,17 +1023,23 @@ export type SysUsuarioCreateWithoutAtl_atletica_membroInput = {
   nickname: string
   email: string
   telefone?: string | null
-  senha_hash: string
+  senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
   avatar_url?: string | null
   ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
+  sysEmailLogs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeCreateNestedManyWithoutSys_usuarioInput
 }
 
 export type SysUsuarioUncheckedCreateWithoutAtl_atletica_membroInput = {
@@ -848,17 +1048,23 @@ export type SysUsuarioUncheckedCreateWithoutAtl_atletica_membroInput = {
   nickname: string
   email: string
   telefone?: string | null
-  senha_hash: string
+  senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
   avatar_url?: string | null
   ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
+  sysEmailLogs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUncheckedCreateNestedManyWithoutSys_usuarioInput
 }
 
 export type SysUsuarioCreateOrConnectWithoutAtl_atletica_membroInput = {
@@ -882,17 +1088,23 @@ export type SysUsuarioUpdateWithoutAtl_atletica_membroInput = {
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  senha_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
+  sysEmailLogs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUpdateManyWithoutSys_usuarioNestedInput
 }
 
 export type SysUsuarioUncheckedUpdateWithoutAtl_atletica_membroInput = {
@@ -901,17 +1113,23 @@ export type SysUsuarioUncheckedUpdateWithoutAtl_atletica_membroInput = {
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  senha_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
+  sysEmailLogs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUncheckedUpdateManyWithoutSys_usuarioNestedInput
 }
 
 export type SysUsuarioCreateWithoutSys_auth_userInput = {
@@ -919,17 +1137,23 @@ export type SysUsuarioCreateWithoutSys_auth_userInput = {
   nickname: string
   email: string
   telefone?: string | null
-  senha_hash: string
+  senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
   avatar_url?: string | null
   ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
+  sysEmailLogs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeCreateNestedManyWithoutSys_usuarioInput
 }
 
 export type SysUsuarioUncheckedCreateWithoutSys_auth_userInput = {
@@ -938,17 +1162,23 @@ export type SysUsuarioUncheckedCreateWithoutSys_auth_userInput = {
   nickname: string
   email: string
   telefone?: string | null
-  senha_hash: string
+  senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
   avatar_url?: string | null
   ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sysEmailLogs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUncheckedCreateNestedManyWithoutSys_usuarioInput
 }
 
 export type SysUsuarioCreateOrConnectWithoutSys_auth_userInput = {
@@ -972,17 +1202,23 @@ export type SysUsuarioUpdateWithoutSys_auth_userInput = {
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  senha_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
+  sysEmailLogs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUpdateManyWithoutSys_usuarioNestedInput
 }
 
 export type SysUsuarioUncheckedUpdateWithoutSys_auth_userInput = {
@@ -991,17 +1227,365 @@ export type SysUsuarioUncheckedUpdateWithoutSys_auth_userInput = {
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  senha_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sysEmailLogs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUncheckedUpdateManyWithoutSys_usuarioNestedInput
+}
+
+export type SysUsuarioCreateWithoutSysEmailLogsInput = {
+  nome: string
+  nickname: string
+  email: string
+  telefone?: string | null
+  senha_hash?: string | null
+  codigo_aluno?: string | null
+  documento?: string | null
+  avatar_url?: string | null
+  ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutSys_usuarioInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeCreateNestedManyWithoutSys_usuarioInput
+}
+
+export type SysUsuarioUncheckedCreateWithoutSysEmailLogsInput = {
+  id?: number
+  nome: string
+  nickname: string
+  email: string
+  telefone?: string | null
+  senha_hash?: string | null
+  codigo_aluno?: string | null
+  documento?: string | null
+  avatar_url?: string | null
+  ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUncheckedCreateNestedManyWithoutSys_usuarioInput
+}
+
+export type SysUsuarioCreateOrConnectWithoutSysEmailLogsInput = {
+  where: Prisma.SysUsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.SysUsuarioCreateWithoutSysEmailLogsInput, Prisma.SysUsuarioUncheckedCreateWithoutSysEmailLogsInput>
+}
+
+export type SysUsuarioUpsertWithoutSysEmailLogsInput = {
+  update: Prisma.XOR<Prisma.SysUsuarioUpdateWithoutSysEmailLogsInput, Prisma.SysUsuarioUncheckedUpdateWithoutSysEmailLogsInput>
+  create: Prisma.XOR<Prisma.SysUsuarioCreateWithoutSysEmailLogsInput, Prisma.SysUsuarioUncheckedCreateWithoutSysEmailLogsInput>
+  where?: Prisma.SysUsuarioWhereInput
+}
+
+export type SysUsuarioUpdateToOneWithWhereWithoutSysEmailLogsInput = {
+  where?: Prisma.SysUsuarioWhereInput
+  data: Prisma.XOR<Prisma.SysUsuarioUpdateWithoutSysEmailLogsInput, Prisma.SysUsuarioUncheckedUpdateWithoutSysEmailLogsInput>
+}
+
+export type SysUsuarioUpdateWithoutSysEmailLogsInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  nickname?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutSys_usuarioNestedInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUpdateManyWithoutSys_usuarioNestedInput
+}
+
+export type SysUsuarioUncheckedUpdateWithoutSysEmailLogsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  nickname?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUncheckedUpdateManyWithoutSys_usuarioNestedInput
+}
+
+export type SysUsuarioCreateWithoutSysEmailVerificationCodesInput = {
+  nome: string
+  nickname: string
+  email: string
+  telefone?: string | null
+  senha_hash?: string | null
+  codigo_aluno?: string | null
+  documento?: string | null
+  avatar_url?: string | null
+  ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutSys_usuarioInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
+  sysEmailLogs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
+}
+
+export type SysUsuarioUncheckedCreateWithoutSysEmailVerificationCodesInput = {
+  id?: number
+  nome: string
+  nickname: string
+  email: string
+  telefone?: string | null
+  senha_hash?: string | null
+  codigo_aluno?: string | null
+  documento?: string | null
+  avatar_url?: string | null
+  ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
+  sysEmailLogs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
+}
+
+export type SysUsuarioCreateOrConnectWithoutSysEmailVerificationCodesInput = {
+  where: Prisma.SysUsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.SysUsuarioCreateWithoutSysEmailVerificationCodesInput, Prisma.SysUsuarioUncheckedCreateWithoutSysEmailVerificationCodesInput>
+}
+
+export type SysUsuarioUpsertWithoutSysEmailVerificationCodesInput = {
+  update: Prisma.XOR<Prisma.SysUsuarioUpdateWithoutSysEmailVerificationCodesInput, Prisma.SysUsuarioUncheckedUpdateWithoutSysEmailVerificationCodesInput>
+  create: Prisma.XOR<Prisma.SysUsuarioCreateWithoutSysEmailVerificationCodesInput, Prisma.SysUsuarioUncheckedCreateWithoutSysEmailVerificationCodesInput>
+  where?: Prisma.SysUsuarioWhereInput
+}
+
+export type SysUsuarioUpdateToOneWithWhereWithoutSysEmailVerificationCodesInput = {
+  where?: Prisma.SysUsuarioWhereInput
+  data: Prisma.XOR<Prisma.SysUsuarioUpdateWithoutSysEmailVerificationCodesInput, Prisma.SysUsuarioUncheckedUpdateWithoutSysEmailVerificationCodesInput>
+}
+
+export type SysUsuarioUpdateWithoutSysEmailVerificationCodesInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  nickname?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutSys_usuarioNestedInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
+  sysEmailLogs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
+}
+
+export type SysUsuarioUncheckedUpdateWithoutSysEmailVerificationCodesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  nickname?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
+  sysEmailLogs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
+}
+
+export type SysUsuarioCreateWithoutSys_auth_login_logInput = {
+  nome: string
+  nickname: string
+  email: string
+  telefone?: string | null
+  senha_hash?: string | null
+  codigo_aluno?: string | null
+  documento?: string | null
+  avatar_url?: string | null
+  ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutSys_usuarioInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
+  sysEmailLogs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeCreateNestedManyWithoutSys_usuarioInput
+}
+
+export type SysUsuarioUncheckedCreateWithoutSys_auth_login_logInput = {
+  id?: number
+  nome: string
+  nickname: string
+  email: string
+  telefone?: string | null
+  senha_hash?: string | null
+  codigo_aluno?: string | null
+  documento?: string | null
+  avatar_url?: string | null
+  ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
+  sysEmailLogs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUncheckedCreateNestedManyWithoutSys_usuarioInput
+}
+
+export type SysUsuarioCreateOrConnectWithoutSys_auth_login_logInput = {
+  where: Prisma.SysUsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.SysUsuarioCreateWithoutSys_auth_login_logInput, Prisma.SysUsuarioUncheckedCreateWithoutSys_auth_login_logInput>
+}
+
+export type SysUsuarioUpsertWithoutSys_auth_login_logInput = {
+  update: Prisma.XOR<Prisma.SysUsuarioUpdateWithoutSys_auth_login_logInput, Prisma.SysUsuarioUncheckedUpdateWithoutSys_auth_login_logInput>
+  create: Prisma.XOR<Prisma.SysUsuarioCreateWithoutSys_auth_login_logInput, Prisma.SysUsuarioUncheckedCreateWithoutSys_auth_login_logInput>
+  where?: Prisma.SysUsuarioWhereInput
+}
+
+export type SysUsuarioUpdateToOneWithWhereWithoutSys_auth_login_logInput = {
+  where?: Prisma.SysUsuarioWhereInput
+  data: Prisma.XOR<Prisma.SysUsuarioUpdateWithoutSys_auth_login_logInput, Prisma.SysUsuarioUncheckedUpdateWithoutSys_auth_login_logInput>
+}
+
+export type SysUsuarioUpdateWithoutSys_auth_login_logInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  nickname?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutSys_usuarioNestedInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
+  sysEmailLogs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUpdateManyWithoutSys_usuarioNestedInput
+}
+
+export type SysUsuarioUncheckedUpdateWithoutSys_auth_login_logInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  nickname?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
+  sysEmailLogs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUncheckedUpdateManyWithoutSys_usuarioNestedInput
 }
 
 
@@ -1013,12 +1597,18 @@ export type SysUsuarioCountOutputType = {
   sys_usuario_role: number
   sys_usuario_permission: number
   atl_atletica_membro: number
+  sys_auth_login_log: number
+  sysEmailLogs: number
+  sysEmailVerificationCodes: number
 }
 
 export type SysUsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sys_usuario_role?: boolean | SysUsuarioCountOutputTypeCountSys_usuario_roleArgs
   sys_usuario_permission?: boolean | SysUsuarioCountOutputTypeCountSys_usuario_permissionArgs
   atl_atletica_membro?: boolean | SysUsuarioCountOutputTypeCountAtl_atletica_membroArgs
+  sys_auth_login_log?: boolean | SysUsuarioCountOutputTypeCountSys_auth_login_logArgs
+  sysEmailLogs?: boolean | SysUsuarioCountOutputTypeCountSysEmailLogsArgs
+  sysEmailVerificationCodes?: boolean | SysUsuarioCountOutputTypeCountSysEmailVerificationCodesArgs
 }
 
 /**
@@ -1052,6 +1642,27 @@ export type SysUsuarioCountOutputTypeCountAtl_atletica_membroArgs<ExtArgs extend
   where?: Prisma.AtlAtleticaMembroWhereInput
 }
 
+/**
+ * SysUsuarioCountOutputType without action
+ */
+export type SysUsuarioCountOutputTypeCountSys_auth_login_logArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SysAuthLoginLogWhereInput
+}
+
+/**
+ * SysUsuarioCountOutputType without action
+ */
+export type SysUsuarioCountOutputTypeCountSysEmailLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SysEmailLogWhereInput
+}
+
+/**
+ * SysUsuarioCountOutputType without action
+ */
+export type SysUsuarioCountOutputTypeCountSysEmailVerificationCodesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SysEmailVerificationCodeWhereInput
+}
+
 
 export type SysUsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1064,13 +1675,19 @@ export type SysUsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   documento?: boolean
   avatar_url?: boolean
   ativo?: boolean
+  perfil_completo?: boolean
+  email_verificado_at?: boolean
+  ultimo_login_at?: boolean
   created_at?: boolean
   updated_at?: boolean
   deleted_at?: boolean
   sys_usuario_role?: boolean | Prisma.SysUsuario$sys_usuario_roleArgs<ExtArgs>
   sys_usuario_permission?: boolean | Prisma.SysUsuario$sys_usuario_permissionArgs<ExtArgs>
   atl_atletica_membro?: boolean | Prisma.SysUsuario$atl_atletica_membroArgs<ExtArgs>
+  sys_auth_login_log?: boolean | Prisma.SysUsuario$sys_auth_login_logArgs<ExtArgs>
   sys_auth_user?: boolean | Prisma.SysUsuario$sys_auth_userArgs<ExtArgs>
+  sysEmailLogs?: boolean | Prisma.SysUsuario$sysEmailLogsArgs<ExtArgs>
+  sysEmailVerificationCodes?: boolean | Prisma.SysUsuario$sysEmailVerificationCodesArgs<ExtArgs>
   _count?: boolean | Prisma.SysUsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sysUsuario"]>
 
@@ -1087,17 +1704,23 @@ export type SysUsuarioSelectScalar = {
   documento?: boolean
   avatar_url?: boolean
   ativo?: boolean
+  perfil_completo?: boolean
+  email_verificado_at?: boolean
+  ultimo_login_at?: boolean
   created_at?: boolean
   updated_at?: boolean
   deleted_at?: boolean
 }
 
-export type SysUsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "nickname" | "email" | "telefone" | "senha_hash" | "codigo_aluno" | "documento" | "avatar_url" | "ativo" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["sysUsuario"]>
+export type SysUsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "nickname" | "email" | "telefone" | "senha_hash" | "codigo_aluno" | "documento" | "avatar_url" | "ativo" | "perfil_completo" | "email_verificado_at" | "ultimo_login_at" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["sysUsuario"]>
 export type SysUsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sys_usuario_role?: boolean | Prisma.SysUsuario$sys_usuario_roleArgs<ExtArgs>
   sys_usuario_permission?: boolean | Prisma.SysUsuario$sys_usuario_permissionArgs<ExtArgs>
   atl_atletica_membro?: boolean | Prisma.SysUsuario$atl_atletica_membroArgs<ExtArgs>
+  sys_auth_login_log?: boolean | Prisma.SysUsuario$sys_auth_login_logArgs<ExtArgs>
   sys_auth_user?: boolean | Prisma.SysUsuario$sys_auth_userArgs<ExtArgs>
+  sysEmailLogs?: boolean | Prisma.SysUsuario$sysEmailLogsArgs<ExtArgs>
+  sysEmailVerificationCodes?: boolean | Prisma.SysUsuario$sysEmailVerificationCodesArgs<ExtArgs>
   _count?: boolean | Prisma.SysUsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1107,7 +1730,10 @@ export type $SysUsuarioPayload<ExtArgs extends runtime.Types.Extensions.Internal
     sys_usuario_role: Prisma.$SysUsuarioRolePayload<ExtArgs>[]
     sys_usuario_permission: Prisma.$SysUsuarioPermissionPayload<ExtArgs>[]
     atl_atletica_membro: Prisma.$AtlAtleticaMembroPayload<ExtArgs>[]
+    sys_auth_login_log: Prisma.$SysAuthLoginLogPayload<ExtArgs>[]
     sys_auth_user: Prisma.$UserPayload<ExtArgs> | null
+    sysEmailLogs: Prisma.$SysEmailLogPayload<ExtArgs>[]
+    sysEmailVerificationCodes: Prisma.$SysEmailVerificationCodePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1115,11 +1741,14 @@ export type $SysUsuarioPayload<ExtArgs extends runtime.Types.Extensions.Internal
     nickname: string
     email: string
     telefone: string | null
-    senha_hash: string
+    senha_hash: string | null
     codigo_aluno: string | null
     documento: string | null
     avatar_url: string | null
     ativo: number
+    perfil_completo: number
+    email_verificado_at: Date | null
+    ultimo_login_at: Date | null
     created_at: Date | null
     updated_at: Date | null
     deleted_at: Date | null
@@ -1466,7 +2095,10 @@ export interface Prisma__SysUsuarioClient<T, Null = never, ExtArgs extends runti
   sys_usuario_role<T extends Prisma.SysUsuario$sys_usuario_roleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$sys_usuario_roleArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysUsuarioRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sys_usuario_permission<T extends Prisma.SysUsuario$sys_usuario_permissionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$sys_usuario_permissionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysUsuarioPermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   atl_atletica_membro<T extends Prisma.SysUsuario$atl_atletica_membroArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$atl_atletica_membroArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AtlAtleticaMembroPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sys_auth_login_log<T extends Prisma.SysUsuario$sys_auth_login_logArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$sys_auth_login_logArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysAuthLoginLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sys_auth_user<T extends Prisma.SysUsuario$sys_auth_userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$sys_auth_userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  sysEmailLogs<T extends Prisma.SysUsuario$sysEmailLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$sysEmailLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysEmailLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sysEmailVerificationCodes<T extends Prisma.SysUsuario$sysEmailVerificationCodesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$sysEmailVerificationCodesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysEmailVerificationCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1506,6 +2138,9 @@ export interface SysUsuarioFieldRefs {
   readonly documento: Prisma.FieldRef<"SysUsuario", 'String'>
   readonly avatar_url: Prisma.FieldRef<"SysUsuario", 'String'>
   readonly ativo: Prisma.FieldRef<"SysUsuario", 'Int'>
+  readonly perfil_completo: Prisma.FieldRef<"SysUsuario", 'Int'>
+  readonly email_verificado_at: Prisma.FieldRef<"SysUsuario", 'DateTime'>
+  readonly ultimo_login_at: Prisma.FieldRef<"SysUsuario", 'DateTime'>
   readonly created_at: Prisma.FieldRef<"SysUsuario", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"SysUsuario", 'DateTime'>
   readonly deleted_at: Prisma.FieldRef<"SysUsuario", 'DateTime'>
@@ -1929,6 +2564,30 @@ export type SysUsuario$atl_atletica_membroArgs<ExtArgs extends runtime.Types.Ext
 }
 
 /**
+ * SysUsuario.sys_auth_login_log
+ */
+export type SysUsuario$sys_auth_login_logArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SysAuthLoginLog
+   */
+  select?: Prisma.SysAuthLoginLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SysAuthLoginLog
+   */
+  omit?: Prisma.SysAuthLoginLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SysAuthLoginLogInclude<ExtArgs> | null
+  where?: Prisma.SysAuthLoginLogWhereInput
+  orderBy?: Prisma.SysAuthLoginLogOrderByWithRelationInput | Prisma.SysAuthLoginLogOrderByWithRelationInput[]
+  cursor?: Prisma.SysAuthLoginLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SysAuthLoginLogScalarFieldEnum | Prisma.SysAuthLoginLogScalarFieldEnum[]
+}
+
+/**
  * SysUsuario.sys_auth_user
  */
 export type SysUsuario$sys_auth_userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1945,6 +2604,54 @@ export type SysUsuario$sys_auth_userArgs<ExtArgs extends runtime.Types.Extension
    */
   include?: Prisma.UserInclude<ExtArgs> | null
   where?: Prisma.UserWhereInput
+}
+
+/**
+ * SysUsuario.sysEmailLogs
+ */
+export type SysUsuario$sysEmailLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SysEmailLog
+   */
+  select?: Prisma.SysEmailLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SysEmailLog
+   */
+  omit?: Prisma.SysEmailLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SysEmailLogInclude<ExtArgs> | null
+  where?: Prisma.SysEmailLogWhereInput
+  orderBy?: Prisma.SysEmailLogOrderByWithRelationInput | Prisma.SysEmailLogOrderByWithRelationInput[]
+  cursor?: Prisma.SysEmailLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SysEmailLogScalarFieldEnum | Prisma.SysEmailLogScalarFieldEnum[]
+}
+
+/**
+ * SysUsuario.sysEmailVerificationCodes
+ */
+export type SysUsuario$sysEmailVerificationCodesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SysEmailVerificationCode
+   */
+  select?: Prisma.SysEmailVerificationCodeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SysEmailVerificationCode
+   */
+  omit?: Prisma.SysEmailVerificationCodeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SysEmailVerificationCodeInclude<ExtArgs> | null
+  where?: Prisma.SysEmailVerificationCodeWhereInput
+  orderBy?: Prisma.SysEmailVerificationCodeOrderByWithRelationInput | Prisma.SysEmailVerificationCodeOrderByWithRelationInput[]
+  cursor?: Prisma.SysEmailVerificationCodeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SysEmailVerificationCodeScalarFieldEnum | Prisma.SysEmailVerificationCodeScalarFieldEnum[]
 }
 
 /**

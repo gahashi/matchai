@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { Card, CardBody } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import {Badge} from "@/components/ui/Badge";
+import Link from "next/link";
 
 type ResolveLoginResponse = {
     ok: boolean;
@@ -363,6 +364,12 @@ function LoginForm() {
                                 {carregando ? "Entrando..." : "Entrar"}
                             </Button>
                         </form>
+                        <div className="bp-auth-message bp-mt-24">
+                            Não tem conta?{" "}
+                            <Link href="/cadastro" style={{ color: "var(--color-primary)", fontWeight: 800 }}>
+                                Criar uma conta
+                            </Link>
+                        </div>
 
                         <div
                             style={{

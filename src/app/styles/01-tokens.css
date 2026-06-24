@@ -14,6 +14,9 @@
     --bp-card-strong: #1d212d;
     --bp-border: #272b36;
     --bp-border-soft: rgba(255, 255, 255, 0.08);
+    --bp-surface-3: #1d2230;
+    --bp-border-strong: #3a4050;
+    --transition-fast: 0.18s ease;
 
     /*
      * Primary do sistema oficial.
@@ -92,10 +95,12 @@
 
     --color-surface: var(--bp-surface);
     --color-surface-2: var(--bp-surface-2);
+    --color-surface-3: var(--bp-surface-3);
     --color-card: var(--bp-card);
     --color-card-strong: var(--bp-card-strong);
     --color-border: var(--bp-border);
     --color-border-soft: var(--bp-border-soft);
+    --color-border-strong: var(--bp-border-strong);
 
     --color-primary: var(--bp-primary);
     --color-primary-hover: var(--bp-primary-hover);
@@ -142,6 +147,8 @@
     --color-background: #07130e;
     --color-background-2: #06100c;
     --color-background-glow: rgba(57, 255, 20, 0.14);
+    --color-surface-3: #173a29;
+    --color-border-strong: #3a7a58;
 
     --color-surface: #0d1f17;
     --color-surface-2: #10281d;

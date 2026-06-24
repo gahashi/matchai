@@ -413,7 +413,10 @@ export const ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  SysEmailLog: 'SysEmailLog',
+  SysEmailVerificationCode: 'SysEmailVerificationCode',
+  SysAuthLoginLog: 'SysAuthLoginLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -429,7 +432,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "sysUsuario" | "sysRoleEscopo" | "sysRole" | "sysPermission" | "sysRolePermission" | "sysUsuarioRole" | "sysUsuarioPermissionTipo" | "sysUsuarioPermission" | "eduInstituicao" | "eduCurso" | "eduInstituicaoCurso" | "atlAtletica" | "atlAtleticaCurso" | "atlCargoTipo" | "atlCargo" | "atlAtleticaCargo" | "atlAtleticaMembroTipo" | "atlAtleticaMembroStatus" | "atlAtleticaMembro" | "atlAtleticaMembroCargo" | "atlAtleticaTema" | "atlAtleticaRegimento" | "sysAssinaturaPlanoPeriodicidade" | "sysAssinaturaPlano" | "atlAtleticaAssinaturaStatus" | "atlAtleticaAssinatura" | "user" | "session" | "account" | "verification"
+    modelProps: "sysUsuario" | "sysRoleEscopo" | "sysRole" | "sysPermission" | "sysRolePermission" | "sysUsuarioRole" | "sysUsuarioPermissionTipo" | "sysUsuarioPermission" | "eduInstituicao" | "eduCurso" | "eduInstituicaoCurso" | "atlAtletica" | "atlAtleticaCurso" | "atlCargoTipo" | "atlCargo" | "atlAtleticaCargo" | "atlAtleticaMembroTipo" | "atlAtleticaMembroStatus" | "atlAtleticaMembro" | "atlAtleticaMembroCargo" | "atlAtleticaTema" | "atlAtleticaRegimento" | "sysAssinaturaPlanoPeriodicidade" | "sysAssinaturaPlano" | "atlAtleticaAssinaturaStatus" | "atlAtleticaAssinatura" | "user" | "session" | "account" | "verification" | "sysEmailLog" | "sysEmailVerificationCode" | "sysAuthLoginLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2413,6 +2416,204 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SysEmailLog: {
+      payload: Prisma.$SysEmailLogPayload<ExtArgs>
+      fields: Prisma.SysEmailLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysEmailLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysEmailLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailLogPayload>
+        }
+        findFirst: {
+          args: Prisma.SysEmailLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysEmailLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailLogPayload>
+        }
+        findMany: {
+          args: Prisma.SysEmailLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailLogPayload>[]
+        }
+        create: {
+          args: Prisma.SysEmailLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailLogPayload>
+        }
+        createMany: {
+          args: Prisma.SysEmailLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysEmailLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailLogPayload>
+        }
+        update: {
+          args: Prisma.SysEmailLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.SysEmailLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysEmailLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysEmailLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailLogPayload>
+        }
+        aggregate: {
+          args: Prisma.SysEmailLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysEmailLog>
+        }
+        groupBy: {
+          args: Prisma.SysEmailLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysEmailLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysEmailLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysEmailLogCountAggregateOutputType> | number
+        }
+      }
+    }
+    SysEmailVerificationCode: {
+      payload: Prisma.$SysEmailVerificationCodePayload<ExtArgs>
+      fields: Prisma.SysEmailVerificationCodeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysEmailVerificationCodeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailVerificationCodePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysEmailVerificationCodeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailVerificationCodePayload>
+        }
+        findFirst: {
+          args: Prisma.SysEmailVerificationCodeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailVerificationCodePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysEmailVerificationCodeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailVerificationCodePayload>
+        }
+        findMany: {
+          args: Prisma.SysEmailVerificationCodeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailVerificationCodePayload>[]
+        }
+        create: {
+          args: Prisma.SysEmailVerificationCodeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailVerificationCodePayload>
+        }
+        createMany: {
+          args: Prisma.SysEmailVerificationCodeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysEmailVerificationCodeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailVerificationCodePayload>
+        }
+        update: {
+          args: Prisma.SysEmailVerificationCodeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailVerificationCodePayload>
+        }
+        deleteMany: {
+          args: Prisma.SysEmailVerificationCodeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysEmailVerificationCodeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysEmailVerificationCodeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysEmailVerificationCodePayload>
+        }
+        aggregate: {
+          args: Prisma.SysEmailVerificationCodeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysEmailVerificationCode>
+        }
+        groupBy: {
+          args: Prisma.SysEmailVerificationCodeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysEmailVerificationCodeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysEmailVerificationCodeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysEmailVerificationCodeCountAggregateOutputType> | number
+        }
+      }
+    }
+    SysAuthLoginLog: {
+      payload: Prisma.$SysAuthLoginLogPayload<ExtArgs>
+      fields: Prisma.SysAuthLoginLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysAuthLoginLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAuthLoginLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysAuthLoginLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAuthLoginLogPayload>
+        }
+        findFirst: {
+          args: Prisma.SysAuthLoginLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAuthLoginLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysAuthLoginLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAuthLoginLogPayload>
+        }
+        findMany: {
+          args: Prisma.SysAuthLoginLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAuthLoginLogPayload>[]
+        }
+        create: {
+          args: Prisma.SysAuthLoginLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAuthLoginLogPayload>
+        }
+        createMany: {
+          args: Prisma.SysAuthLoginLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysAuthLoginLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAuthLoginLogPayload>
+        }
+        update: {
+          args: Prisma.SysAuthLoginLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAuthLoginLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.SysAuthLoginLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysAuthLoginLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysAuthLoginLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAuthLoginLogPayload>
+        }
+        aggregate: {
+          args: Prisma.SysAuthLoginLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysAuthLoginLog>
+        }
+        groupBy: {
+          args: Prisma.SysAuthLoginLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysAuthLoginLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysAuthLoginLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysAuthLoginLogCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2463,6 +2664,9 @@ export const SysUsuarioScalarFieldEnum = {
   documento: 'documento',
   avatar_url: 'avatar_url',
   ativo: 'ativo',
+  perfil_completo: 'perfil_completo',
+  email_verificado_at: 'email_verificado_at',
+  ultimo_login_at: 'ultimo_login_at',
   created_at: 'created_at',
   updated_at: 'updated_at',
   deleted_at: 'deleted_at'
@@ -2906,6 +3110,62 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
+export const SysEmailLogScalarFieldEnum = {
+  id: 'id',
+  sys_usuario_id: 'sys_usuario_id',
+  email_to: 'email_to',
+  email_from: 'email_from',
+  subject: 'subject',
+  template: 'template',
+  provider: 'provider',
+  status: 'status',
+  message_id: 'message_id',
+  error_message: 'error_message',
+  metadata_text: 'metadata_text',
+  sent_at: 'sent_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysEmailLogScalarFieldEnum = (typeof SysEmailLogScalarFieldEnum)[keyof typeof SysEmailLogScalarFieldEnum]
+
+
+export const SysEmailVerificationCodeScalarFieldEnum = {
+  id: 'id',
+  sys_usuario_id: 'sys_usuario_id',
+  email: 'email',
+  tipo: 'tipo',
+  codigo_hash: 'codigo_hash',
+  tentativas: 'tentativas',
+  max_tentativas: 'max_tentativas',
+  expires_at: 'expires_at',
+  used_at: 'used_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type SysEmailVerificationCodeScalarFieldEnum = (typeof SysEmailVerificationCodeScalarFieldEnum)[keyof typeof SysEmailVerificationCodeScalarFieldEnum]
+
+
+export const SysAuthLoginLogScalarFieldEnum = {
+  id: 'id',
+  sys_usuario_id: 'sys_usuario_id',
+  email: 'email',
+  evento: 'evento',
+  status: 'status',
+  ip_address: 'ip_address',
+  user_agent: 'user_agent',
+  device_text: 'device_text',
+  location_text: 'location_text',
+  error_message: 'error_message',
+  metadata_text: 'metadata_text',
+  created_at: 'created_at'
+} as const
+
+export type SysAuthLoginLogScalarFieldEnum = (typeof SysAuthLoginLogScalarFieldEnum)[keyof typeof SysAuthLoginLogScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -3172,6 +3432,45 @@ export const VerificationOrderByRelevanceFieldEnum = {
 export type VerificationOrderByRelevanceFieldEnum = (typeof VerificationOrderByRelevanceFieldEnum)[keyof typeof VerificationOrderByRelevanceFieldEnum]
 
 
+export const SysEmailLogOrderByRelevanceFieldEnum = {
+  email_to: 'email_to',
+  email_from: 'email_from',
+  subject: 'subject',
+  template: 'template',
+  provider: 'provider',
+  status: 'status',
+  message_id: 'message_id',
+  error_message: 'error_message',
+  metadata_text: 'metadata_text'
+} as const
+
+export type SysEmailLogOrderByRelevanceFieldEnum = (typeof SysEmailLogOrderByRelevanceFieldEnum)[keyof typeof SysEmailLogOrderByRelevanceFieldEnum]
+
+
+export const SysEmailVerificationCodeOrderByRelevanceFieldEnum = {
+  email: 'email',
+  tipo: 'tipo',
+  codigo_hash: 'codigo_hash'
+} as const
+
+export type SysEmailVerificationCodeOrderByRelevanceFieldEnum = (typeof SysEmailVerificationCodeOrderByRelevanceFieldEnum)[keyof typeof SysEmailVerificationCodeOrderByRelevanceFieldEnum]
+
+
+export const SysAuthLoginLogOrderByRelevanceFieldEnum = {
+  email: 'email',
+  evento: 'evento',
+  status: 'status',
+  ip_address: 'ip_address',
+  user_agent: 'user_agent',
+  device_text: 'device_text',
+  location_text: 'location_text',
+  error_message: 'error_message',
+  metadata_text: 'metadata_text'
+} as const
+
+export type SysAuthLoginLogOrderByRelevanceFieldEnum = (typeof SysAuthLoginLogOrderByRelevanceFieldEnum)[keyof typeof SysAuthLoginLogOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -3359,6 +3658,9 @@ export type GlobalOmitConfig = {
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit
+  sysEmailLog?: Prisma.SysEmailLogOmit
+  sysEmailVerificationCode?: Prisma.SysEmailVerificationCodeOmit
+  sysAuthLoginLog?: Prisma.SysAuthLoginLogOmit
 }
 
 /* Types for Logging */

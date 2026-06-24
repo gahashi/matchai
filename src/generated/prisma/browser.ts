@@ -167,3 +167,18 @@ export type Account = Prisma.AccountModel
  * 
  */
 export type Verification = Prisma.VerificationModel
+/**
+ * Model SysEmailLog
+ * 
+ */
+export type SysEmailLog = Prisma.SysEmailLogModel
+/**
+ * Model SysEmailVerificationCode
+ * 
+ */
+export type SysEmailVerificationCode = Prisma.SysEmailVerificationCodeModel
+/**
+ * Model SysAuthLoginLog
+ * 
+ */
+export type SysAuthLoginLog = Prisma.SysAuthLoginLogModel
