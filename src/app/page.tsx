@@ -158,7 +158,7 @@ export default function HomePage() {
         <AppShell>
             <PageHeader
                 eyebrow={
-                    <Badge variant="primary">
+                    <Badge color="primary">
                         <Sparkles size={13} />
                         Brava Pass System
                     </Badge>
@@ -167,7 +167,7 @@ export default function HomePage() {
                 subtitle="Painel principal do sistema. Aqui usamos a identidade visual oficial do Brava Pass, enquanto páginas de atléticas e parceiros podem receber temas próprios."
                 actions={
                     <>
-                        <Button variant="secondary">Configurar sistema</Button>
+                        <Button color="secondary">Configurar sistema</Button>
                         <Button>Nova atlética</Button>
                     </>
                 }
@@ -179,17 +179,17 @@ export default function HomePage() {
 
                     <CardBody className="bp-hero-content">
                         <div className="bp-badge-row">
-                            <Badge variant="success">
+                            <Badge color="success">
                                 <ShieldCheck size={13} />
                                 Auth real
                             </Badge>
 
-                            <Badge variant="primary">
+                            <Badge color="primary">
                                 <Zap size={13} />
                                 Design system
                             </Badge>
 
-                            <Badge variant="info">
+                            <Badge color="info">
                                 <LayoutDashboard size={13} />
                                 SaaS modular
                             </Badge>
@@ -214,7 +214,7 @@ export default function HomePage() {
                                 Validar segurança
                             </Button>
 
-                            <Button variant="secondary">
+                            <Button color="secondary">
                                 <Package size={16} />
                                 Ver módulos
                             </Button>
@@ -224,10 +224,10 @@ export default function HomePage() {
                     </CardBody>
                 </Card>
 
-                <Card variant="primary" className="bp-highlight-card">
+                <Card color="primary" className="bp-highlight-card">
                     <CardBody>
                         <div>
-                            <Badge variant="primary">
+                            <Badge color="primary">
                                 <WalletCards size={13} />
                                 Planos por entidade
                             </Badge>
@@ -277,7 +277,7 @@ export default function HomePage() {
                                     </div>
 
                                     <div className="bp-mt-16">
-                                        <Badge variant={metrica.variant}>
+                                        <Badge color={metrica.variant}>
                                             {metrica.badge}
                                         </Badge>
                                     </div>
@@ -312,7 +312,7 @@ export default function HomePage() {
                                             <div className="bp-feature-head">
                                                 <strong>{modulo.title}</strong>
 
-                                                <Badge variant={modulo.variant}>
+                                                <Badge color={modulo.variant}>
                                                     {modulo.badge}
                                                 </Badge>
                                             </div>
@@ -337,7 +337,7 @@ export default function HomePage() {
                             {checklist.map((item) => (
                                 <div key={item.label} className="bp-check-item">
                                     <span>{item.label}</span>
-                                    <Badge variant={item.variant}>{item.status}</Badge>
+                                    <Badge color={item.variant}>{item.status}</Badge>
                                 </div>
                             ))}
                         </div>
@@ -349,11 +349,11 @@ export default function HomePage() {
                 {planos.map((plano) => (
                     <Card
                         key={plano.name}
-                        variant={plano.variant}
+                        color={plano.variant}
                         className="bp-plan-card"
                     >
                         <CardBody>
-                            <Badge variant={plano.badgeVariant}>
+                            <Badge color={plano.badgeVariant}>
                                 {plano.badge}
                             </Badge>
 
@@ -397,7 +397,7 @@ export default function HomePage() {
                                     <td>{atletica.instituicao}</td>
                                     <td>{atletica.plano}</td>
                                     <td>
-                                        <Badge variant="success">
+                                        <Badge color="success">
                                             {atletica.status}
                                         </Badge>
                                     </td>

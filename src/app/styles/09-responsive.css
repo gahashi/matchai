@@ -199,3 +199,18 @@
         padding: 7px 3px;
     }
 }
+
+@media (max-width: 768px) {
+    .bp-topbar-user-meta {
+        display: none;
+    }
+
+    .bp-topbar-auth-actions {
+        gap: 8px;
+    }
+
+    .bp-topbar-auth-actions .bp-link {
+        min-height: 36px;
+        padding-inline: 12px;
+    }
+}

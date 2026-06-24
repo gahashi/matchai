@@ -199,3 +199,46 @@
 .bp-grid-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
+
+.bp-topbar-user {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    padding: 5px 8px 5px 5px;
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-full);
+    background: var(--color-surface-2);
+}
+
+.bp-topbar-user-meta {
+    min-width: 0;
+    display: grid;
+    gap: 2px;
+    line-height: 1.1;
+}
+
+.bp-topbar-user-meta strong {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--color-text);
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.bp-topbar-user-meta span {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--color-text-soft);
+    font-size: 12px;
+}
+
+.bp-topbar-auth-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}

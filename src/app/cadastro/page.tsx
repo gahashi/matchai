@@ -197,7 +197,7 @@ export default function CadastroPage() {
                         </div>
 
                         <div className="bp-auth-hero">
-                            <Badge variant="primary">
+                            <Badge color="primary">
                                 <Sparkles size={15} />
                                 Comece com uma conta verificada
                             </Badge>

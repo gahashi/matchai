@@ -189,7 +189,7 @@ function LoginForm() {
 
                         <div style={{ maxWidth: 560 }}>
                             <Badge
-                                variant="primary"
+                                color="primary"
                                 style={{
                                     display: "inline-flex",
                                     alignItems: "center",

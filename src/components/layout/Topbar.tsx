@@ -1,31 +1,24 @@
-"use client";
+import { Bell, LogIn, Plus, Search, UserPlus } from "lucide-react";
 
-import { useRouter } from "next/navigation";
-import { Bell, LogOut, Plus, Search } from "lucide-react";
-
-import { authClient } from "@/lib/auth/auth-client";
+import { LogoutButton } from "@/components/auth/LogoutButton";
+import { AppLink } from "@/components/ui/AppLink";
 import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { getAuthSession } from "@/lib/auth/session";
 
-export function Topbar() {
-    const router = useRouter();
-
-    async function handleLogout() {
-        await authClient.signOut({
-            fetchOptions: {
-                onSuccess: () => {
-                    router.push("/login");
-                    router.refresh();
-                },
-            },
-        });
-    }
+export async function Topbar() {
+    const session = await getAuthSession();
+    const user = session?.user ?? null;
 
     return (
         <header className="bp-topbar">
             <div className="bp-topbar-mobile-header">
-                <a href="/" className="bp-topbar-mobile-brand" aria-label="Brava Pass">
+                <AppLink
+                    href="/"
+                    className="bp-topbar-mobile-brand"
+                    aria-label="Brava Pass"
+                >
                     <span className="bp-topbar-mobile-logo-box">
                         <img
                             src="/brand/brava-pass-symbol-dark.png"
@@ -36,54 +29,93 @@ export function Topbar() {
 
                     <span className="bp-topbar-mobile-title">
                         <strong>Brava Pass</strong>
-                        <small>Painel administrativo</small>
+                        <small>
+                            {user ? "Painel administrativo" : "Sistema universitário"}
+                        </small>
                     </span>
-                </a>
+                </AppLink>
 
                 <div className="bp-topbar-mobile-actions">
-                    <Button variant="ghost" aria-label="Notificações">
-                        <Bell size={17} />
-                    </Button>
+                    {user ? (
+                        <>
+                            <Button color="secondary" variant="ghost" aria-label="Notificações">
+                                <Bell size={17} />
+                            </Button>
 
-                    <Button
-                        variant="ghost"
-                        aria-label="Sair"
-                        onClick={handleLogout}
-                    >
-                        <LogOut size={17} />
-                    </Button>
+                            <Avatar name={user.nome} src={user.avatar_url ?? undefined} />
 
-                    <Avatar name="Admin Dev" size="sm" />
+                            <LogoutButton />
+                        </>
+                    ) : (
+                        <>
+                            <AppLink href="/login" color="secondary" variant="ghost">
+                                <LogIn size={17} />
+                            </AppLink>
+
+                            <AppLink href="/cadastro" color="primary" variant="solid">
+                                <UserPlus size={17} />
+                            </AppLink>
+                        </>
+                    )}
                 </div>
             </div>
 
             <div className="bp-topbar-search">
-                <div className="bp-search-field">
-                    <Search size={17} className="bp-search-field-icon" />
+                <div style={{ position: "relative" }}>
+                    <Search
+                        size={17}
+                        style={{
+                            position: "absolute",
+                            left: 12,
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                            color: "var(--color-text-soft)",
+                        }}
+                    />
 
                     <Input
                         placeholder="Buscar atléticas, parceiros, eventos..."
-                        className="bp-search-field-input"
+                        style={{ paddingLeft: 38 }}
                     />
                 </div>
             </div>
 
             <div className="bp-topbar-actions">
-                <Button variant="ghost" aria-label="Notificações">
-                    <Bell size={17} />
-                </Button>
+                {user ? (
+                    <>
+                        <Button color="secondary" variant="ghost" aria-label="Notificações">
+                            <Bell size={17} />
+                        </Button>
 
-                <Button>
-                    <Plus size={17} />
-                    <span className="hide-mobile">Nova atlética</span>
-                </Button>
+                        <Button>
+                            <Plus size={17} />
+                            <span className="hide-mobile">Nova atlética</span>
+                        </Button>
 
-                <Button variant="secondary" onClick={handleLogout}>
-                    <LogOut size={17} />
-                    <span className="hide-mobile">Sair</span>
-                </Button>
+                        <div className="bp-topbar-user">
+                            <Avatar name={user.nome} src={user.avatar_url ?? undefined} />
 
-                <Avatar name="Admin Dev" />
+                            <div className="bp-topbar-user-meta">
+                                <strong>{user.nome}</strong>
+                                <span>@{user.nickname}</span>
+                            </div>
+                        </div>
+
+                        <LogoutButton />
+                    </>
+                ) : (
+                    <div className="bp-topbar-auth-actions">
+                        <AppLink href="/login" color="secondary" variant="ghost">
+                            <LogIn size={17} />
+                            Entrar
+                        </AppLink>
+
+                        <AppLink href="/cadastro" color="primary" variant="solid">
+                            <UserPlus size={17} />
+                            Criar conta
+                        </AppLink>
+                    </div>
+                )}
             </div>
         </header>
     );

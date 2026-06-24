@@ -38,7 +38,7 @@ export default function TemaPage() {
 
                         <div style={{ display: "flex", gap: 10, marginTop: 22 }}>
                             <Button>Salvar</Button>
-                            <Button variant="secondary">Restaurar padrão</Button>
+                            <Button color="secondary">Restaurar padrão</Button>
                         </div>
                     </CardBody>
                 </Card>

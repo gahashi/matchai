@@ -5,7 +5,7 @@ type AvatarSize = "sm" | "md" | "lg";
 
 type AvatarProps = HTMLAttributes<HTMLDivElement> & {
     name: string;
-    imageUrl?: string | null;
+    src?: string | null;
     size?: AvatarSize;
 };
 
@@ -28,7 +28,7 @@ function getInitials(name: string) {
 
 export function Avatar({
                            name,
-                           imageUrl,
+                           src,
                            size = "md",
                            className,
                            ...props
@@ -56,10 +56,10 @@ export function Avatar({
             }}
             {...props}
         >
-            {imageUrl ? (
+            {src ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                    src={imageUrl}
+                    src={src}
                     alt={name}
                     style={{
                         width: "100%",

@@ -36,7 +36,7 @@ export default function AtleticaPublicaPage() {
                         </div>
                     </div>
 
-                    <Button variant="secondary">Área da diretoria</Button>
+                    <Button color="secondary">Área da diretoria</Button>
                 </header>
 
                 <Card>
@@ -50,7 +50,7 @@ export default function AtleticaPublicaPage() {
                             }}
                         >
                             <div>
-                                <Badge variant="success">Atlética oficial</Badge>
+                                <Badge color="success">Atlética oficial</Badge>
 
                                 <h1
                                     style={{
@@ -88,7 +88,7 @@ export default function AtleticaPublicaPage() {
                                         <ExternalLink size={17} />
                                         Instagram
                                     </Button>
-                                    <Button variant="secondary">
+                                    <Button color="secondary">
                                         <Mail size={17} />
                                         Contato
                                     </Button>
