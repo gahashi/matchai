@@ -1,25 +1,44 @@
-import { cookies } from "next/headers";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth/auth";
 import { prisma } from "@/lib/prisma";
 import { AuthSession } from "@/lib/auth/auth-types";
 
-const DEV_USER_EMAIL = "admin@bravapass.dev";
+type GetAuthSessionOptions = {
+    headers?: Headers;
+};
 
-export async function getAuthSession(): Promise<AuthSession | null> {
-    /**
-     * Temporário:
-     * Enquanto o login real não existe, usamos o usuário dev do seed.
-     *
-     * Depois vamos trocar isso por leitura de cookie/session token.
-     */
-    const authDevCookie = (await cookies()).get("bp_auth_dev")?.value;
+async function getBetterAuthSession(headersInput?: Headers) {
+    return auth.api.getSession({
+        headers: headersInput ?? (await headers()),
+    });
+}
 
-    if (authDevCookie !== "1") {
+export async function getAuthSession(
+    options?: GetAuthSessionOptions
+): Promise<AuthSession | null> {
+    const betterSession = await getBetterAuthSession(options?.headers);
+
+    if (!betterSession?.user?.id) {
+        return null;
+    }
+
+    const authUser = await prisma.user.findUnique({
+        where: {
+            id: betterSession.user.id,
+        },
+        select: {
+            id: true,
+            sysUsuarioId: true,
+        },
+    });
+
+    if (!authUser?.sysUsuarioId) {
         return null;
     }
 
     const usuario = await prisma.sysUsuario.findUnique({
         where: {
-            email: DEV_USER_EMAIL,
+            id: authUser.sysUsuarioId,
         },
         select: {
             id: true,

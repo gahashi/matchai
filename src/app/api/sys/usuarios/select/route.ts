@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import {requireApiAccess} from "@/lib/auth/require-api-access";
 
 export async function GET(request: NextRequest) {
+    // essa api nao sei s eovu levar para frente é so teste
+    const access = await requireApiAccess(request);
+
+    if (!access.ok) {
+        return access.response;
+    }
+
     const searchParams = request.nextUrl.searchParams;
 
     const q = searchParams.get("q")?.trim() ?? "";

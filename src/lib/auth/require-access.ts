@@ -3,6 +3,10 @@ import { getAuthSession } from "@/lib/auth/session";
 import { getRouteAccessRule } from "@/lib/auth/route-access";
 import { userHasAnyPermission } from "@/lib/auth/permissions";
 
+function buildLoginRedirect(pathname: string) {
+    return `/login?callbackUrl=${encodeURIComponent(pathname)}`;
+}
+
 export async function requirePageAccess(pathname: string) {
     const rule = getRouteAccessRule(pathname);
     const session = await getAuthSession();
@@ -26,11 +30,15 @@ export async function requirePageAccess(pathname: string) {
     }
 
     if (!session) {
-        redirect(`/login?redirect=${encodeURIComponent(pathname)}`);
+        redirect(buildLoginRedirect(pathname));
     }
 
     if (rule.access === "permission") {
         const permissions = rule.permissions ?? [];
+
+        if (permissions.length === 0) {
+            redirect("/sem-permissao");
+        }
 
         const allowed = await userHasAnyPermission(session, permissions);
 
