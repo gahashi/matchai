@@ -1,12 +1,41 @@
-node_modules
-.next
-out
-dist
+# Dependencies
+node_modules/
+app/node_modules/
+
+# Next.js build
+.next/
+app/.next/
+out/
+dist/
+build/
+
+# TypeScript cache
+tsconfig.tsbuildinfo
+app/tsconfig.tsbuildinfo
+
+# Env files
 .env
 .env.local
 .env.*.local
+app/.env
+app/.env.local
+app/.env.*.local
 
-prisma/dev.db
-*.log
+# Local service data
+services/minio/data/
+services/backups/
 
+# Local uploads/storage
+storage/
+uploads/
+
+# Database dumps/backups
+*.sql
+*.dump
+*.backup
+
+# OS/editor
 .DS_Store
+Thumbs.db
+.vscode/
+.idea/

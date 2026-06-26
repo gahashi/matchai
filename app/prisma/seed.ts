@@ -1,8 +1,8 @@
 import "dotenv/config";
 import crypto from "node:crypto";
-import { PrismaClient } from "../src/generated/prisma/client";
+import { PrismaClient } from "@/generated/prisma/client";
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
-import { auth } from "../src/lib/auth/auth";
+import { auth } from "@/lib/auth/auth";
 
 const adapter = new PrismaMariaDb({
     host: process.env.DB_HOST ?? "localhost",
