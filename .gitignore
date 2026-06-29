@@ -26,8 +26,11 @@ services/minio/data/
 services/backups/
 
 # Local uploads/storage
-storage/
-uploads/
+# Local uploads/storage
+/storage/
+/uploads/
+app/storage/
+app/uploads/
 
 # Database dumps/backups
 *.sql
