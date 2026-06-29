@@ -116,6 +116,8 @@ export const SysUsuarioScalarFieldEnum = {
   senha_hash: 'senha_hash',
   codigo_aluno: 'codigo_aluno',
   documento: 'documento',
+  avatar_sys_arquivo_id: 'avatar_sys_arquivo_id',
+  avatar_file_key: 'avatar_file_key',
   avatar_url: 'avatar_url',
   ativo: 'ativo',
   perfil_completo: 'perfil_completo',
@@ -715,6 +717,7 @@ export const SysUsuarioOrderByRelevanceFieldEnum = {
   senha_hash: 'senha_hash',
   codigo_aluno: 'codigo_aluno',
   documento: 'documento',
+  avatar_file_key: 'avatar_file_key',
   avatar_url: 'avatar_url'
 } as const
 

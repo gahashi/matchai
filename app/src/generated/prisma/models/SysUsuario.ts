@@ -28,12 +28,14 @@ export type AggregateSysUsuario = {
 
 export type SysUsuarioAvgAggregateOutputType = {
   id: number | null
+  avatar_sys_arquivo_id: number | null
   ativo: number | null
   perfil_completo: number | null
 }
 
 export type SysUsuarioSumAggregateOutputType = {
   id: number | null
+  avatar_sys_arquivo_id: number | null
   ativo: number | null
   perfil_completo: number | null
 }
@@ -47,6 +49,8 @@ export type SysUsuarioMinAggregateOutputType = {
   senha_hash: string | null
   codigo_aluno: string | null
   documento: string | null
+  avatar_sys_arquivo_id: number | null
+  avatar_file_key: string | null
   avatar_url: string | null
   ativo: number | null
   perfil_completo: number | null
@@ -66,6 +70,8 @@ export type SysUsuarioMaxAggregateOutputType = {
   senha_hash: string | null
   codigo_aluno: string | null
   documento: string | null
+  avatar_sys_arquivo_id: number | null
+  avatar_file_key: string | null
   avatar_url: string | null
   ativo: number | null
   perfil_completo: number | null
@@ -85,6 +91,8 @@ export type SysUsuarioCountAggregateOutputType = {
   senha_hash: number
   codigo_aluno: number
   documento: number
+  avatar_sys_arquivo_id: number
+  avatar_file_key: number
   avatar_url: number
   ativo: number
   perfil_completo: number
@@ -99,12 +107,14 @@ export type SysUsuarioCountAggregateOutputType = {
 
 export type SysUsuarioAvgAggregateInputType = {
   id?: true
+  avatar_sys_arquivo_id?: true
   ativo?: true
   perfil_completo?: true
 }
 
 export type SysUsuarioSumAggregateInputType = {
   id?: true
+  avatar_sys_arquivo_id?: true
   ativo?: true
   perfil_completo?: true
 }
@@ -118,6 +128,8 @@ export type SysUsuarioMinAggregateInputType = {
   senha_hash?: true
   codigo_aluno?: true
   documento?: true
+  avatar_sys_arquivo_id?: true
+  avatar_file_key?: true
   avatar_url?: true
   ativo?: true
   perfil_completo?: true
@@ -137,6 +149,8 @@ export type SysUsuarioMaxAggregateInputType = {
   senha_hash?: true
   codigo_aluno?: true
   documento?: true
+  avatar_sys_arquivo_id?: true
+  avatar_file_key?: true
   avatar_url?: true
   ativo?: true
   perfil_completo?: true
@@ -156,6 +170,8 @@ export type SysUsuarioCountAggregateInputType = {
   senha_hash?: true
   codigo_aluno?: true
   documento?: true
+  avatar_sys_arquivo_id?: true
+  avatar_file_key?: true
   avatar_url?: true
   ativo?: true
   perfil_completo?: true
@@ -262,6 +278,8 @@ export type SysUsuarioGroupByOutputType = {
   senha_hash: string | null
   codigo_aluno: string | null
   documento: string | null
+  avatar_sys_arquivo_id: number | null
+  avatar_file_key: string | null
   avatar_url: string | null
   ativo: number
   perfil_completo: number
@@ -304,6 +322,8 @@ export type SysUsuarioWhereInput = {
   senha_hash?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
   codigo_aluno?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
   documento?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
+  avatar_sys_arquivo_id?: Prisma.IntNullableFilter<"SysUsuario"> | number | null
+  avatar_file_key?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
   avatar_url?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
   ativo?: Prisma.IntFilter<"SysUsuario"> | number
   perfil_completo?: Prisma.IntFilter<"SysUsuario"> | number
@@ -330,6 +350,8 @@ export type SysUsuarioOrderByWithRelationInput = {
   senha_hash?: Prisma.SortOrderInput | Prisma.SortOrder
   codigo_aluno?: Prisma.SortOrderInput | Prisma.SortOrder
   documento?: Prisma.SortOrderInput | Prisma.SortOrder
+  avatar_sys_arquivo_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  avatar_file_key?: Prisma.SortOrderInput | Prisma.SortOrder
   avatar_url?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
   perfil_completo?: Prisma.SortOrder
@@ -360,6 +382,8 @@ export type SysUsuarioWhereUniqueInput = Prisma.AtLeast<{
   senha_hash?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
   codigo_aluno?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
   documento?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
+  avatar_sys_arquivo_id?: Prisma.IntNullableFilter<"SysUsuario"> | number | null
+  avatar_file_key?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
   avatar_url?: Prisma.StringNullableFilter<"SysUsuario"> | string | null
   ativo?: Prisma.IntFilter<"SysUsuario"> | number
   perfil_completo?: Prisma.IntFilter<"SysUsuario"> | number
@@ -386,6 +410,8 @@ export type SysUsuarioOrderByWithAggregationInput = {
   senha_hash?: Prisma.SortOrderInput | Prisma.SortOrder
   codigo_aluno?: Prisma.SortOrderInput | Prisma.SortOrder
   documento?: Prisma.SortOrderInput | Prisma.SortOrder
+  avatar_sys_arquivo_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  avatar_file_key?: Prisma.SortOrderInput | Prisma.SortOrder
   avatar_url?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
   perfil_completo?: Prisma.SortOrder
@@ -413,6 +439,8 @@ export type SysUsuarioScalarWhereWithAggregatesInput = {
   senha_hash?: Prisma.StringNullableWithAggregatesFilter<"SysUsuario"> | string | null
   codigo_aluno?: Prisma.StringNullableWithAggregatesFilter<"SysUsuario"> | string | null
   documento?: Prisma.StringNullableWithAggregatesFilter<"SysUsuario"> | string | null
+  avatar_sys_arquivo_id?: Prisma.IntNullableWithAggregatesFilter<"SysUsuario"> | number | null
+  avatar_file_key?: Prisma.StringNullableWithAggregatesFilter<"SysUsuario"> | string | null
   avatar_url?: Prisma.StringNullableWithAggregatesFilter<"SysUsuario"> | string | null
   ativo?: Prisma.IntWithAggregatesFilter<"SysUsuario"> | number
   perfil_completo?: Prisma.IntWithAggregatesFilter<"SysUsuario"> | number
@@ -431,6 +459,8 @@ export type SysUsuarioCreateInput = {
   senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
   avatar_url?: string | null
   ativo?: number
   perfil_completo?: number
@@ -457,6 +487,8 @@ export type SysUsuarioUncheckedCreateInput = {
   senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
   avatar_url?: string | null
   ativo?: number
   perfil_completo?: number
@@ -482,6 +514,8 @@ export type SysUsuarioUpdateInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -508,6 +542,8 @@ export type SysUsuarioUncheckedUpdateInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -534,6 +570,8 @@ export type SysUsuarioCreateManyInput = {
   senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
   avatar_url?: string | null
   ativo?: number
   perfil_completo?: number
@@ -552,6 +590,8 @@ export type SysUsuarioUpdateManyMutationInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -571,6 +611,8 @@ export type SysUsuarioUncheckedUpdateManyInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -596,6 +638,8 @@ export type SysUsuarioCountOrderByAggregateInput = {
   senha_hash?: Prisma.SortOrder
   codigo_aluno?: Prisma.SortOrder
   documento?: Prisma.SortOrder
+  avatar_sys_arquivo_id?: Prisma.SortOrder
+  avatar_file_key?: Prisma.SortOrder
   avatar_url?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   perfil_completo?: Prisma.SortOrder
@@ -608,6 +652,7 @@ export type SysUsuarioCountOrderByAggregateInput = {
 
 export type SysUsuarioAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  avatar_sys_arquivo_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   perfil_completo?: Prisma.SortOrder
 }
@@ -621,6 +666,8 @@ export type SysUsuarioMaxOrderByAggregateInput = {
   senha_hash?: Prisma.SortOrder
   codigo_aluno?: Prisma.SortOrder
   documento?: Prisma.SortOrder
+  avatar_sys_arquivo_id?: Prisma.SortOrder
+  avatar_file_key?: Prisma.SortOrder
   avatar_url?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   perfil_completo?: Prisma.SortOrder
@@ -640,6 +687,8 @@ export type SysUsuarioMinOrderByAggregateInput = {
   senha_hash?: Prisma.SortOrder
   codigo_aluno?: Prisma.SortOrder
   documento?: Prisma.SortOrder
+  avatar_sys_arquivo_id?: Prisma.SortOrder
+  avatar_file_key?: Prisma.SortOrder
   avatar_url?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   perfil_completo?: Prisma.SortOrder
@@ -652,6 +701,7 @@ export type SysUsuarioMinOrderByAggregateInput = {
 
 export type SysUsuarioSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  avatar_sys_arquivo_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   perfil_completo?: Prisma.SortOrder
 }
@@ -672,6 +722,14 @@ export type StringFieldUpdateOperationsInput = {
 
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -798,6 +856,8 @@ export type SysUsuarioCreateWithoutSys_usuario_roleInput = {
   senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
   avatar_url?: string | null
   ativo?: number
   perfil_completo?: number
@@ -823,6 +883,8 @@ export type SysUsuarioUncheckedCreateWithoutSys_usuario_roleInput = {
   senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
   avatar_url?: string | null
   ativo?: number
   perfil_completo?: number
@@ -863,6 +925,8 @@ export type SysUsuarioUpdateWithoutSys_usuario_roleInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -888,6 +952,8 @@ export type SysUsuarioUncheckedUpdateWithoutSys_usuario_roleInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -912,6 +978,8 @@ export type SysUsuarioCreateWithoutSys_usuario_permissionInput = {
   senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
   avatar_url?: string | null
   ativo?: number
   perfil_completo?: number
@@ -937,6 +1005,8 @@ export type SysUsuarioUncheckedCreateWithoutSys_usuario_permissionInput = {
   senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
   avatar_url?: string | null
   ativo?: number
   perfil_completo?: number
@@ -977,6 +1047,8 @@ export type SysUsuarioUpdateWithoutSys_usuario_permissionInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1002,6 +1074,8 @@ export type SysUsuarioUncheckedUpdateWithoutSys_usuario_permissionInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1026,6 +1100,8 @@ export type SysUsuarioCreateWithoutAtl_atletica_membroInput = {
   senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
   avatar_url?: string | null
   ativo?: number
   perfil_completo?: number
@@ -1051,6 +1127,8 @@ export type SysUsuarioUncheckedCreateWithoutAtl_atletica_membroInput = {
   senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
   avatar_url?: string | null
   ativo?: number
   perfil_completo?: number
@@ -1091,6 +1169,8 @@ export type SysUsuarioUpdateWithoutAtl_atletica_membroInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1116,6 +1196,8 @@ export type SysUsuarioUncheckedUpdateWithoutAtl_atletica_membroInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1140,6 +1222,8 @@ export type SysUsuarioCreateWithoutSys_auth_userInput = {
   senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
   avatar_url?: string | null
   ativo?: number
   perfil_completo?: number
@@ -1165,6 +1249,8 @@ export type SysUsuarioUncheckedCreateWithoutSys_auth_userInput = {
   senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
   avatar_url?: string | null
   ativo?: number
   perfil_completo?: number
@@ -1205,6 +1291,8 @@ export type SysUsuarioUpdateWithoutSys_auth_userInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1230,6 +1318,8 @@ export type SysUsuarioUncheckedUpdateWithoutSys_auth_userInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1254,6 +1344,8 @@ export type SysUsuarioCreateWithoutSysEmailLogsInput = {
   senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
   avatar_url?: string | null
   ativo?: number
   perfil_completo?: number
@@ -1279,6 +1371,8 @@ export type SysUsuarioUncheckedCreateWithoutSysEmailLogsInput = {
   senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
   avatar_url?: string | null
   ativo?: number
   perfil_completo?: number
@@ -1319,6 +1413,8 @@ export type SysUsuarioUpdateWithoutSysEmailLogsInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1344,6 +1440,8 @@ export type SysUsuarioUncheckedUpdateWithoutSysEmailLogsInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1368,6 +1466,8 @@ export type SysUsuarioCreateWithoutSysEmailVerificationCodesInput = {
   senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
   avatar_url?: string | null
   ativo?: number
   perfil_completo?: number
@@ -1393,6 +1493,8 @@ export type SysUsuarioUncheckedCreateWithoutSysEmailVerificationCodesInput = {
   senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
   avatar_url?: string | null
   ativo?: number
   perfil_completo?: number
@@ -1433,6 +1535,8 @@ export type SysUsuarioUpdateWithoutSysEmailVerificationCodesInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1458,6 +1562,8 @@ export type SysUsuarioUncheckedUpdateWithoutSysEmailVerificationCodesInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1482,6 +1588,8 @@ export type SysUsuarioCreateWithoutSys_auth_login_logInput = {
   senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
   avatar_url?: string | null
   ativo?: number
   perfil_completo?: number
@@ -1507,6 +1615,8 @@ export type SysUsuarioUncheckedCreateWithoutSys_auth_login_logInput = {
   senha_hash?: string | null
   codigo_aluno?: string | null
   documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
   avatar_url?: string | null
   ativo?: number
   perfil_completo?: number
@@ -1547,6 +1657,8 @@ export type SysUsuarioUpdateWithoutSys_auth_login_logInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1572,6 +1684,8 @@ export type SysUsuarioUncheckedUpdateWithoutSys_auth_login_logInput = {
   senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1673,6 +1787,8 @@ export type SysUsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   senha_hash?: boolean
   codigo_aluno?: boolean
   documento?: boolean
+  avatar_sys_arquivo_id?: boolean
+  avatar_file_key?: boolean
   avatar_url?: boolean
   ativo?: boolean
   perfil_completo?: boolean
@@ -1702,6 +1818,8 @@ export type SysUsuarioSelectScalar = {
   senha_hash?: boolean
   codigo_aluno?: boolean
   documento?: boolean
+  avatar_sys_arquivo_id?: boolean
+  avatar_file_key?: boolean
   avatar_url?: boolean
   ativo?: boolean
   perfil_completo?: boolean
@@ -1712,7 +1830,7 @@ export type SysUsuarioSelectScalar = {
   deleted_at?: boolean
 }
 
-export type SysUsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "nickname" | "email" | "telefone" | "senha_hash" | "codigo_aluno" | "documento" | "avatar_url" | "ativo" | "perfil_completo" | "email_verificado_at" | "ultimo_login_at" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["sysUsuario"]>
+export type SysUsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "nickname" | "email" | "telefone" | "senha_hash" | "codigo_aluno" | "documento" | "avatar_sys_arquivo_id" | "avatar_file_key" | "avatar_url" | "ativo" | "perfil_completo" | "email_verificado_at" | "ultimo_login_at" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["sysUsuario"]>
 export type SysUsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sys_usuario_role?: boolean | Prisma.SysUsuario$sys_usuario_roleArgs<ExtArgs>
   sys_usuario_permission?: boolean | Prisma.SysUsuario$sys_usuario_permissionArgs<ExtArgs>
@@ -1744,6 +1862,8 @@ export type $SysUsuarioPayload<ExtArgs extends runtime.Types.Extensions.Internal
     senha_hash: string | null
     codigo_aluno: string | null
     documento: string | null
+    avatar_sys_arquivo_id: number | null
+    avatar_file_key: string | null
     avatar_url: string | null
     ativo: number
     perfil_completo: number
@@ -2136,6 +2256,8 @@ export interface SysUsuarioFieldRefs {
   readonly senha_hash: Prisma.FieldRef<"SysUsuario", 'String'>
   readonly codigo_aluno: Prisma.FieldRef<"SysUsuario", 'String'>
   readonly documento: Prisma.FieldRef<"SysUsuario", 'String'>
+  readonly avatar_sys_arquivo_id: Prisma.FieldRef<"SysUsuario", 'Int'>
+  readonly avatar_file_key: Prisma.FieldRef<"SysUsuario", 'String'>
   readonly avatar_url: Prisma.FieldRef<"SysUsuario", 'String'>
   readonly ativo: Prisma.FieldRef<"SysUsuario", 'Int'>
   readonly perfil_completo: Prisma.FieldRef<"SysUsuario", 'Int'>

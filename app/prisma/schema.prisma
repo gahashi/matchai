@@ -8,16 +8,18 @@ datasource db {
 }
 
 model SysUsuario {
-  id           Int     @id @default(autoincrement())
-  nome         String  @db.VarChar(150)
-  nickname     String  @unique @db.VarChar(50)
-  email        String  @unique @db.VarChar(150)
-  telefone     String? @db.VarChar(30)
-  senha_hash   String? @db.VarChar(255)
-  codigo_aluno String? @db.VarChar(50)
-  documento    String? @db.VarChar(30)
-  avatar_url   String? @db.VarChar(255)
-  ativo        Int     @default(1)
+  id                    Int     @id @default(autoincrement())
+  nome                  String  @db.VarChar(150)
+  nickname              String  @unique @db.VarChar(50)
+  email                 String  @unique @db.VarChar(150)
+  telefone              String? @db.VarChar(30)
+  senha_hash            String? @db.VarChar(255)
+  codigo_aluno          String? @db.VarChar(50)
+  documento             String? @db.VarChar(30)
+  avatar_sys_arquivo_id Int?
+  avatar_file_key       String? @db.VarChar(500)
+  avatar_url            String? @db.VarChar(1000)
+  ativo                 Int     @default(1)
 
   perfil_completo     Int       @default(0)
   email_verificado_at DateTime? @db.DateTime(0)

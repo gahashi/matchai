@@ -543,14 +543,6 @@ export type SysUsuarioRoleUncheckedUpdateManyWithoutSys_roleNestedInput = {
   deleteMany?: Prisma.SysUsuarioRoleScalarWhereInput | Prisma.SysUsuarioRoleScalarWhereInput[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type SysUsuarioRoleCreateNestedManyWithoutAtl_atleticaInput = {
   create?: Prisma.XOR<Prisma.SysUsuarioRoleCreateWithoutAtl_atleticaInput, Prisma.SysUsuarioRoleUncheckedCreateWithoutAtl_atleticaInput> | Prisma.SysUsuarioRoleCreateWithoutAtl_atleticaInput[] | Prisma.SysUsuarioRoleUncheckedCreateWithoutAtl_atleticaInput[]
   connectOrCreate?: Prisma.SysUsuarioRoleCreateOrConnectWithoutAtl_atleticaInput | Prisma.SysUsuarioRoleCreateOrConnectWithoutAtl_atleticaInput[]
