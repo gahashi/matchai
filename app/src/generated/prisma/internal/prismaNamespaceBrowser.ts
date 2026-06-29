@@ -83,7 +83,12 @@ export const ModelName = {
   Verification: 'Verification',
   SysEmailLog: 'SysEmailLog',
   SysEmailVerificationCode: 'SysEmailVerificationCode',
-  SysAuthLoginLog: 'SysAuthLoginLog'
+  SysAuthLoginLog: 'SysAuthLoginLog',
+  SysArquivoDisco: 'SysArquivoDisco',
+  SysArquivoVisibilidade: 'SysArquivoVisibilidade',
+  SysArquivoTipo: 'SysArquivoTipo',
+  SysArquivoEntidadeTipo: 'SysArquivoEntidadeTipo',
+  SysArquivo: 'SysArquivo'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -615,6 +620,77 @@ export const SysAuthLoginLogScalarFieldEnum = {
 export type SysAuthLoginLogScalarFieldEnum = (typeof SysAuthLoginLogScalarFieldEnum)[keyof typeof SysAuthLoginLogScalarFieldEnum]
 
 
+export const SysArquivoDiscoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysArquivoDiscoScalarFieldEnum = (typeof SysArquivoDiscoScalarFieldEnum)[keyof typeof SysArquivoDiscoScalarFieldEnum]
+
+
+export const SysArquivoVisibilidadeScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysArquivoVisibilidadeScalarFieldEnum = (typeof SysArquivoVisibilidadeScalarFieldEnum)[keyof typeof SysArquivoVisibilidadeScalarFieldEnum]
+
+
+export const SysArquivoTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysArquivoTipoScalarFieldEnum = (typeof SysArquivoTipoScalarFieldEnum)[keyof typeof SysArquivoTipoScalarFieldEnum]
+
+
+export const SysArquivoEntidadeTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysArquivoEntidadeTipoScalarFieldEnum = (typeof SysArquivoEntidadeTipoScalarFieldEnum)[keyof typeof SysArquivoEntidadeTipoScalarFieldEnum]
+
+
+export const SysArquivoScalarFieldEnum = {
+  id: 'id',
+  sys_arquivo_disco_id: 'sys_arquivo_disco_id',
+  sys_arquivo_visibilidade_id: 'sys_arquivo_visibilidade_id',
+  sys_arquivo_tipo_id: 'sys_arquivo_tipo_id',
+  sys_arquivo_entidade_tipo_id: 'sys_arquivo_entidade_tipo_id',
+  entidade_id: 'entidade_id',
+  bucket: 'bucket',
+  file_key: 'file_key',
+  public_url: 'public_url',
+  original_name: 'original_name',
+  mime_type: 'mime_type',
+  size_bytes: 'size_bytes',
+  content_hash: 'content_hash',
+  created_by_usuario_id: 'created_by_usuario_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type SysArquivoScalarFieldEnum = (typeof SysArquivoScalarFieldEnum)[keyof typeof SysArquivoScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -918,4 +994,48 @@ export const SysAuthLoginLogOrderByRelevanceFieldEnum = {
 } as const
 
 export type SysAuthLoginLogOrderByRelevanceFieldEnum = (typeof SysAuthLoginLogOrderByRelevanceFieldEnum)[keyof typeof SysAuthLoginLogOrderByRelevanceFieldEnum]
+
+
+export const SysArquivoDiscoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome'
+} as const
+
+export type SysArquivoDiscoOrderByRelevanceFieldEnum = (typeof SysArquivoDiscoOrderByRelevanceFieldEnum)[keyof typeof SysArquivoDiscoOrderByRelevanceFieldEnum]
+
+
+export const SysArquivoVisibilidadeOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome'
+} as const
+
+export type SysArquivoVisibilidadeOrderByRelevanceFieldEnum = (typeof SysArquivoVisibilidadeOrderByRelevanceFieldEnum)[keyof typeof SysArquivoVisibilidadeOrderByRelevanceFieldEnum]
+
+
+export const SysArquivoTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome'
+} as const
+
+export type SysArquivoTipoOrderByRelevanceFieldEnum = (typeof SysArquivoTipoOrderByRelevanceFieldEnum)[keyof typeof SysArquivoTipoOrderByRelevanceFieldEnum]
+
+
+export const SysArquivoEntidadeTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome'
+} as const
+
+export type SysArquivoEntidadeTipoOrderByRelevanceFieldEnum = (typeof SysArquivoEntidadeTipoOrderByRelevanceFieldEnum)[keyof typeof SysArquivoEntidadeTipoOrderByRelevanceFieldEnum]
+
+
+export const SysArquivoOrderByRelevanceFieldEnum = {
+  bucket: 'bucket',
+  file_key: 'file_key',
+  public_url: 'public_url',
+  original_name: 'original_name',
+  mime_type: 'mime_type',
+  content_hash: 'content_hash'
+} as const
+
+export type SysArquivoOrderByRelevanceFieldEnum = (typeof SysArquivoOrderByRelevanceFieldEnum)[keyof typeof SysArquivoOrderByRelevanceFieldEnum]
 

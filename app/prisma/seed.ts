@@ -1026,6 +1026,103 @@ async function main() {
         },
     });
 
+    /**
+     * SYS - Arquivos: discos/storage disponíveis
+     */
+    await upsertByCodigo(prisma.sysArquivoDisco, "s3", {
+        nome: "S3 compatível",
+        ativo: 1,
+    });
+
+    /**
+     * SYS - Arquivos: visibilidades
+     */
+    await upsertByCodigo(prisma.sysArquivoVisibilidade, "public", {
+        nome: "Público",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoVisibilidade, "private", {
+        nome: "Privado",
+        ativo: 1,
+    });
+
+    /**
+     * SYS - Arquivos: tipos de arquivo
+     */
+    await upsertByCodigo(prisma.sysArquivoTipo, "avatar_usuario", {
+        nome: "Avatar de usuário",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoTipo, "logo_atletica", {
+        nome: "Logo de atlética",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoTipo, "banner_atletica", {
+        nome: "Banner de atlética",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoTipo, "imagem_evento", {
+        nome: "Imagem de evento",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoTipo, "logo_parceiro", {
+        nome: "Logo de parceiro",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoTipo, "documento", {
+        nome: "Documento",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoTipo, "anexo", {
+        nome: "Anexo",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoTipo, "teste", {
+        nome: "Teste",
+        ativo: 1,
+    });
+
+    /**
+     * SYS - Arquivos: tipos de entidade relacionadas
+     */
+    await upsertByCodigo(prisma.sysArquivoEntidadeTipo, "sys_usuario", {
+        nome: "Usuário",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoEntidadeTipo, "atl_atletica", {
+        nome: "Atlética",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoEntidadeTipo, "atl_atletica_tema", {
+        nome: "Tema da atlética",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoEntidadeTipo, "evt_evento", {
+        nome: "Evento",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoEntidadeTipo, "par_parceiro", {
+        nome: "Parceiro",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoEntidadeTipo, "dev", {
+        nome: "Desenvolvimento",
+        ativo: 1,
+    });
+
     console.log("Seed executado com sucesso.");
     console.log("Usuário dev:");
     console.log("Email: admin@bravapass.dev");
@@ -1045,3 +1142,4 @@ main()
     .finally(async () => {
         await prisma.$disconnect();
     });
+

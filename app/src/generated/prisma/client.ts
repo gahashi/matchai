@@ -206,3 +206,28 @@ export type SysEmailVerificationCode = Prisma.SysEmailVerificationCodeModel
  * 
  */
 export type SysAuthLoginLog = Prisma.SysAuthLoginLogModel
+/**
+ * Model SysArquivoDisco
+ * 
+ */
+export type SysArquivoDisco = Prisma.SysArquivoDiscoModel
+/**
+ * Model SysArquivoVisibilidade
+ * 
+ */
+export type SysArquivoVisibilidade = Prisma.SysArquivoVisibilidadeModel
+/**
+ * Model SysArquivoTipo
+ * 
+ */
+export type SysArquivoTipo = Prisma.SysArquivoTipoModel
+/**
+ * Model SysArquivoEntidadeTipo
+ * 
+ */
+export type SysArquivoEntidadeTipo = Prisma.SysArquivoEntidadeTipoModel
+/**
+ * Model SysArquivo
+ * 
+ */
+export type SysArquivo = Prisma.SysArquivoModel

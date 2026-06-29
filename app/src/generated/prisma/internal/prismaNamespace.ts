@@ -416,7 +416,12 @@ export const ModelName = {
   Verification: 'Verification',
   SysEmailLog: 'SysEmailLog',
   SysEmailVerificationCode: 'SysEmailVerificationCode',
-  SysAuthLoginLog: 'SysAuthLoginLog'
+  SysAuthLoginLog: 'SysAuthLoginLog',
+  SysArquivoDisco: 'SysArquivoDisco',
+  SysArquivoVisibilidade: 'SysArquivoVisibilidade',
+  SysArquivoTipo: 'SysArquivoTipo',
+  SysArquivoEntidadeTipo: 'SysArquivoEntidadeTipo',
+  SysArquivo: 'SysArquivo'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -432,7 +437,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "sysUsuario" | "sysRoleEscopo" | "sysRole" | "sysPermission" | "sysRolePermission" | "sysUsuarioRole" | "sysUsuarioPermissionTipo" | "sysUsuarioPermission" | "eduInstituicao" | "eduCurso" | "eduInstituicaoCurso" | "atlAtletica" | "atlAtleticaCurso" | "atlCargoTipo" | "atlCargo" | "atlAtleticaCargo" | "atlAtleticaMembroTipo" | "atlAtleticaMembroStatus" | "atlAtleticaMembro" | "atlAtleticaMembroCargo" | "atlAtleticaTema" | "atlAtleticaRegimento" | "sysAssinaturaPlanoPeriodicidade" | "sysAssinaturaPlano" | "atlAtleticaAssinaturaStatus" | "atlAtleticaAssinatura" | "user" | "session" | "account" | "verification" | "sysEmailLog" | "sysEmailVerificationCode" | "sysAuthLoginLog"
+    modelProps: "sysUsuario" | "sysRoleEscopo" | "sysRole" | "sysPermission" | "sysRolePermission" | "sysUsuarioRole" | "sysUsuarioPermissionTipo" | "sysUsuarioPermission" | "eduInstituicao" | "eduCurso" | "eduInstituicaoCurso" | "atlAtletica" | "atlAtleticaCurso" | "atlCargoTipo" | "atlCargo" | "atlAtleticaCargo" | "atlAtleticaMembroTipo" | "atlAtleticaMembroStatus" | "atlAtleticaMembro" | "atlAtleticaMembroCargo" | "atlAtleticaTema" | "atlAtleticaRegimento" | "sysAssinaturaPlanoPeriodicidade" | "sysAssinaturaPlano" | "atlAtleticaAssinaturaStatus" | "atlAtleticaAssinatura" | "user" | "session" | "account" | "verification" | "sysEmailLog" | "sysEmailVerificationCode" | "sysAuthLoginLog" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivoEntidadeTipo" | "sysArquivo"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2614,6 +2619,336 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SysArquivoDisco: {
+      payload: Prisma.$SysArquivoDiscoPayload<ExtArgs>
+      fields: Prisma.SysArquivoDiscoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysArquivoDiscoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoDiscoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysArquivoDiscoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoDiscoPayload>
+        }
+        findFirst: {
+          args: Prisma.SysArquivoDiscoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoDiscoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysArquivoDiscoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoDiscoPayload>
+        }
+        findMany: {
+          args: Prisma.SysArquivoDiscoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoDiscoPayload>[]
+        }
+        create: {
+          args: Prisma.SysArquivoDiscoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoDiscoPayload>
+        }
+        createMany: {
+          args: Prisma.SysArquivoDiscoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysArquivoDiscoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoDiscoPayload>
+        }
+        update: {
+          args: Prisma.SysArquivoDiscoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoDiscoPayload>
+        }
+        deleteMany: {
+          args: Prisma.SysArquivoDiscoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysArquivoDiscoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysArquivoDiscoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoDiscoPayload>
+        }
+        aggregate: {
+          args: Prisma.SysArquivoDiscoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysArquivoDisco>
+        }
+        groupBy: {
+          args: Prisma.SysArquivoDiscoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysArquivoDiscoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysArquivoDiscoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysArquivoDiscoCountAggregateOutputType> | number
+        }
+      }
+    }
+    SysArquivoVisibilidade: {
+      payload: Prisma.$SysArquivoVisibilidadePayload<ExtArgs>
+      fields: Prisma.SysArquivoVisibilidadeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysArquivoVisibilidadeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoVisibilidadePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysArquivoVisibilidadeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoVisibilidadePayload>
+        }
+        findFirst: {
+          args: Prisma.SysArquivoVisibilidadeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoVisibilidadePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysArquivoVisibilidadeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoVisibilidadePayload>
+        }
+        findMany: {
+          args: Prisma.SysArquivoVisibilidadeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoVisibilidadePayload>[]
+        }
+        create: {
+          args: Prisma.SysArquivoVisibilidadeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoVisibilidadePayload>
+        }
+        createMany: {
+          args: Prisma.SysArquivoVisibilidadeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysArquivoVisibilidadeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoVisibilidadePayload>
+        }
+        update: {
+          args: Prisma.SysArquivoVisibilidadeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoVisibilidadePayload>
+        }
+        deleteMany: {
+          args: Prisma.SysArquivoVisibilidadeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysArquivoVisibilidadeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysArquivoVisibilidadeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoVisibilidadePayload>
+        }
+        aggregate: {
+          args: Prisma.SysArquivoVisibilidadeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysArquivoVisibilidade>
+        }
+        groupBy: {
+          args: Prisma.SysArquivoVisibilidadeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysArquivoVisibilidadeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysArquivoVisibilidadeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysArquivoVisibilidadeCountAggregateOutputType> | number
+        }
+      }
+    }
+    SysArquivoTipo: {
+      payload: Prisma.$SysArquivoTipoPayload<ExtArgs>
+      fields: Prisma.SysArquivoTipoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysArquivoTipoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoTipoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysArquivoTipoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoTipoPayload>
+        }
+        findFirst: {
+          args: Prisma.SysArquivoTipoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoTipoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysArquivoTipoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoTipoPayload>
+        }
+        findMany: {
+          args: Prisma.SysArquivoTipoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoTipoPayload>[]
+        }
+        create: {
+          args: Prisma.SysArquivoTipoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoTipoPayload>
+        }
+        createMany: {
+          args: Prisma.SysArquivoTipoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysArquivoTipoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoTipoPayload>
+        }
+        update: {
+          args: Prisma.SysArquivoTipoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoTipoPayload>
+        }
+        deleteMany: {
+          args: Prisma.SysArquivoTipoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysArquivoTipoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysArquivoTipoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoTipoPayload>
+        }
+        aggregate: {
+          args: Prisma.SysArquivoTipoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysArquivoTipo>
+        }
+        groupBy: {
+          args: Prisma.SysArquivoTipoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysArquivoTipoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysArquivoTipoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysArquivoTipoCountAggregateOutputType> | number
+        }
+      }
+    }
+    SysArquivoEntidadeTipo: {
+      payload: Prisma.$SysArquivoEntidadeTipoPayload<ExtArgs>
+      fields: Prisma.SysArquivoEntidadeTipoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysArquivoEntidadeTipoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoEntidadeTipoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysArquivoEntidadeTipoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoEntidadeTipoPayload>
+        }
+        findFirst: {
+          args: Prisma.SysArquivoEntidadeTipoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoEntidadeTipoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysArquivoEntidadeTipoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoEntidadeTipoPayload>
+        }
+        findMany: {
+          args: Prisma.SysArquivoEntidadeTipoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoEntidadeTipoPayload>[]
+        }
+        create: {
+          args: Prisma.SysArquivoEntidadeTipoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoEntidadeTipoPayload>
+        }
+        createMany: {
+          args: Prisma.SysArquivoEntidadeTipoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysArquivoEntidadeTipoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoEntidadeTipoPayload>
+        }
+        update: {
+          args: Prisma.SysArquivoEntidadeTipoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoEntidadeTipoPayload>
+        }
+        deleteMany: {
+          args: Prisma.SysArquivoEntidadeTipoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysArquivoEntidadeTipoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysArquivoEntidadeTipoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoEntidadeTipoPayload>
+        }
+        aggregate: {
+          args: Prisma.SysArquivoEntidadeTipoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysArquivoEntidadeTipo>
+        }
+        groupBy: {
+          args: Prisma.SysArquivoEntidadeTipoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysArquivoEntidadeTipoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysArquivoEntidadeTipoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysArquivoEntidadeTipoCountAggregateOutputType> | number
+        }
+      }
+    }
+    SysArquivo: {
+      payload: Prisma.$SysArquivoPayload<ExtArgs>
+      fields: Prisma.SysArquivoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysArquivoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysArquivoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoPayload>
+        }
+        findFirst: {
+          args: Prisma.SysArquivoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysArquivoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoPayload>
+        }
+        findMany: {
+          args: Prisma.SysArquivoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoPayload>[]
+        }
+        create: {
+          args: Prisma.SysArquivoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoPayload>
+        }
+        createMany: {
+          args: Prisma.SysArquivoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysArquivoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoPayload>
+        }
+        update: {
+          args: Prisma.SysArquivoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoPayload>
+        }
+        deleteMany: {
+          args: Prisma.SysArquivoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysArquivoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysArquivoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysArquivoPayload>
+        }
+        aggregate: {
+          args: Prisma.SysArquivoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysArquivo>
+        }
+        groupBy: {
+          args: Prisma.SysArquivoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysArquivoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysArquivoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysArquivoCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3166,6 +3501,77 @@ export const SysAuthLoginLogScalarFieldEnum = {
 export type SysAuthLoginLogScalarFieldEnum = (typeof SysAuthLoginLogScalarFieldEnum)[keyof typeof SysAuthLoginLogScalarFieldEnum]
 
 
+export const SysArquivoDiscoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysArquivoDiscoScalarFieldEnum = (typeof SysArquivoDiscoScalarFieldEnum)[keyof typeof SysArquivoDiscoScalarFieldEnum]
+
+
+export const SysArquivoVisibilidadeScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysArquivoVisibilidadeScalarFieldEnum = (typeof SysArquivoVisibilidadeScalarFieldEnum)[keyof typeof SysArquivoVisibilidadeScalarFieldEnum]
+
+
+export const SysArquivoTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysArquivoTipoScalarFieldEnum = (typeof SysArquivoTipoScalarFieldEnum)[keyof typeof SysArquivoTipoScalarFieldEnum]
+
+
+export const SysArquivoEntidadeTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysArquivoEntidadeTipoScalarFieldEnum = (typeof SysArquivoEntidadeTipoScalarFieldEnum)[keyof typeof SysArquivoEntidadeTipoScalarFieldEnum]
+
+
+export const SysArquivoScalarFieldEnum = {
+  id: 'id',
+  sys_arquivo_disco_id: 'sys_arquivo_disco_id',
+  sys_arquivo_visibilidade_id: 'sys_arquivo_visibilidade_id',
+  sys_arquivo_tipo_id: 'sys_arquivo_tipo_id',
+  sys_arquivo_entidade_tipo_id: 'sys_arquivo_entidade_tipo_id',
+  entidade_id: 'entidade_id',
+  bucket: 'bucket',
+  file_key: 'file_key',
+  public_url: 'public_url',
+  original_name: 'original_name',
+  mime_type: 'mime_type',
+  size_bytes: 'size_bytes',
+  content_hash: 'content_hash',
+  created_by_usuario_id: 'created_by_usuario_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type SysArquivoScalarFieldEnum = (typeof SysArquivoScalarFieldEnum)[keyof typeof SysArquivoScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -3471,6 +3877,50 @@ export const SysAuthLoginLogOrderByRelevanceFieldEnum = {
 export type SysAuthLoginLogOrderByRelevanceFieldEnum = (typeof SysAuthLoginLogOrderByRelevanceFieldEnum)[keyof typeof SysAuthLoginLogOrderByRelevanceFieldEnum]
 
 
+export const SysArquivoDiscoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome'
+} as const
+
+export type SysArquivoDiscoOrderByRelevanceFieldEnum = (typeof SysArquivoDiscoOrderByRelevanceFieldEnum)[keyof typeof SysArquivoDiscoOrderByRelevanceFieldEnum]
+
+
+export const SysArquivoVisibilidadeOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome'
+} as const
+
+export type SysArquivoVisibilidadeOrderByRelevanceFieldEnum = (typeof SysArquivoVisibilidadeOrderByRelevanceFieldEnum)[keyof typeof SysArquivoVisibilidadeOrderByRelevanceFieldEnum]
+
+
+export const SysArquivoTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome'
+} as const
+
+export type SysArquivoTipoOrderByRelevanceFieldEnum = (typeof SysArquivoTipoOrderByRelevanceFieldEnum)[keyof typeof SysArquivoTipoOrderByRelevanceFieldEnum]
+
+
+export const SysArquivoEntidadeTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome'
+} as const
+
+export type SysArquivoEntidadeTipoOrderByRelevanceFieldEnum = (typeof SysArquivoEntidadeTipoOrderByRelevanceFieldEnum)[keyof typeof SysArquivoEntidadeTipoOrderByRelevanceFieldEnum]
+
+
+export const SysArquivoOrderByRelevanceFieldEnum = {
+  bucket: 'bucket',
+  file_key: 'file_key',
+  public_url: 'public_url',
+  original_name: 'original_name',
+  mime_type: 'mime_type',
+  content_hash: 'content_hash'
+} as const
+
+export type SysArquivoOrderByRelevanceFieldEnum = (typeof SysArquivoOrderByRelevanceFieldEnum)[keyof typeof SysArquivoOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -3661,6 +4111,11 @@ export type GlobalOmitConfig = {
   sysEmailLog?: Prisma.SysEmailLogOmit
   sysEmailVerificationCode?: Prisma.SysEmailVerificationCodeOmit
   sysAuthLoginLog?: Prisma.SysAuthLoginLogOmit
+  sysArquivoDisco?: Prisma.SysArquivoDiscoOmit
+  sysArquivoVisibilidade?: Prisma.SysArquivoVisibilidadeOmit
+  sysArquivoTipo?: Prisma.SysArquivoTipoOmit
+  sysArquivoEntidadeTipo?: Prisma.SysArquivoEntidadeTipoOmit
+  sysArquivo?: Prisma.SysArquivoOmit
 }
 
 /* Types for Logging */

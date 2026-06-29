@@ -663,3 +663,95 @@ model SysAuthLoginLog {
   @@index([created_at])
   @@map("sys_auth_login_log")
 }
+
+model SysArquivoDisco {
+  id         Int       @id @default(autoincrement())
+  codigo     String    @unique @db.VarChar(40)
+  nome       String    @db.VarChar(80)
+  ativo      Int       @default(1)
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  arquivos SysArquivo[]
+
+  @@map("sys_arquivo_disco")
+}
+
+model SysArquivoVisibilidade {
+  id         Int       @id @default(autoincrement())
+  codigo     String    @unique @db.VarChar(40)
+  nome       String    @db.VarChar(80)
+  ativo      Int       @default(1)
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  arquivos SysArquivo[]
+
+  @@map("sys_arquivo_visibilidade")
+}
+
+model SysArquivoTipo {
+  id         Int       @id @default(autoincrement())
+  codigo     String    @unique @db.VarChar(60)
+  nome       String    @db.VarChar(120)
+  ativo      Int       @default(1)
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  arquivos SysArquivo[]
+
+  @@map("sys_arquivo_tipo")
+}
+
+model SysArquivoEntidadeTipo {
+  id         Int       @id @default(autoincrement())
+  codigo     String    @unique @db.VarChar(60)
+  nome       String    @db.VarChar(120)
+  ativo      Int       @default(1)
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  arquivos SysArquivo[]
+
+  @@map("sys_arquivo_entidade_tipo")
+}
+
+model SysArquivo {
+  id Int @id @default(autoincrement())
+
+  sys_arquivo_disco_id         Int
+  sys_arquivo_visibilidade_id  Int
+  sys_arquivo_tipo_id          Int?
+  sys_arquivo_entidade_tipo_id Int?
+
+  entidade_id Int?
+
+  bucket     String? @db.VarChar(120)
+  file_key   String  @db.VarChar(500)
+  public_url String? @db.VarChar(1000)
+
+  original_name String  @db.VarChar(255)
+  mime_type     String  @db.VarChar(120)
+  size_bytes    Int
+  content_hash  String? @db.VarChar(128)
+
+  created_by_usuario_id Int?
+
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+  deleted_at DateTime? @db.DateTime(0)
+
+  disco        SysArquivoDisco         @relation(fields: [sys_arquivo_disco_id], references: [id])
+  visibilidade SysArquivoVisibilidade  @relation(fields: [sys_arquivo_visibilidade_id], references: [id])
+  tipo         SysArquivoTipo?         @relation(fields: [sys_arquivo_tipo_id], references: [id])
+  entidadeTipo SysArquivoEntidadeTipo? @relation(fields: [sys_arquivo_entidade_tipo_id], references: [id])
+
+  @@index([sys_arquivo_disco_id])
+  @@index([sys_arquivo_visibilidade_id])
+  @@index([sys_arquivo_tipo_id])
+  @@index([sys_arquivo_entidade_tipo_id, entidade_id])
+  @@index([file_key])
+  @@index([content_hash])
+  @@index([created_by_usuario_id])
+  @@map("sys_arquivo")
+}

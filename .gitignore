@@ -14,7 +14,7 @@ tsconfig.tsbuildinfo
 app/tsconfig.tsbuildinfo
 
 # Env files
-.env
+app/.env
 .env.local
 .env.*.local
 app/.env
