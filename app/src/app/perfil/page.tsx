@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
+import { AppShell } from "@/components/layout/AppShell";
 import { auth } from "@/lib/auth/auth";
 import { prisma } from "@/lib/prisma";
 import ProfileClient from "./ProfileClient";
@@ -72,5 +73,9 @@ export default async function PerfilPage() {
         redirect("/login");
     }
 
-    return <ProfileClient usuario={usuario} />;
+    return (
+        <AppShell>
+            <ProfileClient usuario={usuario} />
+        </AppShell>
+    );
 }

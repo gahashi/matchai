@@ -76,6 +76,17 @@
     --ui-color-foreground: var(--color-secondary-foreground);
 }
 
+.bp-ui-secondary.bp-button-soft,
+.bp-ui-secondary.bp-button-outline,
+.bp-ui-secondary.bp-button-ghost,
+.bp-ui-secondary.bp-link-soft,
+.bp-ui-secondary.bp-link-outline,
+.bp-ui-secondary.bp-link-ghost {
+    --ui-color: var(--color-secondary-foreground);
+    --ui-color-soft: var(--color-secondary);
+    --ui-color-border: var(--color-border);
+}
+
 .bp-ui-success {
     --ui-color: var(--color-success);
     --ui-color-hover: var(--color-success);
@@ -175,7 +186,8 @@
 }
 
 .bp-button-soft:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--ui-color-soft) 76%, var(--ui-color) 24%);
+    background: var(--ui-color-soft);
+    opacity: 0.86;
 }
 
 .bp-button-outline {
