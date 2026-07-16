@@ -11,7 +11,8 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
-    "prisma:seed": "tsx prisma/seed.ts"
+    "prisma:seed": "tsx prisma/seed.ts",
+    "arquivos:limpar": "tsx scripts/limpar-arquivos-removidos.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

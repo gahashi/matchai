@@ -528,3 +528,130 @@
         display: grid;
     }
 }
+
+.bp-account-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.bp-account-identity {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+.bp-account-avatar {
+    width: 84px;
+    height: 84px;
+    flex: 0 0 auto;
+    font-size: 24px;
+}
+
+.bp-account-main {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+}
+
+.bp-account-main h1 {
+    margin: 0;
+}
+
+.bp-account-main p {
+    margin: 0;
+}
+
+.bp-account-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: var(--color-text-soft);
+    font-size: var(--font-size-sm);
+}
+
+.bp-account-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 auto;
+}
+
+.bp-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.bp-form-grid-full {
+    grid-column: 1 / -1;
+}
+
+.bp-inline-edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.bp-security-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.bp-security-copy {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+}
+
+.bp-security-copy strong {
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+}
+
+.bp-security-copy span {
+    color: var(--color-text-soft);
+    font-size: var(--font-size-xs);
+}
+
+@media (max-width: 720px) {
+    .bp-account-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .bp-account-identity {
+        align-items: flex-start;
+    }
+
+    .bp-account-avatar {
+        width: 68px;
+        height: 68px;
+        font-size: 20px;
+    }
+
+    .bp-account-actions,
+    .bp-inline-edit-actions,
+    .bp-security-row {
+        width: 100%;
+    }
+
+    .bp-account-actions,
+    .bp-inline-edit-actions {
+        display: grid;
+    }
+
+    .bp-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bp-security-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}

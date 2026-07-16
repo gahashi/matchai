@@ -3568,7 +3568,8 @@ export const SysArquivoScalarFieldEnum = {
   created_by_usuario_id: 'created_by_usuario_id',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
+  deleted_at: 'deleted_at',
+  storage_deleted_at: 'storage_deleted_at'
 } as const
 
 export type SysArquivoScalarFieldEnum = (typeof SysArquivoScalarFieldEnum)[keyof typeof SysArquivoScalarFieldEnum]

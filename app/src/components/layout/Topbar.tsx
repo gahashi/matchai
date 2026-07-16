@@ -1,6 +1,5 @@
-import { Bell, LogIn, Plus, Search, UserPlus } from "lucide-react";
+import { Bell, LogIn, Search, UserPlus } from "lucide-react";
 
-import { LogoutButton } from "@/components/auth/LogoutButton";
 import { AppLink } from "@/components/ui/AppLink";
 import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
@@ -42,9 +41,14 @@ export async function Topbar() {
                                 <Bell size={17} />
                             </Button>
 
-                            <Avatar name={user.nome} src={user.avatar_url ?? undefined} />
-
-                            <LogoutButton />
+                            <AppLink
+                                href="/perfil"
+                                color="secondary"
+                                variant="ghost"
+                                aria-label="Meu perfil"
+                            >
+                                <Avatar name={user.nome} src={user.avatar_url ?? undefined} />
+                            </AppLink>
                         </>
                     ) : (
                         <>
@@ -87,21 +91,20 @@ export async function Topbar() {
                             <Bell size={17} />
                         </Button>
 
-                        <Button>
-                            <Plus size={17} />
-                            <span className="hide-mobile">Nova atlética</span>
-                        </Button>
-
-                        <div className="bp-topbar-user">
+                        <AppLink
+                            href="/perfil"
+                            color="secondary"
+                            variant="ghost"
+                            className="bp-topbar-user"
+                            aria-label="Meu perfil"
+                        >
                             <Avatar name={user.nome} src={user.avatar_url ?? undefined} />
 
-                            <div className="bp-topbar-user-meta">
+                            <span className="bp-topbar-user-meta">
                                 <strong>{user.nome}</strong>
                                 <span>@{user.nickname}</span>
-                            </div>
-                        </div>
-
-                        <LogoutButton />
+                            </span>
+                        </AppLink>
                     </>
                 ) : (
                     <div className="bp-topbar-auth-actions">

@@ -66,6 +66,7 @@ export type SysArquivoMinAggregateOutputType = {
   created_at: Date | null
   updated_at: Date | null
   deleted_at: Date | null
+  storage_deleted_at: Date | null
 }
 
 export type SysArquivoMaxAggregateOutputType = {
@@ -86,6 +87,7 @@ export type SysArquivoMaxAggregateOutputType = {
   created_at: Date | null
   updated_at: Date | null
   deleted_at: Date | null
+  storage_deleted_at: Date | null
 }
 
 export type SysArquivoCountAggregateOutputType = {
@@ -106,6 +108,7 @@ export type SysArquivoCountAggregateOutputType = {
   created_at: number
   updated_at: number
   deleted_at: number
+  storage_deleted_at: number
   _all: number
 }
 
@@ -150,6 +153,7 @@ export type SysArquivoMinAggregateInputType = {
   created_at?: true
   updated_at?: true
   deleted_at?: true
+  storage_deleted_at?: true
 }
 
 export type SysArquivoMaxAggregateInputType = {
@@ -170,6 +174,7 @@ export type SysArquivoMaxAggregateInputType = {
   created_at?: true
   updated_at?: true
   deleted_at?: true
+  storage_deleted_at?: true
 }
 
 export type SysArquivoCountAggregateInputType = {
@@ -190,6 +195,7 @@ export type SysArquivoCountAggregateInputType = {
   created_at?: true
   updated_at?: true
   deleted_at?: true
+  storage_deleted_at?: true
   _all?: true
 }
 
@@ -297,6 +303,7 @@ export type SysArquivoGroupByOutputType = {
   created_at: Date | null
   updated_at: Date | null
   deleted_at: Date | null
+  storage_deleted_at: Date | null
   _count: SysArquivoCountAggregateOutputType | null
   _avg: SysArquivoAvgAggregateOutputType | null
   _sum: SysArquivoSumAggregateOutputType | null
@@ -340,6 +347,7 @@ export type SysArquivoWhereInput = {
   created_at?: Prisma.DateTimeNullableFilter<"SysArquivo"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"SysArquivo"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableFilter<"SysArquivo"> | Date | string | null
+  storage_deleted_at?: Prisma.DateTimeNullableFilter<"SysArquivo"> | Date | string | null
   disco?: Prisma.XOR<Prisma.SysArquivoDiscoScalarRelationFilter, Prisma.SysArquivoDiscoWhereInput>
   visibilidade?: Prisma.XOR<Prisma.SysArquivoVisibilidadeScalarRelationFilter, Prisma.SysArquivoVisibilidadeWhereInput>
   tipo?: Prisma.XOR<Prisma.SysArquivoTipoNullableScalarRelationFilter, Prisma.SysArquivoTipoWhereInput> | null
@@ -364,6 +372,7 @@ export type SysArquivoOrderByWithRelationInput = {
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  storage_deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   disco?: Prisma.SysArquivoDiscoOrderByWithRelationInput
   visibilidade?: Prisma.SysArquivoVisibilidadeOrderByWithRelationInput
   tipo?: Prisma.SysArquivoTipoOrderByWithRelationInput
@@ -392,6 +401,7 @@ export type SysArquivoWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeNullableFilter<"SysArquivo"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"SysArquivo"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableFilter<"SysArquivo"> | Date | string | null
+  storage_deleted_at?: Prisma.DateTimeNullableFilter<"SysArquivo"> | Date | string | null
   disco?: Prisma.XOR<Prisma.SysArquivoDiscoScalarRelationFilter, Prisma.SysArquivoDiscoWhereInput>
   visibilidade?: Prisma.XOR<Prisma.SysArquivoVisibilidadeScalarRelationFilter, Prisma.SysArquivoVisibilidadeWhereInput>
   tipo?: Prisma.XOR<Prisma.SysArquivoTipoNullableScalarRelationFilter, Prisma.SysArquivoTipoWhereInput> | null
@@ -416,6 +426,7 @@ export type SysArquivoOrderByWithAggregationInput = {
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  storage_deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SysArquivoCountOrderByAggregateInput
   _avg?: Prisma.SysArquivoAvgOrderByAggregateInput
   _max?: Prisma.SysArquivoMaxOrderByAggregateInput
@@ -444,6 +455,7 @@ export type SysArquivoScalarWhereWithAggregatesInput = {
   created_at?: Prisma.DateTimeNullableWithAggregatesFilter<"SysArquivo"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableWithAggregatesFilter<"SysArquivo"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"SysArquivo"> | Date | string | null
+  storage_deleted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"SysArquivo"> | Date | string | null
 }
 
 export type SysArquivoCreateInput = {
@@ -459,6 +471,7 @@ export type SysArquivoCreateInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
   disco: Prisma.SysArquivoDiscoCreateNestedOneWithoutArquivosInput
   visibilidade: Prisma.SysArquivoVisibilidadeCreateNestedOneWithoutArquivosInput
   tipo?: Prisma.SysArquivoTipoCreateNestedOneWithoutArquivosInput
@@ -483,6 +496,7 @@ export type SysArquivoUncheckedCreateInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
 }
 
 export type SysArquivoUpdateInput = {
@@ -498,6 +512,7 @@ export type SysArquivoUpdateInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   disco?: Prisma.SysArquivoDiscoUpdateOneRequiredWithoutArquivosNestedInput
   visibilidade?: Prisma.SysArquivoVisibilidadeUpdateOneRequiredWithoutArquivosNestedInput
   tipo?: Prisma.SysArquivoTipoUpdateOneWithoutArquivosNestedInput
@@ -522,6 +537,7 @@ export type SysArquivoUncheckedUpdateInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SysArquivoCreateManyInput = {
@@ -542,6 +558,7 @@ export type SysArquivoCreateManyInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
 }
 
 export type SysArquivoUpdateManyMutationInput = {
@@ -557,6 +574,7 @@ export type SysArquivoUpdateManyMutationInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SysArquivoUncheckedUpdateManyInput = {
@@ -577,6 +595,7 @@ export type SysArquivoUncheckedUpdateManyInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SysArquivoListRelationFilter = {
@@ -613,6 +632,7 @@ export type SysArquivoCountOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
+  storage_deleted_at?: Prisma.SortOrder
 }
 
 export type SysArquivoAvgOrderByAggregateInput = {
@@ -644,6 +664,7 @@ export type SysArquivoMaxOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
+  storage_deleted_at?: Prisma.SortOrder
 }
 
 export type SysArquivoMinOrderByAggregateInput = {
@@ -664,6 +685,7 @@ export type SysArquivoMinOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
+  storage_deleted_at?: Prisma.SortOrder
 }
 
 export type SysArquivoSumOrderByAggregateInput = {
@@ -858,6 +880,7 @@ export type SysArquivoCreateWithoutDiscoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
   visibilidade: Prisma.SysArquivoVisibilidadeCreateNestedOneWithoutArquivosInput
   tipo?: Prisma.SysArquivoTipoCreateNestedOneWithoutArquivosInput
   entidadeTipo?: Prisma.SysArquivoEntidadeTipoCreateNestedOneWithoutArquivosInput
@@ -880,6 +903,7 @@ export type SysArquivoUncheckedCreateWithoutDiscoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
 }
 
 export type SysArquivoCreateOrConnectWithoutDiscoInput = {
@@ -929,6 +953,7 @@ export type SysArquivoScalarWhereInput = {
   created_at?: Prisma.DateTimeNullableFilter<"SysArquivo"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"SysArquivo"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableFilter<"SysArquivo"> | Date | string | null
+  storage_deleted_at?: Prisma.DateTimeNullableFilter<"SysArquivo"> | Date | string | null
 }
 
 export type SysArquivoCreateWithoutVisibilidadeInput = {
@@ -944,6 +969,7 @@ export type SysArquivoCreateWithoutVisibilidadeInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
   disco: Prisma.SysArquivoDiscoCreateNestedOneWithoutArquivosInput
   tipo?: Prisma.SysArquivoTipoCreateNestedOneWithoutArquivosInput
   entidadeTipo?: Prisma.SysArquivoEntidadeTipoCreateNestedOneWithoutArquivosInput
@@ -966,6 +992,7 @@ export type SysArquivoUncheckedCreateWithoutVisibilidadeInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
 }
 
 export type SysArquivoCreateOrConnectWithoutVisibilidadeInput = {
@@ -1007,6 +1034,7 @@ export type SysArquivoCreateWithoutTipoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
   disco: Prisma.SysArquivoDiscoCreateNestedOneWithoutArquivosInput
   visibilidade: Prisma.SysArquivoVisibilidadeCreateNestedOneWithoutArquivosInput
   entidadeTipo?: Prisma.SysArquivoEntidadeTipoCreateNestedOneWithoutArquivosInput
@@ -1029,6 +1057,7 @@ export type SysArquivoUncheckedCreateWithoutTipoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
 }
 
 export type SysArquivoCreateOrConnectWithoutTipoInput = {
@@ -1070,6 +1099,7 @@ export type SysArquivoCreateWithoutEntidadeTipoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
   disco: Prisma.SysArquivoDiscoCreateNestedOneWithoutArquivosInput
   visibilidade: Prisma.SysArquivoVisibilidadeCreateNestedOneWithoutArquivosInput
   tipo?: Prisma.SysArquivoTipoCreateNestedOneWithoutArquivosInput
@@ -1092,6 +1122,7 @@ export type SysArquivoUncheckedCreateWithoutEntidadeTipoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
 }
 
 export type SysArquivoCreateOrConnectWithoutEntidadeTipoInput = {
@@ -1137,6 +1168,7 @@ export type SysArquivoCreateManyDiscoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
 }
 
 export type SysArquivoUpdateWithoutDiscoInput = {
@@ -1152,6 +1184,7 @@ export type SysArquivoUpdateWithoutDiscoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   visibilidade?: Prisma.SysArquivoVisibilidadeUpdateOneRequiredWithoutArquivosNestedInput
   tipo?: Prisma.SysArquivoTipoUpdateOneWithoutArquivosNestedInput
   entidadeTipo?: Prisma.SysArquivoEntidadeTipoUpdateOneWithoutArquivosNestedInput
@@ -1174,6 +1207,7 @@ export type SysArquivoUncheckedUpdateWithoutDiscoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SysArquivoUncheckedUpdateManyWithoutDiscoInput = {
@@ -1193,6 +1227,7 @@ export type SysArquivoUncheckedUpdateManyWithoutDiscoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SysArquivoCreateManyVisibilidadeInput = {
@@ -1212,6 +1247,7 @@ export type SysArquivoCreateManyVisibilidadeInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
 }
 
 export type SysArquivoUpdateWithoutVisibilidadeInput = {
@@ -1227,6 +1263,7 @@ export type SysArquivoUpdateWithoutVisibilidadeInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   disco?: Prisma.SysArquivoDiscoUpdateOneRequiredWithoutArquivosNestedInput
   tipo?: Prisma.SysArquivoTipoUpdateOneWithoutArquivosNestedInput
   entidadeTipo?: Prisma.SysArquivoEntidadeTipoUpdateOneWithoutArquivosNestedInput
@@ -1249,6 +1286,7 @@ export type SysArquivoUncheckedUpdateWithoutVisibilidadeInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SysArquivoUncheckedUpdateManyWithoutVisibilidadeInput = {
@@ -1268,6 +1306,7 @@ export type SysArquivoUncheckedUpdateManyWithoutVisibilidadeInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SysArquivoCreateManyTipoInput = {
@@ -1287,6 +1326,7 @@ export type SysArquivoCreateManyTipoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
 }
 
 export type SysArquivoUpdateWithoutTipoInput = {
@@ -1302,6 +1342,7 @@ export type SysArquivoUpdateWithoutTipoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   disco?: Prisma.SysArquivoDiscoUpdateOneRequiredWithoutArquivosNestedInput
   visibilidade?: Prisma.SysArquivoVisibilidadeUpdateOneRequiredWithoutArquivosNestedInput
   entidadeTipo?: Prisma.SysArquivoEntidadeTipoUpdateOneWithoutArquivosNestedInput
@@ -1324,6 +1365,7 @@ export type SysArquivoUncheckedUpdateWithoutTipoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SysArquivoUncheckedUpdateManyWithoutTipoInput = {
@@ -1343,6 +1385,7 @@ export type SysArquivoUncheckedUpdateManyWithoutTipoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SysArquivoCreateManyEntidadeTipoInput = {
@@ -1362,6 +1405,7 @@ export type SysArquivoCreateManyEntidadeTipoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
 }
 
 export type SysArquivoUpdateWithoutEntidadeTipoInput = {
@@ -1377,6 +1421,7 @@ export type SysArquivoUpdateWithoutEntidadeTipoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   disco?: Prisma.SysArquivoDiscoUpdateOneRequiredWithoutArquivosNestedInput
   visibilidade?: Prisma.SysArquivoVisibilidadeUpdateOneRequiredWithoutArquivosNestedInput
   tipo?: Prisma.SysArquivoTipoUpdateOneWithoutArquivosNestedInput
@@ -1399,6 +1444,7 @@ export type SysArquivoUncheckedUpdateWithoutEntidadeTipoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SysArquivoUncheckedUpdateManyWithoutEntidadeTipoInput = {
@@ -1418,6 +1464,7 @@ export type SysArquivoUncheckedUpdateManyWithoutEntidadeTipoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -1440,6 +1487,7 @@ export type SysArquivoSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   created_at?: boolean
   updated_at?: boolean
   deleted_at?: boolean
+  storage_deleted_at?: boolean
   disco?: boolean | Prisma.SysArquivoDiscoDefaultArgs<ExtArgs>
   visibilidade?: boolean | Prisma.SysArquivoVisibilidadeDefaultArgs<ExtArgs>
   tipo?: boolean | Prisma.SysArquivo$tipoArgs<ExtArgs>
@@ -1466,9 +1514,10 @@ export type SysArquivoSelectScalar = {
   created_at?: boolean
   updated_at?: boolean
   deleted_at?: boolean
+  storage_deleted_at?: boolean
 }
 
-export type SysArquivoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sys_arquivo_disco_id" | "sys_arquivo_visibilidade_id" | "sys_arquivo_tipo_id" | "sys_arquivo_entidade_tipo_id" | "entidade_id" | "bucket" | "file_key" | "public_url" | "original_name" | "mime_type" | "size_bytes" | "content_hash" | "created_by_usuario_id" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["sysArquivo"]>
+export type SysArquivoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sys_arquivo_disco_id" | "sys_arquivo_visibilidade_id" | "sys_arquivo_tipo_id" | "sys_arquivo_entidade_tipo_id" | "entidade_id" | "bucket" | "file_key" | "public_url" | "original_name" | "mime_type" | "size_bytes" | "content_hash" | "created_by_usuario_id" | "created_at" | "updated_at" | "deleted_at" | "storage_deleted_at", ExtArgs["result"]["sysArquivo"]>
 export type SysArquivoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   disco?: boolean | Prisma.SysArquivoDiscoDefaultArgs<ExtArgs>
   visibilidade?: boolean | Prisma.SysArquivoVisibilidadeDefaultArgs<ExtArgs>
@@ -1502,6 +1551,7 @@ export type $SysArquivoPayload<ExtArgs extends runtime.Types.Extensions.Internal
     created_at: Date | null
     updated_at: Date | null
     deleted_at: Date | null
+    storage_deleted_at: Date | null
   }, ExtArgs["result"]["sysArquivo"]>
   composites: {}
 }
@@ -1892,6 +1942,7 @@ export interface SysArquivoFieldRefs {
   readonly created_at: Prisma.FieldRef<"SysArquivo", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"SysArquivo", 'DateTime'>
   readonly deleted_at: Prisma.FieldRef<"SysArquivo", 'DateTime'>
+  readonly storage_deleted_at: Prisma.FieldRef<"SysArquivo", 'DateTime'>
 }
     
 

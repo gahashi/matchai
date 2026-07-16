@@ -39,6 +39,8 @@ async function getCurrentSysUsuario() {
 }
 
 export async function POST(request: NextRequest) {
+    let novoArquivoKey: string | null = null;
+
     try {
         const usuario = await getCurrentSysUsuario();
 
@@ -65,6 +67,8 @@ export async function POST(request: NextRequest) {
             );
         }
 
+        const avatarAnteriorArquivoId = usuario.avatar_sys_arquivo_id;
+
         const result = await arquivoService.uploadPublicImage({
             file,
             folder: `usuarios/${usuario.id}/avatar`,
@@ -75,35 +79,57 @@ export async function POST(request: NextRequest) {
             createdByUsuarioId: usuario.id,
         });
 
-        const usuarioAtualizado = await prisma.sysUsuario.update({
-            where: {
-                id: usuario.id,
-            },
-            data: {
-                avatar_sys_arquivo_id: result.arquivo.id,
-                avatar_file_key: result.uploadedFile.fileKey,
-                avatar_url: result.uploadedFile.publicUrl,
-                updated_at: new Date(),
-            },
-            select: {
-                id: true,
-                nome: true,
-                nickname: true,
-                email: true,
-                avatar_url: true,
-                avatar_file_key: true,
-                avatar_sys_arquivo_id: true,
-            },
-        });
+        novoArquivoKey = result.uploadedFile.fileKey;
 
-        await prisma.user.updateMany({
-            where: {
-                sysUsuarioId: usuario.id,
-            },
-            data: {
-                image: usuarioAtualizado.avatar_url,
-                updatedAt: new Date(),
-            },
+        const usuarioAtualizado = await prisma.$transaction(async (tx) => {
+            const usuarioNovo = await tx.sysUsuario.update({
+                where: {
+                    id: usuario.id,
+                },
+                data: {
+                    avatar_sys_arquivo_id: result.arquivo.id,
+                    avatar_file_key: result.uploadedFile.fileKey,
+                    avatar_url: result.uploadedFile.publicUrl,
+                    updated_at: new Date(),
+                },
+                select: {
+                    id: true,
+                    nome: true,
+                    nickname: true,
+                    email: true,
+                    avatar_url: true,
+                    avatar_file_key: true,
+                    avatar_sys_arquivo_id: true,
+                },
+            });
+
+            await tx.user.updateMany({
+                where: {
+                    sysUsuarioId: usuario.id,
+                },
+                data: {
+                    image: usuarioNovo.avatar_url,
+                    updatedAt: new Date(),
+                },
+            });
+
+            if (
+                avatarAnteriorArquivoId &&
+                avatarAnteriorArquivoId !== result.arquivo.id
+            ) {
+                await tx.sysArquivo.updateMany({
+                    where: {
+                        id: avatarAnteriorArquivoId,
+                        deleted_at: null,
+                    },
+                    data: {
+                        deleted_at: new Date(),
+                        updated_at: new Date(),
+                    },
+                });
+            }
+
+            return usuarioNovo;
         });
 
         return NextResponse.json({
@@ -113,6 +139,23 @@ export async function POST(request: NextRequest) {
         });
     } catch (error) {
         console.error("[perfil.avatar]", error);
+
+        if (novoArquivoKey) {
+            try {
+                await prisma.sysArquivo.updateMany({
+                    where: {
+                        file_key: novoArquivoKey,
+                        deleted_at: null,
+                    },
+                    data: {
+                        deleted_at: new Date(),
+                        updated_at: new Date(),
+                    },
+                });
+            } catch (rollbackError) {
+                console.error("[perfil.avatar.rollback]", rollbackError);
+            }
+        }
 
         return NextResponse.json(
             {

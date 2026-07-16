@@ -12,6 +12,23 @@ type UploadArquivoPublicoInput = {
     createdByUsuarioId?: number;
 };
 
+type MarcarComoRemovidoInput = {
+    arquivoId: number;
+};
+
+type LimparArquivosRemovidosInput = {
+    diasRetencao?: number;
+    limit?: number;
+    dryRun?: boolean;
+};
+
+type LimpezaArquivoResultado = {
+    encontrados: number;
+    apagados: number;
+    falhas: number;
+    dryRun: boolean;
+};
+
 async function findRequiredArquivoDiscoId(codigo: string): Promise<number> {
     const disco = await prisma.sysArquivoDisco.findUnique({
         where: { codigo },
@@ -72,6 +89,12 @@ async function findArquivoEntidadeTipoId(codigo?: string): Promise<number | null
     return entidadeTipo.id;
 }
 
+function calcularDataLimiteRemocao(diasRetencao: number): Date {
+    const data = new Date();
+    data.setDate(data.getDate() - diasRetencao);
+    return data;
+}
+
 class ArquivoService {
     async uploadPublicImage(input: UploadArquivoPublicoInput) {
         const uploadedFile = await storageService.uploadPublicImage({
@@ -92,6 +115,113 @@ class ArquivoService {
             uploadedFile,
             arquivo,
         };
+    }
+
+    async marcarComoRemovido(input: MarcarComoRemovidoInput) {
+        const arquivo = await prisma.sysArquivo.findUnique({
+            where: {
+                id: input.arquivoId,
+            },
+            select: {
+                id: true,
+                deleted_at: true,
+            },
+        });
+
+        if (!arquivo) {
+            return null;
+        }
+
+        if (arquivo.deleted_at) {
+            return arquivo;
+        }
+
+        return prisma.sysArquivo.update({
+            where: {
+                id: arquivo.id,
+            },
+            data: {
+                deleted_at: new Date(),
+                updated_at: new Date(),
+            },
+        });
+    }
+
+    async limparArquivosRemovidos(
+        input: LimparArquivosRemovidosInput = {},
+    ): Promise<LimpezaArquivoResultado> {
+        const diasRetencao = input.diasRetencao ?? 7;
+        const limit = input.limit ?? 100;
+        const dryRun = input.dryRun ?? false;
+
+        if (diasRetencao < 1) {
+            throw new Error("diasRetencao precisa ser maior ou igual a 1.");
+        }
+
+        if (limit < 1 || limit > 500) {
+            throw new Error("limit precisa estar entre 1 e 500.");
+        }
+
+        const dataLimite = calcularDataLimiteRemocao(diasRetencao);
+
+        const arquivos = await prisma.sysArquivo.findMany({
+            where: {
+                deleted_at: {
+                    not: null,
+                    lte: dataLimite,
+                },
+                storage_deleted_at: null,
+            },
+            select: {
+                id: true,
+                file_key: true,
+                deleted_at: true,
+                storage_deleted_at: true,
+            },
+            orderBy: {
+                deleted_at: "asc",
+            },
+            take: limit,
+        });
+
+        const resultado: LimpezaArquivoResultado = {
+            encontrados: arquivos.length,
+            apagados: 0,
+            falhas: 0,
+            dryRun,
+        };
+
+        for (const arquivo of arquivos) {
+            try {
+                if (dryRun) {
+                    continue;
+                }
+
+                await storageService.delete(arquivo.file_key);
+
+                await prisma.sysArquivo.update({
+                    where: {
+                        id: arquivo.id,
+                    },
+                    data: {
+                        storage_deleted_at: new Date(),
+                        updated_at: new Date(),
+                    },
+                });
+
+                resultado.apagados += 1;
+            } catch (error) {
+                resultado.falhas += 1;
+
+                console.error("[arquivo.cleanup]", {
+                    arquivoId: arquivo.id,
+                    fileKey: arquivo.file_key,
+                    error,
+                });
+            }
+        }
+
+        return resultado;
     }
 
     private async registrarArquivo(params: {

@@ -81,7 +81,11 @@
 .bp-ui-secondary.bp-button-ghost,
 .bp-ui-secondary.bp-link-soft,
 .bp-ui-secondary.bp-link-outline,
-.bp-ui-secondary.bp-link-ghost {
+.bp-ui-secondary.bp-link-ghost,
+.bp-ui-secondary.bp-alert-soft,
+.bp-ui-secondary.bp-alert-outline,
+.bp-ui-secondary.bp-snackbar-soft,
+.bp-ui-secondary.bp-snackbar-outline {
     --ui-color: var(--color-secondary-foreground);
     --ui-color-soft: var(--color-secondary);
     --ui-color-border: var(--color-border);
@@ -293,4 +297,276 @@
     100% {
         transform: translateX(100%);
     }
+}
+
+.bp-alert {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: var(--radius-lg);
+    border: 1px solid transparent;
+    font-size: var(--font-size-sm);
+    line-height: 1.45;
+}
+
+.bp-alert-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    color: currentColor;
+}
+
+.bp-alert-content {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+}
+
+.bp-alert-content strong {
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+    color: currentColor;
+}
+
+.bp-alert-content div {
+    color: currentColor;
+    opacity: 0.86;
+}
+
+.bp-alert-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bp-alert-close {
+    width: 28px;
+    height: 28px;
+    display: inline-grid;
+    place-items: center;
+    border: 0;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: currentColor;
+    cursor: pointer;
+    opacity: 0.72;
+    transition:
+            opacity var(--transition-fast),
+            background var(--transition-fast);
+}
+
+.bp-alert-close:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.bp-alert-soft {
+    background: var(--ui-color-soft);
+    color: var(--ui-color);
+    border-color: var(--ui-color-border, transparent);
+}
+
+.bp-alert-outline {
+    background: transparent;
+    color: var(--ui-color);
+    border-color: var(--ui-color-border, var(--ui-color));
+}
+
+.bp-alert-solid {
+    background: var(--ui-color);
+    color: var(--ui-color-foreground, var(--color-background));
+    border-color: var(--ui-color);
+}
+
+@media (max-width: 720px) {
+    .bp-alert {
+        padding: 13px 14px;
+        gap: 10px;
+    }
+}
+
+.bp-snackbar-wrap {
+    position: fixed;
+    z-index: 80;
+    pointer-events: none;
+    width: min(520px, calc(100vw - 32px));
+}
+
+.bp-snackbar-top-center {
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bp-snackbar-top-right {
+    top: 18px;
+    right: 18px;
+}
+
+.bp-snackbar-bottom-center {
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bp-snackbar-bottom-right {
+    right: 18px;
+    bottom: 18px;
+}
+
+.bp-snackbar {
+    pointer-events: auto;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 14px;
+    border-radius: var(--radius-lg);
+    border: 1px solid transparent;
+    box-shadow: var(--shadow-lg);
+}
+
+.bp-snackbar-soft {
+    background: var(--ui-color-soft);
+    color: var(--ui-color);
+    border-color: var(--ui-color-border, transparent);
+}
+
+.bp-snackbar-outline {
+    background: var(--color-surface);
+    color: var(--ui-color);
+    border-color: var(--ui-color-border, var(--ui-color));
+}
+
+.bp-snackbar-solid {
+    background: var(--ui-color);
+    color: var(--ui-color-foreground, var(--color-background));
+    border-color: var(--ui-color);
+}
+
+.bp-snackbar-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bp-snackbar-content {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+}
+
+.bp-snackbar-content strong {
+    color: currentColor;
+    font-size: var(--font-size-sm);
+    font-weight: 800;
+}
+
+.bp-snackbar-content span {
+    color: currentColor;
+    font-size: var(--font-size-sm);
+    opacity: 0.86;
+}
+
+.bp-snackbar-action {
+    display: inline-flex;
+    align-items: center;
+}
+
+.bp-snackbar-close {
+    width: 28px;
+    height: 28px;
+    display: inline-grid;
+    place-items: center;
+    border: 0;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: currentColor;
+    cursor: pointer;
+    opacity: 0.72;
+    transition:
+            opacity var(--transition-fast),
+            background var(--transition-fast);
+}
+
+.bp-snackbar-close:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 720px) {
+    .bp-snackbar-wrap {
+        top: auto;
+        right: 12px;
+        bottom: calc(76px + env(safe-area-inset-bottom));
+        left: 12px;
+        width: auto;
+        transform: none;
+    }
+
+    .bp-snackbar {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+    }
+
+    .bp-snackbar-action {
+        grid-column: 2 / -1;
+        justify-content: flex-start;
+    }
+}
+
+.bp-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.62);
+    backdrop-filter: blur(10px);
+}
+
+.bp-modal {
+    width: min(520px, 100%);
+    max-height: min(720px, calc(100vh - 40px));
+    overflow: auto;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-xl);
+}
+
+.bp-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 22px 0;
+}
+
+.bp-modal-body {
+    padding: 22px;
+}
+
+.bp-modal-close {
+    width: 34px;
+    height: 34px;
+    display: inline-grid;
+    place-items: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-2);
+    color: var(--color-text);
+    cursor: pointer;
+    transition:
+            border-color var(--transition-fast),
+            background var(--transition-fast);
+}
+
+.bp-modal-close:hover {
+    border-color: var(--color-border-strong);
+    background: var(--color-surface-3);
 }

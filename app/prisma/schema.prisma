@@ -739,9 +739,10 @@ model SysArquivo {
 
   created_by_usuario_id Int?
 
-  created_at DateTime? @db.DateTime(0)
-  updated_at DateTime? @db.DateTime(0)
-  deleted_at DateTime? @db.DateTime(0)
+  created_at         DateTime? @db.DateTime(0)
+  updated_at         DateTime? @db.DateTime(0)
+  deleted_at         DateTime? @db.DateTime(0)
+  storage_deleted_at DateTime? @db.DateTime(0)
 
   disco        SysArquivoDisco         @relation(fields: [sys_arquivo_disco_id], references: [id])
   visibilidade SysArquivoVisibilidade  @relation(fields: [sys_arquivo_visibilidade_id], references: [id])
@@ -755,5 +756,7 @@ model SysArquivo {
   @@index([file_key])
   @@index([content_hash])
   @@index([created_by_usuario_id])
+  @@index([deleted_at])
+  @@index([storage_deleted_at])
   @@map("sys_arquivo")
 }
