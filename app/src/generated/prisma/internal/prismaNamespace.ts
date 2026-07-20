@@ -421,7 +421,10 @@ export const ModelName = {
   SysArquivoVisibilidade: 'SysArquivoVisibilidade',
   SysArquivoTipo: 'SysArquivoTipo',
   SysArquivoEntidadeTipo: 'SysArquivoEntidadeTipo',
-  SysArquivo: 'SysArquivo'
+  SysArquivo: 'SysArquivo',
+  SysInboxItemTipo: 'SysInboxItemTipo',
+  SysInboxItemStatus: 'SysInboxItemStatus',
+  SysInboxItem: 'SysInboxItem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -437,7 +440,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "sysUsuario" | "sysRoleEscopo" | "sysRole" | "sysPermission" | "sysRolePermission" | "sysUsuarioRole" | "sysUsuarioPermissionTipo" | "sysUsuarioPermission" | "eduInstituicao" | "eduCurso" | "eduInstituicaoCurso" | "atlAtletica" | "atlAtleticaCurso" | "atlCargoTipo" | "atlCargo" | "atlAtleticaCargo" | "atlAtleticaMembroTipo" | "atlAtleticaMembroStatus" | "atlAtleticaMembro" | "atlAtleticaMembroCargo" | "atlAtleticaTema" | "atlAtleticaRegimento" | "sysAssinaturaPlanoPeriodicidade" | "sysAssinaturaPlano" | "atlAtleticaAssinaturaStatus" | "atlAtleticaAssinatura" | "user" | "session" | "account" | "verification" | "sysEmailLog" | "sysEmailVerificationCode" | "sysAuthLoginLog" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivoEntidadeTipo" | "sysArquivo"
+    modelProps: "sysUsuario" | "sysRoleEscopo" | "sysRole" | "sysPermission" | "sysRolePermission" | "sysUsuarioRole" | "sysUsuarioPermissionTipo" | "sysUsuarioPermission" | "eduInstituicao" | "eduCurso" | "eduInstituicaoCurso" | "atlAtletica" | "atlAtleticaCurso" | "atlCargoTipo" | "atlCargo" | "atlAtleticaCargo" | "atlAtleticaMembroTipo" | "atlAtleticaMembroStatus" | "atlAtleticaMembro" | "atlAtleticaMembroCargo" | "atlAtleticaTema" | "atlAtleticaRegimento" | "sysAssinaturaPlanoPeriodicidade" | "sysAssinaturaPlano" | "atlAtleticaAssinaturaStatus" | "atlAtleticaAssinatura" | "user" | "session" | "account" | "verification" | "sysEmailLog" | "sysEmailVerificationCode" | "sysAuthLoginLog" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivoEntidadeTipo" | "sysArquivo" | "sysInboxItemTipo" | "sysInboxItemStatus" | "sysInboxItem"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2949,6 +2952,204 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SysInboxItemTipo: {
+      payload: Prisma.$SysInboxItemTipoPayload<ExtArgs>
+      fields: Prisma.SysInboxItemTipoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysInboxItemTipoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemTipoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysInboxItemTipoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemTipoPayload>
+        }
+        findFirst: {
+          args: Prisma.SysInboxItemTipoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemTipoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysInboxItemTipoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemTipoPayload>
+        }
+        findMany: {
+          args: Prisma.SysInboxItemTipoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemTipoPayload>[]
+        }
+        create: {
+          args: Prisma.SysInboxItemTipoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemTipoPayload>
+        }
+        createMany: {
+          args: Prisma.SysInboxItemTipoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysInboxItemTipoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemTipoPayload>
+        }
+        update: {
+          args: Prisma.SysInboxItemTipoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemTipoPayload>
+        }
+        deleteMany: {
+          args: Prisma.SysInboxItemTipoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysInboxItemTipoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysInboxItemTipoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemTipoPayload>
+        }
+        aggregate: {
+          args: Prisma.SysInboxItemTipoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysInboxItemTipo>
+        }
+        groupBy: {
+          args: Prisma.SysInboxItemTipoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysInboxItemTipoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysInboxItemTipoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysInboxItemTipoCountAggregateOutputType> | number
+        }
+      }
+    }
+    SysInboxItemStatus: {
+      payload: Prisma.$SysInboxItemStatusPayload<ExtArgs>
+      fields: Prisma.SysInboxItemStatusFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysInboxItemStatusFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemStatusPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysInboxItemStatusFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemStatusPayload>
+        }
+        findFirst: {
+          args: Prisma.SysInboxItemStatusFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemStatusPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysInboxItemStatusFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemStatusPayload>
+        }
+        findMany: {
+          args: Prisma.SysInboxItemStatusFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemStatusPayload>[]
+        }
+        create: {
+          args: Prisma.SysInboxItemStatusCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemStatusPayload>
+        }
+        createMany: {
+          args: Prisma.SysInboxItemStatusCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysInboxItemStatusDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemStatusPayload>
+        }
+        update: {
+          args: Prisma.SysInboxItemStatusUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemStatusPayload>
+        }
+        deleteMany: {
+          args: Prisma.SysInboxItemStatusDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysInboxItemStatusUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysInboxItemStatusUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemStatusPayload>
+        }
+        aggregate: {
+          args: Prisma.SysInboxItemStatusAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysInboxItemStatus>
+        }
+        groupBy: {
+          args: Prisma.SysInboxItemStatusGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysInboxItemStatusGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysInboxItemStatusCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysInboxItemStatusCountAggregateOutputType> | number
+        }
+      }
+    }
+    SysInboxItem: {
+      payload: Prisma.$SysInboxItemPayload<ExtArgs>
+      fields: Prisma.SysInboxItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysInboxItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysInboxItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemPayload>
+        }
+        findFirst: {
+          args: Prisma.SysInboxItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysInboxItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemPayload>
+        }
+        findMany: {
+          args: Prisma.SysInboxItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemPayload>[]
+        }
+        create: {
+          args: Prisma.SysInboxItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemPayload>
+        }
+        createMany: {
+          args: Prisma.SysInboxItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysInboxItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemPayload>
+        }
+        update: {
+          args: Prisma.SysInboxItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.SysInboxItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysInboxItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysInboxItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysInboxItemPayload>
+        }
+        aggregate: {
+          args: Prisma.SysInboxItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysInboxItem>
+        }
+        groupBy: {
+          args: Prisma.SysInboxItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysInboxItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysInboxItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysInboxItemCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3575,6 +3776,58 @@ export const SysArquivoScalarFieldEnum = {
 export type SysArquivoScalarFieldEnum = (typeof SysArquivoScalarFieldEnum)[keyof typeof SysArquivoScalarFieldEnum]
 
 
+export const SysInboxItemTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysInboxItemTipoScalarFieldEnum = (typeof SysInboxItemTipoScalarFieldEnum)[keyof typeof SysInboxItemTipoScalarFieldEnum]
+
+
+export const SysInboxItemStatusScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysInboxItemStatusScalarFieldEnum = (typeof SysInboxItemStatusScalarFieldEnum)[keyof typeof SysInboxItemStatusScalarFieldEnum]
+
+
+export const SysInboxItemScalarFieldEnum = {
+  id: 'id',
+  sys_usuario_id: 'sys_usuario_id',
+  sys_inbox_item_tipo_id: 'sys_inbox_item_tipo_id',
+  sys_inbox_item_status_id: 'sys_inbox_item_status_id',
+  titulo: 'titulo',
+  mensagem: 'mensagem',
+  action_url: 'action_url',
+  entidade_tipo: 'entidade_tipo',
+  entidade_id: 'entidade_id',
+  metadata_text: 'metadata_text',
+  read_at: 'read_at',
+  archived_at: 'archived_at',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type SysInboxItemScalarFieldEnum = (typeof SysInboxItemScalarFieldEnum)[keyof typeof SysInboxItemScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -3925,6 +4178,39 @@ export const SysArquivoOrderByRelevanceFieldEnum = {
 export type SysArquivoOrderByRelevanceFieldEnum = (typeof SysArquivoOrderByRelevanceFieldEnum)[keyof typeof SysArquivoOrderByRelevanceFieldEnum]
 
 
+export const SysInboxItemTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon'
+} as const
+
+export type SysInboxItemTipoOrderByRelevanceFieldEnum = (typeof SysInboxItemTipoOrderByRelevanceFieldEnum)[keyof typeof SysInboxItemTipoOrderByRelevanceFieldEnum]
+
+
+export const SysInboxItemStatusOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon'
+} as const
+
+export type SysInboxItemStatusOrderByRelevanceFieldEnum = (typeof SysInboxItemStatusOrderByRelevanceFieldEnum)[keyof typeof SysInboxItemStatusOrderByRelevanceFieldEnum]
+
+
+export const SysInboxItemOrderByRelevanceFieldEnum = {
+  titulo: 'titulo',
+  mensagem: 'mensagem',
+  action_url: 'action_url',
+  entidade_tipo: 'entidade_tipo',
+  metadata_text: 'metadata_text'
+} as const
+
+export type SysInboxItemOrderByRelevanceFieldEnum = (typeof SysInboxItemOrderByRelevanceFieldEnum)[keyof typeof SysInboxItemOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -4120,6 +4406,9 @@ export type GlobalOmitConfig = {
   sysArquivoTipo?: Prisma.SysArquivoTipoOmit
   sysArquivoEntidadeTipo?: Prisma.SysArquivoEntidadeTipoOmit
   sysArquivo?: Prisma.SysArquivoOmit
+  sysInboxItemTipo?: Prisma.SysInboxItemTipoOmit
+  sysInboxItemStatus?: Prisma.SysInboxItemStatusOmit
+  sysInboxItem?: Prisma.SysInboxItemOmit
 }
 
 /* Types for Logging */

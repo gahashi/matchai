@@ -85,7 +85,9 @@
 .bp-ui-secondary.bp-alert-soft,
 .bp-ui-secondary.bp-alert-outline,
 .bp-ui-secondary.bp-snackbar-soft,
-.bp-ui-secondary.bp-snackbar-outline {
+.bp-ui-secondary.bp-snackbar-outline,
+.bp-ui-secondary.bp-badge-soft,
+.bp-ui-secondary.bp-badge-outline {
     --ui-color: var(--color-secondary-foreground);
     --ui-color-soft: var(--color-secondary);
     --ui-color-border: var(--color-border);

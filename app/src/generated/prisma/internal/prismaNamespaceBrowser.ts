@@ -88,7 +88,10 @@ export const ModelName = {
   SysArquivoVisibilidade: 'SysArquivoVisibilidade',
   SysArquivoTipo: 'SysArquivoTipo',
   SysArquivoEntidadeTipo: 'SysArquivoEntidadeTipo',
-  SysArquivo: 'SysArquivo'
+  SysArquivo: 'SysArquivo',
+  SysInboxItemTipo: 'SysInboxItemTipo',
+  SysInboxItemStatus: 'SysInboxItemStatus',
+  SysInboxItem: 'SysInboxItem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -694,6 +697,58 @@ export const SysArquivoScalarFieldEnum = {
 export type SysArquivoScalarFieldEnum = (typeof SysArquivoScalarFieldEnum)[keyof typeof SysArquivoScalarFieldEnum]
 
 
+export const SysInboxItemTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysInboxItemTipoScalarFieldEnum = (typeof SysInboxItemTipoScalarFieldEnum)[keyof typeof SysInboxItemTipoScalarFieldEnum]
+
+
+export const SysInboxItemStatusScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysInboxItemStatusScalarFieldEnum = (typeof SysInboxItemStatusScalarFieldEnum)[keyof typeof SysInboxItemStatusScalarFieldEnum]
+
+
+export const SysInboxItemScalarFieldEnum = {
+  id: 'id',
+  sys_usuario_id: 'sys_usuario_id',
+  sys_inbox_item_tipo_id: 'sys_inbox_item_tipo_id',
+  sys_inbox_item_status_id: 'sys_inbox_item_status_id',
+  titulo: 'titulo',
+  mensagem: 'mensagem',
+  action_url: 'action_url',
+  entidade_tipo: 'entidade_tipo',
+  entidade_id: 'entidade_id',
+  metadata_text: 'metadata_text',
+  read_at: 'read_at',
+  archived_at: 'archived_at',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type SysInboxItemScalarFieldEnum = (typeof SysInboxItemScalarFieldEnum)[keyof typeof SysInboxItemScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1042,4 +1097,37 @@ export const SysArquivoOrderByRelevanceFieldEnum = {
 } as const
 
 export type SysArquivoOrderByRelevanceFieldEnum = (typeof SysArquivoOrderByRelevanceFieldEnum)[keyof typeof SysArquivoOrderByRelevanceFieldEnum]
+
+
+export const SysInboxItemTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon'
+} as const
+
+export type SysInboxItemTipoOrderByRelevanceFieldEnum = (typeof SysInboxItemTipoOrderByRelevanceFieldEnum)[keyof typeof SysInboxItemTipoOrderByRelevanceFieldEnum]
+
+
+export const SysInboxItemStatusOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon'
+} as const
+
+export type SysInboxItemStatusOrderByRelevanceFieldEnum = (typeof SysInboxItemStatusOrderByRelevanceFieldEnum)[keyof typeof SysInboxItemStatusOrderByRelevanceFieldEnum]
+
+
+export const SysInboxItemOrderByRelevanceFieldEnum = {
+  titulo: 'titulo',
+  mensagem: 'mensagem',
+  action_url: 'action_url',
+  entidade_tipo: 'entidade_tipo',
+  metadata_text: 'metadata_text'
+} as const
+
+export type SysInboxItemOrderByRelevanceFieldEnum = (typeof SysInboxItemOrderByRelevanceFieldEnum)[keyof typeof SysInboxItemOrderByRelevanceFieldEnum]
 

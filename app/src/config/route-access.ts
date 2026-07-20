@@ -50,6 +50,10 @@ export const routeAccessRules: RouteAccessRule[] = [
         access: "auth",
     },
     {
+        path: "/inbox",
+        access: "auth",
+    },
+    {
         path: "/teste-select",
         access: "auth",
     },

@@ -231,3 +231,18 @@ export type SysArquivoEntidadeTipo = Prisma.SysArquivoEntidadeTipoModel
  * 
  */
 export type SysArquivo = Prisma.SysArquivoModel
+/**
+ * Model SysInboxItemTipo
+ * 
+ */
+export type SysInboxItemTipo = Prisma.SysInboxItemTipoModel
+/**
+ * Model SysInboxItemStatus
+ * 
+ */
+export type SysInboxItemStatus = Prisma.SysInboxItemStatusModel
+/**
+ * Model SysInboxItem
+ * 
+ */
+export type SysInboxItem = Prisma.SysInboxItemModel

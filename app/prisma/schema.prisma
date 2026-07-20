@@ -32,6 +32,7 @@ model SysUsuario {
   sys_usuario_role       SysUsuarioRole[]
   sys_usuario_permission SysUsuarioPermission[]
   atl_atletica_membro    AtlAtleticaMembro[]
+  sys_inbox_item         SysInboxItem[]
 
   sys_auth_login_log SysAuthLoginLog[]
 
@@ -759,4 +760,75 @@ model SysArquivo {
   @@index([deleted_at])
   @@index([storage_deleted_at])
   @@map("sys_arquivo")
+}
+
+model SysInboxItemTipo {
+  id         Int       @id @default(autoincrement())
+  codigo     String    @unique @db.VarChar(60)
+  nome       String    @db.VarChar(120)
+  descricao  String?   @db.Text
+  color      String?   @db.VarChar(40)
+  icon       String?   @db.VarChar(80)
+  ativo      Int       @default(1)
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  sys_inbox_item SysInboxItem[]
+
+  @@map("sys_inbox_item_tipo")
+}
+
+model SysInboxItemStatus {
+  id         Int       @id @default(autoincrement())
+  codigo     String    @unique @db.VarChar(60)
+  nome       String    @db.VarChar(120)
+  descricao  String?   @db.Text
+  color      String?   @db.VarChar(40)
+  icon       String?   @db.VarChar(80)
+  ativo      Int       @default(1)
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  sys_inbox_item SysInboxItem[]
+
+  @@map("sys_inbox_item_status")
+}
+
+model SysInboxItem {
+  id Int @id @default(autoincrement())
+
+  sys_usuario_id           Int
+  sys_inbox_item_tipo_id   Int
+  sys_inbox_item_status_id Int
+
+  titulo   String @db.VarChar(180)
+  mensagem String @db.Text
+
+  action_url    String? @db.VarChar(1000)
+  entidade_tipo String? @db.VarChar(80)
+  entidade_id   Int?
+
+  metadata_text String? @db.Text
+
+  read_at     DateTime? @db.DateTime(0)
+  archived_at DateTime? @db.DateTime(0)
+
+  ativo      Int       @default(1)
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+  deleted_at DateTime? @db.DateTime(0)
+
+  sys_usuario           SysUsuario         @relation(fields: [sys_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  sys_inbox_item_tipo   SysInboxItemTipo   @relation(fields: [sys_inbox_item_tipo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  sys_inbox_item_status SysInboxItemStatus @relation(fields: [sys_inbox_item_status_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@index([sys_usuario_id])
+  @@index([sys_inbox_item_tipo_id])
+  @@index([sys_inbox_item_status_id])
+  @@index([entidade_tipo, entidade_id])
+  @@index([read_at])
+  @@index([archived_at])
+  @@index([created_at])
+  @@index([deleted_at])
+  @@map("sys_inbox_item")
 }

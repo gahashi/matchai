@@ -2,7 +2,6 @@ import { Bell, LogIn, Search, UserPlus } from "lucide-react";
 
 import { AppLink } from "@/components/ui/AppLink";
 import { Avatar } from "@/components/ui/Avatar";
-import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { getAuthSession } from "@/lib/auth/session";
 
@@ -37,9 +36,14 @@ export async function Topbar() {
                 <div className="bp-topbar-mobile-actions">
                     {user ? (
                         <>
-                            <Button color="secondary" variant="ghost" aria-label="Notificações">
+                            <AppLink
+                                href="/inbox"
+                                color="secondary"
+                                variant="ghost"
+                                aria-label="Inbox"
+                            >
                                 <Bell size={17} />
-                            </Button>
+                            </AppLink>
 
                             <AppLink
                                 href="/perfil"
@@ -87,9 +91,14 @@ export async function Topbar() {
             <div className="bp-topbar-actions">
                 {user ? (
                     <>
-                        <Button color="secondary" variant="ghost" aria-label="Notificações">
+                        <AppLink
+                            href="/inbox"
+                            color="secondary"
+                            variant="ghost"
+                            aria-label="Inbox"
+                        >
                             <Bell size={17} />
-                        </Button>
+                        </AppLink>
 
                         <AppLink
                             href="/perfil"

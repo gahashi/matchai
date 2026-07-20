@@ -153,6 +153,87 @@ async function main() {
     });
 
     /**
+     * SYS - Inbox: tipos de item
+     */
+    const sysInboxTipoInfo = await upsertByCodigo(prisma.sysInboxItemTipo, "info", {
+        nome: "Informação",
+        descricao: "Mensagem informativa do sistema.",
+        color: "info",
+        icon: "info",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysInboxItemTipo, "request", {
+        nome: "Solicitação",
+        descricao: "Mensagem que exige ação ou análise do usuário.",
+        color: "warning",
+        icon: "inbox",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysInboxItemTipo, "result", {
+        nome: "Resultado",
+        descricao: "Mensagem com resultado de um processo ou solicitação.",
+        color: "success",
+        icon: "check-circle",
+        ativo: 1,
+    });
+
+    /**
+     * SYS - Inbox: status de item
+     */
+    const sysInboxStatusUnread = await upsertByCodigo(prisma.sysInboxItemStatus, "unread", {
+        nome: "Não lida",
+        descricao: "Mensagem ainda não lida pelo usuário.",
+        color: "primary",
+        icon: "circle",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysInboxItemStatus, "read", {
+        nome: "Lida",
+        descricao: "Mensagem lida pelo usuário.",
+        color: "secondary",
+        icon: "check",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysInboxItemStatus, "pending", {
+        nome: "Pendente",
+        descricao: "Mensagem ou solicitação pendente de ação.",
+        color: "warning",
+        icon: "clock",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysInboxItemStatus, "approved", {
+        nome: "Aprovada",
+        descricao: "Solicitação aprovada.",
+        color: "success",
+        icon: "check-circle",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysInboxItemStatus, "rejected", {
+        nome: "Recusada",
+        descricao: "Solicitação recusada.",
+        color: "danger",
+        icon: "x-circle",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysInboxItemStatus, "archived", {
+        nome: "Arquivada",
+        descricao: "Mensagem arquivada pelo usuário.",
+        color: "secondary",
+        icon: "archive",
+        ativo: 1,
+    });
+
+
+
+
+    /**
      * ATL - Tipos de cargo
      */
     const atlCargoTipoPadrao = await upsertByCodigo(prisma.atlCargoTipo, "padrao", {
@@ -568,6 +649,38 @@ async function main() {
         email: usuarioDev.email,
         senha: "admin123",
     });
+
+    const inboxBoasVindasExistente = await prisma.sysInboxItem.findFirst({
+        where: {
+            sys_usuario_id: usuarioDev.id,
+            entidade_tipo: "dev",
+            titulo: "Bem-vindo ao Brava Pass",
+            deleted_at: null,
+        },
+        select: {
+            id: true,
+        },
+    });
+
+    if (!inboxBoasVindasExistente) {
+        await prisma.sysInboxItem.create({
+            data: {
+                sys_usuario_id: usuarioDev.id,
+                sys_inbox_item_tipo_id: sysInboxTipoInfo.id,
+                sys_inbox_item_status_id: sysInboxStatusUnread.id,
+                titulo: "Bem-vindo ao Brava Pass",
+                mensagem:
+                    "Sua caixa de entrada foi criada. Aqui você receberá avisos, solicitações e resultados importantes do sistema.",
+                action_url: "/inbox",
+                entidade_tipo: "dev",
+                entidade_id: null,
+                ativo: 1,
+                created_at: now(),
+                updated_at: now(),
+            },
+        });
+    }
+
     /**
      * ATL - Cargos padrão
      */
