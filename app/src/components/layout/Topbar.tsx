@@ -37,7 +37,7 @@ export async function Topbar() {
                     {user ? (
                         <>
                             <AppLink
-                                href="/inbox"
+                                href="/sys/inbox"
                                 color="secondary"
                                 variant="ghost"
                                 aria-label="Inbox"
@@ -92,7 +92,7 @@ export async function Topbar() {
                 {user ? (
                     <>
                         <AppLink
-                            href="/inbox"
+                            href="/sys/inbox"
                             color="secondary"
                             variant="ghost"
                             aria-label="Inbox"

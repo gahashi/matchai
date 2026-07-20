@@ -29,18 +29,24 @@ export type AggregateAtlAtletica = {
 export type AtlAtleticaAvgAggregateOutputType = {
   id: number | null
   edu_instituicao_id: number | null
+  atl_atletica_status_id: number | null
+  criado_por_sys_usuario_id: number | null
   ativo: number | null
 }
 
 export type AtlAtleticaSumAggregateOutputType = {
   id: number | null
   edu_instituicao_id: number | null
+  atl_atletica_status_id: number | null
+  criado_por_sys_usuario_id: number | null
   ativo: number | null
 }
 
 export type AtlAtleticaMinAggregateOutputType = {
   id: number | null
   edu_instituicao_id: number | null
+  atl_atletica_status_id: number | null
+  criado_por_sys_usuario_id: number | null
   nome: string | null
   sigla: string | null
   slug: string | null
@@ -57,6 +63,8 @@ export type AtlAtleticaMinAggregateOutputType = {
 export type AtlAtleticaMaxAggregateOutputType = {
   id: number | null
   edu_instituicao_id: number | null
+  atl_atletica_status_id: number | null
+  criado_por_sys_usuario_id: number | null
   nome: string | null
   sigla: string | null
   slug: string | null
@@ -73,6 +81,8 @@ export type AtlAtleticaMaxAggregateOutputType = {
 export type AtlAtleticaCountAggregateOutputType = {
   id: number
   edu_instituicao_id: number
+  atl_atletica_status_id: number
+  criado_por_sys_usuario_id: number
   nome: number
   sigla: number
   slug: number
@@ -91,18 +101,24 @@ export type AtlAtleticaCountAggregateOutputType = {
 export type AtlAtleticaAvgAggregateInputType = {
   id?: true
   edu_instituicao_id?: true
+  atl_atletica_status_id?: true
+  criado_por_sys_usuario_id?: true
   ativo?: true
 }
 
 export type AtlAtleticaSumAggregateInputType = {
   id?: true
   edu_instituicao_id?: true
+  atl_atletica_status_id?: true
+  criado_por_sys_usuario_id?: true
   ativo?: true
 }
 
 export type AtlAtleticaMinAggregateInputType = {
   id?: true
   edu_instituicao_id?: true
+  atl_atletica_status_id?: true
+  criado_por_sys_usuario_id?: true
   nome?: true
   sigla?: true
   slug?: true
@@ -119,6 +135,8 @@ export type AtlAtleticaMinAggregateInputType = {
 export type AtlAtleticaMaxAggregateInputType = {
   id?: true
   edu_instituicao_id?: true
+  atl_atletica_status_id?: true
+  criado_por_sys_usuario_id?: true
   nome?: true
   sigla?: true
   slug?: true
@@ -135,6 +153,8 @@ export type AtlAtleticaMaxAggregateInputType = {
 export type AtlAtleticaCountAggregateInputType = {
   id?: true
   edu_instituicao_id?: true
+  atl_atletica_status_id?: true
+  criado_por_sys_usuario_id?: true
   nome?: true
   sigla?: true
   slug?: true
@@ -238,6 +258,8 @@ export type AtlAtleticaGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type AtlAtleticaGroupByOutputType = {
   id: number
   edu_instituicao_id: number
+  atl_atletica_status_id: number | null
+  criado_por_sys_usuario_id: number | null
   nome: string
   sigla: string
   slug: string
@@ -277,6 +299,8 @@ export type AtlAtleticaWhereInput = {
   NOT?: Prisma.AtlAtleticaWhereInput | Prisma.AtlAtleticaWhereInput[]
   id?: Prisma.IntFilter<"AtlAtletica"> | number
   edu_instituicao_id?: Prisma.IntFilter<"AtlAtletica"> | number
+  atl_atletica_status_id?: Prisma.IntNullableFilter<"AtlAtletica"> | number | null
+  criado_por_sys_usuario_id?: Prisma.IntNullableFilter<"AtlAtletica"> | number | null
   nome?: Prisma.StringFilter<"AtlAtletica"> | string
   sigla?: Prisma.StringFilter<"AtlAtletica"> | string
   slug?: Prisma.StringFilter<"AtlAtletica"> | string
@@ -288,6 +312,9 @@ export type AtlAtleticaWhereInput = {
   created_at?: Prisma.DateTimeNullableFilter<"AtlAtletica"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"AtlAtletica"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableFilter<"AtlAtletica"> | Date | string | null
+  atl_atletica_status?: Prisma.XOR<Prisma.AtlAtleticaStatusNullableScalarRelationFilter, Prisma.AtlAtleticaStatusWhereInput> | null
+  criado_por_sys_usuario?: Prisma.XOR<Prisma.SysUsuarioNullableScalarRelationFilter, Prisma.SysUsuarioWhereInput> | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoListRelationFilter
   edu_instituicao?: Prisma.XOR<Prisma.EduInstituicaoScalarRelationFilter, Prisma.EduInstituicaoWhereInput>
   atl_atletica_curso?: Prisma.AtlAtleticaCursoListRelationFilter
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoListRelationFilter
@@ -302,6 +329,8 @@ export type AtlAtleticaWhereInput = {
 export type AtlAtleticaOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   edu_instituicao_id?: Prisma.SortOrder
+  atl_atletica_status_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  criado_por_sys_usuario_id?: Prisma.SortOrderInput | Prisma.SortOrder
   nome?: Prisma.SortOrder
   sigla?: Prisma.SortOrder
   slug?: Prisma.SortOrder
@@ -313,6 +342,9 @@ export type AtlAtleticaOrderByWithRelationInput = {
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  atl_atletica_status?: Prisma.AtlAtleticaStatusOrderByWithRelationInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioOrderByWithRelationInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoOrderByRelationAggregateInput
   edu_instituicao?: Prisma.EduInstituicaoOrderByWithRelationInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoOrderByRelationAggregateInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoOrderByRelationAggregateInput
@@ -332,6 +364,8 @@ export type AtlAtleticaWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.AtlAtleticaWhereInput[]
   NOT?: Prisma.AtlAtleticaWhereInput | Prisma.AtlAtleticaWhereInput[]
   edu_instituicao_id?: Prisma.IntFilter<"AtlAtletica"> | number
+  atl_atletica_status_id?: Prisma.IntNullableFilter<"AtlAtletica"> | number | null
+  criado_por_sys_usuario_id?: Prisma.IntNullableFilter<"AtlAtletica"> | number | null
   nome?: Prisma.StringFilter<"AtlAtletica"> | string
   sigla?: Prisma.StringFilter<"AtlAtletica"> | string
   mascote?: Prisma.StringFilter<"AtlAtletica"> | string
@@ -342,6 +376,9 @@ export type AtlAtleticaWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeNullableFilter<"AtlAtletica"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"AtlAtletica"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableFilter<"AtlAtletica"> | Date | string | null
+  atl_atletica_status?: Prisma.XOR<Prisma.AtlAtleticaStatusNullableScalarRelationFilter, Prisma.AtlAtleticaStatusWhereInput> | null
+  criado_por_sys_usuario?: Prisma.XOR<Prisma.SysUsuarioNullableScalarRelationFilter, Prisma.SysUsuarioWhereInput> | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoListRelationFilter
   edu_instituicao?: Prisma.XOR<Prisma.EduInstituicaoScalarRelationFilter, Prisma.EduInstituicaoWhereInput>
   atl_atletica_curso?: Prisma.AtlAtleticaCursoListRelationFilter
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoListRelationFilter
@@ -356,6 +393,8 @@ export type AtlAtleticaWhereUniqueInput = Prisma.AtLeast<{
 export type AtlAtleticaOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   edu_instituicao_id?: Prisma.SortOrder
+  atl_atletica_status_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  criado_por_sys_usuario_id?: Prisma.SortOrderInput | Prisma.SortOrder
   nome?: Prisma.SortOrder
   sigla?: Prisma.SortOrder
   slug?: Prisma.SortOrder
@@ -380,6 +419,8 @@ export type AtlAtleticaScalarWhereWithAggregatesInput = {
   NOT?: Prisma.AtlAtleticaScalarWhereWithAggregatesInput | Prisma.AtlAtleticaScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"AtlAtletica"> | number
   edu_instituicao_id?: Prisma.IntWithAggregatesFilter<"AtlAtletica"> | number
+  atl_atletica_status_id?: Prisma.IntNullableWithAggregatesFilter<"AtlAtletica"> | number | null
+  criado_por_sys_usuario_id?: Prisma.IntNullableWithAggregatesFilter<"AtlAtletica"> | number | null
   nome?: Prisma.StringWithAggregatesFilter<"AtlAtletica"> | string
   sigla?: Prisma.StringWithAggregatesFilter<"AtlAtletica"> | string
   slug?: Prisma.StringWithAggregatesFilter<"AtlAtletica"> | string
@@ -405,6 +446,9 @@ export type AtlAtleticaCreateInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusCreateNestedOneWithoutAtl_atleticaInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutAtl_atletica_criadaInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoCreateNestedManyWithoutAtl_atleticaInput
   edu_instituicao: Prisma.EduInstituicaoCreateNestedOneWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoCreateNestedManyWithoutAtl_atleticaInput
@@ -419,6 +463,8 @@ export type AtlAtleticaCreateInput = {
 export type AtlAtleticaUncheckedCreateInput = {
   id?: number
   edu_instituicao_id: number
+  atl_atletica_status_id?: number | null
+  criado_por_sys_usuario_id?: number | null
   nome: string
   sigla: string
   slug: string
@@ -430,6 +476,7 @@ export type AtlAtleticaUncheckedCreateInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutAtl_atleticaInput
@@ -452,6 +499,9 @@ export type AtlAtleticaUpdateInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusUpdateOneWithoutAtl_atleticaNestedInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutAtl_atletica_criadaNestedInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUpdateManyWithoutAtl_atleticaNestedInput
   edu_instituicao?: Prisma.EduInstituicaoUpdateOneRequiredWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUpdateManyWithoutAtl_atleticaNestedInput
@@ -466,6 +516,8 @@ export type AtlAtleticaUpdateInput = {
 export type AtlAtleticaUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
+  atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -477,6 +529,7 @@ export type AtlAtleticaUncheckedUpdateInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutAtl_atleticaNestedInput
@@ -490,6 +543,8 @@ export type AtlAtleticaUncheckedUpdateInput = {
 export type AtlAtleticaCreateManyInput = {
   id?: number
   edu_instituicao_id: number
+  atl_atletica_status_id?: number | null
+  criado_por_sys_usuario_id?: number | null
   nome: string
   sigla: string
   slug: string
@@ -520,6 +575,8 @@ export type AtlAtleticaUpdateManyMutationInput = {
 export type AtlAtleticaUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
+  atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -533,11 +590,6 @@ export type AtlAtleticaUncheckedUpdateManyInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type AtlAtleticaNullableScalarRelationFilter = {
-  is?: Prisma.AtlAtleticaWhereInput | null
-  isNot?: Prisma.AtlAtleticaWhereInput | null
-}
-
 export type AtlAtleticaListRelationFilter = {
   every?: Prisma.AtlAtleticaWhereInput
   some?: Prisma.AtlAtleticaWhereInput
@@ -546,6 +598,11 @@ export type AtlAtleticaListRelationFilter = {
 
 export type AtlAtleticaOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type AtlAtleticaNullableScalarRelationFilter = {
+  is?: Prisma.AtlAtleticaWhereInput | null
+  isNot?: Prisma.AtlAtleticaWhereInput | null
 }
 
 export type AtlAtleticaOrderByRelevanceInput = {
@@ -557,6 +614,8 @@ export type AtlAtleticaOrderByRelevanceInput = {
 export type AtlAtleticaCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   edu_instituicao_id?: Prisma.SortOrder
+  atl_atletica_status_id?: Prisma.SortOrder
+  criado_por_sys_usuario_id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   sigla?: Prisma.SortOrder
   slug?: Prisma.SortOrder
@@ -573,12 +632,16 @@ export type AtlAtleticaCountOrderByAggregateInput = {
 export type AtlAtleticaAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   edu_instituicao_id?: Prisma.SortOrder
+  atl_atletica_status_id?: Prisma.SortOrder
+  criado_por_sys_usuario_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
 }
 
 export type AtlAtleticaMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   edu_instituicao_id?: Prisma.SortOrder
+  atl_atletica_status_id?: Prisma.SortOrder
+  criado_por_sys_usuario_id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   sigla?: Prisma.SortOrder
   slug?: Prisma.SortOrder
@@ -595,6 +658,8 @@ export type AtlAtleticaMaxOrderByAggregateInput = {
 export type AtlAtleticaMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   edu_instituicao_id?: Prisma.SortOrder
+  atl_atletica_status_id?: Prisma.SortOrder
+  criado_por_sys_usuario_id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   sigla?: Prisma.SortOrder
   slug?: Prisma.SortOrder
@@ -611,12 +676,56 @@ export type AtlAtleticaMinOrderByAggregateInput = {
 export type AtlAtleticaSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   edu_instituicao_id?: Prisma.SortOrder
+  atl_atletica_status_id?: Prisma.SortOrder
+  criado_por_sys_usuario_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
 }
 
 export type AtlAtleticaScalarRelationFilter = {
   is?: Prisma.AtlAtleticaWhereInput
   isNot?: Prisma.AtlAtleticaWhereInput
+}
+
+export type AtlAtleticaCreateNestedManyWithoutCriado_por_sys_usuarioInput = {
+  create?: Prisma.XOR<Prisma.AtlAtleticaCreateWithoutCriado_por_sys_usuarioInput, Prisma.AtlAtleticaUncheckedCreateWithoutCriado_por_sys_usuarioInput> | Prisma.AtlAtleticaCreateWithoutCriado_por_sys_usuarioInput[] | Prisma.AtlAtleticaUncheckedCreateWithoutCriado_por_sys_usuarioInput[]
+  connectOrCreate?: Prisma.AtlAtleticaCreateOrConnectWithoutCriado_por_sys_usuarioInput | Prisma.AtlAtleticaCreateOrConnectWithoutCriado_por_sys_usuarioInput[]
+  createMany?: Prisma.AtlAtleticaCreateManyCriado_por_sys_usuarioInputEnvelope
+  connect?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+}
+
+export type AtlAtleticaUncheckedCreateNestedManyWithoutCriado_por_sys_usuarioInput = {
+  create?: Prisma.XOR<Prisma.AtlAtleticaCreateWithoutCriado_por_sys_usuarioInput, Prisma.AtlAtleticaUncheckedCreateWithoutCriado_por_sys_usuarioInput> | Prisma.AtlAtleticaCreateWithoutCriado_por_sys_usuarioInput[] | Prisma.AtlAtleticaUncheckedCreateWithoutCriado_por_sys_usuarioInput[]
+  connectOrCreate?: Prisma.AtlAtleticaCreateOrConnectWithoutCriado_por_sys_usuarioInput | Prisma.AtlAtleticaCreateOrConnectWithoutCriado_por_sys_usuarioInput[]
+  createMany?: Prisma.AtlAtleticaCreateManyCriado_por_sys_usuarioInputEnvelope
+  connect?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+}
+
+export type AtlAtleticaUpdateManyWithoutCriado_por_sys_usuarioNestedInput = {
+  create?: Prisma.XOR<Prisma.AtlAtleticaCreateWithoutCriado_por_sys_usuarioInput, Prisma.AtlAtleticaUncheckedCreateWithoutCriado_por_sys_usuarioInput> | Prisma.AtlAtleticaCreateWithoutCriado_por_sys_usuarioInput[] | Prisma.AtlAtleticaUncheckedCreateWithoutCriado_por_sys_usuarioInput[]
+  connectOrCreate?: Prisma.AtlAtleticaCreateOrConnectWithoutCriado_por_sys_usuarioInput | Prisma.AtlAtleticaCreateOrConnectWithoutCriado_por_sys_usuarioInput[]
+  upsert?: Prisma.AtlAtleticaUpsertWithWhereUniqueWithoutCriado_por_sys_usuarioInput | Prisma.AtlAtleticaUpsertWithWhereUniqueWithoutCriado_por_sys_usuarioInput[]
+  createMany?: Prisma.AtlAtleticaCreateManyCriado_por_sys_usuarioInputEnvelope
+  set?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+  disconnect?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+  delete?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+  connect?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+  update?: Prisma.AtlAtleticaUpdateWithWhereUniqueWithoutCriado_por_sys_usuarioInput | Prisma.AtlAtleticaUpdateWithWhereUniqueWithoutCriado_por_sys_usuarioInput[]
+  updateMany?: Prisma.AtlAtleticaUpdateManyWithWhereWithoutCriado_por_sys_usuarioInput | Prisma.AtlAtleticaUpdateManyWithWhereWithoutCriado_por_sys_usuarioInput[]
+  deleteMany?: Prisma.AtlAtleticaScalarWhereInput | Prisma.AtlAtleticaScalarWhereInput[]
+}
+
+export type AtlAtleticaUncheckedUpdateManyWithoutCriado_por_sys_usuarioNestedInput = {
+  create?: Prisma.XOR<Prisma.AtlAtleticaCreateWithoutCriado_por_sys_usuarioInput, Prisma.AtlAtleticaUncheckedCreateWithoutCriado_por_sys_usuarioInput> | Prisma.AtlAtleticaCreateWithoutCriado_por_sys_usuarioInput[] | Prisma.AtlAtleticaUncheckedCreateWithoutCriado_por_sys_usuarioInput[]
+  connectOrCreate?: Prisma.AtlAtleticaCreateOrConnectWithoutCriado_por_sys_usuarioInput | Prisma.AtlAtleticaCreateOrConnectWithoutCriado_por_sys_usuarioInput[]
+  upsert?: Prisma.AtlAtleticaUpsertWithWhereUniqueWithoutCriado_por_sys_usuarioInput | Prisma.AtlAtleticaUpsertWithWhereUniqueWithoutCriado_por_sys_usuarioInput[]
+  createMany?: Prisma.AtlAtleticaCreateManyCriado_por_sys_usuarioInputEnvelope
+  set?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+  disconnect?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+  delete?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+  connect?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+  update?: Prisma.AtlAtleticaUpdateWithWhereUniqueWithoutCriado_por_sys_usuarioInput | Prisma.AtlAtleticaUpdateWithWhereUniqueWithoutCriado_por_sys_usuarioInput[]
+  updateMany?: Prisma.AtlAtleticaUpdateManyWithWhereWithoutCriado_por_sys_usuarioInput | Prisma.AtlAtleticaUpdateManyWithWhereWithoutCriado_por_sys_usuarioInput[]
+  deleteMany?: Prisma.AtlAtleticaScalarWhereInput | Prisma.AtlAtleticaScalarWhereInput[]
 }
 
 export type AtlAtleticaCreateNestedOneWithoutSys_usuario_roleInput = {
@@ -693,6 +802,48 @@ export type AtlAtleticaUncheckedUpdateManyWithoutEdu_instituicaoNestedInput = {
   deleteMany?: Prisma.AtlAtleticaScalarWhereInput | Prisma.AtlAtleticaScalarWhereInput[]
 }
 
+export type AtlAtleticaCreateNestedManyWithoutAtl_atletica_statusInput = {
+  create?: Prisma.XOR<Prisma.AtlAtleticaCreateWithoutAtl_atletica_statusInput, Prisma.AtlAtleticaUncheckedCreateWithoutAtl_atletica_statusInput> | Prisma.AtlAtleticaCreateWithoutAtl_atletica_statusInput[] | Prisma.AtlAtleticaUncheckedCreateWithoutAtl_atletica_statusInput[]
+  connectOrCreate?: Prisma.AtlAtleticaCreateOrConnectWithoutAtl_atletica_statusInput | Prisma.AtlAtleticaCreateOrConnectWithoutAtl_atletica_statusInput[]
+  createMany?: Prisma.AtlAtleticaCreateManyAtl_atletica_statusInputEnvelope
+  connect?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+}
+
+export type AtlAtleticaUncheckedCreateNestedManyWithoutAtl_atletica_statusInput = {
+  create?: Prisma.XOR<Prisma.AtlAtleticaCreateWithoutAtl_atletica_statusInput, Prisma.AtlAtleticaUncheckedCreateWithoutAtl_atletica_statusInput> | Prisma.AtlAtleticaCreateWithoutAtl_atletica_statusInput[] | Prisma.AtlAtleticaUncheckedCreateWithoutAtl_atletica_statusInput[]
+  connectOrCreate?: Prisma.AtlAtleticaCreateOrConnectWithoutAtl_atletica_statusInput | Prisma.AtlAtleticaCreateOrConnectWithoutAtl_atletica_statusInput[]
+  createMany?: Prisma.AtlAtleticaCreateManyAtl_atletica_statusInputEnvelope
+  connect?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+}
+
+export type AtlAtleticaUpdateManyWithoutAtl_atletica_statusNestedInput = {
+  create?: Prisma.XOR<Prisma.AtlAtleticaCreateWithoutAtl_atletica_statusInput, Prisma.AtlAtleticaUncheckedCreateWithoutAtl_atletica_statusInput> | Prisma.AtlAtleticaCreateWithoutAtl_atletica_statusInput[] | Prisma.AtlAtleticaUncheckedCreateWithoutAtl_atletica_statusInput[]
+  connectOrCreate?: Prisma.AtlAtleticaCreateOrConnectWithoutAtl_atletica_statusInput | Prisma.AtlAtleticaCreateOrConnectWithoutAtl_atletica_statusInput[]
+  upsert?: Prisma.AtlAtleticaUpsertWithWhereUniqueWithoutAtl_atletica_statusInput | Prisma.AtlAtleticaUpsertWithWhereUniqueWithoutAtl_atletica_statusInput[]
+  createMany?: Prisma.AtlAtleticaCreateManyAtl_atletica_statusInputEnvelope
+  set?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+  disconnect?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+  delete?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+  connect?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+  update?: Prisma.AtlAtleticaUpdateWithWhereUniqueWithoutAtl_atletica_statusInput | Prisma.AtlAtleticaUpdateWithWhereUniqueWithoutAtl_atletica_statusInput[]
+  updateMany?: Prisma.AtlAtleticaUpdateManyWithWhereWithoutAtl_atletica_statusInput | Prisma.AtlAtleticaUpdateManyWithWhereWithoutAtl_atletica_statusInput[]
+  deleteMany?: Prisma.AtlAtleticaScalarWhereInput | Prisma.AtlAtleticaScalarWhereInput[]
+}
+
+export type AtlAtleticaUncheckedUpdateManyWithoutAtl_atletica_statusNestedInput = {
+  create?: Prisma.XOR<Prisma.AtlAtleticaCreateWithoutAtl_atletica_statusInput, Prisma.AtlAtleticaUncheckedCreateWithoutAtl_atletica_statusInput> | Prisma.AtlAtleticaCreateWithoutAtl_atletica_statusInput[] | Prisma.AtlAtleticaUncheckedCreateWithoutAtl_atletica_statusInput[]
+  connectOrCreate?: Prisma.AtlAtleticaCreateOrConnectWithoutAtl_atletica_statusInput | Prisma.AtlAtleticaCreateOrConnectWithoutAtl_atletica_statusInput[]
+  upsert?: Prisma.AtlAtleticaUpsertWithWhereUniqueWithoutAtl_atletica_statusInput | Prisma.AtlAtleticaUpsertWithWhereUniqueWithoutAtl_atletica_statusInput[]
+  createMany?: Prisma.AtlAtleticaCreateManyAtl_atletica_statusInputEnvelope
+  set?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+  disconnect?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+  delete?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+  connect?: Prisma.AtlAtleticaWhereUniqueInput | Prisma.AtlAtleticaWhereUniqueInput[]
+  update?: Prisma.AtlAtleticaUpdateWithWhereUniqueWithoutAtl_atletica_statusInput | Prisma.AtlAtleticaUpdateWithWhereUniqueWithoutAtl_atletica_statusInput[]
+  updateMany?: Prisma.AtlAtleticaUpdateManyWithWhereWithoutAtl_atletica_statusInput | Prisma.AtlAtleticaUpdateManyWithWhereWithoutAtl_atletica_statusInput[]
+  deleteMany?: Prisma.AtlAtleticaScalarWhereInput | Prisma.AtlAtleticaScalarWhereInput[]
+}
+
 export type AtlAtleticaCreateNestedOneWithoutAtl_atletica_cursoInput = {
   create?: Prisma.XOR<Prisma.AtlAtleticaCreateWithoutAtl_atletica_cursoInput, Prisma.AtlAtleticaUncheckedCreateWithoutAtl_atletica_cursoInput>
   connectOrCreate?: Prisma.AtlAtleticaCreateOrConnectWithoutAtl_atletica_cursoInput
@@ -705,6 +856,20 @@ export type AtlAtleticaUpdateOneRequiredWithoutAtl_atletica_cursoNestedInput = {
   upsert?: Prisma.AtlAtleticaUpsertWithoutAtl_atletica_cursoInput
   connect?: Prisma.AtlAtleticaWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.AtlAtleticaUpdateToOneWithWhereWithoutAtl_atletica_cursoInput, Prisma.AtlAtleticaUpdateWithoutAtl_atletica_cursoInput>, Prisma.AtlAtleticaUncheckedUpdateWithoutAtl_atletica_cursoInput>
+}
+
+export type AtlAtleticaCreateNestedOneWithoutAtl_atletica_gestaoInput = {
+  create?: Prisma.XOR<Prisma.AtlAtleticaCreateWithoutAtl_atletica_gestaoInput, Prisma.AtlAtleticaUncheckedCreateWithoutAtl_atletica_gestaoInput>
+  connectOrCreate?: Prisma.AtlAtleticaCreateOrConnectWithoutAtl_atletica_gestaoInput
+  connect?: Prisma.AtlAtleticaWhereUniqueInput
+}
+
+export type AtlAtleticaUpdateOneRequiredWithoutAtl_atletica_gestaoNestedInput = {
+  create?: Prisma.XOR<Prisma.AtlAtleticaCreateWithoutAtl_atletica_gestaoInput, Prisma.AtlAtleticaUncheckedCreateWithoutAtl_atletica_gestaoInput>
+  connectOrCreate?: Prisma.AtlAtleticaCreateOrConnectWithoutAtl_atletica_gestaoInput
+  upsert?: Prisma.AtlAtleticaUpsertWithoutAtl_atletica_gestaoInput
+  connect?: Prisma.AtlAtleticaWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AtlAtleticaUpdateToOneWithWhereWithoutAtl_atletica_gestaoInput, Prisma.AtlAtleticaUpdateWithoutAtl_atletica_gestaoInput>, Prisma.AtlAtleticaUncheckedUpdateWithoutAtl_atletica_gestaoInput>
 }
 
 export type AtlAtleticaCreateNestedOneWithoutAtl_atletica_cargoInput = {
@@ -777,6 +942,104 @@ export type AtlAtleticaUpdateOneRequiredWithoutAtl_atletica_assinaturaNestedInpu
   update?: Prisma.XOR<Prisma.XOR<Prisma.AtlAtleticaUpdateToOneWithWhereWithoutAtl_atletica_assinaturaInput, Prisma.AtlAtleticaUpdateWithoutAtl_atletica_assinaturaInput>, Prisma.AtlAtleticaUncheckedUpdateWithoutAtl_atletica_assinaturaInput>
 }
 
+export type AtlAtleticaCreateWithoutCriado_por_sys_usuarioInput = {
+  nome: string
+  sigla: string
+  slug: string
+  mascote: string
+  descricao?: string | null
+  fundado_at?: Date | string | null
+  logo_url?: string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusCreateNestedOneWithoutAtl_atleticaInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoCreateNestedManyWithoutAtl_atleticaInput
+  edu_instituicao: Prisma.EduInstituicaoCreateNestedOneWithoutAtl_atleticaInput
+  atl_atletica_curso?: Prisma.AtlAtleticaCursoCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_cargo?: Prisma.AtlAtleticaCargoCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_tema?: Prisma.AtlAtleticaTemaCreateNestedOneWithoutAtl_atleticaInput
+  atl_atletica_regimento?: Prisma.AtlAtleticaRegimentoCreateNestedManyWithoutAtl_atleticaInput
+  sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutAtl_atleticaInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaCreateNestedManyWithoutAtl_atleticaInput
+}
+
+export type AtlAtleticaUncheckedCreateWithoutCriado_por_sys_usuarioInput = {
+  id?: number
+  edu_instituicao_id: number
+  atl_atletica_status_id?: number | null
+  nome: string
+  sigla: string
+  slug: string
+  mascote: string
+  descricao?: string | null
+  fundado_at?: Date | string | null
+  logo_url?: string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_tema?: Prisma.AtlAtleticaTemaUncheckedCreateNestedOneWithoutAtl_atleticaInput
+  atl_atletica_regimento?: Prisma.AtlAtleticaRegimentoUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaUncheckedCreateNestedManyWithoutAtl_atleticaInput
+}
+
+export type AtlAtleticaCreateOrConnectWithoutCriado_por_sys_usuarioInput = {
+  where: Prisma.AtlAtleticaWhereUniqueInput
+  create: Prisma.XOR<Prisma.AtlAtleticaCreateWithoutCriado_por_sys_usuarioInput, Prisma.AtlAtleticaUncheckedCreateWithoutCriado_por_sys_usuarioInput>
+}
+
+export type AtlAtleticaCreateManyCriado_por_sys_usuarioInputEnvelope = {
+  data: Prisma.AtlAtleticaCreateManyCriado_por_sys_usuarioInput | Prisma.AtlAtleticaCreateManyCriado_por_sys_usuarioInput[]
+  skipDuplicates?: boolean
+}
+
+export type AtlAtleticaUpsertWithWhereUniqueWithoutCriado_por_sys_usuarioInput = {
+  where: Prisma.AtlAtleticaWhereUniqueInput
+  update: Prisma.XOR<Prisma.AtlAtleticaUpdateWithoutCriado_por_sys_usuarioInput, Prisma.AtlAtleticaUncheckedUpdateWithoutCriado_por_sys_usuarioInput>
+  create: Prisma.XOR<Prisma.AtlAtleticaCreateWithoutCriado_por_sys_usuarioInput, Prisma.AtlAtleticaUncheckedCreateWithoutCriado_por_sys_usuarioInput>
+}
+
+export type AtlAtleticaUpdateWithWhereUniqueWithoutCriado_por_sys_usuarioInput = {
+  where: Prisma.AtlAtleticaWhereUniqueInput
+  data: Prisma.XOR<Prisma.AtlAtleticaUpdateWithoutCriado_por_sys_usuarioInput, Prisma.AtlAtleticaUncheckedUpdateWithoutCriado_por_sys_usuarioInput>
+}
+
+export type AtlAtleticaUpdateManyWithWhereWithoutCriado_por_sys_usuarioInput = {
+  where: Prisma.AtlAtleticaScalarWhereInput
+  data: Prisma.XOR<Prisma.AtlAtleticaUpdateManyMutationInput, Prisma.AtlAtleticaUncheckedUpdateManyWithoutCriado_por_sys_usuarioInput>
+}
+
+export type AtlAtleticaScalarWhereInput = {
+  AND?: Prisma.AtlAtleticaScalarWhereInput | Prisma.AtlAtleticaScalarWhereInput[]
+  OR?: Prisma.AtlAtleticaScalarWhereInput[]
+  NOT?: Prisma.AtlAtleticaScalarWhereInput | Prisma.AtlAtleticaScalarWhereInput[]
+  id?: Prisma.IntFilter<"AtlAtletica"> | number
+  edu_instituicao_id?: Prisma.IntFilter<"AtlAtletica"> | number
+  atl_atletica_status_id?: Prisma.IntNullableFilter<"AtlAtletica"> | number | null
+  criado_por_sys_usuario_id?: Prisma.IntNullableFilter<"AtlAtletica"> | number | null
+  nome?: Prisma.StringFilter<"AtlAtletica"> | string
+  sigla?: Prisma.StringFilter<"AtlAtletica"> | string
+  slug?: Prisma.StringFilter<"AtlAtletica"> | string
+  mascote?: Prisma.StringFilter<"AtlAtletica"> | string
+  descricao?: Prisma.StringNullableFilter<"AtlAtletica"> | string | null
+  fundado_at?: Prisma.DateTimeNullableFilter<"AtlAtletica"> | Date | string | null
+  logo_url?: Prisma.StringNullableFilter<"AtlAtletica"> | string | null
+  ativo?: Prisma.IntFilter<"AtlAtletica"> | number
+  created_at?: Prisma.DateTimeNullableFilter<"AtlAtletica"> | Date | string | null
+  updated_at?: Prisma.DateTimeNullableFilter<"AtlAtletica"> | Date | string | null
+  deleted_at?: Prisma.DateTimeNullableFilter<"AtlAtletica"> | Date | string | null
+}
+
 export type AtlAtleticaCreateWithoutSys_usuario_roleInput = {
   nome: string
   sigla: string
@@ -789,6 +1052,9 @@ export type AtlAtleticaCreateWithoutSys_usuario_roleInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusCreateNestedOneWithoutAtl_atleticaInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutAtl_atletica_criadaInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoCreateNestedManyWithoutAtl_atleticaInput
   edu_instituicao: Prisma.EduInstituicaoCreateNestedOneWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoCreateNestedManyWithoutAtl_atleticaInput
@@ -802,6 +1068,8 @@ export type AtlAtleticaCreateWithoutSys_usuario_roleInput = {
 export type AtlAtleticaUncheckedCreateWithoutSys_usuario_roleInput = {
   id?: number
   edu_instituicao_id: number
+  atl_atletica_status_id?: number | null
+  criado_por_sys_usuario_id?: number | null
   nome: string
   sigla: string
   slug: string
@@ -813,6 +1081,7 @@ export type AtlAtleticaUncheckedCreateWithoutSys_usuario_roleInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutAtl_atleticaInput
@@ -850,6 +1119,9 @@ export type AtlAtleticaUpdateWithoutSys_usuario_roleInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusUpdateOneWithoutAtl_atleticaNestedInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutAtl_atletica_criadaNestedInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUpdateManyWithoutAtl_atleticaNestedInput
   edu_instituicao?: Prisma.EduInstituicaoUpdateOneRequiredWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUpdateManyWithoutAtl_atleticaNestedInput
@@ -863,6 +1135,8 @@ export type AtlAtleticaUpdateWithoutSys_usuario_roleInput = {
 export type AtlAtleticaUncheckedUpdateWithoutSys_usuario_roleInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
+  atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -874,6 +1148,7 @@ export type AtlAtleticaUncheckedUpdateWithoutSys_usuario_roleInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutAtl_atleticaNestedInput
@@ -895,6 +1170,9 @@ export type AtlAtleticaCreateWithoutSys_usuario_permissionInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusCreateNestedOneWithoutAtl_atleticaInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutAtl_atletica_criadaInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoCreateNestedManyWithoutAtl_atleticaInput
   edu_instituicao: Prisma.EduInstituicaoCreateNestedOneWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoCreateNestedManyWithoutAtl_atleticaInput
@@ -908,6 +1186,8 @@ export type AtlAtleticaCreateWithoutSys_usuario_permissionInput = {
 export type AtlAtleticaUncheckedCreateWithoutSys_usuario_permissionInput = {
   id?: number
   edu_instituicao_id: number
+  atl_atletica_status_id?: number | null
+  criado_por_sys_usuario_id?: number | null
   nome: string
   sigla: string
   slug: string
@@ -919,6 +1199,7 @@ export type AtlAtleticaUncheckedCreateWithoutSys_usuario_permissionInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutAtl_atleticaInput
@@ -956,6 +1237,9 @@ export type AtlAtleticaUpdateWithoutSys_usuario_permissionInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusUpdateOneWithoutAtl_atleticaNestedInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutAtl_atletica_criadaNestedInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUpdateManyWithoutAtl_atleticaNestedInput
   edu_instituicao?: Prisma.EduInstituicaoUpdateOneRequiredWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUpdateManyWithoutAtl_atleticaNestedInput
@@ -969,6 +1253,8 @@ export type AtlAtleticaUpdateWithoutSys_usuario_permissionInput = {
 export type AtlAtleticaUncheckedUpdateWithoutSys_usuario_permissionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
+  atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -980,6 +1266,7 @@ export type AtlAtleticaUncheckedUpdateWithoutSys_usuario_permissionInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutAtl_atleticaNestedInput
@@ -1001,6 +1288,9 @@ export type AtlAtleticaCreateWithoutEdu_instituicaoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusCreateNestedOneWithoutAtl_atleticaInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutAtl_atletica_criadaInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutAtl_atleticaInput
@@ -1013,6 +1303,8 @@ export type AtlAtleticaCreateWithoutEdu_instituicaoInput = {
 
 export type AtlAtleticaUncheckedCreateWithoutEdu_instituicaoInput = {
   id?: number
+  atl_atletica_status_id?: number | null
+  criado_por_sys_usuario_id?: number | null
   nome: string
   sigla: string
   slug: string
@@ -1024,6 +1316,7 @@ export type AtlAtleticaUncheckedCreateWithoutEdu_instituicaoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutAtl_atleticaInput
@@ -1060,23 +1353,81 @@ export type AtlAtleticaUpdateManyWithWhereWithoutEdu_instituicaoInput = {
   data: Prisma.XOR<Prisma.AtlAtleticaUpdateManyMutationInput, Prisma.AtlAtleticaUncheckedUpdateManyWithoutEdu_instituicaoInput>
 }
 
-export type AtlAtleticaScalarWhereInput = {
-  AND?: Prisma.AtlAtleticaScalarWhereInput | Prisma.AtlAtleticaScalarWhereInput[]
-  OR?: Prisma.AtlAtleticaScalarWhereInput[]
-  NOT?: Prisma.AtlAtleticaScalarWhereInput | Prisma.AtlAtleticaScalarWhereInput[]
-  id?: Prisma.IntFilter<"AtlAtletica"> | number
-  edu_instituicao_id?: Prisma.IntFilter<"AtlAtletica"> | number
-  nome?: Prisma.StringFilter<"AtlAtletica"> | string
-  sigla?: Prisma.StringFilter<"AtlAtletica"> | string
-  slug?: Prisma.StringFilter<"AtlAtletica"> | string
-  mascote?: Prisma.StringFilter<"AtlAtletica"> | string
-  descricao?: Prisma.StringNullableFilter<"AtlAtletica"> | string | null
-  fundado_at?: Prisma.DateTimeNullableFilter<"AtlAtletica"> | Date | string | null
-  logo_url?: Prisma.StringNullableFilter<"AtlAtletica"> | string | null
-  ativo?: Prisma.IntFilter<"AtlAtletica"> | number
-  created_at?: Prisma.DateTimeNullableFilter<"AtlAtletica"> | Date | string | null
-  updated_at?: Prisma.DateTimeNullableFilter<"AtlAtletica"> | Date | string | null
-  deleted_at?: Prisma.DateTimeNullableFilter<"AtlAtletica"> | Date | string | null
+export type AtlAtleticaCreateWithoutAtl_atletica_statusInput = {
+  nome: string
+  sigla: string
+  slug: string
+  mascote: string
+  descricao?: string | null
+  fundado_at?: Date | string | null
+  logo_url?: string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  criado_por_sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutAtl_atletica_criadaInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoCreateNestedManyWithoutAtl_atleticaInput
+  edu_instituicao: Prisma.EduInstituicaoCreateNestedOneWithoutAtl_atleticaInput
+  atl_atletica_curso?: Prisma.AtlAtleticaCursoCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_cargo?: Prisma.AtlAtleticaCargoCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_tema?: Prisma.AtlAtleticaTemaCreateNestedOneWithoutAtl_atleticaInput
+  atl_atletica_regimento?: Prisma.AtlAtleticaRegimentoCreateNestedManyWithoutAtl_atleticaInput
+  sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutAtl_atleticaInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaCreateNestedManyWithoutAtl_atleticaInput
+}
+
+export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_statusInput = {
+  id?: number
+  edu_instituicao_id: number
+  criado_por_sys_usuario_id?: number | null
+  nome: string
+  sigla: string
+  slug: string
+  mascote: string
+  descricao?: string | null
+  fundado_at?: Date | string | null
+  logo_url?: string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_tema?: Prisma.AtlAtleticaTemaUncheckedCreateNestedOneWithoutAtl_atleticaInput
+  atl_atletica_regimento?: Prisma.AtlAtleticaRegimentoUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaUncheckedCreateNestedManyWithoutAtl_atleticaInput
+}
+
+export type AtlAtleticaCreateOrConnectWithoutAtl_atletica_statusInput = {
+  where: Prisma.AtlAtleticaWhereUniqueInput
+  create: Prisma.XOR<Prisma.AtlAtleticaCreateWithoutAtl_atletica_statusInput, Prisma.AtlAtleticaUncheckedCreateWithoutAtl_atletica_statusInput>
+}
+
+export type AtlAtleticaCreateManyAtl_atletica_statusInputEnvelope = {
+  data: Prisma.AtlAtleticaCreateManyAtl_atletica_statusInput | Prisma.AtlAtleticaCreateManyAtl_atletica_statusInput[]
+  skipDuplicates?: boolean
+}
+
+export type AtlAtleticaUpsertWithWhereUniqueWithoutAtl_atletica_statusInput = {
+  where: Prisma.AtlAtleticaWhereUniqueInput
+  update: Prisma.XOR<Prisma.AtlAtleticaUpdateWithoutAtl_atletica_statusInput, Prisma.AtlAtleticaUncheckedUpdateWithoutAtl_atletica_statusInput>
+  create: Prisma.XOR<Prisma.AtlAtleticaCreateWithoutAtl_atletica_statusInput, Prisma.AtlAtleticaUncheckedCreateWithoutAtl_atletica_statusInput>
+}
+
+export type AtlAtleticaUpdateWithWhereUniqueWithoutAtl_atletica_statusInput = {
+  where: Prisma.AtlAtleticaWhereUniqueInput
+  data: Prisma.XOR<Prisma.AtlAtleticaUpdateWithoutAtl_atletica_statusInput, Prisma.AtlAtleticaUncheckedUpdateWithoutAtl_atletica_statusInput>
+}
+
+export type AtlAtleticaUpdateManyWithWhereWithoutAtl_atletica_statusInput = {
+  where: Prisma.AtlAtleticaScalarWhereInput
+  data: Prisma.XOR<Prisma.AtlAtleticaUpdateManyMutationInput, Prisma.AtlAtleticaUncheckedUpdateManyWithoutAtl_atletica_statusInput>
 }
 
 export type AtlAtleticaCreateWithoutAtl_atletica_cursoInput = {
@@ -1091,6 +1442,9 @@ export type AtlAtleticaCreateWithoutAtl_atletica_cursoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusCreateNestedOneWithoutAtl_atleticaInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutAtl_atletica_criadaInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoCreateNestedManyWithoutAtl_atleticaInput
   edu_instituicao: Prisma.EduInstituicaoCreateNestedOneWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutAtl_atleticaInput
@@ -1104,6 +1458,8 @@ export type AtlAtleticaCreateWithoutAtl_atletica_cursoInput = {
 export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_cursoInput = {
   id?: number
   edu_instituicao_id: number
+  atl_atletica_status_id?: number | null
+  criado_por_sys_usuario_id?: number | null
   nome: string
   sigla: string
   slug: string
@@ -1115,6 +1471,7 @@ export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_cursoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_tema?: Prisma.AtlAtleticaTemaUncheckedCreateNestedOneWithoutAtl_atleticaInput
@@ -1152,6 +1509,9 @@ export type AtlAtleticaUpdateWithoutAtl_atletica_cursoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusUpdateOneWithoutAtl_atleticaNestedInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutAtl_atletica_criadaNestedInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUpdateManyWithoutAtl_atleticaNestedInput
   edu_instituicao?: Prisma.EduInstituicaoUpdateOneRequiredWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutAtl_atleticaNestedInput
@@ -1165,6 +1525,8 @@ export type AtlAtleticaUpdateWithoutAtl_atletica_cursoInput = {
 export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_cursoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
+  atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1176,6 +1538,125 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_cursoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_tema?: Prisma.AtlAtleticaTemaUncheckedUpdateOneWithoutAtl_atleticaNestedInput
+  atl_atletica_regimento?: Prisma.AtlAtleticaRegimentoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+}
+
+export type AtlAtleticaCreateWithoutAtl_atletica_gestaoInput = {
+  nome: string
+  sigla: string
+  slug: string
+  mascote: string
+  descricao?: string | null
+  fundado_at?: Date | string | null
+  logo_url?: string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusCreateNestedOneWithoutAtl_atleticaInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutAtl_atletica_criadaInput
+  edu_instituicao: Prisma.EduInstituicaoCreateNestedOneWithoutAtl_atleticaInput
+  atl_atletica_curso?: Prisma.AtlAtleticaCursoCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_cargo?: Prisma.AtlAtleticaCargoCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_tema?: Prisma.AtlAtleticaTemaCreateNestedOneWithoutAtl_atleticaInput
+  atl_atletica_regimento?: Prisma.AtlAtleticaRegimentoCreateNestedManyWithoutAtl_atleticaInput
+  sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutAtl_atleticaInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaCreateNestedManyWithoutAtl_atleticaInput
+}
+
+export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_gestaoInput = {
+  id?: number
+  edu_instituicao_id: number
+  atl_atletica_status_id?: number | null
+  criado_por_sys_usuario_id?: number | null
+  nome: string
+  sigla: string
+  slug: string
+  mascote: string
+  descricao?: string | null
+  fundado_at?: Date | string | null
+  logo_url?: string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_tema?: Prisma.AtlAtleticaTemaUncheckedCreateNestedOneWithoutAtl_atleticaInput
+  atl_atletica_regimento?: Prisma.AtlAtleticaRegimentoUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutAtl_atleticaInput
+  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaUncheckedCreateNestedManyWithoutAtl_atleticaInput
+}
+
+export type AtlAtleticaCreateOrConnectWithoutAtl_atletica_gestaoInput = {
+  where: Prisma.AtlAtleticaWhereUniqueInput
+  create: Prisma.XOR<Prisma.AtlAtleticaCreateWithoutAtl_atletica_gestaoInput, Prisma.AtlAtleticaUncheckedCreateWithoutAtl_atletica_gestaoInput>
+}
+
+export type AtlAtleticaUpsertWithoutAtl_atletica_gestaoInput = {
+  update: Prisma.XOR<Prisma.AtlAtleticaUpdateWithoutAtl_atletica_gestaoInput, Prisma.AtlAtleticaUncheckedUpdateWithoutAtl_atletica_gestaoInput>
+  create: Prisma.XOR<Prisma.AtlAtleticaCreateWithoutAtl_atletica_gestaoInput, Prisma.AtlAtleticaUncheckedCreateWithoutAtl_atletica_gestaoInput>
+  where?: Prisma.AtlAtleticaWhereInput
+}
+
+export type AtlAtleticaUpdateToOneWithWhereWithoutAtl_atletica_gestaoInput = {
+  where?: Prisma.AtlAtleticaWhereInput
+  data: Prisma.XOR<Prisma.AtlAtleticaUpdateWithoutAtl_atletica_gestaoInput, Prisma.AtlAtleticaUncheckedUpdateWithoutAtl_atletica_gestaoInput>
+}
+
+export type AtlAtleticaUpdateWithoutAtl_atletica_gestaoInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  sigla?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  mascote?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fundado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  logo_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusUpdateOneWithoutAtl_atleticaNestedInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutAtl_atletica_criadaNestedInput
+  edu_instituicao?: Prisma.EduInstituicaoUpdateOneRequiredWithoutAtl_atleticaNestedInput
+  atl_atletica_curso?: Prisma.AtlAtleticaCursoUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_cargo?: Prisma.AtlAtleticaCargoUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_tema?: Prisma.AtlAtleticaTemaUpdateOneWithoutAtl_atleticaNestedInput
+  atl_atletica_regimento?: Prisma.AtlAtleticaRegimentoUpdateManyWithoutAtl_atleticaNestedInput
+  sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutAtl_atleticaNestedInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaUpdateManyWithoutAtl_atleticaNestedInput
+}
+
+export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_gestaoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
+  atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  sigla?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  mascote?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fundado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  logo_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_tema?: Prisma.AtlAtleticaTemaUncheckedUpdateOneWithoutAtl_atleticaNestedInput
@@ -1197,6 +1678,9 @@ export type AtlAtleticaCreateWithoutAtl_atletica_cargoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusCreateNestedOneWithoutAtl_atleticaInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutAtl_atletica_criadaInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoCreateNestedManyWithoutAtl_atleticaInput
   edu_instituicao: Prisma.EduInstituicaoCreateNestedOneWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutAtl_atleticaInput
@@ -1210,6 +1694,8 @@ export type AtlAtleticaCreateWithoutAtl_atletica_cargoInput = {
 export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_cargoInput = {
   id?: number
   edu_instituicao_id: number
+  atl_atletica_status_id?: number | null
+  criado_por_sys_usuario_id?: number | null
   nome: string
   sigla: string
   slug: string
@@ -1221,6 +1707,7 @@ export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_cargoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_tema?: Prisma.AtlAtleticaTemaUncheckedCreateNestedOneWithoutAtl_atleticaInput
@@ -1258,6 +1745,9 @@ export type AtlAtleticaUpdateWithoutAtl_atletica_cargoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusUpdateOneWithoutAtl_atleticaNestedInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutAtl_atletica_criadaNestedInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUpdateManyWithoutAtl_atleticaNestedInput
   edu_instituicao?: Prisma.EduInstituicaoUpdateOneRequiredWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutAtl_atleticaNestedInput
@@ -1271,6 +1761,8 @@ export type AtlAtleticaUpdateWithoutAtl_atletica_cargoInput = {
 export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_cargoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
+  atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1282,6 +1774,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_cargoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_tema?: Prisma.AtlAtleticaTemaUncheckedUpdateOneWithoutAtl_atleticaNestedInput
@@ -1303,6 +1796,9 @@ export type AtlAtleticaCreateWithoutAtl_atletica_membroInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusCreateNestedOneWithoutAtl_atleticaInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutAtl_atletica_criadaInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoCreateNestedManyWithoutAtl_atleticaInput
   edu_instituicao: Prisma.EduInstituicaoCreateNestedOneWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoCreateNestedManyWithoutAtl_atleticaInput
@@ -1316,6 +1812,8 @@ export type AtlAtleticaCreateWithoutAtl_atletica_membroInput = {
 export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_membroInput = {
   id?: number
   edu_instituicao_id: number
+  atl_atletica_status_id?: number | null
+  criado_por_sys_usuario_id?: number | null
   nome: string
   sigla: string
   slug: string
@@ -1327,6 +1825,7 @@ export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_membroInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_tema?: Prisma.AtlAtleticaTemaUncheckedCreateNestedOneWithoutAtl_atleticaInput
@@ -1364,6 +1863,9 @@ export type AtlAtleticaUpdateWithoutAtl_atletica_membroInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusUpdateOneWithoutAtl_atleticaNestedInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutAtl_atletica_criadaNestedInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUpdateManyWithoutAtl_atleticaNestedInput
   edu_instituicao?: Prisma.EduInstituicaoUpdateOneRequiredWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUpdateManyWithoutAtl_atleticaNestedInput
@@ -1377,6 +1879,8 @@ export type AtlAtleticaUpdateWithoutAtl_atletica_membroInput = {
 export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_membroInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
+  atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1388,6 +1892,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_membroInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_tema?: Prisma.AtlAtleticaTemaUncheckedUpdateOneWithoutAtl_atleticaNestedInput
@@ -1409,6 +1914,9 @@ export type AtlAtleticaCreateWithoutAtl_atletica_temaInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusCreateNestedOneWithoutAtl_atleticaInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutAtl_atletica_criadaInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoCreateNestedManyWithoutAtl_atleticaInput
   edu_instituicao: Prisma.EduInstituicaoCreateNestedOneWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoCreateNestedManyWithoutAtl_atleticaInput
@@ -1422,6 +1930,8 @@ export type AtlAtleticaCreateWithoutAtl_atletica_temaInput = {
 export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_temaInput = {
   id?: number
   edu_instituicao_id: number
+  atl_atletica_status_id?: number | null
+  criado_por_sys_usuario_id?: number | null
   nome: string
   sigla: string
   slug: string
@@ -1433,6 +1943,7 @@ export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_temaInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutAtl_atleticaInput
@@ -1470,6 +1981,9 @@ export type AtlAtleticaUpdateWithoutAtl_atletica_temaInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusUpdateOneWithoutAtl_atleticaNestedInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutAtl_atletica_criadaNestedInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUpdateManyWithoutAtl_atleticaNestedInput
   edu_instituicao?: Prisma.EduInstituicaoUpdateOneRequiredWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUpdateManyWithoutAtl_atleticaNestedInput
@@ -1483,6 +1997,8 @@ export type AtlAtleticaUpdateWithoutAtl_atletica_temaInput = {
 export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_temaInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
+  atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1494,6 +2010,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_temaInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutAtl_atleticaNestedInput
@@ -1515,6 +2032,9 @@ export type AtlAtleticaCreateWithoutAtl_atletica_regimentoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusCreateNestedOneWithoutAtl_atleticaInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutAtl_atletica_criadaInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoCreateNestedManyWithoutAtl_atleticaInput
   edu_instituicao: Prisma.EduInstituicaoCreateNestedOneWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoCreateNestedManyWithoutAtl_atleticaInput
@@ -1528,6 +2048,8 @@ export type AtlAtleticaCreateWithoutAtl_atletica_regimentoInput = {
 export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_regimentoInput = {
   id?: number
   edu_instituicao_id: number
+  atl_atletica_status_id?: number | null
+  criado_por_sys_usuario_id?: number | null
   nome: string
   sigla: string
   slug: string
@@ -1539,6 +2061,7 @@ export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_regimentoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutAtl_atleticaInput
@@ -1576,6 +2099,9 @@ export type AtlAtleticaUpdateWithoutAtl_atletica_regimentoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusUpdateOneWithoutAtl_atleticaNestedInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutAtl_atletica_criadaNestedInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUpdateManyWithoutAtl_atleticaNestedInput
   edu_instituicao?: Prisma.EduInstituicaoUpdateOneRequiredWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUpdateManyWithoutAtl_atleticaNestedInput
@@ -1589,6 +2115,8 @@ export type AtlAtleticaUpdateWithoutAtl_atletica_regimentoInput = {
 export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_regimentoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
+  atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1600,6 +2128,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_regimentoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutAtl_atleticaNestedInput
@@ -1621,6 +2150,9 @@ export type AtlAtleticaCreateWithoutAtl_atletica_assinaturaInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusCreateNestedOneWithoutAtl_atleticaInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutAtl_atletica_criadaInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoCreateNestedManyWithoutAtl_atleticaInput
   edu_instituicao: Prisma.EduInstituicaoCreateNestedOneWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoCreateNestedManyWithoutAtl_atleticaInput
@@ -1634,6 +2166,8 @@ export type AtlAtleticaCreateWithoutAtl_atletica_assinaturaInput = {
 export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_assinaturaInput = {
   id?: number
   edu_instituicao_id: number
+  atl_atletica_status_id?: number | null
+  criado_por_sys_usuario_id?: number | null
   nome: string
   sigla: string
   slug: string
@@ -1645,6 +2179,7 @@ export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_assinaturaInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedCreateNestedManyWithoutAtl_atleticaInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutAtl_atleticaInput
@@ -1682,6 +2217,9 @@ export type AtlAtleticaUpdateWithoutAtl_atletica_assinaturaInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusUpdateOneWithoutAtl_atleticaNestedInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutAtl_atletica_criadaNestedInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUpdateManyWithoutAtl_atleticaNestedInput
   edu_instituicao?: Prisma.EduInstituicaoUpdateOneRequiredWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUpdateManyWithoutAtl_atleticaNestedInput
@@ -1695,6 +2233,8 @@ export type AtlAtleticaUpdateWithoutAtl_atletica_assinaturaInput = {
 export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_assinaturaInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
+  atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1706,6 +2246,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_assinaturaInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutAtl_atleticaNestedInput
@@ -1715,8 +2256,95 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_assinaturaInput = {
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutAtl_atleticaNestedInput
 }
 
+export type AtlAtleticaCreateManyCriado_por_sys_usuarioInput = {
+  id?: number
+  edu_instituicao_id: number
+  atl_atletica_status_id?: number | null
+  nome: string
+  sigla: string
+  slug: string
+  mascote: string
+  descricao?: string | null
+  fundado_at?: Date | string | null
+  logo_url?: string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+}
+
+export type AtlAtleticaUpdateWithoutCriado_por_sys_usuarioInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  sigla?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  mascote?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fundado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  logo_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusUpdateOneWithoutAtl_atleticaNestedInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUpdateManyWithoutAtl_atleticaNestedInput
+  edu_instituicao?: Prisma.EduInstituicaoUpdateOneRequiredWithoutAtl_atleticaNestedInput
+  atl_atletica_curso?: Prisma.AtlAtleticaCursoUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_cargo?: Prisma.AtlAtleticaCargoUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_tema?: Prisma.AtlAtleticaTemaUpdateOneWithoutAtl_atleticaNestedInput
+  atl_atletica_regimento?: Prisma.AtlAtleticaRegimentoUpdateManyWithoutAtl_atleticaNestedInput
+  sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutAtl_atleticaNestedInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaUpdateManyWithoutAtl_atleticaNestedInput
+}
+
+export type AtlAtleticaUncheckedUpdateWithoutCriado_por_sys_usuarioInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
+  atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  sigla?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  mascote?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fundado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  logo_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_tema?: Prisma.AtlAtleticaTemaUncheckedUpdateOneWithoutAtl_atleticaNestedInput
+  atl_atletica_regimento?: Prisma.AtlAtleticaRegimentoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+}
+
+export type AtlAtleticaUncheckedUpdateManyWithoutCriado_por_sys_usuarioInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
+  atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  sigla?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  mascote?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fundado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  logo_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
 export type AtlAtleticaCreateManyEdu_instituicaoInput = {
   id?: number
+  atl_atletica_status_id?: number | null
+  criado_por_sys_usuario_id?: number | null
   nome: string
   sigla: string
   slug: string
@@ -1742,6 +2370,9 @@ export type AtlAtleticaUpdateWithoutEdu_instituicaoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_status?: Prisma.AtlAtleticaStatusUpdateOneWithoutAtl_atleticaNestedInput
+  criado_por_sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutAtl_atletica_criadaNestedInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutAtl_atleticaNestedInput
@@ -1754,6 +2385,8 @@ export type AtlAtleticaUpdateWithoutEdu_instituicaoInput = {
 
 export type AtlAtleticaUncheckedUpdateWithoutEdu_instituicaoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1765,6 +2398,7 @@ export type AtlAtleticaUncheckedUpdateWithoutEdu_instituicaoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutAtl_atleticaNestedInput
@@ -1777,6 +2411,93 @@ export type AtlAtleticaUncheckedUpdateWithoutEdu_instituicaoInput = {
 
 export type AtlAtleticaUncheckedUpdateManyWithoutEdu_instituicaoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  sigla?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  mascote?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fundado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  logo_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type AtlAtleticaCreateManyAtl_atletica_statusInput = {
+  id?: number
+  edu_instituicao_id: number
+  criado_por_sys_usuario_id?: number | null
+  nome: string
+  sigla: string
+  slug: string
+  mascote: string
+  descricao?: string | null
+  fundado_at?: Date | string | null
+  logo_url?: string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+}
+
+export type AtlAtleticaUpdateWithoutAtl_atletica_statusInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  sigla?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  mascote?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fundado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  logo_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  criado_por_sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutAtl_atletica_criadaNestedInput
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUpdateManyWithoutAtl_atleticaNestedInput
+  edu_instituicao?: Prisma.EduInstituicaoUpdateOneRequiredWithoutAtl_atleticaNestedInput
+  atl_atletica_curso?: Prisma.AtlAtleticaCursoUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_cargo?: Prisma.AtlAtleticaCargoUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_tema?: Prisma.AtlAtleticaTemaUpdateOneWithoutAtl_atleticaNestedInput
+  atl_atletica_regimento?: Prisma.AtlAtleticaRegimentoUpdateManyWithoutAtl_atleticaNestedInput
+  sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutAtl_atleticaNestedInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaUpdateManyWithoutAtl_atleticaNestedInput
+}
+
+export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_statusInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
+  criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  sigla?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  mascote?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fundado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  logo_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  atl_atletica_gestao?: Prisma.AtlAtleticaGestaoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_curso?: Prisma.AtlAtleticaCursoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_cargo?: Prisma.AtlAtleticaCargoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_tema?: Prisma.AtlAtleticaTemaUncheckedUpdateOneWithoutAtl_atleticaNestedInput
+  atl_atletica_regimento?: Prisma.AtlAtleticaRegimentoUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaUncheckedUpdateManyWithoutAtl_atleticaNestedInput
+}
+
+export type AtlAtleticaUncheckedUpdateManyWithoutAtl_atletica_statusInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
+  criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1796,6 +2517,7 @@ export type AtlAtleticaUncheckedUpdateManyWithoutEdu_instituicaoInput = {
  */
 
 export type AtlAtleticaCountOutputType = {
+  atl_atletica_gestao: number
   atl_atletica_curso: number
   atl_atletica_cargo: number
   atl_atletica_membro: number
@@ -1806,6 +2528,7 @@ export type AtlAtleticaCountOutputType = {
 }
 
 export type AtlAtleticaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  atl_atletica_gestao?: boolean | AtlAtleticaCountOutputTypeCountAtl_atletica_gestaoArgs
   atl_atletica_curso?: boolean | AtlAtleticaCountOutputTypeCountAtl_atletica_cursoArgs
   atl_atletica_cargo?: boolean | AtlAtleticaCountOutputTypeCountAtl_atletica_cargoArgs
   atl_atletica_membro?: boolean | AtlAtleticaCountOutputTypeCountAtl_atletica_membroArgs
@@ -1823,6 +2546,13 @@ export type AtlAtleticaCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.
    * Select specific fields to fetch from the AtlAtleticaCountOutputType
    */
   select?: Prisma.AtlAtleticaCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * AtlAtleticaCountOutputType without action
+ */
+export type AtlAtleticaCountOutputTypeCountAtl_atletica_gestaoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AtlAtleticaGestaoWhereInput
 }
 
 /**
@@ -1878,6 +2608,8 @@ export type AtlAtleticaCountOutputTypeCountAtl_atletica_assinaturaArgs<ExtArgs e
 export type AtlAtleticaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   edu_instituicao_id?: boolean
+  atl_atletica_status_id?: boolean
+  criado_por_sys_usuario_id?: boolean
   nome?: boolean
   sigla?: boolean
   slug?: boolean
@@ -1889,6 +2621,9 @@ export type AtlAtleticaSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   created_at?: boolean
   updated_at?: boolean
   deleted_at?: boolean
+  atl_atletica_status?: boolean | Prisma.AtlAtletica$atl_atletica_statusArgs<ExtArgs>
+  criado_por_sys_usuario?: boolean | Prisma.AtlAtletica$criado_por_sys_usuarioArgs<ExtArgs>
+  atl_atletica_gestao?: boolean | Prisma.AtlAtletica$atl_atletica_gestaoArgs<ExtArgs>
   edu_instituicao?: boolean | Prisma.EduInstituicaoDefaultArgs<ExtArgs>
   atl_atletica_curso?: boolean | Prisma.AtlAtletica$atl_atletica_cursoArgs<ExtArgs>
   atl_atletica_cargo?: boolean | Prisma.AtlAtletica$atl_atletica_cargoArgs<ExtArgs>
@@ -1906,6 +2641,8 @@ export type AtlAtleticaSelect<ExtArgs extends runtime.Types.Extensions.InternalA
 export type AtlAtleticaSelectScalar = {
   id?: boolean
   edu_instituicao_id?: boolean
+  atl_atletica_status_id?: boolean
+  criado_por_sys_usuario_id?: boolean
   nome?: boolean
   sigla?: boolean
   slug?: boolean
@@ -1919,8 +2656,11 @@ export type AtlAtleticaSelectScalar = {
   deleted_at?: boolean
 }
 
-export type AtlAtleticaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "edu_instituicao_id" | "nome" | "sigla" | "slug" | "mascote" | "descricao" | "fundado_at" | "logo_url" | "ativo" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["atlAtletica"]>
+export type AtlAtleticaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "edu_instituicao_id" | "atl_atletica_status_id" | "criado_por_sys_usuario_id" | "nome" | "sigla" | "slug" | "mascote" | "descricao" | "fundado_at" | "logo_url" | "ativo" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["atlAtletica"]>
 export type AtlAtleticaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  atl_atletica_status?: boolean | Prisma.AtlAtletica$atl_atletica_statusArgs<ExtArgs>
+  criado_por_sys_usuario?: boolean | Prisma.AtlAtletica$criado_por_sys_usuarioArgs<ExtArgs>
+  atl_atletica_gestao?: boolean | Prisma.AtlAtletica$atl_atletica_gestaoArgs<ExtArgs>
   edu_instituicao?: boolean | Prisma.EduInstituicaoDefaultArgs<ExtArgs>
   atl_atletica_curso?: boolean | Prisma.AtlAtletica$atl_atletica_cursoArgs<ExtArgs>
   atl_atletica_cargo?: boolean | Prisma.AtlAtletica$atl_atletica_cargoArgs<ExtArgs>
@@ -1936,6 +2676,9 @@ export type AtlAtleticaInclude<ExtArgs extends runtime.Types.Extensions.Internal
 export type $AtlAtleticaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "AtlAtletica"
   objects: {
+    atl_atletica_status: Prisma.$AtlAtleticaStatusPayload<ExtArgs> | null
+    criado_por_sys_usuario: Prisma.$SysUsuarioPayload<ExtArgs> | null
+    atl_atletica_gestao: Prisma.$AtlAtleticaGestaoPayload<ExtArgs>[]
     edu_instituicao: Prisma.$EduInstituicaoPayload<ExtArgs>
     atl_atletica_curso: Prisma.$AtlAtleticaCursoPayload<ExtArgs>[]
     atl_atletica_cargo: Prisma.$AtlAtleticaCargoPayload<ExtArgs>[]
@@ -1949,6 +2692,8 @@ export type $AtlAtleticaPayload<ExtArgs extends runtime.Types.Extensions.Interna
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     edu_instituicao_id: number
+    atl_atletica_status_id: number | null
+    criado_por_sys_usuario_id: number | null
     nome: string
     sigla: string
     slug: string
@@ -2300,6 +3045,9 @@ readonly fields: AtlAtleticaFieldRefs;
  */
 export interface Prisma__AtlAtleticaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  atl_atletica_status<T extends Prisma.AtlAtletica$atl_atletica_statusArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AtlAtletica$atl_atletica_statusArgs<ExtArgs>>): Prisma.Prisma__AtlAtleticaStatusClient<runtime.Types.Result.GetResult<Prisma.$AtlAtleticaStatusPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  criado_por_sys_usuario<T extends Prisma.AtlAtletica$criado_por_sys_usuarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AtlAtletica$criado_por_sys_usuarioArgs<ExtArgs>>): Prisma.Prisma__SysUsuarioClient<runtime.Types.Result.GetResult<Prisma.$SysUsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  atl_atletica_gestao<T extends Prisma.AtlAtletica$atl_atletica_gestaoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AtlAtletica$atl_atletica_gestaoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AtlAtleticaGestaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   edu_instituicao<T extends Prisma.EduInstituicaoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EduInstituicaoDefaultArgs<ExtArgs>>): Prisma.Prisma__EduInstituicaoClient<runtime.Types.Result.GetResult<Prisma.$EduInstituicaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   atl_atletica_curso<T extends Prisma.AtlAtletica$atl_atletica_cursoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AtlAtletica$atl_atletica_cursoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AtlAtleticaCursoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   atl_atletica_cargo<T extends Prisma.AtlAtletica$atl_atletica_cargoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AtlAtletica$atl_atletica_cargoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AtlAtleticaCargoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2340,6 +3088,8 @@ export interface Prisma__AtlAtleticaClient<T, Null = never, ExtArgs extends runt
 export interface AtlAtleticaFieldRefs {
   readonly id: Prisma.FieldRef<"AtlAtletica", 'Int'>
   readonly edu_instituicao_id: Prisma.FieldRef<"AtlAtletica", 'Int'>
+  readonly atl_atletica_status_id: Prisma.FieldRef<"AtlAtletica", 'Int'>
+  readonly criado_por_sys_usuario_id: Prisma.FieldRef<"AtlAtletica", 'Int'>
   readonly nome: Prisma.FieldRef<"AtlAtletica", 'String'>
   readonly sigla: Prisma.FieldRef<"AtlAtletica", 'String'>
   readonly slug: Prisma.FieldRef<"AtlAtletica", 'String'>
@@ -2696,6 +3446,68 @@ export type AtlAtleticaDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many AtlAtleticas to delete.
    */
   limit?: number
+}
+
+/**
+ * AtlAtletica.atl_atletica_status
+ */
+export type AtlAtletica$atl_atletica_statusArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AtlAtleticaStatus
+   */
+  select?: Prisma.AtlAtleticaStatusSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AtlAtleticaStatus
+   */
+  omit?: Prisma.AtlAtleticaStatusOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AtlAtleticaStatusInclude<ExtArgs> | null
+  where?: Prisma.AtlAtleticaStatusWhereInput
+}
+
+/**
+ * AtlAtletica.criado_por_sys_usuario
+ */
+export type AtlAtletica$criado_por_sys_usuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SysUsuario
+   */
+  select?: Prisma.SysUsuarioSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SysUsuario
+   */
+  omit?: Prisma.SysUsuarioOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SysUsuarioInclude<ExtArgs> | null
+  where?: Prisma.SysUsuarioWhereInput
+}
+
+/**
+ * AtlAtletica.atl_atletica_gestao
+ */
+export type AtlAtletica$atl_atletica_gestaoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AtlAtleticaGestao
+   */
+  select?: Prisma.AtlAtleticaGestaoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AtlAtleticaGestao
+   */
+  omit?: Prisma.AtlAtleticaGestaoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AtlAtleticaGestaoInclude<ExtArgs> | null
+  where?: Prisma.AtlAtleticaGestaoWhereInput
+  orderBy?: Prisma.AtlAtleticaGestaoOrderByWithRelationInput | Prisma.AtlAtleticaGestaoOrderByWithRelationInput[]
+  cursor?: Prisma.AtlAtleticaGestaoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AtlAtleticaGestaoScalarFieldEnum | Prisma.AtlAtleticaGestaoScalarFieldEnum[]
 }
 
 /**

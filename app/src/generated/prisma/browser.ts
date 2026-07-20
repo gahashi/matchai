@@ -73,6 +73,11 @@ export type EduCurso = Prisma.EduCursoModel
  */
 export type EduInstituicaoCurso = Prisma.EduInstituicaoCursoModel
 /**
+ * Model AtlAtleticaStatus
+ * 
+ */
+export type AtlAtleticaStatus = Prisma.AtlAtleticaStatusModel
+/**
  * Model AtlAtletica
  * 
  */
@@ -82,6 +87,16 @@ export type AtlAtletica = Prisma.AtlAtleticaModel
  * 
  */
 export type AtlAtleticaCurso = Prisma.AtlAtleticaCursoModel
+/**
+ * Model AtlAtleticaGestaoStatus
+ * 
+ */
+export type AtlAtleticaGestaoStatus = Prisma.AtlAtleticaGestaoStatusModel
+/**
+ * Model AtlAtleticaGestao
+ * 
+ */
+export type AtlAtleticaGestao = Prisma.AtlAtleticaGestaoModel
 /**
  * Model AtlCargoTipo
  * 

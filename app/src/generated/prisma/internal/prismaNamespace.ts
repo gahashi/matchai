@@ -395,8 +395,11 @@ export const ModelName = {
   EduInstituicao: 'EduInstituicao',
   EduCurso: 'EduCurso',
   EduInstituicaoCurso: 'EduInstituicaoCurso',
+  AtlAtleticaStatus: 'AtlAtleticaStatus',
   AtlAtletica: 'AtlAtletica',
   AtlAtleticaCurso: 'AtlAtleticaCurso',
+  AtlAtleticaGestaoStatus: 'AtlAtleticaGestaoStatus',
+  AtlAtleticaGestao: 'AtlAtleticaGestao',
   AtlCargoTipo: 'AtlCargoTipo',
   AtlCargo: 'AtlCargo',
   AtlAtleticaCargo: 'AtlAtleticaCargo',
@@ -440,7 +443,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "sysUsuario" | "sysRoleEscopo" | "sysRole" | "sysPermission" | "sysRolePermission" | "sysUsuarioRole" | "sysUsuarioPermissionTipo" | "sysUsuarioPermission" | "eduInstituicao" | "eduCurso" | "eduInstituicaoCurso" | "atlAtletica" | "atlAtleticaCurso" | "atlCargoTipo" | "atlCargo" | "atlAtleticaCargo" | "atlAtleticaMembroTipo" | "atlAtleticaMembroStatus" | "atlAtleticaMembro" | "atlAtleticaMembroCargo" | "atlAtleticaTema" | "atlAtleticaRegimento" | "sysAssinaturaPlanoPeriodicidade" | "sysAssinaturaPlano" | "atlAtleticaAssinaturaStatus" | "atlAtleticaAssinatura" | "user" | "session" | "account" | "verification" | "sysEmailLog" | "sysEmailVerificationCode" | "sysAuthLoginLog" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivoEntidadeTipo" | "sysArquivo" | "sysInboxItemTipo" | "sysInboxItemStatus" | "sysInboxItem"
+    modelProps: "sysUsuario" | "sysRoleEscopo" | "sysRole" | "sysPermission" | "sysRolePermission" | "sysUsuarioRole" | "sysUsuarioPermissionTipo" | "sysUsuarioPermission" | "eduInstituicao" | "eduCurso" | "eduInstituicaoCurso" | "atlAtleticaStatus" | "atlAtletica" | "atlAtleticaCurso" | "atlAtleticaGestaoStatus" | "atlAtleticaGestao" | "atlCargoTipo" | "atlCargo" | "atlAtleticaCargo" | "atlAtleticaMembroTipo" | "atlAtleticaMembroStatus" | "atlAtleticaMembro" | "atlAtleticaMembroCargo" | "atlAtleticaTema" | "atlAtleticaRegimento" | "sysAssinaturaPlanoPeriodicidade" | "sysAssinaturaPlano" | "atlAtleticaAssinaturaStatus" | "atlAtleticaAssinatura" | "user" | "session" | "account" | "verification" | "sysEmailLog" | "sysEmailVerificationCode" | "sysAuthLoginLog" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivoEntidadeTipo" | "sysArquivo" | "sysInboxItemTipo" | "sysInboxItemStatus" | "sysInboxItem"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1170,6 +1173,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AtlAtleticaStatus: {
+      payload: Prisma.$AtlAtleticaStatusPayload<ExtArgs>
+      fields: Prisma.AtlAtleticaStatusFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AtlAtleticaStatusFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AtlAtleticaStatusFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload>
+        }
+        findFirst: {
+          args: Prisma.AtlAtleticaStatusFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AtlAtleticaStatusFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload>
+        }
+        findMany: {
+          args: Prisma.AtlAtleticaStatusFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload>[]
+        }
+        create: {
+          args: Prisma.AtlAtleticaStatusCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload>
+        }
+        createMany: {
+          args: Prisma.AtlAtleticaStatusCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AtlAtleticaStatusDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload>
+        }
+        update: {
+          args: Prisma.AtlAtleticaStatusUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload>
+        }
+        deleteMany: {
+          args: Prisma.AtlAtleticaStatusDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AtlAtleticaStatusUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AtlAtleticaStatusUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload>
+        }
+        aggregate: {
+          args: Prisma.AtlAtleticaStatusAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlAtleticaStatus>
+        }
+        groupBy: {
+          args: Prisma.AtlAtleticaStatusGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaStatusGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AtlAtleticaStatusCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaStatusCountAggregateOutputType> | number
+        }
+      }
+    }
     AtlAtletica: {
       payload: Prisma.$AtlAtleticaPayload<ExtArgs>
       fields: Prisma.AtlAtleticaFieldRefs
@@ -1299,6 +1368,138 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.AtlAtleticaCursoCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaCursoCountAggregateOutputType> | number
+        }
+      }
+    }
+    AtlAtleticaGestaoStatus: {
+      payload: Prisma.$AtlAtleticaGestaoStatusPayload<ExtArgs>
+      fields: Prisma.AtlAtleticaGestaoStatusFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AtlAtleticaGestaoStatusFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AtlAtleticaGestaoStatusFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload>
+        }
+        findFirst: {
+          args: Prisma.AtlAtleticaGestaoStatusFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AtlAtleticaGestaoStatusFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload>
+        }
+        findMany: {
+          args: Prisma.AtlAtleticaGestaoStatusFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload>[]
+        }
+        create: {
+          args: Prisma.AtlAtleticaGestaoStatusCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload>
+        }
+        createMany: {
+          args: Prisma.AtlAtleticaGestaoStatusCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AtlAtleticaGestaoStatusDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload>
+        }
+        update: {
+          args: Prisma.AtlAtleticaGestaoStatusUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload>
+        }
+        deleteMany: {
+          args: Prisma.AtlAtleticaGestaoStatusDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AtlAtleticaGestaoStatusUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AtlAtleticaGestaoStatusUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload>
+        }
+        aggregate: {
+          args: Prisma.AtlAtleticaGestaoStatusAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlAtleticaGestaoStatus>
+        }
+        groupBy: {
+          args: Prisma.AtlAtleticaGestaoStatusGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaGestaoStatusGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AtlAtleticaGestaoStatusCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaGestaoStatusCountAggregateOutputType> | number
+        }
+      }
+    }
+    AtlAtleticaGestao: {
+      payload: Prisma.$AtlAtleticaGestaoPayload<ExtArgs>
+      fields: Prisma.AtlAtleticaGestaoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AtlAtleticaGestaoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AtlAtleticaGestaoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload>
+        }
+        findFirst: {
+          args: Prisma.AtlAtleticaGestaoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AtlAtleticaGestaoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload>
+        }
+        findMany: {
+          args: Prisma.AtlAtleticaGestaoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload>[]
+        }
+        create: {
+          args: Prisma.AtlAtleticaGestaoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload>
+        }
+        createMany: {
+          args: Prisma.AtlAtleticaGestaoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AtlAtleticaGestaoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload>
+        }
+        update: {
+          args: Prisma.AtlAtleticaGestaoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload>
+        }
+        deleteMany: {
+          args: Prisma.AtlAtleticaGestaoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AtlAtleticaGestaoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AtlAtleticaGestaoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload>
+        }
+        aggregate: {
+          args: Prisma.AtlAtleticaGestaoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlAtleticaGestao>
+        }
+        groupBy: {
+          args: Prisma.AtlAtleticaGestaoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaGestaoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AtlAtleticaGestaoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaGestaoCountAggregateOutputType> | number
         }
       }
     }
@@ -3353,9 +3554,26 @@ export const EduInstituicaoCursoScalarFieldEnum = {
 export type EduInstituicaoCursoScalarFieldEnum = (typeof EduInstituicaoCursoScalarFieldEnum)[keyof typeof EduInstituicaoCursoScalarFieldEnum]
 
 
+export const AtlAtleticaStatusScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type AtlAtleticaStatusScalarFieldEnum = (typeof AtlAtleticaStatusScalarFieldEnum)[keyof typeof AtlAtleticaStatusScalarFieldEnum]
+
+
 export const AtlAtleticaScalarFieldEnum = {
   id: 'id',
   edu_instituicao_id: 'edu_instituicao_id',
+  atl_atletica_status_id: 'atl_atletica_status_id',
+  criado_por_sys_usuario_id: 'criado_por_sys_usuario_id',
   nome: 'nome',
   sigla: 'sigla',
   slug: 'slug',
@@ -3384,6 +3602,38 @@ export const AtlAtleticaCursoScalarFieldEnum = {
 } as const
 
 export type AtlAtleticaCursoScalarFieldEnum = (typeof AtlAtleticaCursoScalarFieldEnum)[keyof typeof AtlAtleticaCursoScalarFieldEnum]
+
+
+export const AtlAtleticaGestaoStatusScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type AtlAtleticaGestaoStatusScalarFieldEnum = (typeof AtlAtleticaGestaoStatusScalarFieldEnum)[keyof typeof AtlAtleticaGestaoStatusScalarFieldEnum]
+
+
+export const AtlAtleticaGestaoScalarFieldEnum = {
+  id: 'id',
+  atl_atletica_id: 'atl_atletica_id',
+  atl_atletica_gestao_status_id: 'atl_atletica_gestao_status_id',
+  nome: 'nome',
+  inicio_at: 'inicio_at',
+  fim_at: 'fim_at',
+  observacao: 'observacao',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type AtlAtleticaGestaoScalarFieldEnum = (typeof AtlAtleticaGestaoScalarFieldEnum)[keyof typeof AtlAtleticaGestaoScalarFieldEnum]
 
 
 export const AtlCargoTipoScalarFieldEnum = {
@@ -3921,6 +4171,17 @@ export const EduCursoOrderByRelevanceFieldEnum = {
 export type EduCursoOrderByRelevanceFieldEnum = (typeof EduCursoOrderByRelevanceFieldEnum)[keyof typeof EduCursoOrderByRelevanceFieldEnum]
 
 
+export const AtlAtleticaStatusOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon'
+} as const
+
+export type AtlAtleticaStatusOrderByRelevanceFieldEnum = (typeof AtlAtleticaStatusOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaStatusOrderByRelevanceFieldEnum]
+
+
 export const AtlAtleticaOrderByRelevanceFieldEnum = {
   nome: 'nome',
   sigla: 'sigla',
@@ -3931,6 +4192,25 @@ export const AtlAtleticaOrderByRelevanceFieldEnum = {
 } as const
 
 export type AtlAtleticaOrderByRelevanceFieldEnum = (typeof AtlAtleticaOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaOrderByRelevanceFieldEnum]
+
+
+export const AtlAtleticaGestaoStatusOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon'
+} as const
+
+export type AtlAtleticaGestaoStatusOrderByRelevanceFieldEnum = (typeof AtlAtleticaGestaoStatusOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaGestaoStatusOrderByRelevanceFieldEnum]
+
+
+export const AtlAtleticaGestaoOrderByRelevanceFieldEnum = {
+  nome: 'nome',
+  observacao: 'observacao'
+} as const
+
+export type AtlAtleticaGestaoOrderByRelevanceFieldEnum = (typeof AtlAtleticaGestaoOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaGestaoOrderByRelevanceFieldEnum]
 
 
 export const AtlCargoTipoOrderByRelevanceFieldEnum = {
@@ -4379,8 +4659,11 @@ export type GlobalOmitConfig = {
   eduInstituicao?: Prisma.EduInstituicaoOmit
   eduCurso?: Prisma.EduCursoOmit
   eduInstituicaoCurso?: Prisma.EduInstituicaoCursoOmit
+  atlAtleticaStatus?: Prisma.AtlAtleticaStatusOmit
   atlAtletica?: Prisma.AtlAtleticaOmit
   atlAtleticaCurso?: Prisma.AtlAtleticaCursoOmit
+  atlAtleticaGestaoStatus?: Prisma.AtlAtleticaGestaoStatusOmit
+  atlAtleticaGestao?: Prisma.AtlAtleticaGestaoOmit
   atlCargoTipo?: Prisma.AtlCargoTipoOmit
   atlCargo?: Prisma.AtlCargoOmit
   atlAtleticaCargo?: Prisma.AtlAtleticaCargoOmit

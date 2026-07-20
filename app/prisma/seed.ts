@@ -671,7 +671,7 @@ async function main() {
                 titulo: "Bem-vindo ao Brava Pass",
                 mensagem:
                     "Sua caixa de entrada foi criada. Aqui você receberá avisos, solicitações e resultados importantes do sistema.",
-                action_url: "/inbox",
+                action_url: "/sys/inbox",
                 entidade_tipo: "dev",
                 entidade_id: null,
                 ativo: 1,
@@ -859,6 +859,120 @@ async function main() {
     }
 
     /**
+     * ATL - Status da atlética
+     */
+    await upsertByCodigo(prisma.atlAtleticaStatus, "rascunho", {
+        nome: "Rascunho",
+        descricao: "Atlética criada como rascunho, ainda não enviada para validação.",
+        color: "secondary",
+        icon: "file-edit",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.atlAtleticaStatus, "pendente_validacao", {
+        nome: "Pendente de validação",
+        descricao: "Atlética enviada para análise e validação.",
+        color: "warning",
+        icon: "clock",
+        ativo: 1,
+    });
+
+    const atlAtleticaStatusAtiva = await upsertByCodigo(prisma.atlAtleticaStatus, "ativa", {
+        nome: "Ativa",
+        descricao: "Atlética validada e liberada para uso.",
+        color: "success",
+        icon: "check-circle",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.atlAtleticaStatus, "irregular", {
+        nome: "Irregular",
+        descricao: "Atlética existente, mas com pendência documental, institucional ou administrativa.",
+        color: "warning",
+        icon: "alert-triangle",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.atlAtleticaStatus, "suspensa", {
+        nome: "Suspensa",
+        descricao: "Atlética temporariamente bloqueada por decisão administrativa.",
+        color: "danger",
+        icon: "ban",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.atlAtleticaStatus, "recusada", {
+        nome: "Recusada",
+        descricao: "Solicitação de criação ou validação da atlética foi recusada.",
+        color: "danger",
+        icon: "x-circle",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.atlAtleticaStatus, "inativa", {
+        nome: "Inativa",
+        descricao: "Atlética desativada ou encerrada no sistema.",
+        color: "secondary",
+        icon: "archive",
+        ativo: 1,
+    });
+
+    /**
+     * ATL - Status da gestão da atlética
+     */
+    await upsertByCodigo(prisma.atlAtleticaGestaoStatus, "pendente_validacao", {
+        nome: "Pendente de validação",
+        descricao: "Gestão aguardando validação documental ou institucional.",
+        color: "warning",
+        icon: "clock",
+        ativo: 1,
+    });
+
+    const atlAtleticaGestaoStatusAtiva = await upsertByCodigo(
+        prisma.atlAtleticaGestaoStatus,
+        "ativa",
+        {
+            nome: "Ativa",
+            descricao: "Gestão vigente e validada.",
+            color: "success",
+            icon: "check-circle",
+            ativo: 1,
+        },
+    );
+
+    await upsertByCodigo(prisma.atlAtleticaGestaoStatus, "recusada", {
+        nome: "Recusada",
+        descricao: "Gestão recusada na validação.",
+        color: "danger",
+        icon: "x-circle",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.atlAtleticaGestaoStatus, "encerrada", {
+        nome: "Encerrada",
+        descricao: "Gestão finalizada normalmente.",
+        color: "secondary",
+        icon: "archive",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.atlAtleticaGestaoStatus, "expirada", {
+        nome: "Expirada",
+        descricao: "Gestão passou do período previsto de mandato.",
+        color: "warning",
+        icon: "clock-alert",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.atlAtleticaGestaoStatus, "substituida", {
+        nome: "Substituída",
+        descricao: "Gestão substituída por nova diretoria ou nova gestão.",
+        color: "info",
+        icon: "refresh-cw",
+        ativo: 1,
+    });
+
+    /**
      * ATL - Atlética inicial de teste
      */
     const atletica = await prisma.atlAtletica.upsert({
@@ -871,6 +985,8 @@ async function main() {
             edu_instituicao_id: instituicao.id,
             ativo: 1,
             updated_at: now(),
+            atl_atletica_status_id: atlAtleticaStatusAtiva.id,
+            criado_por_sys_usuario_id: usuarioDev.id,
         },
         create: {
             edu_instituicao_id: instituicao.id,
@@ -882,6 +998,8 @@ async function main() {
             ativo: 1,
             created_at: now(),
             updated_at: now(),
+            atl_atletica_status_id: atlAtleticaStatusAtiva.id,
+            criado_por_sys_usuario_id: usuarioDev.id,
         },
     });
 
@@ -938,6 +1056,37 @@ async function main() {
             },
         });
     }
+
+    /**
+     * ATL - Gestão inicial da atlética
+     */
+    await prisma.atlAtleticaGestao.upsert({
+        where: {
+            atl_atletica_id_nome: {
+                atl_atletica_id: atletica.id,
+                nome: "Gestão 2025–2027",
+            },
+        },
+        update: {
+            atl_atletica_gestao_status_id: atlAtleticaGestaoStatusAtiva.id,
+            inicio_at: new Date("2025-05-09T00:00:00.000Z"),
+            fim_at: new Date("2027-05-09T00:00:00.000Z"),
+            observacao: "Gestão inicial criada para ambiente de desenvolvimento.",
+            ativo: 1,
+            updated_at: now(),
+        },
+        create: {
+            atl_atletica_id: atletica.id,
+            atl_atletica_gestao_status_id: atlAtleticaGestaoStatusAtiva.id,
+            nome: "Gestão 2025–2027",
+            inicio_at: new Date("2025-05-09T00:00:00.000Z"),
+            fim_at: new Date("2027-05-09T00:00:00.000Z"),
+            observacao: "Gestão inicial criada para ambiente de desenvolvimento.",
+            ativo: 1,
+            created_at: now(),
+            updated_at: now(),
+        },
+    });
 
     /**
      * ATL - Tema inicial da atlética

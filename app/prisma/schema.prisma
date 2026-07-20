@@ -32,6 +32,7 @@ model SysUsuario {
   sys_usuario_role       SysUsuarioRole[]
   sys_usuario_permission SysUsuarioPermission[]
   atl_atletica_membro    AtlAtleticaMembro[]
+  atl_atletica_criada    AtlAtletica[]          @relation("AtlAtleticaCriadoPor")
   sys_inbox_item         SysInboxItem[]
 
   sys_auth_login_log SysAuthLoginLog[]
@@ -228,21 +229,42 @@ model EduInstituicaoCurso {
   @@map("edu_instituicao_curso")
 }
 
-model AtlAtletica {
-  id                 Int       @id @default(autoincrement())
-  edu_instituicao_id Int
-  nome               String    @db.VarChar(150)
-  sigla              String    @db.VarChar(30)
-  slug               String    @unique @db.VarChar(100)
-  mascote            String    @db.VarChar(100)
-  descricao          String?   @db.Text
-  fundado_at         DateTime? @db.Date
-  logo_url           String?   @db.VarChar(255)
-  ativo              Int       @default(1)
-  created_at         DateTime? @db.DateTime(0)
-  updated_at         DateTime? @db.DateTime(0)
-  deleted_at         DateTime? @db.DateTime(0)
+model AtlAtleticaStatus {
+  id         Int       @id @default(autoincrement())
+  codigo     String    @unique @db.VarChar(100)
+  nome       String    @db.VarChar(150)
+  descricao  String?   @db.Text
+  color      String?   @db.VarChar(50)
+  icon       String?   @db.VarChar(100)
+  ativo      Int       @default(1)
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
 
+  atl_atletica AtlAtletica[]
+
+  @@map("atl_atletica_status")
+}
+
+model AtlAtletica {
+  id                        Int       @id @default(autoincrement())
+  edu_instituicao_id        Int
+  atl_atletica_status_id    Int?
+  criado_por_sys_usuario_id Int?
+  nome                      String    @db.VarChar(150)
+  sigla                     String    @db.VarChar(30)
+  slug                      String    @unique @db.VarChar(100)
+  mascote                   String    @db.VarChar(100)
+  descricao                 String?   @db.Text
+  fundado_at                DateTime? @db.Date
+  logo_url                  String?   @db.VarChar(255)
+  ativo                     Int       @default(1)
+  created_at                DateTime? @db.DateTime(0)
+  updated_at                DateTime? @db.DateTime(0)
+  deleted_at                DateTime? @db.DateTime(0)
+
+  atl_atletica_status     AtlAtleticaStatus?      @relation(fields: [atl_atletica_status_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  criado_por_sys_usuario  SysUsuario?             @relation("AtlAtleticaCriadoPor", fields: [criado_por_sys_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  atl_atletica_gestao     AtlAtleticaGestao[]
   edu_instituicao         EduInstituicao          @relation(fields: [edu_instituicao_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   atl_atletica_curso      AtlAtleticaCurso[]
   atl_atletica_cargo      AtlAtleticaCargo[]
@@ -255,6 +277,8 @@ model AtlAtletica {
 
   @@index([edu_instituicao_id], map: "atl_atletica_fk1")
   @@index([ativo])
+  @@index([atl_atletica_status_id], map: "atl_atletica_fk2")
+  @@index([criado_por_sys_usuario_id], map: "atl_atletica_fk3")
   @@map("atl_atletica")
 }
 
@@ -275,6 +299,45 @@ model AtlAtleticaCurso {
   @@index([atl_atletica_id], map: "atl_atletica_curso_fk1")
   @@index([edu_curso_id], map: "atl_atletica_curso_fk2")
   @@map("atl_atletica_curso")
+}
+
+model AtlAtleticaGestaoStatus {
+  id         Int       @id @default(autoincrement())
+  codigo     String    @unique @db.VarChar(100)
+  nome       String    @db.VarChar(150)
+  descricao  String?   @db.Text
+  color      String?   @db.VarChar(50)
+  icon       String?   @db.VarChar(100)
+  ativo      Int       @default(1)
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  atl_atletica_gestao AtlAtleticaGestao[]
+
+  @@map("atl_atletica_gestao_status")
+}
+
+model AtlAtleticaGestao {
+  id                            Int       @id @default(autoincrement())
+  atl_atletica_id               Int
+  atl_atletica_gestao_status_id Int
+  nome                          String    @db.VarChar(150)
+  inicio_at                     DateTime? @db.Date
+  fim_at                        DateTime? @db.Date
+  observacao                    String?   @db.Text
+  ativo                         Int       @default(1)
+  created_at                    DateTime? @db.DateTime(0)
+  updated_at                    DateTime? @db.DateTime(0)
+  deleted_at                    DateTime? @db.DateTime(0)
+
+  atl_atletica               AtlAtletica             @relation(fields: [atl_atletica_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  atl_atletica_gestao_status AtlAtleticaGestaoStatus @relation(fields: [atl_atletica_gestao_status_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@unique([atl_atletica_id, nome], map: "uk_atl_atletica_gestao_nome")
+  @@index([atl_atletica_id], map: "atl_atletica_gestao_fk1")
+  @@index([atl_atletica_gestao_status_id], map: "atl_atletica_gestao_fk2")
+  @@index([ativo])
+  @@map("atl_atletica_gestao")
 }
 
 model AtlCargoTipo {

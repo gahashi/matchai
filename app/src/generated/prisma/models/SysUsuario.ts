@@ -335,6 +335,7 @@ export type SysUsuarioWhereInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleListRelationFilter
   sys_usuario_permission?: Prisma.SysUsuarioPermissionListRelationFilter
   atl_atletica_membro?: Prisma.AtlAtleticaMembroListRelationFilter
+  atl_atletica_criada?: Prisma.AtlAtleticaListRelationFilter
   sys_inbox_item?: Prisma.SysInboxItemListRelationFilter
   sys_auth_login_log?: Prisma.SysAuthLoginLogListRelationFilter
   sys_auth_user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -364,6 +365,7 @@ export type SysUsuarioOrderByWithRelationInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleOrderByRelationAggregateInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionOrderByRelationAggregateInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroOrderByRelationAggregateInput
+  atl_atletica_criada?: Prisma.AtlAtleticaOrderByRelationAggregateInput
   sys_inbox_item?: Prisma.SysInboxItemOrderByRelationAggregateInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogOrderByRelationAggregateInput
   sys_auth_user?: Prisma.UserOrderByWithRelationInput
@@ -397,6 +399,7 @@ export type SysUsuarioWhereUniqueInput = Prisma.AtLeast<{
   sys_usuario_role?: Prisma.SysUsuarioRoleListRelationFilter
   sys_usuario_permission?: Prisma.SysUsuarioPermissionListRelationFilter
   atl_atletica_membro?: Prisma.AtlAtleticaMembroListRelationFilter
+  atl_atletica_criada?: Prisma.AtlAtleticaListRelationFilter
   sys_inbox_item?: Prisma.SysInboxItemListRelationFilter
   sys_auth_login_log?: Prisma.SysAuthLoginLogListRelationFilter
   sys_auth_user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -475,6 +478,7 @@ export type SysUsuarioCreateInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_inbox_item?: Prisma.SysInboxItemCreateNestedManyWithoutSys_usuarioInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
@@ -504,6 +508,7 @@ export type SysUsuarioUncheckedCreateInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_inbox_item?: Prisma.SysInboxItemUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
@@ -532,6 +537,7 @@ export type SysUsuarioUpdateInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUpdateManyWithoutCriado_por_sys_usuarioNestedInput
   sys_inbox_item?: Prisma.SysInboxItemUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
@@ -561,6 +567,7 @@ export type SysUsuarioUncheckedUpdateInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedUpdateManyWithoutCriado_por_sys_usuarioNestedInput
   sys_inbox_item?: Prisma.SysInboxItemUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
@@ -779,6 +786,22 @@ export type SysUsuarioUpdateOneRequiredWithoutSys_usuario_permissionNestedInput 
   update?: Prisma.XOR<Prisma.XOR<Prisma.SysUsuarioUpdateToOneWithWhereWithoutSys_usuario_permissionInput, Prisma.SysUsuarioUpdateWithoutSys_usuario_permissionInput>, Prisma.SysUsuarioUncheckedUpdateWithoutSys_usuario_permissionInput>
 }
 
+export type SysUsuarioCreateNestedOneWithoutAtl_atletica_criadaInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioCreateWithoutAtl_atletica_criadaInput, Prisma.SysUsuarioUncheckedCreateWithoutAtl_atletica_criadaInput>
+  connectOrCreate?: Prisma.SysUsuarioCreateOrConnectWithoutAtl_atletica_criadaInput
+  connect?: Prisma.SysUsuarioWhereUniqueInput
+}
+
+export type SysUsuarioUpdateOneWithoutAtl_atletica_criadaNestedInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioCreateWithoutAtl_atletica_criadaInput, Prisma.SysUsuarioUncheckedCreateWithoutAtl_atletica_criadaInput>
+  connectOrCreate?: Prisma.SysUsuarioCreateOrConnectWithoutAtl_atletica_criadaInput
+  upsert?: Prisma.SysUsuarioUpsertWithoutAtl_atletica_criadaInput
+  disconnect?: Prisma.SysUsuarioWhereInput | boolean
+  delete?: Prisma.SysUsuarioWhereInput | boolean
+  connect?: Prisma.SysUsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SysUsuarioUpdateToOneWithWhereWithoutAtl_atletica_criadaInput, Prisma.SysUsuarioUpdateWithoutAtl_atletica_criadaInput>, Prisma.SysUsuarioUncheckedUpdateWithoutAtl_atletica_criadaInput>
+}
+
 export type SysUsuarioCreateNestedOneWithoutAtl_atletica_membroInput = {
   create?: Prisma.XOR<Prisma.SysUsuarioCreateWithoutAtl_atletica_membroInput, Prisma.SysUsuarioUncheckedCreateWithoutAtl_atletica_membroInput>
   connectOrCreate?: Prisma.SysUsuarioCreateOrConnectWithoutAtl_atletica_membroInput
@@ -889,6 +912,7 @@ export type SysUsuarioCreateWithoutSys_usuario_roleInput = {
   deleted_at?: Date | string | null
   sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_inbox_item?: Prisma.SysInboxItemCreateNestedManyWithoutSys_usuarioInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
@@ -917,6 +941,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_usuario_roleInput = {
   deleted_at?: Date | string | null
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_inbox_item?: Prisma.SysInboxItemUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
@@ -960,6 +985,7 @@ export type SysUsuarioUpdateWithoutSys_usuario_roleInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUpdateManyWithoutCriado_por_sys_usuarioNestedInput
   sys_inbox_item?: Prisma.SysInboxItemUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
@@ -988,6 +1014,7 @@ export type SysUsuarioUncheckedUpdateWithoutSys_usuario_roleInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedUpdateManyWithoutCriado_por_sys_usuarioNestedInput
   sys_inbox_item?: Prisma.SysInboxItemUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
@@ -1015,6 +1042,7 @@ export type SysUsuarioCreateWithoutSys_usuario_permissionInput = {
   deleted_at?: Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_inbox_item?: Prisma.SysInboxItemCreateNestedManyWithoutSys_usuarioInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
@@ -1043,6 +1071,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_usuario_permissionInput = {
   deleted_at?: Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_inbox_item?: Prisma.SysInboxItemUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
@@ -1086,6 +1115,7 @@ export type SysUsuarioUpdateWithoutSys_usuario_permissionInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUpdateManyWithoutCriado_por_sys_usuarioNestedInput
   sys_inbox_item?: Prisma.SysInboxItemUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
@@ -1114,6 +1144,137 @@ export type SysUsuarioUncheckedUpdateWithoutSys_usuario_permissionInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedUpdateManyWithoutCriado_por_sys_usuarioNestedInput
+  sys_inbox_item?: Prisma.SysInboxItemUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
+  sysEmailLogs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUncheckedUpdateManyWithoutSys_usuarioNestedInput
+}
+
+export type SysUsuarioCreateWithoutAtl_atletica_criadaInput = {
+  nome: string
+  nickname: string
+  email: string
+  telefone?: string | null
+  senha_hash?: string | null
+  codigo_aluno?: string | null
+  documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
+  avatar_url?: string | null
+  ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutSys_usuarioInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutSys_usuarioInput
+  sys_inbox_item?: Prisma.SysInboxItemCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
+  sysEmailLogs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeCreateNestedManyWithoutSys_usuarioInput
+}
+
+export type SysUsuarioUncheckedCreateWithoutAtl_atletica_criadaInput = {
+  id?: number
+  nome: string
+  nickname: string
+  email: string
+  telefone?: string | null
+  senha_hash?: string | null
+  codigo_aluno?: string | null
+  documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  avatar_file_key?: string | null
+  avatar_url?: string | null
+  ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_inbox_item?: Prisma.SysInboxItemUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
+  sysEmailLogs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUncheckedCreateNestedManyWithoutSys_usuarioInput
+}
+
+export type SysUsuarioCreateOrConnectWithoutAtl_atletica_criadaInput = {
+  where: Prisma.SysUsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.SysUsuarioCreateWithoutAtl_atletica_criadaInput, Prisma.SysUsuarioUncheckedCreateWithoutAtl_atletica_criadaInput>
+}
+
+export type SysUsuarioUpsertWithoutAtl_atletica_criadaInput = {
+  update: Prisma.XOR<Prisma.SysUsuarioUpdateWithoutAtl_atletica_criadaInput, Prisma.SysUsuarioUncheckedUpdateWithoutAtl_atletica_criadaInput>
+  create: Prisma.XOR<Prisma.SysUsuarioCreateWithoutAtl_atletica_criadaInput, Prisma.SysUsuarioUncheckedCreateWithoutAtl_atletica_criadaInput>
+  where?: Prisma.SysUsuarioWhereInput
+}
+
+export type SysUsuarioUpdateToOneWithWhereWithoutAtl_atletica_criadaInput = {
+  where?: Prisma.SysUsuarioWhereInput
+  data: Prisma.XOR<Prisma.SysUsuarioUpdateWithoutAtl_atletica_criadaInput, Prisma.SysUsuarioUncheckedUpdateWithoutAtl_atletica_criadaInput>
+}
+
+export type SysUsuarioUpdateWithoutAtl_atletica_criadaInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  nickname?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutSys_usuarioNestedInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutSys_usuarioNestedInput
+  sys_inbox_item?: Prisma.SysInboxItemUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_login_log?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
+  sysEmailLogs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
+  sysEmailVerificationCodes?: Prisma.SysEmailVerificationCodeUpdateManyWithoutSys_usuarioNestedInput
+}
+
+export type SysUsuarioUncheckedUpdateWithoutAtl_atletica_criadaInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  nickname?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senha_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codigo_aluno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  avatar_file_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_inbox_item?: Prisma.SysInboxItemUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
@@ -1141,6 +1302,7 @@ export type SysUsuarioCreateWithoutAtl_atletica_membroInput = {
   deleted_at?: Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_inbox_item?: Prisma.SysInboxItemCreateNestedManyWithoutSys_usuarioInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
@@ -1169,6 +1331,7 @@ export type SysUsuarioUncheckedCreateWithoutAtl_atletica_membroInput = {
   deleted_at?: Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_inbox_item?: Prisma.SysInboxItemUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
@@ -1212,6 +1375,7 @@ export type SysUsuarioUpdateWithoutAtl_atletica_membroInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUpdateManyWithoutCriado_por_sys_usuarioNestedInput
   sys_inbox_item?: Prisma.SysInboxItemUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
@@ -1240,6 +1404,7 @@ export type SysUsuarioUncheckedUpdateWithoutAtl_atletica_membroInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedUpdateManyWithoutCriado_por_sys_usuarioNestedInput
   sys_inbox_item?: Prisma.SysInboxItemUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
@@ -1268,6 +1433,7 @@ export type SysUsuarioCreateWithoutSys_auth_userInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_inbox_item?: Prisma.SysInboxItemCreateNestedManyWithoutSys_usuarioInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sysEmailLogs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
@@ -1296,6 +1462,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_auth_userInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_inbox_item?: Prisma.SysInboxItemUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sysEmailLogs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
@@ -1339,6 +1506,7 @@ export type SysUsuarioUpdateWithoutSys_auth_userInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUpdateManyWithoutCriado_por_sys_usuarioNestedInput
   sys_inbox_item?: Prisma.SysInboxItemUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sysEmailLogs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
@@ -1367,6 +1535,7 @@ export type SysUsuarioUncheckedUpdateWithoutSys_auth_userInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedUpdateManyWithoutCriado_por_sys_usuarioNestedInput
   sys_inbox_item?: Prisma.SysInboxItemUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sysEmailLogs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
@@ -1394,6 +1563,7 @@ export type SysUsuarioCreateWithoutSysEmailLogsInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_inbox_item?: Prisma.SysInboxItemCreateNestedManyWithoutSys_usuarioInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
@@ -1422,6 +1592,7 @@ export type SysUsuarioUncheckedCreateWithoutSysEmailLogsInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_inbox_item?: Prisma.SysInboxItemUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
@@ -1465,6 +1636,7 @@ export type SysUsuarioUpdateWithoutSysEmailLogsInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUpdateManyWithoutCriado_por_sys_usuarioNestedInput
   sys_inbox_item?: Prisma.SysInboxItemUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
@@ -1493,6 +1665,7 @@ export type SysUsuarioUncheckedUpdateWithoutSysEmailLogsInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedUpdateManyWithoutCriado_por_sys_usuarioNestedInput
   sys_inbox_item?: Prisma.SysInboxItemUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
@@ -1520,6 +1693,7 @@ export type SysUsuarioCreateWithoutSysEmailVerificationCodesInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_inbox_item?: Prisma.SysInboxItemCreateNestedManyWithoutSys_usuarioInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
@@ -1548,6 +1722,7 @@ export type SysUsuarioUncheckedCreateWithoutSysEmailVerificationCodesInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_inbox_item?: Prisma.SysInboxItemUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
@@ -1591,6 +1766,7 @@ export type SysUsuarioUpdateWithoutSysEmailVerificationCodesInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUpdateManyWithoutCriado_por_sys_usuarioNestedInput
   sys_inbox_item?: Prisma.SysInboxItemUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
@@ -1619,6 +1795,7 @@ export type SysUsuarioUncheckedUpdateWithoutSysEmailVerificationCodesInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedUpdateManyWithoutCriado_por_sys_usuarioNestedInput
   sys_inbox_item?: Prisma.SysInboxItemUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
@@ -1646,6 +1823,7 @@ export type SysUsuarioCreateWithoutSys_auth_login_logInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_inbox_item?: Prisma.SysInboxItemCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
   sysEmailLogs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
@@ -1674,6 +1852,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_auth_login_logInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_inbox_item?: Prisma.SysInboxItemUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
   sysEmailLogs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
@@ -1717,6 +1896,7 @@ export type SysUsuarioUpdateWithoutSys_auth_login_logInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUpdateManyWithoutCriado_por_sys_usuarioNestedInput
   sys_inbox_item?: Prisma.SysInboxItemUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
   sysEmailLogs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
@@ -1745,6 +1925,7 @@ export type SysUsuarioUncheckedUpdateWithoutSys_auth_login_logInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedUpdateManyWithoutCriado_por_sys_usuarioNestedInput
   sys_inbox_item?: Prisma.SysInboxItemUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
   sysEmailLogs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
@@ -1772,6 +1953,7 @@ export type SysUsuarioCreateWithoutSys_inbox_itemInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
   sysEmailLogs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
@@ -1800,6 +1982,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_inbox_itemInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedCreateNestedManyWithoutSys_usuarioInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedCreateNestedManyWithoutSys_usuarioInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedCreateNestedManyWithoutCriado_por_sys_usuarioInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
   sysEmailLogs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
@@ -1843,6 +2026,7 @@ export type SysUsuarioUpdateWithoutSys_inbox_itemInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUpdateManyWithoutCriado_por_sys_usuarioNestedInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
   sysEmailLogs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
@@ -1871,6 +2055,7 @@ export type SysUsuarioUncheckedUpdateWithoutSys_inbox_itemInput = {
   sys_usuario_role?: Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_usuario_permission?: Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuarioNestedInput
   atl_atletica_membro?: Prisma.AtlAtleticaMembroUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  atl_atletica_criada?: Prisma.AtlAtleticaUncheckedUpdateManyWithoutCriado_por_sys_usuarioNestedInput
   sys_auth_login_log?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
   sysEmailLogs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
@@ -1886,6 +2071,7 @@ export type SysUsuarioCountOutputType = {
   sys_usuario_role: number
   sys_usuario_permission: number
   atl_atletica_membro: number
+  atl_atletica_criada: number
   sys_inbox_item: number
   sys_auth_login_log: number
   sysEmailLogs: number
@@ -1896,6 +2082,7 @@ export type SysUsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   sys_usuario_role?: boolean | SysUsuarioCountOutputTypeCountSys_usuario_roleArgs
   sys_usuario_permission?: boolean | SysUsuarioCountOutputTypeCountSys_usuario_permissionArgs
   atl_atletica_membro?: boolean | SysUsuarioCountOutputTypeCountAtl_atletica_membroArgs
+  atl_atletica_criada?: boolean | SysUsuarioCountOutputTypeCountAtl_atletica_criadaArgs
   sys_inbox_item?: boolean | SysUsuarioCountOutputTypeCountSys_inbox_itemArgs
   sys_auth_login_log?: boolean | SysUsuarioCountOutputTypeCountSys_auth_login_logArgs
   sysEmailLogs?: boolean | SysUsuarioCountOutputTypeCountSysEmailLogsArgs
@@ -1931,6 +2118,13 @@ export type SysUsuarioCountOutputTypeCountSys_usuario_permissionArgs<ExtArgs ext
  */
 export type SysUsuarioCountOutputTypeCountAtl_atletica_membroArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.AtlAtleticaMembroWhereInput
+}
+
+/**
+ * SysUsuarioCountOutputType without action
+ */
+export type SysUsuarioCountOutputTypeCountAtl_atletica_criadaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AtlAtleticaWhereInput
 }
 
 /**
@@ -1984,6 +2178,7 @@ export type SysUsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   sys_usuario_role?: boolean | Prisma.SysUsuario$sys_usuario_roleArgs<ExtArgs>
   sys_usuario_permission?: boolean | Prisma.SysUsuario$sys_usuario_permissionArgs<ExtArgs>
   atl_atletica_membro?: boolean | Prisma.SysUsuario$atl_atletica_membroArgs<ExtArgs>
+  atl_atletica_criada?: boolean | Prisma.SysUsuario$atl_atletica_criadaArgs<ExtArgs>
   sys_inbox_item?: boolean | Prisma.SysUsuario$sys_inbox_itemArgs<ExtArgs>
   sys_auth_login_log?: boolean | Prisma.SysUsuario$sys_auth_login_logArgs<ExtArgs>
   sys_auth_user?: boolean | Prisma.SysUsuario$sys_auth_userArgs<ExtArgs>
@@ -2020,6 +2215,7 @@ export type SysUsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   sys_usuario_role?: boolean | Prisma.SysUsuario$sys_usuario_roleArgs<ExtArgs>
   sys_usuario_permission?: boolean | Prisma.SysUsuario$sys_usuario_permissionArgs<ExtArgs>
   atl_atletica_membro?: boolean | Prisma.SysUsuario$atl_atletica_membroArgs<ExtArgs>
+  atl_atletica_criada?: boolean | Prisma.SysUsuario$atl_atletica_criadaArgs<ExtArgs>
   sys_inbox_item?: boolean | Prisma.SysUsuario$sys_inbox_itemArgs<ExtArgs>
   sys_auth_login_log?: boolean | Prisma.SysUsuario$sys_auth_login_logArgs<ExtArgs>
   sys_auth_user?: boolean | Prisma.SysUsuario$sys_auth_userArgs<ExtArgs>
@@ -2034,6 +2230,7 @@ export type $SysUsuarioPayload<ExtArgs extends runtime.Types.Extensions.Internal
     sys_usuario_role: Prisma.$SysUsuarioRolePayload<ExtArgs>[]
     sys_usuario_permission: Prisma.$SysUsuarioPermissionPayload<ExtArgs>[]
     atl_atletica_membro: Prisma.$AtlAtleticaMembroPayload<ExtArgs>[]
+    atl_atletica_criada: Prisma.$AtlAtleticaPayload<ExtArgs>[]
     sys_inbox_item: Prisma.$SysInboxItemPayload<ExtArgs>[]
     sys_auth_login_log: Prisma.$SysAuthLoginLogPayload<ExtArgs>[]
     sys_auth_user: Prisma.$UserPayload<ExtArgs> | null
@@ -2402,6 +2599,7 @@ export interface Prisma__SysUsuarioClient<T, Null = never, ExtArgs extends runti
   sys_usuario_role<T extends Prisma.SysUsuario$sys_usuario_roleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$sys_usuario_roleArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysUsuarioRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sys_usuario_permission<T extends Prisma.SysUsuario$sys_usuario_permissionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$sys_usuario_permissionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysUsuarioPermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   atl_atletica_membro<T extends Prisma.SysUsuario$atl_atletica_membroArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$atl_atletica_membroArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AtlAtleticaMembroPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  atl_atletica_criada<T extends Prisma.SysUsuario$atl_atletica_criadaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$atl_atletica_criadaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AtlAtleticaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sys_inbox_item<T extends Prisma.SysUsuario$sys_inbox_itemArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$sys_inbox_itemArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysInboxItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sys_auth_login_log<T extends Prisma.SysUsuario$sys_auth_login_logArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$sys_auth_login_logArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysAuthLoginLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sys_auth_user<T extends Prisma.SysUsuario$sys_auth_userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$sys_auth_userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -2871,6 +3069,30 @@ export type SysUsuario$atl_atletica_membroArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.AtlAtleticaMembroScalarFieldEnum | Prisma.AtlAtleticaMembroScalarFieldEnum[]
+}
+
+/**
+ * SysUsuario.atl_atletica_criada
+ */
+export type SysUsuario$atl_atletica_criadaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AtlAtletica
+   */
+  select?: Prisma.AtlAtleticaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AtlAtletica
+   */
+  omit?: Prisma.AtlAtleticaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AtlAtleticaInclude<ExtArgs> | null
+  where?: Prisma.AtlAtleticaWhereInput
+  orderBy?: Prisma.AtlAtleticaOrderByWithRelationInput | Prisma.AtlAtleticaOrderByWithRelationInput[]
+  cursor?: Prisma.AtlAtleticaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AtlAtleticaScalarFieldEnum | Prisma.AtlAtleticaScalarFieldEnum[]
 }
 
 /**

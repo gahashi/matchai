@@ -15,10 +15,6 @@ export const routeAccessRules: RouteAccessRule[] = [
         path: "/",
         access: "auth",
     },
-    {
-        path: "/atletica",
-        access: "public",
-    },
 
     /**
      * GUEST
@@ -36,10 +32,6 @@ export const routeAccessRules: RouteAccessRule[] = [
         path: "/recuperar-senha",
         access: "guest",
     },
-    {
-        path: "/cadastro",
-        access: "guest",
-    },
 
     /**
      * AUTH
@@ -50,11 +42,15 @@ export const routeAccessRules: RouteAccessRule[] = [
         access: "auth",
     },
     {
-        path: "/inbox",
+        path: "/sys/inbox",
         access: "auth",
     },
     {
-        path: "/teste-select",
+        path: "/atl/atletica",
+        access: "auth",
+    },
+    {
+        path: "/atl/atletica/criar",
         access: "auth",
     },
 
@@ -63,27 +59,27 @@ export const routeAccessRules: RouteAccessRule[] = [
      * Precisa estar logado e ter permissão.
      */
     {
-        path: "/tema",
+        path: "/atl/tema",
         access: "permission",
         permissions: ["tema.visualizar"],
     },
     {
-        path: "/tema/editar",
+        path: "/atl/tema/editar",
         access: "permission",
         permissions: ["tema.editar"],
     },
     {
-        path: "/membros",
+        path: "/atl/membro",
         access: "permission",
         permissions: ["membro.visualizar"],
     },
     {
-        path: "/membros/novo",
+        path: "/atl/membro/novo",
         access: "permission",
         permissions: ["membro.criar"],
     },
     {
-        path: "/configuracoes/atletica",
+        path: "/atl/atletica/configuracao",
         access: "permission",
         permissions: ["atletica.editar"],
     },
