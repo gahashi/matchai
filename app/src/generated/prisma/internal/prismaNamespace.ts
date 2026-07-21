@@ -427,7 +427,14 @@ export const ModelName = {
   SysArquivo: 'SysArquivo',
   SysInboxItemTipo: 'SysInboxItemTipo',
   SysInboxItemStatus: 'SysInboxItemStatus',
-  SysInboxItem: 'SysInboxItem'
+  SysInboxItem: 'SysInboxItem',
+  SysSolicitacaoTipo: 'SysSolicitacaoTipo',
+  SysSolicitacaoStatus: 'SysSolicitacaoStatus',
+  SysSolicitacao: 'SysSolicitacao',
+  SysSolicitacaoHistorico: 'SysSolicitacaoHistorico',
+  SysSolicitacaoDocumentoTipo: 'SysSolicitacaoDocumentoTipo',
+  SysSolicitacaoDocumentoStatus: 'SysSolicitacaoDocumentoStatus',
+  SysSolicitacaoDocumento: 'SysSolicitacaoDocumento'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -443,7 +450,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "sysUsuario" | "sysRoleEscopo" | "sysRole" | "sysPermission" | "sysRolePermission" | "sysUsuarioRole" | "sysUsuarioPermissionTipo" | "sysUsuarioPermission" | "eduInstituicao" | "eduCurso" | "eduInstituicaoCurso" | "atlAtleticaStatus" | "atlAtletica" | "atlAtleticaCurso" | "atlAtleticaGestaoStatus" | "atlAtleticaGestao" | "atlCargoTipo" | "atlCargo" | "atlAtleticaCargo" | "atlAtleticaMembroTipo" | "atlAtleticaMembroStatus" | "atlAtleticaMembro" | "atlAtleticaMembroCargo" | "atlAtleticaTema" | "atlAtleticaRegimento" | "sysAssinaturaPlanoPeriodicidade" | "sysAssinaturaPlano" | "atlAtleticaAssinaturaStatus" | "atlAtleticaAssinatura" | "user" | "session" | "account" | "verification" | "sysEmailLog" | "sysEmailVerificationCode" | "sysAuthLoginLog" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivoEntidadeTipo" | "sysArquivo" | "sysInboxItemTipo" | "sysInboxItemStatus" | "sysInboxItem"
+    modelProps: "sysUsuario" | "sysRoleEscopo" | "sysRole" | "sysPermission" | "sysRolePermission" | "sysUsuarioRole" | "sysUsuarioPermissionTipo" | "sysUsuarioPermission" | "eduInstituicao" | "eduCurso" | "eduInstituicaoCurso" | "atlAtleticaStatus" | "atlAtletica" | "atlAtleticaCurso" | "atlAtleticaGestaoStatus" | "atlAtleticaGestao" | "atlCargoTipo" | "atlCargo" | "atlAtleticaCargo" | "atlAtleticaMembroTipo" | "atlAtleticaMembroStatus" | "atlAtleticaMembro" | "atlAtleticaMembroCargo" | "atlAtleticaTema" | "atlAtleticaRegimento" | "sysAssinaturaPlanoPeriodicidade" | "sysAssinaturaPlano" | "atlAtleticaAssinaturaStatus" | "atlAtleticaAssinatura" | "user" | "session" | "account" | "verification" | "sysEmailLog" | "sysEmailVerificationCode" | "sysAuthLoginLog" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivoEntidadeTipo" | "sysArquivo" | "sysInboxItemTipo" | "sysInboxItemStatus" | "sysInboxItem" | "sysSolicitacaoTipo" | "sysSolicitacaoStatus" | "sysSolicitacao" | "sysSolicitacaoHistorico" | "sysSolicitacaoDocumentoTipo" | "sysSolicitacaoDocumentoStatus" | "sysSolicitacaoDocumento"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3351,6 +3358,468 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SysSolicitacaoTipo: {
+      payload: Prisma.$SysSolicitacaoTipoPayload<ExtArgs>
+      fields: Prisma.SysSolicitacaoTipoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysSolicitacaoTipoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoTipoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysSolicitacaoTipoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoTipoPayload>
+        }
+        findFirst: {
+          args: Prisma.SysSolicitacaoTipoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoTipoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysSolicitacaoTipoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoTipoPayload>
+        }
+        findMany: {
+          args: Prisma.SysSolicitacaoTipoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoTipoPayload>[]
+        }
+        create: {
+          args: Prisma.SysSolicitacaoTipoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoTipoPayload>
+        }
+        createMany: {
+          args: Prisma.SysSolicitacaoTipoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysSolicitacaoTipoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoTipoPayload>
+        }
+        update: {
+          args: Prisma.SysSolicitacaoTipoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoTipoPayload>
+        }
+        deleteMany: {
+          args: Prisma.SysSolicitacaoTipoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysSolicitacaoTipoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysSolicitacaoTipoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoTipoPayload>
+        }
+        aggregate: {
+          args: Prisma.SysSolicitacaoTipoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysSolicitacaoTipo>
+        }
+        groupBy: {
+          args: Prisma.SysSolicitacaoTipoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysSolicitacaoTipoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysSolicitacaoTipoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysSolicitacaoTipoCountAggregateOutputType> | number
+        }
+      }
+    }
+    SysSolicitacaoStatus: {
+      payload: Prisma.$SysSolicitacaoStatusPayload<ExtArgs>
+      fields: Prisma.SysSolicitacaoStatusFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysSolicitacaoStatusFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoStatusPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysSolicitacaoStatusFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoStatusPayload>
+        }
+        findFirst: {
+          args: Prisma.SysSolicitacaoStatusFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoStatusPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysSolicitacaoStatusFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoStatusPayload>
+        }
+        findMany: {
+          args: Prisma.SysSolicitacaoStatusFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoStatusPayload>[]
+        }
+        create: {
+          args: Prisma.SysSolicitacaoStatusCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoStatusPayload>
+        }
+        createMany: {
+          args: Prisma.SysSolicitacaoStatusCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysSolicitacaoStatusDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoStatusPayload>
+        }
+        update: {
+          args: Prisma.SysSolicitacaoStatusUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoStatusPayload>
+        }
+        deleteMany: {
+          args: Prisma.SysSolicitacaoStatusDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysSolicitacaoStatusUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysSolicitacaoStatusUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoStatusPayload>
+        }
+        aggregate: {
+          args: Prisma.SysSolicitacaoStatusAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysSolicitacaoStatus>
+        }
+        groupBy: {
+          args: Prisma.SysSolicitacaoStatusGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysSolicitacaoStatusGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysSolicitacaoStatusCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysSolicitacaoStatusCountAggregateOutputType> | number
+        }
+      }
+    }
+    SysSolicitacao: {
+      payload: Prisma.$SysSolicitacaoPayload<ExtArgs>
+      fields: Prisma.SysSolicitacaoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysSolicitacaoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysSolicitacaoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoPayload>
+        }
+        findFirst: {
+          args: Prisma.SysSolicitacaoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysSolicitacaoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoPayload>
+        }
+        findMany: {
+          args: Prisma.SysSolicitacaoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoPayload>[]
+        }
+        create: {
+          args: Prisma.SysSolicitacaoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoPayload>
+        }
+        createMany: {
+          args: Prisma.SysSolicitacaoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysSolicitacaoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoPayload>
+        }
+        update: {
+          args: Prisma.SysSolicitacaoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoPayload>
+        }
+        deleteMany: {
+          args: Prisma.SysSolicitacaoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysSolicitacaoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysSolicitacaoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoPayload>
+        }
+        aggregate: {
+          args: Prisma.SysSolicitacaoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysSolicitacao>
+        }
+        groupBy: {
+          args: Prisma.SysSolicitacaoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysSolicitacaoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysSolicitacaoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysSolicitacaoCountAggregateOutputType> | number
+        }
+      }
+    }
+    SysSolicitacaoHistorico: {
+      payload: Prisma.$SysSolicitacaoHistoricoPayload<ExtArgs>
+      fields: Prisma.SysSolicitacaoHistoricoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysSolicitacaoHistoricoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoHistoricoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysSolicitacaoHistoricoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoHistoricoPayload>
+        }
+        findFirst: {
+          args: Prisma.SysSolicitacaoHistoricoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoHistoricoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysSolicitacaoHistoricoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoHistoricoPayload>
+        }
+        findMany: {
+          args: Prisma.SysSolicitacaoHistoricoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoHistoricoPayload>[]
+        }
+        create: {
+          args: Prisma.SysSolicitacaoHistoricoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoHistoricoPayload>
+        }
+        createMany: {
+          args: Prisma.SysSolicitacaoHistoricoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysSolicitacaoHistoricoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoHistoricoPayload>
+        }
+        update: {
+          args: Prisma.SysSolicitacaoHistoricoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoHistoricoPayload>
+        }
+        deleteMany: {
+          args: Prisma.SysSolicitacaoHistoricoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysSolicitacaoHistoricoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysSolicitacaoHistoricoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoHistoricoPayload>
+        }
+        aggregate: {
+          args: Prisma.SysSolicitacaoHistoricoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysSolicitacaoHistorico>
+        }
+        groupBy: {
+          args: Prisma.SysSolicitacaoHistoricoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysSolicitacaoHistoricoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysSolicitacaoHistoricoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysSolicitacaoHistoricoCountAggregateOutputType> | number
+        }
+      }
+    }
+    SysSolicitacaoDocumentoTipo: {
+      payload: Prisma.$SysSolicitacaoDocumentoTipoPayload<ExtArgs>
+      fields: Prisma.SysSolicitacaoDocumentoTipoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysSolicitacaoDocumentoTipoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoTipoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysSolicitacaoDocumentoTipoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoTipoPayload>
+        }
+        findFirst: {
+          args: Prisma.SysSolicitacaoDocumentoTipoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoTipoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysSolicitacaoDocumentoTipoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoTipoPayload>
+        }
+        findMany: {
+          args: Prisma.SysSolicitacaoDocumentoTipoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoTipoPayload>[]
+        }
+        create: {
+          args: Prisma.SysSolicitacaoDocumentoTipoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoTipoPayload>
+        }
+        createMany: {
+          args: Prisma.SysSolicitacaoDocumentoTipoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysSolicitacaoDocumentoTipoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoTipoPayload>
+        }
+        update: {
+          args: Prisma.SysSolicitacaoDocumentoTipoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoTipoPayload>
+        }
+        deleteMany: {
+          args: Prisma.SysSolicitacaoDocumentoTipoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysSolicitacaoDocumentoTipoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysSolicitacaoDocumentoTipoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoTipoPayload>
+        }
+        aggregate: {
+          args: Prisma.SysSolicitacaoDocumentoTipoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysSolicitacaoDocumentoTipo>
+        }
+        groupBy: {
+          args: Prisma.SysSolicitacaoDocumentoTipoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysSolicitacaoDocumentoTipoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysSolicitacaoDocumentoTipoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysSolicitacaoDocumentoTipoCountAggregateOutputType> | number
+        }
+      }
+    }
+    SysSolicitacaoDocumentoStatus: {
+      payload: Prisma.$SysSolicitacaoDocumentoStatusPayload<ExtArgs>
+      fields: Prisma.SysSolicitacaoDocumentoStatusFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysSolicitacaoDocumentoStatusFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoStatusPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysSolicitacaoDocumentoStatusFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoStatusPayload>
+        }
+        findFirst: {
+          args: Prisma.SysSolicitacaoDocumentoStatusFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoStatusPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysSolicitacaoDocumentoStatusFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoStatusPayload>
+        }
+        findMany: {
+          args: Prisma.SysSolicitacaoDocumentoStatusFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoStatusPayload>[]
+        }
+        create: {
+          args: Prisma.SysSolicitacaoDocumentoStatusCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoStatusPayload>
+        }
+        createMany: {
+          args: Prisma.SysSolicitacaoDocumentoStatusCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysSolicitacaoDocumentoStatusDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoStatusPayload>
+        }
+        update: {
+          args: Prisma.SysSolicitacaoDocumentoStatusUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoStatusPayload>
+        }
+        deleteMany: {
+          args: Prisma.SysSolicitacaoDocumentoStatusDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysSolicitacaoDocumentoStatusUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysSolicitacaoDocumentoStatusUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoStatusPayload>
+        }
+        aggregate: {
+          args: Prisma.SysSolicitacaoDocumentoStatusAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysSolicitacaoDocumentoStatus>
+        }
+        groupBy: {
+          args: Prisma.SysSolicitacaoDocumentoStatusGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysSolicitacaoDocumentoStatusGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysSolicitacaoDocumentoStatusCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysSolicitacaoDocumentoStatusCountAggregateOutputType> | number
+        }
+      }
+    }
+    SysSolicitacaoDocumento: {
+      payload: Prisma.$SysSolicitacaoDocumentoPayload<ExtArgs>
+      fields: Prisma.SysSolicitacaoDocumentoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysSolicitacaoDocumentoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysSolicitacaoDocumentoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoPayload>
+        }
+        findFirst: {
+          args: Prisma.SysSolicitacaoDocumentoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysSolicitacaoDocumentoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoPayload>
+        }
+        findMany: {
+          args: Prisma.SysSolicitacaoDocumentoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoPayload>[]
+        }
+        create: {
+          args: Prisma.SysSolicitacaoDocumentoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoPayload>
+        }
+        createMany: {
+          args: Prisma.SysSolicitacaoDocumentoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysSolicitacaoDocumentoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoPayload>
+        }
+        update: {
+          args: Prisma.SysSolicitacaoDocumentoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoPayload>
+        }
+        deleteMany: {
+          args: Prisma.SysSolicitacaoDocumentoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysSolicitacaoDocumentoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysSolicitacaoDocumentoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysSolicitacaoDocumentoPayload>
+        }
+        aggregate: {
+          args: Prisma.SysSolicitacaoDocumentoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysSolicitacaoDocumento>
+        }
+        groupBy: {
+          args: Prisma.SysSolicitacaoDocumentoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysSolicitacaoDocumentoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysSolicitacaoDocumentoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysSolicitacaoDocumentoCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4078,6 +4547,120 @@ export const SysInboxItemScalarFieldEnum = {
 export type SysInboxItemScalarFieldEnum = (typeof SysInboxItemScalarFieldEnum)[keyof typeof SysInboxItemScalarFieldEnum]
 
 
+export const SysSolicitacaoTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysSolicitacaoTipoScalarFieldEnum = (typeof SysSolicitacaoTipoScalarFieldEnum)[keyof typeof SysSolicitacaoTipoScalarFieldEnum]
+
+
+export const SysSolicitacaoStatusScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysSolicitacaoStatusScalarFieldEnum = (typeof SysSolicitacaoStatusScalarFieldEnum)[keyof typeof SysSolicitacaoStatusScalarFieldEnum]
+
+
+export const SysSolicitacaoScalarFieldEnum = {
+  id: 'id',
+  sys_solicitacao_tipo_id: 'sys_solicitacao_tipo_id',
+  sys_solicitacao_status_id: 'sys_solicitacao_status_id',
+  solicitado_por_usuario_id: 'solicitado_por_usuario_id',
+  responsavel_sys_usuario_id: 'responsavel_sys_usuario_id',
+  titulo: 'titulo',
+  descricao: 'descricao',
+  entidade_tipo: 'entidade_tipo',
+  entidade_id: 'entidade_id',
+  payload_text: 'payload_text',
+  metadata_text: 'metadata_text',
+  enviado_at: 'enviado_at',
+  finalizado_at: 'finalizado_at',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type SysSolicitacaoScalarFieldEnum = (typeof SysSolicitacaoScalarFieldEnum)[keyof typeof SysSolicitacaoScalarFieldEnum]
+
+
+export const SysSolicitacaoHistoricoScalarFieldEnum = {
+  id: 'id',
+  sys_solicitacao_id: 'sys_solicitacao_id',
+  sys_usuario_id: 'sys_usuario_id',
+  sys_solicitacao_status_anterior_id: 'sys_solicitacao_status_anterior_id',
+  sys_solicitacao_status_novo_id: 'sys_solicitacao_status_novo_id',
+  acao: 'acao',
+  descricao: 'descricao',
+  metadata_text: 'metadata_text',
+  created_at: 'created_at'
+} as const
+
+export type SysSolicitacaoHistoricoScalarFieldEnum = (typeof SysSolicitacaoHistoricoScalarFieldEnum)[keyof typeof SysSolicitacaoHistoricoScalarFieldEnum]
+
+
+export const SysSolicitacaoDocumentoTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysSolicitacaoDocumentoTipoScalarFieldEnum = (typeof SysSolicitacaoDocumentoTipoScalarFieldEnum)[keyof typeof SysSolicitacaoDocumentoTipoScalarFieldEnum]
+
+
+export const SysSolicitacaoDocumentoStatusScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysSolicitacaoDocumentoStatusScalarFieldEnum = (typeof SysSolicitacaoDocumentoStatusScalarFieldEnum)[keyof typeof SysSolicitacaoDocumentoStatusScalarFieldEnum]
+
+
+export const SysSolicitacaoDocumentoScalarFieldEnum = {
+  id: 'id',
+  sys_solicitacao_id: 'sys_solicitacao_id',
+  sys_solicitacao_documento_tipo_id: 'sys_solicitacao_documento_tipo_id',
+  sys_solicitacao_documento_status_id: 'sys_solicitacao_documento_status_id',
+  sys_arquivo_id: 'sys_arquivo_id',
+  titulo: 'titulo',
+  descricao: 'descricao',
+  observacao: 'observacao',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type SysSolicitacaoDocumentoScalarFieldEnum = (typeof SysSolicitacaoDocumentoScalarFieldEnum)[keyof typeof SysSolicitacaoDocumentoScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -4491,6 +5074,77 @@ export const SysInboxItemOrderByRelevanceFieldEnum = {
 export type SysInboxItemOrderByRelevanceFieldEnum = (typeof SysInboxItemOrderByRelevanceFieldEnum)[keyof typeof SysInboxItemOrderByRelevanceFieldEnum]
 
 
+export const SysSolicitacaoTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon'
+} as const
+
+export type SysSolicitacaoTipoOrderByRelevanceFieldEnum = (typeof SysSolicitacaoTipoOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoTipoOrderByRelevanceFieldEnum]
+
+
+export const SysSolicitacaoStatusOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon'
+} as const
+
+export type SysSolicitacaoStatusOrderByRelevanceFieldEnum = (typeof SysSolicitacaoStatusOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoStatusOrderByRelevanceFieldEnum]
+
+
+export const SysSolicitacaoOrderByRelevanceFieldEnum = {
+  titulo: 'titulo',
+  descricao: 'descricao',
+  entidade_tipo: 'entidade_tipo',
+  payload_text: 'payload_text',
+  metadata_text: 'metadata_text'
+} as const
+
+export type SysSolicitacaoOrderByRelevanceFieldEnum = (typeof SysSolicitacaoOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoOrderByRelevanceFieldEnum]
+
+
+export const SysSolicitacaoHistoricoOrderByRelevanceFieldEnum = {
+  acao: 'acao',
+  descricao: 'descricao',
+  metadata_text: 'metadata_text'
+} as const
+
+export type SysSolicitacaoHistoricoOrderByRelevanceFieldEnum = (typeof SysSolicitacaoHistoricoOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoHistoricoOrderByRelevanceFieldEnum]
+
+
+export const SysSolicitacaoDocumentoTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type SysSolicitacaoDocumentoTipoOrderByRelevanceFieldEnum = (typeof SysSolicitacaoDocumentoTipoOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoDocumentoTipoOrderByRelevanceFieldEnum]
+
+
+export const SysSolicitacaoDocumentoStatusOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon'
+} as const
+
+export type SysSolicitacaoDocumentoStatusOrderByRelevanceFieldEnum = (typeof SysSolicitacaoDocumentoStatusOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoDocumentoStatusOrderByRelevanceFieldEnum]
+
+
+export const SysSolicitacaoDocumentoOrderByRelevanceFieldEnum = {
+  titulo: 'titulo',
+  descricao: 'descricao',
+  observacao: 'observacao'
+} as const
+
+export type SysSolicitacaoDocumentoOrderByRelevanceFieldEnum = (typeof SysSolicitacaoDocumentoOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoDocumentoOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -4692,6 +5346,13 @@ export type GlobalOmitConfig = {
   sysInboxItemTipo?: Prisma.SysInboxItemTipoOmit
   sysInboxItemStatus?: Prisma.SysInboxItemStatusOmit
   sysInboxItem?: Prisma.SysInboxItemOmit
+  sysSolicitacaoTipo?: Prisma.SysSolicitacaoTipoOmit
+  sysSolicitacaoStatus?: Prisma.SysSolicitacaoStatusOmit
+  sysSolicitacao?: Prisma.SysSolicitacaoOmit
+  sysSolicitacaoHistorico?: Prisma.SysSolicitacaoHistoricoOmit
+  sysSolicitacaoDocumentoTipo?: Prisma.SysSolicitacaoDocumentoTipoOmit
+  sysSolicitacaoDocumentoStatus?: Prisma.SysSolicitacaoDocumentoStatusOmit
+  sysSolicitacaoDocumento?: Prisma.SysSolicitacaoDocumentoOmit
 }
 
 /* Types for Logging */

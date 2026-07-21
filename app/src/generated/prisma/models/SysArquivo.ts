@@ -352,6 +352,7 @@ export type SysArquivoWhereInput = {
   visibilidade?: Prisma.XOR<Prisma.SysArquivoVisibilidadeScalarRelationFilter, Prisma.SysArquivoVisibilidadeWhereInput>
   tipo?: Prisma.XOR<Prisma.SysArquivoTipoNullableScalarRelationFilter, Prisma.SysArquivoTipoWhereInput> | null
   entidadeTipo?: Prisma.XOR<Prisma.SysArquivoEntidadeTipoNullableScalarRelationFilter, Prisma.SysArquivoEntidadeTipoWhereInput> | null
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoListRelationFilter
 }
 
 export type SysArquivoOrderByWithRelationInput = {
@@ -377,6 +378,7 @@ export type SysArquivoOrderByWithRelationInput = {
   visibilidade?: Prisma.SysArquivoVisibilidadeOrderByWithRelationInput
   tipo?: Prisma.SysArquivoTipoOrderByWithRelationInput
   entidadeTipo?: Prisma.SysArquivoEntidadeTipoOrderByWithRelationInput
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoOrderByRelationAggregateInput
   _relevance?: Prisma.SysArquivoOrderByRelevanceInput
 }
 
@@ -406,6 +408,7 @@ export type SysArquivoWhereUniqueInput = Prisma.AtLeast<{
   visibilidade?: Prisma.XOR<Prisma.SysArquivoVisibilidadeScalarRelationFilter, Prisma.SysArquivoVisibilidadeWhereInput>
   tipo?: Prisma.XOR<Prisma.SysArquivoTipoNullableScalarRelationFilter, Prisma.SysArquivoTipoWhereInput> | null
   entidadeTipo?: Prisma.XOR<Prisma.SysArquivoEntidadeTipoNullableScalarRelationFilter, Prisma.SysArquivoEntidadeTipoWhereInput> | null
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoListRelationFilter
 }, "id">
 
 export type SysArquivoOrderByWithAggregationInput = {
@@ -476,6 +479,7 @@ export type SysArquivoCreateInput = {
   visibilidade: Prisma.SysArquivoVisibilidadeCreateNestedOneWithoutArquivosInput
   tipo?: Prisma.SysArquivoTipoCreateNestedOneWithoutArquivosInput
   entidadeTipo?: Prisma.SysArquivoEntidadeTipoCreateNestedOneWithoutArquivosInput
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoCreateNestedManyWithoutSys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateInput = {
@@ -497,6 +501,7 @@ export type SysArquivoUncheckedCreateInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   storage_deleted_at?: Date | string | null
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoUncheckedCreateNestedManyWithoutSys_arquivoInput
 }
 
 export type SysArquivoUpdateInput = {
@@ -517,6 +522,7 @@ export type SysArquivoUpdateInput = {
   visibilidade?: Prisma.SysArquivoVisibilidadeUpdateOneRequiredWithoutArquivosNestedInput
   tipo?: Prisma.SysArquivoTipoUpdateOneWithoutArquivosNestedInput
   entidadeTipo?: Prisma.SysArquivoEntidadeTipoUpdateOneWithoutArquivosNestedInput
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoUpdateManyWithoutSys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateInput = {
@@ -538,6 +544,7 @@ export type SysArquivoUncheckedUpdateInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoUncheckedUpdateManyWithoutSys_arquivoNestedInput
 }
 
 export type SysArquivoCreateManyInput = {
@@ -697,6 +704,11 @@ export type SysArquivoSumOrderByAggregateInput = {
   entidade_id?: Prisma.SortOrder
   size_bytes?: Prisma.SortOrder
   created_by_usuario_id?: Prisma.SortOrder
+}
+
+export type SysArquivoNullableScalarRelationFilter = {
+  is?: Prisma.SysArquivoWhereInput | null
+  isNot?: Prisma.SysArquivoWhereInput | null
 }
 
 export type SysArquivoCreateNestedManyWithoutDiscoInput = {
@@ -867,6 +879,22 @@ export type SysArquivoUncheckedUpdateManyWithoutEntidadeTipoNestedInput = {
   deleteMany?: Prisma.SysArquivoScalarWhereInput | Prisma.SysArquivoScalarWhereInput[]
 }
 
+export type SysArquivoCreateNestedOneWithoutSysSolicitacaoDocumentosInput = {
+  create?: Prisma.XOR<Prisma.SysArquivoCreateWithoutSysSolicitacaoDocumentosInput, Prisma.SysArquivoUncheckedCreateWithoutSysSolicitacaoDocumentosInput>
+  connectOrCreate?: Prisma.SysArquivoCreateOrConnectWithoutSysSolicitacaoDocumentosInput
+  connect?: Prisma.SysArquivoWhereUniqueInput
+}
+
+export type SysArquivoUpdateOneWithoutSysSolicitacaoDocumentosNestedInput = {
+  create?: Prisma.XOR<Prisma.SysArquivoCreateWithoutSysSolicitacaoDocumentosInput, Prisma.SysArquivoUncheckedCreateWithoutSysSolicitacaoDocumentosInput>
+  connectOrCreate?: Prisma.SysArquivoCreateOrConnectWithoutSysSolicitacaoDocumentosInput
+  upsert?: Prisma.SysArquivoUpsertWithoutSysSolicitacaoDocumentosInput
+  disconnect?: Prisma.SysArquivoWhereInput | boolean
+  delete?: Prisma.SysArquivoWhereInput | boolean
+  connect?: Prisma.SysArquivoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SysArquivoUpdateToOneWithWhereWithoutSysSolicitacaoDocumentosInput, Prisma.SysArquivoUpdateWithoutSysSolicitacaoDocumentosInput>, Prisma.SysArquivoUncheckedUpdateWithoutSysSolicitacaoDocumentosInput>
+}
+
 export type SysArquivoCreateWithoutDiscoInput = {
   entidade_id?: number | null
   bucket?: string | null
@@ -884,6 +912,7 @@ export type SysArquivoCreateWithoutDiscoInput = {
   visibilidade: Prisma.SysArquivoVisibilidadeCreateNestedOneWithoutArquivosInput
   tipo?: Prisma.SysArquivoTipoCreateNestedOneWithoutArquivosInput
   entidadeTipo?: Prisma.SysArquivoEntidadeTipoCreateNestedOneWithoutArquivosInput
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoCreateNestedManyWithoutSys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutDiscoInput = {
@@ -904,6 +933,7 @@ export type SysArquivoUncheckedCreateWithoutDiscoInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   storage_deleted_at?: Date | string | null
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoUncheckedCreateNestedManyWithoutSys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutDiscoInput = {
@@ -973,6 +1003,7 @@ export type SysArquivoCreateWithoutVisibilidadeInput = {
   disco: Prisma.SysArquivoDiscoCreateNestedOneWithoutArquivosInput
   tipo?: Prisma.SysArquivoTipoCreateNestedOneWithoutArquivosInput
   entidadeTipo?: Prisma.SysArquivoEntidadeTipoCreateNestedOneWithoutArquivosInput
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoCreateNestedManyWithoutSys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutVisibilidadeInput = {
@@ -993,6 +1024,7 @@ export type SysArquivoUncheckedCreateWithoutVisibilidadeInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   storage_deleted_at?: Date | string | null
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoUncheckedCreateNestedManyWithoutSys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutVisibilidadeInput = {
@@ -1038,6 +1070,7 @@ export type SysArquivoCreateWithoutTipoInput = {
   disco: Prisma.SysArquivoDiscoCreateNestedOneWithoutArquivosInput
   visibilidade: Prisma.SysArquivoVisibilidadeCreateNestedOneWithoutArquivosInput
   entidadeTipo?: Prisma.SysArquivoEntidadeTipoCreateNestedOneWithoutArquivosInput
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoCreateNestedManyWithoutSys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutTipoInput = {
@@ -1058,6 +1091,7 @@ export type SysArquivoUncheckedCreateWithoutTipoInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   storage_deleted_at?: Date | string | null
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoUncheckedCreateNestedManyWithoutSys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutTipoInput = {
@@ -1103,6 +1137,7 @@ export type SysArquivoCreateWithoutEntidadeTipoInput = {
   disco: Prisma.SysArquivoDiscoCreateNestedOneWithoutArquivosInput
   visibilidade: Prisma.SysArquivoVisibilidadeCreateNestedOneWithoutArquivosInput
   tipo?: Prisma.SysArquivoTipoCreateNestedOneWithoutArquivosInput
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoCreateNestedManyWithoutSys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutEntidadeTipoInput = {
@@ -1123,6 +1158,7 @@ export type SysArquivoUncheckedCreateWithoutEntidadeTipoInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   storage_deleted_at?: Date | string | null
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoUncheckedCreateNestedManyWithoutSys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutEntidadeTipoInput = {
@@ -1149,6 +1185,104 @@ export type SysArquivoUpdateWithWhereUniqueWithoutEntidadeTipoInput = {
 export type SysArquivoUpdateManyWithWhereWithoutEntidadeTipoInput = {
   where: Prisma.SysArquivoScalarWhereInput
   data: Prisma.XOR<Prisma.SysArquivoUpdateManyMutationInput, Prisma.SysArquivoUncheckedUpdateManyWithoutEntidadeTipoInput>
+}
+
+export type SysArquivoCreateWithoutSysSolicitacaoDocumentosInput = {
+  entidade_id?: number | null
+  bucket?: string | null
+  file_key: string
+  public_url?: string | null
+  original_name: string
+  mime_type: string
+  size_bytes: number
+  content_hash?: string | null
+  created_by_usuario_id?: number | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
+  disco: Prisma.SysArquivoDiscoCreateNestedOneWithoutArquivosInput
+  visibilidade: Prisma.SysArquivoVisibilidadeCreateNestedOneWithoutArquivosInput
+  tipo?: Prisma.SysArquivoTipoCreateNestedOneWithoutArquivosInput
+  entidadeTipo?: Prisma.SysArquivoEntidadeTipoCreateNestedOneWithoutArquivosInput
+}
+
+export type SysArquivoUncheckedCreateWithoutSysSolicitacaoDocumentosInput = {
+  id?: number
+  sys_arquivo_disco_id: number
+  sys_arquivo_visibilidade_id: number
+  sys_arquivo_tipo_id?: number | null
+  sys_arquivo_entidade_tipo_id?: number | null
+  entidade_id?: number | null
+  bucket?: string | null
+  file_key: string
+  public_url?: string | null
+  original_name: string
+  mime_type: string
+  size_bytes: number
+  content_hash?: string | null
+  created_by_usuario_id?: number | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
+}
+
+export type SysArquivoCreateOrConnectWithoutSysSolicitacaoDocumentosInput = {
+  where: Prisma.SysArquivoWhereUniqueInput
+  create: Prisma.XOR<Prisma.SysArquivoCreateWithoutSysSolicitacaoDocumentosInput, Prisma.SysArquivoUncheckedCreateWithoutSysSolicitacaoDocumentosInput>
+}
+
+export type SysArquivoUpsertWithoutSysSolicitacaoDocumentosInput = {
+  update: Prisma.XOR<Prisma.SysArquivoUpdateWithoutSysSolicitacaoDocumentosInput, Prisma.SysArquivoUncheckedUpdateWithoutSysSolicitacaoDocumentosInput>
+  create: Prisma.XOR<Prisma.SysArquivoCreateWithoutSysSolicitacaoDocumentosInput, Prisma.SysArquivoUncheckedCreateWithoutSysSolicitacaoDocumentosInput>
+  where?: Prisma.SysArquivoWhereInput
+}
+
+export type SysArquivoUpdateToOneWithWhereWithoutSysSolicitacaoDocumentosInput = {
+  where?: Prisma.SysArquivoWhereInput
+  data: Prisma.XOR<Prisma.SysArquivoUpdateWithoutSysSolicitacaoDocumentosInput, Prisma.SysArquivoUncheckedUpdateWithoutSysSolicitacaoDocumentosInput>
+}
+
+export type SysArquivoUpdateWithoutSysSolicitacaoDocumentosInput = {
+  entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_key?: Prisma.StringFieldUpdateOperationsInput | string
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  original_name?: Prisma.StringFieldUpdateOperationsInput | string
+  mime_type?: Prisma.StringFieldUpdateOperationsInput | string
+  size_bytes?: Prisma.IntFieldUpdateOperationsInput | number
+  content_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disco?: Prisma.SysArquivoDiscoUpdateOneRequiredWithoutArquivosNestedInput
+  visibilidade?: Prisma.SysArquivoVisibilidadeUpdateOneRequiredWithoutArquivosNestedInput
+  tipo?: Prisma.SysArquivoTipoUpdateOneWithoutArquivosNestedInput
+  entidadeTipo?: Prisma.SysArquivoEntidadeTipoUpdateOneWithoutArquivosNestedInput
+}
+
+export type SysArquivoUncheckedUpdateWithoutSysSolicitacaoDocumentosInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_arquivo_disco_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_arquivo_visibilidade_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_arquivo_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sys_arquivo_entidade_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_key?: Prisma.StringFieldUpdateOperationsInput | string
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  original_name?: Prisma.StringFieldUpdateOperationsInput | string
+  mime_type?: Prisma.StringFieldUpdateOperationsInput | string
+  size_bytes?: Prisma.IntFieldUpdateOperationsInput | number
+  content_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SysArquivoCreateManyDiscoInput = {
@@ -1188,6 +1322,7 @@ export type SysArquivoUpdateWithoutDiscoInput = {
   visibilidade?: Prisma.SysArquivoVisibilidadeUpdateOneRequiredWithoutArquivosNestedInput
   tipo?: Prisma.SysArquivoTipoUpdateOneWithoutArquivosNestedInput
   entidadeTipo?: Prisma.SysArquivoEntidadeTipoUpdateOneWithoutArquivosNestedInput
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoUpdateManyWithoutSys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutDiscoInput = {
@@ -1208,6 +1343,7 @@ export type SysArquivoUncheckedUpdateWithoutDiscoInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoUncheckedUpdateManyWithoutSys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateManyWithoutDiscoInput = {
@@ -1267,6 +1403,7 @@ export type SysArquivoUpdateWithoutVisibilidadeInput = {
   disco?: Prisma.SysArquivoDiscoUpdateOneRequiredWithoutArquivosNestedInput
   tipo?: Prisma.SysArquivoTipoUpdateOneWithoutArquivosNestedInput
   entidadeTipo?: Prisma.SysArquivoEntidadeTipoUpdateOneWithoutArquivosNestedInput
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoUpdateManyWithoutSys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutVisibilidadeInput = {
@@ -1287,6 +1424,7 @@ export type SysArquivoUncheckedUpdateWithoutVisibilidadeInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoUncheckedUpdateManyWithoutSys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateManyWithoutVisibilidadeInput = {
@@ -1346,6 +1484,7 @@ export type SysArquivoUpdateWithoutTipoInput = {
   disco?: Prisma.SysArquivoDiscoUpdateOneRequiredWithoutArquivosNestedInput
   visibilidade?: Prisma.SysArquivoVisibilidadeUpdateOneRequiredWithoutArquivosNestedInput
   entidadeTipo?: Prisma.SysArquivoEntidadeTipoUpdateOneWithoutArquivosNestedInput
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoUpdateManyWithoutSys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutTipoInput = {
@@ -1366,6 +1505,7 @@ export type SysArquivoUncheckedUpdateWithoutTipoInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoUncheckedUpdateManyWithoutSys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateManyWithoutTipoInput = {
@@ -1425,6 +1565,7 @@ export type SysArquivoUpdateWithoutEntidadeTipoInput = {
   disco?: Prisma.SysArquivoDiscoUpdateOneRequiredWithoutArquivosNestedInput
   visibilidade?: Prisma.SysArquivoVisibilidadeUpdateOneRequiredWithoutArquivosNestedInput
   tipo?: Prisma.SysArquivoTipoUpdateOneWithoutArquivosNestedInput
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoUpdateManyWithoutSys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutEntidadeTipoInput = {
@@ -1445,6 +1586,7 @@ export type SysArquivoUncheckedUpdateWithoutEntidadeTipoInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sysSolicitacaoDocumentos?: Prisma.SysSolicitacaoDocumentoUncheckedUpdateManyWithoutSys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateManyWithoutEntidadeTipoInput = {
@@ -1467,6 +1609,35 @@ export type SysArquivoUncheckedUpdateManyWithoutEntidadeTipoInput = {
   storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
+
+/**
+ * Count Type SysArquivoCountOutputType
+ */
+
+export type SysArquivoCountOutputType = {
+  sysSolicitacaoDocumentos: number
+}
+
+export type SysArquivoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  sysSolicitacaoDocumentos?: boolean | SysArquivoCountOutputTypeCountSysSolicitacaoDocumentosArgs
+}
+
+/**
+ * SysArquivoCountOutputType without action
+ */
+export type SysArquivoCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SysArquivoCountOutputType
+   */
+  select?: Prisma.SysArquivoCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * SysArquivoCountOutputType without action
+ */
+export type SysArquivoCountOutputTypeCountSysSolicitacaoDocumentosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SysSolicitacaoDocumentoWhereInput
+}
 
 
 export type SysArquivoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1492,6 +1663,8 @@ export type SysArquivoSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   visibilidade?: boolean | Prisma.SysArquivoVisibilidadeDefaultArgs<ExtArgs>
   tipo?: boolean | Prisma.SysArquivo$tipoArgs<ExtArgs>
   entidadeTipo?: boolean | Prisma.SysArquivo$entidadeTipoArgs<ExtArgs>
+  sysSolicitacaoDocumentos?: boolean | Prisma.SysArquivo$sysSolicitacaoDocumentosArgs<ExtArgs>
+  _count?: boolean | Prisma.SysArquivoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sysArquivo"]>
 
 
@@ -1523,6 +1696,8 @@ export type SysArquivoInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   visibilidade?: boolean | Prisma.SysArquivoVisibilidadeDefaultArgs<ExtArgs>
   tipo?: boolean | Prisma.SysArquivo$tipoArgs<ExtArgs>
   entidadeTipo?: boolean | Prisma.SysArquivo$entidadeTipoArgs<ExtArgs>
+  sysSolicitacaoDocumentos?: boolean | Prisma.SysArquivo$sysSolicitacaoDocumentosArgs<ExtArgs>
+  _count?: boolean | Prisma.SysArquivoCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $SysArquivoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1532,6 +1707,7 @@ export type $SysArquivoPayload<ExtArgs extends runtime.Types.Extensions.Internal
     visibilidade: Prisma.$SysArquivoVisibilidadePayload<ExtArgs>
     tipo: Prisma.$SysArquivoTipoPayload<ExtArgs> | null
     entidadeTipo: Prisma.$SysArquivoEntidadeTipoPayload<ExtArgs> | null
+    sysSolicitacaoDocumentos: Prisma.$SysSolicitacaoDocumentoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1896,6 +2072,7 @@ export interface Prisma__SysArquivoClient<T, Null = never, ExtArgs extends runti
   visibilidade<T extends Prisma.SysArquivoVisibilidadeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivoVisibilidadeDefaultArgs<ExtArgs>>): Prisma.Prisma__SysArquivoVisibilidadeClient<runtime.Types.Result.GetResult<Prisma.$SysArquivoVisibilidadePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tipo<T extends Prisma.SysArquivo$tipoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivo$tipoArgs<ExtArgs>>): Prisma.Prisma__SysArquivoTipoClient<runtime.Types.Result.GetResult<Prisma.$SysArquivoTipoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   entidadeTipo<T extends Prisma.SysArquivo$entidadeTipoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivo$entidadeTipoArgs<ExtArgs>>): Prisma.Prisma__SysArquivoEntidadeTipoClient<runtime.Types.Result.GetResult<Prisma.$SysArquivoEntidadeTipoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  sysSolicitacaoDocumentos<T extends Prisma.SysArquivo$sysSolicitacaoDocumentosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivo$sysSolicitacaoDocumentosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysSolicitacaoDocumentoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2326,6 +2503,30 @@ export type SysArquivo$entidadeTipoArgs<ExtArgs extends runtime.Types.Extensions
    */
   include?: Prisma.SysArquivoEntidadeTipoInclude<ExtArgs> | null
   where?: Prisma.SysArquivoEntidadeTipoWhereInput
+}
+
+/**
+ * SysArquivo.sysSolicitacaoDocumentos
+ */
+export type SysArquivo$sysSolicitacaoDocumentosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SysSolicitacaoDocumento
+   */
+  select?: Prisma.SysSolicitacaoDocumentoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SysSolicitacaoDocumento
+   */
+  omit?: Prisma.SysSolicitacaoDocumentoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SysSolicitacaoDocumentoInclude<ExtArgs> | null
+  where?: Prisma.SysSolicitacaoDocumentoWhereInput
+  orderBy?: Prisma.SysSolicitacaoDocumentoOrderByWithRelationInput | Prisma.SysSolicitacaoDocumentoOrderByWithRelationInput[]
+  cursor?: Prisma.SysSolicitacaoDocumentoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SysSolicitacaoDocumentoScalarFieldEnum | Prisma.SysSolicitacaoDocumentoScalarFieldEnum[]
 }
 
 /**

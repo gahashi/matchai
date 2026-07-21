@@ -378,11 +378,295 @@ async function main() {
         icon: "bi-x-circle",
         ativo: 1,
     });
+    /**
+     * SYS - Tipos de solicitação
+     */
+    await upsertByCodigo(prisma.sysSolicitacaoTipo, "criar_atletica", {
+        nome: "Criar atlética",
+        descricao: "Solicitação para criação e validação inicial de uma atlética.",
+        color: "primary",
+        icon: "shield-plus",
+        ativo: 1,
+    });
 
+    await upsertByCodigo(prisma.sysSolicitacaoTipo, "agendar_assembleia", {
+        nome: "Agendar assembleia",
+        descricao: "Solicitação para aprovação ou registro de assembleia.",
+        color: "info",
+        icon: "calendar",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoTipo, "validar_posse", {
+        nome: "Validar posse",
+        descricao: "Solicitação para validação de posse de gestão ou diretoria.",
+        color: "success",
+        icon: "badge-check",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoTipo, "alterar_diretoria", {
+        nome: "Alterar diretoria",
+        descricao: "Solicitação para alteração de membros ou cargos da diretoria.",
+        color: "warning",
+        icon: "users",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoTipo, "alterar_regimento", {
+        nome: "Alterar regimento",
+        descricao: "Solicitação para alteração de regimento, estatuto ou documento equivalente.",
+        color: "warning",
+        icon: "file-text",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoTipo, "solicitar_acesso", {
+        nome: "Solicitar acesso",
+        descricao: "Solicitação para liberar acesso, vínculo ou permissão no sistema.",
+        color: "secondary",
+        icon: "key-round",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoTipo, "solicitar_reuniao", {
+        nome: "Solicitar reunião",
+        descricao: "Solicitação para agendamento ou registro de reunião institucional.",
+        color: "info",
+        icon: "messages-square",
+        ativo: 1,
+    });
+
+    /**
+     * SYS - Status de solicitação
+     */
+    await upsertByCodigo(prisma.sysSolicitacaoStatus, "rascunho", {
+        nome: "Rascunho",
+        descricao: "Solicitação criada, mas ainda não enviada para análise.",
+        color: "secondary",
+        icon: "file-edit",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoStatus, "enviada", {
+        nome: "Enviada",
+        descricao: "Solicitação enviada e aguardando análise.",
+        color: "primary",
+        icon: "send",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoStatus, "em_analise", {
+        nome: "Em análise",
+        descricao: "Solicitação em análise por um responsável.",
+        color: "warning",
+        icon: "search",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoStatus, "ajuste_solicitado", {
+        nome: "Ajuste solicitado",
+        descricao: "Solicitação precisa de correção ou complemento de informação.",
+        color: "warning",
+        icon: "alert-circle",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoStatus, "aprovada", {
+        nome: "Aprovada",
+        descricao: "Solicitação aprovada e pronta para aplicação da ação.",
+        color: "success",
+        icon: "check-circle",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoStatus, "recusada", {
+        nome: "Recusada",
+        descricao: "Solicitação recusada.",
+        color: "danger",
+        icon: "x-circle",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoStatus, "cancelada", {
+        nome: "Cancelada",
+        descricao: "Solicitação cancelada pelo usuário ou pelo sistema.",
+        color: "secondary",
+        icon: "ban",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoStatus, "concluida", {
+        nome: "Concluída",
+        descricao: "Solicitação finalizada com a ação aplicada.",
+        color: "success",
+        icon: "check-check",
+        ativo: 1,
+    });
+
+    /**
+     * SYS - Tipos de documento de solicitação
+     */
+    await upsertByCodigo(prisma.sysSolicitacaoDocumentoTipo, "regimento", {
+        nome: "Regimento",
+        descricao: "Regimento interno da atlética.",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoDocumentoTipo, "estatuto", {
+        nome: "Estatuto",
+        descricao: "Estatuto ou documento institucional equivalente.",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoDocumentoTipo, "ata_assembleia", {
+        nome: "Ata de assembleia",
+        descricao: "Ata formal de assembleia.",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoDocumentoTipo, "lista_presenca", {
+        nome: "Lista de presença",
+        descricao: "Lista de presença de assembleia, reunião ou votação.",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoDocumentoTipo, "termo_posse", {
+        nome: "Termo de posse",
+        descricao: "Termo de posse da gestão ou diretoria.",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoDocumentoTipo, "portaria", {
+        nome: "Portaria",
+        descricao: "Portaria de nomeação, saída ou alteração institucional.",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoDocumentoTipo, "comprovante_divulgacao", {
+        nome: "Comprovante de divulgação",
+        descricao: "Documento ou evidência de divulgação de processo, edital ou assembleia.",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoDocumentoTipo, "documento_votacao", {
+        nome: "Documento de votação",
+        descricao: "Documento, relatório ou evidência relacionada à votação.",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoDocumentoTipo, "outros", {
+        nome: "Outros",
+        descricao: "Outros documentos anexados à solicitação.",
+        ativo: 1,
+    });
+
+    /**
+     * SYS - Status de documento de solicitação
+     */
+    await upsertByCodigo(prisma.sysSolicitacaoDocumentoStatus, "pendente", {
+        nome: "Pendente",
+        descricao: "Documento solicitado, mas ainda não enviado.",
+        color: "warning",
+        icon: "clock",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoDocumentoStatus, "enviado", {
+        nome: "Enviado",
+        descricao: "Documento enviado e aguardando análise.",
+        color: "primary",
+        icon: "upload",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoDocumentoStatus, "aprovado", {
+        nome: "Aprovado",
+        descricao: "Documento aprovado.",
+        color: "success",
+        icon: "check-circle",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoDocumentoStatus, "recusado", {
+        nome: "Recusado",
+        descricao: "Documento recusado.",
+        color: "danger",
+        icon: "x-circle",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysSolicitacaoDocumentoStatus, "substituido", {
+        nome: "Substituído",
+        descricao: "Documento substituído por uma versão mais recente.",
+        color: "secondary",
+        icon: "refresh-cw",
+        ativo: 1,
+    });
     /**
      * SYS - Permissões iniciais
      */
     const permissions = [
+        {
+            codigo: "solicitacao.visualizar",
+            nome: "Visualizar solicitações",
+            modulo: "solicitacao",
+            descricao: "Permite visualizar solicitações do sistema.",
+        },
+        {
+            codigo: "solicitacao.criar",
+            nome: "Criar solicitação",
+            modulo: "solicitacao",
+            descricao: "Permite criar solicitações.",
+        },
+        {
+            codigo: "solicitacao.editar",
+            nome: "Editar solicitação",
+            modulo: "solicitacao",
+            descricao: "Permite editar solicitações em rascunho ou ajuste.",
+        },
+        {
+            codigo: "solicitacao.cancelar",
+            nome: "Cancelar solicitação",
+            modulo: "solicitacao",
+            descricao: "Permite cancelar solicitações.",
+        },
+        {
+            codigo: "solicitacao.analisar",
+            nome: "Analisar solicitação",
+            modulo: "solicitacao",
+            descricao: "Permite analisar solicitações enviadas.",
+        },
+        {
+            codigo: "solicitacao.aprovar",
+            nome: "Aprovar solicitação",
+            modulo: "solicitacao",
+            descricao: "Permite aprovar solicitações.",
+        },
+        {
+            codigo: "solicitacao.recusar",
+            nome: "Recusar solicitação",
+            modulo: "solicitacao",
+            descricao: "Permite recusar solicitações.",
+        },
+        {
+            codigo: "solicitacao.solicitar_ajuste",
+            nome: "Solicitar ajuste",
+            modulo: "solicitacao",
+            descricao: "Permite solicitar ajustes em solicitações.",
+        },
+        {
+            codigo: "documento.enviar",
+            nome: "Enviar documento",
+            modulo: "documento",
+            descricao: "Permite enviar documentos em solicitações.",
+        },
+        {
+            codigo: "documento.analisar",
+            nome: "Analisar documento",
+            modulo: "documento",
+            descricao: "Permite analisar documentos enviados em solicitações.",
+        },
         {
             codigo: "atletica.visualizar",
             nome: "Visualizar atlética",

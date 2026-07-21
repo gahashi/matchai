@@ -94,7 +94,14 @@ export const ModelName = {
   SysArquivo: 'SysArquivo',
   SysInboxItemTipo: 'SysInboxItemTipo',
   SysInboxItemStatus: 'SysInboxItemStatus',
-  SysInboxItem: 'SysInboxItem'
+  SysInboxItem: 'SysInboxItem',
+  SysSolicitacaoTipo: 'SysSolicitacaoTipo',
+  SysSolicitacaoStatus: 'SysSolicitacaoStatus',
+  SysSolicitacao: 'SysSolicitacao',
+  SysSolicitacaoHistorico: 'SysSolicitacaoHistorico',
+  SysSolicitacaoDocumentoTipo: 'SysSolicitacaoDocumentoTipo',
+  SysSolicitacaoDocumentoStatus: 'SysSolicitacaoDocumentoStatus',
+  SysSolicitacaoDocumento: 'SysSolicitacaoDocumento'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -801,6 +808,120 @@ export const SysInboxItemScalarFieldEnum = {
 export type SysInboxItemScalarFieldEnum = (typeof SysInboxItemScalarFieldEnum)[keyof typeof SysInboxItemScalarFieldEnum]
 
 
+export const SysSolicitacaoTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysSolicitacaoTipoScalarFieldEnum = (typeof SysSolicitacaoTipoScalarFieldEnum)[keyof typeof SysSolicitacaoTipoScalarFieldEnum]
+
+
+export const SysSolicitacaoStatusScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysSolicitacaoStatusScalarFieldEnum = (typeof SysSolicitacaoStatusScalarFieldEnum)[keyof typeof SysSolicitacaoStatusScalarFieldEnum]
+
+
+export const SysSolicitacaoScalarFieldEnum = {
+  id: 'id',
+  sys_solicitacao_tipo_id: 'sys_solicitacao_tipo_id',
+  sys_solicitacao_status_id: 'sys_solicitacao_status_id',
+  solicitado_por_usuario_id: 'solicitado_por_usuario_id',
+  responsavel_sys_usuario_id: 'responsavel_sys_usuario_id',
+  titulo: 'titulo',
+  descricao: 'descricao',
+  entidade_tipo: 'entidade_tipo',
+  entidade_id: 'entidade_id',
+  payload_text: 'payload_text',
+  metadata_text: 'metadata_text',
+  enviado_at: 'enviado_at',
+  finalizado_at: 'finalizado_at',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type SysSolicitacaoScalarFieldEnum = (typeof SysSolicitacaoScalarFieldEnum)[keyof typeof SysSolicitacaoScalarFieldEnum]
+
+
+export const SysSolicitacaoHistoricoScalarFieldEnum = {
+  id: 'id',
+  sys_solicitacao_id: 'sys_solicitacao_id',
+  sys_usuario_id: 'sys_usuario_id',
+  sys_solicitacao_status_anterior_id: 'sys_solicitacao_status_anterior_id',
+  sys_solicitacao_status_novo_id: 'sys_solicitacao_status_novo_id',
+  acao: 'acao',
+  descricao: 'descricao',
+  metadata_text: 'metadata_text',
+  created_at: 'created_at'
+} as const
+
+export type SysSolicitacaoHistoricoScalarFieldEnum = (typeof SysSolicitacaoHistoricoScalarFieldEnum)[keyof typeof SysSolicitacaoHistoricoScalarFieldEnum]
+
+
+export const SysSolicitacaoDocumentoTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysSolicitacaoDocumentoTipoScalarFieldEnum = (typeof SysSolicitacaoDocumentoTipoScalarFieldEnum)[keyof typeof SysSolicitacaoDocumentoTipoScalarFieldEnum]
+
+
+export const SysSolicitacaoDocumentoStatusScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysSolicitacaoDocumentoStatusScalarFieldEnum = (typeof SysSolicitacaoDocumentoStatusScalarFieldEnum)[keyof typeof SysSolicitacaoDocumentoStatusScalarFieldEnum]
+
+
+export const SysSolicitacaoDocumentoScalarFieldEnum = {
+  id: 'id',
+  sys_solicitacao_id: 'sys_solicitacao_id',
+  sys_solicitacao_documento_tipo_id: 'sys_solicitacao_documento_tipo_id',
+  sys_solicitacao_documento_status_id: 'sys_solicitacao_documento_status_id',
+  sys_arquivo_id: 'sys_arquivo_id',
+  titulo: 'titulo',
+  descricao: 'descricao',
+  observacao: 'observacao',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type SysSolicitacaoDocumentoScalarFieldEnum = (typeof SysSolicitacaoDocumentoScalarFieldEnum)[keyof typeof SysSolicitacaoDocumentoScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1212,4 +1333,75 @@ export const SysInboxItemOrderByRelevanceFieldEnum = {
 } as const
 
 export type SysInboxItemOrderByRelevanceFieldEnum = (typeof SysInboxItemOrderByRelevanceFieldEnum)[keyof typeof SysInboxItemOrderByRelevanceFieldEnum]
+
+
+export const SysSolicitacaoTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon'
+} as const
+
+export type SysSolicitacaoTipoOrderByRelevanceFieldEnum = (typeof SysSolicitacaoTipoOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoTipoOrderByRelevanceFieldEnum]
+
+
+export const SysSolicitacaoStatusOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon'
+} as const
+
+export type SysSolicitacaoStatusOrderByRelevanceFieldEnum = (typeof SysSolicitacaoStatusOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoStatusOrderByRelevanceFieldEnum]
+
+
+export const SysSolicitacaoOrderByRelevanceFieldEnum = {
+  titulo: 'titulo',
+  descricao: 'descricao',
+  entidade_tipo: 'entidade_tipo',
+  payload_text: 'payload_text',
+  metadata_text: 'metadata_text'
+} as const
+
+export type SysSolicitacaoOrderByRelevanceFieldEnum = (typeof SysSolicitacaoOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoOrderByRelevanceFieldEnum]
+
+
+export const SysSolicitacaoHistoricoOrderByRelevanceFieldEnum = {
+  acao: 'acao',
+  descricao: 'descricao',
+  metadata_text: 'metadata_text'
+} as const
+
+export type SysSolicitacaoHistoricoOrderByRelevanceFieldEnum = (typeof SysSolicitacaoHistoricoOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoHistoricoOrderByRelevanceFieldEnum]
+
+
+export const SysSolicitacaoDocumentoTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type SysSolicitacaoDocumentoTipoOrderByRelevanceFieldEnum = (typeof SysSolicitacaoDocumentoTipoOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoDocumentoTipoOrderByRelevanceFieldEnum]
+
+
+export const SysSolicitacaoDocumentoStatusOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon'
+} as const
+
+export type SysSolicitacaoDocumentoStatusOrderByRelevanceFieldEnum = (typeof SysSolicitacaoDocumentoStatusOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoDocumentoStatusOrderByRelevanceFieldEnum]
+
+
+export const SysSolicitacaoDocumentoOrderByRelevanceFieldEnum = {
+  titulo: 'titulo',
+  descricao: 'descricao',
+  observacao: 'observacao'
+} as const
+
+export type SysSolicitacaoDocumentoOrderByRelevanceFieldEnum = (typeof SysSolicitacaoDocumentoOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoDocumentoOrderByRelevanceFieldEnum]
 

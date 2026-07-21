@@ -29,11 +29,14 @@ model SysUsuario {
   updated_at DateTime? @db.DateTime(0)
   deleted_at DateTime? @db.DateTime(0)
 
-  sys_usuario_role       SysUsuarioRole[]
-  sys_usuario_permission SysUsuarioPermission[]
-  atl_atletica_membro    AtlAtleticaMembro[]
-  atl_atletica_criada    AtlAtletica[]          @relation("AtlAtleticaCriadoPor")
-  sys_inbox_item         SysInboxItem[]
+  sys_usuario_role            SysUsuarioRole[]
+  sys_usuario_permission      SysUsuarioPermission[]
+  atl_atletica_membro         AtlAtleticaMembro[]
+  atl_atletica_criada         AtlAtletica[]             @relation("AtlAtleticaCriadoPor")
+  sys_inbox_item              SysInboxItem[]
+  sys_solicitacao_solicitante SysSolicitacao[]          @relation("SysSolicitacaoSolicitante")
+  sys_solicitacao_responsavel SysSolicitacao[]          @relation("SysSolicitacaoResponsavel")
+  sys_solicitacao_historico   SysSolicitacaoHistorico[]
 
   sys_auth_login_log SysAuthLoginLog[]
 
@@ -808,10 +811,11 @@ model SysArquivo {
   deleted_at         DateTime? @db.DateTime(0)
   storage_deleted_at DateTime? @db.DateTime(0)
 
-  disco        SysArquivoDisco         @relation(fields: [sys_arquivo_disco_id], references: [id])
-  visibilidade SysArquivoVisibilidade  @relation(fields: [sys_arquivo_visibilidade_id], references: [id])
-  tipo         SysArquivoTipo?         @relation(fields: [sys_arquivo_tipo_id], references: [id])
-  entidadeTipo SysArquivoEntidadeTipo? @relation(fields: [sys_arquivo_entidade_tipo_id], references: [id])
+  disco                    SysArquivoDisco           @relation(fields: [sys_arquivo_disco_id], references: [id])
+  visibilidade             SysArquivoVisibilidade    @relation(fields: [sys_arquivo_visibilidade_id], references: [id])
+  tipo                     SysArquivoTipo?           @relation(fields: [sys_arquivo_tipo_id], references: [id])
+  entidadeTipo             SysArquivoEntidadeTipo?   @relation(fields: [sys_arquivo_entidade_tipo_id], references: [id])
+  sysSolicitacaoDocumentos SysSolicitacaoDocumento[]
 
   @@index([sys_arquivo_disco_id])
   @@index([sys_arquivo_visibilidade_id])
@@ -894,4 +898,157 @@ model SysInboxItem {
   @@index([created_at])
   @@index([deleted_at])
   @@map("sys_inbox_item")
+}
+
+model SysSolicitacaoTipo {
+  id         Int       @id @default(autoincrement())
+  codigo     String    @unique @db.VarChar(100)
+  nome       String    @db.VarChar(150)
+  descricao  String?   @db.Text
+  color      String?   @db.VarChar(50)
+  icon       String?   @db.VarChar(100)
+  ativo      Int       @default(1)
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  sys_solicitacao SysSolicitacao[]
+
+  @@map("sys_solicitacao_tipo")
+}
+
+model SysSolicitacaoStatus {
+  id         Int       @id @default(autoincrement())
+  codigo     String    @unique @db.VarChar(100)
+  nome       String    @db.VarChar(150)
+  descricao  String?   @db.Text
+  color      String?   @db.VarChar(50)
+  icon       String?   @db.VarChar(100)
+  ativo      Int       @default(1)
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  sys_solicitacao_status_atual    SysSolicitacao[]          @relation("SysSolicitacaoStatusAtual")
+  sys_solicitacao_status_anterior SysSolicitacaoHistorico[] @relation("SysSolicitacaoStatusAnterior")
+  sys_solicitacao_status_novo     SysSolicitacaoHistorico[] @relation("SysSolicitacaoStatusNovo")
+
+  @@map("sys_solicitacao_status")
+}
+
+model SysSolicitacao {
+  id                         Int       @id @default(autoincrement())
+  sys_solicitacao_tipo_id    Int
+  sys_solicitacao_status_id  Int
+  solicitado_por_usuario_id  Int
+  responsavel_sys_usuario_id Int?
+  titulo                     String    @db.VarChar(180)
+  descricao                  String?   @db.Text
+  entidade_tipo              String?   @db.VarChar(100)
+  entidade_id                Int?
+  payload_text               String?   @db.LongText
+  metadata_text              String?   @db.LongText
+  enviado_at                 DateTime? @db.DateTime(0)
+  finalizado_at              DateTime? @db.DateTime(0)
+  ativo                      Int       @default(1)
+  created_at                 DateTime? @db.DateTime(0)
+  updated_at                 DateTime? @db.DateTime(0)
+  deleted_at                 DateTime? @db.DateTime(0)
+
+  sys_solicitacao_tipo   SysSolicitacaoTipo   @relation(fields: [sys_solicitacao_tipo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  sys_solicitacao_status SysSolicitacaoStatus @relation("SysSolicitacaoStatusAtual", fields: [sys_solicitacao_status_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  solicitado_por_usuario SysUsuario           @relation("SysSolicitacaoSolicitante", fields: [solicitado_por_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  responsavel_usuario    SysUsuario?          @relation("SysSolicitacaoResponsavel", fields: [responsavel_sys_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  sys_solicitacao_historico SysSolicitacaoHistorico[]
+  sys_solicitacao_documento SysSolicitacaoDocumento[]
+
+  @@index([sys_solicitacao_tipo_id], map: "sys_solicitacao_fk1")
+  @@index([sys_solicitacao_status_id], map: "sys_solicitacao_fk2")
+  @@index([solicitado_por_usuario_id], map: "sys_solicitacao_fk3")
+  @@index([responsavel_sys_usuario_id], map: "sys_solicitacao_fk4")
+  @@index([entidade_tipo, entidade_id], map: "sys_solicitacao_entidade_idx")
+  @@index([ativo])
+  @@index([deleted_at])
+  @@map("sys_solicitacao")
+}
+
+model SysSolicitacaoHistorico {
+  id                                 Int       @id @default(autoincrement())
+  sys_solicitacao_id                 Int
+  sys_usuario_id                     Int?
+  sys_solicitacao_status_anterior_id Int?
+  sys_solicitacao_status_novo_id     Int?
+  acao                               String    @db.VarChar(100)
+  descricao                          String?   @db.Text
+  metadata_text                      String?   @db.LongText
+  created_at                         DateTime? @db.DateTime(0)
+
+  sys_solicitacao                 SysSolicitacao        @relation(fields: [sys_solicitacao_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  sys_usuario                     SysUsuario?           @relation(fields: [sys_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  sys_solicitacao_status_anterior SysSolicitacaoStatus? @relation("SysSolicitacaoStatusAnterior", fields: [sys_solicitacao_status_anterior_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  sys_solicitacao_status_novo     SysSolicitacaoStatus? @relation("SysSolicitacaoStatusNovo", fields: [sys_solicitacao_status_novo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@index([sys_solicitacao_id], map: "sys_solicitacao_historico_fk1")
+  @@index([sys_usuario_id], map: "sys_solicitacao_historico_fk2")
+  @@index([sys_solicitacao_status_anterior_id], map: "sys_solicitacao_historico_fk3")
+  @@index([sys_solicitacao_status_novo_id], map: "sys_solicitacao_historico_fk4")
+  @@index([acao])
+  @@map("sys_solicitacao_historico")
+}
+
+model SysSolicitacaoDocumentoTipo {
+  id         Int       @id @default(autoincrement())
+  codigo     String    @unique @db.VarChar(100)
+  nome       String    @db.VarChar(150)
+  descricao  String?   @db.Text
+  ativo      Int       @default(1)
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  sys_solicitacao_documento SysSolicitacaoDocumento[]
+
+  @@map("sys_solicitacao_documento_tipo")
+}
+
+model SysSolicitacaoDocumentoStatus {
+  id         Int       @id @default(autoincrement())
+  codigo     String    @unique @db.VarChar(100)
+  nome       String    @db.VarChar(150)
+  descricao  String?   @db.Text
+  color      String?   @db.VarChar(50)
+  icon       String?   @db.VarChar(100)
+  ativo      Int       @default(1)
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  sys_solicitacao_documento SysSolicitacaoDocumento[]
+
+  @@map("sys_solicitacao_documento_status")
+}
+
+model SysSolicitacaoDocumento {
+  id                                  Int       @id @default(autoincrement())
+  sys_solicitacao_id                  Int
+  sys_solicitacao_documento_tipo_id   Int
+  sys_solicitacao_documento_status_id Int
+  sys_arquivo_id                      Int?
+  titulo                              String?   @db.VarChar(180)
+  descricao                           String?   @db.Text
+  observacao                          String?   @db.Text
+  ativo                               Int       @default(1)
+  created_at                          DateTime? @db.DateTime(0)
+  updated_at                          DateTime? @db.DateTime(0)
+  deleted_at                          DateTime? @db.DateTime(0)
+
+  sys_solicitacao                  SysSolicitacao                @relation(fields: [sys_solicitacao_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  sys_solicitacao_documento_tipo   SysSolicitacaoDocumentoTipo   @relation(fields: [sys_solicitacao_documento_tipo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  sys_solicitacao_documento_status SysSolicitacaoDocumentoStatus @relation(fields: [sys_solicitacao_documento_status_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  sys_arquivo                      SysArquivo?                   @relation(fields: [sys_arquivo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@index([sys_solicitacao_id], map: "sys_solicitacao_documento_fk1")
+  @@index([sys_solicitacao_documento_tipo_id], map: "sys_solicitacao_documento_fk2")
+  @@index([sys_solicitacao_documento_status_id], map: "sys_solicitacao_documento_fk3")
+  @@index([sys_arquivo_id], map: "sys_solicitacao_documento_fk4")
+  @@index([ativo])
+  @@index([deleted_at])
+  @@map("sys_solicitacao_documento")
 }

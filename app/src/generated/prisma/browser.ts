@@ -237,3 +237,38 @@ export type SysInboxItemStatus = Prisma.SysInboxItemStatusModel
  * 
  */
 export type SysInboxItem = Prisma.SysInboxItemModel
+/**
+ * Model SysSolicitacaoTipo
+ * 
+ */
+export type SysSolicitacaoTipo = Prisma.SysSolicitacaoTipoModel
+/**
+ * Model SysSolicitacaoStatus
+ * 
+ */
+export type SysSolicitacaoStatus = Prisma.SysSolicitacaoStatusModel
+/**
+ * Model SysSolicitacao
+ * 
+ */
+export type SysSolicitacao = Prisma.SysSolicitacaoModel
+/**
+ * Model SysSolicitacaoHistorico
+ * 
+ */
+export type SysSolicitacaoHistorico = Prisma.SysSolicitacaoHistoricoModel
+/**
+ * Model SysSolicitacaoDocumentoTipo
+ * 
+ */
+export type SysSolicitacaoDocumentoTipo = Prisma.SysSolicitacaoDocumentoTipoModel
+/**
+ * Model SysSolicitacaoDocumentoStatus
+ * 
+ */
+export type SysSolicitacaoDocumentoStatus = Prisma.SysSolicitacaoDocumentoStatusModel
+/**
+ * Model SysSolicitacaoDocumento
+ * 
+ */
+export type SysSolicitacaoDocumento = Prisma.SysSolicitacaoDocumentoModel

@@ -59,6 +59,11 @@ export const routeAccessRules: RouteAccessRule[] = [
      * Precisa estar logado e ter permissão.
      */
     {
+        path: "/sys/solicitacao",
+        access: "permission",
+        permissions: ["solicitacao.visualizar"],
+    },
+    {
         path: "/atl/tema",
         access: "permission",
         permissions: ["tema.visualizar"],
@@ -83,4 +88,5 @@ export const routeAccessRules: RouteAccessRule[] = [
         access: "permission",
         permissions: ["atletica.editar"],
     },
+
 ];
