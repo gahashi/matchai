@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import { AppShell } from "@/components/layout/AppShell";
 import { Badge } from "@/components/ui/Badge";
 import { Card, CardBody } from "@/components/ui/Card";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -73,7 +74,7 @@ export default async function SolicitacaoDetalhePage({
     }
 
     return (
-        <>
+        <AppShell>
             <PageHeader
                 eyebrow="Solicitação"
                 title={solicitacao.titulo}
@@ -195,8 +196,7 @@ export default async function SolicitacaoDetalhePage({
                                                 <br />
                                                 <span>
                                                     {documento.titulo ??
-                                                        documento
-                                                            .sys_arquivo
+                                                        documento.sys_arquivo
                                                             ?.nome_original ??
                                                         "Documento anexado"}
                                                 </span>
@@ -235,7 +235,7 @@ export default async function SolicitacaoDetalhePage({
                         ) : (
                             <div className="bp-feature-list">
                                 {solicitacao.sys_solicitacao_historico.map(
-                                (historico: SolicitacaoHistoricoItem) => (
+                                    (historico: SolicitacaoHistoricoItem) => (
                                         <div
                                             key={historico.id}
                                             className="bp-check-item"
@@ -248,8 +248,7 @@ export default async function SolicitacaoDetalhePage({
                                                 <br />
                                                 <span>
                                                     {historico.sys_usuario
-                                                            ?.nome ??
-                                                        "Sistema"}{" "}
+                                                        ?.nome ?? "Sistema"}{" "}
                                                     •{" "}
                                                     {formatDate(
                                                         historico.created_at
@@ -282,6 +281,6 @@ export default async function SolicitacaoDetalhePage({
                     </CardBody>
                 </Card>
             </div>
-        </>
+        </AppShell>
     );
 }

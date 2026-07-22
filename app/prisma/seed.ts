@@ -1264,6 +1264,7 @@ async function main() {
         update: {
             nome: "Associação Atlética Acadêmica dos Cursos de Computação",
             sigla: "AAACCU",
+            apelido: "Computaria",
             mascote:'Alien',
             descricao: "Atlética acadêmica dos cursos de computação da UNIVALI.",
             edu_instituicao_id: instituicao.id,
@@ -1276,6 +1277,7 @@ async function main() {
             edu_instituicao_id: instituicao.id,
             nome: "Associação Atlética Acadêmica dos Cursos de Computação",
             sigla: "AAACCU",
+            apelido: "Computaria",
             mascote:'Alien',
             slug: "computaria",
             descricao: "Atlética acadêmica dos cursos de computação da UNIVALI.",

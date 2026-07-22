@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { inboxService } from "@/lib/inbox/inbox-service";
 import { solicitacaoHistoryService } from "@/lib/sys/solicitacao/solicitacao-history-service";
 import {
     AprovarSolicitacaoInput,
@@ -128,6 +129,221 @@ function assertStatusAtualPermitido(
     }
 }
 
+type CreateInboxItemParams = Parameters<typeof inboxService.createItem>[0];
+
+async function criarInboxSeguro(input: CreateInboxItemParams) {
+    try {
+        await inboxService.createItem(input);
+    } catch (error) {
+        console.error("[SOLICITACAO_INBOX] Erro ao criar item no Inbox:", error);
+    }
+}
+
+async function getUsuariosComPermissaoAnaliseIds() {
+    const [porRole, porAllowDireto] = await Promise.all([
+        prisma.sysUsuarioRole.findMany({
+            where: {
+                ativo: 1,
+                deleted_at: null,
+                sys_role: {
+                    ativo: 1,
+                    deleted_at: null,
+                    sys_role_permission: {
+                        some: {
+                            ativo: 1,
+                            sys_permission: {
+                                codigo: "solicitacao.analisar",
+                                ativo: 1,
+                            },
+                        },
+                    },
+                },
+            },
+            select: {
+                sys_usuario_id: true,
+            },
+        }),
+
+        prisma.sysUsuarioPermission.findMany({
+            where: {
+                ativo: 1,
+                deleted_at: null,
+                sys_permission: {
+                    codigo: "solicitacao.analisar",
+                    ativo: 1,
+                },
+                sys_usuario_permission_tipo: {
+                    codigo: "allow",
+                    ativo: 1,
+                },
+            },
+            select: {
+                sys_usuario_id: true,
+            },
+        }),
+    ]);
+
+    const candidatosIds = Array.from(
+        new Set([
+            ...porRole.map((item) => item.sys_usuario_id),
+            ...porAllowDireto.map((item) => item.sys_usuario_id),
+        ])
+    );
+
+    if (candidatosIds.length === 0) {
+        return [];
+    }
+
+    const denies = await prisma.sysUsuarioPermission.findMany({
+        where: {
+            sys_usuario_id: {
+                in: candidatosIds,
+            },
+            ativo: 1,
+            deleted_at: null,
+            sys_permission: {
+                codigo: "solicitacao.analisar",
+                ativo: 1,
+            },
+            sys_usuario_permission_tipo: {
+                codigo: "deny",
+                ativo: 1,
+            },
+        },
+        select: {
+            sys_usuario_id: true,
+        },
+    });
+
+    const deniesIds = new Set(denies.map((item) => item.sys_usuario_id));
+
+    const usuariosAtivos = await prisma.sysUsuario.findMany({
+        where: {
+            id: {
+                in: candidatosIds.filter((id) => !deniesIds.has(id)),
+            },
+            ativo: 1,
+            deleted_at: null,
+        },
+        select: {
+            id: true,
+        },
+    });
+
+    return usuariosAtivos.map((usuario) => usuario.id);
+}
+
+async function notificarAnalistasSolicitacaoEnviada({
+                                                        solicitacaoId,
+                                                        solicitanteId,
+                                                        titulo,
+                                                        tipoCodigo,
+                                                    }: {
+    solicitacaoId: number;
+    solicitanteId: number;
+    titulo: string;
+    tipoCodigo: string;
+}) {
+    const analistasIds = await getUsuariosComPermissaoAnaliseIds();
+
+    await Promise.all(
+        analistasIds
+            .filter((sysUsuarioId) => sysUsuarioId !== solicitanteId)
+            .map((sysUsuarioId) =>
+                criarInboxSeguro({
+                    sysUsuarioId,
+                    tipoCodigo: "request",
+                    statusCodigo: "pending",
+                    titulo: "Nova solicitação para análise",
+                    mensagem: `A solicitação "${titulo}" foi enviada e aguarda análise.`,
+                    actionUrl: `/sys/solicitacao/${solicitacaoId}`,
+                    entidadeTipo: "sys_solicitacao",
+                    entidadeId: solicitacaoId,
+                    metadataText: JSON.stringify({
+                        sys_solicitacao_id: solicitacaoId,
+                        tipo_codigo: tipoCodigo,
+                    }),
+                })
+            )
+    );
+}
+
+async function notificarSolicitanteEmAnalise({
+                                                 solicitacaoId,
+                                                 solicitanteId,
+                                                 titulo,
+                                             }: {
+    solicitacaoId: number;
+    solicitanteId: number;
+    titulo: string;
+}) {
+    await criarInboxSeguro({
+        sysUsuarioId: solicitanteId,
+        tipoCodigo: "info",
+        statusCodigo: "unread",
+        titulo: "Solicitação em análise",
+        mensagem: `Sua solicitação "${titulo}" foi colocada em análise.`,
+        actionUrl: `/sys/solicitacao/${solicitacaoId}`,
+        entidadeTipo: "sys_solicitacao",
+        entidadeId: solicitacaoId,
+        metadataText: JSON.stringify({
+            sys_solicitacao_id: solicitacaoId,
+        }),
+    });
+}
+
+async function notificarSolicitanteAjusteSolicitado({
+                                                        solicitacaoId,
+                                                        solicitanteId,
+                                                        titulo,
+                                                        descricao,
+                                                    }: {
+    solicitacaoId: number;
+    solicitanteId: number;
+    titulo: string;
+    descricao: string;
+}) {
+    await criarInboxSeguro({
+        sysUsuarioId: solicitanteId,
+        tipoCodigo: "request",
+        statusCodigo: "pending",
+        titulo: "Ajuste solicitado",
+        mensagem: `Foi solicitado um ajuste na sua solicitação "${titulo}". ${descricao}`,
+        actionUrl: `/sys/solicitacao/${solicitacaoId}`,
+        entidadeTipo: "sys_solicitacao",
+        entidadeId: solicitacaoId,
+        metadataText: JSON.stringify({
+            sys_solicitacao_id: solicitacaoId,
+        }),
+    });
+}
+
+async function notificarSolicitanteRecusa({
+                                              solicitacaoId,
+                                              solicitanteId,
+                                              titulo,
+                                              descricao,
+                                          }: {
+    solicitacaoId: number;
+    solicitanteId: number;
+    titulo: string;
+    descricao: string;
+}) {
+    await criarInboxSeguro({
+        sysUsuarioId: solicitanteId,
+        tipoCodigo: "result",
+        statusCodigo: "rejected",
+        titulo: "Solicitação recusada",
+        mensagem: `Sua solicitação "${titulo}" foi recusada. Motivo: ${descricao}`,
+        actionUrl: `/sys/solicitacao/${solicitacaoId}`,
+        entidadeTipo: "sys_solicitacao",
+        entidadeId: solicitacaoId,
+        metadataText: JSON.stringify({
+            sys_solicitacao_id: solicitacaoId,
+        }),
+    });
+}
+
 export const solicitacaoService = {
     async criarRascunho({
                             tipoCodigo,
@@ -222,6 +438,13 @@ export const solicitacaoService = {
                 "Solicitação enviada para análise.",
         });
 
+        await notificarAnalistasSolicitacaoEnviada({
+            solicitacaoId: solicitacao.id,
+            solicitanteId: sysUsuarioId,
+            titulo: solicitacaoAtualizada.titulo,
+            tipoCodigo: solicitacao.sys_solicitacao_tipo.codigo,
+        });
+
         return solicitacaoAtualizada;
     },
 
@@ -265,6 +488,14 @@ export const solicitacaoService = {
                 descricaoHistorico ??
                 "Solicitação colocada em análise.",
         });
+
+        if (solicitacao.solicitado_por_usuario_id !== sysUsuarioId) {
+            await notificarSolicitanteEmAnalise({
+                solicitacaoId: solicitacao.id,
+                solicitanteId: solicitacao.solicitado_por_usuario_id,
+                titulo: solicitacaoAtualizada.titulo,
+            });
+        }
 
         return solicitacaoAtualizada;
     },
@@ -310,6 +541,15 @@ export const solicitacaoService = {
             metadata,
         });
 
+        if (solicitacao.solicitado_por_usuario_id !== sysUsuarioId) {
+            await notificarSolicitanteAjusteSolicitado({
+                solicitacaoId: solicitacao.id,
+                solicitanteId: solicitacao.solicitado_por_usuario_id,
+                titulo: solicitacaoAtualizada.titulo,
+                descricao,
+            });
+        }
+
         return solicitacaoAtualizada;
     },
 
@@ -354,6 +594,15 @@ export const solicitacaoService = {
             descricao,
             metadata,
         });
+
+        if (solicitacao.solicitado_por_usuario_id !== sysUsuarioId) {
+            await notificarSolicitanteRecusa({
+                solicitacaoId: solicitacao.id,
+                solicitanteId: solicitacao.solicitado_por_usuario_id,
+                titulo: solicitacaoAtualizada.titulo,
+                descricao,
+            });
+        }
 
         return solicitacaoAtualizada;
     },

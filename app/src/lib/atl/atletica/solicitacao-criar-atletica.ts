@@ -3,6 +3,7 @@ import { inboxService } from "@/lib/inbox/inbox-service";
 
 type CriarAtleticaPayload = {
     nome?: string;
+    apelido?: string;
     sigla?: string;
     slug?: string;
     mascote?: string;
@@ -14,6 +15,7 @@ type CriarAtleticaPayload = {
 
     atletica?: {
         nome?: string;
+        apelido?: string;
         sigla?: string;
         slug?: string;
         mascote?: string;
@@ -246,10 +248,14 @@ export const solicitacaoCriarAtleticaService = {
         const gestaoPayload = getGestaoPayload(payload);
 
         const nome = atleticaPayload.nome?.trim();
+        const apelido = atleticaPayload.apelido?.trim() || nome;
         const sigla = atleticaPayload.sigla?.trim();
-        const mascote = atleticaPayload.mascote?.trim() || "Mascote não informado";
+        const mascote =
+            atleticaPayload.mascote?.trim() || "Mascote não informado";
         const descricao = atleticaPayload.descricao ?? null;
-        const slug = slugify(atleticaPayload.slug || sigla || nome || "");
+        const slug = slugify(
+            atleticaPayload.slug || apelido || sigla || nome || ""
+        );
         const eduInstituicaoId =
             atleticaPayload.eduInstituicaoId ??
             atleticaPayload.edu_instituicao_id ??
@@ -257,11 +263,21 @@ export const solicitacaoCriarAtleticaService = {
             payload.edu_instituicao_id;
 
         if (!nome) {
-            throw new Error("Nome da atlética não informado no payload da solicitação.");
+            throw new Error(
+                "Nome da atlética não informado no payload da solicitação."
+            );
+        }
+
+        if (!apelido) {
+            throw new Error(
+                "Apelido da atlética não informado no payload da solicitação."
+            );
         }
 
         if (!sigla) {
-            throw new Error("Sigla da atlética não informada no payload da solicitação.");
+            throw new Error(
+                "Sigla da atlética não informada no payload da solicitação."
+            );
         }
 
         if (!slug) {
@@ -269,7 +285,32 @@ export const solicitacaoCriarAtleticaService = {
         }
 
         if (!eduInstituicaoId) {
-            throw new Error("Instituição da atlética não informada no payload da solicitação.");
+            throw new Error(
+                "Instituição da atlética não informada no payload da solicitação."
+            );
+        }
+
+        const slugExistente = await prisma.atlAtletica.findFirst({
+            where: {
+                slug,
+                deleted_at: null,
+                id:
+                    solicitacao.entidade_tipo === "atl_atletica" &&
+                    solicitacao.entidade_id
+                        ? {
+                            not: solicitacao.entidade_id,
+                        }
+                        : undefined,
+            },
+            select: {
+                id: true,
+            },
+        });
+
+        if (slugExistente) {
+            throw new Error(
+                "Este endereço público já está em uso. Solicite ajuste antes de aprovar."
+            );
         }
 
         const cursoIds = getCursoIds(payload);
@@ -316,6 +357,7 @@ export const solicitacaoCriarAtleticaService = {
                     },
                     data: {
                         nome,
+                        apelido,
                         sigla,
                         mascote,
                         slug,
@@ -329,59 +371,31 @@ export const solicitacaoCriarAtleticaService = {
                     },
                 });
             } else {
-                const atleticaExistente = await tx.atlAtletica.findUnique({
-                    where: {
+                const atleticaCriada = await tx.atlAtletica.create({
+                    data: {
+                        edu_instituicao_id: Number(eduInstituicaoId),
+                        atl_atletica_status_id: atleticaStatusAtivaId,
+                        criado_por_sys_usuario_id:
+                        solicitacao.solicitado_por_usuario_id,
+                        nome,
+                        apelido,
+                        sigla,
+                        mascote,
                         slug,
-                    },
-                    select: {
-                        id: true,
+                        descricao,
+                        ativo: 1,
+                        created_at: now,
+                        updated_at: now,
                     },
                 });
 
-                if (atleticaExistente) {
-                    atleticaId = atleticaExistente.id;
-
-                    await tx.atlAtletica.update({
-                        where: {
-                            id: atleticaExistente.id,
-                        },
-                        data: {
-                            nome,
-                            sigla,
-                            mascote,
-                            descricao,
-                            edu_instituicao_id: Number(eduInstituicaoId),
-                            atl_atletica_status_id: atleticaStatusAtivaId,
-                            criado_por_sys_usuario_id:
-                            solicitacao.solicitado_por_usuario_id,
-                            ativo: 1,
-                            updated_at: now,
-                        },
-                    });
-                } else {
-                    const atleticaCriada = await tx.atlAtletica.create({
-                        data: {
-                            edu_instituicao_id: Number(eduInstituicaoId),
-                            atl_atletica_status_id: atleticaStatusAtivaId,
-                            criado_por_sys_usuario_id:
-                            solicitacao.solicitado_por_usuario_id,
-                            nome,
-                            sigla,
-                            mascote,
-                            slug,
-                            descricao,
-                            ativo: 1,
-                            created_at: now,
-                            updated_at: now,
-                        },
-                    });
-
-                    atleticaId = atleticaCriada.id;
-                }
+                atleticaId = atleticaCriada.id;
             }
 
             if (!atleticaId) {
-                throw new Error("Não foi possível criar ou localizar a atlética.");
+                throw new Error(
+                    "Não foi possível criar ou localizar a atlética."
+                );
             }
 
             for (const [index, cursoId] of cursoIds.entries()) {
@@ -465,17 +479,18 @@ export const solicitacaoCriarAtleticaService = {
                 },
             });
 
-            const cargoAtualExistente = await tx.atlAtleticaMembroCargo.findFirst({
-                where: {
-                    atl_atletica_membro_id: membro.id,
-                    atl_cargo_id: cargoPresidenteId,
-                    atual: 1,
-                    deleted_at: null,
-                },
-                select: {
-                    id: true,
-                },
-            });
+            const cargoAtualExistente =
+                await tx.atlAtleticaMembroCargo.findFirst({
+                    where: {
+                        atl_atletica_membro_id: membro.id,
+                        atl_cargo_id: cargoPresidenteId,
+                        atual: 1,
+                        deleted_at: null,
+                    },
+                    select: {
+                        id: true,
+                    },
+                });
 
             if (!cargoAtualExistente) {
                 await tx.atlAtleticaMembroCargo.create({
@@ -533,7 +548,8 @@ export const solicitacaoCriarAtleticaService = {
                     sys_usuario_id: sysUsuarioId,
                     sys_solicitacao_status_anterior_id:
                     solicitacao.sys_solicitacao_status_id,
-                    sys_solicitacao_status_novo_id: solicitacaoStatusConcluidaId,
+                    sys_solicitacao_status_novo_id:
+                    solicitacaoStatusConcluidaId,
                     acao: "acao_aplicada",
                     descricao:
                         "Criação da atlética aplicada: atlética ativada, gestão criada e solicitante vinculado como presidente.",
@@ -552,7 +568,9 @@ export const solicitacaoCriarAtleticaService = {
                 gestaoId: gestao.id,
                 solicitanteId: solicitacao.solicitado_por_usuario_id,
                 nome,
+                apelido,
                 sigla,
+                slug,
             };
         });
 
@@ -561,7 +579,7 @@ export const solicitacaoCriarAtleticaService = {
             tipoCodigo: "result",
             statusCodigo: "approved",
             titulo: "Atlética criada com sucesso",
-            mensagem: `A solicitação foi aprovada e a atlética ${resultado.sigla} foi ativada no Brava Pass.`,
+            mensagem: `A solicitação foi aprovada e a atlética ${resultado.apelido} (${resultado.sigla}) foi ativada no Brava Pass.`,
             actionUrl: "/atl/atletica",
             entidadeTipo: "atl_atletica",
             entidadeId: resultado.atleticaId,
@@ -569,6 +587,7 @@ export const solicitacaoCriarAtleticaService = {
                 sys_solicitacao_id: solicitacao.id,
                 atl_atletica_id: resultado.atleticaId,
                 atl_atletica_gestao_id: resultado.gestaoId,
+                slug: resultado.slug,
             }),
         });
 

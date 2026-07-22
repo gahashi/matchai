@@ -7,6 +7,7 @@ import {
     SolicitacaoTipoCodigo,
 } from "@/lib/sys/solicitacao/solicitacao-types";
 import { SolicitacaoClient } from "./SolicitacaoClient";
+import {AppShell} from "@/components/layout/AppShell";
 
 type SolicitacaoPageProps = {
     searchParams: Promise<{
@@ -54,6 +55,8 @@ export default async function SolicitacaoPage({
     });
 
     return (
+        <AppShell>
+
         <SolicitacaoClient
             initialItems={result.items}
             pagination={result.pagination}
@@ -64,5 +67,6 @@ export default async function SolicitacaoPage({
                 sort,
             }}
         />
+        </AppShell>
     );
 }

@@ -254,6 +254,7 @@ model AtlAtletica {
   atl_atletica_status_id    Int?
   criado_por_sys_usuario_id Int?
   nome                      String    @db.VarChar(150)
+  apelido                   String?   @db.VarChar(120)
   sigla                     String    @db.VarChar(30)
   slug                      String    @unique @db.VarChar(100)
   mascote                   String    @db.VarChar(100)

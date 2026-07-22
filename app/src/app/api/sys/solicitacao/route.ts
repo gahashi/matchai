@@ -1,3 +1,4 @@
+import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 import { requireApiAccess } from "@/lib/auth/require-api-access";
@@ -19,6 +20,60 @@ function toNumber(value: string | null) {
     }
 
     return numberValue;
+}
+
+function slugify(value: string) {
+    return value
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+}
+
+async function validarSlugCriarAtletica(body: any) {
+    if (body?.tipoCodigo !== "criar_atletica") {
+        return null;
+    }
+
+    const atleticaPayload = body?.payload?.atletica ?? body?.payload ?? {};
+    const slug = slugify(String(atleticaPayload.slug ?? ""));
+
+    if (!slug) {
+        return NextResponse.json(
+            {
+                ok: false,
+                field: "slug",
+                message: "Informe um endereço público válido para a atlética.",
+            },
+            { status: 400 }
+        );
+    }
+
+    const slugExistente = await prisma.atlAtletica.findFirst({
+        where: {
+            slug,
+            deleted_at: null,
+        },
+        select: {
+            id: true,
+        },
+    });
+
+    if (slugExistente) {
+        return NextResponse.json(
+            {
+                ok: false,
+                field: "slug",
+                message:
+                    "Este endereço público já está em uso. Escolha outro, como computaria-itajai.",
+            },
+            { status: 409 }
+        );
+    }
+
+    return null;
 }
 
 export async function GET(request: NextRequest) {
@@ -59,6 +114,12 @@ export async function POST(request: NextRequest) {
 
     try {
         const body = await request.json();
+
+        const erroSlug = await validarSlugCriarAtletica(body);
+
+        if (erroSlug) {
+            return erroSlug;
+        }
 
         const solicitacao = await solicitacaoService.criarRascunho({
             tipoCodigo: body.tipoCodigo,

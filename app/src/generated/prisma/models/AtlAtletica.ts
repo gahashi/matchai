@@ -48,6 +48,7 @@ export type AtlAtleticaMinAggregateOutputType = {
   atl_atletica_status_id: number | null
   criado_por_sys_usuario_id: number | null
   nome: string | null
+  apelido: string | null
   sigla: string | null
   slug: string | null
   mascote: string | null
@@ -66,6 +67,7 @@ export type AtlAtleticaMaxAggregateOutputType = {
   atl_atletica_status_id: number | null
   criado_por_sys_usuario_id: number | null
   nome: string | null
+  apelido: string | null
   sigla: string | null
   slug: string | null
   mascote: string | null
@@ -84,6 +86,7 @@ export type AtlAtleticaCountAggregateOutputType = {
   atl_atletica_status_id: number
   criado_por_sys_usuario_id: number
   nome: number
+  apelido: number
   sigla: number
   slug: number
   mascote: number
@@ -120,6 +123,7 @@ export type AtlAtleticaMinAggregateInputType = {
   atl_atletica_status_id?: true
   criado_por_sys_usuario_id?: true
   nome?: true
+  apelido?: true
   sigla?: true
   slug?: true
   mascote?: true
@@ -138,6 +142,7 @@ export type AtlAtleticaMaxAggregateInputType = {
   atl_atletica_status_id?: true
   criado_por_sys_usuario_id?: true
   nome?: true
+  apelido?: true
   sigla?: true
   slug?: true
   mascote?: true
@@ -156,6 +161,7 @@ export type AtlAtleticaCountAggregateInputType = {
   atl_atletica_status_id?: true
   criado_por_sys_usuario_id?: true
   nome?: true
+  apelido?: true
   sigla?: true
   slug?: true
   mascote?: true
@@ -261,6 +267,7 @@ export type AtlAtleticaGroupByOutputType = {
   atl_atletica_status_id: number | null
   criado_por_sys_usuario_id: number | null
   nome: string
+  apelido: string | null
   sigla: string
   slug: string
   mascote: string
@@ -302,6 +309,7 @@ export type AtlAtleticaWhereInput = {
   atl_atletica_status_id?: Prisma.IntNullableFilter<"AtlAtletica"> | number | null
   criado_por_sys_usuario_id?: Prisma.IntNullableFilter<"AtlAtletica"> | number | null
   nome?: Prisma.StringFilter<"AtlAtletica"> | string
+  apelido?: Prisma.StringNullableFilter<"AtlAtletica"> | string | null
   sigla?: Prisma.StringFilter<"AtlAtletica"> | string
   slug?: Prisma.StringFilter<"AtlAtletica"> | string
   mascote?: Prisma.StringFilter<"AtlAtletica"> | string
@@ -332,6 +340,7 @@ export type AtlAtleticaOrderByWithRelationInput = {
   atl_atletica_status_id?: Prisma.SortOrderInput | Prisma.SortOrder
   criado_por_sys_usuario_id?: Prisma.SortOrderInput | Prisma.SortOrder
   nome?: Prisma.SortOrder
+  apelido?: Prisma.SortOrderInput | Prisma.SortOrder
   sigla?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   mascote?: Prisma.SortOrder
@@ -367,6 +376,7 @@ export type AtlAtleticaWhereUniqueInput = Prisma.AtLeast<{
   atl_atletica_status_id?: Prisma.IntNullableFilter<"AtlAtletica"> | number | null
   criado_por_sys_usuario_id?: Prisma.IntNullableFilter<"AtlAtletica"> | number | null
   nome?: Prisma.StringFilter<"AtlAtletica"> | string
+  apelido?: Prisma.StringNullableFilter<"AtlAtletica"> | string | null
   sigla?: Prisma.StringFilter<"AtlAtletica"> | string
   mascote?: Prisma.StringFilter<"AtlAtletica"> | string
   descricao?: Prisma.StringNullableFilter<"AtlAtletica"> | string | null
@@ -396,6 +406,7 @@ export type AtlAtleticaOrderByWithAggregationInput = {
   atl_atletica_status_id?: Prisma.SortOrderInput | Prisma.SortOrder
   criado_por_sys_usuario_id?: Prisma.SortOrderInput | Prisma.SortOrder
   nome?: Prisma.SortOrder
+  apelido?: Prisma.SortOrderInput | Prisma.SortOrder
   sigla?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   mascote?: Prisma.SortOrder
@@ -422,6 +433,7 @@ export type AtlAtleticaScalarWhereWithAggregatesInput = {
   atl_atletica_status_id?: Prisma.IntNullableWithAggregatesFilter<"AtlAtletica"> | number | null
   criado_por_sys_usuario_id?: Prisma.IntNullableWithAggregatesFilter<"AtlAtletica"> | number | null
   nome?: Prisma.StringWithAggregatesFilter<"AtlAtletica"> | string
+  apelido?: Prisma.StringNullableWithAggregatesFilter<"AtlAtletica"> | string | null
   sigla?: Prisma.StringWithAggregatesFilter<"AtlAtletica"> | string
   slug?: Prisma.StringWithAggregatesFilter<"AtlAtletica"> | string
   mascote?: Prisma.StringWithAggregatesFilter<"AtlAtletica"> | string
@@ -436,6 +448,7 @@ export type AtlAtleticaScalarWhereWithAggregatesInput = {
 
 export type AtlAtleticaCreateInput = {
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -466,6 +479,7 @@ export type AtlAtleticaUncheckedCreateInput = {
   atl_atletica_status_id?: number | null
   criado_por_sys_usuario_id?: number | null
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -489,6 +503,7 @@ export type AtlAtleticaUncheckedCreateInput = {
 
 export type AtlAtleticaUpdateInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -519,6 +534,7 @@ export type AtlAtleticaUncheckedUpdateInput = {
   atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -546,6 +562,7 @@ export type AtlAtleticaCreateManyInput = {
   atl_atletica_status_id?: number | null
   criado_por_sys_usuario_id?: number | null
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -560,6 +577,7 @@ export type AtlAtleticaCreateManyInput = {
 
 export type AtlAtleticaUpdateManyMutationInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -578,6 +596,7 @@ export type AtlAtleticaUncheckedUpdateManyInput = {
   atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -617,6 +636,7 @@ export type AtlAtleticaCountOrderByAggregateInput = {
   atl_atletica_status_id?: Prisma.SortOrder
   criado_por_sys_usuario_id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
+  apelido?: Prisma.SortOrder
   sigla?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   mascote?: Prisma.SortOrder
@@ -643,6 +663,7 @@ export type AtlAtleticaMaxOrderByAggregateInput = {
   atl_atletica_status_id?: Prisma.SortOrder
   criado_por_sys_usuario_id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
+  apelido?: Prisma.SortOrder
   sigla?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   mascote?: Prisma.SortOrder
@@ -661,6 +682,7 @@ export type AtlAtleticaMinOrderByAggregateInput = {
   atl_atletica_status_id?: Prisma.SortOrder
   criado_por_sys_usuario_id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
+  apelido?: Prisma.SortOrder
   sigla?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   mascote?: Prisma.SortOrder
@@ -944,6 +966,7 @@ export type AtlAtleticaUpdateOneRequiredWithoutAtl_atletica_assinaturaNestedInpu
 
 export type AtlAtleticaCreateWithoutCriado_por_sys_usuarioInput = {
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -972,6 +995,7 @@ export type AtlAtleticaUncheckedCreateWithoutCriado_por_sys_usuarioInput = {
   edu_instituicao_id: number
   atl_atletica_status_id?: number | null
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1028,6 +1052,7 @@ export type AtlAtleticaScalarWhereInput = {
   atl_atletica_status_id?: Prisma.IntNullableFilter<"AtlAtletica"> | number | null
   criado_por_sys_usuario_id?: Prisma.IntNullableFilter<"AtlAtletica"> | number | null
   nome?: Prisma.StringFilter<"AtlAtletica"> | string
+  apelido?: Prisma.StringNullableFilter<"AtlAtletica"> | string | null
   sigla?: Prisma.StringFilter<"AtlAtletica"> | string
   slug?: Prisma.StringFilter<"AtlAtletica"> | string
   mascote?: Prisma.StringFilter<"AtlAtletica"> | string
@@ -1042,6 +1067,7 @@ export type AtlAtleticaScalarWhereInput = {
 
 export type AtlAtleticaCreateWithoutSys_usuario_roleInput = {
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1071,6 +1097,7 @@ export type AtlAtleticaUncheckedCreateWithoutSys_usuario_roleInput = {
   atl_atletica_status_id?: number | null
   criado_por_sys_usuario_id?: number | null
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1109,6 +1136,7 @@ export type AtlAtleticaUpdateToOneWithWhereWithoutSys_usuario_roleInput = {
 
 export type AtlAtleticaUpdateWithoutSys_usuario_roleInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1138,6 +1166,7 @@ export type AtlAtleticaUncheckedUpdateWithoutSys_usuario_roleInput = {
   atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1160,6 +1189,7 @@ export type AtlAtleticaUncheckedUpdateWithoutSys_usuario_roleInput = {
 
 export type AtlAtleticaCreateWithoutSys_usuario_permissionInput = {
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1189,6 +1219,7 @@ export type AtlAtleticaUncheckedCreateWithoutSys_usuario_permissionInput = {
   atl_atletica_status_id?: number | null
   criado_por_sys_usuario_id?: number | null
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1227,6 +1258,7 @@ export type AtlAtleticaUpdateToOneWithWhereWithoutSys_usuario_permissionInput = 
 
 export type AtlAtleticaUpdateWithoutSys_usuario_permissionInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1256,6 +1288,7 @@ export type AtlAtleticaUncheckedUpdateWithoutSys_usuario_permissionInput = {
   atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1278,6 +1311,7 @@ export type AtlAtleticaUncheckedUpdateWithoutSys_usuario_permissionInput = {
 
 export type AtlAtleticaCreateWithoutEdu_instituicaoInput = {
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1306,6 +1340,7 @@ export type AtlAtleticaUncheckedCreateWithoutEdu_instituicaoInput = {
   atl_atletica_status_id?: number | null
   criado_por_sys_usuario_id?: number | null
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1355,6 +1390,7 @@ export type AtlAtleticaUpdateManyWithWhereWithoutEdu_instituicaoInput = {
 
 export type AtlAtleticaCreateWithoutAtl_atletica_statusInput = {
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1383,6 +1419,7 @@ export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_statusInput = {
   edu_instituicao_id: number
   criado_por_sys_usuario_id?: number | null
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1432,6 +1469,7 @@ export type AtlAtleticaUpdateManyWithWhereWithoutAtl_atletica_statusInput = {
 
 export type AtlAtleticaCreateWithoutAtl_atletica_cursoInput = {
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1461,6 +1499,7 @@ export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_cursoInput = {
   atl_atletica_status_id?: number | null
   criado_por_sys_usuario_id?: number | null
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1499,6 +1538,7 @@ export type AtlAtleticaUpdateToOneWithWhereWithoutAtl_atletica_cursoInput = {
 
 export type AtlAtleticaUpdateWithoutAtl_atletica_cursoInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1528,6 +1568,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_cursoInput = {
   atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1550,6 +1591,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_cursoInput = {
 
 export type AtlAtleticaCreateWithoutAtl_atletica_gestaoInput = {
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1579,6 +1621,7 @@ export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_gestaoInput = {
   atl_atletica_status_id?: number | null
   criado_por_sys_usuario_id?: number | null
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1617,6 +1660,7 @@ export type AtlAtleticaUpdateToOneWithWhereWithoutAtl_atletica_gestaoInput = {
 
 export type AtlAtleticaUpdateWithoutAtl_atletica_gestaoInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1646,6 +1690,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_gestaoInput = {
   atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1668,6 +1713,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_gestaoInput = {
 
 export type AtlAtleticaCreateWithoutAtl_atletica_cargoInput = {
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1697,6 +1743,7 @@ export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_cargoInput = {
   atl_atletica_status_id?: number | null
   criado_por_sys_usuario_id?: number | null
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1735,6 +1782,7 @@ export type AtlAtleticaUpdateToOneWithWhereWithoutAtl_atletica_cargoInput = {
 
 export type AtlAtleticaUpdateWithoutAtl_atletica_cargoInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1764,6 +1812,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_cargoInput = {
   atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1786,6 +1835,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_cargoInput = {
 
 export type AtlAtleticaCreateWithoutAtl_atletica_membroInput = {
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1815,6 +1865,7 @@ export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_membroInput = {
   atl_atletica_status_id?: number | null
   criado_por_sys_usuario_id?: number | null
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1853,6 +1904,7 @@ export type AtlAtleticaUpdateToOneWithWhereWithoutAtl_atletica_membroInput = {
 
 export type AtlAtleticaUpdateWithoutAtl_atletica_membroInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1882,6 +1934,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_membroInput = {
   atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1904,6 +1957,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_membroInput = {
 
 export type AtlAtleticaCreateWithoutAtl_atletica_temaInput = {
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1933,6 +1987,7 @@ export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_temaInput = {
   atl_atletica_status_id?: number | null
   criado_por_sys_usuario_id?: number | null
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -1971,6 +2026,7 @@ export type AtlAtleticaUpdateToOneWithWhereWithoutAtl_atletica_temaInput = {
 
 export type AtlAtleticaUpdateWithoutAtl_atletica_temaInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2000,6 +2056,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_temaInput = {
   atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2022,6 +2079,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_temaInput = {
 
 export type AtlAtleticaCreateWithoutAtl_atletica_regimentoInput = {
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -2051,6 +2109,7 @@ export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_regimentoInput = {
   atl_atletica_status_id?: number | null
   criado_por_sys_usuario_id?: number | null
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -2089,6 +2148,7 @@ export type AtlAtleticaUpdateToOneWithWhereWithoutAtl_atletica_regimentoInput = 
 
 export type AtlAtleticaUpdateWithoutAtl_atletica_regimentoInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2118,6 +2178,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_regimentoInput = {
   atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2140,6 +2201,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_regimentoInput = {
 
 export type AtlAtleticaCreateWithoutAtl_atletica_assinaturaInput = {
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -2169,6 +2231,7 @@ export type AtlAtleticaUncheckedCreateWithoutAtl_atletica_assinaturaInput = {
   atl_atletica_status_id?: number | null
   criado_por_sys_usuario_id?: number | null
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -2207,6 +2270,7 @@ export type AtlAtleticaUpdateToOneWithWhereWithoutAtl_atletica_assinaturaInput =
 
 export type AtlAtleticaUpdateWithoutAtl_atletica_assinaturaInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2236,6 +2300,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_assinaturaInput = {
   atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2261,6 +2326,7 @@ export type AtlAtleticaCreateManyCriado_por_sys_usuarioInput = {
   edu_instituicao_id: number
   atl_atletica_status_id?: number | null
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -2275,6 +2341,7 @@ export type AtlAtleticaCreateManyCriado_por_sys_usuarioInput = {
 
 export type AtlAtleticaUpdateWithoutCriado_por_sys_usuarioInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2303,6 +2370,7 @@ export type AtlAtleticaUncheckedUpdateWithoutCriado_por_sys_usuarioInput = {
   edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
   atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2329,6 +2397,7 @@ export type AtlAtleticaUncheckedUpdateManyWithoutCriado_por_sys_usuarioInput = {
   edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
   atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2346,6 +2415,7 @@ export type AtlAtleticaCreateManyEdu_instituicaoInput = {
   atl_atletica_status_id?: number | null
   criado_por_sys_usuario_id?: number | null
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -2360,6 +2430,7 @@ export type AtlAtleticaCreateManyEdu_instituicaoInput = {
 
 export type AtlAtleticaUpdateWithoutEdu_instituicaoInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2388,6 +2459,7 @@ export type AtlAtleticaUncheckedUpdateWithoutEdu_instituicaoInput = {
   atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2414,6 +2486,7 @@ export type AtlAtleticaUncheckedUpdateManyWithoutEdu_instituicaoInput = {
   atl_atletica_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2431,6 +2504,7 @@ export type AtlAtleticaCreateManyAtl_atletica_statusInput = {
   edu_instituicao_id: number
   criado_por_sys_usuario_id?: number | null
   nome: string
+  apelido?: string | null
   sigla: string
   slug: string
   mascote: string
@@ -2445,6 +2519,7 @@ export type AtlAtleticaCreateManyAtl_atletica_statusInput = {
 
 export type AtlAtleticaUpdateWithoutAtl_atletica_statusInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2473,6 +2548,7 @@ export type AtlAtleticaUncheckedUpdateWithoutAtl_atletica_statusInput = {
   edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
   criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2499,6 +2575,7 @@ export type AtlAtleticaUncheckedUpdateManyWithoutAtl_atletica_statusInput = {
   edu_instituicao_id?: Prisma.IntFieldUpdateOperationsInput | number
   criado_por_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  apelido?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sigla?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   mascote?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2611,6 +2688,7 @@ export type AtlAtleticaSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   atl_atletica_status_id?: boolean
   criado_por_sys_usuario_id?: boolean
   nome?: boolean
+  apelido?: boolean
   sigla?: boolean
   slug?: boolean
   mascote?: boolean
@@ -2644,6 +2722,7 @@ export type AtlAtleticaSelectScalar = {
   atl_atletica_status_id?: boolean
   criado_por_sys_usuario_id?: boolean
   nome?: boolean
+  apelido?: boolean
   sigla?: boolean
   slug?: boolean
   mascote?: boolean
@@ -2656,7 +2735,7 @@ export type AtlAtleticaSelectScalar = {
   deleted_at?: boolean
 }
 
-export type AtlAtleticaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "edu_instituicao_id" | "atl_atletica_status_id" | "criado_por_sys_usuario_id" | "nome" | "sigla" | "slug" | "mascote" | "descricao" | "fundado_at" | "logo_url" | "ativo" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["atlAtletica"]>
+export type AtlAtleticaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "edu_instituicao_id" | "atl_atletica_status_id" | "criado_por_sys_usuario_id" | "nome" | "apelido" | "sigla" | "slug" | "mascote" | "descricao" | "fundado_at" | "logo_url" | "ativo" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["atlAtletica"]>
 export type AtlAtleticaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   atl_atletica_status?: boolean | Prisma.AtlAtletica$atl_atletica_statusArgs<ExtArgs>
   criado_por_sys_usuario?: boolean | Prisma.AtlAtletica$criado_por_sys_usuarioArgs<ExtArgs>
@@ -2695,6 +2774,7 @@ export type $AtlAtleticaPayload<ExtArgs extends runtime.Types.Extensions.Interna
     atl_atletica_status_id: number | null
     criado_por_sys_usuario_id: number | null
     nome: string
+    apelido: string | null
     sigla: string
     slug: string
     mascote: string
@@ -3091,6 +3171,7 @@ export interface AtlAtleticaFieldRefs {
   readonly atl_atletica_status_id: Prisma.FieldRef<"AtlAtletica", 'Int'>
   readonly criado_por_sys_usuario_id: Prisma.FieldRef<"AtlAtletica", 'Int'>
   readonly nome: Prisma.FieldRef<"AtlAtletica", 'String'>
+  readonly apelido: Prisma.FieldRef<"AtlAtletica", 'String'>
   readonly sigla: Prisma.FieldRef<"AtlAtletica", 'String'>
   readonly slug: Prisma.FieldRef<"AtlAtletica", 'String'>
   readonly mascote: Prisma.FieldRef<"AtlAtletica", 'String'>

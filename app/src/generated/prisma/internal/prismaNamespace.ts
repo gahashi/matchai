@@ -4044,6 +4044,7 @@ export const AtlAtleticaScalarFieldEnum = {
   atl_atletica_status_id: 'atl_atletica_status_id',
   criado_por_sys_usuario_id: 'criado_por_sys_usuario_id',
   nome: 'nome',
+  apelido: 'apelido',
   sigla: 'sigla',
   slug: 'slug',
   mascote: 'mascote',
@@ -4767,6 +4768,7 @@ export type AtlAtleticaStatusOrderByRelevanceFieldEnum = (typeof AtlAtleticaStat
 
 export const AtlAtleticaOrderByRelevanceFieldEnum = {
   nome: 'nome',
+  apelido: 'apelido',
   sigla: 'sigla',
   slug: 'slug',
   mascote: 'mascote',
