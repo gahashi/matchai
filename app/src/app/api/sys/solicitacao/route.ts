@@ -104,16 +104,23 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-    const access = await requireApiAccess(request, {
-        permissions: ["solicitacao.criar"],
-    });
-
-    if (!access.ok) {
-        return access.response;
-    }
-
     try {
         const body = await request.json();
+
+        const isCriarAtletica = body?.tipoCodigo === "criar_atletica";
+
+        const access = await requireApiAccess(
+            request,
+            isCriarAtletica
+                ? {}
+                : {
+                    permissions: ["solicitacao.criar"],
+                }
+        );
+
+        if (!access.ok) {
+            return access.response;
+        }
 
         const erroSlug = await validarSlugCriarAtletica(body);
 

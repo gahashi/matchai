@@ -1078,14 +1078,9 @@ async function main() {
      */
     const cursosBase = [
         {
-            nome: "Ciência da Computação",
-            abreviacao: "CC",
+            nome: "Administração",
+            abreviacao: "ADM",
             periodos: 8,
-        },
-        {
-            nome: "Sistemas para Internet",
-            abreviacao: "SISNET",
-            periodos: 6,
         },
         {
             nome: "Análise e Desenvolvimento de Sistemas",
@@ -1093,9 +1088,134 @@ async function main() {
             periodos: 6,
         },
         {
+            nome: "Arquitetura e Urbanismo",
+            abreviacao: "ARQ",
+            periodos: 10,
+        },
+        {
+            nome: "Biomedicina",
+            abreviacao: "BIOMED",
+            periodos: 8,
+        },
+        {
+            nome: "Ciência da Computação",
+            abreviacao: "CC",
+            periodos: 8,
+        },
+        {
+            nome: "Ciências Contábeis",
+            abreviacao: "CONT",
+            periodos: 8,
+        },
+        {
+            nome: "Comércio Exterior",
+            abreviacao: "COMEX",
+            periodos: 8,
+        },
+        {
+            nome: "Design",
+            abreviacao: "DESIGN",
+            periodos: 8,
+        },
+        {
+            nome: "Direito",
+            abreviacao: "DIR",
+            periodos: 10,
+        },
+        {
+            nome: "Educação Física",
+            abreviacao: "EDFIS",
+            periodos: 8,
+        },
+        {
+            nome: "Enfermagem",
+            abreviacao: "ENF",
+            periodos: 10,
+        },
+        {
+            nome: "Engenharia Civil",
+            abreviacao: "ECIV",
+            periodos: 10,
+        },
+        {
+            nome: "Engenharia da Computação",
+            abreviacao: "ECOMP",
+            periodos: 10,
+        },
+        {
+            nome: "Engenharia de Produção",
+            abreviacao: "EPROD",
+            periodos: 10,
+        },
+        {
+            nome: "Engenharia de Software",
+            abreviacao: "ESW",
+            periodos: 8,
+        },
+        {
+            nome: "Fisioterapia",
+            abreviacao: "FISIO",
+            periodos: 10,
+        },
+        {
+            nome: "Gastronomia",
+            abreviacao: "GASTRO",
+            periodos: 4,
+        },
+        {
             nome: "Inteligência Artificial",
             abreviacao: "IA",
             periodos: 8,
+        },
+        {
+            nome: "Jornalismo",
+            abreviacao: "JOR",
+            periodos: 8,
+        },
+        {
+            nome: "Medicina",
+            abreviacao: "MED",
+            periodos: 12,
+        },
+        {
+            nome: "Medicina Veterinária",
+            abreviacao: "VET",
+            periodos: 10,
+        },
+        {
+            nome: "Nutrição",
+            abreviacao: "NUT",
+            periodos: 8,
+        },
+        {
+            nome: "Odontologia",
+            abreviacao: "ODONTO",
+            periodos: 10,
+        },
+        {
+            nome: "Pedagogia",
+            abreviacao: "PED",
+            periodos: 8,
+        },
+        {
+            nome: "Psicologia",
+            abreviacao: "PSI",
+            periodos: 10,
+        },
+        {
+            nome: "Publicidade e Propaganda",
+            abreviacao: "PP",
+            periodos: 8,
+        },
+        {
+            nome: "Relações Internacionais",
+            abreviacao: "RI",
+            periodos: 8,
+        },
+        {
+            nome: "Sistemas para Internet",
+            abreviacao: "SISNET",
+            periodos: 6,
         },
     ];
 
