@@ -234,7 +234,7 @@ export function CriarAtleticaClient({
                     "Sua solicitação de criação de atlética foi enviada para análise.",
             });
 
-            router.push(`/sys/solicitacao/${solicitacaoId}`);
+            router.push("/atl/atletica");
             router.refresh();
         } catch (error) {
             const message =
