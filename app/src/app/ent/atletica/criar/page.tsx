@@ -8,7 +8,9 @@ import { requireAuthPageAccess } from "@/lib/auth/require-access";
 import { prisma } from "@/lib/prisma";
 import { CriarAtleticaClient } from "./CriarAtleticaClient";
 
-async function getSolicitacaoCriarAtleticaEmAndamento(sysUsuarioId: number) {
+async function getSolicitacaoCriarAtleticaEmAndamento(
+    sysUsuarioId: number,
+) {
     return prisma.sysSolicitacao.findFirst({
         where: {
             solicitado_por_usuario_id: sysUsuarioId,
@@ -44,7 +46,114 @@ async function getSolicitacaoCriarAtleticaEmAndamento(sysUsuarioId: number) {
         },
     });
 }
+async function getContextoEducacionalUsuario(
+    sysUsuarioId: number
+) {
+    const vinculosPolo =
+        await prisma.sysUsuarioPolo.findMany({
+            where: {
+                sys_usuario_id: sysUsuarioId,
+                ativo: 1,
+                deleted_at: null,
+                edu_polo: {
+                    ativo: 1,
+                    deleted_at: null,
+                    edu_instituicao: {
+                        ativo: 1,
+                        deleted_at: null,
+                    },
+                },
+            },
+            select: {
+                principal: true,
+                edu_polo: {
+                    select: {
+                        id: true,
+                        nome: true,
+                        cidade: true,
+                        estado: true,
+                        edu_instituicao: {
+                            select: {
+                                id: true,
+                                nome: true,
+                                abreviacao: true,
+                                cidade: true,
+                                estado: true,
+                            },
+                        },
+                    },
+                },
+            },
+            orderBy: [
+                {
+                    principal: "desc",
+                },
+                {
+                    created_at: "asc",
+                },
+            ],
+        });
 
+    if (vinculosPolo.length === 0) {
+        return {
+            instituicaoInicial: null,
+            polosIniciais: [],
+            cursosIniciais: [],
+        };
+    }
+
+    const vinculoPrincipal =
+        vinculosPolo.find(
+            (vinculo) => vinculo.principal === 1
+        ) ?? vinculosPolo[0];
+
+    const instituicao =
+        vinculoPrincipal.edu_polo.edu_instituicao;
+
+    const polosDaInstituicao = vinculosPolo
+        .filter(
+            (vinculo) =>
+                vinculo.edu_polo.edu_instituicao.id ===
+                instituicao.id
+        )
+        .sort((a, b) => {
+            if (a.principal === b.principal) {
+                return 0;
+            }
+
+            return a.principal === 1 ? -1 : 1;
+        });
+
+    return {
+        instituicaoInicial: {
+            id: instituicao.id,
+            label: instituicao.abreviacao
+                ? `${instituicao.abreviacao} — ${instituicao.nome}`
+                : instituicao.nome,
+            description: [
+                instituicao.cidade,
+                instituicao.estado,
+            ]
+                .filter(Boolean)
+                .join(" / "),
+        },
+
+        polosIniciais: polosDaInstituicao.map(
+            (vinculo) => ({
+                id: vinculo.edu_polo.id,
+                label: vinculo.edu_polo.nome,
+                description: [
+                    vinculo.edu_polo.cidade,
+                    vinculo.edu_polo.estado,
+                ]
+                    .filter(Boolean)
+                    .join(" / "),
+            })
+        ),
+
+        cursosIniciais: [],
+    };
+}
 function getBadgeColor(color?: string | null) {
     if (
         color === "primary" ||
@@ -61,10 +170,15 @@ function getBadgeColor(color?: string | null) {
 }
 
 export default async function CriarAtleticaPage() {
-    const { session } = await requireAuthPageAccess("/ent/atletica/criar");
+    const { session } = await requireAuthPageAccess(
+        "/ent/atletica/criar",
+    );
 
-    const solicitacaoEmAndamento =
-        await getSolicitacaoCriarAtleticaEmAndamento(session.user.id);
+    const [solicitacaoEmAndamento, contextoEducacional] =
+        await Promise.all([
+            getSolicitacaoCriarAtleticaEmAndamento(session.user.id),
+            getContextoEducacionalUsuario(session.user.id),
+        ]);
 
     return (
         <AppShell>
@@ -76,7 +190,7 @@ export default async function CriarAtleticaPage() {
                         <Badge
                             color={getBadgeColor(
                                 solicitacaoEmAndamento
-                                    .sys_solicitacao_status.color
+                                    .sys_solicitacao_status.color,
                             )}
                             variant="soft"
                         >
@@ -101,27 +215,35 @@ export default async function CriarAtleticaPage() {
                         </h2>
 
                         <p className="bp-section-subtitle">
-                            A criação da atlética passa por uma solicitação.
-                            Depois do envio, a equipe responsável analisa os
-                            dados e aprova, solicita ajuste ou recusa.
+                            A criação da atlética passa por uma
+                            solicitação. Depois do envio, a equipe
+                            responsável analisa os dados e aprova,
+                            solicita ajuste ou recusa.
                         </p>
 
                         <div className="bp-check-list">
                             <div className="bp-check-item">
-                                <span>1. Você preenche os dados iniciais</span>
-                            </div>
-
-                            <div className="bp-check-item">
-                                <span>2. O sistema cria uma solicitação</span>
-                            </div>
-
-                            <div className="bp-check-item">
-                                <span>3. A solicitação vai para análise</span>
+                                <span>
+                                    1. Você preenche os dados iniciais
+                                </span>
                             </div>
 
                             <div className="bp-check-item">
                                 <span>
-                                    4. Após aprovação, a atlética é ativada
+                                    2. O sistema cria uma solicitação
+                                </span>
+                            </div>
+
+                            <div className="bp-check-item">
+                                <span>
+                                    3. A solicitação vai para análise
+                                </span>
+                            </div>
+
+                            <div className="bp-check-item">
+                                <span>
+                                    4. Após aprovação, a atlética é
+                                    ativada
                                 </span>
                             </div>
                         </div>
@@ -134,6 +256,15 @@ export default async function CriarAtleticaPage() {
                     }
                     solicitacaoEmAndamentoTitulo={
                         solicitacaoEmAndamento?.titulo ?? null
+                    }
+                    instituicaoInicial={
+                        contextoEducacional.instituicaoInicial
+                    }
+                    polosIniciais={
+                        contextoEducacional.polosIniciais
+                    }
+                    cursosIniciais={
+                        contextoEducacional.cursosIniciais
                     }
                 />
             </div>

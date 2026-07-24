@@ -1,10 +1,10 @@
 import { AppShell } from "@/components/layout/AppShell";
-import { requirePageAccess } from "@/lib/auth/require-access";
+import {requireAuthPageAccess} from "@/lib/auth/require-access";
 import { inboxService } from "@/lib/inbox/inbox-service";
 import InboxClient from "./InboxClient";
 
 export default async function InboxPage() {
-    const { session } = await requirePageAccess("/inbox");
+    const { session } = await requireAuthPageAccess("sys/inbox");
 
     const result = session
         ? await inboxService.listItems({

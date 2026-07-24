@@ -18,6 +18,9 @@ import { Textarea } from "@/components/ui/Textarea";
 type CriarAtleticaClientProps = {
     solicitacaoEmAndamentoId: number | null;
     solicitacaoEmAndamentoTitulo: string | null;
+    instituicaoInicial?: AsyncSelectOption | null;
+    polosIniciais?: AsyncSelectOption[];
+    cursosIniciais?: AsyncSelectOption[];
 };
 
 type FeedbackState = {
@@ -39,6 +42,9 @@ function slugify(value: string) {
 export function CriarAtleticaClient({
                                         solicitacaoEmAndamentoId,
                                         solicitacaoEmAndamentoTitulo,
+                                        instituicaoInicial = null,
+                                        polosIniciais = [],
+                                        cursosIniciais = [],
                                     }: CriarAtleticaClientProps) {
     const router = useRouter();
 
@@ -47,16 +53,26 @@ export function CriarAtleticaClient({
     const [sigla, setSigla] = useState("");
     const [slug, setSlug] = useState("");
     const [slugError, setSlugError] = useState<string | null>(null);
-    const [slugEditadoManualmente, setSlugEditadoManualmente] = useState(false);
+    const [slugEditadoManualmente, setSlugEditadoManualmente] =
+        useState(false);
 
     const [mascote, setMascote] = useState("");
     const [descricao, setDescricao] = useState("");
+
     const [instituicao, setInstituicao] =
-        useState<AsyncSelectOption | null>(null);
-    const [cursos, setCursos] = useState<AsyncSelectOption[]>([]);
+        useState<AsyncSelectOption | null>(instituicaoInicial);
+
+    const [polos, setPolos] =
+        useState<AsyncSelectOption[]>(polosIniciais);
+
+    const [cursos, setCursos] =
+        useState<AsyncSelectOption[]>(cursosIniciais);
+
     const [gestaoNome, setGestaoNome] = useState("");
     const [loading, setLoading] = useState(false);
-    const [feedback, setFeedback] = useState<FeedbackState | null>(null);
+
+    const [feedback, setFeedback] =
+        useState<FeedbackState | null>(null);
 
     const slugSugerido = useMemo(
         () => slugify(apelido || sigla || nome),
@@ -64,14 +80,20 @@ export function CriarAtleticaClient({
     );
 
     useEffect(() => {
-        if (slugEditadoManualmente) return;
+        if (slugEditadoManualmente) {
+            return;
+        }
 
         setSlug(slugSugerido);
-    }, [slugSugerido, slugEditadoManualmente]);
+    }, [slugEditadoManualmente, slugSugerido]);
 
     const cursoEndpoint = instituicao
         ? `/api/edu/curso/select?instituicaoId=${instituicao.id}`
         : "/api/edu/curso/select";
+
+    const poloEndpoint = instituicao
+        ? `/api/edu/polo/select?instituicaoId=${instituicao.id}`
+        : "/api/edu/polo/select";
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -83,6 +105,7 @@ export function CriarAtleticaClient({
                 message:
                     "Você já possui uma solicitação de criação de atlética em andamento.",
             });
+
             return;
         }
 
@@ -92,6 +115,7 @@ export function CriarAtleticaClient({
                 title: "Nome obrigatório",
                 message: "Informe o nome oficial da atlética.",
             });
+
             return;
         }
 
@@ -101,6 +125,7 @@ export function CriarAtleticaClient({
                 title: "Apelido obrigatório",
                 message: "Informe o nome popular da atlética.",
             });
+
             return;
         }
 
@@ -110,6 +135,7 @@ export function CriarAtleticaClient({
                 title: "Sigla obrigatória",
                 message: "Informe a sigla da atlética.",
             });
+
             return;
         }
 
@@ -119,8 +145,10 @@ export function CriarAtleticaClient({
             setFeedback({
                 color: "danger",
                 title: "Endereço público obrigatório",
-                message: "Informe um endereço público válido para a atlética.",
+                message:
+                    "Informe um endereço público válido para a atlética.",
             });
+
             return;
         }
 
@@ -130,6 +158,18 @@ export function CriarAtleticaClient({
                 title: "Instituição obrigatória",
                 message: "Selecione a instituição da atlética.",
             });
+
+            return;
+        }
+
+        if (polos.length === 0) {
+            setFeedback({
+                color: "danger",
+                title: "Polo obrigatório",
+                message:
+                    "Selecione pelo menos um polo vinculado à atlética.",
+            });
+
             return;
         }
 
@@ -137,54 +177,78 @@ export function CriarAtleticaClient({
             setFeedback({
                 color: "danger",
                 title: "Curso obrigatório",
-                message: "Selecione pelo menos um curso vinculado à atlética.",
+                message:
+                    "Selecione pelo menos um curso vinculado à atlética.",
             });
+
             return;
         }
+
+        const polosPayload = polos.map((polo, index) => ({
+            id: Number(polo.id),
+            principal: index === 0,
+        }));
+
         setSlugError(null);
         setLoading(true);
         setFeedback(null);
 
         try {
-            const criarResponse = await fetch("/api/sys/solicitacao", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    tipoCodigo: "criar_atletica",
-                    titulo: `Criação da atlética ${apelido.trim()}`,
-                    descricao:
-                        descricao.trim() ||
-                        `Solicitação para criação da atlética ${apelido.trim()} (${sigla.trim().toUpperCase()}).`,
-                    entidadeTipo: "ent_atletica",
-                    entidadeId: null,
-                    payload: {
-                        atletica: {
-                            nome: nome.trim(),
-                            apelido: apelido.trim(),
-                            sigla: sigla.trim().toUpperCase(),
-                            slug: slugFinal,
-                            mascote: mascote.trim() || "Mascote não informado",
-                            descricao: descricao.trim() || null,
-                            eduInstituicaoId: Number(instituicao.id),
-                            cursoIds: cursos.map((curso) => Number(curso.id)),
-                        },
-                        gestao: {
-                            nome:
-                                gestaoNome.trim() ||
-                                `Gestão ${new Date().getFullYear()}`,
-                            inicioAt: new Date().toISOString(),
-                            fimAt: null,
-                            observacao:
-                                "Gestão inicial informada na solicitação de criação da atlética.",
-                        },
+            const criarResponse = await fetch(
+                "/api/sys/solicitacao",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
                     },
-                    metadata: {
-                        origem: "ent_atletica_criar",
-                    },
-                }),
-            });
+                    body: JSON.stringify({
+                        tipoCodigo: "criar_atletica",
+                        titulo: `Criação da atlética ${apelido.trim()}`,
+                        descricao:
+                            descricao.trim() ||
+                            `Solicitação para criação da atlética ${apelido.trim()} (${sigla
+                                .trim()
+                                .toUpperCase()}).`,
+                        entidadeTipo: "ent_entidade",
+                        entidadeId: null,
+                        payload: {
+                            atletica: {
+                                nome: nome.trim(),
+                                apelido: apelido.trim(),
+                                sigla: sigla
+                                    .trim()
+                                    .toUpperCase(),
+                                slug: slugFinal,
+                                mascote:
+                                    mascote.trim() ||
+                                    "Mascote não informado",
+                                descricao:
+                                    descricao.trim() || null,
+                                instituicaoId: Number(
+                                    instituicao.id
+                                ),
+                                polos: polosPayload,
+                                cursoIds: cursos.map((curso) =>
+                                    Number(curso.id)
+                                ),
+                            },
+                            gestao: {
+                                nome:
+                                    gestaoNome.trim() ||
+                                    `Gestão ${new Date().getFullYear()}`,
+                                inicioAt:
+                                    new Date().toISOString(),
+                                fimAt: null,
+                                observacao:
+                                    "Gestão inicial informada na solicitação de criação da atlética.",
+                            },
+                        },
+                        metadata: {
+                            origem: "ent_entidade_criar",
+                        },
+                    }),
+                }
+            );
 
             const criarData = await criarResponse.json();
 
@@ -242,7 +306,11 @@ export function CriarAtleticaClient({
                     ? error.message
                     : "Não foi possível criar a solicitação.";
 
-            if (message.toLowerCase().includes("endereço público")) {
+            if (
+                message
+                    .toLowerCase()
+                    .includes("endereço público")
+            ) {
                 setSlugError(message);
             }
 
@@ -281,7 +349,7 @@ export function CriarAtleticaClient({
                             </AppLink>
 
                             <AppLink
-                                href="/app/src/app/ent/atletica"
+                                href="/ent/atletica"
                                 color="secondary"
                                 variant="soft"
                             >
@@ -307,11 +375,16 @@ export function CriarAtleticaClient({
         <>
             <Card variant="elevated">
                 <CardBody>
-                    <form onSubmit={handleSubmit} className="bp-form-grid">
+                    <form
+                        onSubmit={handleSubmit}
+                        className="bp-form-grid"
+                    >
                         <Input
                             label="Nome oficial da atlética"
                             value={nome}
-                            onChange={(event) => setNome(event.target.value)}
+                            onChange={(event) =>
+                                setNome(event.target.value)
+                            }
                             placeholder="Ex.: Associação Atlética Acadêmica dos Cursos de Computação da Universidade do Vale do Itajaí"
                             required
                         />
@@ -319,7 +392,9 @@ export function CriarAtleticaClient({
                         <Input
                             label="Apelido / nome popular"
                             value={apelido}
-                            onChange={(event) => setApelido(event.target.value)}
+                            onChange={(event) =>
+                                setApelido(event.target.value)
+                            }
                             placeholder="Ex.: Computaria"
                             helperText="Usado em cards, página pública, loja, eventos e comunicações."
                             required
@@ -329,7 +404,9 @@ export function CriarAtleticaClient({
                             label="Sigla"
                             value={sigla}
                             onChange={(event) =>
-                                setSigla(event.target.value.toUpperCase())
+                                setSigla(
+                                    event.target.value.toUpperCase()
+                                )
                             }
                             placeholder="Ex.: AAACCU"
                             required
@@ -341,7 +418,9 @@ export function CriarAtleticaClient({
                             onChange={(event) => {
                                 setSlugEditadoManualmente(true);
                                 setSlugError(null);
-                                setSlug(slugify(event.target.value));
+                                setSlug(
+                                    slugify(event.target.value)
+                                );
                             }}
                             placeholder="Ex.: computaria"
                             error={slugError}
@@ -356,7 +435,9 @@ export function CriarAtleticaClient({
                         <Input
                             label="Mascote"
                             value={mascote}
-                            onChange={(event) => setMascote(event.target.value)}
+                            onChange={(event) =>
+                                setMascote(event.target.value)
+                            }
                             placeholder="Ex.: Alien"
                         />
 
@@ -364,7 +445,9 @@ export function CriarAtleticaClient({
                             label="Nome da gestão inicial"
                             value={gestaoNome}
                             onChange={(event) =>
-                                setGestaoNome(event.target.value)
+                                setGestaoNome(
+                                    event.target.value
+                                )
                             }
                             placeholder={`Gestão ${new Date().getFullYear()}`}
                         />
@@ -375,16 +458,45 @@ export function CriarAtleticaClient({
                                 endpoint="/api/edu/instituicao/select"
                                 placeholder="Busque pela instituição..."
                                 value={instituicao}
-                                onChange={setInstituicao}
+                                onChange={(option) => {
+                                    setInstituicao(option);
+                                    setPolos([]);
+                                    setCursos([]);
+                                }}
                                 minChars={0}
                             />
                         </div>
 
                         <div className="bp-form-grid-full">
                             <AsyncSelect
-                                key={String(
-                                    instituicao?.id ?? "sem-instituicao"
-                                )}
+                                key={`polos-${String(
+                                    instituicao?.id ??
+                                    "sem-instituicao"
+                                )}`}
+                                mode="multiple"
+                                label="Polos vinculados"
+                                endpoint={poloEndpoint}
+                                placeholder="Busque e selecione os polos..."
+                                value={polos}
+                                onChange={setPolos}
+                                minChars={0}
+                                maxSelected={10}
+                                disabled={!instituicao}
+                                helperText="O primeiro polo selecionado será considerado o polo principal da atlética."
+                                emptyMessage={
+                                    instituicao
+                                        ? "Nenhum polo encontrado."
+                                        : "Selecione uma instituição primeiro."
+                                }
+                            />
+                        </div>
+
+                        <div className="bp-form-grid-full">
+                            <AsyncSelect
+                                key={`cursos-${String(
+                                    instituicao?.id ??
+                                    "sem-instituicao"
+                                )}`}
                                 mode="multiple"
                                 label="Cursos vinculados"
                                 endpoint={cursoEndpoint}
@@ -407,9 +519,11 @@ export function CriarAtleticaClient({
                                 label="Descrição"
                                 value={descricao}
                                 onChange={(event) =>
-                                    setDescricao(event.target.value)
+                                    setDescricao(
+                                        event.target.value
+                                    )
                                 }
-                                placeholder="Explique brevemente a criação da atlética, curso envolvido, contexto ou observações importantes."
+                                placeholder="Explique brevemente a criação da atlética, cursos envolvidos, contexto ou observações importantes."
                                 rows={5}
                             />
                         </div>
@@ -417,10 +531,12 @@ export function CriarAtleticaClient({
                         <div className="bp-form-grid-full">
                             <div
                                 className="bp-action-row"
-                                style={{ justifyContent: "flex-end" }}
+                                style={{
+                                    justifyContent: "flex-end",
+                                }}
                             >
                                 <AppLink
-                                    href="/app/src/app/ent/atletica"
+                                    href="/ent/atletica"
                                     color="secondary"
                                     variant="soft"
                                 >
@@ -438,6 +554,7 @@ export function CriarAtleticaClient({
                                     ) : (
                                         <Send size={16} />
                                     )}
+
                                     Confirmar
                                 </Button>
                             </div>
@@ -451,7 +568,9 @@ export function CriarAtleticaClient({
                     color={feedback.color}
                     title={feedback.title}
                     message={feedback.message}
-                    autoClose={feedback.color === "success"}
+                    autoClose={
+                        feedback.color === "success"
+                    }
                     onClose={() => setFeedback(null)}
                 />
             ) : null}

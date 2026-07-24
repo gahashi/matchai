@@ -1,55 +1,57 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+
+import { requireApiAccess } from "@/lib/auth/require-api-access";
+import {
+    normalizarIdFiltro,
+    normalizarSelectLimit,
+    selectError,
+    selectSuccess,
+} from "@/lib/api/select-utils";
 import { prisma } from "@/lib/prisma";
 
 export async function GET(request: NextRequest) {
+    const access = await requireApiAccess(request);
+
+    if (!access.ok) {
+        return access.response;
+    }
+
     try {
-        const { searchParams } = new URL(request.url);
-
+        const searchParams = request.nextUrl.searchParams;
         const q = searchParams.get("q")?.trim() ?? "";
-        const instituicaoId = Number(searchParams.get("eduInstituicaoId") ?? 0);
-
-        const limitParam = Number(searchParams.get("limit") ?? 15);
-        const limit = Number.isInteger(limitParam)
-            ? Math.min(Math.max(limitParam, 1), 50)
-            : 15;
+        const limit = normalizarSelectLimit(searchParams.get("limit"));
+        const instituicaoId = normalizarIdFiltro(
+            searchParams.get("instituicaoId"),
+        );
 
         const polos = await prisma.eduPolo.findMany({
             where: {
                 ativo: 1,
                 deleted_at: null,
-                ...(instituicaoId > 0
-                    ? {
-                        edu_instituicao_id: instituicaoId,
-                    }
+                ...(instituicaoId
+                    ? { edu_instituicao_id: instituicaoId }
                     : {}),
                 ...(q
                     ? {
                         OR: [
+                            { nome: { contains: q } },
+                            { codigo: { contains: q } },
+                            { cidade: { contains: q } },
+                            { estado: { contains: q } },
                             {
-                                nome: {
-                                    contains: q,
+                                edu_instituicao: {
+                                    nome: { contains: q },
                                 },
                             },
                             {
-                                codigo: {
-                                    contains: q,
-                                },
-                            },
-                            {
-                                cidade: {
-                                    contains: q,
+                                edu_instituicao: {
+                                    abreviacao: { contains: q },
                                 },
                             },
                         ],
                     }
                     : {}),
             },
-            orderBy: [
-                {
-                    nome: "asc",
-                },
-            ],
-            take: limit,
             select: {
                 id: true,
                 codigo: true,
@@ -64,34 +66,34 @@ export async function GET(request: NextRequest) {
                     },
                 },
             },
+            orderBy: [
+                {
+                    edu_instituicao: {
+                        nome: "asc",
+                    },
+                },
+                {
+                    nome: "asc",
+                },
+            ],
+            take: limit,
         });
 
-        return NextResponse.json({
-            items: polos.map((polo) => ({
+        return selectSuccess(
+            polos.map((polo) => ({
                 id: polo.id,
-                label: polo.nome,
-                description: [
-                    polo.edu_instituicao.abreviacao,
-                    polo.cidade,
-                    polo.estado,
-                ]
+                label: instituicaoId
+                    ? polo.nome
+                    : `${polo.edu_instituicao.abreviacao || polo.edu_instituicao.nome} — ${polo.nome}`,
+                description: [polo.cidade, polo.estado]
                     .filter(Boolean)
-                    .join(" • "),
+                    .join(" / "),
                 codigo: polo.codigo,
-                eduInstituicaoId: polo.edu_instituicao_id,
+                instituicaoId: polo.edu_instituicao_id,
             })),
-        });
-    } catch (error) {
-        console.error("Erro ao buscar polos:", error);
-
-        return NextResponse.json(
-            {
-                items: [],
-                message: "Não foi possível buscar os polos.",
-            },
-            {
-                status: 500,
-            }
         );
+    } catch (error) {
+        console.error("[EDU_POLO_SELECT] Erro ao buscar polos:", error);
+        return selectError("Não foi possível buscar os polos.");
     }
 }

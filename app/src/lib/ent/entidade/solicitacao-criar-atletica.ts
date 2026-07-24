@@ -1,41 +1,27 @@
-import { prisma } from "@/lib/prisma";
 import { inboxService } from "@/lib/inbox/inbox-service";
+import { prisma } from "@/lib/prisma";
+
+type CriarAtleticaPoloPayload = {
+    id: number;
+    principal: boolean;
+};
 
 type CriarAtleticaPayload = {
-    nome?: string;
-    apelido?: string;
-    sigla?: string;
-    slug?: string;
-    mascote?: string;
-    descricao?: string | null;
-    eduInstituicaoId?: number;
-    edu_instituicao_id?: number;
-    eduPoloId?: number;
-    edu_polo_id?: number;
-    cursoIds?: number[];
-    cursosIds?: number[];
-
-    atletica?: {
-        nome?: string;
-        apelido?: string;
-        sigla?: string;
-        slug?: string;
+    atletica: {
+        nome: string;
+        apelido: string;
+        sigla: string;
+        slug: string;
         mascote?: string;
         descricao?: string | null;
-        eduInstituicaoId?: number;
-        edu_instituicao_id?: number;
-        eduPoloId?: number;
-        edu_polo_id?: number;
-        cursoIds?: number[];
-        cursosIds?: number[];
+        instituicaoId: number;
+        polos: CriarAtleticaPoloPayload[];
+        cursoIds: number[];
     };
-
-    gestao?: {
-        nome?: string;
-        inicioAt?: string | Date | null;
-        inicio_at?: string | Date | null;
+    gestao: {
+        nome: string;
+        inicioAt: string | Date;
         fimAt?: string | Date | null;
-        fim_at?: string | Date | null;
         observacao?: string | null;
     };
 };
@@ -45,21 +31,21 @@ type AplicarCriacaoAtleticaInput = {
     sysUsuarioId: number;
 };
 
-function parseJsonSafe(value?: string | null): CriarAtleticaPayload {
+function parseJsonSafe(value?: string | null): CriarAtleticaPayload | null {
     if (!value) {
-        return {};
+        return null;
     }
 
     try {
-        const parsed = JSON.parse(value);
+        const parsed: unknown = JSON.parse(value);
 
         if (!parsed || typeof parsed !== "object") {
-            return {};
+            return null;
         }
 
-        return parsed;
+        return parsed as CriarAtleticaPayload;
     } catch {
-        return {};
+        return null;
     }
 }
 
@@ -71,14 +57,6 @@ function slugify(value: string) {
         .trim()
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-+|-+$/g, "");
-}
-
-function getAtleticaPayload(payload: CriarAtleticaPayload) {
-    return payload.atletica ?? payload;
-}
-
-function getGestaoPayload(payload: CriarAtleticaPayload) {
-    return payload.gestao ?? {};
 }
 
 function normalizarDate(value?: string | Date | null) {
@@ -95,19 +73,55 @@ function normalizarDate(value?: string | Date | null) {
     return date;
 }
 
-function getCursoIds(payload: CriarAtleticaPayload) {
-    const atleticaPayload = getAtleticaPayload(payload);
+function normalizarIds(values: number[]) {
+    return Array.from(
+        new Set(
+            values
+                .map((id) => Number(id))
+                .filter((id) => Number.isInteger(id) && id > 0)
+        )
+    );
+}
 
-    const cursoIds =
-        atleticaPayload.cursoIds ??
-        atleticaPayload.cursosIds ??
-        payload.cursoIds ??
-        payload.cursosIds ??
-        [];
+function normalizarPolos(polos: CriarAtleticaPoloPayload[]) {
+    if (!Array.isArray(polos) || polos.length === 0) {
+        throw new Error(
+            "Informe pelo menos um polo vinculado à atlética."
+        );
+    }
 
-    return cursoIds
-        .map((id) => Number(id))
-        .filter((id) => Number.isInteger(id) && id > 0);
+    const polosNormalizados = polos
+        .map((polo) => ({
+            id: Number(polo.id),
+            principal: polo.principal === true,
+        }))
+        .filter((polo) => Number.isInteger(polo.id) && polo.id > 0);
+
+    if (polosNormalizados.length !== polos.length) {
+        throw new Error("A lista de polos contém um identificador inválido.");
+    }
+
+    const ids = polosNormalizados.map((polo) => polo.id);
+
+    if (new Set(ids).size !== ids.length) {
+        throw new Error("A lista de polos possui registros duplicados.");
+    }
+
+    const polosPrincipais = polosNormalizados.filter(
+        (polo) => polo.principal
+    );
+
+    if (polosPrincipais.length !== 1) {
+        throw new Error(
+            "A atlética deve possuir exatamente um polo principal."
+        );
+    }
+
+    return {
+        polos: polosNormalizados,
+        poloPrincipalId: polosPrincipais[0].id,
+        poloIds: ids,
+    };
 }
 
 async function getEntidadeTipoId(codigo: string) {
@@ -251,7 +265,9 @@ export const solicitacaoCriarAtleticaService = {
         }
 
         if (solicitacao.sys_solicitacao_tipo.codigo !== "criar_atletica") {
-            throw new Error("Esta solicitação não é do tipo criar_atletica.");
+            throw new Error(
+                "Esta solicitação não é do tipo criar_atletica."
+            );
         }
 
         if (solicitacao.sys_solicitacao_status.codigo !== "aprovada") {
@@ -261,30 +277,30 @@ export const solicitacaoCriarAtleticaService = {
         }
 
         const payload = parseJsonSafe(solicitacao.payload_text);
-        const atleticaPayload = getAtleticaPayload(payload);
-        const gestaoPayload = getGestaoPayload(payload);
+
+        if (!payload?.atletica || !payload.gestao) {
+            throw new Error(
+                "Payload da solicitação de criação da atlética inválido."
+            );
+        }
+
+        const atleticaPayload = payload.atletica;
+        const gestaoPayload = payload.gestao;
 
         const nome = atleticaPayload.nome?.trim();
-        const apelido = atleticaPayload.apelido?.trim() || nome;
-        const sigla = atleticaPayload.sigla?.trim();
+        const apelido = atleticaPayload.apelido?.trim();
+        const sigla = atleticaPayload.sigla?.trim().toUpperCase();
         const mascote =
             atleticaPayload.mascote?.trim() || "Mascote não informado";
         const descricao = atleticaPayload.descricao ?? null;
         const slug = slugify(
             atleticaPayload.slug || apelido || sigla || nome || ""
         );
-        const eduInstituicaoId =
-            atleticaPayload.eduInstituicaoId ??
-            atleticaPayload.edu_instituicao_id ??
-            payload.eduInstituicaoId ??
-            payload.edu_instituicao_id;
-
-        const eduPoloId =
-            atleticaPayload.eduPoloId ??
-            atleticaPayload.edu_polo_id ??
-            payload.eduPoloId ??
-            payload.edu_polo_id ??
-            solicitacao.edu_polo_id;
+        const instituicaoId = Number(atleticaPayload.instituicaoId);
+        const cursoIds = normalizarIds(atleticaPayload.cursoIds ?? []);
+        const { polos, poloPrincipalId, poloIds } = normalizarPolos(
+            atleticaPayload.polos ?? []
+        );
 
         if (!nome) {
             throw new Error(
@@ -308,15 +324,15 @@ export const solicitacaoCriarAtleticaService = {
             throw new Error("Não foi possível gerar o slug da atlética.");
         }
 
-        if (!eduInstituicaoId) {
+        if (!Number.isInteger(instituicaoId) || instituicaoId <= 0) {
             throw new Error(
                 "Instituição da atlética não informada no payload da solicitação."
             );
         }
 
-        if (!eduPoloId) {
+        if (cursoIds.length === 0) {
             throw new Error(
-                "Polo principal da atlética não informado no payload da solicitação."
+                "Informe pelo menos um curso vinculado à atlética."
             );
         }
 
@@ -343,20 +359,83 @@ export const solicitacaoCriarAtleticaService = {
             );
         }
 
-        const cursoIds = getCursoIds(payload);
+        const [instituicao, polosValidos, cursosValidos] =
+            await Promise.all([
+                prisma.eduInstituicao.findFirst({
+                    where: {
+                        id: instituicaoId,
+                        ativo: 1,
+                        deleted_at: null,
+                    },
+                    select: {
+                        id: true,
+                    },
+                }),
+                prisma.eduPolo.findMany({
+                    where: {
+                        id: {
+                            in: poloIds,
+                        },
+                        edu_instituicao_id: instituicaoId,
+                        ativo: 1,
+                        deleted_at: null,
+                    },
+                    select: {
+                        id: true,
+                    },
+                }),
+                prisma.eduInstituicaoCurso.findMany({
+                    where: {
+                        edu_instituicao_id: instituicaoId,
+                        edu_curso_id: {
+                            in: cursoIds,
+                        },
+                        ativo: 1,
+                        deleted_at: null,
+                        edu_curso: {
+                            ativo: 1,
+                            deleted_at: null,
+                        },
+                    },
+                    select: {
+                        edu_curso_id: true,
+                    },
+                }),
+            ]);
+
+        if (!instituicao) {
+            throw new Error("A instituição informada não está disponível.");
+        }
+
+        const poloIdsValidos = polosValidos.map((polo) => polo.id);
+        const cursoIdsValidos = cursosValidos.map(
+            (curso) => curso.edu_curso_id
+        );
+
+        if (poloIdsValidos.length !== poloIds.length) {
+            throw new Error(
+                "Um ou mais polos selecionados não pertencem à instituição informada."
+            );
+        }
+
+        if (!poloIdsValidos.includes(poloPrincipalId)) {
+            throw new Error(
+                "O polo principal não pertence à instituição informada."
+            );
+        }
+
+        if (cursoIdsValidos.length !== cursoIds.length) {
+            throw new Error(
+                "Um ou mais cursos selecionados não pertencem à instituição informada."
+            );
+        }
 
         const gestaoNome =
             gestaoPayload.nome?.trim() ||
             `Gestão ${new Date().getFullYear()}`;
-
         const gestaoInicioAt =
-            normalizarDate(gestaoPayload.inicioAt ?? gestaoPayload.inicio_at) ??
-            new Date();
-
-        const gestaoFimAt = normalizarDate(
-            gestaoPayload.fimAt ?? gestaoPayload.fim_at
-        );
-
+            normalizarDate(gestaoPayload.inicioAt) ?? new Date();
+        const gestaoFimAt = normalizarDate(gestaoPayload.fimAt);
         const now = new Date();
 
         const resultado = await prisma.$transaction(async (tx) => {
@@ -382,24 +461,28 @@ export const solicitacaoCriarAtleticaService = {
 
             let entEntidadeId = solicitacao.entidade_id;
 
-            if (solicitacao.entidade_tipo === "ent_entidade" && entEntidadeId) {
+            if (
+                solicitacao.entidade_tipo === "ent_entidade" &&
+                entEntidadeId
+            ) {
                 await tx.entEntidade.update({
                     where: {
                         id: entEntidadeId,
                     },
                     data: {
                         ent_entidade_tipo_id: entidadeTipoAtleticaId,
+                        ent_entidade_status_id: atleticaStatusAtivaId,
+                        edu_instituicao_id: instituicaoId,
+                        criado_por_sys_usuario_id:
+                        solicitacao.solicitado_por_usuario_id,
                         nome,
                         apelido,
                         sigla,
                         mascote,
                         slug,
                         descricao,
-                        edu_instituicao_id: Number(eduInstituicaoId),
-                        ent_entidade_status_id: atleticaStatusAtivaId,
-                        criado_por_sys_usuario_id:
-                        solicitacao.solicitado_por_usuario_id,
                         ativo: 1,
+                        deleted_at: null,
                         updated_at: now,
                     },
                 });
@@ -407,8 +490,8 @@ export const solicitacaoCriarAtleticaService = {
                 const atleticaCriada = await tx.entEntidade.create({
                     data: {
                         ent_entidade_tipo_id: entidadeTipoAtleticaId,
-                        edu_instituicao_id: Number(eduInstituicaoId),
                         ent_entidade_status_id: atleticaStatusAtivaId,
+                        edu_instituicao_id: instituicaoId,
                         criado_por_sys_usuario_id:
                         solicitacao.solicitado_por_usuario_id,
                         nome,
@@ -426,47 +509,62 @@ export const solicitacaoCriarAtleticaService = {
                 entEntidadeId = atleticaCriada.id;
             }
 
-            if (!entEntidadeId) {
-                throw new Error(
-                    "Não foi possível criar ou localizar a atlética."
-                );
-            }
-
-            await tx.entEntidadePolo.upsert({
-                where: {
-                    ent_entidade_id_edu_polo_id: {
-                        ent_entidade_id: entEntidadeId,
-                        edu_polo_id: Number(eduPoloId),
-                    },
-                },
-                update: {
-                    principal: 1,
-                    ativo: 1,
-                    updated_at: now,
-                },
-                create: {
-                    ent_entidade_id: entEntidadeId,
-                    edu_polo_id: Number(eduPoloId),
-                    principal: 1,
-                    ativo: 1,
-                    created_at: now,
-                    updated_at: now,
-                },
-            });
-
             await tx.entEntidadePolo.updateMany({
                 where: {
                     ent_entidade_id: entEntidadeId,
-                    edu_polo_id: { not: Number(eduPoloId) },
-                    principal: 1,
+                    edu_polo_id: {
+                        notIn: poloIdsValidos,
+                    },
+                    ativo: 1,
                 },
                 data: {
                     principal: 0,
+                    ativo: 0,
                     updated_at: now,
                 },
             });
 
-            for (const [index, cursoId] of cursoIds.entries()) {
+            for (const polo of polos) {
+                await tx.entEntidadePolo.upsert({
+                    where: {
+                        ent_entidade_id_edu_polo_id: {
+                            ent_entidade_id: entEntidadeId,
+                            edu_polo_id: polo.id,
+                        },
+                    },
+                    update: {
+                        principal: polo.principal ? 1 : 0,
+                        ativo: 1,
+                        deleted_at: null,
+                        updated_at: now,
+                    },
+                    create: {
+                        ent_entidade_id: entEntidadeId,
+                        edu_polo_id: polo.id,
+                        principal: polo.principal ? 1 : 0,
+                        ativo: 1,
+                        created_at: now,
+                        updated_at: now,
+                    },
+                });
+            }
+
+            await tx.entEntidadeCurso.updateMany({
+                where: {
+                    ent_entidade_id: entEntidadeId,
+                    edu_curso_id: {
+                        notIn: cursoIdsValidos,
+                    },
+                    ativo: 1,
+                },
+                data: {
+                    principal: 0,
+                    ativo: 0,
+                    updated_at: now,
+                },
+            });
+
+            for (const [index, cursoId] of cursoIdsValidos.entries()) {
                 await tx.entEntidadeCurso.upsert({
                     where: {
                         ent_entidade_id_edu_curso_id: {
@@ -477,6 +575,7 @@ export const solicitacaoCriarAtleticaService = {
                     update: {
                         principal: index === 0 ? 1 : 0,
                         ativo: 1,
+                        deleted_at: null,
                         updated_at: now,
                     },
                     create: {
@@ -505,6 +604,7 @@ export const solicitacaoCriarAtleticaService = {
                         gestaoPayload.observacao ??
                         "Gestão criada a partir da solicitação de criação da atlética.",
                     ativo: 1,
+                    deleted_at: null,
                     updated_at: now,
                 },
                 create: {
@@ -526,20 +626,25 @@ export const solicitacaoCriarAtleticaService = {
                 where: {
                     ent_entidade_id_sys_usuario_id: {
                         ent_entidade_id: entEntidadeId,
-                        sys_usuario_id: solicitacao.solicitado_por_usuario_id,
+                        sys_usuario_id:
+                        solicitacao.solicitado_por_usuario_id,
                     },
                 },
                 update: {
                     ent_entidade_membro_tipo_id: membroTipoDiretorId,
-                    ent_entidade_membro_status_id: membroStatusAtivoId,
+                    ent_entidade_membro_status_id:
+                    membroStatusAtivoId,
                     ativo: 1,
+                    deleted_at: null,
                     updated_at: now,
                 },
                 create: {
                     ent_entidade_id: entEntidadeId,
-                    sys_usuario_id: solicitacao.solicitado_por_usuario_id,
+                    sys_usuario_id:
+                    solicitacao.solicitado_por_usuario_id,
                     ent_entidade_membro_tipo_id: membroTipoDiretorId,
-                    ent_entidade_membro_status_id: membroStatusAtivoId,
+                    ent_entidade_membro_status_id:
+                    membroStatusAtivoId,
                     entrou_at: now,
                     ativo: 1,
                     created_at: now,
@@ -578,17 +683,20 @@ export const solicitacaoCriarAtleticaService = {
             await tx.sysUsuarioRole.upsert({
                 where: {
                     sys_usuario_id_sys_role_id_ent_entidade_id: {
-                        sys_usuario_id: solicitacao.solicitado_por_usuario_id,
+                        sys_usuario_id:
+                        solicitacao.solicitado_por_usuario_id,
                         sys_role_id: rolePresidenciaAtleticaId,
                         ent_entidade_id: entEntidadeId,
                     },
                 },
                 update: {
                     ativo: 1,
+                    deleted_at: null,
                     updated_at: now,
                 },
                 create: {
-                    sys_usuario_id: solicitacao.solicitado_por_usuario_id,
+                    sys_usuario_id:
+                    solicitacao.solicitado_por_usuario_id,
                     sys_role_id: rolePresidenciaAtleticaId,
                     ent_entidade_id: entEntidadeId,
                     ativo: 1,
@@ -602,12 +710,13 @@ export const solicitacaoCriarAtleticaService = {
                     id: solicitacao.id,
                 },
                 data: {
-                    sys_solicitacao_status_id: solicitacaoStatusConcluidaId,
+                    sys_solicitacao_status_id:
+                    solicitacaoStatusConcluidaId,
                     entidade_tipo: "ent_entidade",
                     entidade_id: entEntidadeId,
                     ent_entidade_id: entEntidadeId,
-                    edu_instituicao_id: Number(eduInstituicaoId),
-                    edu_polo_id: Number(eduPoloId),
+                    edu_instituicao_id: instituicaoId,
+                    edu_polo_id: poloPrincipalId,
                     finalizado_at: now,
                     updated_at: now,
                 },
@@ -627,6 +736,10 @@ export const solicitacaoCriarAtleticaService = {
                     metadata_text: JSON.stringify({
                         ent_entidade_id: entEntidadeId,
                         ent_entidade_gestao_id: gestao.id,
+                        edu_instituicao_id: instituicaoId,
+                        edu_polo_principal_id: poloPrincipalId,
+                        edu_polo_ids: poloIdsValidos,
+                        edu_curso_ids: cursoIdsValidos,
                         sys_usuario_presidente_id:
                         solicitacao.solicitado_por_usuario_id,
                     }),
@@ -637,7 +750,8 @@ export const solicitacaoCriarAtleticaService = {
             return {
                 entEntidadeId,
                 gestaoId: gestao.id,
-                solicitanteId: solicitacao.solicitado_por_usuario_id,
+                solicitanteId:
+                solicitacao.solicitado_por_usuario_id,
                 nome,
                 apelido,
                 sigla,

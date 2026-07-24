@@ -155,7 +155,7 @@ export default async function AtleticaPage() {
                             </Badge>
 
                             <AppLink
-                                href="/app/src/app/ent/atletica/tema"
+                                href="/ent/atletica/tema"
                                 color="secondary"
                                 variant="soft"
                             >
@@ -198,7 +198,7 @@ export default async function AtleticaPage() {
 
                                 <div className="bp-hero-actions">
                                     <AppLink
-                                        href="/app/src/app/ent/atletica/tema"
+                                        href="/ent/atletica/tema"
                                         color="primary"
                                         variant="solid"
                                     >
@@ -430,7 +430,7 @@ export default async function AtleticaPage() {
                 description="Você ainda não possui uma atlética ativa nem uma solicitação de criação em andamento."
                 action={
                     <AppLink
-                        href="/app/src/app/ent/atletica/criar"
+                        href="/ent/atletica/criar"
                         color="primary"
                         variant="solid"
                     >
