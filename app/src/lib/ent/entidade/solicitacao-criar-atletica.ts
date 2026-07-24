@@ -730,9 +730,9 @@ export const solicitacaoCriarAtleticaService = {
                     solicitacao.sys_solicitacao_status_id,
                     sys_solicitacao_status_novo_id:
                     solicitacaoStatusConcluidaId,
-                    acao: "acao_aplicada",
+                    acao: "concluida",
                     descricao:
-                        "Criação da atlética aplicada: atlética ativada, gestão criada e solicitante vinculado como presidente.",
+                        "Solicitação concluída: atlética ativada, polos e cursos vinculados, gestão criada e solicitante vinculado como presidente.",
                     metadata_text: JSON.stringify({
                         ent_entidade_id: entEntidadeId,
                         ent_entidade_gestao_id: gestao.id,

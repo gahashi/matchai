@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { requireApiAccess } from "@/lib/auth/require-api-access";
-import { solicitacaoService } from "@/lib/sys/solicitacao/solicitacao-service";
+import {
+    getSolicitacaoErrorStatus,
+    solicitacaoService,
+} from "@/lib/sys/solicitacao/solicitacao-service";
 
 type RouteContext = {
     params: Promise<{
@@ -48,7 +51,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
                         : "Não foi possível colocar a solicitação em análise.",
             },
             {
-                status: 400,
+                status: getSolicitacaoErrorStatus(error),
             }
         );
     }

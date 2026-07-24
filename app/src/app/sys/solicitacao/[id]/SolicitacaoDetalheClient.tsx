@@ -19,6 +19,13 @@ type SolicitacaoDetalheClientProps = {
     solicitacaoId: number;
     statusCodigo: string;
     tipoCodigo: string;
+    permissions: {
+        isRequester: boolean;
+        canAnalyze: boolean;
+        canApprove: boolean;
+        canReject: boolean;
+        canRequestAdjustment: boolean;
+    };
 };
 
 type ActionType =
@@ -41,10 +48,11 @@ function getActionLabel(action: ActionType) {
 
     return labels[action];
 }
-
 export function SolicitacaoDetalheClient({
                                              solicitacaoId,
                                              statusCodigo,
+                                             tipoCodigo,
+                                             permissions,
                                          }: SolicitacaoDetalheClientProps) {
     const router = useRouter();
 
@@ -119,17 +127,36 @@ export function SolicitacaoDetalheClient({
     }
 
     const canSend =
-        statusCodigo === "rascunho" || statusCodigo === "ajuste_solicitado";
+        permissions.isRequester &&
+        (statusCodigo === "rascunho" ||
+            statusCodigo === "ajuste_solicitado");
 
-    const canAnalyze = statusCodigo === "enviada";
+    const canAnalyze =
+        permissions.canAnalyze &&
+        tipoCodigo !== "criar_atletica" &&
+        statusCodigo === "enviada";
 
-    const canManagerAction =
-        statusCodigo === "enviada" || statusCodigo === "em_analise";
+    const canApprove =
+        permissions.canApprove &&
+        (statusCodigo === "enviada" ||
+            statusCodigo === "em_analise");
+
+    const canReject =
+        permissions.canReject &&
+        (statusCodigo === "enviada" ||
+            statusCodigo === "em_analise" ||
+            statusCodigo === "ajuste_solicitado");
+
+    const canRequestAdjustment =
+        permissions.canRequestAdjustment &&
+        (statusCodigo === "enviada" ||
+            statusCodigo === "em_analise");
 
     const canCancel =
-        statusCodigo === "rascunho" ||
-        statusCodigo === "enviada" ||
-        statusCodigo === "ajuste_solicitado";
+        permissions.isRequester &&
+        (statusCodigo === "rascunho" ||
+            statusCodigo === "enviada" ||
+            statusCodigo === "ajuste_solicitado");
 
     return (
         <>
@@ -176,56 +203,57 @@ export function SolicitacaoDetalheClient({
                             </Button>
                         ) : null}
 
-                        {canManagerAction ? (
-                            <>
-                                <Button
-                                    type="button"
-                                    color="success"
-                                    variant="soft"
-                                    onClick={() => executeAction("aprovar")}
-                                    disabled={loadingAction !== null}
-                                >
-                                    {loadingAction === "aprovar" ? (
-                                        <Loader2 size={16} />
-                                    ) : (
-                                        <CheckCircle2 size={16} />
-                                    )}
-                                    Aprovar
-                                </Button>
+                        {canApprove ? (
+                            <Button
+                                type="button"
+                                color="success"
+                                variant="soft"
+                                onClick={() => executeAction("aprovar")}
+                                disabled={loadingAction !== null}
+                            >
+                                {loadingAction === "aprovar" ? (
+                                    <Loader2 size={16} />
+                                ) : (
+                                    <CheckCircle2 size={16} />
+                                )}
+                                Aprovar
+                            </Button>
+                        ) : null}
 
-                                <Button
-                                    type="button"
-                                    color="warning"
-                                    variant="soft"
-                                    onClick={() =>
-                                        executeAction("solicitar-ajuste")
-                                    }
-                                    disabled={loadingAction !== null}
-                                >
-                                    {loadingAction ===
-                                    "solicitar-ajuste" ? (
-                                        <Loader2 size={16} />
-                                    ) : (
-                                        <AlertTriangle size={16} />
-                                    )}
-                                    Solicitar ajuste
-                                </Button>
+                        {canRequestAdjustment ? (
+                            <Button
+                                type="button"
+                                color="warning"
+                                variant="soft"
+                                onClick={() =>
+                                    executeAction("solicitar-ajuste")
+                                }
+                                disabled={loadingAction !== null}
+                            >
+                                {loadingAction === "solicitar-ajuste" ? (
+                                    <Loader2 size={16} />
+                                ) : (
+                                    <AlertTriangle size={16} />
+                                )}
+                                Solicitar ajuste
+                            </Button>
+                        ) : null}
 
-                                <Button
-                                    type="button"
-                                    color="danger"
-                                    variant="soft"
-                                    onClick={() => executeAction("recusar")}
-                                    disabled={loadingAction !== null}
-                                >
-                                    {loadingAction === "recusar" ? (
-                                        <Loader2 size={16} />
-                                    ) : (
-                                        <XCircle size={16} />
-                                    )}
-                                    Recusar
-                                </Button>
-                            </>
+                        {canReject ? (
+                            <Button
+                                type="button"
+                                color="danger"
+                                variant="soft"
+                                onClick={() => executeAction("recusar")}
+                                disabled={loadingAction !== null}
+                            >
+                                {loadingAction === "recusar" ? (
+                                    <Loader2 size={16} />
+                                ) : (
+                                    <XCircle size={16} />
+                                )}
+                                Recusar
+                            </Button>
                         ) : null}
 
                         {canCancel ? (

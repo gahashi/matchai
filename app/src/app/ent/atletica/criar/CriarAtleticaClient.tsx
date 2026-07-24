@@ -464,14 +464,20 @@ export function CriarAtleticaClient({
                                     setCursos([]);
                                 }}
                                 minChars={0}
+                                required
+                                error={
+                                    !instituicao &&
+                                    feedback?.title === "Instituição obrigatória"
+                                        ? feedback.message
+                                        : null
+                                }
                             />
                         </div>
 
                         <div className="bp-form-grid-full">
                             <AsyncSelect
                                 key={`polos-${String(
-                                    instituicao?.id ??
-                                    "sem-instituicao"
+                                    instituicao?.id ?? "sem-instituicao"
                                 )}`}
                                 mode="multiple"
                                 label="Polos vinculados"
@@ -482,7 +488,15 @@ export function CriarAtleticaClient({
                                 minChars={0}
                                 maxSelected={10}
                                 disabled={!instituicao}
+                                required
+                                firstSelectedLabel="Principal"
                                 helperText="O primeiro polo selecionado será considerado o polo principal da atlética."
+                                error={
+                                    polos.length === 0 &&
+                                    feedback?.title === "Polo obrigatório"
+                                        ? feedback.message
+                                        : null
+                                }
                                 emptyMessage={
                                     instituicao
                                         ? "Nenhum polo encontrado."
@@ -494,8 +508,7 @@ export function CriarAtleticaClient({
                         <div className="bp-form-grid-full">
                             <AsyncSelect
                                 key={`cursos-${String(
-                                    instituicao?.id ??
-                                    "sem-instituicao"
+                                    instituicao?.id ?? "sem-instituicao"
                                 )}`}
                                 mode="multiple"
                                 label="Cursos vinculados"
@@ -506,6 +519,13 @@ export function CriarAtleticaClient({
                                 minChars={0}
                                 maxSelected={8}
                                 disabled={!instituicao}
+                                required
+                                error={
+                                    cursos.length === 0 &&
+                                    feedback?.title === "Curso obrigatório"
+                                        ? feedback.message
+                                        : null
+                                }
                                 emptyMessage={
                                     instituicao
                                         ? "Nenhum curso encontrado."

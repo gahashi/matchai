@@ -20,6 +20,7 @@ export type SolicitacaoStatusCodigo =
 export type SolicitacaoHistoricoAcao =
     | "criada"
     | "enviada"
+    | "reenviada"
     | "em_analise"
     | "ajuste_solicitado"
     | "aprovada"

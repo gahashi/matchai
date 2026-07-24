@@ -2,7 +2,10 @@ import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 import { requireApiAccess } from "@/lib/auth/require-api-access";
-import { solicitacaoService } from "@/lib/sys/solicitacao/solicitacao-service";
+import {
+    getSolicitacaoErrorStatus,
+    solicitacaoService,
+} from "@/lib/sys/solicitacao/solicitacao-service";
 import {
     SolicitacaoListScope,
     SolicitacaoListSort,
@@ -80,30 +83,53 @@ async function validarSlugCriarAtletica(body: any) {
 }
 
 export async function GET(request: NextRequest) {
-    const access = await requireApiAccess(request, {
-        permissions: ["solicitacao.visualizar"],
-    });
+    const access = await requireApiAccess(request);
 
     if (!access.ok) {
         return access.response;
     }
 
-    const searchParams = request.nextUrl.searchParams;
+    try {
+        const searchParams = request.nextUrl.searchParams;
 
-    const result = await solicitacaoService.listar({
-        sysUsuarioId: access.session.user.id,
-        scope: (searchParams.get("scope") as SolicitacaoListScope | null) ?? "minhas",
-        statusCodigo: searchParams.get("status") as SolicitacaoStatusCodigo | undefined,
-        tipoCodigo: searchParams.get("tipo") as SolicitacaoTipoCodigo | undefined,
-        page: toNumber(searchParams.get("page")),
-        pageSize: toNumber(searchParams.get("pageSize")),
-        sort: (searchParams.get("sort") as SolicitacaoListSort | null) ?? "recent",
-    });
+        const result = await solicitacaoService.listar({
+            sysUsuarioId: access.session.user.id,
+            scope:
+                (searchParams.get("scope") as
+                    | SolicitacaoListScope
+                    | null) ?? "minhas",
+            statusCodigo: searchParams.get("status") as
+                | SolicitacaoStatusCodigo
+                | undefined,
+            tipoCodigo: searchParams.get("tipo") as
+                | SolicitacaoTipoCodigo
+                | undefined,
+            page: toNumber(searchParams.get("page")),
+            pageSize: toNumber(searchParams.get("pageSize")),
+            sort:
+                (searchParams.get("sort") as
+                    | SolicitacaoListSort
+                    | null) ?? "recent",
+        });
 
-    return NextResponse.json({
-        ok: true,
-        ...result,
-    });
+        return NextResponse.json({
+            ok: true,
+            ...result,
+        });
+    } catch (error) {
+        return NextResponse.json(
+            {
+                ok: false,
+                message:
+                    error instanceof Error
+                        ? error.message
+                        : "Não foi possível listar as solicitações.",
+            },
+            {
+                status: getSolicitacaoErrorStatus(error),
+            }
+        );
+    }
 }
 
 export async function POST(request: NextRequest) {

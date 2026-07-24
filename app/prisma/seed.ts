@@ -635,6 +635,13 @@ async function main() {
      */
     const permissions = [
         {
+            codigo: "solicitacao.visualizar_todas",
+            nome: "Visualizar todas as solicitações",
+            modulo: "solicitacao",
+            descricao:
+                "Permite visualizar qualquer solicitação do sistema.",
+        },
+        {
             codigo: "solicitacao.visualizar",
             nome: "Visualizar solicitações",
             modulo: "solicitacao",

@@ -1,5 +1,12 @@
+import { redirect } from "next/navigation";
 import { requireAuthPageAccess } from "@/lib/auth/require-access";
-import { solicitacaoService } from "@/lib/sys/solicitacao/solicitacao-service";
+import {
+    userHasGlobalPermission,
+} from "@/lib/auth/permissions";
+import {
+    SolicitacaoForbiddenError,
+    solicitacaoService,
+} from "@/lib/sys/solicitacao/solicitacao-service";
 import {
     SolicitacaoListScope,
     SolicitacaoListSort,
@@ -44,15 +51,36 @@ export default async function SolicitacaoPage({
     const sort = (params.sort as SolicitacaoListSort | undefined) ?? "recent";
     const page = toNumber(params.page) ?? 1;
 
-    const result = await solicitacaoService.listar({
-        sysUsuarioId: session.user.id,
-        scope,
-        statusCodigo,
-        tipoCodigo,
-        sort,
-        page,
-        pageSize: 12,
-    });
+    const [canAnalyze, canViewAll] = await Promise.all([
+        userHasGlobalPermission(
+            session,
+            "solicitacao.analisar"
+        ),
+        userHasGlobalPermission(
+            session,
+            "solicitacao.visualizar_todas"
+        ),
+    ]);
+
+    let result;
+
+    try {
+        result = await solicitacaoService.listar({
+            sysUsuarioId: session.user.id,
+            scope,
+            statusCodigo,
+            tipoCodigo,
+            sort,
+            page,
+            pageSize: 12,
+        });
+    } catch (error) {
+        if (error instanceof SolicitacaoForbiddenError) {
+            redirect("/sem-permissao");
+        }
+
+        throw error;
+    }
 
     return (
         <AppShell>
@@ -65,6 +93,10 @@ export default async function SolicitacaoPage({
                 statusCodigo,
                 tipoCodigo,
                 sort,
+            }}
+            allowedScopes={{
+                analise: canAnalyze,
+                todas: canViewAll,
             }}
         />
         </AppShell>

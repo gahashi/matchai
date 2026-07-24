@@ -184,7 +184,7 @@ export default function InboxClient({
 
             const data = await response.json();
 
-            if (!response.ok || !data.success) {
+            if (!response.ok || !data.ok) {
                 throw new Error(data.message || "Erro ao carregar inbox.");
             }
 
@@ -222,7 +222,7 @@ export default function InboxClient({
 
         const data = await response.json();
 
-        if (!response.ok || !data.success) {
+        if (!response.ok || !data.ok) {
             throw new Error(data.message || "Erro ao marcar como lida.");
         }
 
@@ -275,7 +275,7 @@ export default function InboxClient({
 
             const data = await response.json();
 
-            if (!response.ok || !data.success) {
+            if (!response.ok || !data.ok) {
                 throw new Error(data.message || "Erro ao marcar como não lida.");
             }
 
@@ -328,7 +328,7 @@ export default function InboxClient({
 
             const data = await response.json();
 
-            if (!response.ok || !data.success) {
+            if (!response.ok || !data.ok) {
                 throw new Error(data.message || "Erro ao arquivar mensagem.");
             }
 

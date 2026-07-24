@@ -1,17 +1,32 @@
 import { prisma } from "@/lib/prisma";
 import { AuthSession } from "@/lib/auth/auth-types";
 
-export async function userHasPermission(
-    session: AuthSession,
-    permissionCode: string
-): Promise<boolean> {
-    const sysUsuarioId = session.user.id;
-    const entEntidadeId = session.ent_entidade_id ?? null;
+type PermissionScope = {
+    entEntidadeId?: number | null;
+    globalOnly?: boolean;
+};
 
-    /**
-     * 1. Verifica DENY direto.
-     * Se tiver deny direto, bloqueia mesmo que a role permita.
-     */
+function buildEntityScope({
+                              entEntidadeId = null,
+                              globalOnly = false,
+                          }: PermissionScope) {
+    if (globalOnly || !entEntidadeId) {
+        return [{ ent_entidade_id: null }];
+    }
+
+    return [
+        { ent_entidade_id: null },
+        { ent_entidade_id: entEntidadeId },
+    ];
+}
+
+export async function userHasPermissionByUserId(
+    sysUsuarioId: number,
+    permissionCode: string,
+    scope: PermissionScope = {}
+): Promise<boolean> {
+    const entityScope = buildEntityScope(scope);
+
     const directDeny = await prisma.sysUsuarioPermission.findFirst({
         where: {
             sys_usuario_id: sysUsuarioId,
@@ -25,10 +40,7 @@ export async function userHasPermission(
                 codigo: "deny",
                 ativo: 1,
             },
-            OR: [
-                { ent_entidade_id: null },
-                ...(entEntidadeId ? [{ ent_entidade_id: entEntidadeId }] : []),
-            ],
+            OR: entityScope,
         },
         select: {
             id: true,
@@ -39,9 +51,6 @@ export async function userHasPermission(
         return false;
     }
 
-    /**
-     * 2. Verifica ALLOW direto.
-     */
     const directAllow = await prisma.sysUsuarioPermission.findFirst({
         where: {
             sys_usuario_id: sysUsuarioId,
@@ -55,10 +64,7 @@ export async function userHasPermission(
                 codigo: "allow",
                 ativo: 1,
             },
-            OR: [
-                { ent_entidade_id: null },
-                ...(entEntidadeId ? [{ ent_entidade_id: entEntidadeId }] : []),
-            ],
+            OR: entityScope,
         },
         select: {
             id: true,
@@ -69,18 +75,12 @@ export async function userHasPermission(
         return true;
     }
 
-    /**
-     * 3. Verifica permissões vindas das roles.
-     */
     const rolePermission = await prisma.sysUsuarioRole.findFirst({
         where: {
             sys_usuario_id: sysUsuarioId,
             ativo: 1,
             deleted_at: null,
-            OR: [
-                { ent_entidade_id: null },
-                ...(entEntidadeId ? [{ ent_entidade_id: entEntidadeId }] : []),
-            ],
+            OR: entityScope,
             sys_role: {
                 ativo: 1,
                 deleted_at: null,
@@ -103,12 +103,47 @@ export async function userHasPermission(
     return Boolean(rolePermission);
 }
 
+export async function userHasGlobalPermissionByUserId(
+    sysUsuarioId: number,
+    permissionCode: string
+): Promise<boolean> {
+    return userHasPermissionByUserId(sysUsuarioId, permissionCode, {
+        globalOnly: true,
+    });
+}
+
+export async function userHasPermission(
+    session: AuthSession,
+    permissionCode: string
+): Promise<boolean> {
+    return userHasPermissionByUserId(
+        session.user.id,
+        permissionCode,
+        {
+            entEntidadeId: session.ent_entidade_id ?? null,
+        }
+    );
+}
+
+export async function userHasGlobalPermission(
+    session: AuthSession,
+    permissionCode: string
+): Promise<boolean> {
+    return userHasGlobalPermissionByUserId(
+        session.user.id,
+        permissionCode
+    );
+}
+
 export async function userHasAnyPermission(
     session: AuthSession,
     permissionCodes: string[]
 ): Promise<boolean> {
     for (const permissionCode of permissionCodes) {
-        const allowed = await userHasPermission(session, permissionCode);
+        const allowed = await userHasPermission(
+            session,
+            permissionCode
+        );
 
         if (allowed) {
             return true;

@@ -2,7 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { requireApiAccess } from "@/lib/auth/require-api-access";
 import { solicitacaoCriarAtleticaService } from "../../../../../../lib/ent/entidade/solicitacao-criar-atletica";
-import { solicitacaoService } from "@/lib/sys/solicitacao/solicitacao-service";
+import {
+    getSolicitacaoErrorStatus,
+    solicitacaoService,
+} from "@/lib/sys/solicitacao/solicitacao-service";
 
 type RouteContext = {
     params: Promise<{
@@ -35,7 +38,10 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
             metadata: body.metadata ?? null,
         });
 
-        const detalhe = await solicitacaoService.detalhar(solicitacaoId);
+        const detalhe = await solicitacaoService.detalhar({
+            solicitacaoId,
+            sysUsuarioId: access.session.user.id,
+        });
 
         if (!detalhe) {
             throw new Error("Solicitação não encontrada após aprovação.");
@@ -53,7 +59,10 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
 
         return NextResponse.json({
             ok: true,
-            solicitacao: await solicitacaoService.detalhar(solicitacaoId),
+            solicitacao: await solicitacaoService.detalhar({
+                solicitacaoId,
+                sysUsuarioId: access.session.user.id,
+            }),
             resultadoAplicacao,
         });
     } catch (error) {
@@ -66,7 +75,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
                         : "Não foi possível aprovar a solicitação.",
             },
             {
-                status: 400,
+                status: getSolicitacaoErrorStatus(error),
             }
         );
     }

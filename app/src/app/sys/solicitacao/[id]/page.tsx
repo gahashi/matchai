@@ -1,11 +1,15 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { AppShell } from "@/components/layout/AppShell";
 import { Badge } from "@/components/ui/Badge";
 import { Card, CardBody } from "@/components/ui/Card";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { requireAuthPageAccess } from "@/lib/auth/require-access";
-import { solicitacaoService } from "@/lib/sys/solicitacao/solicitacao-service";
+import { userHasGlobalPermission } from "@/lib/auth/permissions";
+import {
+    SolicitacaoForbiddenError,
+    solicitacaoService,
+} from "@/lib/sys/solicitacao/solicitacao-service";
 import { SolicitacaoDetalheClient } from "./SolicitacaoDetalheClient";
 
 type SolicitacaoDetalhePageProps = {
@@ -58,7 +62,8 @@ type SolicitacaoHistoricoItem = NonNullable<
 export default async function SolicitacaoDetalhePage({
                                                          params,
                                                      }: SolicitacaoDetalhePageProps) {
-    await requireAuthPageAccess("/sys/solicitacao");
+    const { session } =
+        await requireAuthPageAccess("/sys/solicitacao");
 
     const { id } = await params;
     const solicitacaoId = Number(id);
@@ -67,11 +72,52 @@ export default async function SolicitacaoDetalhePage({
         notFound();
     }
 
-    const solicitacao = await solicitacaoService.detalhar(solicitacaoId);
+    let solicitacao;
+
+    try {
+        solicitacao = await solicitacaoService.detalhar({
+            solicitacaoId,
+            sysUsuarioId: session.user.id,
+        });
+    } catch (error) {
+        if (error instanceof SolicitacaoForbiddenError) {
+            redirect("/sem-permissao");
+        }
+
+        throw error;
+    }
 
     if (!solicitacao) {
         notFound();
     }
+
+    const [
+        canAnalyze,
+        canApprove,
+        canReject,
+        canRequestAdjustment,
+    ] = await Promise.all([
+        userHasGlobalPermission(
+            session,
+            "solicitacao.analisar"
+        ),
+        userHasGlobalPermission(
+            session,
+            "solicitacao.aprovar"
+        ),
+        userHasGlobalPermission(
+            session,
+            "solicitacao.recusar"
+        ),
+        userHasGlobalPermission(
+            session,
+            "solicitacao.solicitar_ajuste"
+        ),
+    ]);
+
+    const isRequester =
+        solicitacao.solicitado_por_usuario_id ===
+        session.user.id;
 
     return (
         <AppShell>
@@ -165,6 +211,13 @@ export default async function SolicitacaoDetalhePage({
                     solicitacaoId={solicitacao.id}
                     statusCodigo={solicitacao.sys_solicitacao_status.codigo}
                     tipoCodigo={solicitacao.sys_solicitacao_tipo.codigo}
+                    permissions={{
+                        isRequester,
+                        canAnalyze,
+                        canApprove,
+                        canReject,
+                        canRequestAdjustment,
+                    }}
                 />
             </div>
 

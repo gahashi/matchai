@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { requireApiAccess } from "@/lib/auth/require-api-access";
-import { solicitacaoService } from "@/lib/sys/solicitacao/solicitacao-service";
+import {
+    getSolicitacaoErrorStatus,
+    solicitacaoService,
+} from "@/lib/sys/solicitacao/solicitacao-service";
 
 type RouteContext = {
     params: Promise<{
@@ -10,9 +13,7 @@ type RouteContext = {
 };
 
 export async function PATCH(request: NextRequest, context: RouteContext) {
-    const access = await requireApiAccess(request, {
-        permissions: ["solicitacao.cancelar"],
-    });
+    const access = await requireApiAccess(request);
 
     if (!access.ok) {
         return access.response;
@@ -47,7 +48,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
                         : "Não foi possível cancelar a solicitação.",
             },
             {
-                status: 400,
+                status: getSolicitacaoErrorStatus(error),
             }
         );
     }

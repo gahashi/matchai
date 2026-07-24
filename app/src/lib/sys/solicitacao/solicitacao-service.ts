@@ -1,6 +1,9 @@
-import { prisma } from "@/lib/prisma";
-import { inboxService } from "@/lib/inbox/inbox-service";
-import { solicitacaoHistoryService } from "@/lib/sys/solicitacao/solicitacao-history-service";
+import {prisma} from "@/lib/prisma";
+import {inboxService} from "@/lib/inbox/inbox-service";
+import {
+    userHasGlobalPermissionByUserId,
+} from "@/lib/auth/permissions";
+import {solicitacaoHistoryService} from "@/lib/sys/solicitacao/solicitacao-history-service";
 import {
     AprovarSolicitacaoInput,
     CancelarSolicitacaoInput,
@@ -48,10 +51,73 @@ function parseJsonSafe(value?: string | null) {
     }
 }
 
+
+export class SolicitacaoForbiddenError extends Error {
+    readonly statusCode = 403;
+
+    constructor(message = "Sem permissão para acessar esta solicitação.") {
+        super(message);
+        this.name = "SolicitacaoForbiddenError";
+    }
+}
+
+export function getSolicitacaoErrorStatus(error: unknown) {
+    if (error instanceof SolicitacaoForbiddenError) {
+        return error.statusCode;
+    }
+
+    return 400;
+}
+
+async function assertGlobalPermission(
+    sysUsuarioId: number,
+    permissionCode: string,
+    message: string
+) {
+    const allowed = await userHasGlobalPermissionByUserId(
+        sysUsuarioId,
+        permissionCode
+    );
+
+    if (!allowed) {
+        throw new SolicitacaoForbiddenError(message);
+    }
+}
+
+async function canAccessSolicitacaoDetail({
+                                              sysUsuarioId,
+                                              solicitanteId,
+                                              responsavelId,
+                                          }: {
+    sysUsuarioId: number;
+    solicitanteId: number;
+    responsavelId: number | null;
+}) {
+    if (
+        solicitanteId === sysUsuarioId ||
+        responsavelId === sysUsuarioId
+    ) {
+        return true;
+    }
+
+    const [canAnalyze, canViewAll] = await Promise.all([
+        userHasGlobalPermissionByUserId(
+            sysUsuarioId,
+            "solicitacao.analisar"
+        ),
+        userHasGlobalPermissionByUserId(
+            sysUsuarioId,
+            "solicitacao.visualizar_todas"
+        ),
+    ]);
+
+    return canAnalyze || canViewAll;
+}
+
 async function getTipoId(codigo: SolicitacaoTipoCodigo) {
     const tipo = await prisma.sysSolicitacaoTipo.findUnique({
-        where: { codigo },
-        select: { id: true },
+        where: {codigo},
+        select: {id: true},
     });
 
     if (!tipo) {
@@ -63,7 +129,7 @@ async function getTipoId(codigo: SolicitacaoTipoCodigo) {
 
 async function getStatus(codigo: SolicitacaoStatusCodigo) {
     const status = await prisma.sysSolicitacaoStatus.findUnique({
-        where: { codigo },
+        where: {codigo},
         select: {
             id: true,
             codigo: true,
@@ -399,14 +465,22 @@ export const solicitacaoService = {
                      sysUsuarioId,
                      descricaoHistorico = null,
                  }: EnviarSolicitacaoInput) {
-        const solicitacao = await getSolicitacaoBase(solicitacaoId);
+        const solicitacao =
+            await getSolicitacaoBase(solicitacaoId);
 
         if (!solicitacao) {
-            throw new Error("Solicitação não encontrada.");
+            throw new Error(
+                "Solicitação não encontrada."
+            );
         }
 
-        if (solicitacao.solicitado_por_usuario_id !== sysUsuarioId) {
-            throw new Error("Somente o solicitante pode enviar esta solicitação.");
+        if (
+            solicitacao.solicitado_por_usuario_id !==
+            sysUsuarioId
+        ) {
+            throw new SolicitacaoForbiddenError(
+                "Somente o solicitante pode enviar esta solicitação."
+            );
         }
 
         assertStatusAtualPermitido(
@@ -415,34 +489,104 @@ export const solicitacaoService = {
             "enviar"
         );
 
-        const statusEnviadaId = await getStatusId("enviada");
+        const isCriarAtletica =
+            solicitacao.sys_solicitacao_tipo.codigo ===
+            "criar_atletica";
+
+        const isReenvio =
+            solicitacao.sys_solicitacao_status.codigo ===
+            "ajuste_solicitado";
+
+        const [statusEnviada, statusEmAnalise] =
+            await Promise.all([
+                getStatus("enviada"),
+                isCriarAtletica
+                    ? getStatus("em_analise")
+                    : Promise.resolve(null),
+            ]);
+
         const now = new Date();
 
-        const solicitacaoAtualizada = await prisma.sysSolicitacao.update({
-            where: { id: solicitacao.id },
-            data: {
-                sys_solicitacao_status_id: statusEnviadaId,
-                enviado_at: now,
-                updated_at: now,
-            },
-        });
+        const solicitacaoAtualizada =
+            await prisma.$transaction(async (tx) => {
+                const statusFinalId =
+                    isCriarAtletica &&
+                    statusEmAnalise
+                        ? statusEmAnalise.id
+                        : statusEnviada.id;
 
-        await solicitacaoHistoryService.registrar({
-            sysSolicitacaoId: solicitacao.id,
-            sysUsuarioId,
-            statusAnteriorId: solicitacao.sys_solicitacao_status_id,
-            statusNovoId: statusEnviadaId,
-            acao: "enviada",
-            descricao:
-                descricaoHistorico ??
-                "Solicitação enviada para análise.",
-        });
+                const atualizada =
+                    await tx.sysSolicitacao.update({
+                        where: {
+                            id: solicitacao.id,
+                        },
+                        data: {
+                            sys_solicitacao_status_id:
+                            statusFinalId,
+                            enviado_at: now,
+                            updated_at: now,
+                        },
+                    });
+
+                await tx.sysSolicitacaoHistorico.create({
+                    data: {
+                        sys_solicitacao_id:
+                        solicitacao.id,
+                        sys_usuario_id: sysUsuarioId,
+                        sys_solicitacao_status_anterior_id:
+                        solicitacao.sys_solicitacao_status_id,
+                        sys_solicitacao_status_novo_id:
+                        statusEnviada.id,
+                        acao: isReenvio
+                            ? "reenviada"
+                            : "enviada",
+                        descricao:
+                            descricaoHistorico ??
+                            (isReenvio
+                                ? "Solicitação ajustada e reenviada para análise."
+                                : "Solicitação enviada para análise."),
+                        metadata_text: null,
+                        created_at: now,
+                    },
+                });
+
+                if (
+                    isCriarAtletica &&
+                    statusEmAnalise
+                ) {
+                    await tx.sysSolicitacaoHistorico.create({
+                        data: {
+                            sys_solicitacao_id:
+                            solicitacao.id,
+                            sys_usuario_id:
+                            sysUsuarioId,
+                            sys_solicitacao_status_anterior_id:
+                            statusEnviada.id,
+                            sys_solicitacao_status_novo_id:
+                            statusEmAnalise.id,
+                            acao: "em_analise",
+                            descricao: isReenvio
+                                ? "Solicitação de criação de atlética retornou automaticamente para análise após os ajustes."
+                                : "Solicitação de criação de atlética entrou automaticamente em análise.",
+                            metadata_text: JSON.stringify({
+                                fluxo_automatico: true,
+                                tipo_codigo:
+                                    "criar_atletica",
+                            }),
+                            created_at: now,
+                        },
+                    });
+                }
+
+                return atualizada;
+            });
 
         await notificarAnalistasSolicitacaoEnviada({
             solicitacaoId: solicitacao.id,
             solicitanteId: sysUsuarioId,
             titulo: solicitacaoAtualizada.titulo,
-            tipoCodigo: solicitacao.sys_solicitacao_tipo.codigo,
+            tipoCodigo:
+            solicitacao.sys_solicitacao_tipo.codigo,
         });
 
         return solicitacaoAtualizada;
@@ -454,6 +598,12 @@ export const solicitacaoService = {
                                responsavelSysUsuarioId = null,
                                descricaoHistorico = null,
                            }: ColocarEmAnaliseInput) {
+        await assertGlobalPermission(
+            sysUsuarioId,
+            "solicitacao.analisar",
+            "Sem permissão para colocar solicitações em análise."
+        );
+
         const solicitacao = await getSolicitacaoBase(solicitacaoId);
 
         if (!solicitacao) {
@@ -470,7 +620,7 @@ export const solicitacaoService = {
         const now = new Date();
 
         const solicitacaoAtualizada = await prisma.sysSolicitacao.update({
-            where: { id: solicitacao.id },
+            where: {id: solicitacao.id},
             data: {
                 sys_solicitacao_status_id: statusEmAnaliseId,
                 responsavel_sys_usuario_id: responsavelSysUsuarioId ?? sysUsuarioId,
@@ -506,6 +656,12 @@ export const solicitacaoService = {
                               descricao,
                               metadata = null,
                           }: SolicitarAjusteInput) {
+        await assertGlobalPermission(
+            sysUsuarioId,
+            "solicitacao.solicitar_ajuste",
+            "Sem permissão para solicitar ajustes."
+        );
+
         const solicitacao = await getSolicitacaoBase(solicitacaoId);
 
         if (!solicitacao) {
@@ -522,7 +678,7 @@ export const solicitacaoService = {
         const now = new Date();
 
         const solicitacaoAtualizada = await prisma.sysSolicitacao.update({
-            where: { id: solicitacao.id },
+            where: {id: solicitacao.id},
             data: {
                 sys_solicitacao_status_id: statusAjusteId,
                 responsavel_sys_usuario_id:
@@ -559,6 +715,12 @@ export const solicitacaoService = {
                       descricao,
                       metadata = null,
                   }: RecusarSolicitacaoInput) {
+        await assertGlobalPermission(
+            sysUsuarioId,
+            "solicitacao.recusar",
+            "Sem permissão para recusar solicitações."
+        );
+
         const solicitacao = await getSolicitacaoBase(solicitacaoId);
 
         if (!solicitacao) {
@@ -575,7 +737,7 @@ export const solicitacaoService = {
         const now = new Date();
 
         const solicitacaoAtualizada = await prisma.sysSolicitacao.update({
-            where: { id: solicitacao.id },
+            where: {id: solicitacao.id},
             data: {
                 sys_solicitacao_status_id: statusRecusadaId,
                 responsavel_sys_usuario_id:
@@ -613,6 +775,12 @@ export const solicitacaoService = {
                       descricao = null,
                       metadata = null,
                   }: AprovarSolicitacaoInput) {
+        await assertGlobalPermission(
+            sysUsuarioId,
+            "solicitacao.aprovar",
+            "Sem permissão para aprovar solicitações."
+        );
+
         const solicitacao = await getSolicitacaoBase(solicitacaoId);
 
         if (!solicitacao) {
@@ -629,7 +797,7 @@ export const solicitacaoService = {
         const now = new Date();
 
         const solicitacaoAtualizada = await prisma.sysSolicitacao.update({
-            where: { id: solicitacao.id },
+            where: {id: solicitacao.id},
             data: {
                 sys_solicitacao_status_id: statusAprovadaId,
                 responsavel_sys_usuario_id:
@@ -675,7 +843,7 @@ export const solicitacaoService = {
         const now = new Date();
 
         const solicitacaoAtualizada = await prisma.sysSolicitacao.update({
-            where: { id: solicitacao.id },
+            where: {id: solicitacao.id},
             data: {
                 sys_solicitacao_status_id: statusConcluidaId,
                 finalizado_at: now,
@@ -710,7 +878,7 @@ export const solicitacaoService = {
         }
 
         if (solicitacao.solicitado_por_usuario_id !== sysUsuarioId) {
-            throw new Error("Somente o solicitante pode cancelar esta solicitação.");
+            throw new SolicitacaoForbiddenError("Somente o solicitante pode cancelar esta solicitação.");
         }
 
         assertStatusAtualPermitido(
@@ -723,7 +891,7 @@ export const solicitacaoService = {
         const now = new Date();
 
         const solicitacaoAtualizada = await prisma.sysSolicitacao.update({
-            where: { id: solicitacao.id },
+            where: {id: solicitacao.id},
             data: {
                 sys_solicitacao_status_id: statusCanceladaId,
                 finalizado_at: now,
@@ -745,7 +913,13 @@ export const solicitacaoService = {
         return solicitacaoAtualizada;
     },
 
-    async detalhar(solicitacaoId: number) {
+    async detalhar({
+                       solicitacaoId,
+                       sysUsuarioId,
+                   }: {
+        solicitacaoId: number;
+        sysUsuarioId: number;
+    }) {
         const solicitacao = await prisma.sysSolicitacao.findFirst({
             where: {
                 id: solicitacaoId,
@@ -810,6 +984,16 @@ export const solicitacaoService = {
             return null;
         }
 
+        const allowed = await canAccessSolicitacaoDetail({
+            sysUsuarioId,
+            solicitanteId: solicitacao.solicitado_por_usuario_id,
+            responsavelId: solicitacao.responsavel_sys_usuario_id,
+        });
+
+        if (!allowed) {
+            throw new SolicitacaoForbiddenError();
+        }
+
         return mapSolicitacao(solicitacao);
     },
 
@@ -822,6 +1006,22 @@ export const solicitacaoService = {
                      pageSize,
                      sort = "recent",
                  }: ListarSolicitacoesInput) {
+        if (scope === "analise") {
+            await assertGlobalPermission(
+                sysUsuarioId,
+                "solicitacao.analisar",
+                "Sem permissão para visualizar solicitações em análise."
+            );
+        }
+
+        if (scope === "todas") {
+            await assertGlobalPermission(
+                sysUsuarioId,
+                "solicitacao.visualizar_todas",
+                "Sem permissão para visualizar todas as solicitações."
+            );
+        }
+
         const resolvedPage = normalizarPage(page);
         const resolvedPageSize = normalizarPageSize(pageSize);
         const skip = (resolvedPage - 1) * resolvedPageSize;
@@ -857,11 +1057,11 @@ export const solicitacaoService = {
 
         const orderBy =
             sort === "oldest"
-                ? [{ created_at: "asc" as const }]
-                : [{ created_at: "desc" as const }];
+                ? [{created_at: "asc" as const}]
+                : [{created_at: "desc" as const}];
 
         const [total, items] = await Promise.all([
-            prisma.sysSolicitacao.count({ where }),
+            prisma.sysSolicitacao.count({where}),
             prisma.sysSolicitacao.findMany({
                 where,
                 select: {

@@ -60,8 +60,7 @@ export const routeAccessRules: RouteAccessRule[] = [
      */
     {
         path: "/sys/solicitacao",
-        access: "permission",
-        permissions: ["solicitacao.visualizar"],
+        access: "auth",
     },
     {
         path: "/ent/atletica/tema",

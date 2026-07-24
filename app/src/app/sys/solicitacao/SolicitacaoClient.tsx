@@ -6,7 +6,6 @@ import {
     FileText,
     Filter,
     Inbox,
-    Plus,
     RotateCcw,
 } from "lucide-react";
 
@@ -73,6 +72,10 @@ type Pagination = {
 type SolicitacaoClientProps = {
     initialItems: SolicitacaoListItem[];
     pagination: Pagination;
+    allowedScopes: {
+        analise: boolean;
+        todas: boolean;
+    };
     filters: {
         scope: SolicitacaoListScope;
         statusCodigo?: SolicitacaoStatusCodigo;
@@ -86,7 +89,7 @@ const scopeOptions: {
     value: SolicitacaoListScope;
 }[] = [
     { label: "Minhas", value: "minhas" },
-    { label: "Análise", value: "analise" },
+    { label: "Para análise", value: "analise" },
     { label: "Todas", value: "todas" },
 ];
 
@@ -176,6 +179,7 @@ export function SolicitacaoClient({
                                       initialItems,
                                       pagination,
                                       filters,
+                                      allowedScopes,
                                   }: SolicitacaoClientProps) {
     const baseParams = {
         scope: filters.scope,
@@ -190,16 +194,6 @@ export function SolicitacaoClient({
                 eyebrow="Sistema"
                 title="Solicitações"
                 subtitle="Acompanhe solicitações, validações, documentos e processos institucionais do Brava Pass."
-                actions={
-                    <AppLink
-                        href="/ent/atletica/criar"
-                        color="primary"
-                        variant="solid"
-                    >
-                        <Plus size={16} />
-                        Nova solicitação
-                    </AppLink>
-                }
             />
 
             <Card className="bp-mb-24">
@@ -231,7 +225,19 @@ export function SolicitacaoClient({
                     </div>
 
                     <div className="bp-action-row bp-mt-16">
-                        {scopeOptions.map((option) => (
+                        {scopeOptions
+                            .filter((option) => {
+                                if (option.value === "analise") {
+                                    return allowedScopes.analise;
+                                }
+
+                                if (option.value === "todas") {
+                                    return allowedScopes.todas;
+                                }
+
+                                return true;
+                            })
+                            .map((option) => (
                             <AppLink
                                 key={option.value}
                                 href={buildHref({
@@ -285,15 +291,6 @@ export function SolicitacaoClient({
                     icon={<Inbox size={28} />}
                     title="Nenhuma solicitação encontrada"
                     description="Quando houver solicitações, elas aparecerão aqui com status, histórico e ações disponíveis."
-                    action={
-                        <AppLink
-                            href="/ent/atletica/criar"
-                            color="primary"
-                            variant="solid"
-                        >
-                            Criar solicitação
-                        </AppLink>
-                    }
                 />
             ) : (
                 <div className="bp-feature-list">

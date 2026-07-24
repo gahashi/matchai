@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { requireApiAccess } from "@/lib/auth/require-api-access";
-import { solicitacaoService } from "@/lib/sys/solicitacao/solicitacao-service";
+import {
+    getSolicitacaoErrorStatus,
+    solicitacaoService,
+} from "@/lib/sys/solicitacao/solicitacao-service";
 
 type RouteContext = {
     params: Promise<{
@@ -9,46 +12,51 @@ type RouteContext = {
     }>;
 };
 
-export async function GET(request: NextRequest, context: RouteContext) {
+export async function PATCH(request: NextRequest, context: RouteContext) {
     const access = await requireApiAccess(request, {
-        permissions: ["solicitacao.visualizar"],
+        permissions: ["solicitacao.recusar"],
     });
 
     if (!access.ok) {
         return access.response;
     }
 
-    const { id } = await context.params;
-    const solicitacaoId = Number(id);
+    try {
+        const { id } = await context.params;
+        const body = await request.json();
+        const solicitacaoId = Number(id);
 
-    if (!Number.isInteger(solicitacaoId)) {
+        if (!Number.isInteger(solicitacaoId)) {
+            throw new Error("Solicitação inválida.");
+        }
+
+        if (!body.descricao) {
+            throw new Error("Informe o motivo da recusa.");
+        }
+
+        const solicitacao = await solicitacaoService.recusar({
+            solicitacaoId,
+            sysUsuarioId: access.session.user.id,
+            descricao: body.descricao,
+            metadata: body.metadata ?? null,
+        });
+
+        return NextResponse.json({
+            ok: true,
+            solicitacao,
+        });
+    } catch (error) {
         return NextResponse.json(
             {
                 ok: false,
-                message: "Solicitação inválida.",
+                message:
+                    error instanceof Error
+                        ? error.message
+                        : "Não foi possível recusar a solicitação.",
             },
             {
                 status: 400,
             }
         );
     }
-
-    const solicitacao = await solicitacaoService.detalhar(solicitacaoId);
-
-    if (!solicitacao) {
-        return NextResponse.json(
-            {
-                ok: false,
-                message: "Solicitação não encontrada.",
-            },
-            {
-                status: 404,
-            }
-        );
-    }
-
-    return NextResponse.json({
-        ok: true,
-        solicitacao,
-    });
 }
