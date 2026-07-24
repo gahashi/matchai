@@ -253,7 +253,9 @@ export type EduInstituicaoWhereInput = {
   updated_at?: Prisma.DateTimeNullableFilter<"EduInstituicao"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableFilter<"EduInstituicao"> | Date | string | null
   edu_instituicao_curso?: Prisma.EduInstituicaoCursoListRelationFilter
-  atl_atletica?: Prisma.AtlAtleticaListRelationFilter
+  edu_polo?: Prisma.EduPoloListRelationFilter
+  ent_entidade?: Prisma.EntEntidadeListRelationFilter
+  sys_solicitacao?: Prisma.SysSolicitacaoListRelationFilter
 }
 
 export type EduInstituicaoOrderByWithRelationInput = {
@@ -267,7 +269,9 @@ export type EduInstituicaoOrderByWithRelationInput = {
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   edu_instituicao_curso?: Prisma.EduInstituicaoCursoOrderByRelationAggregateInput
-  atl_atletica?: Prisma.AtlAtleticaOrderByRelationAggregateInput
+  edu_polo?: Prisma.EduPoloOrderByRelationAggregateInput
+  ent_entidade?: Prisma.EntEntidadeOrderByRelationAggregateInput
+  sys_solicitacao?: Prisma.SysSolicitacaoOrderByRelationAggregateInput
   _relevance?: Prisma.EduInstituicaoOrderByRelevanceInput
 }
 
@@ -285,7 +289,9 @@ export type EduInstituicaoWhereUniqueInput = Prisma.AtLeast<{
   updated_at?: Prisma.DateTimeNullableFilter<"EduInstituicao"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableFilter<"EduInstituicao"> | Date | string | null
   edu_instituicao_curso?: Prisma.EduInstituicaoCursoListRelationFilter
-  atl_atletica?: Prisma.AtlAtleticaListRelationFilter
+  edu_polo?: Prisma.EduPoloListRelationFilter
+  ent_entidade?: Prisma.EntEntidadeListRelationFilter
+  sys_solicitacao?: Prisma.SysSolicitacaoListRelationFilter
 }, "id">
 
 export type EduInstituicaoOrderByWithAggregationInput = {
@@ -330,7 +336,9 @@ export type EduInstituicaoCreateInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   edu_instituicao_curso?: Prisma.EduInstituicaoCursoCreateNestedManyWithoutEdu_instituicaoInput
-  atl_atletica?: Prisma.AtlAtleticaCreateNestedManyWithoutEdu_instituicaoInput
+  edu_polo?: Prisma.EduPoloCreateNestedManyWithoutEdu_instituicaoInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedManyWithoutEdu_instituicaoInput
+  sys_solicitacao?: Prisma.SysSolicitacaoCreateNestedManyWithoutEdu_instituicaoInput
 }
 
 export type EduInstituicaoUncheckedCreateInput = {
@@ -344,7 +352,9 @@ export type EduInstituicaoUncheckedCreateInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   edu_instituicao_curso?: Prisma.EduInstituicaoCursoUncheckedCreateNestedManyWithoutEdu_instituicaoInput
-  atl_atletica?: Prisma.AtlAtleticaUncheckedCreateNestedManyWithoutEdu_instituicaoInput
+  edu_polo?: Prisma.EduPoloUncheckedCreateNestedManyWithoutEdu_instituicaoInput
+  ent_entidade?: Prisma.EntEntidadeUncheckedCreateNestedManyWithoutEdu_instituicaoInput
+  sys_solicitacao?: Prisma.SysSolicitacaoUncheckedCreateNestedManyWithoutEdu_instituicaoInput
 }
 
 export type EduInstituicaoUpdateInput = {
@@ -357,7 +367,9 @@ export type EduInstituicaoUpdateInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   edu_instituicao_curso?: Prisma.EduInstituicaoCursoUpdateManyWithoutEdu_instituicaoNestedInput
-  atl_atletica?: Prisma.AtlAtleticaUpdateManyWithoutEdu_instituicaoNestedInput
+  edu_polo?: Prisma.EduPoloUpdateManyWithoutEdu_instituicaoNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateManyWithoutEdu_instituicaoNestedInput
+  sys_solicitacao?: Prisma.SysSolicitacaoUpdateManyWithoutEdu_instituicaoNestedInput
 }
 
 export type EduInstituicaoUncheckedUpdateInput = {
@@ -371,7 +383,9 @@ export type EduInstituicaoUncheckedUpdateInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   edu_instituicao_curso?: Prisma.EduInstituicaoCursoUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
-  atl_atletica?: Prisma.AtlAtleticaUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
+  edu_polo?: Prisma.EduPoloUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
+  ent_entidade?: Prisma.EntEntidadeUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
+  sys_solicitacao?: Prisma.SysSolicitacaoUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
 }
 
 export type EduInstituicaoCreateManyInput = {
@@ -466,6 +480,11 @@ export type EduInstituicaoScalarRelationFilter = {
   isNot?: Prisma.EduInstituicaoWhereInput
 }
 
+export type EduInstituicaoNullableScalarRelationFilter = {
+  is?: Prisma.EduInstituicaoWhereInput | null
+  isNot?: Prisma.EduInstituicaoWhereInput | null
+}
+
 export type EduInstituicaoCreateNestedOneWithoutEdu_instituicao_cursoInput = {
   create?: Prisma.XOR<Prisma.EduInstituicaoCreateWithoutEdu_instituicao_cursoInput, Prisma.EduInstituicaoUncheckedCreateWithoutEdu_instituicao_cursoInput>
   connectOrCreate?: Prisma.EduInstituicaoCreateOrConnectWithoutEdu_instituicao_cursoInput
@@ -480,18 +499,48 @@ export type EduInstituicaoUpdateOneRequiredWithoutEdu_instituicao_cursoNestedInp
   update?: Prisma.XOR<Prisma.XOR<Prisma.EduInstituicaoUpdateToOneWithWhereWithoutEdu_instituicao_cursoInput, Prisma.EduInstituicaoUpdateWithoutEdu_instituicao_cursoInput>, Prisma.EduInstituicaoUncheckedUpdateWithoutEdu_instituicao_cursoInput>
 }
 
-export type EduInstituicaoCreateNestedOneWithoutAtl_atleticaInput = {
-  create?: Prisma.XOR<Prisma.EduInstituicaoCreateWithoutAtl_atleticaInput, Prisma.EduInstituicaoUncheckedCreateWithoutAtl_atleticaInput>
-  connectOrCreate?: Prisma.EduInstituicaoCreateOrConnectWithoutAtl_atleticaInput
+export type EduInstituicaoCreateNestedOneWithoutEdu_poloInput = {
+  create?: Prisma.XOR<Prisma.EduInstituicaoCreateWithoutEdu_poloInput, Prisma.EduInstituicaoUncheckedCreateWithoutEdu_poloInput>
+  connectOrCreate?: Prisma.EduInstituicaoCreateOrConnectWithoutEdu_poloInput
   connect?: Prisma.EduInstituicaoWhereUniqueInput
 }
 
-export type EduInstituicaoUpdateOneRequiredWithoutAtl_atleticaNestedInput = {
-  create?: Prisma.XOR<Prisma.EduInstituicaoCreateWithoutAtl_atleticaInput, Prisma.EduInstituicaoUncheckedCreateWithoutAtl_atleticaInput>
-  connectOrCreate?: Prisma.EduInstituicaoCreateOrConnectWithoutAtl_atleticaInput
-  upsert?: Prisma.EduInstituicaoUpsertWithoutAtl_atleticaInput
+export type EduInstituicaoUpdateOneRequiredWithoutEdu_poloNestedInput = {
+  create?: Prisma.XOR<Prisma.EduInstituicaoCreateWithoutEdu_poloInput, Prisma.EduInstituicaoUncheckedCreateWithoutEdu_poloInput>
+  connectOrCreate?: Prisma.EduInstituicaoCreateOrConnectWithoutEdu_poloInput
+  upsert?: Prisma.EduInstituicaoUpsertWithoutEdu_poloInput
   connect?: Prisma.EduInstituicaoWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.EduInstituicaoUpdateToOneWithWhereWithoutAtl_atleticaInput, Prisma.EduInstituicaoUpdateWithoutAtl_atleticaInput>, Prisma.EduInstituicaoUncheckedUpdateWithoutAtl_atleticaInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EduInstituicaoUpdateToOneWithWhereWithoutEdu_poloInput, Prisma.EduInstituicaoUpdateWithoutEdu_poloInput>, Prisma.EduInstituicaoUncheckedUpdateWithoutEdu_poloInput>
+}
+
+export type EduInstituicaoCreateNestedOneWithoutEnt_entidadeInput = {
+  create?: Prisma.XOR<Prisma.EduInstituicaoCreateWithoutEnt_entidadeInput, Prisma.EduInstituicaoUncheckedCreateWithoutEnt_entidadeInput>
+  connectOrCreate?: Prisma.EduInstituicaoCreateOrConnectWithoutEnt_entidadeInput
+  connect?: Prisma.EduInstituicaoWhereUniqueInput
+}
+
+export type EduInstituicaoUpdateOneRequiredWithoutEnt_entidadeNestedInput = {
+  create?: Prisma.XOR<Prisma.EduInstituicaoCreateWithoutEnt_entidadeInput, Prisma.EduInstituicaoUncheckedCreateWithoutEnt_entidadeInput>
+  connectOrCreate?: Prisma.EduInstituicaoCreateOrConnectWithoutEnt_entidadeInput
+  upsert?: Prisma.EduInstituicaoUpsertWithoutEnt_entidadeInput
+  connect?: Prisma.EduInstituicaoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EduInstituicaoUpdateToOneWithWhereWithoutEnt_entidadeInput, Prisma.EduInstituicaoUpdateWithoutEnt_entidadeInput>, Prisma.EduInstituicaoUncheckedUpdateWithoutEnt_entidadeInput>
+}
+
+export type EduInstituicaoCreateNestedOneWithoutSys_solicitacaoInput = {
+  create?: Prisma.XOR<Prisma.EduInstituicaoCreateWithoutSys_solicitacaoInput, Prisma.EduInstituicaoUncheckedCreateWithoutSys_solicitacaoInput>
+  connectOrCreate?: Prisma.EduInstituicaoCreateOrConnectWithoutSys_solicitacaoInput
+  connect?: Prisma.EduInstituicaoWhereUniqueInput
+}
+
+export type EduInstituicaoUpdateOneWithoutSys_solicitacaoNestedInput = {
+  create?: Prisma.XOR<Prisma.EduInstituicaoCreateWithoutSys_solicitacaoInput, Prisma.EduInstituicaoUncheckedCreateWithoutSys_solicitacaoInput>
+  connectOrCreate?: Prisma.EduInstituicaoCreateOrConnectWithoutSys_solicitacaoInput
+  upsert?: Prisma.EduInstituicaoUpsertWithoutSys_solicitacaoInput
+  disconnect?: Prisma.EduInstituicaoWhereInput | boolean
+  delete?: Prisma.EduInstituicaoWhereInput | boolean
+  connect?: Prisma.EduInstituicaoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EduInstituicaoUpdateToOneWithWhereWithoutSys_solicitacaoInput, Prisma.EduInstituicaoUpdateWithoutSys_solicitacaoInput>, Prisma.EduInstituicaoUncheckedUpdateWithoutSys_solicitacaoInput>
 }
 
 export type EduInstituicaoCreateWithoutEdu_instituicao_cursoInput = {
@@ -503,7 +552,9 @@ export type EduInstituicaoCreateWithoutEdu_instituicao_cursoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
-  atl_atletica?: Prisma.AtlAtleticaCreateNestedManyWithoutEdu_instituicaoInput
+  edu_polo?: Prisma.EduPoloCreateNestedManyWithoutEdu_instituicaoInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedManyWithoutEdu_instituicaoInput
+  sys_solicitacao?: Prisma.SysSolicitacaoCreateNestedManyWithoutEdu_instituicaoInput
 }
 
 export type EduInstituicaoUncheckedCreateWithoutEdu_instituicao_cursoInput = {
@@ -516,7 +567,9 @@ export type EduInstituicaoUncheckedCreateWithoutEdu_instituicao_cursoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
-  atl_atletica?: Prisma.AtlAtleticaUncheckedCreateNestedManyWithoutEdu_instituicaoInput
+  edu_polo?: Prisma.EduPoloUncheckedCreateNestedManyWithoutEdu_instituicaoInput
+  ent_entidade?: Prisma.EntEntidadeUncheckedCreateNestedManyWithoutEdu_instituicaoInput
+  sys_solicitacao?: Prisma.SysSolicitacaoUncheckedCreateNestedManyWithoutEdu_instituicaoInput
 }
 
 export type EduInstituicaoCreateOrConnectWithoutEdu_instituicao_cursoInput = {
@@ -544,7 +597,9 @@ export type EduInstituicaoUpdateWithoutEdu_instituicao_cursoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  atl_atletica?: Prisma.AtlAtleticaUpdateManyWithoutEdu_instituicaoNestedInput
+  edu_polo?: Prisma.EduPoloUpdateManyWithoutEdu_instituicaoNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateManyWithoutEdu_instituicaoNestedInput
+  sys_solicitacao?: Prisma.SysSolicitacaoUpdateManyWithoutEdu_instituicaoNestedInput
 }
 
 export type EduInstituicaoUncheckedUpdateWithoutEdu_instituicao_cursoInput = {
@@ -557,10 +612,12 @@ export type EduInstituicaoUncheckedUpdateWithoutEdu_instituicao_cursoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  atl_atletica?: Prisma.AtlAtleticaUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
+  edu_polo?: Prisma.EduPoloUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
+  ent_entidade?: Prisma.EntEntidadeUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
+  sys_solicitacao?: Prisma.SysSolicitacaoUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
 }
 
-export type EduInstituicaoCreateWithoutAtl_atleticaInput = {
+export type EduInstituicaoCreateWithoutEdu_poloInput = {
   nome: string
   abreviacao: string
   cidade?: string | null
@@ -570,9 +627,11 @@ export type EduInstituicaoCreateWithoutAtl_atleticaInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   edu_instituicao_curso?: Prisma.EduInstituicaoCursoCreateNestedManyWithoutEdu_instituicaoInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedManyWithoutEdu_instituicaoInput
+  sys_solicitacao?: Prisma.SysSolicitacaoCreateNestedManyWithoutEdu_instituicaoInput
 }
 
-export type EduInstituicaoUncheckedCreateWithoutAtl_atleticaInput = {
+export type EduInstituicaoUncheckedCreateWithoutEdu_poloInput = {
   id?: number
   nome: string
   abreviacao: string
@@ -583,25 +642,27 @@ export type EduInstituicaoUncheckedCreateWithoutAtl_atleticaInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   edu_instituicao_curso?: Prisma.EduInstituicaoCursoUncheckedCreateNestedManyWithoutEdu_instituicaoInput
+  ent_entidade?: Prisma.EntEntidadeUncheckedCreateNestedManyWithoutEdu_instituicaoInput
+  sys_solicitacao?: Prisma.SysSolicitacaoUncheckedCreateNestedManyWithoutEdu_instituicaoInput
 }
 
-export type EduInstituicaoCreateOrConnectWithoutAtl_atleticaInput = {
+export type EduInstituicaoCreateOrConnectWithoutEdu_poloInput = {
   where: Prisma.EduInstituicaoWhereUniqueInput
-  create: Prisma.XOR<Prisma.EduInstituicaoCreateWithoutAtl_atleticaInput, Prisma.EduInstituicaoUncheckedCreateWithoutAtl_atleticaInput>
+  create: Prisma.XOR<Prisma.EduInstituicaoCreateWithoutEdu_poloInput, Prisma.EduInstituicaoUncheckedCreateWithoutEdu_poloInput>
 }
 
-export type EduInstituicaoUpsertWithoutAtl_atleticaInput = {
-  update: Prisma.XOR<Prisma.EduInstituicaoUpdateWithoutAtl_atleticaInput, Prisma.EduInstituicaoUncheckedUpdateWithoutAtl_atleticaInput>
-  create: Prisma.XOR<Prisma.EduInstituicaoCreateWithoutAtl_atleticaInput, Prisma.EduInstituicaoUncheckedCreateWithoutAtl_atleticaInput>
+export type EduInstituicaoUpsertWithoutEdu_poloInput = {
+  update: Prisma.XOR<Prisma.EduInstituicaoUpdateWithoutEdu_poloInput, Prisma.EduInstituicaoUncheckedUpdateWithoutEdu_poloInput>
+  create: Prisma.XOR<Prisma.EduInstituicaoCreateWithoutEdu_poloInput, Prisma.EduInstituicaoUncheckedCreateWithoutEdu_poloInput>
   where?: Prisma.EduInstituicaoWhereInput
 }
 
-export type EduInstituicaoUpdateToOneWithWhereWithoutAtl_atleticaInput = {
+export type EduInstituicaoUpdateToOneWithWhereWithoutEdu_poloInput = {
   where?: Prisma.EduInstituicaoWhereInput
-  data: Prisma.XOR<Prisma.EduInstituicaoUpdateWithoutAtl_atleticaInput, Prisma.EduInstituicaoUncheckedUpdateWithoutAtl_atleticaInput>
+  data: Prisma.XOR<Prisma.EduInstituicaoUpdateWithoutEdu_poloInput, Prisma.EduInstituicaoUncheckedUpdateWithoutEdu_poloInput>
 }
 
-export type EduInstituicaoUpdateWithoutAtl_atleticaInput = {
+export type EduInstituicaoUpdateWithoutEdu_poloInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   abreviacao?: Prisma.StringFieldUpdateOperationsInput | string
   cidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -611,9 +672,11 @@ export type EduInstituicaoUpdateWithoutAtl_atleticaInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   edu_instituicao_curso?: Prisma.EduInstituicaoCursoUpdateManyWithoutEdu_instituicaoNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateManyWithoutEdu_instituicaoNestedInput
+  sys_solicitacao?: Prisma.SysSolicitacaoUpdateManyWithoutEdu_instituicaoNestedInput
 }
 
-export type EduInstituicaoUncheckedUpdateWithoutAtl_atleticaInput = {
+export type EduInstituicaoUncheckedUpdateWithoutEdu_poloInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   abreviacao?: Prisma.StringFieldUpdateOperationsInput | string
@@ -624,6 +687,156 @@ export type EduInstituicaoUncheckedUpdateWithoutAtl_atleticaInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   edu_instituicao_curso?: Prisma.EduInstituicaoCursoUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
+  ent_entidade?: Prisma.EntEntidadeUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
+  sys_solicitacao?: Prisma.SysSolicitacaoUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
+}
+
+export type EduInstituicaoCreateWithoutEnt_entidadeInput = {
+  nome: string
+  abreviacao: string
+  cidade?: string | null
+  estado?: string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  edu_instituicao_curso?: Prisma.EduInstituicaoCursoCreateNestedManyWithoutEdu_instituicaoInput
+  edu_polo?: Prisma.EduPoloCreateNestedManyWithoutEdu_instituicaoInput
+  sys_solicitacao?: Prisma.SysSolicitacaoCreateNestedManyWithoutEdu_instituicaoInput
+}
+
+export type EduInstituicaoUncheckedCreateWithoutEnt_entidadeInput = {
+  id?: number
+  nome: string
+  abreviacao: string
+  cidade?: string | null
+  estado?: string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  edu_instituicao_curso?: Prisma.EduInstituicaoCursoUncheckedCreateNestedManyWithoutEdu_instituicaoInput
+  edu_polo?: Prisma.EduPoloUncheckedCreateNestedManyWithoutEdu_instituicaoInput
+  sys_solicitacao?: Prisma.SysSolicitacaoUncheckedCreateNestedManyWithoutEdu_instituicaoInput
+}
+
+export type EduInstituicaoCreateOrConnectWithoutEnt_entidadeInput = {
+  where: Prisma.EduInstituicaoWhereUniqueInput
+  create: Prisma.XOR<Prisma.EduInstituicaoCreateWithoutEnt_entidadeInput, Prisma.EduInstituicaoUncheckedCreateWithoutEnt_entidadeInput>
+}
+
+export type EduInstituicaoUpsertWithoutEnt_entidadeInput = {
+  update: Prisma.XOR<Prisma.EduInstituicaoUpdateWithoutEnt_entidadeInput, Prisma.EduInstituicaoUncheckedUpdateWithoutEnt_entidadeInput>
+  create: Prisma.XOR<Prisma.EduInstituicaoCreateWithoutEnt_entidadeInput, Prisma.EduInstituicaoUncheckedCreateWithoutEnt_entidadeInput>
+  where?: Prisma.EduInstituicaoWhereInput
+}
+
+export type EduInstituicaoUpdateToOneWithWhereWithoutEnt_entidadeInput = {
+  where?: Prisma.EduInstituicaoWhereInput
+  data: Prisma.XOR<Prisma.EduInstituicaoUpdateWithoutEnt_entidadeInput, Prisma.EduInstituicaoUncheckedUpdateWithoutEnt_entidadeInput>
+}
+
+export type EduInstituicaoUpdateWithoutEnt_entidadeInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  abreviacao?: Prisma.StringFieldUpdateOperationsInput | string
+  cidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  edu_instituicao_curso?: Prisma.EduInstituicaoCursoUpdateManyWithoutEdu_instituicaoNestedInput
+  edu_polo?: Prisma.EduPoloUpdateManyWithoutEdu_instituicaoNestedInput
+  sys_solicitacao?: Prisma.SysSolicitacaoUpdateManyWithoutEdu_instituicaoNestedInput
+}
+
+export type EduInstituicaoUncheckedUpdateWithoutEnt_entidadeInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  abreviacao?: Prisma.StringFieldUpdateOperationsInput | string
+  cidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  edu_instituicao_curso?: Prisma.EduInstituicaoCursoUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
+  edu_polo?: Prisma.EduPoloUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
+  sys_solicitacao?: Prisma.SysSolicitacaoUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
+}
+
+export type EduInstituicaoCreateWithoutSys_solicitacaoInput = {
+  nome: string
+  abreviacao: string
+  cidade?: string | null
+  estado?: string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  edu_instituicao_curso?: Prisma.EduInstituicaoCursoCreateNestedManyWithoutEdu_instituicaoInput
+  edu_polo?: Prisma.EduPoloCreateNestedManyWithoutEdu_instituicaoInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedManyWithoutEdu_instituicaoInput
+}
+
+export type EduInstituicaoUncheckedCreateWithoutSys_solicitacaoInput = {
+  id?: number
+  nome: string
+  abreviacao: string
+  cidade?: string | null
+  estado?: string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  edu_instituicao_curso?: Prisma.EduInstituicaoCursoUncheckedCreateNestedManyWithoutEdu_instituicaoInput
+  edu_polo?: Prisma.EduPoloUncheckedCreateNestedManyWithoutEdu_instituicaoInput
+  ent_entidade?: Prisma.EntEntidadeUncheckedCreateNestedManyWithoutEdu_instituicaoInput
+}
+
+export type EduInstituicaoCreateOrConnectWithoutSys_solicitacaoInput = {
+  where: Prisma.EduInstituicaoWhereUniqueInput
+  create: Prisma.XOR<Prisma.EduInstituicaoCreateWithoutSys_solicitacaoInput, Prisma.EduInstituicaoUncheckedCreateWithoutSys_solicitacaoInput>
+}
+
+export type EduInstituicaoUpsertWithoutSys_solicitacaoInput = {
+  update: Prisma.XOR<Prisma.EduInstituicaoUpdateWithoutSys_solicitacaoInput, Prisma.EduInstituicaoUncheckedUpdateWithoutSys_solicitacaoInput>
+  create: Prisma.XOR<Prisma.EduInstituicaoCreateWithoutSys_solicitacaoInput, Prisma.EduInstituicaoUncheckedCreateWithoutSys_solicitacaoInput>
+  where?: Prisma.EduInstituicaoWhereInput
+}
+
+export type EduInstituicaoUpdateToOneWithWhereWithoutSys_solicitacaoInput = {
+  where?: Prisma.EduInstituicaoWhereInput
+  data: Prisma.XOR<Prisma.EduInstituicaoUpdateWithoutSys_solicitacaoInput, Prisma.EduInstituicaoUncheckedUpdateWithoutSys_solicitacaoInput>
+}
+
+export type EduInstituicaoUpdateWithoutSys_solicitacaoInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  abreviacao?: Prisma.StringFieldUpdateOperationsInput | string
+  cidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  edu_instituicao_curso?: Prisma.EduInstituicaoCursoUpdateManyWithoutEdu_instituicaoNestedInput
+  edu_polo?: Prisma.EduPoloUpdateManyWithoutEdu_instituicaoNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateManyWithoutEdu_instituicaoNestedInput
+}
+
+export type EduInstituicaoUncheckedUpdateWithoutSys_solicitacaoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  abreviacao?: Prisma.StringFieldUpdateOperationsInput | string
+  cidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  edu_instituicao_curso?: Prisma.EduInstituicaoCursoUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
+  edu_polo?: Prisma.EduPoloUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
+  ent_entidade?: Prisma.EntEntidadeUncheckedUpdateManyWithoutEdu_instituicaoNestedInput
 }
 
 
@@ -633,12 +846,16 @@ export type EduInstituicaoUncheckedUpdateWithoutAtl_atleticaInput = {
 
 export type EduInstituicaoCountOutputType = {
   edu_instituicao_curso: number
-  atl_atletica: number
+  edu_polo: number
+  ent_entidade: number
+  sys_solicitacao: number
 }
 
 export type EduInstituicaoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   edu_instituicao_curso?: boolean | EduInstituicaoCountOutputTypeCountEdu_instituicao_cursoArgs
-  atl_atletica?: boolean | EduInstituicaoCountOutputTypeCountAtl_atleticaArgs
+  edu_polo?: boolean | EduInstituicaoCountOutputTypeCountEdu_poloArgs
+  ent_entidade?: boolean | EduInstituicaoCountOutputTypeCountEnt_entidadeArgs
+  sys_solicitacao?: boolean | EduInstituicaoCountOutputTypeCountSys_solicitacaoArgs
 }
 
 /**
@@ -661,8 +878,22 @@ export type EduInstituicaoCountOutputTypeCountEdu_instituicao_cursoArgs<ExtArgs 
 /**
  * EduInstituicaoCountOutputType without action
  */
-export type EduInstituicaoCountOutputTypeCountAtl_atleticaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AtlAtleticaWhereInput
+export type EduInstituicaoCountOutputTypeCountEdu_poloArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EduPoloWhereInput
+}
+
+/**
+ * EduInstituicaoCountOutputType without action
+ */
+export type EduInstituicaoCountOutputTypeCountEnt_entidadeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EntEntidadeWhereInput
+}
+
+/**
+ * EduInstituicaoCountOutputType without action
+ */
+export type EduInstituicaoCountOutputTypeCountSys_solicitacaoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SysSolicitacaoWhereInput
 }
 
 
@@ -677,7 +908,9 @@ export type EduInstituicaoSelect<ExtArgs extends runtime.Types.Extensions.Intern
   updated_at?: boolean
   deleted_at?: boolean
   edu_instituicao_curso?: boolean | Prisma.EduInstituicao$edu_instituicao_cursoArgs<ExtArgs>
-  atl_atletica?: boolean | Prisma.EduInstituicao$atl_atleticaArgs<ExtArgs>
+  edu_polo?: boolean | Prisma.EduInstituicao$edu_poloArgs<ExtArgs>
+  ent_entidade?: boolean | Prisma.EduInstituicao$ent_entidadeArgs<ExtArgs>
+  sys_solicitacao?: boolean | Prisma.EduInstituicao$sys_solicitacaoArgs<ExtArgs>
   _count?: boolean | Prisma.EduInstituicaoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["eduInstituicao"]>
 
@@ -698,7 +931,9 @@ export type EduInstituicaoSelectScalar = {
 export type EduInstituicaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "abreviacao" | "cidade" | "estado" | "ativo" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["eduInstituicao"]>
 export type EduInstituicaoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   edu_instituicao_curso?: boolean | Prisma.EduInstituicao$edu_instituicao_cursoArgs<ExtArgs>
-  atl_atletica?: boolean | Prisma.EduInstituicao$atl_atleticaArgs<ExtArgs>
+  edu_polo?: boolean | Prisma.EduInstituicao$edu_poloArgs<ExtArgs>
+  ent_entidade?: boolean | Prisma.EduInstituicao$ent_entidadeArgs<ExtArgs>
+  sys_solicitacao?: boolean | Prisma.EduInstituicao$sys_solicitacaoArgs<ExtArgs>
   _count?: boolean | Prisma.EduInstituicaoCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -706,7 +941,9 @@ export type $EduInstituicaoPayload<ExtArgs extends runtime.Types.Extensions.Inte
   name: "EduInstituicao"
   objects: {
     edu_instituicao_curso: Prisma.$EduInstituicaoCursoPayload<ExtArgs>[]
-    atl_atletica: Prisma.$AtlAtleticaPayload<ExtArgs>[]
+    edu_polo: Prisma.$EduPoloPayload<ExtArgs>[]
+    ent_entidade: Prisma.$EntEntidadePayload<ExtArgs>[]
+    sys_solicitacao: Prisma.$SysSolicitacaoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1059,7 +1296,9 @@ readonly fields: EduInstituicaoFieldRefs;
 export interface Prisma__EduInstituicaoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   edu_instituicao_curso<T extends Prisma.EduInstituicao$edu_instituicao_cursoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EduInstituicao$edu_instituicao_cursoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EduInstituicaoCursoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  atl_atletica<T extends Prisma.EduInstituicao$atl_atleticaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EduInstituicao$atl_atleticaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AtlAtleticaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  edu_polo<T extends Prisma.EduInstituicao$edu_poloArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EduInstituicao$edu_poloArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EduPoloPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ent_entidade<T extends Prisma.EduInstituicao$ent_entidadeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EduInstituicao$ent_entidadeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EntEntidadePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sys_solicitacao<T extends Prisma.EduInstituicao$sys_solicitacaoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EduInstituicao$sys_solicitacaoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysSolicitacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1470,27 +1709,75 @@ export type EduInstituicao$edu_instituicao_cursoArgs<ExtArgs extends runtime.Typ
 }
 
 /**
- * EduInstituicao.atl_atletica
+ * EduInstituicao.edu_polo
  */
-export type EduInstituicao$atl_atleticaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type EduInstituicao$edu_poloArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the AtlAtletica
+   * Select specific fields to fetch from the EduPolo
    */
-  select?: Prisma.AtlAtleticaSelect<ExtArgs> | null
+  select?: Prisma.EduPoloSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the AtlAtletica
+   * Omit specific fields from the EduPolo
    */
-  omit?: Prisma.AtlAtleticaOmit<ExtArgs> | null
+  omit?: Prisma.EduPoloOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.AtlAtleticaInclude<ExtArgs> | null
-  where?: Prisma.AtlAtleticaWhereInput
-  orderBy?: Prisma.AtlAtleticaOrderByWithRelationInput | Prisma.AtlAtleticaOrderByWithRelationInput[]
-  cursor?: Prisma.AtlAtleticaWhereUniqueInput
+  include?: Prisma.EduPoloInclude<ExtArgs> | null
+  where?: Prisma.EduPoloWhereInput
+  orderBy?: Prisma.EduPoloOrderByWithRelationInput | Prisma.EduPoloOrderByWithRelationInput[]
+  cursor?: Prisma.EduPoloWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.AtlAtleticaScalarFieldEnum | Prisma.AtlAtleticaScalarFieldEnum[]
+  distinct?: Prisma.EduPoloScalarFieldEnum | Prisma.EduPoloScalarFieldEnum[]
+}
+
+/**
+ * EduInstituicao.ent_entidade
+ */
+export type EduInstituicao$ent_entidadeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EntEntidade
+   */
+  select?: Prisma.EntEntidadeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EntEntidade
+   */
+  omit?: Prisma.EntEntidadeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EntEntidadeInclude<ExtArgs> | null
+  where?: Prisma.EntEntidadeWhereInput
+  orderBy?: Prisma.EntEntidadeOrderByWithRelationInput | Prisma.EntEntidadeOrderByWithRelationInput[]
+  cursor?: Prisma.EntEntidadeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EntEntidadeScalarFieldEnum | Prisma.EntEntidadeScalarFieldEnum[]
+}
+
+/**
+ * EduInstituicao.sys_solicitacao
+ */
+export type EduInstituicao$sys_solicitacaoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SysSolicitacao
+   */
+  select?: Prisma.SysSolicitacaoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SysSolicitacao
+   */
+  omit?: Prisma.SysSolicitacaoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SysSolicitacaoInclude<ExtArgs> | null
+  where?: Prisma.SysSolicitacaoWhereInput
+  orderBy?: Prisma.SysSolicitacaoOrderByWithRelationInput | Prisma.SysSolicitacaoOrderByWithRelationInput[]
+  cursor?: Prisma.SysSolicitacaoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SysSolicitacaoScalarFieldEnum | Prisma.SysSolicitacaoScalarFieldEnum[]
 }
 
 /**

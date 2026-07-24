@@ -32,6 +32,9 @@ export type SysSolicitacaoAvgAggregateOutputType = {
   sys_solicitacao_status_id: number | null
   solicitado_por_usuario_id: number | null
   responsavel_sys_usuario_id: number | null
+  edu_instituicao_id: number | null
+  edu_polo_id: number | null
+  ent_entidade_id: number | null
   entidade_id: number | null
   ativo: number | null
 }
@@ -42,6 +45,9 @@ export type SysSolicitacaoSumAggregateOutputType = {
   sys_solicitacao_status_id: number | null
   solicitado_por_usuario_id: number | null
   responsavel_sys_usuario_id: number | null
+  edu_instituicao_id: number | null
+  edu_polo_id: number | null
+  ent_entidade_id: number | null
   entidade_id: number | null
   ativo: number | null
 }
@@ -52,6 +58,9 @@ export type SysSolicitacaoMinAggregateOutputType = {
   sys_solicitacao_status_id: number | null
   solicitado_por_usuario_id: number | null
   responsavel_sys_usuario_id: number | null
+  edu_instituicao_id: number | null
+  edu_polo_id: number | null
+  ent_entidade_id: number | null
   titulo: string | null
   descricao: string | null
   entidade_tipo: string | null
@@ -72,6 +81,9 @@ export type SysSolicitacaoMaxAggregateOutputType = {
   sys_solicitacao_status_id: number | null
   solicitado_por_usuario_id: number | null
   responsavel_sys_usuario_id: number | null
+  edu_instituicao_id: number | null
+  edu_polo_id: number | null
+  ent_entidade_id: number | null
   titulo: string | null
   descricao: string | null
   entidade_tipo: string | null
@@ -92,6 +104,9 @@ export type SysSolicitacaoCountAggregateOutputType = {
   sys_solicitacao_status_id: number
   solicitado_por_usuario_id: number
   responsavel_sys_usuario_id: number
+  edu_instituicao_id: number
+  edu_polo_id: number
+  ent_entidade_id: number
   titulo: number
   descricao: number
   entidade_tipo: number
@@ -114,6 +129,9 @@ export type SysSolicitacaoAvgAggregateInputType = {
   sys_solicitacao_status_id?: true
   solicitado_por_usuario_id?: true
   responsavel_sys_usuario_id?: true
+  edu_instituicao_id?: true
+  edu_polo_id?: true
+  ent_entidade_id?: true
   entidade_id?: true
   ativo?: true
 }
@@ -124,6 +142,9 @@ export type SysSolicitacaoSumAggregateInputType = {
   sys_solicitacao_status_id?: true
   solicitado_por_usuario_id?: true
   responsavel_sys_usuario_id?: true
+  edu_instituicao_id?: true
+  edu_polo_id?: true
+  ent_entidade_id?: true
   entidade_id?: true
   ativo?: true
 }
@@ -134,6 +155,9 @@ export type SysSolicitacaoMinAggregateInputType = {
   sys_solicitacao_status_id?: true
   solicitado_por_usuario_id?: true
   responsavel_sys_usuario_id?: true
+  edu_instituicao_id?: true
+  edu_polo_id?: true
+  ent_entidade_id?: true
   titulo?: true
   descricao?: true
   entidade_tipo?: true
@@ -154,6 +178,9 @@ export type SysSolicitacaoMaxAggregateInputType = {
   sys_solicitacao_status_id?: true
   solicitado_por_usuario_id?: true
   responsavel_sys_usuario_id?: true
+  edu_instituicao_id?: true
+  edu_polo_id?: true
+  ent_entidade_id?: true
   titulo?: true
   descricao?: true
   entidade_tipo?: true
@@ -174,6 +201,9 @@ export type SysSolicitacaoCountAggregateInputType = {
   sys_solicitacao_status_id?: true
   solicitado_por_usuario_id?: true
   responsavel_sys_usuario_id?: true
+  edu_instituicao_id?: true
+  edu_polo_id?: true
+  ent_entidade_id?: true
   titulo?: true
   descricao?: true
   entidade_tipo?: true
@@ -281,6 +311,9 @@ export type SysSolicitacaoGroupByOutputType = {
   sys_solicitacao_status_id: number
   solicitado_por_usuario_id: number
   responsavel_sys_usuario_id: number | null
+  edu_instituicao_id: number | null
+  edu_polo_id: number | null
+  ent_entidade_id: number | null
   titulo: string
   descricao: string | null
   entidade_tipo: string | null
@@ -324,6 +357,9 @@ export type SysSolicitacaoWhereInput = {
   sys_solicitacao_status_id?: Prisma.IntFilter<"SysSolicitacao"> | number
   solicitado_por_usuario_id?: Prisma.IntFilter<"SysSolicitacao"> | number
   responsavel_sys_usuario_id?: Prisma.IntNullableFilter<"SysSolicitacao"> | number | null
+  edu_instituicao_id?: Prisma.IntNullableFilter<"SysSolicitacao"> | number | null
+  edu_polo_id?: Prisma.IntNullableFilter<"SysSolicitacao"> | number | null
+  ent_entidade_id?: Prisma.IntNullableFilter<"SysSolicitacao"> | number | null
   titulo?: Prisma.StringFilter<"SysSolicitacao"> | string
   descricao?: Prisma.StringNullableFilter<"SysSolicitacao"> | string | null
   entidade_tipo?: Prisma.StringNullableFilter<"SysSolicitacao"> | string | null
@@ -340,6 +376,9 @@ export type SysSolicitacaoWhereInput = {
   sys_solicitacao_status?: Prisma.XOR<Prisma.SysSolicitacaoStatusScalarRelationFilter, Prisma.SysSolicitacaoStatusWhereInput>
   solicitado_por_usuario?: Prisma.XOR<Prisma.SysUsuarioScalarRelationFilter, Prisma.SysUsuarioWhereInput>
   responsavel_usuario?: Prisma.XOR<Prisma.SysUsuarioNullableScalarRelationFilter, Prisma.SysUsuarioWhereInput> | null
+  edu_instituicao?: Prisma.XOR<Prisma.EduInstituicaoNullableScalarRelationFilter, Prisma.EduInstituicaoWhereInput> | null
+  edu_polo?: Prisma.XOR<Prisma.EduPoloNullableScalarRelationFilter, Prisma.EduPoloWhereInput> | null
+  ent_entidade?: Prisma.XOR<Prisma.EntEntidadeNullableScalarRelationFilter, Prisma.EntEntidadeWhereInput> | null
   sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoListRelationFilter
   sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoListRelationFilter
 }
@@ -350,6 +389,9 @@ export type SysSolicitacaoOrderByWithRelationInput = {
   sys_solicitacao_status_id?: Prisma.SortOrder
   solicitado_por_usuario_id?: Prisma.SortOrder
   responsavel_sys_usuario_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  edu_instituicao_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  edu_polo_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrderInput | Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
   entidade_tipo?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -366,6 +408,9 @@ export type SysSolicitacaoOrderByWithRelationInput = {
   sys_solicitacao_status?: Prisma.SysSolicitacaoStatusOrderByWithRelationInput
   solicitado_por_usuario?: Prisma.SysUsuarioOrderByWithRelationInput
   responsavel_usuario?: Prisma.SysUsuarioOrderByWithRelationInput
+  edu_instituicao?: Prisma.EduInstituicaoOrderByWithRelationInput
+  edu_polo?: Prisma.EduPoloOrderByWithRelationInput
+  ent_entidade?: Prisma.EntEntidadeOrderByWithRelationInput
   sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoOrderByRelationAggregateInput
   sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoOrderByRelationAggregateInput
   _relevance?: Prisma.SysSolicitacaoOrderByRelevanceInput
@@ -380,6 +425,9 @@ export type SysSolicitacaoWhereUniqueInput = Prisma.AtLeast<{
   sys_solicitacao_status_id?: Prisma.IntFilter<"SysSolicitacao"> | number
   solicitado_por_usuario_id?: Prisma.IntFilter<"SysSolicitacao"> | number
   responsavel_sys_usuario_id?: Prisma.IntNullableFilter<"SysSolicitacao"> | number | null
+  edu_instituicao_id?: Prisma.IntNullableFilter<"SysSolicitacao"> | number | null
+  edu_polo_id?: Prisma.IntNullableFilter<"SysSolicitacao"> | number | null
+  ent_entidade_id?: Prisma.IntNullableFilter<"SysSolicitacao"> | number | null
   titulo?: Prisma.StringFilter<"SysSolicitacao"> | string
   descricao?: Prisma.StringNullableFilter<"SysSolicitacao"> | string | null
   entidade_tipo?: Prisma.StringNullableFilter<"SysSolicitacao"> | string | null
@@ -396,6 +444,9 @@ export type SysSolicitacaoWhereUniqueInput = Prisma.AtLeast<{
   sys_solicitacao_status?: Prisma.XOR<Prisma.SysSolicitacaoStatusScalarRelationFilter, Prisma.SysSolicitacaoStatusWhereInput>
   solicitado_por_usuario?: Prisma.XOR<Prisma.SysUsuarioScalarRelationFilter, Prisma.SysUsuarioWhereInput>
   responsavel_usuario?: Prisma.XOR<Prisma.SysUsuarioNullableScalarRelationFilter, Prisma.SysUsuarioWhereInput> | null
+  edu_instituicao?: Prisma.XOR<Prisma.EduInstituicaoNullableScalarRelationFilter, Prisma.EduInstituicaoWhereInput> | null
+  edu_polo?: Prisma.XOR<Prisma.EduPoloNullableScalarRelationFilter, Prisma.EduPoloWhereInput> | null
+  ent_entidade?: Prisma.XOR<Prisma.EntEntidadeNullableScalarRelationFilter, Prisma.EntEntidadeWhereInput> | null
   sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoListRelationFilter
   sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoListRelationFilter
 }, "id">
@@ -406,6 +457,9 @@ export type SysSolicitacaoOrderByWithAggregationInput = {
   sys_solicitacao_status_id?: Prisma.SortOrder
   solicitado_por_usuario_id?: Prisma.SortOrder
   responsavel_sys_usuario_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  edu_instituicao_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  edu_polo_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrderInput | Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
   entidade_tipo?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -434,6 +488,9 @@ export type SysSolicitacaoScalarWhereWithAggregatesInput = {
   sys_solicitacao_status_id?: Prisma.IntWithAggregatesFilter<"SysSolicitacao"> | number
   solicitado_por_usuario_id?: Prisma.IntWithAggregatesFilter<"SysSolicitacao"> | number
   responsavel_sys_usuario_id?: Prisma.IntNullableWithAggregatesFilter<"SysSolicitacao"> | number | null
+  edu_instituicao_id?: Prisma.IntNullableWithAggregatesFilter<"SysSolicitacao"> | number | null
+  edu_polo_id?: Prisma.IntNullableWithAggregatesFilter<"SysSolicitacao"> | number | null
+  ent_entidade_id?: Prisma.IntNullableWithAggregatesFilter<"SysSolicitacao"> | number | null
   titulo?: Prisma.StringWithAggregatesFilter<"SysSolicitacao"> | string
   descricao?: Prisma.StringNullableWithAggregatesFilter<"SysSolicitacao"> | string | null
   entidade_tipo?: Prisma.StringNullableWithAggregatesFilter<"SysSolicitacao"> | string | null
@@ -465,6 +522,9 @@ export type SysSolicitacaoCreateInput = {
   sys_solicitacao_status: Prisma.SysSolicitacaoStatusCreateNestedOneWithoutSys_solicitacao_status_atualInput
   solicitado_por_usuario: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_solicitanteInput
   responsavel_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_responsavelInput
+  edu_instituicao?: Prisma.EduInstituicaoCreateNestedOneWithoutSys_solicitacaoInput
+  edu_polo?: Prisma.EduPoloCreateNestedOneWithoutSys_solicitacaoInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedOneWithoutSysSolicitacaosInput
   sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoCreateNestedManyWithoutSys_solicitacaoInput
   sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoCreateNestedManyWithoutSys_solicitacaoInput
 }
@@ -475,6 +535,9 @@ export type SysSolicitacaoUncheckedCreateInput = {
   sys_solicitacao_status_id: number
   solicitado_por_usuario_id: number
   responsavel_sys_usuario_id?: number | null
+  edu_instituicao_id?: number | null
+  edu_polo_id?: number | null
+  ent_entidade_id?: number | null
   titulo: string
   descricao?: string | null
   entidade_tipo?: string | null
@@ -508,6 +571,9 @@ export type SysSolicitacaoUpdateInput = {
   sys_solicitacao_status?: Prisma.SysSolicitacaoStatusUpdateOneRequiredWithoutSys_solicitacao_status_atualNestedInput
   solicitado_por_usuario?: Prisma.SysUsuarioUpdateOneRequiredWithoutSys_solicitacao_solicitanteNestedInput
   responsavel_usuario?: Prisma.SysUsuarioUpdateOneWithoutSys_solicitacao_responsavelNestedInput
+  edu_instituicao?: Prisma.EduInstituicaoUpdateOneWithoutSys_solicitacaoNestedInput
+  edu_polo?: Prisma.EduPoloUpdateOneWithoutSys_solicitacaoNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateOneWithoutSysSolicitacaosNestedInput
   sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoUpdateManyWithoutSys_solicitacaoNestedInput
   sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoUpdateManyWithoutSys_solicitacaoNestedInput
 }
@@ -518,6 +584,9 @@ export type SysSolicitacaoUncheckedUpdateInput = {
   sys_solicitacao_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   solicitado_por_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   responsavel_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_instituicao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_polo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -540,6 +609,9 @@ export type SysSolicitacaoCreateManyInput = {
   sys_solicitacao_status_id: number
   solicitado_por_usuario_id: number
   responsavel_sys_usuario_id?: number | null
+  edu_instituicao_id?: number | null
+  edu_polo_id?: number | null
+  ent_entidade_id?: number | null
   titulo: string
   descricao?: string | null
   entidade_tipo?: string | null
@@ -575,6 +647,9 @@ export type SysSolicitacaoUncheckedUpdateManyInput = {
   sys_solicitacao_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   solicitado_por_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   responsavel_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_instituicao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_polo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -611,6 +686,9 @@ export type SysSolicitacaoCountOrderByAggregateInput = {
   sys_solicitacao_status_id?: Prisma.SortOrder
   solicitado_por_usuario_id?: Prisma.SortOrder
   responsavel_sys_usuario_id?: Prisma.SortOrder
+  edu_instituicao_id?: Prisma.SortOrder
+  edu_polo_id?: Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
   entidade_tipo?: Prisma.SortOrder
@@ -631,6 +709,9 @@ export type SysSolicitacaoAvgOrderByAggregateInput = {
   sys_solicitacao_status_id?: Prisma.SortOrder
   solicitado_por_usuario_id?: Prisma.SortOrder
   responsavel_sys_usuario_id?: Prisma.SortOrder
+  edu_instituicao_id?: Prisma.SortOrder
+  edu_polo_id?: Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrder
   entidade_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
 }
@@ -641,6 +722,9 @@ export type SysSolicitacaoMaxOrderByAggregateInput = {
   sys_solicitacao_status_id?: Prisma.SortOrder
   solicitado_por_usuario_id?: Prisma.SortOrder
   responsavel_sys_usuario_id?: Prisma.SortOrder
+  edu_instituicao_id?: Prisma.SortOrder
+  edu_polo_id?: Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
   entidade_tipo?: Prisma.SortOrder
@@ -661,6 +745,9 @@ export type SysSolicitacaoMinOrderByAggregateInput = {
   sys_solicitacao_status_id?: Prisma.SortOrder
   solicitado_por_usuario_id?: Prisma.SortOrder
   responsavel_sys_usuario_id?: Prisma.SortOrder
+  edu_instituicao_id?: Prisma.SortOrder
+  edu_polo_id?: Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
   entidade_tipo?: Prisma.SortOrder
@@ -681,6 +768,9 @@ export type SysSolicitacaoSumOrderByAggregateInput = {
   sys_solicitacao_status_id?: Prisma.SortOrder
   solicitado_por_usuario_id?: Prisma.SortOrder
   responsavel_sys_usuario_id?: Prisma.SortOrder
+  edu_instituicao_id?: Prisma.SortOrder
+  edu_polo_id?: Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrder
   entidade_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
 }
@@ -771,6 +861,132 @@ export type SysSolicitacaoUncheckedUpdateManyWithoutResponsavel_usuarioNestedInp
   connect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
   update?: Prisma.SysSolicitacaoUpdateWithWhereUniqueWithoutResponsavel_usuarioInput | Prisma.SysSolicitacaoUpdateWithWhereUniqueWithoutResponsavel_usuarioInput[]
   updateMany?: Prisma.SysSolicitacaoUpdateManyWithWhereWithoutResponsavel_usuarioInput | Prisma.SysSolicitacaoUpdateManyWithWhereWithoutResponsavel_usuarioInput[]
+  deleteMany?: Prisma.SysSolicitacaoScalarWhereInput | Prisma.SysSolicitacaoScalarWhereInput[]
+}
+
+export type SysSolicitacaoCreateNestedManyWithoutEdu_instituicaoInput = {
+  create?: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEdu_instituicaoInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_instituicaoInput> | Prisma.SysSolicitacaoCreateWithoutEdu_instituicaoInput[] | Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_instituicaoInput[]
+  connectOrCreate?: Prisma.SysSolicitacaoCreateOrConnectWithoutEdu_instituicaoInput | Prisma.SysSolicitacaoCreateOrConnectWithoutEdu_instituicaoInput[]
+  createMany?: Prisma.SysSolicitacaoCreateManyEdu_instituicaoInputEnvelope
+  connect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+}
+
+export type SysSolicitacaoUncheckedCreateNestedManyWithoutEdu_instituicaoInput = {
+  create?: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEdu_instituicaoInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_instituicaoInput> | Prisma.SysSolicitacaoCreateWithoutEdu_instituicaoInput[] | Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_instituicaoInput[]
+  connectOrCreate?: Prisma.SysSolicitacaoCreateOrConnectWithoutEdu_instituicaoInput | Prisma.SysSolicitacaoCreateOrConnectWithoutEdu_instituicaoInput[]
+  createMany?: Prisma.SysSolicitacaoCreateManyEdu_instituicaoInputEnvelope
+  connect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+}
+
+export type SysSolicitacaoUpdateManyWithoutEdu_instituicaoNestedInput = {
+  create?: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEdu_instituicaoInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_instituicaoInput> | Prisma.SysSolicitacaoCreateWithoutEdu_instituicaoInput[] | Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_instituicaoInput[]
+  connectOrCreate?: Prisma.SysSolicitacaoCreateOrConnectWithoutEdu_instituicaoInput | Prisma.SysSolicitacaoCreateOrConnectWithoutEdu_instituicaoInput[]
+  upsert?: Prisma.SysSolicitacaoUpsertWithWhereUniqueWithoutEdu_instituicaoInput | Prisma.SysSolicitacaoUpsertWithWhereUniqueWithoutEdu_instituicaoInput[]
+  createMany?: Prisma.SysSolicitacaoCreateManyEdu_instituicaoInputEnvelope
+  set?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  disconnect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  delete?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  connect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  update?: Prisma.SysSolicitacaoUpdateWithWhereUniqueWithoutEdu_instituicaoInput | Prisma.SysSolicitacaoUpdateWithWhereUniqueWithoutEdu_instituicaoInput[]
+  updateMany?: Prisma.SysSolicitacaoUpdateManyWithWhereWithoutEdu_instituicaoInput | Prisma.SysSolicitacaoUpdateManyWithWhereWithoutEdu_instituicaoInput[]
+  deleteMany?: Prisma.SysSolicitacaoScalarWhereInput | Prisma.SysSolicitacaoScalarWhereInput[]
+}
+
+export type SysSolicitacaoUncheckedUpdateManyWithoutEdu_instituicaoNestedInput = {
+  create?: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEdu_instituicaoInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_instituicaoInput> | Prisma.SysSolicitacaoCreateWithoutEdu_instituicaoInput[] | Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_instituicaoInput[]
+  connectOrCreate?: Prisma.SysSolicitacaoCreateOrConnectWithoutEdu_instituicaoInput | Prisma.SysSolicitacaoCreateOrConnectWithoutEdu_instituicaoInput[]
+  upsert?: Prisma.SysSolicitacaoUpsertWithWhereUniqueWithoutEdu_instituicaoInput | Prisma.SysSolicitacaoUpsertWithWhereUniqueWithoutEdu_instituicaoInput[]
+  createMany?: Prisma.SysSolicitacaoCreateManyEdu_instituicaoInputEnvelope
+  set?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  disconnect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  delete?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  connect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  update?: Prisma.SysSolicitacaoUpdateWithWhereUniqueWithoutEdu_instituicaoInput | Prisma.SysSolicitacaoUpdateWithWhereUniqueWithoutEdu_instituicaoInput[]
+  updateMany?: Prisma.SysSolicitacaoUpdateManyWithWhereWithoutEdu_instituicaoInput | Prisma.SysSolicitacaoUpdateManyWithWhereWithoutEdu_instituicaoInput[]
+  deleteMany?: Prisma.SysSolicitacaoScalarWhereInput | Prisma.SysSolicitacaoScalarWhereInput[]
+}
+
+export type SysSolicitacaoCreateNestedManyWithoutEdu_poloInput = {
+  create?: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEdu_poloInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_poloInput> | Prisma.SysSolicitacaoCreateWithoutEdu_poloInput[] | Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_poloInput[]
+  connectOrCreate?: Prisma.SysSolicitacaoCreateOrConnectWithoutEdu_poloInput | Prisma.SysSolicitacaoCreateOrConnectWithoutEdu_poloInput[]
+  createMany?: Prisma.SysSolicitacaoCreateManyEdu_poloInputEnvelope
+  connect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+}
+
+export type SysSolicitacaoUncheckedCreateNestedManyWithoutEdu_poloInput = {
+  create?: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEdu_poloInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_poloInput> | Prisma.SysSolicitacaoCreateWithoutEdu_poloInput[] | Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_poloInput[]
+  connectOrCreate?: Prisma.SysSolicitacaoCreateOrConnectWithoutEdu_poloInput | Prisma.SysSolicitacaoCreateOrConnectWithoutEdu_poloInput[]
+  createMany?: Prisma.SysSolicitacaoCreateManyEdu_poloInputEnvelope
+  connect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+}
+
+export type SysSolicitacaoUpdateManyWithoutEdu_poloNestedInput = {
+  create?: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEdu_poloInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_poloInput> | Prisma.SysSolicitacaoCreateWithoutEdu_poloInput[] | Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_poloInput[]
+  connectOrCreate?: Prisma.SysSolicitacaoCreateOrConnectWithoutEdu_poloInput | Prisma.SysSolicitacaoCreateOrConnectWithoutEdu_poloInput[]
+  upsert?: Prisma.SysSolicitacaoUpsertWithWhereUniqueWithoutEdu_poloInput | Prisma.SysSolicitacaoUpsertWithWhereUniqueWithoutEdu_poloInput[]
+  createMany?: Prisma.SysSolicitacaoCreateManyEdu_poloInputEnvelope
+  set?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  disconnect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  delete?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  connect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  update?: Prisma.SysSolicitacaoUpdateWithWhereUniqueWithoutEdu_poloInput | Prisma.SysSolicitacaoUpdateWithWhereUniqueWithoutEdu_poloInput[]
+  updateMany?: Prisma.SysSolicitacaoUpdateManyWithWhereWithoutEdu_poloInput | Prisma.SysSolicitacaoUpdateManyWithWhereWithoutEdu_poloInput[]
+  deleteMany?: Prisma.SysSolicitacaoScalarWhereInput | Prisma.SysSolicitacaoScalarWhereInput[]
+}
+
+export type SysSolicitacaoUncheckedUpdateManyWithoutEdu_poloNestedInput = {
+  create?: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEdu_poloInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_poloInput> | Prisma.SysSolicitacaoCreateWithoutEdu_poloInput[] | Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_poloInput[]
+  connectOrCreate?: Prisma.SysSolicitacaoCreateOrConnectWithoutEdu_poloInput | Prisma.SysSolicitacaoCreateOrConnectWithoutEdu_poloInput[]
+  upsert?: Prisma.SysSolicitacaoUpsertWithWhereUniqueWithoutEdu_poloInput | Prisma.SysSolicitacaoUpsertWithWhereUniqueWithoutEdu_poloInput[]
+  createMany?: Prisma.SysSolicitacaoCreateManyEdu_poloInputEnvelope
+  set?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  disconnect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  delete?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  connect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  update?: Prisma.SysSolicitacaoUpdateWithWhereUniqueWithoutEdu_poloInput | Prisma.SysSolicitacaoUpdateWithWhereUniqueWithoutEdu_poloInput[]
+  updateMany?: Prisma.SysSolicitacaoUpdateManyWithWhereWithoutEdu_poloInput | Prisma.SysSolicitacaoUpdateManyWithWhereWithoutEdu_poloInput[]
+  deleteMany?: Prisma.SysSolicitacaoScalarWhereInput | Prisma.SysSolicitacaoScalarWhereInput[]
+}
+
+export type SysSolicitacaoCreateNestedManyWithoutEnt_entidadeInput = {
+  create?: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEnt_entidadeInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEnt_entidadeInput> | Prisma.SysSolicitacaoCreateWithoutEnt_entidadeInput[] | Prisma.SysSolicitacaoUncheckedCreateWithoutEnt_entidadeInput[]
+  connectOrCreate?: Prisma.SysSolicitacaoCreateOrConnectWithoutEnt_entidadeInput | Prisma.SysSolicitacaoCreateOrConnectWithoutEnt_entidadeInput[]
+  createMany?: Prisma.SysSolicitacaoCreateManyEnt_entidadeInputEnvelope
+  connect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+}
+
+export type SysSolicitacaoUncheckedCreateNestedManyWithoutEnt_entidadeInput = {
+  create?: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEnt_entidadeInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEnt_entidadeInput> | Prisma.SysSolicitacaoCreateWithoutEnt_entidadeInput[] | Prisma.SysSolicitacaoUncheckedCreateWithoutEnt_entidadeInput[]
+  connectOrCreate?: Prisma.SysSolicitacaoCreateOrConnectWithoutEnt_entidadeInput | Prisma.SysSolicitacaoCreateOrConnectWithoutEnt_entidadeInput[]
+  createMany?: Prisma.SysSolicitacaoCreateManyEnt_entidadeInputEnvelope
+  connect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+}
+
+export type SysSolicitacaoUpdateManyWithoutEnt_entidadeNestedInput = {
+  create?: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEnt_entidadeInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEnt_entidadeInput> | Prisma.SysSolicitacaoCreateWithoutEnt_entidadeInput[] | Prisma.SysSolicitacaoUncheckedCreateWithoutEnt_entidadeInput[]
+  connectOrCreate?: Prisma.SysSolicitacaoCreateOrConnectWithoutEnt_entidadeInput | Prisma.SysSolicitacaoCreateOrConnectWithoutEnt_entidadeInput[]
+  upsert?: Prisma.SysSolicitacaoUpsertWithWhereUniqueWithoutEnt_entidadeInput | Prisma.SysSolicitacaoUpsertWithWhereUniqueWithoutEnt_entidadeInput[]
+  createMany?: Prisma.SysSolicitacaoCreateManyEnt_entidadeInputEnvelope
+  set?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  disconnect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  delete?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  connect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  update?: Prisma.SysSolicitacaoUpdateWithWhereUniqueWithoutEnt_entidadeInput | Prisma.SysSolicitacaoUpdateWithWhereUniqueWithoutEnt_entidadeInput[]
+  updateMany?: Prisma.SysSolicitacaoUpdateManyWithWhereWithoutEnt_entidadeInput | Prisma.SysSolicitacaoUpdateManyWithWhereWithoutEnt_entidadeInput[]
+  deleteMany?: Prisma.SysSolicitacaoScalarWhereInput | Prisma.SysSolicitacaoScalarWhereInput[]
+}
+
+export type SysSolicitacaoUncheckedUpdateManyWithoutEnt_entidadeNestedInput = {
+  create?: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEnt_entidadeInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEnt_entidadeInput> | Prisma.SysSolicitacaoCreateWithoutEnt_entidadeInput[] | Prisma.SysSolicitacaoUncheckedCreateWithoutEnt_entidadeInput[]
+  connectOrCreate?: Prisma.SysSolicitacaoCreateOrConnectWithoutEnt_entidadeInput | Prisma.SysSolicitacaoCreateOrConnectWithoutEnt_entidadeInput[]
+  upsert?: Prisma.SysSolicitacaoUpsertWithWhereUniqueWithoutEnt_entidadeInput | Prisma.SysSolicitacaoUpsertWithWhereUniqueWithoutEnt_entidadeInput[]
+  createMany?: Prisma.SysSolicitacaoCreateManyEnt_entidadeInputEnvelope
+  set?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  disconnect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  delete?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  connect?: Prisma.SysSolicitacaoWhereUniqueInput | Prisma.SysSolicitacaoWhereUniqueInput[]
+  update?: Prisma.SysSolicitacaoUpdateWithWhereUniqueWithoutEnt_entidadeInput | Prisma.SysSolicitacaoUpdateWithWhereUniqueWithoutEnt_entidadeInput[]
+  updateMany?: Prisma.SysSolicitacaoUpdateManyWithWhereWithoutEnt_entidadeInput | Prisma.SysSolicitacaoUpdateManyWithWhereWithoutEnt_entidadeInput[]
   deleteMany?: Prisma.SysSolicitacaoScalarWhereInput | Prisma.SysSolicitacaoScalarWhereInput[]
 }
 
@@ -902,6 +1118,9 @@ export type SysSolicitacaoCreateWithoutSolicitado_por_usuarioInput = {
   sys_solicitacao_tipo: Prisma.SysSolicitacaoTipoCreateNestedOneWithoutSys_solicitacaoInput
   sys_solicitacao_status: Prisma.SysSolicitacaoStatusCreateNestedOneWithoutSys_solicitacao_status_atualInput
   responsavel_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_responsavelInput
+  edu_instituicao?: Prisma.EduInstituicaoCreateNestedOneWithoutSys_solicitacaoInput
+  edu_polo?: Prisma.EduPoloCreateNestedOneWithoutSys_solicitacaoInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedOneWithoutSysSolicitacaosInput
   sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoCreateNestedManyWithoutSys_solicitacaoInput
   sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoCreateNestedManyWithoutSys_solicitacaoInput
 }
@@ -911,6 +1130,9 @@ export type SysSolicitacaoUncheckedCreateWithoutSolicitado_por_usuarioInput = {
   sys_solicitacao_tipo_id: number
   sys_solicitacao_status_id: number
   responsavel_sys_usuario_id?: number | null
+  edu_instituicao_id?: number | null
+  edu_polo_id?: number | null
+  ent_entidade_id?: number | null
   titulo: string
   descricao?: string | null
   entidade_tipo?: string | null
@@ -953,6 +1175,9 @@ export type SysSolicitacaoCreateWithoutResponsavel_usuarioInput = {
   sys_solicitacao_tipo: Prisma.SysSolicitacaoTipoCreateNestedOneWithoutSys_solicitacaoInput
   sys_solicitacao_status: Prisma.SysSolicitacaoStatusCreateNestedOneWithoutSys_solicitacao_status_atualInput
   solicitado_por_usuario: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_solicitanteInput
+  edu_instituicao?: Prisma.EduInstituicaoCreateNestedOneWithoutSys_solicitacaoInput
+  edu_polo?: Prisma.EduPoloCreateNestedOneWithoutSys_solicitacaoInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedOneWithoutSysSolicitacaosInput
   sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoCreateNestedManyWithoutSys_solicitacaoInput
   sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoCreateNestedManyWithoutSys_solicitacaoInput
 }
@@ -962,6 +1187,9 @@ export type SysSolicitacaoUncheckedCreateWithoutResponsavel_usuarioInput = {
   sys_solicitacao_tipo_id: number
   sys_solicitacao_status_id: number
   solicitado_por_usuario_id: number
+  edu_instituicao_id?: number | null
+  edu_polo_id?: number | null
+  ent_entidade_id?: number | null
   titulo: string
   descricao?: string | null
   entidade_tipo?: string | null
@@ -1013,6 +1241,9 @@ export type SysSolicitacaoScalarWhereInput = {
   sys_solicitacao_status_id?: Prisma.IntFilter<"SysSolicitacao"> | number
   solicitado_por_usuario_id?: Prisma.IntFilter<"SysSolicitacao"> | number
   responsavel_sys_usuario_id?: Prisma.IntNullableFilter<"SysSolicitacao"> | number | null
+  edu_instituicao_id?: Prisma.IntNullableFilter<"SysSolicitacao"> | number | null
+  edu_polo_id?: Prisma.IntNullableFilter<"SysSolicitacao"> | number | null
+  ent_entidade_id?: Prisma.IntNullableFilter<"SysSolicitacao"> | number | null
   titulo?: Prisma.StringFilter<"SysSolicitacao"> | string
   descricao?: Prisma.StringNullableFilter<"SysSolicitacao"> | string | null
   entidade_tipo?: Prisma.StringNullableFilter<"SysSolicitacao"> | string | null
@@ -1043,6 +1274,225 @@ export type SysSolicitacaoUpdateManyWithWhereWithoutResponsavel_usuarioInput = {
   data: Prisma.XOR<Prisma.SysSolicitacaoUpdateManyMutationInput, Prisma.SysSolicitacaoUncheckedUpdateManyWithoutResponsavel_usuarioInput>
 }
 
+export type SysSolicitacaoCreateWithoutEdu_instituicaoInput = {
+  titulo: string
+  descricao?: string | null
+  entidade_tipo?: string | null
+  entidade_id?: number | null
+  payload_text?: string | null
+  metadata_text?: string | null
+  enviado_at?: Date | string | null
+  finalizado_at?: Date | string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_solicitacao_tipo: Prisma.SysSolicitacaoTipoCreateNestedOneWithoutSys_solicitacaoInput
+  sys_solicitacao_status: Prisma.SysSolicitacaoStatusCreateNestedOneWithoutSys_solicitacao_status_atualInput
+  solicitado_por_usuario: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_solicitanteInput
+  responsavel_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_responsavelInput
+  edu_polo?: Prisma.EduPoloCreateNestedOneWithoutSys_solicitacaoInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedOneWithoutSysSolicitacaosInput
+  sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoCreateNestedManyWithoutSys_solicitacaoInput
+  sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoCreateNestedManyWithoutSys_solicitacaoInput
+}
+
+export type SysSolicitacaoUncheckedCreateWithoutEdu_instituicaoInput = {
+  id?: number
+  sys_solicitacao_tipo_id: number
+  sys_solicitacao_status_id: number
+  solicitado_por_usuario_id: number
+  responsavel_sys_usuario_id?: number | null
+  edu_polo_id?: number | null
+  ent_entidade_id?: number | null
+  titulo: string
+  descricao?: string | null
+  entidade_tipo?: string | null
+  entidade_id?: number | null
+  payload_text?: string | null
+  metadata_text?: string | null
+  enviado_at?: Date | string | null
+  finalizado_at?: Date | string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoUncheckedCreateNestedManyWithoutSys_solicitacaoInput
+  sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoUncheckedCreateNestedManyWithoutSys_solicitacaoInput
+}
+
+export type SysSolicitacaoCreateOrConnectWithoutEdu_instituicaoInput = {
+  where: Prisma.SysSolicitacaoWhereUniqueInput
+  create: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEdu_instituicaoInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_instituicaoInput>
+}
+
+export type SysSolicitacaoCreateManyEdu_instituicaoInputEnvelope = {
+  data: Prisma.SysSolicitacaoCreateManyEdu_instituicaoInput | Prisma.SysSolicitacaoCreateManyEdu_instituicaoInput[]
+  skipDuplicates?: boolean
+}
+
+export type SysSolicitacaoUpsertWithWhereUniqueWithoutEdu_instituicaoInput = {
+  where: Prisma.SysSolicitacaoWhereUniqueInput
+  update: Prisma.XOR<Prisma.SysSolicitacaoUpdateWithoutEdu_instituicaoInput, Prisma.SysSolicitacaoUncheckedUpdateWithoutEdu_instituicaoInput>
+  create: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEdu_instituicaoInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_instituicaoInput>
+}
+
+export type SysSolicitacaoUpdateWithWhereUniqueWithoutEdu_instituicaoInput = {
+  where: Prisma.SysSolicitacaoWhereUniqueInput
+  data: Prisma.XOR<Prisma.SysSolicitacaoUpdateWithoutEdu_instituicaoInput, Prisma.SysSolicitacaoUncheckedUpdateWithoutEdu_instituicaoInput>
+}
+
+export type SysSolicitacaoUpdateManyWithWhereWithoutEdu_instituicaoInput = {
+  where: Prisma.SysSolicitacaoScalarWhereInput
+  data: Prisma.XOR<Prisma.SysSolicitacaoUpdateManyMutationInput, Prisma.SysSolicitacaoUncheckedUpdateManyWithoutEdu_instituicaoInput>
+}
+
+export type SysSolicitacaoCreateWithoutEdu_poloInput = {
+  titulo: string
+  descricao?: string | null
+  entidade_tipo?: string | null
+  entidade_id?: number | null
+  payload_text?: string | null
+  metadata_text?: string | null
+  enviado_at?: Date | string | null
+  finalizado_at?: Date | string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_solicitacao_tipo: Prisma.SysSolicitacaoTipoCreateNestedOneWithoutSys_solicitacaoInput
+  sys_solicitacao_status: Prisma.SysSolicitacaoStatusCreateNestedOneWithoutSys_solicitacao_status_atualInput
+  solicitado_por_usuario: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_solicitanteInput
+  responsavel_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_responsavelInput
+  edu_instituicao?: Prisma.EduInstituicaoCreateNestedOneWithoutSys_solicitacaoInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedOneWithoutSysSolicitacaosInput
+  sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoCreateNestedManyWithoutSys_solicitacaoInput
+  sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoCreateNestedManyWithoutSys_solicitacaoInput
+}
+
+export type SysSolicitacaoUncheckedCreateWithoutEdu_poloInput = {
+  id?: number
+  sys_solicitacao_tipo_id: number
+  sys_solicitacao_status_id: number
+  solicitado_por_usuario_id: number
+  responsavel_sys_usuario_id?: number | null
+  edu_instituicao_id?: number | null
+  ent_entidade_id?: number | null
+  titulo: string
+  descricao?: string | null
+  entidade_tipo?: string | null
+  entidade_id?: number | null
+  payload_text?: string | null
+  metadata_text?: string | null
+  enviado_at?: Date | string | null
+  finalizado_at?: Date | string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoUncheckedCreateNestedManyWithoutSys_solicitacaoInput
+  sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoUncheckedCreateNestedManyWithoutSys_solicitacaoInput
+}
+
+export type SysSolicitacaoCreateOrConnectWithoutEdu_poloInput = {
+  where: Prisma.SysSolicitacaoWhereUniqueInput
+  create: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEdu_poloInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_poloInput>
+}
+
+export type SysSolicitacaoCreateManyEdu_poloInputEnvelope = {
+  data: Prisma.SysSolicitacaoCreateManyEdu_poloInput | Prisma.SysSolicitacaoCreateManyEdu_poloInput[]
+  skipDuplicates?: boolean
+}
+
+export type SysSolicitacaoUpsertWithWhereUniqueWithoutEdu_poloInput = {
+  where: Prisma.SysSolicitacaoWhereUniqueInput
+  update: Prisma.XOR<Prisma.SysSolicitacaoUpdateWithoutEdu_poloInput, Prisma.SysSolicitacaoUncheckedUpdateWithoutEdu_poloInput>
+  create: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEdu_poloInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEdu_poloInput>
+}
+
+export type SysSolicitacaoUpdateWithWhereUniqueWithoutEdu_poloInput = {
+  where: Prisma.SysSolicitacaoWhereUniqueInput
+  data: Prisma.XOR<Prisma.SysSolicitacaoUpdateWithoutEdu_poloInput, Prisma.SysSolicitacaoUncheckedUpdateWithoutEdu_poloInput>
+}
+
+export type SysSolicitacaoUpdateManyWithWhereWithoutEdu_poloInput = {
+  where: Prisma.SysSolicitacaoScalarWhereInput
+  data: Prisma.XOR<Prisma.SysSolicitacaoUpdateManyMutationInput, Prisma.SysSolicitacaoUncheckedUpdateManyWithoutEdu_poloInput>
+}
+
+export type SysSolicitacaoCreateWithoutEnt_entidadeInput = {
+  titulo: string
+  descricao?: string | null
+  entidade_tipo?: string | null
+  entidade_id?: number | null
+  payload_text?: string | null
+  metadata_text?: string | null
+  enviado_at?: Date | string | null
+  finalizado_at?: Date | string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_solicitacao_tipo: Prisma.SysSolicitacaoTipoCreateNestedOneWithoutSys_solicitacaoInput
+  sys_solicitacao_status: Prisma.SysSolicitacaoStatusCreateNestedOneWithoutSys_solicitacao_status_atualInput
+  solicitado_por_usuario: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_solicitanteInput
+  responsavel_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_responsavelInput
+  edu_instituicao?: Prisma.EduInstituicaoCreateNestedOneWithoutSys_solicitacaoInput
+  edu_polo?: Prisma.EduPoloCreateNestedOneWithoutSys_solicitacaoInput
+  sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoCreateNestedManyWithoutSys_solicitacaoInput
+  sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoCreateNestedManyWithoutSys_solicitacaoInput
+}
+
+export type SysSolicitacaoUncheckedCreateWithoutEnt_entidadeInput = {
+  id?: number
+  sys_solicitacao_tipo_id: number
+  sys_solicitacao_status_id: number
+  solicitado_por_usuario_id: number
+  responsavel_sys_usuario_id?: number | null
+  edu_instituicao_id?: number | null
+  edu_polo_id?: number | null
+  titulo: string
+  descricao?: string | null
+  entidade_tipo?: string | null
+  entidade_id?: number | null
+  payload_text?: string | null
+  metadata_text?: string | null
+  enviado_at?: Date | string | null
+  finalizado_at?: Date | string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoUncheckedCreateNestedManyWithoutSys_solicitacaoInput
+  sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoUncheckedCreateNestedManyWithoutSys_solicitacaoInput
+}
+
+export type SysSolicitacaoCreateOrConnectWithoutEnt_entidadeInput = {
+  where: Prisma.SysSolicitacaoWhereUniqueInput
+  create: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEnt_entidadeInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEnt_entidadeInput>
+}
+
+export type SysSolicitacaoCreateManyEnt_entidadeInputEnvelope = {
+  data: Prisma.SysSolicitacaoCreateManyEnt_entidadeInput | Prisma.SysSolicitacaoCreateManyEnt_entidadeInput[]
+  skipDuplicates?: boolean
+}
+
+export type SysSolicitacaoUpsertWithWhereUniqueWithoutEnt_entidadeInput = {
+  where: Prisma.SysSolicitacaoWhereUniqueInput
+  update: Prisma.XOR<Prisma.SysSolicitacaoUpdateWithoutEnt_entidadeInput, Prisma.SysSolicitacaoUncheckedUpdateWithoutEnt_entidadeInput>
+  create: Prisma.XOR<Prisma.SysSolicitacaoCreateWithoutEnt_entidadeInput, Prisma.SysSolicitacaoUncheckedCreateWithoutEnt_entidadeInput>
+}
+
+export type SysSolicitacaoUpdateWithWhereUniqueWithoutEnt_entidadeInput = {
+  where: Prisma.SysSolicitacaoWhereUniqueInput
+  data: Prisma.XOR<Prisma.SysSolicitacaoUpdateWithoutEnt_entidadeInput, Prisma.SysSolicitacaoUncheckedUpdateWithoutEnt_entidadeInput>
+}
+
+export type SysSolicitacaoUpdateManyWithWhereWithoutEnt_entidadeInput = {
+  where: Prisma.SysSolicitacaoScalarWhereInput
+  data: Prisma.XOR<Prisma.SysSolicitacaoUpdateManyMutationInput, Prisma.SysSolicitacaoUncheckedUpdateManyWithoutEnt_entidadeInput>
+}
+
 export type SysSolicitacaoCreateWithoutSys_solicitacao_tipoInput = {
   titulo: string
   descricao?: string | null
@@ -1059,6 +1509,9 @@ export type SysSolicitacaoCreateWithoutSys_solicitacao_tipoInput = {
   sys_solicitacao_status: Prisma.SysSolicitacaoStatusCreateNestedOneWithoutSys_solicitacao_status_atualInput
   solicitado_por_usuario: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_solicitanteInput
   responsavel_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_responsavelInput
+  edu_instituicao?: Prisma.EduInstituicaoCreateNestedOneWithoutSys_solicitacaoInput
+  edu_polo?: Prisma.EduPoloCreateNestedOneWithoutSys_solicitacaoInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedOneWithoutSysSolicitacaosInput
   sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoCreateNestedManyWithoutSys_solicitacaoInput
   sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoCreateNestedManyWithoutSys_solicitacaoInput
 }
@@ -1068,6 +1521,9 @@ export type SysSolicitacaoUncheckedCreateWithoutSys_solicitacao_tipoInput = {
   sys_solicitacao_status_id: number
   solicitado_por_usuario_id: number
   responsavel_sys_usuario_id?: number | null
+  edu_instituicao_id?: number | null
+  edu_polo_id?: number | null
+  ent_entidade_id?: number | null
   titulo: string
   descricao?: string | null
   entidade_tipo?: string | null
@@ -1126,6 +1582,9 @@ export type SysSolicitacaoCreateWithoutSys_solicitacao_statusInput = {
   sys_solicitacao_tipo: Prisma.SysSolicitacaoTipoCreateNestedOneWithoutSys_solicitacaoInput
   solicitado_por_usuario: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_solicitanteInput
   responsavel_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_responsavelInput
+  edu_instituicao?: Prisma.EduInstituicaoCreateNestedOneWithoutSys_solicitacaoInput
+  edu_polo?: Prisma.EduPoloCreateNestedOneWithoutSys_solicitacaoInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedOneWithoutSysSolicitacaosInput
   sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoCreateNestedManyWithoutSys_solicitacaoInput
   sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoCreateNestedManyWithoutSys_solicitacaoInput
 }
@@ -1135,6 +1594,9 @@ export type SysSolicitacaoUncheckedCreateWithoutSys_solicitacao_statusInput = {
   sys_solicitacao_tipo_id: number
   solicitado_por_usuario_id: number
   responsavel_sys_usuario_id?: number | null
+  edu_instituicao_id?: number | null
+  edu_polo_id?: number | null
+  ent_entidade_id?: number | null
   titulo: string
   descricao?: string | null
   entidade_tipo?: string | null
@@ -1194,6 +1656,9 @@ export type SysSolicitacaoCreateWithoutSys_solicitacao_historicoInput = {
   sys_solicitacao_status: Prisma.SysSolicitacaoStatusCreateNestedOneWithoutSys_solicitacao_status_atualInput
   solicitado_por_usuario: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_solicitanteInput
   responsavel_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_responsavelInput
+  edu_instituicao?: Prisma.EduInstituicaoCreateNestedOneWithoutSys_solicitacaoInput
+  edu_polo?: Prisma.EduPoloCreateNestedOneWithoutSys_solicitacaoInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedOneWithoutSysSolicitacaosInput
   sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoCreateNestedManyWithoutSys_solicitacaoInput
 }
 
@@ -1203,6 +1668,9 @@ export type SysSolicitacaoUncheckedCreateWithoutSys_solicitacao_historicoInput =
   sys_solicitacao_status_id: number
   solicitado_por_usuario_id: number
   responsavel_sys_usuario_id?: number | null
+  edu_instituicao_id?: number | null
+  edu_polo_id?: number | null
+  ent_entidade_id?: number | null
   titulo: string
   descricao?: string | null
   entidade_tipo?: string | null
@@ -1251,6 +1719,9 @@ export type SysSolicitacaoUpdateWithoutSys_solicitacao_historicoInput = {
   sys_solicitacao_status?: Prisma.SysSolicitacaoStatusUpdateOneRequiredWithoutSys_solicitacao_status_atualNestedInput
   solicitado_por_usuario?: Prisma.SysUsuarioUpdateOneRequiredWithoutSys_solicitacao_solicitanteNestedInput
   responsavel_usuario?: Prisma.SysUsuarioUpdateOneWithoutSys_solicitacao_responsavelNestedInput
+  edu_instituicao?: Prisma.EduInstituicaoUpdateOneWithoutSys_solicitacaoNestedInput
+  edu_polo?: Prisma.EduPoloUpdateOneWithoutSys_solicitacaoNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateOneWithoutSysSolicitacaosNestedInput
   sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoUpdateManyWithoutSys_solicitacaoNestedInput
 }
 
@@ -1260,6 +1731,9 @@ export type SysSolicitacaoUncheckedUpdateWithoutSys_solicitacao_historicoInput =
   sys_solicitacao_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   solicitado_por_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   responsavel_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_instituicao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_polo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1292,6 +1766,9 @@ export type SysSolicitacaoCreateWithoutSys_solicitacao_documentoInput = {
   sys_solicitacao_status: Prisma.SysSolicitacaoStatusCreateNestedOneWithoutSys_solicitacao_status_atualInput
   solicitado_por_usuario: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_solicitanteInput
   responsavel_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSys_solicitacao_responsavelInput
+  edu_instituicao?: Prisma.EduInstituicaoCreateNestedOneWithoutSys_solicitacaoInput
+  edu_polo?: Prisma.EduPoloCreateNestedOneWithoutSys_solicitacaoInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedOneWithoutSysSolicitacaosInput
   sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoCreateNestedManyWithoutSys_solicitacaoInput
 }
 
@@ -1301,6 +1778,9 @@ export type SysSolicitacaoUncheckedCreateWithoutSys_solicitacao_documentoInput =
   sys_solicitacao_status_id: number
   solicitado_por_usuario_id: number
   responsavel_sys_usuario_id?: number | null
+  edu_instituicao_id?: number | null
+  edu_polo_id?: number | null
+  ent_entidade_id?: number | null
   titulo: string
   descricao?: string | null
   entidade_tipo?: string | null
@@ -1349,6 +1829,9 @@ export type SysSolicitacaoUpdateWithoutSys_solicitacao_documentoInput = {
   sys_solicitacao_status?: Prisma.SysSolicitacaoStatusUpdateOneRequiredWithoutSys_solicitacao_status_atualNestedInput
   solicitado_por_usuario?: Prisma.SysUsuarioUpdateOneRequiredWithoutSys_solicitacao_solicitanteNestedInput
   responsavel_usuario?: Prisma.SysUsuarioUpdateOneWithoutSys_solicitacao_responsavelNestedInput
+  edu_instituicao?: Prisma.EduInstituicaoUpdateOneWithoutSys_solicitacaoNestedInput
+  edu_polo?: Prisma.EduPoloUpdateOneWithoutSys_solicitacaoNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateOneWithoutSysSolicitacaosNestedInput
   sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoUpdateManyWithoutSys_solicitacaoNestedInput
 }
 
@@ -1358,6 +1841,9 @@ export type SysSolicitacaoUncheckedUpdateWithoutSys_solicitacao_documentoInput =
   sys_solicitacao_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   solicitado_por_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   responsavel_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_instituicao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_polo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1378,6 +1864,9 @@ export type SysSolicitacaoCreateManySolicitado_por_usuarioInput = {
   sys_solicitacao_tipo_id: number
   sys_solicitacao_status_id: number
   responsavel_sys_usuario_id?: number | null
+  edu_instituicao_id?: number | null
+  edu_polo_id?: number | null
+  ent_entidade_id?: number | null
   titulo: string
   descricao?: string | null
   entidade_tipo?: string | null
@@ -1397,6 +1886,9 @@ export type SysSolicitacaoCreateManyResponsavel_usuarioInput = {
   sys_solicitacao_tipo_id: number
   sys_solicitacao_status_id: number
   solicitado_por_usuario_id: number
+  edu_instituicao_id?: number | null
+  edu_polo_id?: number | null
+  ent_entidade_id?: number | null
   titulo: string
   descricao?: string | null
   entidade_tipo?: string | null
@@ -1427,6 +1919,9 @@ export type SysSolicitacaoUpdateWithoutSolicitado_por_usuarioInput = {
   sys_solicitacao_tipo?: Prisma.SysSolicitacaoTipoUpdateOneRequiredWithoutSys_solicitacaoNestedInput
   sys_solicitacao_status?: Prisma.SysSolicitacaoStatusUpdateOneRequiredWithoutSys_solicitacao_status_atualNestedInput
   responsavel_usuario?: Prisma.SysUsuarioUpdateOneWithoutSys_solicitacao_responsavelNestedInput
+  edu_instituicao?: Prisma.EduInstituicaoUpdateOneWithoutSys_solicitacaoNestedInput
+  edu_polo?: Prisma.EduPoloUpdateOneWithoutSys_solicitacaoNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateOneWithoutSysSolicitacaosNestedInput
   sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoUpdateManyWithoutSys_solicitacaoNestedInput
   sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoUpdateManyWithoutSys_solicitacaoNestedInput
 }
@@ -1436,6 +1931,9 @@ export type SysSolicitacaoUncheckedUpdateWithoutSolicitado_por_usuarioInput = {
   sys_solicitacao_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_solicitacao_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   responsavel_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_instituicao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_polo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1457,6 +1955,9 @@ export type SysSolicitacaoUncheckedUpdateManyWithoutSolicitado_por_usuarioInput 
   sys_solicitacao_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_solicitacao_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   responsavel_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_instituicao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_polo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1487,6 +1988,9 @@ export type SysSolicitacaoUpdateWithoutResponsavel_usuarioInput = {
   sys_solicitacao_tipo?: Prisma.SysSolicitacaoTipoUpdateOneRequiredWithoutSys_solicitacaoNestedInput
   sys_solicitacao_status?: Prisma.SysSolicitacaoStatusUpdateOneRequiredWithoutSys_solicitacao_status_atualNestedInput
   solicitado_por_usuario?: Prisma.SysUsuarioUpdateOneRequiredWithoutSys_solicitacao_solicitanteNestedInput
+  edu_instituicao?: Prisma.EduInstituicaoUpdateOneWithoutSys_solicitacaoNestedInput
+  edu_polo?: Prisma.EduPoloUpdateOneWithoutSys_solicitacaoNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateOneWithoutSysSolicitacaosNestedInput
   sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoUpdateManyWithoutSys_solicitacaoNestedInput
   sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoUpdateManyWithoutSys_solicitacaoNestedInput
 }
@@ -1496,6 +2000,9 @@ export type SysSolicitacaoUncheckedUpdateWithoutResponsavel_usuarioInput = {
   sys_solicitacao_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_solicitacao_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   solicitado_por_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
+  edu_instituicao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_polo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1517,6 +2024,282 @@ export type SysSolicitacaoUncheckedUpdateManyWithoutResponsavel_usuarioInput = {
   sys_solicitacao_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_solicitacao_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   solicitado_por_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
+  edu_instituicao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_polo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payload_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enviado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type SysSolicitacaoCreateManyEdu_instituicaoInput = {
+  id?: number
+  sys_solicitacao_tipo_id: number
+  sys_solicitacao_status_id: number
+  solicitado_por_usuario_id: number
+  responsavel_sys_usuario_id?: number | null
+  edu_polo_id?: number | null
+  ent_entidade_id?: number | null
+  titulo: string
+  descricao?: string | null
+  entidade_tipo?: string | null
+  entidade_id?: number | null
+  payload_text?: string | null
+  metadata_text?: string | null
+  enviado_at?: Date | string | null
+  finalizado_at?: Date | string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+}
+
+export type SysSolicitacaoUpdateWithoutEdu_instituicaoInput = {
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payload_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enviado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_solicitacao_tipo?: Prisma.SysSolicitacaoTipoUpdateOneRequiredWithoutSys_solicitacaoNestedInput
+  sys_solicitacao_status?: Prisma.SysSolicitacaoStatusUpdateOneRequiredWithoutSys_solicitacao_status_atualNestedInput
+  solicitado_por_usuario?: Prisma.SysUsuarioUpdateOneRequiredWithoutSys_solicitacao_solicitanteNestedInput
+  responsavel_usuario?: Prisma.SysUsuarioUpdateOneWithoutSys_solicitacao_responsavelNestedInput
+  edu_polo?: Prisma.EduPoloUpdateOneWithoutSys_solicitacaoNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateOneWithoutSysSolicitacaosNestedInput
+  sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoUpdateManyWithoutSys_solicitacaoNestedInput
+  sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoUpdateManyWithoutSys_solicitacaoNestedInput
+}
+
+export type SysSolicitacaoUncheckedUpdateWithoutEdu_instituicaoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_solicitacao_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_solicitacao_status_id?: Prisma.IntFieldUpdateOperationsInput | number
+  solicitado_por_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
+  responsavel_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_polo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payload_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enviado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoUncheckedUpdateManyWithoutSys_solicitacaoNestedInput
+  sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoUncheckedUpdateManyWithoutSys_solicitacaoNestedInput
+}
+
+export type SysSolicitacaoUncheckedUpdateManyWithoutEdu_instituicaoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_solicitacao_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_solicitacao_status_id?: Prisma.IntFieldUpdateOperationsInput | number
+  solicitado_por_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
+  responsavel_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_polo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payload_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enviado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type SysSolicitacaoCreateManyEdu_poloInput = {
+  id?: number
+  sys_solicitacao_tipo_id: number
+  sys_solicitacao_status_id: number
+  solicitado_por_usuario_id: number
+  responsavel_sys_usuario_id?: number | null
+  edu_instituicao_id?: number | null
+  ent_entidade_id?: number | null
+  titulo: string
+  descricao?: string | null
+  entidade_tipo?: string | null
+  entidade_id?: number | null
+  payload_text?: string | null
+  metadata_text?: string | null
+  enviado_at?: Date | string | null
+  finalizado_at?: Date | string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+}
+
+export type SysSolicitacaoUpdateWithoutEdu_poloInput = {
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payload_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enviado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_solicitacao_tipo?: Prisma.SysSolicitacaoTipoUpdateOneRequiredWithoutSys_solicitacaoNestedInput
+  sys_solicitacao_status?: Prisma.SysSolicitacaoStatusUpdateOneRequiredWithoutSys_solicitacao_status_atualNestedInput
+  solicitado_por_usuario?: Prisma.SysUsuarioUpdateOneRequiredWithoutSys_solicitacao_solicitanteNestedInput
+  responsavel_usuario?: Prisma.SysUsuarioUpdateOneWithoutSys_solicitacao_responsavelNestedInput
+  edu_instituicao?: Prisma.EduInstituicaoUpdateOneWithoutSys_solicitacaoNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateOneWithoutSysSolicitacaosNestedInput
+  sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoUpdateManyWithoutSys_solicitacaoNestedInput
+  sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoUpdateManyWithoutSys_solicitacaoNestedInput
+}
+
+export type SysSolicitacaoUncheckedUpdateWithoutEdu_poloInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_solicitacao_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_solicitacao_status_id?: Prisma.IntFieldUpdateOperationsInput | number
+  solicitado_por_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
+  responsavel_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_instituicao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payload_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enviado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoUncheckedUpdateManyWithoutSys_solicitacaoNestedInput
+  sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoUncheckedUpdateManyWithoutSys_solicitacaoNestedInput
+}
+
+export type SysSolicitacaoUncheckedUpdateManyWithoutEdu_poloInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_solicitacao_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_solicitacao_status_id?: Prisma.IntFieldUpdateOperationsInput | number
+  solicitado_por_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
+  responsavel_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_instituicao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payload_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enviado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type SysSolicitacaoCreateManyEnt_entidadeInput = {
+  id?: number
+  sys_solicitacao_tipo_id: number
+  sys_solicitacao_status_id: number
+  solicitado_por_usuario_id: number
+  responsavel_sys_usuario_id?: number | null
+  edu_instituicao_id?: number | null
+  edu_polo_id?: number | null
+  titulo: string
+  descricao?: string | null
+  entidade_tipo?: string | null
+  entidade_id?: number | null
+  payload_text?: string | null
+  metadata_text?: string | null
+  enviado_at?: Date | string | null
+  finalizado_at?: Date | string | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+}
+
+export type SysSolicitacaoUpdateWithoutEnt_entidadeInput = {
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payload_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enviado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_solicitacao_tipo?: Prisma.SysSolicitacaoTipoUpdateOneRequiredWithoutSys_solicitacaoNestedInput
+  sys_solicitacao_status?: Prisma.SysSolicitacaoStatusUpdateOneRequiredWithoutSys_solicitacao_status_atualNestedInput
+  solicitado_por_usuario?: Prisma.SysUsuarioUpdateOneRequiredWithoutSys_solicitacao_solicitanteNestedInput
+  responsavel_usuario?: Prisma.SysUsuarioUpdateOneWithoutSys_solicitacao_responsavelNestedInput
+  edu_instituicao?: Prisma.EduInstituicaoUpdateOneWithoutSys_solicitacaoNestedInput
+  edu_polo?: Prisma.EduPoloUpdateOneWithoutSys_solicitacaoNestedInput
+  sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoUpdateManyWithoutSys_solicitacaoNestedInput
+  sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoUpdateManyWithoutSys_solicitacaoNestedInput
+}
+
+export type SysSolicitacaoUncheckedUpdateWithoutEnt_entidadeInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_solicitacao_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_solicitacao_status_id?: Prisma.IntFieldUpdateOperationsInput | number
+  solicitado_por_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
+  responsavel_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_instituicao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_polo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payload_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enviado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoUncheckedUpdateManyWithoutSys_solicitacaoNestedInput
+  sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoUncheckedUpdateManyWithoutSys_solicitacaoNestedInput
+}
+
+export type SysSolicitacaoUncheckedUpdateManyWithoutEnt_entidadeInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_solicitacao_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_solicitacao_status_id?: Prisma.IntFieldUpdateOperationsInput | number
+  solicitado_por_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
+  responsavel_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_instituicao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_polo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1536,6 +2319,9 @@ export type SysSolicitacaoCreateManySys_solicitacao_tipoInput = {
   sys_solicitacao_status_id: number
   solicitado_por_usuario_id: number
   responsavel_sys_usuario_id?: number | null
+  edu_instituicao_id?: number | null
+  edu_polo_id?: number | null
+  ent_entidade_id?: number | null
   titulo: string
   descricao?: string | null
   entidade_tipo?: string | null
@@ -1566,6 +2352,9 @@ export type SysSolicitacaoUpdateWithoutSys_solicitacao_tipoInput = {
   sys_solicitacao_status?: Prisma.SysSolicitacaoStatusUpdateOneRequiredWithoutSys_solicitacao_status_atualNestedInput
   solicitado_por_usuario?: Prisma.SysUsuarioUpdateOneRequiredWithoutSys_solicitacao_solicitanteNestedInput
   responsavel_usuario?: Prisma.SysUsuarioUpdateOneWithoutSys_solicitacao_responsavelNestedInput
+  edu_instituicao?: Prisma.EduInstituicaoUpdateOneWithoutSys_solicitacaoNestedInput
+  edu_polo?: Prisma.EduPoloUpdateOneWithoutSys_solicitacaoNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateOneWithoutSysSolicitacaosNestedInput
   sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoUpdateManyWithoutSys_solicitacaoNestedInput
   sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoUpdateManyWithoutSys_solicitacaoNestedInput
 }
@@ -1575,6 +2364,9 @@ export type SysSolicitacaoUncheckedUpdateWithoutSys_solicitacao_tipoInput = {
   sys_solicitacao_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   solicitado_por_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   responsavel_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_instituicao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_polo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1596,6 +2388,9 @@ export type SysSolicitacaoUncheckedUpdateManyWithoutSys_solicitacao_tipoInput = 
   sys_solicitacao_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   solicitado_por_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   responsavel_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_instituicao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_polo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1615,6 +2410,9 @@ export type SysSolicitacaoCreateManySys_solicitacao_statusInput = {
   sys_solicitacao_tipo_id: number
   solicitado_por_usuario_id: number
   responsavel_sys_usuario_id?: number | null
+  edu_instituicao_id?: number | null
+  edu_polo_id?: number | null
+  ent_entidade_id?: number | null
   titulo: string
   descricao?: string | null
   entidade_tipo?: string | null
@@ -1645,6 +2443,9 @@ export type SysSolicitacaoUpdateWithoutSys_solicitacao_statusInput = {
   sys_solicitacao_tipo?: Prisma.SysSolicitacaoTipoUpdateOneRequiredWithoutSys_solicitacaoNestedInput
   solicitado_por_usuario?: Prisma.SysUsuarioUpdateOneRequiredWithoutSys_solicitacao_solicitanteNestedInput
   responsavel_usuario?: Prisma.SysUsuarioUpdateOneWithoutSys_solicitacao_responsavelNestedInput
+  edu_instituicao?: Prisma.EduInstituicaoUpdateOneWithoutSys_solicitacaoNestedInput
+  edu_polo?: Prisma.EduPoloUpdateOneWithoutSys_solicitacaoNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateOneWithoutSysSolicitacaosNestedInput
   sys_solicitacao_historico?: Prisma.SysSolicitacaoHistoricoUpdateManyWithoutSys_solicitacaoNestedInput
   sys_solicitacao_documento?: Prisma.SysSolicitacaoDocumentoUpdateManyWithoutSys_solicitacaoNestedInput
 }
@@ -1654,6 +2455,9 @@ export type SysSolicitacaoUncheckedUpdateWithoutSys_solicitacao_statusInput = {
   sys_solicitacao_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
   solicitado_por_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   responsavel_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_instituicao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_polo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1675,6 +2479,9 @@ export type SysSolicitacaoUncheckedUpdateManyWithoutSys_solicitacao_statusInput 
   sys_solicitacao_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
   solicitado_por_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   responsavel_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_instituicao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  edu_polo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1735,6 +2542,9 @@ export type SysSolicitacaoSelect<ExtArgs extends runtime.Types.Extensions.Intern
   sys_solicitacao_status_id?: boolean
   solicitado_por_usuario_id?: boolean
   responsavel_sys_usuario_id?: boolean
+  edu_instituicao_id?: boolean
+  edu_polo_id?: boolean
+  ent_entidade_id?: boolean
   titulo?: boolean
   descricao?: boolean
   entidade_tipo?: boolean
@@ -1751,6 +2561,9 @@ export type SysSolicitacaoSelect<ExtArgs extends runtime.Types.Extensions.Intern
   sys_solicitacao_status?: boolean | Prisma.SysSolicitacaoStatusDefaultArgs<ExtArgs>
   solicitado_por_usuario?: boolean | Prisma.SysUsuarioDefaultArgs<ExtArgs>
   responsavel_usuario?: boolean | Prisma.SysSolicitacao$responsavel_usuarioArgs<ExtArgs>
+  edu_instituicao?: boolean | Prisma.SysSolicitacao$edu_instituicaoArgs<ExtArgs>
+  edu_polo?: boolean | Prisma.SysSolicitacao$edu_poloArgs<ExtArgs>
+  ent_entidade?: boolean | Prisma.SysSolicitacao$ent_entidadeArgs<ExtArgs>
   sys_solicitacao_historico?: boolean | Prisma.SysSolicitacao$sys_solicitacao_historicoArgs<ExtArgs>
   sys_solicitacao_documento?: boolean | Prisma.SysSolicitacao$sys_solicitacao_documentoArgs<ExtArgs>
   _count?: boolean | Prisma.SysSolicitacaoCountOutputTypeDefaultArgs<ExtArgs>
@@ -1764,6 +2577,9 @@ export type SysSolicitacaoSelectScalar = {
   sys_solicitacao_status_id?: boolean
   solicitado_por_usuario_id?: boolean
   responsavel_sys_usuario_id?: boolean
+  edu_instituicao_id?: boolean
+  edu_polo_id?: boolean
+  ent_entidade_id?: boolean
   titulo?: boolean
   descricao?: boolean
   entidade_tipo?: boolean
@@ -1778,12 +2594,15 @@ export type SysSolicitacaoSelectScalar = {
   deleted_at?: boolean
 }
 
-export type SysSolicitacaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sys_solicitacao_tipo_id" | "sys_solicitacao_status_id" | "solicitado_por_usuario_id" | "responsavel_sys_usuario_id" | "titulo" | "descricao" | "entidade_tipo" | "entidade_id" | "payload_text" | "metadata_text" | "enviado_at" | "finalizado_at" | "ativo" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["sysSolicitacao"]>
+export type SysSolicitacaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sys_solicitacao_tipo_id" | "sys_solicitacao_status_id" | "solicitado_por_usuario_id" | "responsavel_sys_usuario_id" | "edu_instituicao_id" | "edu_polo_id" | "ent_entidade_id" | "titulo" | "descricao" | "entidade_tipo" | "entidade_id" | "payload_text" | "metadata_text" | "enviado_at" | "finalizado_at" | "ativo" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["sysSolicitacao"]>
 export type SysSolicitacaoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sys_solicitacao_tipo?: boolean | Prisma.SysSolicitacaoTipoDefaultArgs<ExtArgs>
   sys_solicitacao_status?: boolean | Prisma.SysSolicitacaoStatusDefaultArgs<ExtArgs>
   solicitado_por_usuario?: boolean | Prisma.SysUsuarioDefaultArgs<ExtArgs>
   responsavel_usuario?: boolean | Prisma.SysSolicitacao$responsavel_usuarioArgs<ExtArgs>
+  edu_instituicao?: boolean | Prisma.SysSolicitacao$edu_instituicaoArgs<ExtArgs>
+  edu_polo?: boolean | Prisma.SysSolicitacao$edu_poloArgs<ExtArgs>
+  ent_entidade?: boolean | Prisma.SysSolicitacao$ent_entidadeArgs<ExtArgs>
   sys_solicitacao_historico?: boolean | Prisma.SysSolicitacao$sys_solicitacao_historicoArgs<ExtArgs>
   sys_solicitacao_documento?: boolean | Prisma.SysSolicitacao$sys_solicitacao_documentoArgs<ExtArgs>
   _count?: boolean | Prisma.SysSolicitacaoCountOutputTypeDefaultArgs<ExtArgs>
@@ -1796,6 +2615,9 @@ export type $SysSolicitacaoPayload<ExtArgs extends runtime.Types.Extensions.Inte
     sys_solicitacao_status: Prisma.$SysSolicitacaoStatusPayload<ExtArgs>
     solicitado_por_usuario: Prisma.$SysUsuarioPayload<ExtArgs>
     responsavel_usuario: Prisma.$SysUsuarioPayload<ExtArgs> | null
+    edu_instituicao: Prisma.$EduInstituicaoPayload<ExtArgs> | null
+    edu_polo: Prisma.$EduPoloPayload<ExtArgs> | null
+    ent_entidade: Prisma.$EntEntidadePayload<ExtArgs> | null
     sys_solicitacao_historico: Prisma.$SysSolicitacaoHistoricoPayload<ExtArgs>[]
     sys_solicitacao_documento: Prisma.$SysSolicitacaoDocumentoPayload<ExtArgs>[]
   }
@@ -1805,6 +2627,9 @@ export type $SysSolicitacaoPayload<ExtArgs extends runtime.Types.Extensions.Inte
     sys_solicitacao_status_id: number
     solicitado_por_usuario_id: number
     responsavel_sys_usuario_id: number | null
+    edu_instituicao_id: number | null
+    edu_polo_id: number | null
+    ent_entidade_id: number | null
     titulo: string
     descricao: string | null
     entidade_tipo: string | null
@@ -2161,6 +2986,9 @@ export interface Prisma__SysSolicitacaoClient<T, Null = never, ExtArgs extends r
   sys_solicitacao_status<T extends Prisma.SysSolicitacaoStatusDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysSolicitacaoStatusDefaultArgs<ExtArgs>>): Prisma.Prisma__SysSolicitacaoStatusClient<runtime.Types.Result.GetResult<Prisma.$SysSolicitacaoStatusPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   solicitado_por_usuario<T extends Prisma.SysUsuarioDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuarioDefaultArgs<ExtArgs>>): Prisma.Prisma__SysUsuarioClient<runtime.Types.Result.GetResult<Prisma.$SysUsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   responsavel_usuario<T extends Prisma.SysSolicitacao$responsavel_usuarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysSolicitacao$responsavel_usuarioArgs<ExtArgs>>): Prisma.Prisma__SysUsuarioClient<runtime.Types.Result.GetResult<Prisma.$SysUsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  edu_instituicao<T extends Prisma.SysSolicitacao$edu_instituicaoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysSolicitacao$edu_instituicaoArgs<ExtArgs>>): Prisma.Prisma__EduInstituicaoClient<runtime.Types.Result.GetResult<Prisma.$EduInstituicaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  edu_polo<T extends Prisma.SysSolicitacao$edu_poloArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysSolicitacao$edu_poloArgs<ExtArgs>>): Prisma.Prisma__EduPoloClient<runtime.Types.Result.GetResult<Prisma.$EduPoloPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  ent_entidade<T extends Prisma.SysSolicitacao$ent_entidadeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysSolicitacao$ent_entidadeArgs<ExtArgs>>): Prisma.Prisma__EntEntidadeClient<runtime.Types.Result.GetResult<Prisma.$EntEntidadePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   sys_solicitacao_historico<T extends Prisma.SysSolicitacao$sys_solicitacao_historicoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysSolicitacao$sys_solicitacao_historicoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysSolicitacaoHistoricoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sys_solicitacao_documento<T extends Prisma.SysSolicitacao$sys_solicitacao_documentoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysSolicitacao$sys_solicitacao_documentoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysSolicitacaoDocumentoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -2197,6 +3025,9 @@ export interface SysSolicitacaoFieldRefs {
   readonly sys_solicitacao_status_id: Prisma.FieldRef<"SysSolicitacao", 'Int'>
   readonly solicitado_por_usuario_id: Prisma.FieldRef<"SysSolicitacao", 'Int'>
   readonly responsavel_sys_usuario_id: Prisma.FieldRef<"SysSolicitacao", 'Int'>
+  readonly edu_instituicao_id: Prisma.FieldRef<"SysSolicitacao", 'Int'>
+  readonly edu_polo_id: Prisma.FieldRef<"SysSolicitacao", 'Int'>
+  readonly ent_entidade_id: Prisma.FieldRef<"SysSolicitacao", 'Int'>
   readonly titulo: Prisma.FieldRef<"SysSolicitacao", 'String'>
   readonly descricao: Prisma.FieldRef<"SysSolicitacao", 'String'>
   readonly entidade_tipo: Prisma.FieldRef<"SysSolicitacao", 'String'>
@@ -2573,6 +3404,63 @@ export type SysSolicitacao$responsavel_usuarioArgs<ExtArgs extends runtime.Types
    */
   include?: Prisma.SysUsuarioInclude<ExtArgs> | null
   where?: Prisma.SysUsuarioWhereInput
+}
+
+/**
+ * SysSolicitacao.edu_instituicao
+ */
+export type SysSolicitacao$edu_instituicaoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EduInstituicao
+   */
+  select?: Prisma.EduInstituicaoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EduInstituicao
+   */
+  omit?: Prisma.EduInstituicaoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EduInstituicaoInclude<ExtArgs> | null
+  where?: Prisma.EduInstituicaoWhereInput
+}
+
+/**
+ * SysSolicitacao.edu_polo
+ */
+export type SysSolicitacao$edu_poloArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EduPolo
+   */
+  select?: Prisma.EduPoloSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EduPolo
+   */
+  omit?: Prisma.EduPoloOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EduPoloInclude<ExtArgs> | null
+  where?: Prisma.EduPoloWhereInput
+}
+
+/**
+ * SysSolicitacao.ent_entidade
+ */
+export type SysSolicitacao$ent_entidadeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EntEntidade
+   */
+  select?: Prisma.EntEntidadeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EntEntidade
+   */
+  omit?: Prisma.EntEntidadeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EntEntidadeInclude<ExtArgs> | null
+  where?: Prisma.EntEntidadeWhereInput
 }
 
 /**

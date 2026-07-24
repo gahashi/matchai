@@ -30,7 +30,7 @@ export type SysUsuarioRoleAvgAggregateOutputType = {
   id: number | null
   sys_usuario_id: number | null
   sys_role_id: number | null
-  atl_atletica_id: number | null
+  ent_entidade_id: number | null
   ativo: number | null
 }
 
@@ -38,7 +38,7 @@ export type SysUsuarioRoleSumAggregateOutputType = {
   id: number | null
   sys_usuario_id: number | null
   sys_role_id: number | null
-  atl_atletica_id: number | null
+  ent_entidade_id: number | null
   ativo: number | null
 }
 
@@ -46,7 +46,7 @@ export type SysUsuarioRoleMinAggregateOutputType = {
   id: number | null
   sys_usuario_id: number | null
   sys_role_id: number | null
-  atl_atletica_id: number | null
+  ent_entidade_id: number | null
   ativo: number | null
   created_at: Date | null
   updated_at: Date | null
@@ -57,7 +57,7 @@ export type SysUsuarioRoleMaxAggregateOutputType = {
   id: number | null
   sys_usuario_id: number | null
   sys_role_id: number | null
-  atl_atletica_id: number | null
+  ent_entidade_id: number | null
   ativo: number | null
   created_at: Date | null
   updated_at: Date | null
@@ -68,7 +68,7 @@ export type SysUsuarioRoleCountAggregateOutputType = {
   id: number
   sys_usuario_id: number
   sys_role_id: number
-  atl_atletica_id: number
+  ent_entidade_id: number
   ativo: number
   created_at: number
   updated_at: number
@@ -81,7 +81,7 @@ export type SysUsuarioRoleAvgAggregateInputType = {
   id?: true
   sys_usuario_id?: true
   sys_role_id?: true
-  atl_atletica_id?: true
+  ent_entidade_id?: true
   ativo?: true
 }
 
@@ -89,7 +89,7 @@ export type SysUsuarioRoleSumAggregateInputType = {
   id?: true
   sys_usuario_id?: true
   sys_role_id?: true
-  atl_atletica_id?: true
+  ent_entidade_id?: true
   ativo?: true
 }
 
@@ -97,7 +97,7 @@ export type SysUsuarioRoleMinAggregateInputType = {
   id?: true
   sys_usuario_id?: true
   sys_role_id?: true
-  atl_atletica_id?: true
+  ent_entidade_id?: true
   ativo?: true
   created_at?: true
   updated_at?: true
@@ -108,7 +108,7 @@ export type SysUsuarioRoleMaxAggregateInputType = {
   id?: true
   sys_usuario_id?: true
   sys_role_id?: true
-  atl_atletica_id?: true
+  ent_entidade_id?: true
   ativo?: true
   created_at?: true
   updated_at?: true
@@ -119,7 +119,7 @@ export type SysUsuarioRoleCountAggregateInputType = {
   id?: true
   sys_usuario_id?: true
   sys_role_id?: true
-  atl_atletica_id?: true
+  ent_entidade_id?: true
   ativo?: true
   created_at?: true
   updated_at?: true
@@ -217,7 +217,7 @@ export type SysUsuarioRoleGroupByOutputType = {
   id: number
   sys_usuario_id: number
   sys_role_id: number
-  atl_atletica_id: number | null
+  ent_entidade_id: number | null
   ativo: number
   created_at: Date | null
   updated_at: Date | null
@@ -251,53 +251,53 @@ export type SysUsuarioRoleWhereInput = {
   id?: Prisma.IntFilter<"SysUsuarioRole"> | number
   sys_usuario_id?: Prisma.IntFilter<"SysUsuarioRole"> | number
   sys_role_id?: Prisma.IntFilter<"SysUsuarioRole"> | number
-  atl_atletica_id?: Prisma.IntNullableFilter<"SysUsuarioRole"> | number | null
+  ent_entidade_id?: Prisma.IntNullableFilter<"SysUsuarioRole"> | number | null
   ativo?: Prisma.IntFilter<"SysUsuarioRole"> | number
   created_at?: Prisma.DateTimeNullableFilter<"SysUsuarioRole"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"SysUsuarioRole"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableFilter<"SysUsuarioRole"> | Date | string | null
   sys_usuario?: Prisma.XOR<Prisma.SysUsuarioScalarRelationFilter, Prisma.SysUsuarioWhereInput>
   sys_role?: Prisma.XOR<Prisma.SysRoleScalarRelationFilter, Prisma.SysRoleWhereInput>
-  atl_atletica?: Prisma.XOR<Prisma.AtlAtleticaNullableScalarRelationFilter, Prisma.AtlAtleticaWhereInput> | null
+  ent_entidade?: Prisma.XOR<Prisma.EntEntidadeNullableScalarRelationFilter, Prisma.EntEntidadeWhereInput> | null
 }
 
 export type SysUsuarioRoleOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
   sys_role_id?: Prisma.SortOrder
-  atl_atletica_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   sys_usuario?: Prisma.SysUsuarioOrderByWithRelationInput
   sys_role?: Prisma.SysRoleOrderByWithRelationInput
-  atl_atletica?: Prisma.AtlAtleticaOrderByWithRelationInput
+  ent_entidade?: Prisma.EntEntidadeOrderByWithRelationInput
 }
 
 export type SysUsuarioRoleWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  sys_usuario_id_sys_role_id_atl_atletica_id?: Prisma.SysUsuarioRoleSys_usuario_idSys_role_idAtl_atletica_idCompoundUniqueInput
+  sys_usuario_id_sys_role_id_ent_entidade_id?: Prisma.SysUsuarioRoleSys_usuario_idSys_role_idEnt_entidade_idCompoundUniqueInput
   AND?: Prisma.SysUsuarioRoleWhereInput | Prisma.SysUsuarioRoleWhereInput[]
   OR?: Prisma.SysUsuarioRoleWhereInput[]
   NOT?: Prisma.SysUsuarioRoleWhereInput | Prisma.SysUsuarioRoleWhereInput[]
   sys_usuario_id?: Prisma.IntFilter<"SysUsuarioRole"> | number
   sys_role_id?: Prisma.IntFilter<"SysUsuarioRole"> | number
-  atl_atletica_id?: Prisma.IntNullableFilter<"SysUsuarioRole"> | number | null
+  ent_entidade_id?: Prisma.IntNullableFilter<"SysUsuarioRole"> | number | null
   ativo?: Prisma.IntFilter<"SysUsuarioRole"> | number
   created_at?: Prisma.DateTimeNullableFilter<"SysUsuarioRole"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"SysUsuarioRole"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableFilter<"SysUsuarioRole"> | Date | string | null
   sys_usuario?: Prisma.XOR<Prisma.SysUsuarioScalarRelationFilter, Prisma.SysUsuarioWhereInput>
   sys_role?: Prisma.XOR<Prisma.SysRoleScalarRelationFilter, Prisma.SysRoleWhereInput>
-  atl_atletica?: Prisma.XOR<Prisma.AtlAtleticaNullableScalarRelationFilter, Prisma.AtlAtleticaWhereInput> | null
-}, "id" | "sys_usuario_id_sys_role_id_atl_atletica_id">
+  ent_entidade?: Prisma.XOR<Prisma.EntEntidadeNullableScalarRelationFilter, Prisma.EntEntidadeWhereInput> | null
+}, "id" | "sys_usuario_id_sys_role_id_ent_entidade_id">
 
 export type SysUsuarioRoleOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
   sys_role_id?: Prisma.SortOrder
-  atl_atletica_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -316,7 +316,7 @@ export type SysUsuarioRoleScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"SysUsuarioRole"> | number
   sys_usuario_id?: Prisma.IntWithAggregatesFilter<"SysUsuarioRole"> | number
   sys_role_id?: Prisma.IntWithAggregatesFilter<"SysUsuarioRole"> | number
-  atl_atletica_id?: Prisma.IntNullableWithAggregatesFilter<"SysUsuarioRole"> | number | null
+  ent_entidade_id?: Prisma.IntNullableWithAggregatesFilter<"SysUsuarioRole"> | number | null
   ativo?: Prisma.IntWithAggregatesFilter<"SysUsuarioRole"> | number
   created_at?: Prisma.DateTimeNullableWithAggregatesFilter<"SysUsuarioRole"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableWithAggregatesFilter<"SysUsuarioRole"> | Date | string | null
@@ -330,14 +330,14 @@ export type SysUsuarioRoleCreateInput = {
   deleted_at?: Date | string | null
   sys_usuario: Prisma.SysUsuarioCreateNestedOneWithoutSys_usuario_roleInput
   sys_role: Prisma.SysRoleCreateNestedOneWithoutSys_usuario_roleInput
-  atl_atletica?: Prisma.AtlAtleticaCreateNestedOneWithoutSys_usuario_roleInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedOneWithoutSys_usuario_roleInput
 }
 
 export type SysUsuarioRoleUncheckedCreateInput = {
   id?: number
   sys_usuario_id: number
   sys_role_id: number
-  atl_atletica_id?: number | null
+  ent_entidade_id?: number | null
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -351,14 +351,14 @@ export type SysUsuarioRoleUpdateInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario?: Prisma.SysUsuarioUpdateOneRequiredWithoutSys_usuario_roleNestedInput
   sys_role?: Prisma.SysRoleUpdateOneRequiredWithoutSys_usuario_roleNestedInput
-  atl_atletica?: Prisma.AtlAtleticaUpdateOneWithoutSys_usuario_roleNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateOneWithoutSys_usuario_roleNestedInput
 }
 
 export type SysUsuarioRoleUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_role_id?: Prisma.IntFieldUpdateOperationsInput | number
-  atl_atletica_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -369,7 +369,7 @@ export type SysUsuarioRoleCreateManyInput = {
   id?: number
   sys_usuario_id: number
   sys_role_id: number
-  atl_atletica_id?: number | null
+  ent_entidade_id?: number | null
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -387,7 +387,7 @@ export type SysUsuarioRoleUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_role_id?: Prisma.IntFieldUpdateOperationsInput | number
-  atl_atletica_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -404,17 +404,17 @@ export type SysUsuarioRoleOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type SysUsuarioRoleSys_usuario_idSys_role_idAtl_atletica_idCompoundUniqueInput = {
+export type SysUsuarioRoleSys_usuario_idSys_role_idEnt_entidade_idCompoundUniqueInput = {
   sys_usuario_id: number
   sys_role_id: number
-  atl_atletica_id: number
+  ent_entidade_id: number
 }
 
 export type SysUsuarioRoleCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
   sys_role_id?: Prisma.SortOrder
-  atl_atletica_id?: Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -425,7 +425,7 @@ export type SysUsuarioRoleAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
   sys_role_id?: Prisma.SortOrder
-  atl_atletica_id?: Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
 }
 
@@ -433,7 +433,7 @@ export type SysUsuarioRoleMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
   sys_role_id?: Prisma.SortOrder
-  atl_atletica_id?: Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -444,7 +444,7 @@ export type SysUsuarioRoleMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
   sys_role_id?: Prisma.SortOrder
-  atl_atletica_id?: Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -455,7 +455,7 @@ export type SysUsuarioRoleSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
   sys_role_id?: Prisma.SortOrder
-  atl_atletica_id?: Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
 }
 
@@ -543,45 +543,45 @@ export type SysUsuarioRoleUncheckedUpdateManyWithoutSys_roleNestedInput = {
   deleteMany?: Prisma.SysUsuarioRoleScalarWhereInput | Prisma.SysUsuarioRoleScalarWhereInput[]
 }
 
-export type SysUsuarioRoleCreateNestedManyWithoutAtl_atleticaInput = {
-  create?: Prisma.XOR<Prisma.SysUsuarioRoleCreateWithoutAtl_atleticaInput, Prisma.SysUsuarioRoleUncheckedCreateWithoutAtl_atleticaInput> | Prisma.SysUsuarioRoleCreateWithoutAtl_atleticaInput[] | Prisma.SysUsuarioRoleUncheckedCreateWithoutAtl_atleticaInput[]
-  connectOrCreate?: Prisma.SysUsuarioRoleCreateOrConnectWithoutAtl_atleticaInput | Prisma.SysUsuarioRoleCreateOrConnectWithoutAtl_atleticaInput[]
-  createMany?: Prisma.SysUsuarioRoleCreateManyAtl_atleticaInputEnvelope
+export type SysUsuarioRoleCreateNestedManyWithoutEnt_entidadeInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioRoleCreateWithoutEnt_entidadeInput, Prisma.SysUsuarioRoleUncheckedCreateWithoutEnt_entidadeInput> | Prisma.SysUsuarioRoleCreateWithoutEnt_entidadeInput[] | Prisma.SysUsuarioRoleUncheckedCreateWithoutEnt_entidadeInput[]
+  connectOrCreate?: Prisma.SysUsuarioRoleCreateOrConnectWithoutEnt_entidadeInput | Prisma.SysUsuarioRoleCreateOrConnectWithoutEnt_entidadeInput[]
+  createMany?: Prisma.SysUsuarioRoleCreateManyEnt_entidadeInputEnvelope
   connect?: Prisma.SysUsuarioRoleWhereUniqueInput | Prisma.SysUsuarioRoleWhereUniqueInput[]
 }
 
-export type SysUsuarioRoleUncheckedCreateNestedManyWithoutAtl_atleticaInput = {
-  create?: Prisma.XOR<Prisma.SysUsuarioRoleCreateWithoutAtl_atleticaInput, Prisma.SysUsuarioRoleUncheckedCreateWithoutAtl_atleticaInput> | Prisma.SysUsuarioRoleCreateWithoutAtl_atleticaInput[] | Prisma.SysUsuarioRoleUncheckedCreateWithoutAtl_atleticaInput[]
-  connectOrCreate?: Prisma.SysUsuarioRoleCreateOrConnectWithoutAtl_atleticaInput | Prisma.SysUsuarioRoleCreateOrConnectWithoutAtl_atleticaInput[]
-  createMany?: Prisma.SysUsuarioRoleCreateManyAtl_atleticaInputEnvelope
+export type SysUsuarioRoleUncheckedCreateNestedManyWithoutEnt_entidadeInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioRoleCreateWithoutEnt_entidadeInput, Prisma.SysUsuarioRoleUncheckedCreateWithoutEnt_entidadeInput> | Prisma.SysUsuarioRoleCreateWithoutEnt_entidadeInput[] | Prisma.SysUsuarioRoleUncheckedCreateWithoutEnt_entidadeInput[]
+  connectOrCreate?: Prisma.SysUsuarioRoleCreateOrConnectWithoutEnt_entidadeInput | Prisma.SysUsuarioRoleCreateOrConnectWithoutEnt_entidadeInput[]
+  createMany?: Prisma.SysUsuarioRoleCreateManyEnt_entidadeInputEnvelope
   connect?: Prisma.SysUsuarioRoleWhereUniqueInput | Prisma.SysUsuarioRoleWhereUniqueInput[]
 }
 
-export type SysUsuarioRoleUpdateManyWithoutAtl_atleticaNestedInput = {
-  create?: Prisma.XOR<Prisma.SysUsuarioRoleCreateWithoutAtl_atleticaInput, Prisma.SysUsuarioRoleUncheckedCreateWithoutAtl_atleticaInput> | Prisma.SysUsuarioRoleCreateWithoutAtl_atleticaInput[] | Prisma.SysUsuarioRoleUncheckedCreateWithoutAtl_atleticaInput[]
-  connectOrCreate?: Prisma.SysUsuarioRoleCreateOrConnectWithoutAtl_atleticaInput | Prisma.SysUsuarioRoleCreateOrConnectWithoutAtl_atleticaInput[]
-  upsert?: Prisma.SysUsuarioRoleUpsertWithWhereUniqueWithoutAtl_atleticaInput | Prisma.SysUsuarioRoleUpsertWithWhereUniqueWithoutAtl_atleticaInput[]
-  createMany?: Prisma.SysUsuarioRoleCreateManyAtl_atleticaInputEnvelope
+export type SysUsuarioRoleUpdateManyWithoutEnt_entidadeNestedInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioRoleCreateWithoutEnt_entidadeInput, Prisma.SysUsuarioRoleUncheckedCreateWithoutEnt_entidadeInput> | Prisma.SysUsuarioRoleCreateWithoutEnt_entidadeInput[] | Prisma.SysUsuarioRoleUncheckedCreateWithoutEnt_entidadeInput[]
+  connectOrCreate?: Prisma.SysUsuarioRoleCreateOrConnectWithoutEnt_entidadeInput | Prisma.SysUsuarioRoleCreateOrConnectWithoutEnt_entidadeInput[]
+  upsert?: Prisma.SysUsuarioRoleUpsertWithWhereUniqueWithoutEnt_entidadeInput | Prisma.SysUsuarioRoleUpsertWithWhereUniqueWithoutEnt_entidadeInput[]
+  createMany?: Prisma.SysUsuarioRoleCreateManyEnt_entidadeInputEnvelope
   set?: Prisma.SysUsuarioRoleWhereUniqueInput | Prisma.SysUsuarioRoleWhereUniqueInput[]
   disconnect?: Prisma.SysUsuarioRoleWhereUniqueInput | Prisma.SysUsuarioRoleWhereUniqueInput[]
   delete?: Prisma.SysUsuarioRoleWhereUniqueInput | Prisma.SysUsuarioRoleWhereUniqueInput[]
   connect?: Prisma.SysUsuarioRoleWhereUniqueInput | Prisma.SysUsuarioRoleWhereUniqueInput[]
-  update?: Prisma.SysUsuarioRoleUpdateWithWhereUniqueWithoutAtl_atleticaInput | Prisma.SysUsuarioRoleUpdateWithWhereUniqueWithoutAtl_atleticaInput[]
-  updateMany?: Prisma.SysUsuarioRoleUpdateManyWithWhereWithoutAtl_atleticaInput | Prisma.SysUsuarioRoleUpdateManyWithWhereWithoutAtl_atleticaInput[]
+  update?: Prisma.SysUsuarioRoleUpdateWithWhereUniqueWithoutEnt_entidadeInput | Prisma.SysUsuarioRoleUpdateWithWhereUniqueWithoutEnt_entidadeInput[]
+  updateMany?: Prisma.SysUsuarioRoleUpdateManyWithWhereWithoutEnt_entidadeInput | Prisma.SysUsuarioRoleUpdateManyWithWhereWithoutEnt_entidadeInput[]
   deleteMany?: Prisma.SysUsuarioRoleScalarWhereInput | Prisma.SysUsuarioRoleScalarWhereInput[]
 }
 
-export type SysUsuarioRoleUncheckedUpdateManyWithoutAtl_atleticaNestedInput = {
-  create?: Prisma.XOR<Prisma.SysUsuarioRoleCreateWithoutAtl_atleticaInput, Prisma.SysUsuarioRoleUncheckedCreateWithoutAtl_atleticaInput> | Prisma.SysUsuarioRoleCreateWithoutAtl_atleticaInput[] | Prisma.SysUsuarioRoleUncheckedCreateWithoutAtl_atleticaInput[]
-  connectOrCreate?: Prisma.SysUsuarioRoleCreateOrConnectWithoutAtl_atleticaInput | Prisma.SysUsuarioRoleCreateOrConnectWithoutAtl_atleticaInput[]
-  upsert?: Prisma.SysUsuarioRoleUpsertWithWhereUniqueWithoutAtl_atleticaInput | Prisma.SysUsuarioRoleUpsertWithWhereUniqueWithoutAtl_atleticaInput[]
-  createMany?: Prisma.SysUsuarioRoleCreateManyAtl_atleticaInputEnvelope
+export type SysUsuarioRoleUncheckedUpdateManyWithoutEnt_entidadeNestedInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioRoleCreateWithoutEnt_entidadeInput, Prisma.SysUsuarioRoleUncheckedCreateWithoutEnt_entidadeInput> | Prisma.SysUsuarioRoleCreateWithoutEnt_entidadeInput[] | Prisma.SysUsuarioRoleUncheckedCreateWithoutEnt_entidadeInput[]
+  connectOrCreate?: Prisma.SysUsuarioRoleCreateOrConnectWithoutEnt_entidadeInput | Prisma.SysUsuarioRoleCreateOrConnectWithoutEnt_entidadeInput[]
+  upsert?: Prisma.SysUsuarioRoleUpsertWithWhereUniqueWithoutEnt_entidadeInput | Prisma.SysUsuarioRoleUpsertWithWhereUniqueWithoutEnt_entidadeInput[]
+  createMany?: Prisma.SysUsuarioRoleCreateManyEnt_entidadeInputEnvelope
   set?: Prisma.SysUsuarioRoleWhereUniqueInput | Prisma.SysUsuarioRoleWhereUniqueInput[]
   disconnect?: Prisma.SysUsuarioRoleWhereUniqueInput | Prisma.SysUsuarioRoleWhereUniqueInput[]
   delete?: Prisma.SysUsuarioRoleWhereUniqueInput | Prisma.SysUsuarioRoleWhereUniqueInput[]
   connect?: Prisma.SysUsuarioRoleWhereUniqueInput | Prisma.SysUsuarioRoleWhereUniqueInput[]
-  update?: Prisma.SysUsuarioRoleUpdateWithWhereUniqueWithoutAtl_atleticaInput | Prisma.SysUsuarioRoleUpdateWithWhereUniqueWithoutAtl_atleticaInput[]
-  updateMany?: Prisma.SysUsuarioRoleUpdateManyWithWhereWithoutAtl_atleticaInput | Prisma.SysUsuarioRoleUpdateManyWithWhereWithoutAtl_atleticaInput[]
+  update?: Prisma.SysUsuarioRoleUpdateWithWhereUniqueWithoutEnt_entidadeInput | Prisma.SysUsuarioRoleUpdateWithWhereUniqueWithoutEnt_entidadeInput[]
+  updateMany?: Prisma.SysUsuarioRoleUpdateManyWithWhereWithoutEnt_entidadeInput | Prisma.SysUsuarioRoleUpdateManyWithWhereWithoutEnt_entidadeInput[]
   deleteMany?: Prisma.SysUsuarioRoleScalarWhereInput | Prisma.SysUsuarioRoleScalarWhereInput[]
 }
 
@@ -591,13 +591,13 @@ export type SysUsuarioRoleCreateWithoutSys_usuarioInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   sys_role: Prisma.SysRoleCreateNestedOneWithoutSys_usuario_roleInput
-  atl_atletica?: Prisma.AtlAtleticaCreateNestedOneWithoutSys_usuario_roleInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedOneWithoutSys_usuario_roleInput
 }
 
 export type SysUsuarioRoleUncheckedCreateWithoutSys_usuarioInput = {
   id?: number
   sys_role_id: number
-  atl_atletica_id?: number | null
+  ent_entidade_id?: number | null
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -637,7 +637,7 @@ export type SysUsuarioRoleScalarWhereInput = {
   id?: Prisma.IntFilter<"SysUsuarioRole"> | number
   sys_usuario_id?: Prisma.IntFilter<"SysUsuarioRole"> | number
   sys_role_id?: Prisma.IntFilter<"SysUsuarioRole"> | number
-  atl_atletica_id?: Prisma.IntNullableFilter<"SysUsuarioRole"> | number | null
+  ent_entidade_id?: Prisma.IntNullableFilter<"SysUsuarioRole"> | number | null
   ativo?: Prisma.IntFilter<"SysUsuarioRole"> | number
   created_at?: Prisma.DateTimeNullableFilter<"SysUsuarioRole"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"SysUsuarioRole"> | Date | string | null
@@ -650,13 +650,13 @@ export type SysUsuarioRoleCreateWithoutSys_roleInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   sys_usuario: Prisma.SysUsuarioCreateNestedOneWithoutSys_usuario_roleInput
-  atl_atletica?: Prisma.AtlAtleticaCreateNestedOneWithoutSys_usuario_roleInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedOneWithoutSys_usuario_roleInput
 }
 
 export type SysUsuarioRoleUncheckedCreateWithoutSys_roleInput = {
   id?: number
   sys_usuario_id: number
-  atl_atletica_id?: number | null
+  ent_entidade_id?: number | null
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -689,7 +689,7 @@ export type SysUsuarioRoleUpdateManyWithWhereWithoutSys_roleInput = {
   data: Prisma.XOR<Prisma.SysUsuarioRoleUpdateManyMutationInput, Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutSys_roleInput>
 }
 
-export type SysUsuarioRoleCreateWithoutAtl_atleticaInput = {
+export type SysUsuarioRoleCreateWithoutEnt_entidadeInput = {
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -698,7 +698,7 @@ export type SysUsuarioRoleCreateWithoutAtl_atleticaInput = {
   sys_role: Prisma.SysRoleCreateNestedOneWithoutSys_usuario_roleInput
 }
 
-export type SysUsuarioRoleUncheckedCreateWithoutAtl_atleticaInput = {
+export type SysUsuarioRoleUncheckedCreateWithoutEnt_entidadeInput = {
   id?: number
   sys_usuario_id: number
   sys_role_id: number
@@ -708,36 +708,36 @@ export type SysUsuarioRoleUncheckedCreateWithoutAtl_atleticaInput = {
   deleted_at?: Date | string | null
 }
 
-export type SysUsuarioRoleCreateOrConnectWithoutAtl_atleticaInput = {
+export type SysUsuarioRoleCreateOrConnectWithoutEnt_entidadeInput = {
   where: Prisma.SysUsuarioRoleWhereUniqueInput
-  create: Prisma.XOR<Prisma.SysUsuarioRoleCreateWithoutAtl_atleticaInput, Prisma.SysUsuarioRoleUncheckedCreateWithoutAtl_atleticaInput>
+  create: Prisma.XOR<Prisma.SysUsuarioRoleCreateWithoutEnt_entidadeInput, Prisma.SysUsuarioRoleUncheckedCreateWithoutEnt_entidadeInput>
 }
 
-export type SysUsuarioRoleCreateManyAtl_atleticaInputEnvelope = {
-  data: Prisma.SysUsuarioRoleCreateManyAtl_atleticaInput | Prisma.SysUsuarioRoleCreateManyAtl_atleticaInput[]
+export type SysUsuarioRoleCreateManyEnt_entidadeInputEnvelope = {
+  data: Prisma.SysUsuarioRoleCreateManyEnt_entidadeInput | Prisma.SysUsuarioRoleCreateManyEnt_entidadeInput[]
   skipDuplicates?: boolean
 }
 
-export type SysUsuarioRoleUpsertWithWhereUniqueWithoutAtl_atleticaInput = {
+export type SysUsuarioRoleUpsertWithWhereUniqueWithoutEnt_entidadeInput = {
   where: Prisma.SysUsuarioRoleWhereUniqueInput
-  update: Prisma.XOR<Prisma.SysUsuarioRoleUpdateWithoutAtl_atleticaInput, Prisma.SysUsuarioRoleUncheckedUpdateWithoutAtl_atleticaInput>
-  create: Prisma.XOR<Prisma.SysUsuarioRoleCreateWithoutAtl_atleticaInput, Prisma.SysUsuarioRoleUncheckedCreateWithoutAtl_atleticaInput>
+  update: Prisma.XOR<Prisma.SysUsuarioRoleUpdateWithoutEnt_entidadeInput, Prisma.SysUsuarioRoleUncheckedUpdateWithoutEnt_entidadeInput>
+  create: Prisma.XOR<Prisma.SysUsuarioRoleCreateWithoutEnt_entidadeInput, Prisma.SysUsuarioRoleUncheckedCreateWithoutEnt_entidadeInput>
 }
 
-export type SysUsuarioRoleUpdateWithWhereUniqueWithoutAtl_atleticaInput = {
+export type SysUsuarioRoleUpdateWithWhereUniqueWithoutEnt_entidadeInput = {
   where: Prisma.SysUsuarioRoleWhereUniqueInput
-  data: Prisma.XOR<Prisma.SysUsuarioRoleUpdateWithoutAtl_atleticaInput, Prisma.SysUsuarioRoleUncheckedUpdateWithoutAtl_atleticaInput>
+  data: Prisma.XOR<Prisma.SysUsuarioRoleUpdateWithoutEnt_entidadeInput, Prisma.SysUsuarioRoleUncheckedUpdateWithoutEnt_entidadeInput>
 }
 
-export type SysUsuarioRoleUpdateManyWithWhereWithoutAtl_atleticaInput = {
+export type SysUsuarioRoleUpdateManyWithWhereWithoutEnt_entidadeInput = {
   where: Prisma.SysUsuarioRoleScalarWhereInput
-  data: Prisma.XOR<Prisma.SysUsuarioRoleUpdateManyMutationInput, Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutAtl_atleticaInput>
+  data: Prisma.XOR<Prisma.SysUsuarioRoleUpdateManyMutationInput, Prisma.SysUsuarioRoleUncheckedUpdateManyWithoutEnt_entidadeInput>
 }
 
 export type SysUsuarioRoleCreateManySys_usuarioInput = {
   id?: number
   sys_role_id: number
-  atl_atletica_id?: number | null
+  ent_entidade_id?: number | null
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -750,13 +750,13 @@ export type SysUsuarioRoleUpdateWithoutSys_usuarioInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_role?: Prisma.SysRoleUpdateOneRequiredWithoutSys_usuario_roleNestedInput
-  atl_atletica?: Prisma.AtlAtleticaUpdateOneWithoutSys_usuario_roleNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateOneWithoutSys_usuario_roleNestedInput
 }
 
 export type SysUsuarioRoleUncheckedUpdateWithoutSys_usuarioInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_role_id?: Prisma.IntFieldUpdateOperationsInput | number
-  atl_atletica_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -766,7 +766,7 @@ export type SysUsuarioRoleUncheckedUpdateWithoutSys_usuarioInput = {
 export type SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_role_id?: Prisma.IntFieldUpdateOperationsInput | number
-  atl_atletica_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -776,7 +776,7 @@ export type SysUsuarioRoleUncheckedUpdateManyWithoutSys_usuarioInput = {
 export type SysUsuarioRoleCreateManySys_roleInput = {
   id?: number
   sys_usuario_id: number
-  atl_atletica_id?: number | null
+  ent_entidade_id?: number | null
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -789,13 +789,13 @@ export type SysUsuarioRoleUpdateWithoutSys_roleInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario?: Prisma.SysUsuarioUpdateOneRequiredWithoutSys_usuario_roleNestedInput
-  atl_atletica?: Prisma.AtlAtleticaUpdateOneWithoutSys_usuario_roleNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateOneWithoutSys_usuario_roleNestedInput
 }
 
 export type SysUsuarioRoleUncheckedUpdateWithoutSys_roleInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
-  atl_atletica_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -805,14 +805,14 @@ export type SysUsuarioRoleUncheckedUpdateWithoutSys_roleInput = {
 export type SysUsuarioRoleUncheckedUpdateManyWithoutSys_roleInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
-  atl_atletica_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type SysUsuarioRoleCreateManyAtl_atleticaInput = {
+export type SysUsuarioRoleCreateManyEnt_entidadeInput = {
   id?: number
   sys_usuario_id: number
   sys_role_id: number
@@ -822,7 +822,7 @@ export type SysUsuarioRoleCreateManyAtl_atleticaInput = {
   deleted_at?: Date | string | null
 }
 
-export type SysUsuarioRoleUpdateWithoutAtl_atleticaInput = {
+export type SysUsuarioRoleUpdateWithoutEnt_entidadeInput = {
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -831,7 +831,7 @@ export type SysUsuarioRoleUpdateWithoutAtl_atleticaInput = {
   sys_role?: Prisma.SysRoleUpdateOneRequiredWithoutSys_usuario_roleNestedInput
 }
 
-export type SysUsuarioRoleUncheckedUpdateWithoutAtl_atleticaInput = {
+export type SysUsuarioRoleUncheckedUpdateWithoutEnt_entidadeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_role_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -841,7 +841,7 @@ export type SysUsuarioRoleUncheckedUpdateWithoutAtl_atleticaInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type SysUsuarioRoleUncheckedUpdateManyWithoutAtl_atleticaInput = {
+export type SysUsuarioRoleUncheckedUpdateManyWithoutEnt_entidadeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_role_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -857,14 +857,14 @@ export type SysUsuarioRoleSelect<ExtArgs extends runtime.Types.Extensions.Intern
   id?: boolean
   sys_usuario_id?: boolean
   sys_role_id?: boolean
-  atl_atletica_id?: boolean
+  ent_entidade_id?: boolean
   ativo?: boolean
   created_at?: boolean
   updated_at?: boolean
   deleted_at?: boolean
   sys_usuario?: boolean | Prisma.SysUsuarioDefaultArgs<ExtArgs>
   sys_role?: boolean | Prisma.SysRoleDefaultArgs<ExtArgs>
-  atl_atletica?: boolean | Prisma.SysUsuarioRole$atl_atleticaArgs<ExtArgs>
+  ent_entidade?: boolean | Prisma.SysUsuarioRole$ent_entidadeArgs<ExtArgs>
 }, ExtArgs["result"]["sysUsuarioRole"]>
 
 
@@ -873,18 +873,18 @@ export type SysUsuarioRoleSelectScalar = {
   id?: boolean
   sys_usuario_id?: boolean
   sys_role_id?: boolean
-  atl_atletica_id?: boolean
+  ent_entidade_id?: boolean
   ativo?: boolean
   created_at?: boolean
   updated_at?: boolean
   deleted_at?: boolean
 }
 
-export type SysUsuarioRoleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sys_usuario_id" | "sys_role_id" | "atl_atletica_id" | "ativo" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["sysUsuarioRole"]>
+export type SysUsuarioRoleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sys_usuario_id" | "sys_role_id" | "ent_entidade_id" | "ativo" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["sysUsuarioRole"]>
 export type SysUsuarioRoleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sys_usuario?: boolean | Prisma.SysUsuarioDefaultArgs<ExtArgs>
   sys_role?: boolean | Prisma.SysRoleDefaultArgs<ExtArgs>
-  atl_atletica?: boolean | Prisma.SysUsuarioRole$atl_atleticaArgs<ExtArgs>
+  ent_entidade?: boolean | Prisma.SysUsuarioRole$ent_entidadeArgs<ExtArgs>
 }
 
 export type $SysUsuarioRolePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -892,13 +892,13 @@ export type $SysUsuarioRolePayload<ExtArgs extends runtime.Types.Extensions.Inte
   objects: {
     sys_usuario: Prisma.$SysUsuarioPayload<ExtArgs>
     sys_role: Prisma.$SysRolePayload<ExtArgs>
-    atl_atletica: Prisma.$AtlAtleticaPayload<ExtArgs> | null
+    ent_entidade: Prisma.$EntEntidadePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     sys_usuario_id: number
     sys_role_id: number
-    atl_atletica_id: number | null
+    ent_entidade_id: number | null
     ativo: number
     created_at: Date | null
     updated_at: Date | null
@@ -1245,7 +1245,7 @@ export interface Prisma__SysUsuarioRoleClient<T, Null = never, ExtArgs extends r
   readonly [Symbol.toStringTag]: "PrismaPromise"
   sys_usuario<T extends Prisma.SysUsuarioDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuarioDefaultArgs<ExtArgs>>): Prisma.Prisma__SysUsuarioClient<runtime.Types.Result.GetResult<Prisma.$SysUsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   sys_role<T extends Prisma.SysRoleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysRoleDefaultArgs<ExtArgs>>): Prisma.Prisma__SysRoleClient<runtime.Types.Result.GetResult<Prisma.$SysRolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  atl_atletica<T extends Prisma.SysUsuarioRole$atl_atleticaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuarioRole$atl_atleticaArgs<ExtArgs>>): Prisma.Prisma__AtlAtleticaClient<runtime.Types.Result.GetResult<Prisma.$AtlAtleticaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  ent_entidade<T extends Prisma.SysUsuarioRole$ent_entidadeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuarioRole$ent_entidadeArgs<ExtArgs>>): Prisma.Prisma__EntEntidadeClient<runtime.Types.Result.GetResult<Prisma.$EntEntidadePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1278,7 +1278,7 @@ export interface SysUsuarioRoleFieldRefs {
   readonly id: Prisma.FieldRef<"SysUsuarioRole", 'Int'>
   readonly sys_usuario_id: Prisma.FieldRef<"SysUsuarioRole", 'Int'>
   readonly sys_role_id: Prisma.FieldRef<"SysUsuarioRole", 'Int'>
-  readonly atl_atletica_id: Prisma.FieldRef<"SysUsuarioRole", 'Int'>
+  readonly ent_entidade_id: Prisma.FieldRef<"SysUsuarioRole", 'Int'>
   readonly ativo: Prisma.FieldRef<"SysUsuarioRole", 'Int'>
   readonly created_at: Prisma.FieldRef<"SysUsuarioRole", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"SysUsuarioRole", 'DateTime'>
@@ -1631,22 +1631,22 @@ export type SysUsuarioRoleDeleteManyArgs<ExtArgs extends runtime.Types.Extension
 }
 
 /**
- * SysUsuarioRole.atl_atletica
+ * SysUsuarioRole.ent_entidade
  */
-export type SysUsuarioRole$atl_atleticaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SysUsuarioRole$ent_entidadeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the AtlAtletica
+   * Select specific fields to fetch from the EntEntidade
    */
-  select?: Prisma.AtlAtleticaSelect<ExtArgs> | null
+  select?: Prisma.EntEntidadeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the AtlAtletica
+   * Omit specific fields from the EntEntidade
    */
-  omit?: Prisma.AtlAtleticaOmit<ExtArgs> | null
+  omit?: Prisma.EntEntidadeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.AtlAtleticaInclude<ExtArgs> | null
-  where?: Prisma.AtlAtleticaWhereInput
+  include?: Prisma.EntEntidadeInclude<ExtArgs> | null
+  where?: Prisma.EntEntidadeWhereInput
 }
 
 /**

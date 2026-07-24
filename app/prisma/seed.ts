@@ -234,72 +234,99 @@ async function main() {
 
 
     /**
-     * ATL - Tipos de cargo
+     * ENT - Tipos de entidade
      */
-    const atlCargoTipoPadrao = await upsertByCodigo(prisma.atlCargoTipo, "padrao", {
-        nome: "Padrão",
-        descricao: "Cargo padrão disponível para qualquer atlética.",
+    const entEntidadeTipoAtletica = await upsertByCodigo(prisma.entEntidadeTipo, "atletica", {
+        nome: "Atlética",
+        descricao: "Associação atlética acadêmica vinculada a uma instituição de ensino.",
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlCargoTipo, "personalizado", {
-        nome: "Personalizado",
-        descricao: "Cargo criado ou personalizado por uma atlética.",
+    await upsertByCodigo(prisma.entEntidadeTipo, "centro_academico", {
+        nome: "Centro Acadêmico",
+        descricao: "Centro acadêmico representativo de um ou mais cursos.",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.entEntidadeTipo, "liga", {
+        nome: "Liga",
+        descricao: "Liga ou organização responsável por integrar e validar entidades estudantis.",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.entEntidadeTipo, "dce", {
+        nome: "DCE",
+        descricao: "Diretório Central dos Estudantes.",
         ativo: 1,
     });
 
     /**
-     * ATL - Tipos de membro
+     * ENT - Tipos de cargo
      */
-    const atlMembroTipoDiretor = await upsertByCodigo(prisma.atlAtleticaMembroTipo, "diretor", {
+    const entCargoTipoPadrao = await upsertByCodigo(prisma.entCargoTipo, "padrao", {
+        nome: "Padrão",
+        descricao: "Cargo padrão disponível para qualquer entidade.",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.entCargoTipo, "personalizado", {
+        nome: "Personalizado",
+        descricao: "Cargo criado ou personalizado por uma entidade.",
+        ativo: 1,
+    });
+
+    /**
+     * ENT - Tipos de membro
+     */
+    const entMembroTipoDiretor = await upsertByCodigo(prisma.entEntidadeMembroTipo, "diretor", {
         nome: "Diretor",
         descricao: "Membro que faz parte da diretoria da atlética.",
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlAtleticaMembroTipo, "colaborador", {
+    await upsertByCodigo(prisma.entEntidadeMembroTipo, "colaborador", {
         nome: "Colaborador",
         descricao: "Pessoa que colabora com a atlética sem necessariamente fazer parte da diretoria.",
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlAtleticaMembroTipo, "conselheiro", {
+    await upsertByCodigo(prisma.entEntidadeMembroTipo, "conselheiro", {
         nome: "Conselheiro",
         descricao: "Pessoa vinculada ao conselho da atlética.",
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlAtleticaMembroTipo, "membro", {
+    await upsertByCodigo(prisma.entEntidadeMembroTipo, "membro", {
         nome: "Membro",
         descricao: "Membro comum vinculado à atlética.",
         ativo: 1,
     });
 
     /**
-     * ATL - Status de membro
+     * ENT - Status de membro
      */
-    const atlMembroStatusAtivo = await upsertByCodigo(prisma.atlAtleticaMembroStatus, "ativo", {
+    const entMembroStatusAtivo = await upsertByCodigo(prisma.entEntidadeMembroStatus, "ativo", {
         nome: "Ativo",
         color: "success",
         icon: "bi-check-circle",
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlAtleticaMembroStatus, "inativo", {
+    await upsertByCodigo(prisma.entEntidadeMembroStatus, "inativo", {
         nome: "Inativo",
         color: "secondary",
         icon: "bi-dash-circle",
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlAtleticaMembroStatus, "afastado", {
+    await upsertByCodigo(prisma.entEntidadeMembroStatus, "afastado", {
         nome: "Afastado",
         color: "warning",
         icon: "bi-exclamation-circle",
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlAtleticaMembroStatus, "convidado", {
+    await upsertByCodigo(prisma.entEntidadeMembroStatus, "convidado", {
         nome: "Convidado",
         color: "info",
         icon: "bi-person-plus",
@@ -338,10 +365,10 @@ async function main() {
     });
 
     /**
-     * ATL - Status de assinatura
+     * ENT - Status de assinatura
      */
     const assinaturaStatusDev = await upsertByCodigo(
-        prisma.atlAtleticaAssinaturaStatus,
+        prisma.entEntidadeAssinaturaStatus,
         "dev",
         {
             nome: "Dev",
@@ -351,28 +378,28 @@ async function main() {
         }
     );
 
-    await upsertByCodigo(prisma.atlAtleticaAssinaturaStatus, "ativa", {
+    await upsertByCodigo(prisma.entEntidadeAssinaturaStatus, "ativa", {
         nome: "Ativa",
         color: "success",
         icon: "bi-check-circle",
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlAtleticaAssinaturaStatus, "inativa", {
+    await upsertByCodigo(prisma.entEntidadeAssinaturaStatus, "inativa", {
         nome: "Inativa",
         color: "secondary",
         icon: "bi-dash-circle",
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlAtleticaAssinaturaStatus, "expirada", {
+    await upsertByCodigo(prisma.entEntidadeAssinaturaStatus, "expirada", {
         nome: "Expirada",
         color: "warning",
         icon: "bi-clock-history",
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlAtleticaAssinaturaStatus, "cancelada", {
+    await upsertByCodigo(prisma.entEntidadeAssinaturaStatus, "cancelada", {
         nome: "Cancelada",
         color: "danger",
         icon: "bi-x-circle",
@@ -668,13 +695,13 @@ async function main() {
             descricao: "Permite analisar documentos enviados em solicitações.",
         },
         {
-            codigo: "atletica.visualizar",
+            codigo: "entidade.visualizar",
             nome: "Visualizar atlética",
             modulo: "atletica",
             descricao: "Permite visualizar dados da atlética.",
         },
         {
-            codigo: "atletica.editar",
+            codigo: "entidade.editar",
             nome: "Editar atlética",
             modulo: "atletica",
             descricao: "Permite editar dados principais da atlética.",
@@ -860,8 +887,8 @@ async function main() {
     }
 
     const permissoesPresidenciaCodigos = [
-        "atletica.visualizar",
-        "atletica.editar",
+        "entidade.visualizar",
+        "entidade.editar",
         "tema.visualizar",
         "tema.editar",
         "membro.visualizar",
@@ -966,7 +993,7 @@ async function main() {
     }
 
     /**
-     * ATL - Cargos padrão
+     * ENT - Cargos padrão
      */
     const cargosPadrao = [
         {
@@ -1014,21 +1041,21 @@ async function main() {
     const cargosCriados = [];
 
     for (const cargo of cargosPadrao) {
-        const cargoExistente = await prisma.atlCargo.findFirst({
+        const cargoExistente = await prisma.entCargo.findFirst({
             where: {
                 codigo: cargo.codigo,
-                atl_atletica_id: null,
+                ent_entidade_id: null,
             },
         });
 
         if (cargoExistente) {
             cargosCriados.push(
-                await prisma.atlCargo.update({
+                await prisma.entCargo.update({
                     where: { id: cargoExistente.id },
                     data: {
                         nome: cargo.nome,
                         descricao: cargo.descricao,
-                        atl_cargo_tipo_id: atlCargoTipoPadrao.id,
+                        ent_cargo_tipo_id: entCargoTipoPadrao.id,
                         ativo: 1,
                         updated_at: now(),
                     },
@@ -1036,13 +1063,13 @@ async function main() {
             );
         } else {
             cargosCriados.push(
-                await prisma.atlCargo.create({
+                await prisma.entCargo.create({
                     data: {
                         codigo: cargo.codigo,
                         nome: cargo.nome,
                         descricao: cargo.descricao,
-                        atl_cargo_tipo_id: atlCargoTipoPadrao.id,
-                        atl_atletica_id: null,
+                        ent_cargo_tipo_id: entCargoTipoPadrao.id,
+                        ent_entidade_id: null,
                         ativo: 1,
                         created_at: now(),
                         updated_at: now(),
@@ -1072,6 +1099,85 @@ async function main() {
             },
         });
     }
+
+    /**
+     * EDU - Polos iniciais da UNIVALI
+     */
+    const polosBase = [
+        { codigo: "itajai", nome: "Itajaí", cidade: "Itajaí", estado: "SC" },
+        { codigo: "balneario_camboriu", nome: "Balneário Camboriú", cidade: "Balneário Camboriú", estado: "SC" },
+        { codigo: "florianopolis", nome: "Florianópolis", cidade: "Florianópolis", estado: "SC" },
+        { codigo: "kobrasol_sao_jose", nome: "Kobrasol / São José", cidade: "São José", estado: "SC" },
+    ];
+
+    const polosCriados = [];
+
+    for (const poloBase of polosBase) {
+        const poloExistente = await prisma.eduPolo.findFirst({
+            where: {
+                edu_instituicao_id: instituicao.id,
+                codigo: poloBase.codigo,
+            },
+        });
+
+        if (poloExistente) {
+            polosCriados.push(
+                await prisma.eduPolo.update({
+                    where: { id: poloExistente.id },
+                    data: {
+                        nome: poloBase.nome,
+                        cidade: poloBase.cidade,
+                        estado: poloBase.estado,
+                        ativo: 1,
+                        updated_at: now(),
+                    },
+                }),
+            );
+        } else {
+            polosCriados.push(
+                await prisma.eduPolo.create({
+                    data: {
+                        edu_instituicao_id: instituicao.id,
+                        codigo: poloBase.codigo,
+                        nome: poloBase.nome,
+                        cidade: poloBase.cidade,
+                        estado: poloBase.estado,
+                        ativo: 1,
+                        created_at: now(),
+                        updated_at: now(),
+                    },
+                }),
+            );
+        }
+    }
+
+    const poloItajai = polosCriados.find((polo) => polo.codigo === "itajai");
+
+    if (!poloItajai) {
+        throw new Error("Polo de Itajaí não foi criado.");
+    }
+
+    await prisma.sysUsuarioPolo.upsert({
+        where: {
+            sys_usuario_id_edu_polo_id: {
+                sys_usuario_id: usuarioDev.id,
+                edu_polo_id: poloItajai.id,
+            },
+        },
+        update: {
+            principal: 1,
+            ativo: 1,
+            updated_at: now(),
+        },
+        create: {
+            sys_usuario_id: usuarioDev.id,
+            edu_polo_id: poloItajai.id,
+            principal: 1,
+            ativo: 1,
+            created_at: now(),
+            updated_at: now(),
+        },
+    });
 
     /**
      * EDU - Cursos iniciais
@@ -1263,9 +1369,9 @@ async function main() {
     }
 
     /**
-     * ATL - Status da atlética
+     * ENT - Status da atlética
      */
-    await upsertByCodigo(prisma.atlAtleticaStatus, "rascunho", {
+    await upsertByCodigo(prisma.entEntidadeStatus, "rascunho", {
         nome: "Rascunho",
         descricao: "Atlética criada como rascunho, ainda não enviada para validação.",
         color: "secondary",
@@ -1273,7 +1379,7 @@ async function main() {
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlAtleticaStatus, "pendente_validacao", {
+    await upsertByCodigo(prisma.entEntidadeStatus, "pendente_validacao", {
         nome: "Pendente de validação",
         descricao: "Atlética enviada para análise e validação.",
         color: "warning",
@@ -1281,7 +1387,7 @@ async function main() {
         ativo: 1,
     });
 
-    const atlAtleticaStatusAtiva = await upsertByCodigo(prisma.atlAtleticaStatus, "ativa", {
+    const entEntidadeStatusAtiva = await upsertByCodigo(prisma.entEntidadeStatus, "ativa", {
         nome: "Ativa",
         descricao: "Atlética validada e liberada para uso.",
         color: "success",
@@ -1289,7 +1395,7 @@ async function main() {
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlAtleticaStatus, "irregular", {
+    await upsertByCodigo(prisma.entEntidadeStatus, "irregular", {
         nome: "Irregular",
         descricao: "Atlética existente, mas com pendência documental, institucional ou administrativa.",
         color: "warning",
@@ -1297,7 +1403,7 @@ async function main() {
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlAtleticaStatus, "suspensa", {
+    await upsertByCodigo(prisma.entEntidadeStatus, "suspensa", {
         nome: "Suspensa",
         descricao: "Atlética temporariamente bloqueada por decisão administrativa.",
         color: "danger",
@@ -1305,7 +1411,7 @@ async function main() {
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlAtleticaStatus, "recusada", {
+    await upsertByCodigo(prisma.entEntidadeStatus, "recusada", {
         nome: "Recusada",
         descricao: "Solicitação de criação ou validação da atlética foi recusada.",
         color: "danger",
@@ -1313,7 +1419,7 @@ async function main() {
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlAtleticaStatus, "inativa", {
+    await upsertByCodigo(prisma.entEntidadeStatus, "inativa", {
         nome: "Inativa",
         descricao: "Atlética desativada ou encerrada no sistema.",
         color: "secondary",
@@ -1322,9 +1428,9 @@ async function main() {
     });
 
     /**
-     * ATL - Status da gestão da atlética
+     * ENT - Status da gestão da atlética
      */
-    await upsertByCodigo(prisma.atlAtleticaGestaoStatus, "pendente_validacao", {
+    await upsertByCodigo(prisma.entEntidadeGestaoStatus, "pendente_validacao", {
         nome: "Pendente de validação",
         descricao: "Gestão aguardando validação documental ou institucional.",
         color: "warning",
@@ -1332,8 +1438,8 @@ async function main() {
         ativo: 1,
     });
 
-    const atlAtleticaGestaoStatusAtiva = await upsertByCodigo(
-        prisma.atlAtleticaGestaoStatus,
+    const entEntidadeGestaoStatusAtiva = await upsertByCodigo(
+        prisma.entEntidadeGestaoStatus,
         "ativa",
         {
             nome: "Ativa",
@@ -1344,7 +1450,7 @@ async function main() {
         },
     );
 
-    await upsertByCodigo(prisma.atlAtleticaGestaoStatus, "recusada", {
+    await upsertByCodigo(prisma.entEntidadeGestaoStatus, "recusada", {
         nome: "Recusada",
         descricao: "Gestão recusada na validação.",
         color: "danger",
@@ -1352,7 +1458,7 @@ async function main() {
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlAtleticaGestaoStatus, "encerrada", {
+    await upsertByCodigo(prisma.entEntidadeGestaoStatus, "encerrada", {
         nome: "Encerrada",
         descricao: "Gestão finalizada normalmente.",
         color: "secondary",
@@ -1360,7 +1466,7 @@ async function main() {
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlAtleticaGestaoStatus, "expirada", {
+    await upsertByCodigo(prisma.entEntidadeGestaoStatus, "expirada", {
         nome: "Expirada",
         descricao: "Gestão passou do período previsto de mandato.",
         color: "warning",
@@ -1368,7 +1474,7 @@ async function main() {
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.atlAtleticaGestaoStatus, "substituida", {
+    await upsertByCodigo(prisma.entEntidadeGestaoStatus, "substituida", {
         nome: "Substituída",
         descricao: "Gestão substituída por nova diretoria ou nova gestão.",
         color: "info",
@@ -1377,11 +1483,12 @@ async function main() {
     });
 
     /**
-     * ATL - Atlética inicial de teste
+     * ENT - Atlética inicial de teste
      */
-    const atletica = await prisma.atlAtletica.upsert({
+    const entidade = await prisma.entEntidade.upsert({
         where: { slug: "computaria" },
         update: {
+            ent_entidade_tipo_id: entEntidadeTipoAtletica.id,
             nome: "Associação Atlética Acadêmica dos Cursos de Computação",
             sigla: "AAACCU",
             apelido: "Computaria",
@@ -1390,10 +1497,11 @@ async function main() {
             edu_instituicao_id: instituicao.id,
             ativo: 1,
             updated_at: now(),
-            atl_atletica_status_id: atlAtleticaStatusAtiva.id,
+            ent_entidade_status_id: entEntidadeStatusAtiva.id,
             criado_por_sys_usuario_id: usuarioDev.id,
         },
         create: {
+            ent_entidade_tipo_id: entEntidadeTipoAtletica.id,
             edu_instituicao_id: instituicao.id,
             nome: "Associação Atlética Acadêmica dos Cursos de Computação",
             sigla: "AAACCU",
@@ -1404,19 +1512,46 @@ async function main() {
             ativo: 1,
             created_at: now(),
             updated_at: now(),
-            atl_atletica_status_id: atlAtleticaStatusAtiva.id,
+            ent_entidade_status_id: entEntidadeStatusAtiva.id,
             criado_por_sys_usuario_id: usuarioDev.id,
         },
     });
 
+    await prisma.entEntidadePolo.upsert({
+        where: {
+            ent_entidade_id_edu_polo_id: {
+                ent_entidade_id: entidade.id,
+                edu_polo_id: poloItajai.id,
+            },
+        },
+        update: {
+            principal: 1,
+            ativo: 1,
+            updated_at: now(),
+        },
+        create: {
+            ent_entidade_id: entidade.id,
+            edu_polo_id: poloItajai.id,
+            principal: 1,
+            ativo: 1,
+            created_at: now(),
+            updated_at: now(),
+        },
+    });
+
     /**
-     * ATL - Vincular cursos à atlética
+     * ENT - Vincular cursos à atlética
      */
-    for (const [index, curso] of cursosCriados.entries()) {
-        await prisma.atlAtleticaCurso.upsert({
+    const cursosComputariaCodigos = ["ADS", "CC", "ECOMP", "ESW", "IA", "SISNET"];
+    const cursosComputaria = cursosCriados.filter((curso) =>
+        cursosComputariaCodigos.includes(curso.abreviacao),
+    );
+
+    for (const [index, curso] of cursosComputaria.entries()) {
+        await prisma.entEntidadeCurso.upsert({
             where: {
-                atl_atletica_id_edu_curso_id: {
-                    atl_atletica_id: atletica.id,
+                ent_entidade_id_edu_curso_id: {
+                    ent_entidade_id: entidade.id,
                     edu_curso_id: curso.id,
                 },
             },
@@ -1426,7 +1561,7 @@ async function main() {
                 updated_at: now(),
             },
             create: {
-                atl_atletica_id: atletica.id,
+                ent_entidade_id: entidade.id,
                 edu_curso_id: curso.id,
                 principal: index === 0 ? 1 : 0,
                 ativo: 1,
@@ -1437,14 +1572,14 @@ async function main() {
     }
 
     /**
-     * ATL - Ativar cargos padrão para a atlética
+     * ENT - Ativar cargos padrão para a atlética
      */
     for (const [index, cargo] of cargosCriados.entries()) {
-        await prisma.atlAtleticaCargo.upsert({
+        await prisma.entEntidadeCargo.upsert({
             where: {
-                atl_atletica_id_atl_cargo_id: {
-                    atl_atletica_id: atletica.id,
-                    atl_cargo_id: cargo.id,
+                ent_entidade_id_ent_cargo_id: {
+                    ent_entidade_id: entidade.id,
+                    ent_cargo_id: cargo.id,
                 },
             },
             update: {
@@ -1453,8 +1588,8 @@ async function main() {
                 updated_at: now(),
             },
             create: {
-                atl_atletica_id: atletica.id,
-                atl_cargo_id: cargo.id,
+                ent_entidade_id: entidade.id,
+                ent_cargo_id: cargo.id,
                 ordem: index + 1,
                 ativo: 1,
                 created_at: now(),
@@ -1464,17 +1599,17 @@ async function main() {
     }
 
     /**
-     * ATL - Gestão inicial da atlética
+     * ENT - Gestão inicial da atlética
      */
-    await prisma.atlAtleticaGestao.upsert({
+    await prisma.entEntidadeGestao.upsert({
         where: {
-            atl_atletica_id_nome: {
-                atl_atletica_id: atletica.id,
+            ent_entidade_id_nome: {
+                ent_entidade_id: entidade.id,
                 nome: "Gestão 2025–2027",
             },
         },
         update: {
-            atl_atletica_gestao_status_id: atlAtleticaGestaoStatusAtiva.id,
+            ent_entidade_gestao_status_id: entEntidadeGestaoStatusAtiva.id,
             inicio_at: new Date("2025-05-09T00:00:00.000Z"),
             fim_at: new Date("2027-05-09T00:00:00.000Z"),
             observacao: "Gestão inicial criada para ambiente de desenvolvimento.",
@@ -1482,8 +1617,8 @@ async function main() {
             updated_at: now(),
         },
         create: {
-            atl_atletica_id: atletica.id,
-            atl_atletica_gestao_status_id: atlAtleticaGestaoStatusAtiva.id,
+            ent_entidade_id: entidade.id,
+            ent_entidade_gestao_status_id: entEntidadeGestaoStatusAtiva.id,
             nome: "Gestão 2025–2027",
             inicio_at: new Date("2025-05-09T00:00:00.000Z"),
             fim_at: new Date("2027-05-09T00:00:00.000Z"),
@@ -1495,10 +1630,10 @@ async function main() {
     });
 
     /**
-     * ATL - Tema inicial da atlética
+     * ENT - Tema inicial da atlética
      */
-    await prisma.atlAtleticaTema.upsert({
-        where: { atl_atletica_id: atletica.id },
+    await prisma.entEntidadeTema.upsert({
+        where: { ent_entidade_id: entidade.id },
         update: {
             cor_primaria: "#39FF14",
             cor_secundaria: "#131313",
@@ -1508,7 +1643,7 @@ async function main() {
             updated_at: now(),
         },
         create: {
-            atl_atletica_id: atletica.id,
+            ent_entidade_id: entidade.id,
             cor_primaria: "#39FF14",
             cor_secundaria: "#131313",
             cor_fundo: "#FFFFFF",
@@ -1520,12 +1655,12 @@ async function main() {
     });
 
     /**
-     * ATL - Regimento inicial
+     * ENT - Regimento inicial
      */
-    await prisma.atlAtleticaRegimento.upsert({
+    await prisma.entEntidadeRegimento.upsert({
         where: {
-            atl_atletica_id_versao: {
-                atl_atletica_id: atletica.id,
+            ent_entidade_id_versao: {
+                ent_entidade_id: entidade.id,
                 versao: "1.0",
             },
         },
@@ -1537,7 +1672,7 @@ async function main() {
             updated_at: now(),
         },
         create: {
-            atl_atletica_id: atletica.id,
+            ent_entidade_id: entidade.id,
             titulo: "Regimento interno inicial",
             versao: "1.0",
             conteudo:
@@ -1578,31 +1713,31 @@ async function main() {
     });
 
     /**
-     * ATL - Assinatura DEV da atlética
+     * ENT - Assinatura DEV da atlética
      */
-    const assinaturaExistente = await prisma.atlAtleticaAssinatura.findFirst({
+    const assinaturaExistente = await prisma.entEntidadeAssinatura.findFirst({
         where: {
-            atl_atletica_id: atletica.id,
+            ent_entidade_id: entidade.id,
             sys_assinatura_plano_id: planoDev.id,
             deleted_at: null,
         },
     });
 
     if (assinaturaExistente) {
-        await prisma.atlAtleticaAssinatura.update({
+        await prisma.entEntidadeAssinatura.update({
             where: { id: assinaturaExistente.id },
             data: {
-                atl_atletica_assinatura_status_id: assinaturaStatusDev.id,
+                ent_entidade_assinatura_status_id: assinaturaStatusDev.id,
                 ativo: 1,
                 updated_at: now(),
             },
         });
     } else {
-        await prisma.atlAtleticaAssinatura.create({
+        await prisma.entEntidadeAssinatura.create({
             data: {
-                atl_atletica_id: atletica.id,
+                ent_entidade_id: entidade.id,
                 sys_assinatura_plano_id: planoDev.id,
-                atl_atletica_assinatura_status_id: assinaturaStatusDev.id,
+                ent_entidade_assinatura_status_id: assinaturaStatusDev.id,
                 inicio_at: now(),
                 observacao: "Assinatura DEV criada para testes iniciais.",
                 ativo: 1,
@@ -1613,26 +1748,26 @@ async function main() {
     }
 
     /**
-     * ATL - Vincular usuário dev como membro da atlética
+     * ENT - Vincular usuário dev como membro da atlética
      */
-    const membroDev = await prisma.atlAtleticaMembro.upsert({
+    const membroDev = await prisma.entEntidadeMembro.upsert({
         where: {
-            atl_atletica_id_sys_usuario_id: {
-                atl_atletica_id: atletica.id,
+            ent_entidade_id_sys_usuario_id: {
+                ent_entidade_id: entidade.id,
                 sys_usuario_id: usuarioDev.id,
             },
         },
         update: {
-            atl_atletica_membro_tipo_id: atlMembroTipoDiretor.id,
-            atl_atletica_membro_status_id: atlMembroStatusAtivo.id,
+            ent_entidade_membro_tipo_id: entMembroTipoDiretor.id,
+            ent_entidade_membro_status_id: entMembroStatusAtivo.id,
             ativo: 1,
             updated_at: now(),
         },
         create: {
-            atl_atletica_id: atletica.id,
+            ent_entidade_id: entidade.id,
             sys_usuario_id: usuarioDev.id,
-            atl_atletica_membro_tipo_id: atlMembroTipoDiretor.id,
-            atl_atletica_membro_status_id: atlMembroStatusAtivo.id,
+            ent_entidade_membro_tipo_id: entMembroTipoDiretor.id,
+            ent_entidade_membro_status_id: entMembroStatusAtivo.id,
             entrou_at: now(),
             ativo: 1,
             created_at: now(),
@@ -1641,25 +1776,25 @@ async function main() {
     });
 
     /**
-     * ATL - Dar cargo de presidente para usuário dev
+     * ENT - Dar cargo de presidente para usuário dev
      */
     const cargoPresidente = cargosCriados.find((cargo) => cargo.codigo === "presidente");
 
     if (cargoPresidente) {
-        const cargoAtualExistente = await prisma.atlAtleticaMembroCargo.findFirst({
+        const cargoAtualExistente = await prisma.entEntidadeMembroCargo.findFirst({
             where: {
-                atl_atletica_membro_id: membroDev.id,
-                atl_cargo_id: cargoPresidente.id,
+                ent_entidade_membro_id: membroDev.id,
+                ent_cargo_id: cargoPresidente.id,
                 atual: 1,
                 deleted_at: null,
             },
         });
 
         if (!cargoAtualExistente) {
-            await prisma.atlAtleticaMembroCargo.create({
+            await prisma.entEntidadeMembroCargo.create({
                 data: {
-                    atl_atletica_membro_id: membroDev.id,
-                    atl_cargo_id: cargoPresidente.id,
+                    ent_entidade_membro_id: membroDev.id,
+                    ent_cargo_id: cargoPresidente.id,
                     inicio_at: now(),
                     atual: 1,
                     created_at: now(),
@@ -1674,10 +1809,10 @@ async function main() {
      */
     await prisma.sysUsuarioRole.upsert({
         where: {
-            sys_usuario_id_sys_role_id_atl_atletica_id: {
+            sys_usuario_id_sys_role_id_ent_entidade_id: {
                 sys_usuario_id: usuarioDev.id,
                 sys_role_id: roleAdminAtletica.id,
-                atl_atletica_id: atletica.id,
+                ent_entidade_id: entidade.id,
             },
         },
         update: {
@@ -1687,7 +1822,7 @@ async function main() {
         create: {
             sys_usuario_id: usuarioDev.id,
             sys_role_id: roleAdminAtletica.id,
-            atl_atletica_id: atletica.id,
+            ent_entidade_id: entidade.id,
             ativo: 1,
             created_at: now(),
             updated_at: now(),
@@ -1766,12 +1901,12 @@ async function main() {
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.sysArquivoEntidadeTipo, "atl_atletica", {
+    await upsertByCodigo(prisma.sysArquivoEntidadeTipo, "ent_entidade", {
         nome: "Atlética",
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.sysArquivoEntidadeTipo, "atl_atletica_tema", {
+    await upsertByCodigo(prisma.sysArquivoEntidadeTipo, "ent_entidade_tema", {
         nome: "Tema da atlética",
         ativo: 1,
     });

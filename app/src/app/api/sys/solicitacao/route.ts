@@ -51,10 +51,13 @@ async function validarSlugCriarAtletica(body: any) {
         );
     }
 
-    const slugExistente = await prisma.atlAtletica.findFirst({
+    const slugExistente = await prisma.entEntidade.findFirst({
         where: {
             slug,
             deleted_at: null,
+            ent_entidade_tipo: {
+                codigo: "atletica",
+            },
         },
         select: {
             id: true,

@@ -13,11 +13,11 @@ import {
 
 const navItems = [
     { label: "Dashboard", icon: Home, href: "/" },
-    { label: "Atléticas", icon: Shield, href: "/atl/atletica" },
+    { label: "Atléticas", icon: Shield, href: "/ent/atletica" },
     { label: "Parceiros", icon: Store, href: "/parceiros" },
     { label: "Assinaturas", icon: CreditCard, href: "/assinaturas" },
     { label: "Organizações", icon: Building2, href: "/organizacoes" },
-    { label: "Configurações", icon: Settings, href: "/atl/tema" },
+    { label: "Configurações", icon: Settings, href: "/ent/atletica/tema" },
 ];
 
 function isActiveRoute(pathname: string, href: string) {

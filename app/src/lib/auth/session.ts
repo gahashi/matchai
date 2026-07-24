@@ -48,13 +48,13 @@ export async function getAuthSession(
             avatar_url: true,
             ativo: true,
             deleted_at: true,
-            atl_atletica_membro: {
+            ent_entidade_membro: {
                 where: {
                     ativo: 1,
                     deleted_at: null,
                 },
                 select: {
-                    atl_atletica_id: true,
+                    ent_entidade_id: true,
                 },
                 take: 1,
             },
@@ -73,7 +73,7 @@ export async function getAuthSession(
             email: usuario.email,
             avatar_url: usuario.avatar_url,
         },
-        atl_atletica_id:
-            usuario.atl_atletica_membro[0]?.atl_atletica_id ?? null,
+        ent_entidade_id:
+            usuario.ent_entidade_membro[0]?.ent_entidade_id ?? null,
     };
 }

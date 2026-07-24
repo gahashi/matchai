@@ -293,7 +293,7 @@ export type SysAssinaturaPlanoWhereInput = {
   updated_at?: Prisma.DateTimeNullableFilter<"SysAssinaturaPlano"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableFilter<"SysAssinaturaPlano"> | Date | string | null
   sys_assinatura_plano_periodicidade?: Prisma.XOR<Prisma.SysAssinaturaPlanoPeriodicidadeScalarRelationFilter, Prisma.SysAssinaturaPlanoPeriodicidadeWhereInput>
-  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaListRelationFilter
+  ent_entidade_assinatura?: Prisma.EntEntidadeAssinaturaListRelationFilter
 }
 
 export type SysAssinaturaPlanoOrderByWithRelationInput = {
@@ -310,7 +310,7 @@ export type SysAssinaturaPlanoOrderByWithRelationInput = {
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   sys_assinatura_plano_periodicidade?: Prisma.SysAssinaturaPlanoPeriodicidadeOrderByWithRelationInput
-  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaOrderByRelationAggregateInput
+  ent_entidade_assinatura?: Prisma.EntEntidadeAssinaturaOrderByRelationAggregateInput
   _relevance?: Prisma.SysAssinaturaPlanoOrderByRelevanceInput
 }
 
@@ -331,7 +331,7 @@ export type SysAssinaturaPlanoWhereUniqueInput = Prisma.AtLeast<{
   updated_at?: Prisma.DateTimeNullableFilter<"SysAssinaturaPlano"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableFilter<"SysAssinaturaPlano"> | Date | string | null
   sys_assinatura_plano_periodicidade?: Prisma.XOR<Prisma.SysAssinaturaPlanoPeriodicidadeScalarRelationFilter, Prisma.SysAssinaturaPlanoPeriodicidadeWhereInput>
-  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaListRelationFilter
+  ent_entidade_assinatura?: Prisma.EntEntidadeAssinaturaListRelationFilter
 }, "id" | "codigo">
 
 export type SysAssinaturaPlanoOrderByWithAggregationInput = {
@@ -384,7 +384,7 @@ export type SysAssinaturaPlanoCreateInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   sys_assinatura_plano_periodicidade: Prisma.SysAssinaturaPlanoPeriodicidadeCreateNestedOneWithoutSys_assinatura_planoInput
-  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaCreateNestedManyWithoutSys_assinatura_planoInput
+  ent_entidade_assinatura?: Prisma.EntEntidadeAssinaturaCreateNestedManyWithoutSys_assinatura_planoInput
 }
 
 export type SysAssinaturaPlanoUncheckedCreateInput = {
@@ -400,7 +400,7 @@ export type SysAssinaturaPlanoUncheckedCreateInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
-  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaUncheckedCreateNestedManyWithoutSys_assinatura_planoInput
+  ent_entidade_assinatura?: Prisma.EntEntidadeAssinaturaUncheckedCreateNestedManyWithoutSys_assinatura_planoInput
 }
 
 export type SysAssinaturaPlanoUpdateInput = {
@@ -415,7 +415,7 @@ export type SysAssinaturaPlanoUpdateInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_assinatura_plano_periodicidade?: Prisma.SysAssinaturaPlanoPeriodicidadeUpdateOneRequiredWithoutSys_assinatura_planoNestedInput
-  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaUpdateManyWithoutSys_assinatura_planoNestedInput
+  ent_entidade_assinatura?: Prisma.EntEntidadeAssinaturaUpdateManyWithoutSys_assinatura_planoNestedInput
 }
 
 export type SysAssinaturaPlanoUncheckedUpdateInput = {
@@ -431,7 +431,7 @@ export type SysAssinaturaPlanoUncheckedUpdateInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaUncheckedUpdateManyWithoutSys_assinatura_planoNestedInput
+  ent_entidade_assinatura?: Prisma.EntEntidadeAssinaturaUncheckedUpdateManyWithoutSys_assinatura_planoNestedInput
 }
 
 export type SysAssinaturaPlanoCreateManyInput = {
@@ -611,18 +611,18 @@ export type DecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
-export type SysAssinaturaPlanoCreateNestedOneWithoutAtl_atletica_assinaturaInput = {
-  create?: Prisma.XOR<Prisma.SysAssinaturaPlanoCreateWithoutAtl_atletica_assinaturaInput, Prisma.SysAssinaturaPlanoUncheckedCreateWithoutAtl_atletica_assinaturaInput>
-  connectOrCreate?: Prisma.SysAssinaturaPlanoCreateOrConnectWithoutAtl_atletica_assinaturaInput
+export type SysAssinaturaPlanoCreateNestedOneWithoutEnt_entidade_assinaturaInput = {
+  create?: Prisma.XOR<Prisma.SysAssinaturaPlanoCreateWithoutEnt_entidade_assinaturaInput, Prisma.SysAssinaturaPlanoUncheckedCreateWithoutEnt_entidade_assinaturaInput>
+  connectOrCreate?: Prisma.SysAssinaturaPlanoCreateOrConnectWithoutEnt_entidade_assinaturaInput
   connect?: Prisma.SysAssinaturaPlanoWhereUniqueInput
 }
 
-export type SysAssinaturaPlanoUpdateOneRequiredWithoutAtl_atletica_assinaturaNestedInput = {
-  create?: Prisma.XOR<Prisma.SysAssinaturaPlanoCreateWithoutAtl_atletica_assinaturaInput, Prisma.SysAssinaturaPlanoUncheckedCreateWithoutAtl_atletica_assinaturaInput>
-  connectOrCreate?: Prisma.SysAssinaturaPlanoCreateOrConnectWithoutAtl_atletica_assinaturaInput
-  upsert?: Prisma.SysAssinaturaPlanoUpsertWithoutAtl_atletica_assinaturaInput
+export type SysAssinaturaPlanoUpdateOneRequiredWithoutEnt_entidade_assinaturaNestedInput = {
+  create?: Prisma.XOR<Prisma.SysAssinaturaPlanoCreateWithoutEnt_entidade_assinaturaInput, Prisma.SysAssinaturaPlanoUncheckedCreateWithoutEnt_entidade_assinaturaInput>
+  connectOrCreate?: Prisma.SysAssinaturaPlanoCreateOrConnectWithoutEnt_entidade_assinaturaInput
+  upsert?: Prisma.SysAssinaturaPlanoUpsertWithoutEnt_entidade_assinaturaInput
   connect?: Prisma.SysAssinaturaPlanoWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.SysAssinaturaPlanoUpdateToOneWithWhereWithoutAtl_atletica_assinaturaInput, Prisma.SysAssinaturaPlanoUpdateWithoutAtl_atletica_assinaturaInput>, Prisma.SysAssinaturaPlanoUncheckedUpdateWithoutAtl_atletica_assinaturaInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SysAssinaturaPlanoUpdateToOneWithWhereWithoutEnt_entidade_assinaturaInput, Prisma.SysAssinaturaPlanoUpdateWithoutEnt_entidade_assinaturaInput>, Prisma.SysAssinaturaPlanoUncheckedUpdateWithoutEnt_entidade_assinaturaInput>
 }
 
 export type SysAssinaturaPlanoCreateWithoutSys_assinatura_plano_periodicidadeInput = {
@@ -636,7 +636,7 @@ export type SysAssinaturaPlanoCreateWithoutSys_assinatura_plano_periodicidadeInp
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
-  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaCreateNestedManyWithoutSys_assinatura_planoInput
+  ent_entidade_assinatura?: Prisma.EntEntidadeAssinaturaCreateNestedManyWithoutSys_assinatura_planoInput
 }
 
 export type SysAssinaturaPlanoUncheckedCreateWithoutSys_assinatura_plano_periodicidadeInput = {
@@ -651,7 +651,7 @@ export type SysAssinaturaPlanoUncheckedCreateWithoutSys_assinatura_plano_periodi
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
-  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaUncheckedCreateNestedManyWithoutSys_assinatura_planoInput
+  ent_entidade_assinatura?: Prisma.EntEntidadeAssinaturaUncheckedCreateNestedManyWithoutSys_assinatura_planoInput
 }
 
 export type SysAssinaturaPlanoCreateOrConnectWithoutSys_assinatura_plano_periodicidadeInput = {
@@ -698,7 +698,7 @@ export type SysAssinaturaPlanoScalarWhereInput = {
   deleted_at?: Prisma.DateTimeNullableFilter<"SysAssinaturaPlano"> | Date | string | null
 }
 
-export type SysAssinaturaPlanoCreateWithoutAtl_atletica_assinaturaInput = {
+export type SysAssinaturaPlanoCreateWithoutEnt_entidade_assinaturaInput = {
   nome: string
   codigo: string
   descricao?: string | null
@@ -712,7 +712,7 @@ export type SysAssinaturaPlanoCreateWithoutAtl_atletica_assinaturaInput = {
   sys_assinatura_plano_periodicidade: Prisma.SysAssinaturaPlanoPeriodicidadeCreateNestedOneWithoutSys_assinatura_planoInput
 }
 
-export type SysAssinaturaPlanoUncheckedCreateWithoutAtl_atletica_assinaturaInput = {
+export type SysAssinaturaPlanoUncheckedCreateWithoutEnt_entidade_assinaturaInput = {
   id?: number
   nome: string
   codigo: string
@@ -727,23 +727,23 @@ export type SysAssinaturaPlanoUncheckedCreateWithoutAtl_atletica_assinaturaInput
   deleted_at?: Date | string | null
 }
 
-export type SysAssinaturaPlanoCreateOrConnectWithoutAtl_atletica_assinaturaInput = {
+export type SysAssinaturaPlanoCreateOrConnectWithoutEnt_entidade_assinaturaInput = {
   where: Prisma.SysAssinaturaPlanoWhereUniqueInput
-  create: Prisma.XOR<Prisma.SysAssinaturaPlanoCreateWithoutAtl_atletica_assinaturaInput, Prisma.SysAssinaturaPlanoUncheckedCreateWithoutAtl_atletica_assinaturaInput>
+  create: Prisma.XOR<Prisma.SysAssinaturaPlanoCreateWithoutEnt_entidade_assinaturaInput, Prisma.SysAssinaturaPlanoUncheckedCreateWithoutEnt_entidade_assinaturaInput>
 }
 
-export type SysAssinaturaPlanoUpsertWithoutAtl_atletica_assinaturaInput = {
-  update: Prisma.XOR<Prisma.SysAssinaturaPlanoUpdateWithoutAtl_atletica_assinaturaInput, Prisma.SysAssinaturaPlanoUncheckedUpdateWithoutAtl_atletica_assinaturaInput>
-  create: Prisma.XOR<Prisma.SysAssinaturaPlanoCreateWithoutAtl_atletica_assinaturaInput, Prisma.SysAssinaturaPlanoUncheckedCreateWithoutAtl_atletica_assinaturaInput>
+export type SysAssinaturaPlanoUpsertWithoutEnt_entidade_assinaturaInput = {
+  update: Prisma.XOR<Prisma.SysAssinaturaPlanoUpdateWithoutEnt_entidade_assinaturaInput, Prisma.SysAssinaturaPlanoUncheckedUpdateWithoutEnt_entidade_assinaturaInput>
+  create: Prisma.XOR<Prisma.SysAssinaturaPlanoCreateWithoutEnt_entidade_assinaturaInput, Prisma.SysAssinaturaPlanoUncheckedCreateWithoutEnt_entidade_assinaturaInput>
   where?: Prisma.SysAssinaturaPlanoWhereInput
 }
 
-export type SysAssinaturaPlanoUpdateToOneWithWhereWithoutAtl_atletica_assinaturaInput = {
+export type SysAssinaturaPlanoUpdateToOneWithWhereWithoutEnt_entidade_assinaturaInput = {
   where?: Prisma.SysAssinaturaPlanoWhereInput
-  data: Prisma.XOR<Prisma.SysAssinaturaPlanoUpdateWithoutAtl_atletica_assinaturaInput, Prisma.SysAssinaturaPlanoUncheckedUpdateWithoutAtl_atletica_assinaturaInput>
+  data: Prisma.XOR<Prisma.SysAssinaturaPlanoUpdateWithoutEnt_entidade_assinaturaInput, Prisma.SysAssinaturaPlanoUncheckedUpdateWithoutEnt_entidade_assinaturaInput>
 }
 
-export type SysAssinaturaPlanoUpdateWithoutAtl_atletica_assinaturaInput = {
+export type SysAssinaturaPlanoUpdateWithoutEnt_entidade_assinaturaInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -757,7 +757,7 @@ export type SysAssinaturaPlanoUpdateWithoutAtl_atletica_assinaturaInput = {
   sys_assinatura_plano_periodicidade?: Prisma.SysAssinaturaPlanoPeriodicidadeUpdateOneRequiredWithoutSys_assinatura_planoNestedInput
 }
 
-export type SysAssinaturaPlanoUncheckedUpdateWithoutAtl_atletica_assinaturaInput = {
+export type SysAssinaturaPlanoUncheckedUpdateWithoutEnt_entidade_assinaturaInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
@@ -797,7 +797,7 @@ export type SysAssinaturaPlanoUpdateWithoutSys_assinatura_plano_periodicidadeInp
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaUpdateManyWithoutSys_assinatura_planoNestedInput
+  ent_entidade_assinatura?: Prisma.EntEntidadeAssinaturaUpdateManyWithoutSys_assinatura_planoNestedInput
 }
 
 export type SysAssinaturaPlanoUncheckedUpdateWithoutSys_assinatura_plano_periodicidadeInput = {
@@ -812,7 +812,7 @@ export type SysAssinaturaPlanoUncheckedUpdateWithoutSys_assinatura_plano_periodi
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  atl_atletica_assinatura?: Prisma.AtlAtleticaAssinaturaUncheckedUpdateManyWithoutSys_assinatura_planoNestedInput
+  ent_entidade_assinatura?: Prisma.EntEntidadeAssinaturaUncheckedUpdateManyWithoutSys_assinatura_planoNestedInput
 }
 
 export type SysAssinaturaPlanoUncheckedUpdateManyWithoutSys_assinatura_plano_periodicidadeInput = {
@@ -835,11 +835,11 @@ export type SysAssinaturaPlanoUncheckedUpdateManyWithoutSys_assinatura_plano_per
  */
 
 export type SysAssinaturaPlanoCountOutputType = {
-  atl_atletica_assinatura: number
+  ent_entidade_assinatura: number
 }
 
 export type SysAssinaturaPlanoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  atl_atletica_assinatura?: boolean | SysAssinaturaPlanoCountOutputTypeCountAtl_atletica_assinaturaArgs
+  ent_entidade_assinatura?: boolean | SysAssinaturaPlanoCountOutputTypeCountEnt_entidade_assinaturaArgs
 }
 
 /**
@@ -855,8 +855,8 @@ export type SysAssinaturaPlanoCountOutputTypeDefaultArgs<ExtArgs extends runtime
 /**
  * SysAssinaturaPlanoCountOutputType without action
  */
-export type SysAssinaturaPlanoCountOutputTypeCountAtl_atletica_assinaturaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AtlAtleticaAssinaturaWhereInput
+export type SysAssinaturaPlanoCountOutputTypeCountEnt_entidade_assinaturaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EntEntidadeAssinaturaWhereInput
 }
 
 
@@ -874,7 +874,7 @@ export type SysAssinaturaPlanoSelect<ExtArgs extends runtime.Types.Extensions.In
   updated_at?: boolean
   deleted_at?: boolean
   sys_assinatura_plano_periodicidade?: boolean | Prisma.SysAssinaturaPlanoPeriodicidadeDefaultArgs<ExtArgs>
-  atl_atletica_assinatura?: boolean | Prisma.SysAssinaturaPlano$atl_atletica_assinaturaArgs<ExtArgs>
+  ent_entidade_assinatura?: boolean | Prisma.SysAssinaturaPlano$ent_entidade_assinaturaArgs<ExtArgs>
   _count?: boolean | Prisma.SysAssinaturaPlanoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sysAssinaturaPlano"]>
 
@@ -898,7 +898,7 @@ export type SysAssinaturaPlanoSelectScalar = {
 export type SysAssinaturaPlanoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "codigo" | "descricao" | "valor" | "sys_assinatura_plano_periodicidade_id" | "limite_membros" | "limite_eventos" | "ativo" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["sysAssinaturaPlano"]>
 export type SysAssinaturaPlanoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sys_assinatura_plano_periodicidade?: boolean | Prisma.SysAssinaturaPlanoPeriodicidadeDefaultArgs<ExtArgs>
-  atl_atletica_assinatura?: boolean | Prisma.SysAssinaturaPlano$atl_atletica_assinaturaArgs<ExtArgs>
+  ent_entidade_assinatura?: boolean | Prisma.SysAssinaturaPlano$ent_entidade_assinaturaArgs<ExtArgs>
   _count?: boolean | Prisma.SysAssinaturaPlanoCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -906,7 +906,7 @@ export type $SysAssinaturaPlanoPayload<ExtArgs extends runtime.Types.Extensions.
   name: "SysAssinaturaPlano"
   objects: {
     sys_assinatura_plano_periodicidade: Prisma.$SysAssinaturaPlanoPeriodicidadePayload<ExtArgs>
-    atl_atletica_assinatura: Prisma.$AtlAtleticaAssinaturaPayload<ExtArgs>[]
+    ent_entidade_assinatura: Prisma.$EntEntidadeAssinaturaPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1262,7 +1262,7 @@ readonly fields: SysAssinaturaPlanoFieldRefs;
 export interface Prisma__SysAssinaturaPlanoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   sys_assinatura_plano_periodicidade<T extends Prisma.SysAssinaturaPlanoPeriodicidadeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysAssinaturaPlanoPeriodicidadeDefaultArgs<ExtArgs>>): Prisma.Prisma__SysAssinaturaPlanoPeriodicidadeClient<runtime.Types.Result.GetResult<Prisma.$SysAssinaturaPlanoPeriodicidadePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  atl_atletica_assinatura<T extends Prisma.SysAssinaturaPlano$atl_atletica_assinaturaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysAssinaturaPlano$atl_atletica_assinaturaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AtlAtleticaAssinaturaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ent_entidade_assinatura<T extends Prisma.SysAssinaturaPlano$ent_entidade_assinaturaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysAssinaturaPlano$ent_entidade_assinaturaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EntEntidadeAssinaturaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1652,27 +1652,27 @@ export type SysAssinaturaPlanoDeleteManyArgs<ExtArgs extends runtime.Types.Exten
 }
 
 /**
- * SysAssinaturaPlano.atl_atletica_assinatura
+ * SysAssinaturaPlano.ent_entidade_assinatura
  */
-export type SysAssinaturaPlano$atl_atletica_assinaturaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SysAssinaturaPlano$ent_entidade_assinaturaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the AtlAtleticaAssinatura
+   * Select specific fields to fetch from the EntEntidadeAssinatura
    */
-  select?: Prisma.AtlAtleticaAssinaturaSelect<ExtArgs> | null
+  select?: Prisma.EntEntidadeAssinaturaSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the AtlAtleticaAssinatura
+   * Omit specific fields from the EntEntidadeAssinatura
    */
-  omit?: Prisma.AtlAtleticaAssinaturaOmit<ExtArgs> | null
+  omit?: Prisma.EntEntidadeAssinaturaOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.AtlAtleticaAssinaturaInclude<ExtArgs> | null
-  where?: Prisma.AtlAtleticaAssinaturaWhereInput
-  orderBy?: Prisma.AtlAtleticaAssinaturaOrderByWithRelationInput | Prisma.AtlAtleticaAssinaturaOrderByWithRelationInput[]
-  cursor?: Prisma.AtlAtleticaAssinaturaWhereUniqueInput
+  include?: Prisma.EntEntidadeAssinaturaInclude<ExtArgs> | null
+  where?: Prisma.EntEntidadeAssinaturaWhereInput
+  orderBy?: Prisma.EntEntidadeAssinaturaOrderByWithRelationInput | Prisma.EntEntidadeAssinaturaOrderByWithRelationInput[]
+  cursor?: Prisma.EntEntidadeAssinaturaWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.AtlAtleticaAssinaturaScalarFieldEnum | Prisma.AtlAtleticaAssinaturaScalarFieldEnum[]
+  distinct?: Prisma.EntEntidadeAssinaturaScalarFieldEnum | Prisma.EntEntidadeAssinaturaScalarFieldEnum[]
 }
 
 /**

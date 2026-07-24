@@ -31,8 +31,9 @@ model SysUsuario {
 
   sys_usuario_role            SysUsuarioRole[]
   sys_usuario_permission      SysUsuarioPermission[]
-  atl_atletica_membro         AtlAtleticaMembro[]
-  atl_atletica_criada         AtlAtletica[]             @relation("AtlAtleticaCriadoPor")
+  ent_entidade_membro         EntEntidadeMembro[]
+  sys_usuario_polo            SysUsuarioPolo[]
+  ent_entidade_criada         EntEntidade[]             @relation("EntEntidadeCriadoPor")
   sys_inbox_item              SysInboxItem[]
   sys_solicitacao_solicitante SysSolicitacao[]          @relation("SysSolicitacaoSolicitante")
   sys_solicitacao_responsavel SysSolicitacao[]          @relation("SysSolicitacaoResponsavel")
@@ -120,7 +121,7 @@ model SysUsuarioRole {
   id              Int       @id @default(autoincrement())
   sys_usuario_id  Int
   sys_role_id     Int
-  atl_atletica_id Int?
+  ent_entidade_id Int?
   ativo           Int       @default(1)
   created_at      DateTime? @db.DateTime(0)
   updated_at      DateTime? @db.DateTime(0)
@@ -128,12 +129,12 @@ model SysUsuarioRole {
 
   sys_usuario  SysUsuario   @relation(fields: [sys_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   sys_role     SysRole      @relation(fields: [sys_role_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  atl_atletica AtlAtletica? @relation(fields: [atl_atletica_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade EntEntidade? @relation(fields: [ent_entidade_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
-  @@unique([sys_usuario_id, sys_role_id, atl_atletica_id], map: "uk_sys_usuario_role_contexto")
+  @@unique([sys_usuario_id, sys_role_id, ent_entidade_id], map: "uk_sys_usuario_role_contexto")
   @@index([sys_usuario_id], map: "sys_usuario_role_fk1")
   @@index([sys_role_id], map: "sys_usuario_role_fk2")
-  @@index([atl_atletica_id], map: "sys_usuario_role_fk3")
+  @@index([ent_entidade_id], map: "sys_usuario_role_fk3")
   @@map("sys_usuario_role")
 }
 
@@ -156,7 +157,7 @@ model SysUsuarioPermission {
   sys_usuario_id                 Int
   sys_permission_id              Int
   sys_usuario_permission_tipo_id Int
-  atl_atletica_id                Int?
+  ent_entidade_id                Int?
   motivo                         String?   @db.VarChar(255)
   ativo                          Int       @default(1)
   created_at                     DateTime? @db.DateTime(0)
@@ -166,13 +167,13 @@ model SysUsuarioPermission {
   sys_usuario                 SysUsuario               @relation(fields: [sys_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   sys_permission              SysPermission            @relation(fields: [sys_permission_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   sys_usuario_permission_tipo SysUsuarioPermissionTipo @relation(fields: [sys_usuario_permission_tipo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  atl_atletica                AtlAtletica?             @relation(fields: [atl_atletica_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade                EntEntidade?             @relation(fields: [ent_entidade_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
-  @@unique([sys_usuario_id, sys_permission_id, atl_atletica_id], map: "uk_sys_usuario_permission_contexto")
+  @@unique([sys_usuario_id, sys_permission_id, ent_entidade_id], map: "uk_sys_usuario_permission_contexto")
   @@index([sys_usuario_id], map: "sys_usuario_permission_fk1")
   @@index([sys_permission_id], map: "sys_usuario_permission_fk2")
   @@index([sys_usuario_permission_tipo_id], map: "sys_usuario_permission_fk3")
-  @@index([atl_atletica_id], map: "sys_usuario_permission_fk4")
+  @@index([ent_entidade_id], map: "sys_usuario_permission_fk4")
   @@map("sys_usuario_permission")
 }
 
@@ -188,7 +189,9 @@ model EduInstituicao {
   deleted_at DateTime? @db.DateTime(0)
 
   edu_instituicao_curso EduInstituicaoCurso[]
-  atl_atletica          AtlAtletica[]
+  edu_polo              EduPolo[]
+  ent_entidade          EntEntidade[]
+  sys_solicitacao       SysSolicitacao[]
 
   @@index([abreviacao])
   @@index([ativo])
@@ -207,7 +210,7 @@ model EduCurso {
   deleted_at DateTime? @db.DateTime(0)
 
   edu_instituicao_curso EduInstituicaoCurso[]
-  atl_atletica_curso    AtlAtleticaCurso[]
+  ent_entidade_curso    EntEntidadeCurso[]
 
   @@index([abreviacao])
   @@index([ativo])
@@ -232,7 +235,64 @@ model EduInstituicaoCurso {
   @@map("edu_instituicao_curso")
 }
 
-model AtlAtleticaStatus {
+model EduPolo {
+  id                 Int       @id @default(autoincrement())
+  edu_instituicao_id Int
+  codigo             String    @db.VarChar(100)
+  nome               String    @db.VarChar(150)
+  cidade             String?   @db.VarChar(100)
+  estado             String?   @db.VarChar(2)
+  ativo              Int       @default(1)
+  created_at         DateTime? @db.DateTime(0)
+  updated_at         DateTime? @db.DateTime(0)
+  deleted_at         DateTime? @db.DateTime(0)
+
+  edu_instituicao   EduInstituicao    @relation(fields: [edu_instituicao_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  sys_usuario_polo  SysUsuarioPolo[]
+  ent_entidade_polo EntEntidadePolo[]
+  sys_solicitacao   SysSolicitacao[]
+
+  @@unique([edu_instituicao_id, codigo], map: "uk_edu_polo_instituicao_codigo")
+  @@index([edu_instituicao_id], map: "edu_polo_fk1")
+  @@index([ativo])
+  @@map("edu_polo")
+}
+
+model SysUsuarioPolo {
+  id             Int       @id @default(autoincrement())
+  sys_usuario_id Int
+  edu_polo_id    Int
+  principal      Int       @default(0)
+  ativo          Int       @default(1)
+  created_at     DateTime? @db.DateTime(0)
+  updated_at     DateTime? @db.DateTime(0)
+  deleted_at     DateTime? @db.DateTime(0)
+
+  sys_usuario SysUsuario @relation(fields: [sys_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  edu_polo    EduPolo    @relation(fields: [edu_polo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@unique([sys_usuario_id, edu_polo_id], map: "uk_sys_usuario_polo")
+  @@index([sys_usuario_id], map: "sys_usuario_polo_fk1")
+  @@index([edu_polo_id], map: "sys_usuario_polo_fk2")
+  @@index([principal])
+  @@map("sys_usuario_polo")
+}
+
+model EntEntidadeTipo {
+  id         Int       @id @default(autoincrement())
+  codigo     String    @unique @db.VarChar(100)
+  nome       String    @db.VarChar(150)
+  descricao  String?   @db.Text
+  ativo      Int       @default(1)
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  ent_entidade EntEntidade[]
+
+  @@map("ent_entidade_tipo")
+}
+
+model EntEntidadeStatus {
   id         Int       @id @default(autoincrement())
   codigo     String    @unique @db.VarChar(100)
   nome       String    @db.VarChar(150)
@@ -243,15 +303,16 @@ model AtlAtleticaStatus {
   created_at DateTime? @db.DateTime(0)
   updated_at DateTime? @db.DateTime(0)
 
-  atl_atletica AtlAtletica[]
+  ent_entidade EntEntidade[]
 
-  @@map("atl_atletica_status")
+  @@map("ent_entidade_status")
 }
 
-model AtlAtletica {
+model EntEntidade {
   id                        Int       @id @default(autoincrement())
+  ent_entidade_tipo_id      Int
+  ent_entidade_status_id    Int
   edu_instituicao_id        Int
-  atl_atletica_status_id    Int?
   criado_por_sys_usuario_id Int?
   nome                      String    @db.VarChar(150)
   apelido                   String?   @db.VarChar(120)
@@ -266,29 +327,34 @@ model AtlAtletica {
   updated_at                DateTime? @db.DateTime(0)
   deleted_at                DateTime? @db.DateTime(0)
 
-  atl_atletica_status     AtlAtleticaStatus?      @relation(fields: [atl_atletica_status_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  criado_por_sys_usuario  SysUsuario?             @relation("AtlAtleticaCriadoPor", fields: [criado_por_sys_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  atl_atletica_gestao     AtlAtleticaGestao[]
+  ent_entidade_tipo       EntEntidadeTipo         @relation(fields: [ent_entidade_tipo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade_status     EntEntidadeStatus       @relation(fields: [ent_entidade_status_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  criado_por_sys_usuario  SysUsuario?             @relation("EntEntidadeCriadoPor", fields: [criado_por_sys_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade_gestao     EntEntidadeGestao[]
   edu_instituicao         EduInstituicao          @relation(fields: [edu_instituicao_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  atl_atletica_curso      AtlAtleticaCurso[]
-  atl_atletica_cargo      AtlAtleticaCargo[]
-  atl_atletica_membro     AtlAtleticaMembro[]
-  atl_atletica_tema       AtlAtleticaTema?
-  atl_atletica_regimento  AtlAtleticaRegimento[]
+  ent_entidade_curso      EntEntidadeCurso[]
+  ent_entidade_cargo      EntEntidadeCargo[]
+  ent_cargo               EntCargo[]
+  ent_entidade_membro     EntEntidadeMembro[]
+  ent_entidade_tema       EntEntidadeTema?
+  ent_entidade_regimento  EntEntidadeRegimento[]
   sys_usuario_role        SysUsuarioRole[]
   sys_usuario_permission  SysUsuarioPermission[]
-  atl_atletica_assinatura AtlAtleticaAssinatura[]
+  ent_entidade_assinatura EntEntidadeAssinatura[]
+  entEntidadePolos        EntEntidadePolo[]
+  sysSolicitacaos         SysSolicitacao[]
 
-  @@index([edu_instituicao_id], map: "atl_atletica_fk1")
+  @@index([ent_entidade_tipo_id], map: "ent_entidade_fk1")
+  @@index([ent_entidade_status_id], map: "ent_entidade_fk2")
+  @@index([edu_instituicao_id], map: "ent_entidade_fk3")
+  @@index([criado_por_sys_usuario_id], map: "ent_entidade_fk4")
   @@index([ativo])
-  @@index([atl_atletica_status_id], map: "atl_atletica_fk2")
-  @@index([criado_por_sys_usuario_id], map: "atl_atletica_fk3")
-  @@map("atl_atletica")
+  @@map("ent_entidade")
 }
 
-model AtlAtleticaCurso {
+model EntEntidadeCurso {
   id              Int       @id @default(autoincrement())
-  atl_atletica_id Int
+  ent_entidade_id Int
   edu_curso_id    Int
   principal       Int       @default(0)
   ativo           Int       @default(1)
@@ -296,16 +362,36 @@ model AtlAtleticaCurso {
   updated_at      DateTime? @db.DateTime(0)
   deleted_at      DateTime? @db.DateTime(0)
 
-  atl_atletica AtlAtletica @relation(fields: [atl_atletica_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade EntEntidade @relation(fields: [ent_entidade_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   edu_curso    EduCurso    @relation(fields: [edu_curso_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
-  @@unique([atl_atletica_id, edu_curso_id], map: "uk_atl_atletica_curso")
-  @@index([atl_atletica_id], map: "atl_atletica_curso_fk1")
-  @@index([edu_curso_id], map: "atl_atletica_curso_fk2")
-  @@map("atl_atletica_curso")
+  @@unique([ent_entidade_id, edu_curso_id], map: "uk_ent_entidade_curso")
+  @@index([ent_entidade_id], map: "ent_entidade_curso_fk1")
+  @@index([edu_curso_id], map: "ent_entidade_curso_fk2")
+  @@map("ent_entidade_curso")
 }
 
-model AtlAtleticaGestaoStatus {
+model EntEntidadePolo {
+  id              Int       @id @default(autoincrement())
+  ent_entidade_id Int
+  edu_polo_id     Int
+  principal       Int       @default(0)
+  ativo           Int       @default(1)
+  created_at      DateTime? @db.DateTime(0)
+  updated_at      DateTime? @db.DateTime(0)
+  deleted_at      DateTime? @db.DateTime(0)
+
+  ent_entidade EntEntidade @relation(fields: [ent_entidade_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  edu_polo     EduPolo     @relation(fields: [edu_polo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@unique([ent_entidade_id, edu_polo_id], map: "uk_ent_entidade_polo")
+  @@index([ent_entidade_id], map: "ent_entidade_polo_fk1")
+  @@index([edu_polo_id], map: "ent_entidade_polo_fk2")
+  @@index([principal])
+  @@map("ent_entidade_polo")
+}
+
+model EntEntidadeGestaoStatus {
   id         Int       @id @default(autoincrement())
   codigo     String    @unique @db.VarChar(100)
   nome       String    @db.VarChar(150)
@@ -316,15 +402,15 @@ model AtlAtleticaGestaoStatus {
   created_at DateTime? @db.DateTime(0)
   updated_at DateTime? @db.DateTime(0)
 
-  atl_atletica_gestao AtlAtleticaGestao[]
+  ent_entidade_gestao EntEntidadeGestao[]
 
-  @@map("atl_atletica_gestao_status")
+  @@map("ent_entidade_gestao_status")
 }
 
-model AtlAtleticaGestao {
+model EntEntidadeGestao {
   id                            Int       @id @default(autoincrement())
-  atl_atletica_id               Int
-  atl_atletica_gestao_status_id Int
+  ent_entidade_id               Int
+  ent_entidade_gestao_status_id Int
   nome                          String    @db.VarChar(150)
   inicio_at                     DateTime? @db.Date
   fim_at                        DateTime? @db.Date
@@ -334,17 +420,17 @@ model AtlAtleticaGestao {
   updated_at                    DateTime? @db.DateTime(0)
   deleted_at                    DateTime? @db.DateTime(0)
 
-  atl_atletica               AtlAtletica             @relation(fields: [atl_atletica_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  atl_atletica_gestao_status AtlAtleticaGestaoStatus @relation(fields: [atl_atletica_gestao_status_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade               EntEntidade             @relation(fields: [ent_entidade_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade_gestao_status EntEntidadeGestaoStatus @relation(fields: [ent_entidade_gestao_status_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
-  @@unique([atl_atletica_id, nome], map: "uk_atl_atletica_gestao_nome")
-  @@index([atl_atletica_id], map: "atl_atletica_gestao_fk1")
-  @@index([atl_atletica_gestao_status_id], map: "atl_atletica_gestao_fk2")
+  @@unique([ent_entidade_id, nome], map: "uk_ent_entidade_gestao_nome")
+  @@index([ent_entidade_id], map: "ent_entidade_gestao_fk1")
+  @@index([ent_entidade_gestao_status_id], map: "ent_entidade_gestao_fk2")
   @@index([ativo])
-  @@map("atl_atletica_gestao")
+  @@map("ent_entidade_gestao")
 }
 
-model AtlCargoTipo {
+model EntCargoTipo {
   id         Int       @id @default(autoincrement())
   codigo     String    @unique @db.VarChar(100)
   nome       String    @db.VarChar(150)
@@ -353,38 +439,39 @@ model AtlCargoTipo {
   created_at DateTime? @db.DateTime(0)
   updated_at DateTime? @db.DateTime(0)
 
-  atl_cargo AtlCargo[]
+  ent_cargo EntCargo[]
 
-  @@map("atl_cargo_tipo")
+  @@map("ent_cargo_tipo")
 }
 
-model AtlCargo {
+model EntCargo {
   id                Int       @id @default(autoincrement())
   nome              String    @db.VarChar(100)
   codigo            String    @db.VarChar(100)
   descricao         String?   @db.VarChar(255)
-  atl_cargo_tipo_id Int
-  atl_atletica_id   Int?
+  ent_cargo_tipo_id Int
+  ent_entidade_id   Int?
   ativo             Int       @default(1)
   created_at        DateTime? @db.DateTime(0)
   updated_at        DateTime? @db.DateTime(0)
   deleted_at        DateTime? @db.DateTime(0)
 
-  atl_cargo_tipo            AtlCargoTipo             @relation(fields: [atl_cargo_tipo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  atl_atletica_cargo        AtlAtleticaCargo[]
-  atl_atletica_membro_cargo AtlAtleticaMembroCargo[]
+  ent_cargo_tipo            EntCargoTipo             @relation(fields: [ent_cargo_tipo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade              EntEntidade?             @relation(fields: [ent_entidade_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade_cargo        EntEntidadeCargo[]
+  ent_entidade_membro_cargo EntEntidadeMembroCargo[]
 
-  @@unique([codigo, atl_atletica_id], map: "uk_atl_cargo_codigo_contexto")
-  @@index([atl_cargo_tipo_id], map: "atl_cargo_fk1")
-  @@index([atl_atletica_id], map: "atl_cargo_fk2")
+  @@unique([codigo, ent_entidade_id], map: "uk_ent_cargo_codigo_contexto")
+  @@index([ent_cargo_tipo_id], map: "ent_cargo_fk1")
+  @@index([ent_entidade_id], map: "ent_cargo_fk2")
   @@index([ativo])
-  @@map("atl_cargo")
+  @@map("ent_cargo")
 }
 
-model AtlAtleticaCargo {
+model EntEntidadeCargo {
   id                    Int       @id @default(autoincrement())
-  atl_atletica_id       Int
-  atl_cargo_id          Int
+  ent_entidade_id       Int
+  ent_cargo_id          Int
   nome_exibicao         String?   @db.VarChar(100)
   descricao_customizada String?   @db.VarChar(255)
   ordem                 Int       @default(0)
@@ -393,17 +480,17 @@ model AtlAtleticaCargo {
   updated_at            DateTime? @db.DateTime(0)
   deleted_at            DateTime? @db.DateTime(0)
 
-  atl_atletica AtlAtletica @relation(fields: [atl_atletica_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  atl_cargo    AtlCargo    @relation(fields: [atl_cargo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade EntEntidade @relation(fields: [ent_entidade_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_cargo    EntCargo    @relation(fields: [ent_cargo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
-  @@unique([atl_atletica_id, atl_cargo_id], map: "uk_atl_atletica_cargo")
-  @@index([atl_atletica_id], map: "atl_atletica_cargo_fk1")
-  @@index([atl_cargo_id], map: "atl_atletica_cargo_fk2")
+  @@unique([ent_entidade_id, ent_cargo_id], map: "uk_ent_entidade_cargo")
+  @@index([ent_entidade_id], map: "ent_entidade_cargo_fk1")
+  @@index([ent_cargo_id], map: "ent_entidade_cargo_fk2")
   @@index([ordem])
-  @@map("atl_atletica_cargo")
+  @@map("ent_entidade_cargo")
 }
 
-model AtlAtleticaMembroTipo {
+model EntEntidadeMembroTipo {
   id         Int       @id @default(autoincrement())
   codigo     String    @unique @db.VarChar(100)
   nome       String    @db.VarChar(150)
@@ -412,12 +499,12 @@ model AtlAtleticaMembroTipo {
   created_at DateTime? @db.DateTime(0)
   updated_at DateTime? @db.DateTime(0)
 
-  atl_atletica_membro AtlAtleticaMembro[]
+  ent_entidade_membro EntEntidadeMembro[]
 
-  @@map("atl_atletica_membro_tipo")
+  @@map("ent_entidade_membro_tipo")
 }
 
-model AtlAtleticaMembroStatus {
+model EntEntidadeMembroStatus {
   id         Int       @id @default(autoincrement())
   codigo     String    @unique @db.VarChar(100)
   nome       String    @db.VarChar(150)
@@ -427,17 +514,17 @@ model AtlAtleticaMembroStatus {
   created_at DateTime? @db.DateTime(0)
   updated_at DateTime? @db.DateTime(0)
 
-  atl_atletica_membro AtlAtleticaMembro[]
+  ent_entidade_membro EntEntidadeMembro[]
 
-  @@map("atl_atletica_membro_status")
+  @@map("ent_entidade_membro_status")
 }
 
-model AtlAtleticaMembro {
+model EntEntidadeMembro {
   id                            Int       @id @default(autoincrement())
-  atl_atletica_id               Int
+  ent_entidade_id               Int
   sys_usuario_id                Int
-  atl_atletica_membro_tipo_id   Int
-  atl_atletica_membro_status_id Int
+  ent_entidade_membro_tipo_id   Int
+  ent_entidade_membro_status_id Int
   entrou_at                     DateTime? @db.Date
   saiu_at                       DateTime? @db.Date
   observacao                    String?   @db.Text
@@ -446,24 +533,24 @@ model AtlAtleticaMembro {
   updated_at                    DateTime? @db.DateTime(0)
   deleted_at                    DateTime? @db.DateTime(0)
 
-  atl_atletica               AtlAtletica              @relation(fields: [atl_atletica_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade               EntEntidade              @relation(fields: [ent_entidade_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   sys_usuario                SysUsuario               @relation(fields: [sys_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  atl_atletica_membro_tipo   AtlAtleticaMembroTipo    @relation(fields: [atl_atletica_membro_tipo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  atl_atletica_membro_status AtlAtleticaMembroStatus  @relation(fields: [atl_atletica_membro_status_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  atl_atletica_membro_cargo  AtlAtleticaMembroCargo[]
+  ent_entidade_membro_tipo   EntEntidadeMembroTipo    @relation(fields: [ent_entidade_membro_tipo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade_membro_status EntEntidadeMembroStatus  @relation(fields: [ent_entidade_membro_status_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade_membro_cargo  EntEntidadeMembroCargo[]
 
-  @@unique([atl_atletica_id, sys_usuario_id], map: "uk_atl_atletica_membro")
-  @@index([atl_atletica_id], map: "atl_atletica_membro_fk1")
-  @@index([sys_usuario_id], map: "atl_atletica_membro_fk2")
-  @@index([atl_atletica_membro_tipo_id], map: "atl_atletica_membro_fk3")
-  @@index([atl_atletica_membro_status_id], map: "atl_atletica_membro_fk4")
-  @@map("atl_atletica_membro")
+  @@unique([ent_entidade_id, sys_usuario_id], map: "uk_ent_entidade_membro")
+  @@index([ent_entidade_id], map: "ent_entidade_membro_fk1")
+  @@index([sys_usuario_id], map: "ent_entidade_membro_fk2")
+  @@index([ent_entidade_membro_tipo_id], map: "ent_entidade_membro_fk3")
+  @@index([ent_entidade_membro_status_id], map: "ent_entidade_membro_fk4")
+  @@map("ent_entidade_membro")
 }
 
-model AtlAtleticaMembroCargo {
+model EntEntidadeMembroCargo {
   id                     Int       @id @default(autoincrement())
-  atl_atletica_membro_id Int
-  atl_cargo_id           Int
+  ent_entidade_membro_id Int
+  ent_cargo_id           Int
   inicio_at              DateTime  @db.Date
   fim_at                 DateTime? @db.Date
   atual                  Int       @default(1)
@@ -472,18 +559,18 @@ model AtlAtleticaMembroCargo {
   updated_at             DateTime? @db.DateTime(0)
   deleted_at             DateTime? @db.DateTime(0)
 
-  atl_atletica_membro AtlAtleticaMembro @relation(fields: [atl_atletica_membro_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  atl_cargo           AtlCargo          @relation(fields: [atl_cargo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade_membro EntEntidadeMembro @relation(fields: [ent_entidade_membro_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_cargo           EntCargo          @relation(fields: [ent_cargo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
-  @@index([atl_atletica_membro_id], map: "atl_atletica_membro_cargo_fk1")
-  @@index([atl_cargo_id], map: "atl_atletica_membro_cargo_fk2")
+  @@index([ent_entidade_membro_id], map: "ent_entidade_membro_cargo_fk1")
+  @@index([ent_cargo_id], map: "ent_entidade_membro_cargo_fk2")
   @@index([atual])
-  @@map("atl_atletica_membro_cargo")
+  @@map("ent_entidade_membro_cargo")
 }
 
-model AtlAtleticaTema {
+model EntEntidadeTema {
   id              Int       @id @default(autoincrement())
-  atl_atletica_id Int       @unique
+  ent_entidade_id Int       @unique
   cor_primaria    String    @db.VarChar(20)
   cor_secundaria  String    @db.VarChar(20)
   cor_fundo       String?   @db.VarChar(20)
@@ -495,15 +582,15 @@ model AtlAtleticaTema {
   created_at      DateTime? @db.DateTime(0)
   updated_at      DateTime? @db.DateTime(0)
 
-  atl_atletica AtlAtletica @relation(fields: [atl_atletica_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade EntEntidade @relation(fields: [ent_entidade_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
-  @@index([atl_atletica_id], map: "atl_atletica_tema_fk1")
-  @@map("atl_atletica_tema")
+  @@index([ent_entidade_id], map: "ent_entidade_tema_fk1")
+  @@map("ent_entidade_tema")
 }
 
-model AtlAtleticaRegimento {
+model EntEntidadeRegimento {
   id              Int       @id @default(autoincrement())
-  atl_atletica_id Int
+  ent_entidade_id Int
   titulo          String    @db.VarChar(150)
   versao          String    @db.VarChar(30)
   conteudo        String    @db.Text
@@ -514,11 +601,11 @@ model AtlAtleticaRegimento {
   updated_at      DateTime? @db.DateTime(0)
   deleted_at      DateTime? @db.DateTime(0)
 
-  atl_atletica AtlAtletica @relation(fields: [atl_atletica_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade EntEntidade @relation(fields: [ent_entidade_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
-  @@unique([atl_atletica_id, versao], map: "uk_atl_atletica_regimento_versao")
-  @@index([atl_atletica_id], map: "atl_atletica_regimento_fk1")
-  @@map("atl_atletica_regimento")
+  @@unique([ent_entidade_id, versao], map: "uk_ent_entidade_regimento_versao")
+  @@index([ent_entidade_id], map: "ent_entidade_regimento_fk1")
+  @@map("ent_entidade_regimento")
 }
 
 model SysAssinaturaPlanoPeriodicidade {
@@ -550,13 +637,13 @@ model SysAssinaturaPlano {
   deleted_at                            DateTime? @db.DateTime(0)
 
   sys_assinatura_plano_periodicidade SysAssinaturaPlanoPeriodicidade @relation(fields: [sys_assinatura_plano_periodicidade_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  atl_atletica_assinatura            AtlAtleticaAssinatura[]
+  ent_entidade_assinatura            EntEntidadeAssinatura[]
 
   @@index([sys_assinatura_plano_periodicidade_id], map: "sys_assinatura_plano_fk1")
   @@map("sys_assinatura_plano")
 }
 
-model AtlAtleticaAssinaturaStatus {
+model EntEntidadeAssinaturaStatus {
   id         Int       @id @default(autoincrement())
   codigo     String    @unique @db.VarChar(100)
   nome       String    @db.VarChar(150)
@@ -566,16 +653,16 @@ model AtlAtleticaAssinaturaStatus {
   created_at DateTime? @db.DateTime(0)
   updated_at DateTime? @db.DateTime(0)
 
-  atl_atletica_assinatura AtlAtleticaAssinatura[]
+  ent_entidade_assinatura EntEntidadeAssinatura[]
 
-  @@map("atl_atletica_assinatura_status")
+  @@map("ent_entidade_assinatura_status")
 }
 
-model AtlAtleticaAssinatura {
+model EntEntidadeAssinatura {
   id                                Int       @id @default(autoincrement())
-  atl_atletica_id                   Int
+  ent_entidade_id                   Int
   sys_assinatura_plano_id           Int
-  atl_atletica_assinatura_status_id Int
+  ent_entidade_assinatura_status_id Int
   inicio_at                         DateTime  @db.Date
   fim_at                            DateTime? @db.Date
   observacao                        String?   @db.Text
@@ -584,14 +671,14 @@ model AtlAtleticaAssinatura {
   updated_at                        DateTime? @db.DateTime(0)
   deleted_at                        DateTime? @db.DateTime(0)
 
-  atl_atletica                   AtlAtletica                 @relation(fields: [atl_atletica_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade                   EntEntidade                 @relation(fields: [ent_entidade_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   sys_assinatura_plano           SysAssinaturaPlano          @relation(fields: [sys_assinatura_plano_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  atl_atletica_assinatura_status AtlAtleticaAssinaturaStatus @relation(fields: [atl_atletica_assinatura_status_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade_assinatura_status EntEntidadeAssinaturaStatus @relation(fields: [ent_entidade_assinatura_status_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
-  @@index([atl_atletica_id], map: "atl_atletica_assinatura_fk1")
-  @@index([sys_assinatura_plano_id], map: "atl_atletica_assinatura_fk2")
-  @@index([atl_atletica_assinatura_status_id], map: "atl_atletica_assinatura_fk3")
-  @@map("atl_atletica_assinatura")
+  @@index([ent_entidade_id], map: "ent_entidade_assinatura_fk1")
+  @@index([sys_assinatura_plano_id], map: "ent_entidade_assinatura_fk2")
+  @@index([ent_entidade_assinatura_status_id], map: "ent_entidade_assinatura_fk3")
+  @@map("ent_entidade_assinatura")
 }
 
 model User {
@@ -941,6 +1028,9 @@ model SysSolicitacao {
   sys_solicitacao_status_id  Int
   solicitado_por_usuario_id  Int
   responsavel_sys_usuario_id Int?
+  edu_instituicao_id         Int?
+  edu_polo_id                Int?
+  ent_entidade_id            Int?
   titulo                     String    @db.VarChar(180)
   descricao                  String?   @db.Text
   entidade_tipo              String?   @db.VarChar(100)
@@ -958,6 +1048,9 @@ model SysSolicitacao {
   sys_solicitacao_status SysSolicitacaoStatus @relation("SysSolicitacaoStatusAtual", fields: [sys_solicitacao_status_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   solicitado_por_usuario SysUsuario           @relation("SysSolicitacaoSolicitante", fields: [solicitado_por_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   responsavel_usuario    SysUsuario?          @relation("SysSolicitacaoResponsavel", fields: [responsavel_sys_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  edu_instituicao        EduInstituicao?      @relation(fields: [edu_instituicao_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  edu_polo               EduPolo?             @relation(fields: [edu_polo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  ent_entidade           EntEntidade?         @relation(fields: [ent_entidade_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
   sys_solicitacao_historico SysSolicitacaoHistorico[]
   sys_solicitacao_documento SysSolicitacaoDocumento[]
@@ -966,6 +1059,9 @@ model SysSolicitacao {
   @@index([sys_solicitacao_status_id], map: "sys_solicitacao_fk2")
   @@index([solicitado_por_usuario_id], map: "sys_solicitacao_fk3")
   @@index([responsavel_sys_usuario_id], map: "sys_solicitacao_fk4")
+  @@index([edu_instituicao_id], map: "sys_solicitacao_fk5")
+  @@index([edu_polo_id], map: "sys_solicitacao_fk6")
+  @@index([ent_entidade_id], map: "sys_solicitacao_fk7")
   @@index([entidade_tipo, entidade_id], map: "sys_solicitacao_entidade_idx")
   @@index([ativo])
   @@index([deleted_at])

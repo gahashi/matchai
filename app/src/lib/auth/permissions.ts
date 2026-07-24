@@ -6,7 +6,7 @@ export async function userHasPermission(
     permissionCode: string
 ): Promise<boolean> {
     const sysUsuarioId = session.user.id;
-    const atlAtleticaId = session.atl_atletica_id ?? null;
+    const entEntidadeId = session.ent_entidade_id ?? null;
 
     /**
      * 1. Verifica DENY direto.
@@ -26,8 +26,8 @@ export async function userHasPermission(
                 ativo: 1,
             },
             OR: [
-                { atl_atletica_id: null },
-                ...(atlAtleticaId ? [{ atl_atletica_id: atlAtleticaId }] : []),
+                { ent_entidade_id: null },
+                ...(entEntidadeId ? [{ ent_entidade_id: entEntidadeId }] : []),
             ],
         },
         select: {
@@ -56,8 +56,8 @@ export async function userHasPermission(
                 ativo: 1,
             },
             OR: [
-                { atl_atletica_id: null },
-                ...(atlAtleticaId ? [{ atl_atletica_id: atlAtleticaId }] : []),
+                { ent_entidade_id: null },
+                ...(entEntidadeId ? [{ ent_entidade_id: entEntidadeId }] : []),
             ],
         },
         select: {
@@ -78,8 +78,8 @@ export async function userHasPermission(
             ativo: 1,
             deleted_at: null,
             OR: [
-                { atl_atletica_id: null },
-                ...(atlAtleticaId ? [{ atl_atletica_id: atlAtleticaId }] : []),
+                { ent_entidade_id: null },
+                ...(entEntidadeId ? [{ ent_entidade_id: entEntidadeId }] : []),
             ],
             sys_role: {
                 ativo: 1,

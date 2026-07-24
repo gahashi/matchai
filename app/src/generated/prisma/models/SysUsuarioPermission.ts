@@ -31,7 +31,7 @@ export type SysUsuarioPermissionAvgAggregateOutputType = {
   sys_usuario_id: number | null
   sys_permission_id: number | null
   sys_usuario_permission_tipo_id: number | null
-  atl_atletica_id: number | null
+  ent_entidade_id: number | null
   ativo: number | null
 }
 
@@ -40,7 +40,7 @@ export type SysUsuarioPermissionSumAggregateOutputType = {
   sys_usuario_id: number | null
   sys_permission_id: number | null
   sys_usuario_permission_tipo_id: number | null
-  atl_atletica_id: number | null
+  ent_entidade_id: number | null
   ativo: number | null
 }
 
@@ -49,7 +49,7 @@ export type SysUsuarioPermissionMinAggregateOutputType = {
   sys_usuario_id: number | null
   sys_permission_id: number | null
   sys_usuario_permission_tipo_id: number | null
-  atl_atletica_id: number | null
+  ent_entidade_id: number | null
   motivo: string | null
   ativo: number | null
   created_at: Date | null
@@ -62,7 +62,7 @@ export type SysUsuarioPermissionMaxAggregateOutputType = {
   sys_usuario_id: number | null
   sys_permission_id: number | null
   sys_usuario_permission_tipo_id: number | null
-  atl_atletica_id: number | null
+  ent_entidade_id: number | null
   motivo: string | null
   ativo: number | null
   created_at: Date | null
@@ -75,7 +75,7 @@ export type SysUsuarioPermissionCountAggregateOutputType = {
   sys_usuario_id: number
   sys_permission_id: number
   sys_usuario_permission_tipo_id: number
-  atl_atletica_id: number
+  ent_entidade_id: number
   motivo: number
   ativo: number
   created_at: number
@@ -90,7 +90,7 @@ export type SysUsuarioPermissionAvgAggregateInputType = {
   sys_usuario_id?: true
   sys_permission_id?: true
   sys_usuario_permission_tipo_id?: true
-  atl_atletica_id?: true
+  ent_entidade_id?: true
   ativo?: true
 }
 
@@ -99,7 +99,7 @@ export type SysUsuarioPermissionSumAggregateInputType = {
   sys_usuario_id?: true
   sys_permission_id?: true
   sys_usuario_permission_tipo_id?: true
-  atl_atletica_id?: true
+  ent_entidade_id?: true
   ativo?: true
 }
 
@@ -108,7 +108,7 @@ export type SysUsuarioPermissionMinAggregateInputType = {
   sys_usuario_id?: true
   sys_permission_id?: true
   sys_usuario_permission_tipo_id?: true
-  atl_atletica_id?: true
+  ent_entidade_id?: true
   motivo?: true
   ativo?: true
   created_at?: true
@@ -121,7 +121,7 @@ export type SysUsuarioPermissionMaxAggregateInputType = {
   sys_usuario_id?: true
   sys_permission_id?: true
   sys_usuario_permission_tipo_id?: true
-  atl_atletica_id?: true
+  ent_entidade_id?: true
   motivo?: true
   ativo?: true
   created_at?: true
@@ -134,7 +134,7 @@ export type SysUsuarioPermissionCountAggregateInputType = {
   sys_usuario_id?: true
   sys_permission_id?: true
   sys_usuario_permission_tipo_id?: true
-  atl_atletica_id?: true
+  ent_entidade_id?: true
   motivo?: true
   ativo?: true
   created_at?: true
@@ -234,7 +234,7 @@ export type SysUsuarioPermissionGroupByOutputType = {
   sys_usuario_id: number
   sys_permission_id: number
   sys_usuario_permission_tipo_id: number
-  atl_atletica_id: number | null
+  ent_entidade_id: number | null
   motivo: string | null
   ativo: number
   created_at: Date | null
@@ -270,7 +270,7 @@ export type SysUsuarioPermissionWhereInput = {
   sys_usuario_id?: Prisma.IntFilter<"SysUsuarioPermission"> | number
   sys_permission_id?: Prisma.IntFilter<"SysUsuarioPermission"> | number
   sys_usuario_permission_tipo_id?: Prisma.IntFilter<"SysUsuarioPermission"> | number
-  atl_atletica_id?: Prisma.IntNullableFilter<"SysUsuarioPermission"> | number | null
+  ent_entidade_id?: Prisma.IntNullableFilter<"SysUsuarioPermission"> | number | null
   motivo?: Prisma.StringNullableFilter<"SysUsuarioPermission"> | string | null
   ativo?: Prisma.IntFilter<"SysUsuarioPermission"> | number
   created_at?: Prisma.DateTimeNullableFilter<"SysUsuarioPermission"> | Date | string | null
@@ -279,7 +279,7 @@ export type SysUsuarioPermissionWhereInput = {
   sys_usuario?: Prisma.XOR<Prisma.SysUsuarioScalarRelationFilter, Prisma.SysUsuarioWhereInput>
   sys_permission?: Prisma.XOR<Prisma.SysPermissionScalarRelationFilter, Prisma.SysPermissionWhereInput>
   sys_usuario_permission_tipo?: Prisma.XOR<Prisma.SysUsuarioPermissionTipoScalarRelationFilter, Prisma.SysUsuarioPermissionTipoWhereInput>
-  atl_atletica?: Prisma.XOR<Prisma.AtlAtleticaNullableScalarRelationFilter, Prisma.AtlAtleticaWhereInput> | null
+  ent_entidade?: Prisma.XOR<Prisma.EntEntidadeNullableScalarRelationFilter, Prisma.EntEntidadeWhereInput> | null
 }
 
 export type SysUsuarioPermissionOrderByWithRelationInput = {
@@ -287,7 +287,7 @@ export type SysUsuarioPermissionOrderByWithRelationInput = {
   sys_usuario_id?: Prisma.SortOrder
   sys_permission_id?: Prisma.SortOrder
   sys_usuario_permission_tipo_id?: Prisma.SortOrder
-  atl_atletica_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrderInput | Prisma.SortOrder
   motivo?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -296,20 +296,20 @@ export type SysUsuarioPermissionOrderByWithRelationInput = {
   sys_usuario?: Prisma.SysUsuarioOrderByWithRelationInput
   sys_permission?: Prisma.SysPermissionOrderByWithRelationInput
   sys_usuario_permission_tipo?: Prisma.SysUsuarioPermissionTipoOrderByWithRelationInput
-  atl_atletica?: Prisma.AtlAtleticaOrderByWithRelationInput
+  ent_entidade?: Prisma.EntEntidadeOrderByWithRelationInput
   _relevance?: Prisma.SysUsuarioPermissionOrderByRelevanceInput
 }
 
 export type SysUsuarioPermissionWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  sys_usuario_id_sys_permission_id_atl_atletica_id?: Prisma.SysUsuarioPermissionSys_usuario_idSys_permission_idAtl_atletica_idCompoundUniqueInput
+  sys_usuario_id_sys_permission_id_ent_entidade_id?: Prisma.SysUsuarioPermissionSys_usuario_idSys_permission_idEnt_entidade_idCompoundUniqueInput
   AND?: Prisma.SysUsuarioPermissionWhereInput | Prisma.SysUsuarioPermissionWhereInput[]
   OR?: Prisma.SysUsuarioPermissionWhereInput[]
   NOT?: Prisma.SysUsuarioPermissionWhereInput | Prisma.SysUsuarioPermissionWhereInput[]
   sys_usuario_id?: Prisma.IntFilter<"SysUsuarioPermission"> | number
   sys_permission_id?: Prisma.IntFilter<"SysUsuarioPermission"> | number
   sys_usuario_permission_tipo_id?: Prisma.IntFilter<"SysUsuarioPermission"> | number
-  atl_atletica_id?: Prisma.IntNullableFilter<"SysUsuarioPermission"> | number | null
+  ent_entidade_id?: Prisma.IntNullableFilter<"SysUsuarioPermission"> | number | null
   motivo?: Prisma.StringNullableFilter<"SysUsuarioPermission"> | string | null
   ativo?: Prisma.IntFilter<"SysUsuarioPermission"> | number
   created_at?: Prisma.DateTimeNullableFilter<"SysUsuarioPermission"> | Date | string | null
@@ -318,15 +318,15 @@ export type SysUsuarioPermissionWhereUniqueInput = Prisma.AtLeast<{
   sys_usuario?: Prisma.XOR<Prisma.SysUsuarioScalarRelationFilter, Prisma.SysUsuarioWhereInput>
   sys_permission?: Prisma.XOR<Prisma.SysPermissionScalarRelationFilter, Prisma.SysPermissionWhereInput>
   sys_usuario_permission_tipo?: Prisma.XOR<Prisma.SysUsuarioPermissionTipoScalarRelationFilter, Prisma.SysUsuarioPermissionTipoWhereInput>
-  atl_atletica?: Prisma.XOR<Prisma.AtlAtleticaNullableScalarRelationFilter, Prisma.AtlAtleticaWhereInput> | null
-}, "id" | "sys_usuario_id_sys_permission_id_atl_atletica_id">
+  ent_entidade?: Prisma.XOR<Prisma.EntEntidadeNullableScalarRelationFilter, Prisma.EntEntidadeWhereInput> | null
+}, "id" | "sys_usuario_id_sys_permission_id_ent_entidade_id">
 
 export type SysUsuarioPermissionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
   sys_permission_id?: Prisma.SortOrder
   sys_usuario_permission_tipo_id?: Prisma.SortOrder
-  atl_atletica_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrderInput | Prisma.SortOrder
   motivo?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -347,7 +347,7 @@ export type SysUsuarioPermissionScalarWhereWithAggregatesInput = {
   sys_usuario_id?: Prisma.IntWithAggregatesFilter<"SysUsuarioPermission"> | number
   sys_permission_id?: Prisma.IntWithAggregatesFilter<"SysUsuarioPermission"> | number
   sys_usuario_permission_tipo_id?: Prisma.IntWithAggregatesFilter<"SysUsuarioPermission"> | number
-  atl_atletica_id?: Prisma.IntNullableWithAggregatesFilter<"SysUsuarioPermission"> | number | null
+  ent_entidade_id?: Prisma.IntNullableWithAggregatesFilter<"SysUsuarioPermission"> | number | null
   motivo?: Prisma.StringNullableWithAggregatesFilter<"SysUsuarioPermission"> | string | null
   ativo?: Prisma.IntWithAggregatesFilter<"SysUsuarioPermission"> | number
   created_at?: Prisma.DateTimeNullableWithAggregatesFilter<"SysUsuarioPermission"> | Date | string | null
@@ -364,7 +364,7 @@ export type SysUsuarioPermissionCreateInput = {
   sys_usuario: Prisma.SysUsuarioCreateNestedOneWithoutSys_usuario_permissionInput
   sys_permission: Prisma.SysPermissionCreateNestedOneWithoutSys_usuario_permissionInput
   sys_usuario_permission_tipo: Prisma.SysUsuarioPermissionTipoCreateNestedOneWithoutSys_usuario_permissionInput
-  atl_atletica?: Prisma.AtlAtleticaCreateNestedOneWithoutSys_usuario_permissionInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedOneWithoutSys_usuario_permissionInput
 }
 
 export type SysUsuarioPermissionUncheckedCreateInput = {
@@ -372,7 +372,7 @@ export type SysUsuarioPermissionUncheckedCreateInput = {
   sys_usuario_id: number
   sys_permission_id: number
   sys_usuario_permission_tipo_id: number
-  atl_atletica_id?: number | null
+  ent_entidade_id?: number | null
   motivo?: string | null
   ativo?: number
   created_at?: Date | string | null
@@ -389,7 +389,7 @@ export type SysUsuarioPermissionUpdateInput = {
   sys_usuario?: Prisma.SysUsuarioUpdateOneRequiredWithoutSys_usuario_permissionNestedInput
   sys_permission?: Prisma.SysPermissionUpdateOneRequiredWithoutSys_usuario_permissionNestedInput
   sys_usuario_permission_tipo?: Prisma.SysUsuarioPermissionTipoUpdateOneRequiredWithoutSys_usuario_permissionNestedInput
-  atl_atletica?: Prisma.AtlAtleticaUpdateOneWithoutSys_usuario_permissionNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateOneWithoutSys_usuario_permissionNestedInput
 }
 
 export type SysUsuarioPermissionUncheckedUpdateInput = {
@@ -397,7 +397,7 @@ export type SysUsuarioPermissionUncheckedUpdateInput = {
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_permission_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_permission_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
-  atl_atletica_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   motivo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -410,7 +410,7 @@ export type SysUsuarioPermissionCreateManyInput = {
   sys_usuario_id: number
   sys_permission_id: number
   sys_usuario_permission_tipo_id: number
-  atl_atletica_id?: number | null
+  ent_entidade_id?: number | null
   motivo?: string | null
   ativo?: number
   created_at?: Date | string | null
@@ -431,7 +431,7 @@ export type SysUsuarioPermissionUncheckedUpdateManyInput = {
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_permission_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_permission_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
-  atl_atletica_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   motivo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -455,10 +455,10 @@ export type SysUsuarioPermissionOrderByRelevanceInput = {
   search: string
 }
 
-export type SysUsuarioPermissionSys_usuario_idSys_permission_idAtl_atletica_idCompoundUniqueInput = {
+export type SysUsuarioPermissionSys_usuario_idSys_permission_idEnt_entidade_idCompoundUniqueInput = {
   sys_usuario_id: number
   sys_permission_id: number
-  atl_atletica_id: number
+  ent_entidade_id: number
 }
 
 export type SysUsuarioPermissionCountOrderByAggregateInput = {
@@ -466,7 +466,7 @@ export type SysUsuarioPermissionCountOrderByAggregateInput = {
   sys_usuario_id?: Prisma.SortOrder
   sys_permission_id?: Prisma.SortOrder
   sys_usuario_permission_tipo_id?: Prisma.SortOrder
-  atl_atletica_id?: Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrder
   motivo?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -479,7 +479,7 @@ export type SysUsuarioPermissionAvgOrderByAggregateInput = {
   sys_usuario_id?: Prisma.SortOrder
   sys_permission_id?: Prisma.SortOrder
   sys_usuario_permission_tipo_id?: Prisma.SortOrder
-  atl_atletica_id?: Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
 }
 
@@ -488,7 +488,7 @@ export type SysUsuarioPermissionMaxOrderByAggregateInput = {
   sys_usuario_id?: Prisma.SortOrder
   sys_permission_id?: Prisma.SortOrder
   sys_usuario_permission_tipo_id?: Prisma.SortOrder
-  atl_atletica_id?: Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrder
   motivo?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -501,7 +501,7 @@ export type SysUsuarioPermissionMinOrderByAggregateInput = {
   sys_usuario_id?: Prisma.SortOrder
   sys_permission_id?: Prisma.SortOrder
   sys_usuario_permission_tipo_id?: Prisma.SortOrder
-  atl_atletica_id?: Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrder
   motivo?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -514,7 +514,7 @@ export type SysUsuarioPermissionSumOrderByAggregateInput = {
   sys_usuario_id?: Prisma.SortOrder
   sys_permission_id?: Prisma.SortOrder
   sys_usuario_permission_tipo_id?: Prisma.SortOrder
-  atl_atletica_id?: Prisma.SortOrder
+  ent_entidade_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
 }
 
@@ -644,45 +644,45 @@ export type SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuario_permission
   deleteMany?: Prisma.SysUsuarioPermissionScalarWhereInput | Prisma.SysUsuarioPermissionScalarWhereInput[]
 }
 
-export type SysUsuarioPermissionCreateNestedManyWithoutAtl_atleticaInput = {
-  create?: Prisma.XOR<Prisma.SysUsuarioPermissionCreateWithoutAtl_atleticaInput, Prisma.SysUsuarioPermissionUncheckedCreateWithoutAtl_atleticaInput> | Prisma.SysUsuarioPermissionCreateWithoutAtl_atleticaInput[] | Prisma.SysUsuarioPermissionUncheckedCreateWithoutAtl_atleticaInput[]
-  connectOrCreate?: Prisma.SysUsuarioPermissionCreateOrConnectWithoutAtl_atleticaInput | Prisma.SysUsuarioPermissionCreateOrConnectWithoutAtl_atleticaInput[]
-  createMany?: Prisma.SysUsuarioPermissionCreateManyAtl_atleticaInputEnvelope
+export type SysUsuarioPermissionCreateNestedManyWithoutEnt_entidadeInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioPermissionCreateWithoutEnt_entidadeInput, Prisma.SysUsuarioPermissionUncheckedCreateWithoutEnt_entidadeInput> | Prisma.SysUsuarioPermissionCreateWithoutEnt_entidadeInput[] | Prisma.SysUsuarioPermissionUncheckedCreateWithoutEnt_entidadeInput[]
+  connectOrCreate?: Prisma.SysUsuarioPermissionCreateOrConnectWithoutEnt_entidadeInput | Prisma.SysUsuarioPermissionCreateOrConnectWithoutEnt_entidadeInput[]
+  createMany?: Prisma.SysUsuarioPermissionCreateManyEnt_entidadeInputEnvelope
   connect?: Prisma.SysUsuarioPermissionWhereUniqueInput | Prisma.SysUsuarioPermissionWhereUniqueInput[]
 }
 
-export type SysUsuarioPermissionUncheckedCreateNestedManyWithoutAtl_atleticaInput = {
-  create?: Prisma.XOR<Prisma.SysUsuarioPermissionCreateWithoutAtl_atleticaInput, Prisma.SysUsuarioPermissionUncheckedCreateWithoutAtl_atleticaInput> | Prisma.SysUsuarioPermissionCreateWithoutAtl_atleticaInput[] | Prisma.SysUsuarioPermissionUncheckedCreateWithoutAtl_atleticaInput[]
-  connectOrCreate?: Prisma.SysUsuarioPermissionCreateOrConnectWithoutAtl_atleticaInput | Prisma.SysUsuarioPermissionCreateOrConnectWithoutAtl_atleticaInput[]
-  createMany?: Prisma.SysUsuarioPermissionCreateManyAtl_atleticaInputEnvelope
+export type SysUsuarioPermissionUncheckedCreateNestedManyWithoutEnt_entidadeInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioPermissionCreateWithoutEnt_entidadeInput, Prisma.SysUsuarioPermissionUncheckedCreateWithoutEnt_entidadeInput> | Prisma.SysUsuarioPermissionCreateWithoutEnt_entidadeInput[] | Prisma.SysUsuarioPermissionUncheckedCreateWithoutEnt_entidadeInput[]
+  connectOrCreate?: Prisma.SysUsuarioPermissionCreateOrConnectWithoutEnt_entidadeInput | Prisma.SysUsuarioPermissionCreateOrConnectWithoutEnt_entidadeInput[]
+  createMany?: Prisma.SysUsuarioPermissionCreateManyEnt_entidadeInputEnvelope
   connect?: Prisma.SysUsuarioPermissionWhereUniqueInput | Prisma.SysUsuarioPermissionWhereUniqueInput[]
 }
 
-export type SysUsuarioPermissionUpdateManyWithoutAtl_atleticaNestedInput = {
-  create?: Prisma.XOR<Prisma.SysUsuarioPermissionCreateWithoutAtl_atleticaInput, Prisma.SysUsuarioPermissionUncheckedCreateWithoutAtl_atleticaInput> | Prisma.SysUsuarioPermissionCreateWithoutAtl_atleticaInput[] | Prisma.SysUsuarioPermissionUncheckedCreateWithoutAtl_atleticaInput[]
-  connectOrCreate?: Prisma.SysUsuarioPermissionCreateOrConnectWithoutAtl_atleticaInput | Prisma.SysUsuarioPermissionCreateOrConnectWithoutAtl_atleticaInput[]
-  upsert?: Prisma.SysUsuarioPermissionUpsertWithWhereUniqueWithoutAtl_atleticaInput | Prisma.SysUsuarioPermissionUpsertWithWhereUniqueWithoutAtl_atleticaInput[]
-  createMany?: Prisma.SysUsuarioPermissionCreateManyAtl_atleticaInputEnvelope
+export type SysUsuarioPermissionUpdateManyWithoutEnt_entidadeNestedInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioPermissionCreateWithoutEnt_entidadeInput, Prisma.SysUsuarioPermissionUncheckedCreateWithoutEnt_entidadeInput> | Prisma.SysUsuarioPermissionCreateWithoutEnt_entidadeInput[] | Prisma.SysUsuarioPermissionUncheckedCreateWithoutEnt_entidadeInput[]
+  connectOrCreate?: Prisma.SysUsuarioPermissionCreateOrConnectWithoutEnt_entidadeInput | Prisma.SysUsuarioPermissionCreateOrConnectWithoutEnt_entidadeInput[]
+  upsert?: Prisma.SysUsuarioPermissionUpsertWithWhereUniqueWithoutEnt_entidadeInput | Prisma.SysUsuarioPermissionUpsertWithWhereUniqueWithoutEnt_entidadeInput[]
+  createMany?: Prisma.SysUsuarioPermissionCreateManyEnt_entidadeInputEnvelope
   set?: Prisma.SysUsuarioPermissionWhereUniqueInput | Prisma.SysUsuarioPermissionWhereUniqueInput[]
   disconnect?: Prisma.SysUsuarioPermissionWhereUniqueInput | Prisma.SysUsuarioPermissionWhereUniqueInput[]
   delete?: Prisma.SysUsuarioPermissionWhereUniqueInput | Prisma.SysUsuarioPermissionWhereUniqueInput[]
   connect?: Prisma.SysUsuarioPermissionWhereUniqueInput | Prisma.SysUsuarioPermissionWhereUniqueInput[]
-  update?: Prisma.SysUsuarioPermissionUpdateWithWhereUniqueWithoutAtl_atleticaInput | Prisma.SysUsuarioPermissionUpdateWithWhereUniqueWithoutAtl_atleticaInput[]
-  updateMany?: Prisma.SysUsuarioPermissionUpdateManyWithWhereWithoutAtl_atleticaInput | Prisma.SysUsuarioPermissionUpdateManyWithWhereWithoutAtl_atleticaInput[]
+  update?: Prisma.SysUsuarioPermissionUpdateWithWhereUniqueWithoutEnt_entidadeInput | Prisma.SysUsuarioPermissionUpdateWithWhereUniqueWithoutEnt_entidadeInput[]
+  updateMany?: Prisma.SysUsuarioPermissionUpdateManyWithWhereWithoutEnt_entidadeInput | Prisma.SysUsuarioPermissionUpdateManyWithWhereWithoutEnt_entidadeInput[]
   deleteMany?: Prisma.SysUsuarioPermissionScalarWhereInput | Prisma.SysUsuarioPermissionScalarWhereInput[]
 }
 
-export type SysUsuarioPermissionUncheckedUpdateManyWithoutAtl_atleticaNestedInput = {
-  create?: Prisma.XOR<Prisma.SysUsuarioPermissionCreateWithoutAtl_atleticaInput, Prisma.SysUsuarioPermissionUncheckedCreateWithoutAtl_atleticaInput> | Prisma.SysUsuarioPermissionCreateWithoutAtl_atleticaInput[] | Prisma.SysUsuarioPermissionUncheckedCreateWithoutAtl_atleticaInput[]
-  connectOrCreate?: Prisma.SysUsuarioPermissionCreateOrConnectWithoutAtl_atleticaInput | Prisma.SysUsuarioPermissionCreateOrConnectWithoutAtl_atleticaInput[]
-  upsert?: Prisma.SysUsuarioPermissionUpsertWithWhereUniqueWithoutAtl_atleticaInput | Prisma.SysUsuarioPermissionUpsertWithWhereUniqueWithoutAtl_atleticaInput[]
-  createMany?: Prisma.SysUsuarioPermissionCreateManyAtl_atleticaInputEnvelope
+export type SysUsuarioPermissionUncheckedUpdateManyWithoutEnt_entidadeNestedInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioPermissionCreateWithoutEnt_entidadeInput, Prisma.SysUsuarioPermissionUncheckedCreateWithoutEnt_entidadeInput> | Prisma.SysUsuarioPermissionCreateWithoutEnt_entidadeInput[] | Prisma.SysUsuarioPermissionUncheckedCreateWithoutEnt_entidadeInput[]
+  connectOrCreate?: Prisma.SysUsuarioPermissionCreateOrConnectWithoutEnt_entidadeInput | Prisma.SysUsuarioPermissionCreateOrConnectWithoutEnt_entidadeInput[]
+  upsert?: Prisma.SysUsuarioPermissionUpsertWithWhereUniqueWithoutEnt_entidadeInput | Prisma.SysUsuarioPermissionUpsertWithWhereUniqueWithoutEnt_entidadeInput[]
+  createMany?: Prisma.SysUsuarioPermissionCreateManyEnt_entidadeInputEnvelope
   set?: Prisma.SysUsuarioPermissionWhereUniqueInput | Prisma.SysUsuarioPermissionWhereUniqueInput[]
   disconnect?: Prisma.SysUsuarioPermissionWhereUniqueInput | Prisma.SysUsuarioPermissionWhereUniqueInput[]
   delete?: Prisma.SysUsuarioPermissionWhereUniqueInput | Prisma.SysUsuarioPermissionWhereUniqueInput[]
   connect?: Prisma.SysUsuarioPermissionWhereUniqueInput | Prisma.SysUsuarioPermissionWhereUniqueInput[]
-  update?: Prisma.SysUsuarioPermissionUpdateWithWhereUniqueWithoutAtl_atleticaInput | Prisma.SysUsuarioPermissionUpdateWithWhereUniqueWithoutAtl_atleticaInput[]
-  updateMany?: Prisma.SysUsuarioPermissionUpdateManyWithWhereWithoutAtl_atleticaInput | Prisma.SysUsuarioPermissionUpdateManyWithWhereWithoutAtl_atleticaInput[]
+  update?: Prisma.SysUsuarioPermissionUpdateWithWhereUniqueWithoutEnt_entidadeInput | Prisma.SysUsuarioPermissionUpdateWithWhereUniqueWithoutEnt_entidadeInput[]
+  updateMany?: Prisma.SysUsuarioPermissionUpdateManyWithWhereWithoutEnt_entidadeInput | Prisma.SysUsuarioPermissionUpdateManyWithWhereWithoutEnt_entidadeInput[]
   deleteMany?: Prisma.SysUsuarioPermissionScalarWhereInput | Prisma.SysUsuarioPermissionScalarWhereInput[]
 }
 
@@ -694,14 +694,14 @@ export type SysUsuarioPermissionCreateWithoutSys_usuarioInput = {
   deleted_at?: Date | string | null
   sys_permission: Prisma.SysPermissionCreateNestedOneWithoutSys_usuario_permissionInput
   sys_usuario_permission_tipo: Prisma.SysUsuarioPermissionTipoCreateNestedOneWithoutSys_usuario_permissionInput
-  atl_atletica?: Prisma.AtlAtleticaCreateNestedOneWithoutSys_usuario_permissionInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedOneWithoutSys_usuario_permissionInput
 }
 
 export type SysUsuarioPermissionUncheckedCreateWithoutSys_usuarioInput = {
   id?: number
   sys_permission_id: number
   sys_usuario_permission_tipo_id: number
-  atl_atletica_id?: number | null
+  ent_entidade_id?: number | null
   motivo?: string | null
   ativo?: number
   created_at?: Date | string | null
@@ -743,7 +743,7 @@ export type SysUsuarioPermissionScalarWhereInput = {
   sys_usuario_id?: Prisma.IntFilter<"SysUsuarioPermission"> | number
   sys_permission_id?: Prisma.IntFilter<"SysUsuarioPermission"> | number
   sys_usuario_permission_tipo_id?: Prisma.IntFilter<"SysUsuarioPermission"> | number
-  atl_atletica_id?: Prisma.IntNullableFilter<"SysUsuarioPermission"> | number | null
+  ent_entidade_id?: Prisma.IntNullableFilter<"SysUsuarioPermission"> | number | null
   motivo?: Prisma.StringNullableFilter<"SysUsuarioPermission"> | string | null
   ativo?: Prisma.IntFilter<"SysUsuarioPermission"> | number
   created_at?: Prisma.DateTimeNullableFilter<"SysUsuarioPermission"> | Date | string | null
@@ -759,14 +759,14 @@ export type SysUsuarioPermissionCreateWithoutSys_permissionInput = {
   deleted_at?: Date | string | null
   sys_usuario: Prisma.SysUsuarioCreateNestedOneWithoutSys_usuario_permissionInput
   sys_usuario_permission_tipo: Prisma.SysUsuarioPermissionTipoCreateNestedOneWithoutSys_usuario_permissionInput
-  atl_atletica?: Prisma.AtlAtleticaCreateNestedOneWithoutSys_usuario_permissionInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedOneWithoutSys_usuario_permissionInput
 }
 
 export type SysUsuarioPermissionUncheckedCreateWithoutSys_permissionInput = {
   id?: number
   sys_usuario_id: number
   sys_usuario_permission_tipo_id: number
-  atl_atletica_id?: number | null
+  ent_entidade_id?: number | null
   motivo?: string | null
   ativo?: number
   created_at?: Date | string | null
@@ -808,14 +808,14 @@ export type SysUsuarioPermissionCreateWithoutSys_usuario_permission_tipoInput = 
   deleted_at?: Date | string | null
   sys_usuario: Prisma.SysUsuarioCreateNestedOneWithoutSys_usuario_permissionInput
   sys_permission: Prisma.SysPermissionCreateNestedOneWithoutSys_usuario_permissionInput
-  atl_atletica?: Prisma.AtlAtleticaCreateNestedOneWithoutSys_usuario_permissionInput
+  ent_entidade?: Prisma.EntEntidadeCreateNestedOneWithoutSys_usuario_permissionInput
 }
 
 export type SysUsuarioPermissionUncheckedCreateWithoutSys_usuario_permission_tipoInput = {
   id?: number
   sys_usuario_id: number
   sys_permission_id: number
-  atl_atletica_id?: number | null
+  ent_entidade_id?: number | null
   motivo?: string | null
   ativo?: number
   created_at?: Date | string | null
@@ -849,7 +849,7 @@ export type SysUsuarioPermissionUpdateManyWithWhereWithoutSys_usuario_permission
   data: Prisma.XOR<Prisma.SysUsuarioPermissionUpdateManyMutationInput, Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuario_permission_tipoInput>
 }
 
-export type SysUsuarioPermissionCreateWithoutAtl_atleticaInput = {
+export type SysUsuarioPermissionCreateWithoutEnt_entidadeInput = {
   motivo?: string | null
   ativo?: number
   created_at?: Date | string | null
@@ -860,7 +860,7 @@ export type SysUsuarioPermissionCreateWithoutAtl_atleticaInput = {
   sys_usuario_permission_tipo: Prisma.SysUsuarioPermissionTipoCreateNestedOneWithoutSys_usuario_permissionInput
 }
 
-export type SysUsuarioPermissionUncheckedCreateWithoutAtl_atleticaInput = {
+export type SysUsuarioPermissionUncheckedCreateWithoutEnt_entidadeInput = {
   id?: number
   sys_usuario_id: number
   sys_permission_id: number
@@ -872,37 +872,37 @@ export type SysUsuarioPermissionUncheckedCreateWithoutAtl_atleticaInput = {
   deleted_at?: Date | string | null
 }
 
-export type SysUsuarioPermissionCreateOrConnectWithoutAtl_atleticaInput = {
+export type SysUsuarioPermissionCreateOrConnectWithoutEnt_entidadeInput = {
   where: Prisma.SysUsuarioPermissionWhereUniqueInput
-  create: Prisma.XOR<Prisma.SysUsuarioPermissionCreateWithoutAtl_atleticaInput, Prisma.SysUsuarioPermissionUncheckedCreateWithoutAtl_atleticaInput>
+  create: Prisma.XOR<Prisma.SysUsuarioPermissionCreateWithoutEnt_entidadeInput, Prisma.SysUsuarioPermissionUncheckedCreateWithoutEnt_entidadeInput>
 }
 
-export type SysUsuarioPermissionCreateManyAtl_atleticaInputEnvelope = {
-  data: Prisma.SysUsuarioPermissionCreateManyAtl_atleticaInput | Prisma.SysUsuarioPermissionCreateManyAtl_atleticaInput[]
+export type SysUsuarioPermissionCreateManyEnt_entidadeInputEnvelope = {
+  data: Prisma.SysUsuarioPermissionCreateManyEnt_entidadeInput | Prisma.SysUsuarioPermissionCreateManyEnt_entidadeInput[]
   skipDuplicates?: boolean
 }
 
-export type SysUsuarioPermissionUpsertWithWhereUniqueWithoutAtl_atleticaInput = {
+export type SysUsuarioPermissionUpsertWithWhereUniqueWithoutEnt_entidadeInput = {
   where: Prisma.SysUsuarioPermissionWhereUniqueInput
-  update: Prisma.XOR<Prisma.SysUsuarioPermissionUpdateWithoutAtl_atleticaInput, Prisma.SysUsuarioPermissionUncheckedUpdateWithoutAtl_atleticaInput>
-  create: Prisma.XOR<Prisma.SysUsuarioPermissionCreateWithoutAtl_atleticaInput, Prisma.SysUsuarioPermissionUncheckedCreateWithoutAtl_atleticaInput>
+  update: Prisma.XOR<Prisma.SysUsuarioPermissionUpdateWithoutEnt_entidadeInput, Prisma.SysUsuarioPermissionUncheckedUpdateWithoutEnt_entidadeInput>
+  create: Prisma.XOR<Prisma.SysUsuarioPermissionCreateWithoutEnt_entidadeInput, Prisma.SysUsuarioPermissionUncheckedCreateWithoutEnt_entidadeInput>
 }
 
-export type SysUsuarioPermissionUpdateWithWhereUniqueWithoutAtl_atleticaInput = {
+export type SysUsuarioPermissionUpdateWithWhereUniqueWithoutEnt_entidadeInput = {
   where: Prisma.SysUsuarioPermissionWhereUniqueInput
-  data: Prisma.XOR<Prisma.SysUsuarioPermissionUpdateWithoutAtl_atleticaInput, Prisma.SysUsuarioPermissionUncheckedUpdateWithoutAtl_atleticaInput>
+  data: Prisma.XOR<Prisma.SysUsuarioPermissionUpdateWithoutEnt_entidadeInput, Prisma.SysUsuarioPermissionUncheckedUpdateWithoutEnt_entidadeInput>
 }
 
-export type SysUsuarioPermissionUpdateManyWithWhereWithoutAtl_atleticaInput = {
+export type SysUsuarioPermissionUpdateManyWithWhereWithoutEnt_entidadeInput = {
   where: Prisma.SysUsuarioPermissionScalarWhereInput
-  data: Prisma.XOR<Prisma.SysUsuarioPermissionUpdateManyMutationInput, Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutAtl_atleticaInput>
+  data: Prisma.XOR<Prisma.SysUsuarioPermissionUpdateManyMutationInput, Prisma.SysUsuarioPermissionUncheckedUpdateManyWithoutEnt_entidadeInput>
 }
 
 export type SysUsuarioPermissionCreateManySys_usuarioInput = {
   id?: number
   sys_permission_id: number
   sys_usuario_permission_tipo_id: number
-  atl_atletica_id?: number | null
+  ent_entidade_id?: number | null
   motivo?: string | null
   ativo?: number
   created_at?: Date | string | null
@@ -918,14 +918,14 @@ export type SysUsuarioPermissionUpdateWithoutSys_usuarioInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_permission?: Prisma.SysPermissionUpdateOneRequiredWithoutSys_usuario_permissionNestedInput
   sys_usuario_permission_tipo?: Prisma.SysUsuarioPermissionTipoUpdateOneRequiredWithoutSys_usuario_permissionNestedInput
-  atl_atletica?: Prisma.AtlAtleticaUpdateOneWithoutSys_usuario_permissionNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateOneWithoutSys_usuario_permissionNestedInput
 }
 
 export type SysUsuarioPermissionUncheckedUpdateWithoutSys_usuarioInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_permission_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_permission_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
-  atl_atletica_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   motivo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -937,7 +937,7 @@ export type SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuarioInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_permission_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_permission_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
-  atl_atletica_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   motivo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -949,7 +949,7 @@ export type SysUsuarioPermissionCreateManySys_permissionInput = {
   id?: number
   sys_usuario_id: number
   sys_usuario_permission_tipo_id: number
-  atl_atletica_id?: number | null
+  ent_entidade_id?: number | null
   motivo?: string | null
   ativo?: number
   created_at?: Date | string | null
@@ -965,14 +965,14 @@ export type SysUsuarioPermissionUpdateWithoutSys_permissionInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario?: Prisma.SysUsuarioUpdateOneRequiredWithoutSys_usuario_permissionNestedInput
   sys_usuario_permission_tipo?: Prisma.SysUsuarioPermissionTipoUpdateOneRequiredWithoutSys_usuario_permissionNestedInput
-  atl_atletica?: Prisma.AtlAtleticaUpdateOneWithoutSys_usuario_permissionNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateOneWithoutSys_usuario_permissionNestedInput
 }
 
 export type SysUsuarioPermissionUncheckedUpdateWithoutSys_permissionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_permission_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
-  atl_atletica_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   motivo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -984,7 +984,7 @@ export type SysUsuarioPermissionUncheckedUpdateManyWithoutSys_permissionInput = 
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_permission_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
-  atl_atletica_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   motivo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -996,7 +996,7 @@ export type SysUsuarioPermissionCreateManySys_usuario_permission_tipoInput = {
   id?: number
   sys_usuario_id: number
   sys_permission_id: number
-  atl_atletica_id?: number | null
+  ent_entidade_id?: number | null
   motivo?: string | null
   ativo?: number
   created_at?: Date | string | null
@@ -1012,14 +1012,14 @@ export type SysUsuarioPermissionUpdateWithoutSys_usuario_permission_tipoInput = 
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario?: Prisma.SysUsuarioUpdateOneRequiredWithoutSys_usuario_permissionNestedInput
   sys_permission?: Prisma.SysPermissionUpdateOneRequiredWithoutSys_usuario_permissionNestedInput
-  atl_atletica?: Prisma.AtlAtleticaUpdateOneWithoutSys_usuario_permissionNestedInput
+  ent_entidade?: Prisma.EntEntidadeUpdateOneWithoutSys_usuario_permissionNestedInput
 }
 
 export type SysUsuarioPermissionUncheckedUpdateWithoutSys_usuario_permission_tipoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_permission_id?: Prisma.IntFieldUpdateOperationsInput | number
-  atl_atletica_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   motivo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1031,7 +1031,7 @@ export type SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuario_permission
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_permission_id?: Prisma.IntFieldUpdateOperationsInput | number
-  atl_atletica_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ent_entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   motivo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1039,7 +1039,7 @@ export type SysUsuarioPermissionUncheckedUpdateManyWithoutSys_usuario_permission
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type SysUsuarioPermissionCreateManyAtl_atleticaInput = {
+export type SysUsuarioPermissionCreateManyEnt_entidadeInput = {
   id?: number
   sys_usuario_id: number
   sys_permission_id: number
@@ -1051,7 +1051,7 @@ export type SysUsuarioPermissionCreateManyAtl_atleticaInput = {
   deleted_at?: Date | string | null
 }
 
-export type SysUsuarioPermissionUpdateWithoutAtl_atleticaInput = {
+export type SysUsuarioPermissionUpdateWithoutEnt_entidadeInput = {
   motivo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1062,7 +1062,7 @@ export type SysUsuarioPermissionUpdateWithoutAtl_atleticaInput = {
   sys_usuario_permission_tipo?: Prisma.SysUsuarioPermissionTipoUpdateOneRequiredWithoutSys_usuario_permissionNestedInput
 }
 
-export type SysUsuarioPermissionUncheckedUpdateWithoutAtl_atleticaInput = {
+export type SysUsuarioPermissionUncheckedUpdateWithoutEnt_entidadeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_permission_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1074,7 +1074,7 @@ export type SysUsuarioPermissionUncheckedUpdateWithoutAtl_atleticaInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type SysUsuarioPermissionUncheckedUpdateManyWithoutAtl_atleticaInput = {
+export type SysUsuarioPermissionUncheckedUpdateManyWithoutEnt_entidadeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_permission_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1093,7 +1093,7 @@ export type SysUsuarioPermissionSelect<ExtArgs extends runtime.Types.Extensions.
   sys_usuario_id?: boolean
   sys_permission_id?: boolean
   sys_usuario_permission_tipo_id?: boolean
-  atl_atletica_id?: boolean
+  ent_entidade_id?: boolean
   motivo?: boolean
   ativo?: boolean
   created_at?: boolean
@@ -1102,7 +1102,7 @@ export type SysUsuarioPermissionSelect<ExtArgs extends runtime.Types.Extensions.
   sys_usuario?: boolean | Prisma.SysUsuarioDefaultArgs<ExtArgs>
   sys_permission?: boolean | Prisma.SysPermissionDefaultArgs<ExtArgs>
   sys_usuario_permission_tipo?: boolean | Prisma.SysUsuarioPermissionTipoDefaultArgs<ExtArgs>
-  atl_atletica?: boolean | Prisma.SysUsuarioPermission$atl_atleticaArgs<ExtArgs>
+  ent_entidade?: boolean | Prisma.SysUsuarioPermission$ent_entidadeArgs<ExtArgs>
 }, ExtArgs["result"]["sysUsuarioPermission"]>
 
 
@@ -1112,7 +1112,7 @@ export type SysUsuarioPermissionSelectScalar = {
   sys_usuario_id?: boolean
   sys_permission_id?: boolean
   sys_usuario_permission_tipo_id?: boolean
-  atl_atletica_id?: boolean
+  ent_entidade_id?: boolean
   motivo?: boolean
   ativo?: boolean
   created_at?: boolean
@@ -1120,12 +1120,12 @@ export type SysUsuarioPermissionSelectScalar = {
   deleted_at?: boolean
 }
 
-export type SysUsuarioPermissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sys_usuario_id" | "sys_permission_id" | "sys_usuario_permission_tipo_id" | "atl_atletica_id" | "motivo" | "ativo" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["sysUsuarioPermission"]>
+export type SysUsuarioPermissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sys_usuario_id" | "sys_permission_id" | "sys_usuario_permission_tipo_id" | "ent_entidade_id" | "motivo" | "ativo" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["sysUsuarioPermission"]>
 export type SysUsuarioPermissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sys_usuario?: boolean | Prisma.SysUsuarioDefaultArgs<ExtArgs>
   sys_permission?: boolean | Prisma.SysPermissionDefaultArgs<ExtArgs>
   sys_usuario_permission_tipo?: boolean | Prisma.SysUsuarioPermissionTipoDefaultArgs<ExtArgs>
-  atl_atletica?: boolean | Prisma.SysUsuarioPermission$atl_atleticaArgs<ExtArgs>
+  ent_entidade?: boolean | Prisma.SysUsuarioPermission$ent_entidadeArgs<ExtArgs>
 }
 
 export type $SysUsuarioPermissionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1134,14 +1134,14 @@ export type $SysUsuarioPermissionPayload<ExtArgs extends runtime.Types.Extension
     sys_usuario: Prisma.$SysUsuarioPayload<ExtArgs>
     sys_permission: Prisma.$SysPermissionPayload<ExtArgs>
     sys_usuario_permission_tipo: Prisma.$SysUsuarioPermissionTipoPayload<ExtArgs>
-    atl_atletica: Prisma.$AtlAtleticaPayload<ExtArgs> | null
+    ent_entidade: Prisma.$EntEntidadePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     sys_usuario_id: number
     sys_permission_id: number
     sys_usuario_permission_tipo_id: number
-    atl_atletica_id: number | null
+    ent_entidade_id: number | null
     motivo: string | null
     ativo: number
     created_at: Date | null
@@ -1490,7 +1490,7 @@ export interface Prisma__SysUsuarioPermissionClient<T, Null = never, ExtArgs ext
   sys_usuario<T extends Prisma.SysUsuarioDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuarioDefaultArgs<ExtArgs>>): Prisma.Prisma__SysUsuarioClient<runtime.Types.Result.GetResult<Prisma.$SysUsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   sys_permission<T extends Prisma.SysPermissionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysPermissionDefaultArgs<ExtArgs>>): Prisma.Prisma__SysPermissionClient<runtime.Types.Result.GetResult<Prisma.$SysPermissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   sys_usuario_permission_tipo<T extends Prisma.SysUsuarioPermissionTipoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuarioPermissionTipoDefaultArgs<ExtArgs>>): Prisma.Prisma__SysUsuarioPermissionTipoClient<runtime.Types.Result.GetResult<Prisma.$SysUsuarioPermissionTipoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  atl_atletica<T extends Prisma.SysUsuarioPermission$atl_atleticaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuarioPermission$atl_atleticaArgs<ExtArgs>>): Prisma.Prisma__AtlAtleticaClient<runtime.Types.Result.GetResult<Prisma.$AtlAtleticaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  ent_entidade<T extends Prisma.SysUsuarioPermission$ent_entidadeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuarioPermission$ent_entidadeArgs<ExtArgs>>): Prisma.Prisma__EntEntidadeClient<runtime.Types.Result.GetResult<Prisma.$EntEntidadePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1524,7 +1524,7 @@ export interface SysUsuarioPermissionFieldRefs {
   readonly sys_usuario_id: Prisma.FieldRef<"SysUsuarioPermission", 'Int'>
   readonly sys_permission_id: Prisma.FieldRef<"SysUsuarioPermission", 'Int'>
   readonly sys_usuario_permission_tipo_id: Prisma.FieldRef<"SysUsuarioPermission", 'Int'>
-  readonly atl_atletica_id: Prisma.FieldRef<"SysUsuarioPermission", 'Int'>
+  readonly ent_entidade_id: Prisma.FieldRef<"SysUsuarioPermission", 'Int'>
   readonly motivo: Prisma.FieldRef<"SysUsuarioPermission", 'String'>
   readonly ativo: Prisma.FieldRef<"SysUsuarioPermission", 'Int'>
   readonly created_at: Prisma.FieldRef<"SysUsuarioPermission", 'DateTime'>
@@ -1878,22 +1878,22 @@ export type SysUsuarioPermissionDeleteManyArgs<ExtArgs extends runtime.Types.Ext
 }
 
 /**
- * SysUsuarioPermission.atl_atletica
+ * SysUsuarioPermission.ent_entidade
  */
-export type SysUsuarioPermission$atl_atleticaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SysUsuarioPermission$ent_entidadeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the AtlAtletica
+   * Select specific fields to fetch from the EntEntidade
    */
-  select?: Prisma.AtlAtleticaSelect<ExtArgs> | null
+  select?: Prisma.EntEntidadeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the AtlAtletica
+   * Omit specific fields from the EntEntidade
    */
-  omit?: Prisma.AtlAtleticaOmit<ExtArgs> | null
+  omit?: Prisma.EntEntidadeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.AtlAtleticaInclude<ExtArgs> | null
-  where?: Prisma.AtlAtleticaWhereInput
+  include?: Prisma.EntEntidadeInclude<ExtArgs> | null
+  where?: Prisma.EntEntidadeWhereInput
 }
 
 /**

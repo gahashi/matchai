@@ -395,24 +395,28 @@ export const ModelName = {
   EduInstituicao: 'EduInstituicao',
   EduCurso: 'EduCurso',
   EduInstituicaoCurso: 'EduInstituicaoCurso',
-  AtlAtleticaStatus: 'AtlAtleticaStatus',
-  AtlAtletica: 'AtlAtletica',
-  AtlAtleticaCurso: 'AtlAtleticaCurso',
-  AtlAtleticaGestaoStatus: 'AtlAtleticaGestaoStatus',
-  AtlAtleticaGestao: 'AtlAtleticaGestao',
-  AtlCargoTipo: 'AtlCargoTipo',
-  AtlCargo: 'AtlCargo',
-  AtlAtleticaCargo: 'AtlAtleticaCargo',
-  AtlAtleticaMembroTipo: 'AtlAtleticaMembroTipo',
-  AtlAtleticaMembroStatus: 'AtlAtleticaMembroStatus',
-  AtlAtleticaMembro: 'AtlAtleticaMembro',
-  AtlAtleticaMembroCargo: 'AtlAtleticaMembroCargo',
-  AtlAtleticaTema: 'AtlAtleticaTema',
-  AtlAtleticaRegimento: 'AtlAtleticaRegimento',
+  EduPolo: 'EduPolo',
+  SysUsuarioPolo: 'SysUsuarioPolo',
+  EntEntidadeTipo: 'EntEntidadeTipo',
+  EntEntidadeStatus: 'EntEntidadeStatus',
+  EntEntidade: 'EntEntidade',
+  EntEntidadeCurso: 'EntEntidadeCurso',
+  EntEntidadePolo: 'EntEntidadePolo',
+  EntEntidadeGestaoStatus: 'EntEntidadeGestaoStatus',
+  EntEntidadeGestao: 'EntEntidadeGestao',
+  EntCargoTipo: 'EntCargoTipo',
+  EntCargo: 'EntCargo',
+  EntEntidadeCargo: 'EntEntidadeCargo',
+  EntEntidadeMembroTipo: 'EntEntidadeMembroTipo',
+  EntEntidadeMembroStatus: 'EntEntidadeMembroStatus',
+  EntEntidadeMembro: 'EntEntidadeMembro',
+  EntEntidadeMembroCargo: 'EntEntidadeMembroCargo',
+  EntEntidadeTema: 'EntEntidadeTema',
+  EntEntidadeRegimento: 'EntEntidadeRegimento',
   SysAssinaturaPlanoPeriodicidade: 'SysAssinaturaPlanoPeriodicidade',
   SysAssinaturaPlano: 'SysAssinaturaPlano',
-  AtlAtleticaAssinaturaStatus: 'AtlAtleticaAssinaturaStatus',
-  AtlAtleticaAssinatura: 'AtlAtleticaAssinatura',
+  EntEntidadeAssinaturaStatus: 'EntEntidadeAssinaturaStatus',
+  EntEntidadeAssinatura: 'EntEntidadeAssinatura',
   User: 'User',
   Session: 'Session',
   Account: 'Account',
@@ -450,7 +454,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "sysUsuario" | "sysRoleEscopo" | "sysRole" | "sysPermission" | "sysRolePermission" | "sysUsuarioRole" | "sysUsuarioPermissionTipo" | "sysUsuarioPermission" | "eduInstituicao" | "eduCurso" | "eduInstituicaoCurso" | "atlAtleticaStatus" | "atlAtletica" | "atlAtleticaCurso" | "atlAtleticaGestaoStatus" | "atlAtleticaGestao" | "atlCargoTipo" | "atlCargo" | "atlAtleticaCargo" | "atlAtleticaMembroTipo" | "atlAtleticaMembroStatus" | "atlAtleticaMembro" | "atlAtleticaMembroCargo" | "atlAtleticaTema" | "atlAtleticaRegimento" | "sysAssinaturaPlanoPeriodicidade" | "sysAssinaturaPlano" | "atlAtleticaAssinaturaStatus" | "atlAtleticaAssinatura" | "user" | "session" | "account" | "verification" | "sysEmailLog" | "sysEmailVerificationCode" | "sysAuthLoginLog" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivoEntidadeTipo" | "sysArquivo" | "sysInboxItemTipo" | "sysInboxItemStatus" | "sysInboxItem" | "sysSolicitacaoTipo" | "sysSolicitacaoStatus" | "sysSolicitacao" | "sysSolicitacaoHistorico" | "sysSolicitacaoDocumentoTipo" | "sysSolicitacaoDocumentoStatus" | "sysSolicitacaoDocumento"
+    modelProps: "sysUsuario" | "sysRoleEscopo" | "sysRole" | "sysPermission" | "sysRolePermission" | "sysUsuarioRole" | "sysUsuarioPermissionTipo" | "sysUsuarioPermission" | "eduInstituicao" | "eduCurso" | "eduInstituicaoCurso" | "eduPolo" | "sysUsuarioPolo" | "entEntidadeTipo" | "entEntidadeStatus" | "entEntidade" | "entEntidadeCurso" | "entEntidadePolo" | "entEntidadeGestaoStatus" | "entEntidadeGestao" | "entCargoTipo" | "entCargo" | "entEntidadeCargo" | "entEntidadeMembroTipo" | "entEntidadeMembroStatus" | "entEntidadeMembro" | "entEntidadeMembroCargo" | "entEntidadeTema" | "entEntidadeRegimento" | "sysAssinaturaPlanoPeriodicidade" | "sysAssinaturaPlano" | "entEntidadeAssinaturaStatus" | "entEntidadeAssinatura" | "user" | "session" | "account" | "verification" | "sysEmailLog" | "sysEmailVerificationCode" | "sysAuthLoginLog" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivoEntidadeTipo" | "sysArquivo" | "sysInboxItemTipo" | "sysInboxItemStatus" | "sysInboxItem" | "sysSolicitacaoTipo" | "sysSolicitacaoStatus" | "sysSolicitacao" | "sysSolicitacaoHistorico" | "sysSolicitacaoDocumentoTipo" | "sysSolicitacaoDocumentoStatus" | "sysSolicitacaoDocumento"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1180,927 +1184,1191 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    AtlAtleticaStatus: {
-      payload: Prisma.$AtlAtleticaStatusPayload<ExtArgs>
-      fields: Prisma.AtlAtleticaStatusFieldRefs
+    EduPolo: {
+      payload: Prisma.$EduPoloPayload<ExtArgs>
+      fields: Prisma.EduPoloFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.AtlAtleticaStatusFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload> | null
+          args: Prisma.EduPoloFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EduPoloPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.AtlAtleticaStatusFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload>
+          args: Prisma.EduPoloFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EduPoloPayload>
         }
         findFirst: {
-          args: Prisma.AtlAtleticaStatusFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload> | null
+          args: Prisma.EduPoloFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EduPoloPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.AtlAtleticaStatusFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload>
+          args: Prisma.EduPoloFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EduPoloPayload>
         }
         findMany: {
-          args: Prisma.AtlAtleticaStatusFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload>[]
+          args: Prisma.EduPoloFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EduPoloPayload>[]
         }
         create: {
-          args: Prisma.AtlAtleticaStatusCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload>
+          args: Prisma.EduPoloCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EduPoloPayload>
         }
         createMany: {
-          args: Prisma.AtlAtleticaStatusCreateManyArgs<ExtArgs>
+          args: Prisma.EduPoloCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         delete: {
-          args: Prisma.AtlAtleticaStatusDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload>
+          args: Prisma.EduPoloDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EduPoloPayload>
         }
         update: {
-          args: Prisma.AtlAtleticaStatusUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload>
+          args: Prisma.EduPoloUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EduPoloPayload>
         }
         deleteMany: {
-          args: Prisma.AtlAtleticaStatusDeleteManyArgs<ExtArgs>
+          args: Prisma.EduPoloDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.AtlAtleticaStatusUpdateManyArgs<ExtArgs>
+          args: Prisma.EduPoloUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         upsert: {
-          args: Prisma.AtlAtleticaStatusUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaStatusPayload>
+          args: Prisma.EduPoloUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EduPoloPayload>
         }
         aggregate: {
-          args: Prisma.AtlAtleticaStatusAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlAtleticaStatus>
+          args: Prisma.EduPoloAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEduPolo>
         }
         groupBy: {
-          args: Prisma.AtlAtleticaStatusGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaStatusGroupByOutputType>[]
+          args: Prisma.EduPoloGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EduPoloGroupByOutputType>[]
         }
         count: {
-          args: Prisma.AtlAtleticaStatusCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaStatusCountAggregateOutputType> | number
+          args: Prisma.EduPoloCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EduPoloCountAggregateOutputType> | number
         }
       }
     }
-    AtlAtletica: {
-      payload: Prisma.$AtlAtleticaPayload<ExtArgs>
-      fields: Prisma.AtlAtleticaFieldRefs
+    SysUsuarioPolo: {
+      payload: Prisma.$SysUsuarioPoloPayload<ExtArgs>
+      fields: Prisma.SysUsuarioPoloFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.AtlAtleticaFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaPayload> | null
+          args: Prisma.SysUsuarioPoloFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysUsuarioPoloPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.AtlAtleticaFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaPayload>
+          args: Prisma.SysUsuarioPoloFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysUsuarioPoloPayload>
         }
         findFirst: {
-          args: Prisma.AtlAtleticaFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaPayload> | null
+          args: Prisma.SysUsuarioPoloFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysUsuarioPoloPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.AtlAtleticaFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaPayload>
+          args: Prisma.SysUsuarioPoloFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysUsuarioPoloPayload>
         }
         findMany: {
-          args: Prisma.AtlAtleticaFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaPayload>[]
+          args: Prisma.SysUsuarioPoloFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysUsuarioPoloPayload>[]
         }
         create: {
-          args: Prisma.AtlAtleticaCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaPayload>
+          args: Prisma.SysUsuarioPoloCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysUsuarioPoloPayload>
         }
         createMany: {
-          args: Prisma.AtlAtleticaCreateManyArgs<ExtArgs>
+          args: Prisma.SysUsuarioPoloCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         delete: {
-          args: Prisma.AtlAtleticaDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaPayload>
+          args: Prisma.SysUsuarioPoloDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysUsuarioPoloPayload>
         }
         update: {
-          args: Prisma.AtlAtleticaUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaPayload>
+          args: Prisma.SysUsuarioPoloUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysUsuarioPoloPayload>
         }
         deleteMany: {
-          args: Prisma.AtlAtleticaDeleteManyArgs<ExtArgs>
+          args: Prisma.SysUsuarioPoloDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.AtlAtleticaUpdateManyArgs<ExtArgs>
+          args: Prisma.SysUsuarioPoloUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         upsert: {
-          args: Prisma.AtlAtleticaUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaPayload>
+          args: Prisma.SysUsuarioPoloUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysUsuarioPoloPayload>
         }
         aggregate: {
-          args: Prisma.AtlAtleticaAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlAtletica>
+          args: Prisma.SysUsuarioPoloAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysUsuarioPolo>
         }
         groupBy: {
-          args: Prisma.AtlAtleticaGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaGroupByOutputType>[]
+          args: Prisma.SysUsuarioPoloGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysUsuarioPoloGroupByOutputType>[]
         }
         count: {
-          args: Prisma.AtlAtleticaCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaCountAggregateOutputType> | number
+          args: Prisma.SysUsuarioPoloCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysUsuarioPoloCountAggregateOutputType> | number
         }
       }
     }
-    AtlAtleticaCurso: {
-      payload: Prisma.$AtlAtleticaCursoPayload<ExtArgs>
-      fields: Prisma.AtlAtleticaCursoFieldRefs
+    EntEntidadeTipo: {
+      payload: Prisma.$EntEntidadeTipoPayload<ExtArgs>
+      fields: Prisma.EntEntidadeTipoFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.AtlAtleticaCursoFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCursoPayload> | null
+          args: Prisma.EntEntidadeTipoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTipoPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.AtlAtleticaCursoFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCursoPayload>
+          args: Prisma.EntEntidadeTipoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTipoPayload>
         }
         findFirst: {
-          args: Prisma.AtlAtleticaCursoFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCursoPayload> | null
+          args: Prisma.EntEntidadeTipoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTipoPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.AtlAtleticaCursoFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCursoPayload>
+          args: Prisma.EntEntidadeTipoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTipoPayload>
         }
         findMany: {
-          args: Prisma.AtlAtleticaCursoFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCursoPayload>[]
+          args: Prisma.EntEntidadeTipoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTipoPayload>[]
         }
         create: {
-          args: Prisma.AtlAtleticaCursoCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCursoPayload>
+          args: Prisma.EntEntidadeTipoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTipoPayload>
         }
         createMany: {
-          args: Prisma.AtlAtleticaCursoCreateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeTipoCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         delete: {
-          args: Prisma.AtlAtleticaCursoDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCursoPayload>
+          args: Prisma.EntEntidadeTipoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTipoPayload>
         }
         update: {
-          args: Prisma.AtlAtleticaCursoUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCursoPayload>
+          args: Prisma.EntEntidadeTipoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTipoPayload>
         }
         deleteMany: {
-          args: Prisma.AtlAtleticaCursoDeleteManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeTipoDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.AtlAtleticaCursoUpdateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeTipoUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         upsert: {
-          args: Prisma.AtlAtleticaCursoUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCursoPayload>
+          args: Prisma.EntEntidadeTipoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTipoPayload>
         }
         aggregate: {
-          args: Prisma.AtlAtleticaCursoAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlAtleticaCurso>
+          args: Prisma.EntEntidadeTipoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntEntidadeTipo>
         }
         groupBy: {
-          args: Prisma.AtlAtleticaCursoGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaCursoGroupByOutputType>[]
+          args: Prisma.EntEntidadeTipoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeTipoGroupByOutputType>[]
         }
         count: {
-          args: Prisma.AtlAtleticaCursoCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaCursoCountAggregateOutputType> | number
+          args: Prisma.EntEntidadeTipoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeTipoCountAggregateOutputType> | number
         }
       }
     }
-    AtlAtleticaGestaoStatus: {
-      payload: Prisma.$AtlAtleticaGestaoStatusPayload<ExtArgs>
-      fields: Prisma.AtlAtleticaGestaoStatusFieldRefs
+    EntEntidadeStatus: {
+      payload: Prisma.$EntEntidadeStatusPayload<ExtArgs>
+      fields: Prisma.EntEntidadeStatusFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.AtlAtleticaGestaoStatusFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload> | null
+          args: Prisma.EntEntidadeStatusFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeStatusPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.AtlAtleticaGestaoStatusFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload>
+          args: Prisma.EntEntidadeStatusFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeStatusPayload>
         }
         findFirst: {
-          args: Prisma.AtlAtleticaGestaoStatusFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload> | null
+          args: Prisma.EntEntidadeStatusFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeStatusPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.AtlAtleticaGestaoStatusFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload>
+          args: Prisma.EntEntidadeStatusFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeStatusPayload>
         }
         findMany: {
-          args: Prisma.AtlAtleticaGestaoStatusFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload>[]
+          args: Prisma.EntEntidadeStatusFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeStatusPayload>[]
         }
         create: {
-          args: Prisma.AtlAtleticaGestaoStatusCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload>
+          args: Prisma.EntEntidadeStatusCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeStatusPayload>
         }
         createMany: {
-          args: Prisma.AtlAtleticaGestaoStatusCreateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeStatusCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         delete: {
-          args: Prisma.AtlAtleticaGestaoStatusDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload>
+          args: Prisma.EntEntidadeStatusDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeStatusPayload>
         }
         update: {
-          args: Prisma.AtlAtleticaGestaoStatusUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload>
+          args: Prisma.EntEntidadeStatusUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeStatusPayload>
         }
         deleteMany: {
-          args: Prisma.AtlAtleticaGestaoStatusDeleteManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeStatusDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.AtlAtleticaGestaoStatusUpdateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeStatusUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         upsert: {
-          args: Prisma.AtlAtleticaGestaoStatusUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoStatusPayload>
+          args: Prisma.EntEntidadeStatusUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeStatusPayload>
         }
         aggregate: {
-          args: Prisma.AtlAtleticaGestaoStatusAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlAtleticaGestaoStatus>
+          args: Prisma.EntEntidadeStatusAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntEntidadeStatus>
         }
         groupBy: {
-          args: Prisma.AtlAtleticaGestaoStatusGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaGestaoStatusGroupByOutputType>[]
+          args: Prisma.EntEntidadeStatusGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeStatusGroupByOutputType>[]
         }
         count: {
-          args: Prisma.AtlAtleticaGestaoStatusCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaGestaoStatusCountAggregateOutputType> | number
+          args: Prisma.EntEntidadeStatusCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeStatusCountAggregateOutputType> | number
         }
       }
     }
-    AtlAtleticaGestao: {
-      payload: Prisma.$AtlAtleticaGestaoPayload<ExtArgs>
-      fields: Prisma.AtlAtleticaGestaoFieldRefs
+    EntEntidade: {
+      payload: Prisma.$EntEntidadePayload<ExtArgs>
+      fields: Prisma.EntEntidadeFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.AtlAtleticaGestaoFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload> | null
+          args: Prisma.EntEntidadeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.AtlAtleticaGestaoFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload>
+          args: Prisma.EntEntidadeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePayload>
         }
         findFirst: {
-          args: Prisma.AtlAtleticaGestaoFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload> | null
+          args: Prisma.EntEntidadeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.AtlAtleticaGestaoFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload>
+          args: Prisma.EntEntidadeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePayload>
         }
         findMany: {
-          args: Prisma.AtlAtleticaGestaoFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload>[]
+          args: Prisma.EntEntidadeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePayload>[]
         }
         create: {
-          args: Prisma.AtlAtleticaGestaoCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload>
+          args: Prisma.EntEntidadeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePayload>
         }
         createMany: {
-          args: Prisma.AtlAtleticaGestaoCreateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         delete: {
-          args: Prisma.AtlAtleticaGestaoDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload>
+          args: Prisma.EntEntidadeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePayload>
         }
         update: {
-          args: Prisma.AtlAtleticaGestaoUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload>
+          args: Prisma.EntEntidadeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePayload>
         }
         deleteMany: {
-          args: Prisma.AtlAtleticaGestaoDeleteManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.AtlAtleticaGestaoUpdateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         upsert: {
-          args: Prisma.AtlAtleticaGestaoUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaGestaoPayload>
+          args: Prisma.EntEntidadeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePayload>
         }
         aggregate: {
-          args: Prisma.AtlAtleticaGestaoAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlAtleticaGestao>
+          args: Prisma.EntEntidadeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntEntidade>
         }
         groupBy: {
-          args: Prisma.AtlAtleticaGestaoGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaGestaoGroupByOutputType>[]
+          args: Prisma.EntEntidadeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeGroupByOutputType>[]
         }
         count: {
-          args: Prisma.AtlAtleticaGestaoCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaGestaoCountAggregateOutputType> | number
+          args: Prisma.EntEntidadeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeCountAggregateOutputType> | number
         }
       }
     }
-    AtlCargoTipo: {
-      payload: Prisma.$AtlCargoTipoPayload<ExtArgs>
-      fields: Prisma.AtlCargoTipoFieldRefs
+    EntEntidadeCurso: {
+      payload: Prisma.$EntEntidadeCursoPayload<ExtArgs>
+      fields: Prisma.EntEntidadeCursoFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.AtlCargoTipoFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoTipoPayload> | null
+          args: Prisma.EntEntidadeCursoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCursoPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.AtlCargoTipoFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoTipoPayload>
+          args: Prisma.EntEntidadeCursoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCursoPayload>
         }
         findFirst: {
-          args: Prisma.AtlCargoTipoFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoTipoPayload> | null
+          args: Prisma.EntEntidadeCursoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCursoPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.AtlCargoTipoFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoTipoPayload>
+          args: Prisma.EntEntidadeCursoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCursoPayload>
         }
         findMany: {
-          args: Prisma.AtlCargoTipoFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoTipoPayload>[]
+          args: Prisma.EntEntidadeCursoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCursoPayload>[]
         }
         create: {
-          args: Prisma.AtlCargoTipoCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoTipoPayload>
+          args: Prisma.EntEntidadeCursoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCursoPayload>
         }
         createMany: {
-          args: Prisma.AtlCargoTipoCreateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeCursoCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         delete: {
-          args: Prisma.AtlCargoTipoDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoTipoPayload>
+          args: Prisma.EntEntidadeCursoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCursoPayload>
         }
         update: {
-          args: Prisma.AtlCargoTipoUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoTipoPayload>
+          args: Prisma.EntEntidadeCursoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCursoPayload>
         }
         deleteMany: {
-          args: Prisma.AtlCargoTipoDeleteManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeCursoDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.AtlCargoTipoUpdateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeCursoUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         upsert: {
-          args: Prisma.AtlCargoTipoUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoTipoPayload>
+          args: Prisma.EntEntidadeCursoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCursoPayload>
         }
         aggregate: {
-          args: Prisma.AtlCargoTipoAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlCargoTipo>
+          args: Prisma.EntEntidadeCursoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntEntidadeCurso>
         }
         groupBy: {
-          args: Prisma.AtlCargoTipoGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlCargoTipoGroupByOutputType>[]
+          args: Prisma.EntEntidadeCursoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeCursoGroupByOutputType>[]
         }
         count: {
-          args: Prisma.AtlCargoTipoCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlCargoTipoCountAggregateOutputType> | number
+          args: Prisma.EntEntidadeCursoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeCursoCountAggregateOutputType> | number
         }
       }
     }
-    AtlCargo: {
-      payload: Prisma.$AtlCargoPayload<ExtArgs>
-      fields: Prisma.AtlCargoFieldRefs
+    EntEntidadePolo: {
+      payload: Prisma.$EntEntidadePoloPayload<ExtArgs>
+      fields: Prisma.EntEntidadePoloFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.AtlCargoFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoPayload> | null
+          args: Prisma.EntEntidadePoloFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePoloPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.AtlCargoFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoPayload>
+          args: Prisma.EntEntidadePoloFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePoloPayload>
         }
         findFirst: {
-          args: Prisma.AtlCargoFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoPayload> | null
+          args: Prisma.EntEntidadePoloFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePoloPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.AtlCargoFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoPayload>
+          args: Prisma.EntEntidadePoloFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePoloPayload>
         }
         findMany: {
-          args: Prisma.AtlCargoFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoPayload>[]
+          args: Prisma.EntEntidadePoloFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePoloPayload>[]
         }
         create: {
-          args: Prisma.AtlCargoCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoPayload>
+          args: Prisma.EntEntidadePoloCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePoloPayload>
         }
         createMany: {
-          args: Prisma.AtlCargoCreateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadePoloCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         delete: {
-          args: Prisma.AtlCargoDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoPayload>
+          args: Prisma.EntEntidadePoloDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePoloPayload>
         }
         update: {
-          args: Prisma.AtlCargoUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoPayload>
+          args: Prisma.EntEntidadePoloUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePoloPayload>
         }
         deleteMany: {
-          args: Prisma.AtlCargoDeleteManyArgs<ExtArgs>
+          args: Prisma.EntEntidadePoloDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.AtlCargoUpdateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadePoloUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         upsert: {
-          args: Prisma.AtlCargoUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlCargoPayload>
+          args: Prisma.EntEntidadePoloUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadePoloPayload>
         }
         aggregate: {
-          args: Prisma.AtlCargoAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlCargo>
+          args: Prisma.EntEntidadePoloAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntEntidadePolo>
         }
         groupBy: {
-          args: Prisma.AtlCargoGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlCargoGroupByOutputType>[]
+          args: Prisma.EntEntidadePoloGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadePoloGroupByOutputType>[]
         }
         count: {
-          args: Prisma.AtlCargoCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlCargoCountAggregateOutputType> | number
+          args: Prisma.EntEntidadePoloCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadePoloCountAggregateOutputType> | number
         }
       }
     }
-    AtlAtleticaCargo: {
-      payload: Prisma.$AtlAtleticaCargoPayload<ExtArgs>
-      fields: Prisma.AtlAtleticaCargoFieldRefs
+    EntEntidadeGestaoStatus: {
+      payload: Prisma.$EntEntidadeGestaoStatusPayload<ExtArgs>
+      fields: Prisma.EntEntidadeGestaoStatusFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.AtlAtleticaCargoFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCargoPayload> | null
+          args: Prisma.EntEntidadeGestaoStatusFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoStatusPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.AtlAtleticaCargoFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCargoPayload>
+          args: Prisma.EntEntidadeGestaoStatusFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoStatusPayload>
         }
         findFirst: {
-          args: Prisma.AtlAtleticaCargoFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCargoPayload> | null
+          args: Prisma.EntEntidadeGestaoStatusFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoStatusPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.AtlAtleticaCargoFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCargoPayload>
+          args: Prisma.EntEntidadeGestaoStatusFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoStatusPayload>
         }
         findMany: {
-          args: Prisma.AtlAtleticaCargoFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCargoPayload>[]
+          args: Prisma.EntEntidadeGestaoStatusFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoStatusPayload>[]
         }
         create: {
-          args: Prisma.AtlAtleticaCargoCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCargoPayload>
+          args: Prisma.EntEntidadeGestaoStatusCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoStatusPayload>
         }
         createMany: {
-          args: Prisma.AtlAtleticaCargoCreateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeGestaoStatusCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         delete: {
-          args: Prisma.AtlAtleticaCargoDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCargoPayload>
+          args: Prisma.EntEntidadeGestaoStatusDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoStatusPayload>
         }
         update: {
-          args: Prisma.AtlAtleticaCargoUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCargoPayload>
+          args: Prisma.EntEntidadeGestaoStatusUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoStatusPayload>
         }
         deleteMany: {
-          args: Prisma.AtlAtleticaCargoDeleteManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeGestaoStatusDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.AtlAtleticaCargoUpdateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeGestaoStatusUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         upsert: {
-          args: Prisma.AtlAtleticaCargoUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaCargoPayload>
+          args: Prisma.EntEntidadeGestaoStatusUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoStatusPayload>
         }
         aggregate: {
-          args: Prisma.AtlAtleticaCargoAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlAtleticaCargo>
+          args: Prisma.EntEntidadeGestaoStatusAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntEntidadeGestaoStatus>
         }
         groupBy: {
-          args: Prisma.AtlAtleticaCargoGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaCargoGroupByOutputType>[]
+          args: Prisma.EntEntidadeGestaoStatusGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeGestaoStatusGroupByOutputType>[]
         }
         count: {
-          args: Prisma.AtlAtleticaCargoCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaCargoCountAggregateOutputType> | number
+          args: Prisma.EntEntidadeGestaoStatusCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeGestaoStatusCountAggregateOutputType> | number
         }
       }
     }
-    AtlAtleticaMembroTipo: {
-      payload: Prisma.$AtlAtleticaMembroTipoPayload<ExtArgs>
-      fields: Prisma.AtlAtleticaMembroTipoFieldRefs
+    EntEntidadeGestao: {
+      payload: Prisma.$EntEntidadeGestaoPayload<ExtArgs>
+      fields: Prisma.EntEntidadeGestaoFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.AtlAtleticaMembroTipoFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroTipoPayload> | null
+          args: Prisma.EntEntidadeGestaoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.AtlAtleticaMembroTipoFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroTipoPayload>
+          args: Prisma.EntEntidadeGestaoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoPayload>
         }
         findFirst: {
-          args: Prisma.AtlAtleticaMembroTipoFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroTipoPayload> | null
+          args: Prisma.EntEntidadeGestaoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.AtlAtleticaMembroTipoFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroTipoPayload>
+          args: Prisma.EntEntidadeGestaoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoPayload>
         }
         findMany: {
-          args: Prisma.AtlAtleticaMembroTipoFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroTipoPayload>[]
+          args: Prisma.EntEntidadeGestaoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoPayload>[]
         }
         create: {
-          args: Prisma.AtlAtleticaMembroTipoCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroTipoPayload>
+          args: Prisma.EntEntidadeGestaoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoPayload>
         }
         createMany: {
-          args: Prisma.AtlAtleticaMembroTipoCreateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeGestaoCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         delete: {
-          args: Prisma.AtlAtleticaMembroTipoDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroTipoPayload>
+          args: Prisma.EntEntidadeGestaoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoPayload>
         }
         update: {
-          args: Prisma.AtlAtleticaMembroTipoUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroTipoPayload>
+          args: Prisma.EntEntidadeGestaoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoPayload>
         }
         deleteMany: {
-          args: Prisma.AtlAtleticaMembroTipoDeleteManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeGestaoDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.AtlAtleticaMembroTipoUpdateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeGestaoUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         upsert: {
-          args: Prisma.AtlAtleticaMembroTipoUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroTipoPayload>
+          args: Prisma.EntEntidadeGestaoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeGestaoPayload>
         }
         aggregate: {
-          args: Prisma.AtlAtleticaMembroTipoAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlAtleticaMembroTipo>
+          args: Prisma.EntEntidadeGestaoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntEntidadeGestao>
         }
         groupBy: {
-          args: Prisma.AtlAtleticaMembroTipoGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaMembroTipoGroupByOutputType>[]
+          args: Prisma.EntEntidadeGestaoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeGestaoGroupByOutputType>[]
         }
         count: {
-          args: Prisma.AtlAtleticaMembroTipoCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaMembroTipoCountAggregateOutputType> | number
+          args: Prisma.EntEntidadeGestaoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeGestaoCountAggregateOutputType> | number
         }
       }
     }
-    AtlAtleticaMembroStatus: {
-      payload: Prisma.$AtlAtleticaMembroStatusPayload<ExtArgs>
-      fields: Prisma.AtlAtleticaMembroStatusFieldRefs
+    EntCargoTipo: {
+      payload: Prisma.$EntCargoTipoPayload<ExtArgs>
+      fields: Prisma.EntCargoTipoFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.AtlAtleticaMembroStatusFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroStatusPayload> | null
+          args: Prisma.EntCargoTipoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoTipoPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.AtlAtleticaMembroStatusFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroStatusPayload>
+          args: Prisma.EntCargoTipoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoTipoPayload>
         }
         findFirst: {
-          args: Prisma.AtlAtleticaMembroStatusFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroStatusPayload> | null
+          args: Prisma.EntCargoTipoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoTipoPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.AtlAtleticaMembroStatusFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroStatusPayload>
+          args: Prisma.EntCargoTipoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoTipoPayload>
         }
         findMany: {
-          args: Prisma.AtlAtleticaMembroStatusFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroStatusPayload>[]
+          args: Prisma.EntCargoTipoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoTipoPayload>[]
         }
         create: {
-          args: Prisma.AtlAtleticaMembroStatusCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroStatusPayload>
+          args: Prisma.EntCargoTipoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoTipoPayload>
         }
         createMany: {
-          args: Prisma.AtlAtleticaMembroStatusCreateManyArgs<ExtArgs>
+          args: Prisma.EntCargoTipoCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         delete: {
-          args: Prisma.AtlAtleticaMembroStatusDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroStatusPayload>
+          args: Prisma.EntCargoTipoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoTipoPayload>
         }
         update: {
-          args: Prisma.AtlAtleticaMembroStatusUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroStatusPayload>
+          args: Prisma.EntCargoTipoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoTipoPayload>
         }
         deleteMany: {
-          args: Prisma.AtlAtleticaMembroStatusDeleteManyArgs<ExtArgs>
+          args: Prisma.EntCargoTipoDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.AtlAtleticaMembroStatusUpdateManyArgs<ExtArgs>
+          args: Prisma.EntCargoTipoUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         upsert: {
-          args: Prisma.AtlAtleticaMembroStatusUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroStatusPayload>
+          args: Prisma.EntCargoTipoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoTipoPayload>
         }
         aggregate: {
-          args: Prisma.AtlAtleticaMembroStatusAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlAtleticaMembroStatus>
+          args: Prisma.EntCargoTipoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntCargoTipo>
         }
         groupBy: {
-          args: Prisma.AtlAtleticaMembroStatusGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaMembroStatusGroupByOutputType>[]
+          args: Prisma.EntCargoTipoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntCargoTipoGroupByOutputType>[]
         }
         count: {
-          args: Prisma.AtlAtleticaMembroStatusCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaMembroStatusCountAggregateOutputType> | number
+          args: Prisma.EntCargoTipoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntCargoTipoCountAggregateOutputType> | number
         }
       }
     }
-    AtlAtleticaMembro: {
-      payload: Prisma.$AtlAtleticaMembroPayload<ExtArgs>
-      fields: Prisma.AtlAtleticaMembroFieldRefs
+    EntCargo: {
+      payload: Prisma.$EntCargoPayload<ExtArgs>
+      fields: Prisma.EntCargoFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.AtlAtleticaMembroFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroPayload> | null
+          args: Prisma.EntCargoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.AtlAtleticaMembroFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroPayload>
+          args: Prisma.EntCargoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoPayload>
         }
         findFirst: {
-          args: Prisma.AtlAtleticaMembroFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroPayload> | null
+          args: Prisma.EntCargoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.AtlAtleticaMembroFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroPayload>
+          args: Prisma.EntCargoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoPayload>
         }
         findMany: {
-          args: Prisma.AtlAtleticaMembroFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroPayload>[]
+          args: Prisma.EntCargoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoPayload>[]
         }
         create: {
-          args: Prisma.AtlAtleticaMembroCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroPayload>
+          args: Prisma.EntCargoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoPayload>
         }
         createMany: {
-          args: Prisma.AtlAtleticaMembroCreateManyArgs<ExtArgs>
+          args: Prisma.EntCargoCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         delete: {
-          args: Prisma.AtlAtleticaMembroDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroPayload>
+          args: Prisma.EntCargoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoPayload>
         }
         update: {
-          args: Prisma.AtlAtleticaMembroUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroPayload>
+          args: Prisma.EntCargoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoPayload>
         }
         deleteMany: {
-          args: Prisma.AtlAtleticaMembroDeleteManyArgs<ExtArgs>
+          args: Prisma.EntCargoDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.AtlAtleticaMembroUpdateManyArgs<ExtArgs>
+          args: Prisma.EntCargoUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         upsert: {
-          args: Prisma.AtlAtleticaMembroUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroPayload>
+          args: Prisma.EntCargoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntCargoPayload>
         }
         aggregate: {
-          args: Prisma.AtlAtleticaMembroAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlAtleticaMembro>
+          args: Prisma.EntCargoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntCargo>
         }
         groupBy: {
-          args: Prisma.AtlAtleticaMembroGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaMembroGroupByOutputType>[]
+          args: Prisma.EntCargoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntCargoGroupByOutputType>[]
         }
         count: {
-          args: Prisma.AtlAtleticaMembroCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaMembroCountAggregateOutputType> | number
+          args: Prisma.EntCargoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntCargoCountAggregateOutputType> | number
         }
       }
     }
-    AtlAtleticaMembroCargo: {
-      payload: Prisma.$AtlAtleticaMembroCargoPayload<ExtArgs>
-      fields: Prisma.AtlAtleticaMembroCargoFieldRefs
+    EntEntidadeCargo: {
+      payload: Prisma.$EntEntidadeCargoPayload<ExtArgs>
+      fields: Prisma.EntEntidadeCargoFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.AtlAtleticaMembroCargoFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroCargoPayload> | null
+          args: Prisma.EntEntidadeCargoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCargoPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.AtlAtleticaMembroCargoFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroCargoPayload>
+          args: Prisma.EntEntidadeCargoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCargoPayload>
         }
         findFirst: {
-          args: Prisma.AtlAtleticaMembroCargoFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroCargoPayload> | null
+          args: Prisma.EntEntidadeCargoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCargoPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.AtlAtleticaMembroCargoFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroCargoPayload>
+          args: Prisma.EntEntidadeCargoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCargoPayload>
         }
         findMany: {
-          args: Prisma.AtlAtleticaMembroCargoFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroCargoPayload>[]
+          args: Prisma.EntEntidadeCargoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCargoPayload>[]
         }
         create: {
-          args: Prisma.AtlAtleticaMembroCargoCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroCargoPayload>
+          args: Prisma.EntEntidadeCargoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCargoPayload>
         }
         createMany: {
-          args: Prisma.AtlAtleticaMembroCargoCreateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeCargoCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         delete: {
-          args: Prisma.AtlAtleticaMembroCargoDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroCargoPayload>
+          args: Prisma.EntEntidadeCargoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCargoPayload>
         }
         update: {
-          args: Prisma.AtlAtleticaMembroCargoUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroCargoPayload>
+          args: Prisma.EntEntidadeCargoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCargoPayload>
         }
         deleteMany: {
-          args: Prisma.AtlAtleticaMembroCargoDeleteManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeCargoDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.AtlAtleticaMembroCargoUpdateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeCargoUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         upsert: {
-          args: Prisma.AtlAtleticaMembroCargoUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaMembroCargoPayload>
+          args: Prisma.EntEntidadeCargoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeCargoPayload>
         }
         aggregate: {
-          args: Prisma.AtlAtleticaMembroCargoAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlAtleticaMembroCargo>
+          args: Prisma.EntEntidadeCargoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntEntidadeCargo>
         }
         groupBy: {
-          args: Prisma.AtlAtleticaMembroCargoGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaMembroCargoGroupByOutputType>[]
+          args: Prisma.EntEntidadeCargoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeCargoGroupByOutputType>[]
         }
         count: {
-          args: Prisma.AtlAtleticaMembroCargoCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaMembroCargoCountAggregateOutputType> | number
+          args: Prisma.EntEntidadeCargoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeCargoCountAggregateOutputType> | number
         }
       }
     }
-    AtlAtleticaTema: {
-      payload: Prisma.$AtlAtleticaTemaPayload<ExtArgs>
-      fields: Prisma.AtlAtleticaTemaFieldRefs
+    EntEntidadeMembroTipo: {
+      payload: Prisma.$EntEntidadeMembroTipoPayload<ExtArgs>
+      fields: Prisma.EntEntidadeMembroTipoFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.AtlAtleticaTemaFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaTemaPayload> | null
+          args: Prisma.EntEntidadeMembroTipoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroTipoPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.AtlAtleticaTemaFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaTemaPayload>
+          args: Prisma.EntEntidadeMembroTipoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroTipoPayload>
         }
         findFirst: {
-          args: Prisma.AtlAtleticaTemaFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaTemaPayload> | null
+          args: Prisma.EntEntidadeMembroTipoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroTipoPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.AtlAtleticaTemaFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaTemaPayload>
+          args: Prisma.EntEntidadeMembroTipoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroTipoPayload>
         }
         findMany: {
-          args: Prisma.AtlAtleticaTemaFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaTemaPayload>[]
+          args: Prisma.EntEntidadeMembroTipoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroTipoPayload>[]
         }
         create: {
-          args: Prisma.AtlAtleticaTemaCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaTemaPayload>
+          args: Prisma.EntEntidadeMembroTipoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroTipoPayload>
         }
         createMany: {
-          args: Prisma.AtlAtleticaTemaCreateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeMembroTipoCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         delete: {
-          args: Prisma.AtlAtleticaTemaDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaTemaPayload>
+          args: Prisma.EntEntidadeMembroTipoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroTipoPayload>
         }
         update: {
-          args: Prisma.AtlAtleticaTemaUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaTemaPayload>
+          args: Prisma.EntEntidadeMembroTipoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroTipoPayload>
         }
         deleteMany: {
-          args: Prisma.AtlAtleticaTemaDeleteManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeMembroTipoDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.AtlAtleticaTemaUpdateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeMembroTipoUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         upsert: {
-          args: Prisma.AtlAtleticaTemaUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaTemaPayload>
+          args: Prisma.EntEntidadeMembroTipoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroTipoPayload>
         }
         aggregate: {
-          args: Prisma.AtlAtleticaTemaAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlAtleticaTema>
+          args: Prisma.EntEntidadeMembroTipoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntEntidadeMembroTipo>
         }
         groupBy: {
-          args: Prisma.AtlAtleticaTemaGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaTemaGroupByOutputType>[]
+          args: Prisma.EntEntidadeMembroTipoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeMembroTipoGroupByOutputType>[]
         }
         count: {
-          args: Prisma.AtlAtleticaTemaCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaTemaCountAggregateOutputType> | number
+          args: Prisma.EntEntidadeMembroTipoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeMembroTipoCountAggregateOutputType> | number
         }
       }
     }
-    AtlAtleticaRegimento: {
-      payload: Prisma.$AtlAtleticaRegimentoPayload<ExtArgs>
-      fields: Prisma.AtlAtleticaRegimentoFieldRefs
+    EntEntidadeMembroStatus: {
+      payload: Prisma.$EntEntidadeMembroStatusPayload<ExtArgs>
+      fields: Prisma.EntEntidadeMembroStatusFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.AtlAtleticaRegimentoFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaRegimentoPayload> | null
+          args: Prisma.EntEntidadeMembroStatusFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroStatusPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.AtlAtleticaRegimentoFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaRegimentoPayload>
+          args: Prisma.EntEntidadeMembroStatusFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroStatusPayload>
         }
         findFirst: {
-          args: Prisma.AtlAtleticaRegimentoFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaRegimentoPayload> | null
+          args: Prisma.EntEntidadeMembroStatusFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroStatusPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.AtlAtleticaRegimentoFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaRegimentoPayload>
+          args: Prisma.EntEntidadeMembroStatusFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroStatusPayload>
         }
         findMany: {
-          args: Prisma.AtlAtleticaRegimentoFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaRegimentoPayload>[]
+          args: Prisma.EntEntidadeMembroStatusFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroStatusPayload>[]
         }
         create: {
-          args: Prisma.AtlAtleticaRegimentoCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaRegimentoPayload>
+          args: Prisma.EntEntidadeMembroStatusCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroStatusPayload>
         }
         createMany: {
-          args: Prisma.AtlAtleticaRegimentoCreateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeMembroStatusCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         delete: {
-          args: Prisma.AtlAtleticaRegimentoDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaRegimentoPayload>
+          args: Prisma.EntEntidadeMembroStatusDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroStatusPayload>
         }
         update: {
-          args: Prisma.AtlAtleticaRegimentoUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaRegimentoPayload>
+          args: Prisma.EntEntidadeMembroStatusUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroStatusPayload>
         }
         deleteMany: {
-          args: Prisma.AtlAtleticaRegimentoDeleteManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeMembroStatusDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.AtlAtleticaRegimentoUpdateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeMembroStatusUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         upsert: {
-          args: Prisma.AtlAtleticaRegimentoUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaRegimentoPayload>
+          args: Prisma.EntEntidadeMembroStatusUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroStatusPayload>
         }
         aggregate: {
-          args: Prisma.AtlAtleticaRegimentoAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlAtleticaRegimento>
+          args: Prisma.EntEntidadeMembroStatusAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntEntidadeMembroStatus>
         }
         groupBy: {
-          args: Prisma.AtlAtleticaRegimentoGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaRegimentoGroupByOutputType>[]
+          args: Prisma.EntEntidadeMembroStatusGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeMembroStatusGroupByOutputType>[]
         }
         count: {
-          args: Prisma.AtlAtleticaRegimentoCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaRegimentoCountAggregateOutputType> | number
+          args: Prisma.EntEntidadeMembroStatusCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeMembroStatusCountAggregateOutputType> | number
+        }
+      }
+    }
+    EntEntidadeMembro: {
+      payload: Prisma.$EntEntidadeMembroPayload<ExtArgs>
+      fields: Prisma.EntEntidadeMembroFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EntEntidadeMembroFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EntEntidadeMembroFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroPayload>
+        }
+        findFirst: {
+          args: Prisma.EntEntidadeMembroFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EntEntidadeMembroFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroPayload>
+        }
+        findMany: {
+          args: Prisma.EntEntidadeMembroFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroPayload>[]
+        }
+        create: {
+          args: Prisma.EntEntidadeMembroCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroPayload>
+        }
+        createMany: {
+          args: Prisma.EntEntidadeMembroCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.EntEntidadeMembroDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroPayload>
+        }
+        update: {
+          args: Prisma.EntEntidadeMembroUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroPayload>
+        }
+        deleteMany: {
+          args: Prisma.EntEntidadeMembroDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EntEntidadeMembroUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.EntEntidadeMembroUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroPayload>
+        }
+        aggregate: {
+          args: Prisma.EntEntidadeMembroAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntEntidadeMembro>
+        }
+        groupBy: {
+          args: Prisma.EntEntidadeMembroGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeMembroGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EntEntidadeMembroCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeMembroCountAggregateOutputType> | number
+        }
+      }
+    }
+    EntEntidadeMembroCargo: {
+      payload: Prisma.$EntEntidadeMembroCargoPayload<ExtArgs>
+      fields: Prisma.EntEntidadeMembroCargoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EntEntidadeMembroCargoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroCargoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EntEntidadeMembroCargoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroCargoPayload>
+        }
+        findFirst: {
+          args: Prisma.EntEntidadeMembroCargoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroCargoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EntEntidadeMembroCargoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroCargoPayload>
+        }
+        findMany: {
+          args: Prisma.EntEntidadeMembroCargoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroCargoPayload>[]
+        }
+        create: {
+          args: Prisma.EntEntidadeMembroCargoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroCargoPayload>
+        }
+        createMany: {
+          args: Prisma.EntEntidadeMembroCargoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.EntEntidadeMembroCargoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroCargoPayload>
+        }
+        update: {
+          args: Prisma.EntEntidadeMembroCargoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroCargoPayload>
+        }
+        deleteMany: {
+          args: Prisma.EntEntidadeMembroCargoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EntEntidadeMembroCargoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.EntEntidadeMembroCargoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeMembroCargoPayload>
+        }
+        aggregate: {
+          args: Prisma.EntEntidadeMembroCargoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntEntidadeMembroCargo>
+        }
+        groupBy: {
+          args: Prisma.EntEntidadeMembroCargoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeMembroCargoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EntEntidadeMembroCargoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeMembroCargoCountAggregateOutputType> | number
+        }
+      }
+    }
+    EntEntidadeTema: {
+      payload: Prisma.$EntEntidadeTemaPayload<ExtArgs>
+      fields: Prisma.EntEntidadeTemaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EntEntidadeTemaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTemaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EntEntidadeTemaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTemaPayload>
+        }
+        findFirst: {
+          args: Prisma.EntEntidadeTemaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTemaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EntEntidadeTemaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTemaPayload>
+        }
+        findMany: {
+          args: Prisma.EntEntidadeTemaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTemaPayload>[]
+        }
+        create: {
+          args: Prisma.EntEntidadeTemaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTemaPayload>
+        }
+        createMany: {
+          args: Prisma.EntEntidadeTemaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.EntEntidadeTemaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTemaPayload>
+        }
+        update: {
+          args: Prisma.EntEntidadeTemaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTemaPayload>
+        }
+        deleteMany: {
+          args: Prisma.EntEntidadeTemaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EntEntidadeTemaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.EntEntidadeTemaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeTemaPayload>
+        }
+        aggregate: {
+          args: Prisma.EntEntidadeTemaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntEntidadeTema>
+        }
+        groupBy: {
+          args: Prisma.EntEntidadeTemaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeTemaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EntEntidadeTemaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeTemaCountAggregateOutputType> | number
+        }
+      }
+    }
+    EntEntidadeRegimento: {
+      payload: Prisma.$EntEntidadeRegimentoPayload<ExtArgs>
+      fields: Prisma.EntEntidadeRegimentoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EntEntidadeRegimentoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeRegimentoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EntEntidadeRegimentoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeRegimentoPayload>
+        }
+        findFirst: {
+          args: Prisma.EntEntidadeRegimentoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeRegimentoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EntEntidadeRegimentoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeRegimentoPayload>
+        }
+        findMany: {
+          args: Prisma.EntEntidadeRegimentoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeRegimentoPayload>[]
+        }
+        create: {
+          args: Prisma.EntEntidadeRegimentoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeRegimentoPayload>
+        }
+        createMany: {
+          args: Prisma.EntEntidadeRegimentoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.EntEntidadeRegimentoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeRegimentoPayload>
+        }
+        update: {
+          args: Prisma.EntEntidadeRegimentoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeRegimentoPayload>
+        }
+        deleteMany: {
+          args: Prisma.EntEntidadeRegimentoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EntEntidadeRegimentoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.EntEntidadeRegimentoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeRegimentoPayload>
+        }
+        aggregate: {
+          args: Prisma.EntEntidadeRegimentoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntEntidadeRegimento>
+        }
+        groupBy: {
+          args: Prisma.EntEntidadeRegimentoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeRegimentoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EntEntidadeRegimentoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeRegimentoCountAggregateOutputType> | number
         }
       }
     }
@@ -2236,135 +2504,135 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    AtlAtleticaAssinaturaStatus: {
-      payload: Prisma.$AtlAtleticaAssinaturaStatusPayload<ExtArgs>
-      fields: Prisma.AtlAtleticaAssinaturaStatusFieldRefs
+    EntEntidadeAssinaturaStatus: {
+      payload: Prisma.$EntEntidadeAssinaturaStatusPayload<ExtArgs>
+      fields: Prisma.EntEntidadeAssinaturaStatusFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.AtlAtleticaAssinaturaStatusFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaStatusPayload> | null
+          args: Prisma.EntEntidadeAssinaturaStatusFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaStatusPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.AtlAtleticaAssinaturaStatusFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaStatusPayload>
+          args: Prisma.EntEntidadeAssinaturaStatusFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaStatusPayload>
         }
         findFirst: {
-          args: Prisma.AtlAtleticaAssinaturaStatusFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaStatusPayload> | null
+          args: Prisma.EntEntidadeAssinaturaStatusFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaStatusPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.AtlAtleticaAssinaturaStatusFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaStatusPayload>
+          args: Prisma.EntEntidadeAssinaturaStatusFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaStatusPayload>
         }
         findMany: {
-          args: Prisma.AtlAtleticaAssinaturaStatusFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaStatusPayload>[]
+          args: Prisma.EntEntidadeAssinaturaStatusFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaStatusPayload>[]
         }
         create: {
-          args: Prisma.AtlAtleticaAssinaturaStatusCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaStatusPayload>
+          args: Prisma.EntEntidadeAssinaturaStatusCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaStatusPayload>
         }
         createMany: {
-          args: Prisma.AtlAtleticaAssinaturaStatusCreateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeAssinaturaStatusCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         delete: {
-          args: Prisma.AtlAtleticaAssinaturaStatusDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaStatusPayload>
+          args: Prisma.EntEntidadeAssinaturaStatusDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaStatusPayload>
         }
         update: {
-          args: Prisma.AtlAtleticaAssinaturaStatusUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaStatusPayload>
+          args: Prisma.EntEntidadeAssinaturaStatusUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaStatusPayload>
         }
         deleteMany: {
-          args: Prisma.AtlAtleticaAssinaturaStatusDeleteManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeAssinaturaStatusDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.AtlAtleticaAssinaturaStatusUpdateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeAssinaturaStatusUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         upsert: {
-          args: Prisma.AtlAtleticaAssinaturaStatusUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaStatusPayload>
+          args: Prisma.EntEntidadeAssinaturaStatusUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaStatusPayload>
         }
         aggregate: {
-          args: Prisma.AtlAtleticaAssinaturaStatusAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlAtleticaAssinaturaStatus>
+          args: Prisma.EntEntidadeAssinaturaStatusAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntEntidadeAssinaturaStatus>
         }
         groupBy: {
-          args: Prisma.AtlAtleticaAssinaturaStatusGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaAssinaturaStatusGroupByOutputType>[]
+          args: Prisma.EntEntidadeAssinaturaStatusGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeAssinaturaStatusGroupByOutputType>[]
         }
         count: {
-          args: Prisma.AtlAtleticaAssinaturaStatusCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaAssinaturaStatusCountAggregateOutputType> | number
+          args: Prisma.EntEntidadeAssinaturaStatusCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeAssinaturaStatusCountAggregateOutputType> | number
         }
       }
     }
-    AtlAtleticaAssinatura: {
-      payload: Prisma.$AtlAtleticaAssinaturaPayload<ExtArgs>
-      fields: Prisma.AtlAtleticaAssinaturaFieldRefs
+    EntEntidadeAssinatura: {
+      payload: Prisma.$EntEntidadeAssinaturaPayload<ExtArgs>
+      fields: Prisma.EntEntidadeAssinaturaFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.AtlAtleticaAssinaturaFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaPayload> | null
+          args: Prisma.EntEntidadeAssinaturaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.AtlAtleticaAssinaturaFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaPayload>
+          args: Prisma.EntEntidadeAssinaturaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaPayload>
         }
         findFirst: {
-          args: Prisma.AtlAtleticaAssinaturaFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaPayload> | null
+          args: Prisma.EntEntidadeAssinaturaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.AtlAtleticaAssinaturaFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaPayload>
+          args: Prisma.EntEntidadeAssinaturaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaPayload>
         }
         findMany: {
-          args: Prisma.AtlAtleticaAssinaturaFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaPayload>[]
+          args: Prisma.EntEntidadeAssinaturaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaPayload>[]
         }
         create: {
-          args: Prisma.AtlAtleticaAssinaturaCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaPayload>
+          args: Prisma.EntEntidadeAssinaturaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaPayload>
         }
         createMany: {
-          args: Prisma.AtlAtleticaAssinaturaCreateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeAssinaturaCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         delete: {
-          args: Prisma.AtlAtleticaAssinaturaDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaPayload>
+          args: Prisma.EntEntidadeAssinaturaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaPayload>
         }
         update: {
-          args: Prisma.AtlAtleticaAssinaturaUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaPayload>
+          args: Prisma.EntEntidadeAssinaturaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaPayload>
         }
         deleteMany: {
-          args: Prisma.AtlAtleticaAssinaturaDeleteManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeAssinaturaDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.AtlAtleticaAssinaturaUpdateManyArgs<ExtArgs>
+          args: Prisma.EntEntidadeAssinaturaUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         upsert: {
-          args: Prisma.AtlAtleticaAssinaturaUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtlAtleticaAssinaturaPayload>
+          args: Prisma.EntEntidadeAssinaturaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntEntidadeAssinaturaPayload>
         }
         aggregate: {
-          args: Prisma.AtlAtleticaAssinaturaAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAtlAtleticaAssinatura>
+          args: Prisma.EntEntidadeAssinaturaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntEntidadeAssinatura>
         }
         groupBy: {
-          args: Prisma.AtlAtleticaAssinaturaGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaAssinaturaGroupByOutputType>[]
+          args: Prisma.EntEntidadeAssinaturaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeAssinaturaGroupByOutputType>[]
         }
         count: {
-          args: Prisma.AtlAtleticaAssinaturaCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AtlAtleticaAssinaturaCountAggregateOutputType> | number
+          args: Prisma.EntEntidadeAssinaturaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntEntidadeAssinaturaCountAggregateOutputType> | number
         }
       }
     }
@@ -3941,7 +4209,7 @@ export const SysUsuarioRoleScalarFieldEnum = {
   id: 'id',
   sys_usuario_id: 'sys_usuario_id',
   sys_role_id: 'sys_role_id',
-  atl_atletica_id: 'atl_atletica_id',
+  ent_entidade_id: 'ent_entidade_id',
   ativo: 'ativo',
   created_at: 'created_at',
   updated_at: 'updated_at',
@@ -3969,7 +4237,7 @@ export const SysUsuarioPermissionScalarFieldEnum = {
   sys_usuario_id: 'sys_usuario_id',
   sys_permission_id: 'sys_permission_id',
   sys_usuario_permission_tipo_id: 'sys_usuario_permission_tipo_id',
-  atl_atletica_id: 'atl_atletica_id',
+  ent_entidade_id: 'ent_entidade_id',
   motivo: 'motivo',
   ativo: 'ativo',
   created_at: 'created_at',
@@ -4023,7 +4291,50 @@ export const EduInstituicaoCursoScalarFieldEnum = {
 export type EduInstituicaoCursoScalarFieldEnum = (typeof EduInstituicaoCursoScalarFieldEnum)[keyof typeof EduInstituicaoCursoScalarFieldEnum]
 
 
-export const AtlAtleticaStatusScalarFieldEnum = {
+export const EduPoloScalarFieldEnum = {
+  id: 'id',
+  edu_instituicao_id: 'edu_instituicao_id',
+  codigo: 'codigo',
+  nome: 'nome',
+  cidade: 'cidade',
+  estado: 'estado',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type EduPoloScalarFieldEnum = (typeof EduPoloScalarFieldEnum)[keyof typeof EduPoloScalarFieldEnum]
+
+
+export const SysUsuarioPoloScalarFieldEnum = {
+  id: 'id',
+  sys_usuario_id: 'sys_usuario_id',
+  edu_polo_id: 'edu_polo_id',
+  principal: 'principal',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type SysUsuarioPoloScalarFieldEnum = (typeof SysUsuarioPoloScalarFieldEnum)[keyof typeof SysUsuarioPoloScalarFieldEnum]
+
+
+export const EntEntidadeTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type EntEntidadeTipoScalarFieldEnum = (typeof EntEntidadeTipoScalarFieldEnum)[keyof typeof EntEntidadeTipoScalarFieldEnum]
+
+
+export const EntEntidadeStatusScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
   nome: 'nome',
@@ -4035,13 +4346,14 @@ export const AtlAtleticaStatusScalarFieldEnum = {
   updated_at: 'updated_at'
 } as const
 
-export type AtlAtleticaStatusScalarFieldEnum = (typeof AtlAtleticaStatusScalarFieldEnum)[keyof typeof AtlAtleticaStatusScalarFieldEnum]
+export type EntEntidadeStatusScalarFieldEnum = (typeof EntEntidadeStatusScalarFieldEnum)[keyof typeof EntEntidadeStatusScalarFieldEnum]
 
 
-export const AtlAtleticaScalarFieldEnum = {
+export const EntEntidadeScalarFieldEnum = {
   id: 'id',
+  ent_entidade_tipo_id: 'ent_entidade_tipo_id',
+  ent_entidade_status_id: 'ent_entidade_status_id',
   edu_instituicao_id: 'edu_instituicao_id',
-  atl_atletica_status_id: 'atl_atletica_status_id',
   criado_por_sys_usuario_id: 'criado_por_sys_usuario_id',
   nome: 'nome',
   apelido: 'apelido',
@@ -4057,12 +4369,12 @@ export const AtlAtleticaScalarFieldEnum = {
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlAtleticaScalarFieldEnum = (typeof AtlAtleticaScalarFieldEnum)[keyof typeof AtlAtleticaScalarFieldEnum]
+export type EntEntidadeScalarFieldEnum = (typeof EntEntidadeScalarFieldEnum)[keyof typeof EntEntidadeScalarFieldEnum]
 
 
-export const AtlAtleticaCursoScalarFieldEnum = {
+export const EntEntidadeCursoScalarFieldEnum = {
   id: 'id',
-  atl_atletica_id: 'atl_atletica_id',
+  ent_entidade_id: 'ent_entidade_id',
   edu_curso_id: 'edu_curso_id',
   principal: 'principal',
   ativo: 'ativo',
@@ -4071,10 +4383,24 @@ export const AtlAtleticaCursoScalarFieldEnum = {
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlAtleticaCursoScalarFieldEnum = (typeof AtlAtleticaCursoScalarFieldEnum)[keyof typeof AtlAtleticaCursoScalarFieldEnum]
+export type EntEntidadeCursoScalarFieldEnum = (typeof EntEntidadeCursoScalarFieldEnum)[keyof typeof EntEntidadeCursoScalarFieldEnum]
 
 
-export const AtlAtleticaGestaoStatusScalarFieldEnum = {
+export const EntEntidadePoloScalarFieldEnum = {
+  id: 'id',
+  ent_entidade_id: 'ent_entidade_id',
+  edu_polo_id: 'edu_polo_id',
+  principal: 'principal',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type EntEntidadePoloScalarFieldEnum = (typeof EntEntidadePoloScalarFieldEnum)[keyof typeof EntEntidadePoloScalarFieldEnum]
+
+
+export const EntEntidadeGestaoStatusScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
   nome: 'nome',
@@ -4086,13 +4412,13 @@ export const AtlAtleticaGestaoStatusScalarFieldEnum = {
   updated_at: 'updated_at'
 } as const
 
-export type AtlAtleticaGestaoStatusScalarFieldEnum = (typeof AtlAtleticaGestaoStatusScalarFieldEnum)[keyof typeof AtlAtleticaGestaoStatusScalarFieldEnum]
+export type EntEntidadeGestaoStatusScalarFieldEnum = (typeof EntEntidadeGestaoStatusScalarFieldEnum)[keyof typeof EntEntidadeGestaoStatusScalarFieldEnum]
 
 
-export const AtlAtleticaGestaoScalarFieldEnum = {
+export const EntEntidadeGestaoScalarFieldEnum = {
   id: 'id',
-  atl_atletica_id: 'atl_atletica_id',
-  atl_atletica_gestao_status_id: 'atl_atletica_gestao_status_id',
+  ent_entidade_id: 'ent_entidade_id',
+  ent_entidade_gestao_status_id: 'ent_entidade_gestao_status_id',
   nome: 'nome',
   inicio_at: 'inicio_at',
   fim_at: 'fim_at',
@@ -4103,10 +4429,10 @@ export const AtlAtleticaGestaoScalarFieldEnum = {
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlAtleticaGestaoScalarFieldEnum = (typeof AtlAtleticaGestaoScalarFieldEnum)[keyof typeof AtlAtleticaGestaoScalarFieldEnum]
+export type EntEntidadeGestaoScalarFieldEnum = (typeof EntEntidadeGestaoScalarFieldEnum)[keyof typeof EntEntidadeGestaoScalarFieldEnum]
 
 
-export const AtlCargoTipoScalarFieldEnum = {
+export const EntCargoTipoScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
   nome: 'nome',
@@ -4116,29 +4442,29 @@ export const AtlCargoTipoScalarFieldEnum = {
   updated_at: 'updated_at'
 } as const
 
-export type AtlCargoTipoScalarFieldEnum = (typeof AtlCargoTipoScalarFieldEnum)[keyof typeof AtlCargoTipoScalarFieldEnum]
+export type EntCargoTipoScalarFieldEnum = (typeof EntCargoTipoScalarFieldEnum)[keyof typeof EntCargoTipoScalarFieldEnum]
 
 
-export const AtlCargoScalarFieldEnum = {
+export const EntCargoScalarFieldEnum = {
   id: 'id',
   nome: 'nome',
   codigo: 'codigo',
   descricao: 'descricao',
-  atl_cargo_tipo_id: 'atl_cargo_tipo_id',
-  atl_atletica_id: 'atl_atletica_id',
+  ent_cargo_tipo_id: 'ent_cargo_tipo_id',
+  ent_entidade_id: 'ent_entidade_id',
   ativo: 'ativo',
   created_at: 'created_at',
   updated_at: 'updated_at',
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlCargoScalarFieldEnum = (typeof AtlCargoScalarFieldEnum)[keyof typeof AtlCargoScalarFieldEnum]
+export type EntCargoScalarFieldEnum = (typeof EntCargoScalarFieldEnum)[keyof typeof EntCargoScalarFieldEnum]
 
 
-export const AtlAtleticaCargoScalarFieldEnum = {
+export const EntEntidadeCargoScalarFieldEnum = {
   id: 'id',
-  atl_atletica_id: 'atl_atletica_id',
-  atl_cargo_id: 'atl_cargo_id',
+  ent_entidade_id: 'ent_entidade_id',
+  ent_cargo_id: 'ent_cargo_id',
   nome_exibicao: 'nome_exibicao',
   descricao_customizada: 'descricao_customizada',
   ordem: 'ordem',
@@ -4148,10 +4474,10 @@ export const AtlAtleticaCargoScalarFieldEnum = {
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlAtleticaCargoScalarFieldEnum = (typeof AtlAtleticaCargoScalarFieldEnum)[keyof typeof AtlAtleticaCargoScalarFieldEnum]
+export type EntEntidadeCargoScalarFieldEnum = (typeof EntEntidadeCargoScalarFieldEnum)[keyof typeof EntEntidadeCargoScalarFieldEnum]
 
 
-export const AtlAtleticaMembroTipoScalarFieldEnum = {
+export const EntEntidadeMembroTipoScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
   nome: 'nome',
@@ -4161,10 +4487,10 @@ export const AtlAtleticaMembroTipoScalarFieldEnum = {
   updated_at: 'updated_at'
 } as const
 
-export type AtlAtleticaMembroTipoScalarFieldEnum = (typeof AtlAtleticaMembroTipoScalarFieldEnum)[keyof typeof AtlAtleticaMembroTipoScalarFieldEnum]
+export type EntEntidadeMembroTipoScalarFieldEnum = (typeof EntEntidadeMembroTipoScalarFieldEnum)[keyof typeof EntEntidadeMembroTipoScalarFieldEnum]
 
 
-export const AtlAtleticaMembroStatusScalarFieldEnum = {
+export const EntEntidadeMembroStatusScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
   nome: 'nome',
@@ -4175,15 +4501,15 @@ export const AtlAtleticaMembroStatusScalarFieldEnum = {
   updated_at: 'updated_at'
 } as const
 
-export type AtlAtleticaMembroStatusScalarFieldEnum = (typeof AtlAtleticaMembroStatusScalarFieldEnum)[keyof typeof AtlAtleticaMembroStatusScalarFieldEnum]
+export type EntEntidadeMembroStatusScalarFieldEnum = (typeof EntEntidadeMembroStatusScalarFieldEnum)[keyof typeof EntEntidadeMembroStatusScalarFieldEnum]
 
 
-export const AtlAtleticaMembroScalarFieldEnum = {
+export const EntEntidadeMembroScalarFieldEnum = {
   id: 'id',
-  atl_atletica_id: 'atl_atletica_id',
+  ent_entidade_id: 'ent_entidade_id',
   sys_usuario_id: 'sys_usuario_id',
-  atl_atletica_membro_tipo_id: 'atl_atletica_membro_tipo_id',
-  atl_atletica_membro_status_id: 'atl_atletica_membro_status_id',
+  ent_entidade_membro_tipo_id: 'ent_entidade_membro_tipo_id',
+  ent_entidade_membro_status_id: 'ent_entidade_membro_status_id',
   entrou_at: 'entrou_at',
   saiu_at: 'saiu_at',
   observacao: 'observacao',
@@ -4193,13 +4519,13 @@ export const AtlAtleticaMembroScalarFieldEnum = {
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlAtleticaMembroScalarFieldEnum = (typeof AtlAtleticaMembroScalarFieldEnum)[keyof typeof AtlAtleticaMembroScalarFieldEnum]
+export type EntEntidadeMembroScalarFieldEnum = (typeof EntEntidadeMembroScalarFieldEnum)[keyof typeof EntEntidadeMembroScalarFieldEnum]
 
 
-export const AtlAtleticaMembroCargoScalarFieldEnum = {
+export const EntEntidadeMembroCargoScalarFieldEnum = {
   id: 'id',
-  atl_atletica_membro_id: 'atl_atletica_membro_id',
-  atl_cargo_id: 'atl_cargo_id',
+  ent_entidade_membro_id: 'ent_entidade_membro_id',
+  ent_cargo_id: 'ent_cargo_id',
   inicio_at: 'inicio_at',
   fim_at: 'fim_at',
   atual: 'atual',
@@ -4209,12 +4535,12 @@ export const AtlAtleticaMembroCargoScalarFieldEnum = {
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlAtleticaMembroCargoScalarFieldEnum = (typeof AtlAtleticaMembroCargoScalarFieldEnum)[keyof typeof AtlAtleticaMembroCargoScalarFieldEnum]
+export type EntEntidadeMembroCargoScalarFieldEnum = (typeof EntEntidadeMembroCargoScalarFieldEnum)[keyof typeof EntEntidadeMembroCargoScalarFieldEnum]
 
 
-export const AtlAtleticaTemaScalarFieldEnum = {
+export const EntEntidadeTemaScalarFieldEnum = {
   id: 'id',
-  atl_atletica_id: 'atl_atletica_id',
+  ent_entidade_id: 'ent_entidade_id',
   cor_primaria: 'cor_primaria',
   cor_secundaria: 'cor_secundaria',
   cor_fundo: 'cor_fundo',
@@ -4227,12 +4553,12 @@ export const AtlAtleticaTemaScalarFieldEnum = {
   updated_at: 'updated_at'
 } as const
 
-export type AtlAtleticaTemaScalarFieldEnum = (typeof AtlAtleticaTemaScalarFieldEnum)[keyof typeof AtlAtleticaTemaScalarFieldEnum]
+export type EntEntidadeTemaScalarFieldEnum = (typeof EntEntidadeTemaScalarFieldEnum)[keyof typeof EntEntidadeTemaScalarFieldEnum]
 
 
-export const AtlAtleticaRegimentoScalarFieldEnum = {
+export const EntEntidadeRegimentoScalarFieldEnum = {
   id: 'id',
-  atl_atletica_id: 'atl_atletica_id',
+  ent_entidade_id: 'ent_entidade_id',
   titulo: 'titulo',
   versao: 'versao',
   conteudo: 'conteudo',
@@ -4244,7 +4570,7 @@ export const AtlAtleticaRegimentoScalarFieldEnum = {
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlAtleticaRegimentoScalarFieldEnum = (typeof AtlAtleticaRegimentoScalarFieldEnum)[keyof typeof AtlAtleticaRegimentoScalarFieldEnum]
+export type EntEntidadeRegimentoScalarFieldEnum = (typeof EntEntidadeRegimentoScalarFieldEnum)[keyof typeof EntEntidadeRegimentoScalarFieldEnum]
 
 
 export const SysAssinaturaPlanoPeriodicidadeScalarFieldEnum = {
@@ -4278,7 +4604,7 @@ export const SysAssinaturaPlanoScalarFieldEnum = {
 export type SysAssinaturaPlanoScalarFieldEnum = (typeof SysAssinaturaPlanoScalarFieldEnum)[keyof typeof SysAssinaturaPlanoScalarFieldEnum]
 
 
-export const AtlAtleticaAssinaturaStatusScalarFieldEnum = {
+export const EntEntidadeAssinaturaStatusScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
   nome: 'nome',
@@ -4289,14 +4615,14 @@ export const AtlAtleticaAssinaturaStatusScalarFieldEnum = {
   updated_at: 'updated_at'
 } as const
 
-export type AtlAtleticaAssinaturaStatusScalarFieldEnum = (typeof AtlAtleticaAssinaturaStatusScalarFieldEnum)[keyof typeof AtlAtleticaAssinaturaStatusScalarFieldEnum]
+export type EntEntidadeAssinaturaStatusScalarFieldEnum = (typeof EntEntidadeAssinaturaStatusScalarFieldEnum)[keyof typeof EntEntidadeAssinaturaStatusScalarFieldEnum]
 
 
-export const AtlAtleticaAssinaturaScalarFieldEnum = {
+export const EntEntidadeAssinaturaScalarFieldEnum = {
   id: 'id',
-  atl_atletica_id: 'atl_atletica_id',
+  ent_entidade_id: 'ent_entidade_id',
   sys_assinatura_plano_id: 'sys_assinatura_plano_id',
-  atl_atletica_assinatura_status_id: 'atl_atletica_assinatura_status_id',
+  ent_entidade_assinatura_status_id: 'ent_entidade_assinatura_status_id',
   inicio_at: 'inicio_at',
   fim_at: 'fim_at',
   observacao: 'observacao',
@@ -4306,7 +4632,7 @@ export const AtlAtleticaAssinaturaScalarFieldEnum = {
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlAtleticaAssinaturaScalarFieldEnum = (typeof AtlAtleticaAssinaturaScalarFieldEnum)[keyof typeof AtlAtleticaAssinaturaScalarFieldEnum]
+export type EntEntidadeAssinaturaScalarFieldEnum = (typeof EntEntidadeAssinaturaScalarFieldEnum)[keyof typeof EntEntidadeAssinaturaScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -4584,6 +4910,9 @@ export const SysSolicitacaoScalarFieldEnum = {
   sys_solicitacao_status_id: 'sys_solicitacao_status_id',
   solicitado_por_usuario_id: 'solicitado_por_usuario_id',
   responsavel_sys_usuario_id: 'responsavel_sys_usuario_id',
+  edu_instituicao_id: 'edu_instituicao_id',
+  edu_polo_id: 'edu_polo_id',
+  ent_entidade_id: 'ent_entidade_id',
   titulo: 'titulo',
   descricao: 'descricao',
   entidade_tipo: 'entidade_tipo',
@@ -4755,7 +5084,26 @@ export const EduCursoOrderByRelevanceFieldEnum = {
 export type EduCursoOrderByRelevanceFieldEnum = (typeof EduCursoOrderByRelevanceFieldEnum)[keyof typeof EduCursoOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaStatusOrderByRelevanceFieldEnum = {
+export const EduPoloOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  cidade: 'cidade',
+  estado: 'estado'
+} as const
+
+export type EduPoloOrderByRelevanceFieldEnum = (typeof EduPoloOrderByRelevanceFieldEnum)[keyof typeof EduPoloOrderByRelevanceFieldEnum]
+
+
+export const EntEntidadeTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type EntEntidadeTipoOrderByRelevanceFieldEnum = (typeof EntEntidadeTipoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeTipoOrderByRelevanceFieldEnum]
+
+
+export const EntEntidadeStatusOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   nome: 'nome',
   descricao: 'descricao',
@@ -4763,10 +5111,10 @@ export const AtlAtleticaStatusOrderByRelevanceFieldEnum = {
   icon: 'icon'
 } as const
 
-export type AtlAtleticaStatusOrderByRelevanceFieldEnum = (typeof AtlAtleticaStatusOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaStatusOrderByRelevanceFieldEnum]
+export type EntEntidadeStatusOrderByRelevanceFieldEnum = (typeof EntEntidadeStatusOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeStatusOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaOrderByRelevanceFieldEnum = {
+export const EntEntidadeOrderByRelevanceFieldEnum = {
   nome: 'nome',
   apelido: 'apelido',
   sigla: 'sigla',
@@ -4776,10 +5124,10 @@ export const AtlAtleticaOrderByRelevanceFieldEnum = {
   logo_url: 'logo_url'
 } as const
 
-export type AtlAtleticaOrderByRelevanceFieldEnum = (typeof AtlAtleticaOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaOrderByRelevanceFieldEnum]
+export type EntEntidadeOrderByRelevanceFieldEnum = (typeof EntEntidadeOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaGestaoStatusOrderByRelevanceFieldEnum = {
+export const EntEntidadeGestaoStatusOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   nome: 'nome',
   descricao: 'descricao',
@@ -4787,77 +5135,77 @@ export const AtlAtleticaGestaoStatusOrderByRelevanceFieldEnum = {
   icon: 'icon'
 } as const
 
-export type AtlAtleticaGestaoStatusOrderByRelevanceFieldEnum = (typeof AtlAtleticaGestaoStatusOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaGestaoStatusOrderByRelevanceFieldEnum]
+export type EntEntidadeGestaoStatusOrderByRelevanceFieldEnum = (typeof EntEntidadeGestaoStatusOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeGestaoStatusOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaGestaoOrderByRelevanceFieldEnum = {
+export const EntEntidadeGestaoOrderByRelevanceFieldEnum = {
   nome: 'nome',
   observacao: 'observacao'
 } as const
 
-export type AtlAtleticaGestaoOrderByRelevanceFieldEnum = (typeof AtlAtleticaGestaoOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaGestaoOrderByRelevanceFieldEnum]
+export type EntEntidadeGestaoOrderByRelevanceFieldEnum = (typeof EntEntidadeGestaoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeGestaoOrderByRelevanceFieldEnum]
 
 
-export const AtlCargoTipoOrderByRelevanceFieldEnum = {
+export const EntCargoTipoOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   nome: 'nome',
   descricao: 'descricao'
 } as const
 
-export type AtlCargoTipoOrderByRelevanceFieldEnum = (typeof AtlCargoTipoOrderByRelevanceFieldEnum)[keyof typeof AtlCargoTipoOrderByRelevanceFieldEnum]
+export type EntCargoTipoOrderByRelevanceFieldEnum = (typeof EntCargoTipoOrderByRelevanceFieldEnum)[keyof typeof EntCargoTipoOrderByRelevanceFieldEnum]
 
 
-export const AtlCargoOrderByRelevanceFieldEnum = {
+export const EntCargoOrderByRelevanceFieldEnum = {
   nome: 'nome',
   codigo: 'codigo',
   descricao: 'descricao'
 } as const
 
-export type AtlCargoOrderByRelevanceFieldEnum = (typeof AtlCargoOrderByRelevanceFieldEnum)[keyof typeof AtlCargoOrderByRelevanceFieldEnum]
+export type EntCargoOrderByRelevanceFieldEnum = (typeof EntCargoOrderByRelevanceFieldEnum)[keyof typeof EntCargoOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaCargoOrderByRelevanceFieldEnum = {
+export const EntEntidadeCargoOrderByRelevanceFieldEnum = {
   nome_exibicao: 'nome_exibicao',
   descricao_customizada: 'descricao_customizada'
 } as const
 
-export type AtlAtleticaCargoOrderByRelevanceFieldEnum = (typeof AtlAtleticaCargoOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaCargoOrderByRelevanceFieldEnum]
+export type EntEntidadeCargoOrderByRelevanceFieldEnum = (typeof EntEntidadeCargoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeCargoOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaMembroTipoOrderByRelevanceFieldEnum = {
+export const EntEntidadeMembroTipoOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   nome: 'nome',
   descricao: 'descricao'
 } as const
 
-export type AtlAtleticaMembroTipoOrderByRelevanceFieldEnum = (typeof AtlAtleticaMembroTipoOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaMembroTipoOrderByRelevanceFieldEnum]
+export type EntEntidadeMembroTipoOrderByRelevanceFieldEnum = (typeof EntEntidadeMembroTipoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeMembroTipoOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaMembroStatusOrderByRelevanceFieldEnum = {
+export const EntEntidadeMembroStatusOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   nome: 'nome',
   color: 'color',
   icon: 'icon'
 } as const
 
-export type AtlAtleticaMembroStatusOrderByRelevanceFieldEnum = (typeof AtlAtleticaMembroStatusOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaMembroStatusOrderByRelevanceFieldEnum]
+export type EntEntidadeMembroStatusOrderByRelevanceFieldEnum = (typeof EntEntidadeMembroStatusOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeMembroStatusOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaMembroOrderByRelevanceFieldEnum = {
+export const EntEntidadeMembroOrderByRelevanceFieldEnum = {
   observacao: 'observacao'
 } as const
 
-export type AtlAtleticaMembroOrderByRelevanceFieldEnum = (typeof AtlAtleticaMembroOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaMembroOrderByRelevanceFieldEnum]
+export type EntEntidadeMembroOrderByRelevanceFieldEnum = (typeof EntEntidadeMembroOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeMembroOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaMembroCargoOrderByRelevanceFieldEnum = {
+export const EntEntidadeMembroCargoOrderByRelevanceFieldEnum = {
   observacao: 'observacao'
 } as const
 
-export type AtlAtleticaMembroCargoOrderByRelevanceFieldEnum = (typeof AtlAtleticaMembroCargoOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaMembroCargoOrderByRelevanceFieldEnum]
+export type EntEntidadeMembroCargoOrderByRelevanceFieldEnum = (typeof EntEntidadeMembroCargoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeMembroCargoOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaTemaOrderByRelevanceFieldEnum = {
+export const EntEntidadeTemaOrderByRelevanceFieldEnum = {
   cor_primaria: 'cor_primaria',
   cor_secundaria: 'cor_secundaria',
   cor_fundo: 'cor_fundo',
@@ -4867,17 +5215,17 @@ export const AtlAtleticaTemaOrderByRelevanceFieldEnum = {
   custom_css: 'custom_css'
 } as const
 
-export type AtlAtleticaTemaOrderByRelevanceFieldEnum = (typeof AtlAtleticaTemaOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaTemaOrderByRelevanceFieldEnum]
+export type EntEntidadeTemaOrderByRelevanceFieldEnum = (typeof EntEntidadeTemaOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeTemaOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaRegimentoOrderByRelevanceFieldEnum = {
+export const EntEntidadeRegimentoOrderByRelevanceFieldEnum = {
   titulo: 'titulo',
   versao: 'versao',
   conteudo: 'conteudo',
   arquivo_url: 'arquivo_url'
 } as const
 
-export type AtlAtleticaRegimentoOrderByRelevanceFieldEnum = (typeof AtlAtleticaRegimentoOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaRegimentoOrderByRelevanceFieldEnum]
+export type EntEntidadeRegimentoOrderByRelevanceFieldEnum = (typeof EntEntidadeRegimentoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeRegimentoOrderByRelevanceFieldEnum]
 
 
 export const SysAssinaturaPlanoPeriodicidadeOrderByRelevanceFieldEnum = {
@@ -4898,21 +5246,21 @@ export const SysAssinaturaPlanoOrderByRelevanceFieldEnum = {
 export type SysAssinaturaPlanoOrderByRelevanceFieldEnum = (typeof SysAssinaturaPlanoOrderByRelevanceFieldEnum)[keyof typeof SysAssinaturaPlanoOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaAssinaturaStatusOrderByRelevanceFieldEnum = {
+export const EntEntidadeAssinaturaStatusOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   nome: 'nome',
   color: 'color',
   icon: 'icon'
 } as const
 
-export type AtlAtleticaAssinaturaStatusOrderByRelevanceFieldEnum = (typeof AtlAtleticaAssinaturaStatusOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaAssinaturaStatusOrderByRelevanceFieldEnum]
+export type EntEntidadeAssinaturaStatusOrderByRelevanceFieldEnum = (typeof EntEntidadeAssinaturaStatusOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeAssinaturaStatusOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaAssinaturaOrderByRelevanceFieldEnum = {
+export const EntEntidadeAssinaturaOrderByRelevanceFieldEnum = {
   observacao: 'observacao'
 } as const
 
-export type AtlAtleticaAssinaturaOrderByRelevanceFieldEnum = (typeof AtlAtleticaAssinaturaOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaAssinaturaOrderByRelevanceFieldEnum]
+export type EntEntidadeAssinaturaOrderByRelevanceFieldEnum = (typeof EntEntidadeAssinaturaOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeAssinaturaOrderByRelevanceFieldEnum]
 
 
 export const UserOrderByRelevanceFieldEnum = {
@@ -5315,24 +5663,28 @@ export type GlobalOmitConfig = {
   eduInstituicao?: Prisma.EduInstituicaoOmit
   eduCurso?: Prisma.EduCursoOmit
   eduInstituicaoCurso?: Prisma.EduInstituicaoCursoOmit
-  atlAtleticaStatus?: Prisma.AtlAtleticaStatusOmit
-  atlAtletica?: Prisma.AtlAtleticaOmit
-  atlAtleticaCurso?: Prisma.AtlAtleticaCursoOmit
-  atlAtleticaGestaoStatus?: Prisma.AtlAtleticaGestaoStatusOmit
-  atlAtleticaGestao?: Prisma.AtlAtleticaGestaoOmit
-  atlCargoTipo?: Prisma.AtlCargoTipoOmit
-  atlCargo?: Prisma.AtlCargoOmit
-  atlAtleticaCargo?: Prisma.AtlAtleticaCargoOmit
-  atlAtleticaMembroTipo?: Prisma.AtlAtleticaMembroTipoOmit
-  atlAtleticaMembroStatus?: Prisma.AtlAtleticaMembroStatusOmit
-  atlAtleticaMembro?: Prisma.AtlAtleticaMembroOmit
-  atlAtleticaMembroCargo?: Prisma.AtlAtleticaMembroCargoOmit
-  atlAtleticaTema?: Prisma.AtlAtleticaTemaOmit
-  atlAtleticaRegimento?: Prisma.AtlAtleticaRegimentoOmit
+  eduPolo?: Prisma.EduPoloOmit
+  sysUsuarioPolo?: Prisma.SysUsuarioPoloOmit
+  entEntidadeTipo?: Prisma.EntEntidadeTipoOmit
+  entEntidadeStatus?: Prisma.EntEntidadeStatusOmit
+  entEntidade?: Prisma.EntEntidadeOmit
+  entEntidadeCurso?: Prisma.EntEntidadeCursoOmit
+  entEntidadePolo?: Prisma.EntEntidadePoloOmit
+  entEntidadeGestaoStatus?: Prisma.EntEntidadeGestaoStatusOmit
+  entEntidadeGestao?: Prisma.EntEntidadeGestaoOmit
+  entCargoTipo?: Prisma.EntCargoTipoOmit
+  entCargo?: Prisma.EntCargoOmit
+  entEntidadeCargo?: Prisma.EntEntidadeCargoOmit
+  entEntidadeMembroTipo?: Prisma.EntEntidadeMembroTipoOmit
+  entEntidadeMembroStatus?: Prisma.EntEntidadeMembroStatusOmit
+  entEntidadeMembro?: Prisma.EntEntidadeMembroOmit
+  entEntidadeMembroCargo?: Prisma.EntEntidadeMembroCargoOmit
+  entEntidadeTema?: Prisma.EntEntidadeTemaOmit
+  entEntidadeRegimento?: Prisma.EntEntidadeRegimentoOmit
   sysAssinaturaPlanoPeriodicidade?: Prisma.SysAssinaturaPlanoPeriodicidadeOmit
   sysAssinaturaPlano?: Prisma.SysAssinaturaPlanoOmit
-  atlAtleticaAssinaturaStatus?: Prisma.AtlAtleticaAssinaturaStatusOmit
-  atlAtleticaAssinatura?: Prisma.AtlAtleticaAssinaturaOmit
+  entEntidadeAssinaturaStatus?: Prisma.EntEntidadeAssinaturaStatusOmit
+  entEntidadeAssinatura?: Prisma.EntEntidadeAssinaturaOmit
   user?: Prisma.UserOmit
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit

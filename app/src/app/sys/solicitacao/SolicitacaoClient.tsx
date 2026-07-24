@@ -192,7 +192,7 @@ export function SolicitacaoClient({
                 subtitle="Acompanhe solicitações, validações, documentos e processos institucionais do Brava Pass."
                 actions={
                     <AppLink
-                        href="/atl/atletica/criar"
+                        href="/app/src/app/ent/atletica/criar"
                         color="primary"
                         variant="solid"
                     >
@@ -287,7 +287,7 @@ export function SolicitacaoClient({
                     description="Quando houver solicitações, elas aparecerão aqui com status, histórico e ações disponíveis."
                     action={
                         <AppLink
-                            href="/atl/atletica/criar"
+                            href="/app/src/app/ent/atletica/criar"
                             color="primary"
                             variant="solid"
                         >

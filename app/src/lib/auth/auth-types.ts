@@ -8,7 +8,7 @@ export type AuthUser = {
 
 export type AuthSession = {
     user: AuthUser;
-    atl_atletica_id?: number | null;
+    ent_entidade_id?: number | null;
 };
 
 export type PermissionCheckResult = {

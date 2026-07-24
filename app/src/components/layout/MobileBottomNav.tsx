@@ -6,9 +6,9 @@ import { CreditCard, Home, Settings, Shield } from "lucide-react";
 
 const mobileNavItems = [
     { label: "Início", icon: Home, href: "/" },
-    { label: "Atlética", icon: Shield, href: "/atl/atletica" },
+    { label: "Atlética", icon: Shield, href: "/ent/atletica" },
     { label: "Planos", icon: CreditCard, href: "/assinaturas" },
-    { label: "Tema", icon: Settings, href: "/atl/tema" },
+    { label: "Tema", icon: Settings, href: "/ent/atletica/tema" },
 ];
 
 function isActiveRoute(pathname: string, href: string) {

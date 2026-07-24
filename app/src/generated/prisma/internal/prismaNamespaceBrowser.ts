@@ -62,24 +62,28 @@ export const ModelName = {
   EduInstituicao: 'EduInstituicao',
   EduCurso: 'EduCurso',
   EduInstituicaoCurso: 'EduInstituicaoCurso',
-  AtlAtleticaStatus: 'AtlAtleticaStatus',
-  AtlAtletica: 'AtlAtletica',
-  AtlAtleticaCurso: 'AtlAtleticaCurso',
-  AtlAtleticaGestaoStatus: 'AtlAtleticaGestaoStatus',
-  AtlAtleticaGestao: 'AtlAtleticaGestao',
-  AtlCargoTipo: 'AtlCargoTipo',
-  AtlCargo: 'AtlCargo',
-  AtlAtleticaCargo: 'AtlAtleticaCargo',
-  AtlAtleticaMembroTipo: 'AtlAtleticaMembroTipo',
-  AtlAtleticaMembroStatus: 'AtlAtleticaMembroStatus',
-  AtlAtleticaMembro: 'AtlAtleticaMembro',
-  AtlAtleticaMembroCargo: 'AtlAtleticaMembroCargo',
-  AtlAtleticaTema: 'AtlAtleticaTema',
-  AtlAtleticaRegimento: 'AtlAtleticaRegimento',
+  EduPolo: 'EduPolo',
+  SysUsuarioPolo: 'SysUsuarioPolo',
+  EntEntidadeTipo: 'EntEntidadeTipo',
+  EntEntidadeStatus: 'EntEntidadeStatus',
+  EntEntidade: 'EntEntidade',
+  EntEntidadeCurso: 'EntEntidadeCurso',
+  EntEntidadePolo: 'EntEntidadePolo',
+  EntEntidadeGestaoStatus: 'EntEntidadeGestaoStatus',
+  EntEntidadeGestao: 'EntEntidadeGestao',
+  EntCargoTipo: 'EntCargoTipo',
+  EntCargo: 'EntCargo',
+  EntEntidadeCargo: 'EntEntidadeCargo',
+  EntEntidadeMembroTipo: 'EntEntidadeMembroTipo',
+  EntEntidadeMembroStatus: 'EntEntidadeMembroStatus',
+  EntEntidadeMembro: 'EntEntidadeMembro',
+  EntEntidadeMembroCargo: 'EntEntidadeMembroCargo',
+  EntEntidadeTema: 'EntEntidadeTema',
+  EntEntidadeRegimento: 'EntEntidadeRegimento',
   SysAssinaturaPlanoPeriodicidade: 'SysAssinaturaPlanoPeriodicidade',
   SysAssinaturaPlano: 'SysAssinaturaPlano',
-  AtlAtleticaAssinaturaStatus: 'AtlAtleticaAssinaturaStatus',
-  AtlAtleticaAssinatura: 'AtlAtleticaAssinatura',
+  EntEntidadeAssinaturaStatus: 'EntEntidadeAssinaturaStatus',
+  EntEntidadeAssinatura: 'EntEntidadeAssinatura',
   User: 'User',
   Session: 'Session',
   Account: 'Account',
@@ -202,7 +206,7 @@ export const SysUsuarioRoleScalarFieldEnum = {
   id: 'id',
   sys_usuario_id: 'sys_usuario_id',
   sys_role_id: 'sys_role_id',
-  atl_atletica_id: 'atl_atletica_id',
+  ent_entidade_id: 'ent_entidade_id',
   ativo: 'ativo',
   created_at: 'created_at',
   updated_at: 'updated_at',
@@ -230,7 +234,7 @@ export const SysUsuarioPermissionScalarFieldEnum = {
   sys_usuario_id: 'sys_usuario_id',
   sys_permission_id: 'sys_permission_id',
   sys_usuario_permission_tipo_id: 'sys_usuario_permission_tipo_id',
-  atl_atletica_id: 'atl_atletica_id',
+  ent_entidade_id: 'ent_entidade_id',
   motivo: 'motivo',
   ativo: 'ativo',
   created_at: 'created_at',
@@ -284,7 +288,50 @@ export const EduInstituicaoCursoScalarFieldEnum = {
 export type EduInstituicaoCursoScalarFieldEnum = (typeof EduInstituicaoCursoScalarFieldEnum)[keyof typeof EduInstituicaoCursoScalarFieldEnum]
 
 
-export const AtlAtleticaStatusScalarFieldEnum = {
+export const EduPoloScalarFieldEnum = {
+  id: 'id',
+  edu_instituicao_id: 'edu_instituicao_id',
+  codigo: 'codigo',
+  nome: 'nome',
+  cidade: 'cidade',
+  estado: 'estado',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type EduPoloScalarFieldEnum = (typeof EduPoloScalarFieldEnum)[keyof typeof EduPoloScalarFieldEnum]
+
+
+export const SysUsuarioPoloScalarFieldEnum = {
+  id: 'id',
+  sys_usuario_id: 'sys_usuario_id',
+  edu_polo_id: 'edu_polo_id',
+  principal: 'principal',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type SysUsuarioPoloScalarFieldEnum = (typeof SysUsuarioPoloScalarFieldEnum)[keyof typeof SysUsuarioPoloScalarFieldEnum]
+
+
+export const EntEntidadeTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type EntEntidadeTipoScalarFieldEnum = (typeof EntEntidadeTipoScalarFieldEnum)[keyof typeof EntEntidadeTipoScalarFieldEnum]
+
+
+export const EntEntidadeStatusScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
   nome: 'nome',
@@ -296,13 +343,14 @@ export const AtlAtleticaStatusScalarFieldEnum = {
   updated_at: 'updated_at'
 } as const
 
-export type AtlAtleticaStatusScalarFieldEnum = (typeof AtlAtleticaStatusScalarFieldEnum)[keyof typeof AtlAtleticaStatusScalarFieldEnum]
+export type EntEntidadeStatusScalarFieldEnum = (typeof EntEntidadeStatusScalarFieldEnum)[keyof typeof EntEntidadeStatusScalarFieldEnum]
 
 
-export const AtlAtleticaScalarFieldEnum = {
+export const EntEntidadeScalarFieldEnum = {
   id: 'id',
+  ent_entidade_tipo_id: 'ent_entidade_tipo_id',
+  ent_entidade_status_id: 'ent_entidade_status_id',
   edu_instituicao_id: 'edu_instituicao_id',
-  atl_atletica_status_id: 'atl_atletica_status_id',
   criado_por_sys_usuario_id: 'criado_por_sys_usuario_id',
   nome: 'nome',
   apelido: 'apelido',
@@ -318,12 +366,12 @@ export const AtlAtleticaScalarFieldEnum = {
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlAtleticaScalarFieldEnum = (typeof AtlAtleticaScalarFieldEnum)[keyof typeof AtlAtleticaScalarFieldEnum]
+export type EntEntidadeScalarFieldEnum = (typeof EntEntidadeScalarFieldEnum)[keyof typeof EntEntidadeScalarFieldEnum]
 
 
-export const AtlAtleticaCursoScalarFieldEnum = {
+export const EntEntidadeCursoScalarFieldEnum = {
   id: 'id',
-  atl_atletica_id: 'atl_atletica_id',
+  ent_entidade_id: 'ent_entidade_id',
   edu_curso_id: 'edu_curso_id',
   principal: 'principal',
   ativo: 'ativo',
@@ -332,10 +380,24 @@ export const AtlAtleticaCursoScalarFieldEnum = {
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlAtleticaCursoScalarFieldEnum = (typeof AtlAtleticaCursoScalarFieldEnum)[keyof typeof AtlAtleticaCursoScalarFieldEnum]
+export type EntEntidadeCursoScalarFieldEnum = (typeof EntEntidadeCursoScalarFieldEnum)[keyof typeof EntEntidadeCursoScalarFieldEnum]
 
 
-export const AtlAtleticaGestaoStatusScalarFieldEnum = {
+export const EntEntidadePoloScalarFieldEnum = {
+  id: 'id',
+  ent_entidade_id: 'ent_entidade_id',
+  edu_polo_id: 'edu_polo_id',
+  principal: 'principal',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type EntEntidadePoloScalarFieldEnum = (typeof EntEntidadePoloScalarFieldEnum)[keyof typeof EntEntidadePoloScalarFieldEnum]
+
+
+export const EntEntidadeGestaoStatusScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
   nome: 'nome',
@@ -347,13 +409,13 @@ export const AtlAtleticaGestaoStatusScalarFieldEnum = {
   updated_at: 'updated_at'
 } as const
 
-export type AtlAtleticaGestaoStatusScalarFieldEnum = (typeof AtlAtleticaGestaoStatusScalarFieldEnum)[keyof typeof AtlAtleticaGestaoStatusScalarFieldEnum]
+export type EntEntidadeGestaoStatusScalarFieldEnum = (typeof EntEntidadeGestaoStatusScalarFieldEnum)[keyof typeof EntEntidadeGestaoStatusScalarFieldEnum]
 
 
-export const AtlAtleticaGestaoScalarFieldEnum = {
+export const EntEntidadeGestaoScalarFieldEnum = {
   id: 'id',
-  atl_atletica_id: 'atl_atletica_id',
-  atl_atletica_gestao_status_id: 'atl_atletica_gestao_status_id',
+  ent_entidade_id: 'ent_entidade_id',
+  ent_entidade_gestao_status_id: 'ent_entidade_gestao_status_id',
   nome: 'nome',
   inicio_at: 'inicio_at',
   fim_at: 'fim_at',
@@ -364,10 +426,10 @@ export const AtlAtleticaGestaoScalarFieldEnum = {
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlAtleticaGestaoScalarFieldEnum = (typeof AtlAtleticaGestaoScalarFieldEnum)[keyof typeof AtlAtleticaGestaoScalarFieldEnum]
+export type EntEntidadeGestaoScalarFieldEnum = (typeof EntEntidadeGestaoScalarFieldEnum)[keyof typeof EntEntidadeGestaoScalarFieldEnum]
 
 
-export const AtlCargoTipoScalarFieldEnum = {
+export const EntCargoTipoScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
   nome: 'nome',
@@ -377,29 +439,29 @@ export const AtlCargoTipoScalarFieldEnum = {
   updated_at: 'updated_at'
 } as const
 
-export type AtlCargoTipoScalarFieldEnum = (typeof AtlCargoTipoScalarFieldEnum)[keyof typeof AtlCargoTipoScalarFieldEnum]
+export type EntCargoTipoScalarFieldEnum = (typeof EntCargoTipoScalarFieldEnum)[keyof typeof EntCargoTipoScalarFieldEnum]
 
 
-export const AtlCargoScalarFieldEnum = {
+export const EntCargoScalarFieldEnum = {
   id: 'id',
   nome: 'nome',
   codigo: 'codigo',
   descricao: 'descricao',
-  atl_cargo_tipo_id: 'atl_cargo_tipo_id',
-  atl_atletica_id: 'atl_atletica_id',
+  ent_cargo_tipo_id: 'ent_cargo_tipo_id',
+  ent_entidade_id: 'ent_entidade_id',
   ativo: 'ativo',
   created_at: 'created_at',
   updated_at: 'updated_at',
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlCargoScalarFieldEnum = (typeof AtlCargoScalarFieldEnum)[keyof typeof AtlCargoScalarFieldEnum]
+export type EntCargoScalarFieldEnum = (typeof EntCargoScalarFieldEnum)[keyof typeof EntCargoScalarFieldEnum]
 
 
-export const AtlAtleticaCargoScalarFieldEnum = {
+export const EntEntidadeCargoScalarFieldEnum = {
   id: 'id',
-  atl_atletica_id: 'atl_atletica_id',
-  atl_cargo_id: 'atl_cargo_id',
+  ent_entidade_id: 'ent_entidade_id',
+  ent_cargo_id: 'ent_cargo_id',
   nome_exibicao: 'nome_exibicao',
   descricao_customizada: 'descricao_customizada',
   ordem: 'ordem',
@@ -409,10 +471,10 @@ export const AtlAtleticaCargoScalarFieldEnum = {
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlAtleticaCargoScalarFieldEnum = (typeof AtlAtleticaCargoScalarFieldEnum)[keyof typeof AtlAtleticaCargoScalarFieldEnum]
+export type EntEntidadeCargoScalarFieldEnum = (typeof EntEntidadeCargoScalarFieldEnum)[keyof typeof EntEntidadeCargoScalarFieldEnum]
 
 
-export const AtlAtleticaMembroTipoScalarFieldEnum = {
+export const EntEntidadeMembroTipoScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
   nome: 'nome',
@@ -422,10 +484,10 @@ export const AtlAtleticaMembroTipoScalarFieldEnum = {
   updated_at: 'updated_at'
 } as const
 
-export type AtlAtleticaMembroTipoScalarFieldEnum = (typeof AtlAtleticaMembroTipoScalarFieldEnum)[keyof typeof AtlAtleticaMembroTipoScalarFieldEnum]
+export type EntEntidadeMembroTipoScalarFieldEnum = (typeof EntEntidadeMembroTipoScalarFieldEnum)[keyof typeof EntEntidadeMembroTipoScalarFieldEnum]
 
 
-export const AtlAtleticaMembroStatusScalarFieldEnum = {
+export const EntEntidadeMembroStatusScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
   nome: 'nome',
@@ -436,15 +498,15 @@ export const AtlAtleticaMembroStatusScalarFieldEnum = {
   updated_at: 'updated_at'
 } as const
 
-export type AtlAtleticaMembroStatusScalarFieldEnum = (typeof AtlAtleticaMembroStatusScalarFieldEnum)[keyof typeof AtlAtleticaMembroStatusScalarFieldEnum]
+export type EntEntidadeMembroStatusScalarFieldEnum = (typeof EntEntidadeMembroStatusScalarFieldEnum)[keyof typeof EntEntidadeMembroStatusScalarFieldEnum]
 
 
-export const AtlAtleticaMembroScalarFieldEnum = {
+export const EntEntidadeMembroScalarFieldEnum = {
   id: 'id',
-  atl_atletica_id: 'atl_atletica_id',
+  ent_entidade_id: 'ent_entidade_id',
   sys_usuario_id: 'sys_usuario_id',
-  atl_atletica_membro_tipo_id: 'atl_atletica_membro_tipo_id',
-  atl_atletica_membro_status_id: 'atl_atletica_membro_status_id',
+  ent_entidade_membro_tipo_id: 'ent_entidade_membro_tipo_id',
+  ent_entidade_membro_status_id: 'ent_entidade_membro_status_id',
   entrou_at: 'entrou_at',
   saiu_at: 'saiu_at',
   observacao: 'observacao',
@@ -454,13 +516,13 @@ export const AtlAtleticaMembroScalarFieldEnum = {
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlAtleticaMembroScalarFieldEnum = (typeof AtlAtleticaMembroScalarFieldEnum)[keyof typeof AtlAtleticaMembroScalarFieldEnum]
+export type EntEntidadeMembroScalarFieldEnum = (typeof EntEntidadeMembroScalarFieldEnum)[keyof typeof EntEntidadeMembroScalarFieldEnum]
 
 
-export const AtlAtleticaMembroCargoScalarFieldEnum = {
+export const EntEntidadeMembroCargoScalarFieldEnum = {
   id: 'id',
-  atl_atletica_membro_id: 'atl_atletica_membro_id',
-  atl_cargo_id: 'atl_cargo_id',
+  ent_entidade_membro_id: 'ent_entidade_membro_id',
+  ent_cargo_id: 'ent_cargo_id',
   inicio_at: 'inicio_at',
   fim_at: 'fim_at',
   atual: 'atual',
@@ -470,12 +532,12 @@ export const AtlAtleticaMembroCargoScalarFieldEnum = {
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlAtleticaMembroCargoScalarFieldEnum = (typeof AtlAtleticaMembroCargoScalarFieldEnum)[keyof typeof AtlAtleticaMembroCargoScalarFieldEnum]
+export type EntEntidadeMembroCargoScalarFieldEnum = (typeof EntEntidadeMembroCargoScalarFieldEnum)[keyof typeof EntEntidadeMembroCargoScalarFieldEnum]
 
 
-export const AtlAtleticaTemaScalarFieldEnum = {
+export const EntEntidadeTemaScalarFieldEnum = {
   id: 'id',
-  atl_atletica_id: 'atl_atletica_id',
+  ent_entidade_id: 'ent_entidade_id',
   cor_primaria: 'cor_primaria',
   cor_secundaria: 'cor_secundaria',
   cor_fundo: 'cor_fundo',
@@ -488,12 +550,12 @@ export const AtlAtleticaTemaScalarFieldEnum = {
   updated_at: 'updated_at'
 } as const
 
-export type AtlAtleticaTemaScalarFieldEnum = (typeof AtlAtleticaTemaScalarFieldEnum)[keyof typeof AtlAtleticaTemaScalarFieldEnum]
+export type EntEntidadeTemaScalarFieldEnum = (typeof EntEntidadeTemaScalarFieldEnum)[keyof typeof EntEntidadeTemaScalarFieldEnum]
 
 
-export const AtlAtleticaRegimentoScalarFieldEnum = {
+export const EntEntidadeRegimentoScalarFieldEnum = {
   id: 'id',
-  atl_atletica_id: 'atl_atletica_id',
+  ent_entidade_id: 'ent_entidade_id',
   titulo: 'titulo',
   versao: 'versao',
   conteudo: 'conteudo',
@@ -505,7 +567,7 @@ export const AtlAtleticaRegimentoScalarFieldEnum = {
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlAtleticaRegimentoScalarFieldEnum = (typeof AtlAtleticaRegimentoScalarFieldEnum)[keyof typeof AtlAtleticaRegimentoScalarFieldEnum]
+export type EntEntidadeRegimentoScalarFieldEnum = (typeof EntEntidadeRegimentoScalarFieldEnum)[keyof typeof EntEntidadeRegimentoScalarFieldEnum]
 
 
 export const SysAssinaturaPlanoPeriodicidadeScalarFieldEnum = {
@@ -539,7 +601,7 @@ export const SysAssinaturaPlanoScalarFieldEnum = {
 export type SysAssinaturaPlanoScalarFieldEnum = (typeof SysAssinaturaPlanoScalarFieldEnum)[keyof typeof SysAssinaturaPlanoScalarFieldEnum]
 
 
-export const AtlAtleticaAssinaturaStatusScalarFieldEnum = {
+export const EntEntidadeAssinaturaStatusScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
   nome: 'nome',
@@ -550,14 +612,14 @@ export const AtlAtleticaAssinaturaStatusScalarFieldEnum = {
   updated_at: 'updated_at'
 } as const
 
-export type AtlAtleticaAssinaturaStatusScalarFieldEnum = (typeof AtlAtleticaAssinaturaStatusScalarFieldEnum)[keyof typeof AtlAtleticaAssinaturaStatusScalarFieldEnum]
+export type EntEntidadeAssinaturaStatusScalarFieldEnum = (typeof EntEntidadeAssinaturaStatusScalarFieldEnum)[keyof typeof EntEntidadeAssinaturaStatusScalarFieldEnum]
 
 
-export const AtlAtleticaAssinaturaScalarFieldEnum = {
+export const EntEntidadeAssinaturaScalarFieldEnum = {
   id: 'id',
-  atl_atletica_id: 'atl_atletica_id',
+  ent_entidade_id: 'ent_entidade_id',
   sys_assinatura_plano_id: 'sys_assinatura_plano_id',
-  atl_atletica_assinatura_status_id: 'atl_atletica_assinatura_status_id',
+  ent_entidade_assinatura_status_id: 'ent_entidade_assinatura_status_id',
   inicio_at: 'inicio_at',
   fim_at: 'fim_at',
   observacao: 'observacao',
@@ -567,7 +629,7 @@ export const AtlAtleticaAssinaturaScalarFieldEnum = {
   deleted_at: 'deleted_at'
 } as const
 
-export type AtlAtleticaAssinaturaScalarFieldEnum = (typeof AtlAtleticaAssinaturaScalarFieldEnum)[keyof typeof AtlAtleticaAssinaturaScalarFieldEnum]
+export type EntEntidadeAssinaturaScalarFieldEnum = (typeof EntEntidadeAssinaturaScalarFieldEnum)[keyof typeof EntEntidadeAssinaturaScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -845,6 +907,9 @@ export const SysSolicitacaoScalarFieldEnum = {
   sys_solicitacao_status_id: 'sys_solicitacao_status_id',
   solicitado_por_usuario_id: 'solicitado_por_usuario_id',
   responsavel_sys_usuario_id: 'responsavel_sys_usuario_id',
+  edu_instituicao_id: 'edu_instituicao_id',
+  edu_polo_id: 'edu_polo_id',
+  ent_entidade_id: 'ent_entidade_id',
   titulo: 'titulo',
   descricao: 'descricao',
   entidade_tipo: 'entidade_tipo',
@@ -1016,7 +1081,26 @@ export const EduCursoOrderByRelevanceFieldEnum = {
 export type EduCursoOrderByRelevanceFieldEnum = (typeof EduCursoOrderByRelevanceFieldEnum)[keyof typeof EduCursoOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaStatusOrderByRelevanceFieldEnum = {
+export const EduPoloOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  cidade: 'cidade',
+  estado: 'estado'
+} as const
+
+export type EduPoloOrderByRelevanceFieldEnum = (typeof EduPoloOrderByRelevanceFieldEnum)[keyof typeof EduPoloOrderByRelevanceFieldEnum]
+
+
+export const EntEntidadeTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type EntEntidadeTipoOrderByRelevanceFieldEnum = (typeof EntEntidadeTipoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeTipoOrderByRelevanceFieldEnum]
+
+
+export const EntEntidadeStatusOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   nome: 'nome',
   descricao: 'descricao',
@@ -1024,10 +1108,10 @@ export const AtlAtleticaStatusOrderByRelevanceFieldEnum = {
   icon: 'icon'
 } as const
 
-export type AtlAtleticaStatusOrderByRelevanceFieldEnum = (typeof AtlAtleticaStatusOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaStatusOrderByRelevanceFieldEnum]
+export type EntEntidadeStatusOrderByRelevanceFieldEnum = (typeof EntEntidadeStatusOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeStatusOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaOrderByRelevanceFieldEnum = {
+export const EntEntidadeOrderByRelevanceFieldEnum = {
   nome: 'nome',
   apelido: 'apelido',
   sigla: 'sigla',
@@ -1037,10 +1121,10 @@ export const AtlAtleticaOrderByRelevanceFieldEnum = {
   logo_url: 'logo_url'
 } as const
 
-export type AtlAtleticaOrderByRelevanceFieldEnum = (typeof AtlAtleticaOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaOrderByRelevanceFieldEnum]
+export type EntEntidadeOrderByRelevanceFieldEnum = (typeof EntEntidadeOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaGestaoStatusOrderByRelevanceFieldEnum = {
+export const EntEntidadeGestaoStatusOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   nome: 'nome',
   descricao: 'descricao',
@@ -1048,77 +1132,77 @@ export const AtlAtleticaGestaoStatusOrderByRelevanceFieldEnum = {
   icon: 'icon'
 } as const
 
-export type AtlAtleticaGestaoStatusOrderByRelevanceFieldEnum = (typeof AtlAtleticaGestaoStatusOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaGestaoStatusOrderByRelevanceFieldEnum]
+export type EntEntidadeGestaoStatusOrderByRelevanceFieldEnum = (typeof EntEntidadeGestaoStatusOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeGestaoStatusOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaGestaoOrderByRelevanceFieldEnum = {
+export const EntEntidadeGestaoOrderByRelevanceFieldEnum = {
   nome: 'nome',
   observacao: 'observacao'
 } as const
 
-export type AtlAtleticaGestaoOrderByRelevanceFieldEnum = (typeof AtlAtleticaGestaoOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaGestaoOrderByRelevanceFieldEnum]
+export type EntEntidadeGestaoOrderByRelevanceFieldEnum = (typeof EntEntidadeGestaoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeGestaoOrderByRelevanceFieldEnum]
 
 
-export const AtlCargoTipoOrderByRelevanceFieldEnum = {
+export const EntCargoTipoOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   nome: 'nome',
   descricao: 'descricao'
 } as const
 
-export type AtlCargoTipoOrderByRelevanceFieldEnum = (typeof AtlCargoTipoOrderByRelevanceFieldEnum)[keyof typeof AtlCargoTipoOrderByRelevanceFieldEnum]
+export type EntCargoTipoOrderByRelevanceFieldEnum = (typeof EntCargoTipoOrderByRelevanceFieldEnum)[keyof typeof EntCargoTipoOrderByRelevanceFieldEnum]
 
 
-export const AtlCargoOrderByRelevanceFieldEnum = {
+export const EntCargoOrderByRelevanceFieldEnum = {
   nome: 'nome',
   codigo: 'codigo',
   descricao: 'descricao'
 } as const
 
-export type AtlCargoOrderByRelevanceFieldEnum = (typeof AtlCargoOrderByRelevanceFieldEnum)[keyof typeof AtlCargoOrderByRelevanceFieldEnum]
+export type EntCargoOrderByRelevanceFieldEnum = (typeof EntCargoOrderByRelevanceFieldEnum)[keyof typeof EntCargoOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaCargoOrderByRelevanceFieldEnum = {
+export const EntEntidadeCargoOrderByRelevanceFieldEnum = {
   nome_exibicao: 'nome_exibicao',
   descricao_customizada: 'descricao_customizada'
 } as const
 
-export type AtlAtleticaCargoOrderByRelevanceFieldEnum = (typeof AtlAtleticaCargoOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaCargoOrderByRelevanceFieldEnum]
+export type EntEntidadeCargoOrderByRelevanceFieldEnum = (typeof EntEntidadeCargoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeCargoOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaMembroTipoOrderByRelevanceFieldEnum = {
+export const EntEntidadeMembroTipoOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   nome: 'nome',
   descricao: 'descricao'
 } as const
 
-export type AtlAtleticaMembroTipoOrderByRelevanceFieldEnum = (typeof AtlAtleticaMembroTipoOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaMembroTipoOrderByRelevanceFieldEnum]
+export type EntEntidadeMembroTipoOrderByRelevanceFieldEnum = (typeof EntEntidadeMembroTipoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeMembroTipoOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaMembroStatusOrderByRelevanceFieldEnum = {
+export const EntEntidadeMembroStatusOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   nome: 'nome',
   color: 'color',
   icon: 'icon'
 } as const
 
-export type AtlAtleticaMembroStatusOrderByRelevanceFieldEnum = (typeof AtlAtleticaMembroStatusOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaMembroStatusOrderByRelevanceFieldEnum]
+export type EntEntidadeMembroStatusOrderByRelevanceFieldEnum = (typeof EntEntidadeMembroStatusOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeMembroStatusOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaMembroOrderByRelevanceFieldEnum = {
+export const EntEntidadeMembroOrderByRelevanceFieldEnum = {
   observacao: 'observacao'
 } as const
 
-export type AtlAtleticaMembroOrderByRelevanceFieldEnum = (typeof AtlAtleticaMembroOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaMembroOrderByRelevanceFieldEnum]
+export type EntEntidadeMembroOrderByRelevanceFieldEnum = (typeof EntEntidadeMembroOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeMembroOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaMembroCargoOrderByRelevanceFieldEnum = {
+export const EntEntidadeMembroCargoOrderByRelevanceFieldEnum = {
   observacao: 'observacao'
 } as const
 
-export type AtlAtleticaMembroCargoOrderByRelevanceFieldEnum = (typeof AtlAtleticaMembroCargoOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaMembroCargoOrderByRelevanceFieldEnum]
+export type EntEntidadeMembroCargoOrderByRelevanceFieldEnum = (typeof EntEntidadeMembroCargoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeMembroCargoOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaTemaOrderByRelevanceFieldEnum = {
+export const EntEntidadeTemaOrderByRelevanceFieldEnum = {
   cor_primaria: 'cor_primaria',
   cor_secundaria: 'cor_secundaria',
   cor_fundo: 'cor_fundo',
@@ -1128,17 +1212,17 @@ export const AtlAtleticaTemaOrderByRelevanceFieldEnum = {
   custom_css: 'custom_css'
 } as const
 
-export type AtlAtleticaTemaOrderByRelevanceFieldEnum = (typeof AtlAtleticaTemaOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaTemaOrderByRelevanceFieldEnum]
+export type EntEntidadeTemaOrderByRelevanceFieldEnum = (typeof EntEntidadeTemaOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeTemaOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaRegimentoOrderByRelevanceFieldEnum = {
+export const EntEntidadeRegimentoOrderByRelevanceFieldEnum = {
   titulo: 'titulo',
   versao: 'versao',
   conteudo: 'conteudo',
   arquivo_url: 'arquivo_url'
 } as const
 
-export type AtlAtleticaRegimentoOrderByRelevanceFieldEnum = (typeof AtlAtleticaRegimentoOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaRegimentoOrderByRelevanceFieldEnum]
+export type EntEntidadeRegimentoOrderByRelevanceFieldEnum = (typeof EntEntidadeRegimentoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeRegimentoOrderByRelevanceFieldEnum]
 
 
 export const SysAssinaturaPlanoPeriodicidadeOrderByRelevanceFieldEnum = {
@@ -1159,21 +1243,21 @@ export const SysAssinaturaPlanoOrderByRelevanceFieldEnum = {
 export type SysAssinaturaPlanoOrderByRelevanceFieldEnum = (typeof SysAssinaturaPlanoOrderByRelevanceFieldEnum)[keyof typeof SysAssinaturaPlanoOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaAssinaturaStatusOrderByRelevanceFieldEnum = {
+export const EntEntidadeAssinaturaStatusOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   nome: 'nome',
   color: 'color',
   icon: 'icon'
 } as const
 
-export type AtlAtleticaAssinaturaStatusOrderByRelevanceFieldEnum = (typeof AtlAtleticaAssinaturaStatusOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaAssinaturaStatusOrderByRelevanceFieldEnum]
+export type EntEntidadeAssinaturaStatusOrderByRelevanceFieldEnum = (typeof EntEntidadeAssinaturaStatusOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeAssinaturaStatusOrderByRelevanceFieldEnum]
 
 
-export const AtlAtleticaAssinaturaOrderByRelevanceFieldEnum = {
+export const EntEntidadeAssinaturaOrderByRelevanceFieldEnum = {
   observacao: 'observacao'
 } as const
 
-export type AtlAtleticaAssinaturaOrderByRelevanceFieldEnum = (typeof AtlAtleticaAssinaturaOrderByRelevanceFieldEnum)[keyof typeof AtlAtleticaAssinaturaOrderByRelevanceFieldEnum]
+export type EntEntidadeAssinaturaOrderByRelevanceFieldEnum = (typeof EntEntidadeAssinaturaOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeAssinaturaOrderByRelevanceFieldEnum]
 
 
 export const UserOrderByRelevanceFieldEnum = {

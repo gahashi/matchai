@@ -97,75 +97,95 @@ export type EduCurso = Prisma.EduCursoModel
  */
 export type EduInstituicaoCurso = Prisma.EduInstituicaoCursoModel
 /**
- * Model AtlAtleticaStatus
+ * Model EduPolo
  * 
  */
-export type AtlAtleticaStatus = Prisma.AtlAtleticaStatusModel
+export type EduPolo = Prisma.EduPoloModel
 /**
- * Model AtlAtletica
+ * Model SysUsuarioPolo
  * 
  */
-export type AtlAtletica = Prisma.AtlAtleticaModel
+export type SysUsuarioPolo = Prisma.SysUsuarioPoloModel
 /**
- * Model AtlAtleticaCurso
+ * Model EntEntidadeTipo
  * 
  */
-export type AtlAtleticaCurso = Prisma.AtlAtleticaCursoModel
+export type EntEntidadeTipo = Prisma.EntEntidadeTipoModel
 /**
- * Model AtlAtleticaGestaoStatus
+ * Model EntEntidadeStatus
  * 
  */
-export type AtlAtleticaGestaoStatus = Prisma.AtlAtleticaGestaoStatusModel
+export type EntEntidadeStatus = Prisma.EntEntidadeStatusModel
 /**
- * Model AtlAtleticaGestao
+ * Model EntEntidade
  * 
  */
-export type AtlAtleticaGestao = Prisma.AtlAtleticaGestaoModel
+export type EntEntidade = Prisma.EntEntidadeModel
 /**
- * Model AtlCargoTipo
+ * Model EntEntidadeCurso
  * 
  */
-export type AtlCargoTipo = Prisma.AtlCargoTipoModel
+export type EntEntidadeCurso = Prisma.EntEntidadeCursoModel
 /**
- * Model AtlCargo
+ * Model EntEntidadePolo
  * 
  */
-export type AtlCargo = Prisma.AtlCargoModel
+export type EntEntidadePolo = Prisma.EntEntidadePoloModel
 /**
- * Model AtlAtleticaCargo
+ * Model EntEntidadeGestaoStatus
  * 
  */
-export type AtlAtleticaCargo = Prisma.AtlAtleticaCargoModel
+export type EntEntidadeGestaoStatus = Prisma.EntEntidadeGestaoStatusModel
 /**
- * Model AtlAtleticaMembroTipo
+ * Model EntEntidadeGestao
  * 
  */
-export type AtlAtleticaMembroTipo = Prisma.AtlAtleticaMembroTipoModel
+export type EntEntidadeGestao = Prisma.EntEntidadeGestaoModel
 /**
- * Model AtlAtleticaMembroStatus
+ * Model EntCargoTipo
  * 
  */
-export type AtlAtleticaMembroStatus = Prisma.AtlAtleticaMembroStatusModel
+export type EntCargoTipo = Prisma.EntCargoTipoModel
 /**
- * Model AtlAtleticaMembro
+ * Model EntCargo
  * 
  */
-export type AtlAtleticaMembro = Prisma.AtlAtleticaMembroModel
+export type EntCargo = Prisma.EntCargoModel
 /**
- * Model AtlAtleticaMembroCargo
+ * Model EntEntidadeCargo
  * 
  */
-export type AtlAtleticaMembroCargo = Prisma.AtlAtleticaMembroCargoModel
+export type EntEntidadeCargo = Prisma.EntEntidadeCargoModel
 /**
- * Model AtlAtleticaTema
+ * Model EntEntidadeMembroTipo
  * 
  */
-export type AtlAtleticaTema = Prisma.AtlAtleticaTemaModel
+export type EntEntidadeMembroTipo = Prisma.EntEntidadeMembroTipoModel
 /**
- * Model AtlAtleticaRegimento
+ * Model EntEntidadeMembroStatus
  * 
  */
-export type AtlAtleticaRegimento = Prisma.AtlAtleticaRegimentoModel
+export type EntEntidadeMembroStatus = Prisma.EntEntidadeMembroStatusModel
+/**
+ * Model EntEntidadeMembro
+ * 
+ */
+export type EntEntidadeMembro = Prisma.EntEntidadeMembroModel
+/**
+ * Model EntEntidadeMembroCargo
+ * 
+ */
+export type EntEntidadeMembroCargo = Prisma.EntEntidadeMembroCargoModel
+/**
+ * Model EntEntidadeTema
+ * 
+ */
+export type EntEntidadeTema = Prisma.EntEntidadeTemaModel
+/**
+ * Model EntEntidadeRegimento
+ * 
+ */
+export type EntEntidadeRegimento = Prisma.EntEntidadeRegimentoModel
 /**
  * Model SysAssinaturaPlanoPeriodicidade
  * 
@@ -177,15 +197,15 @@ export type SysAssinaturaPlanoPeriodicidade = Prisma.SysAssinaturaPlanoPeriodici
  */
 export type SysAssinaturaPlano = Prisma.SysAssinaturaPlanoModel
 /**
- * Model AtlAtleticaAssinaturaStatus
+ * Model EntEntidadeAssinaturaStatus
  * 
  */
-export type AtlAtleticaAssinaturaStatus = Prisma.AtlAtleticaAssinaturaStatusModel
+export type EntEntidadeAssinaturaStatus = Prisma.EntEntidadeAssinaturaStatusModel
 /**
- * Model AtlAtleticaAssinatura
+ * Model EntEntidadeAssinatura
  * 
  */
-export type AtlAtleticaAssinatura = Prisma.AtlAtleticaAssinaturaModel
+export type EntEntidadeAssinatura = Prisma.EntEntidadeAssinaturaModel
 /**
  * Model User
  * 
