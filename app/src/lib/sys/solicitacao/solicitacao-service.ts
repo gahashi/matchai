@@ -1,9 +1,14 @@
 import {prisma} from "@/lib/prisma";
-import {inboxService} from "@/lib/inbox/inbox-service";
+import { inboxService } from "@/lib/sys/inbox/inbox-service";
+
 import {
     userHasGlobalPermissionByUserId,
 } from "@/lib/auth/permissions";
 import {solicitacaoHistoryService} from "@/lib/sys/solicitacao/solicitacao-history-service";
+import {
+    solicitacaoCriarAtleticaDetalheService,
+} from "@/lib/ent/atletica/solicitacao-criar-atletica-detalhe";
+
 import {
     AprovarSolicitacaoInput,
     CancelarSolicitacaoInput,
@@ -17,7 +22,12 @@ import {
     SolicitarAjusteInput,
     SolicitacaoStatusCodigo,
     SolicitacaoTipoCodigo,
+    AtualizarPayloadSolicitacaoInput,
 } from "@/lib/sys/solicitacao/solicitacao-types";
+
+import {
+    validarCriarAtleticaPayload,
+} from "@/lib/ent/atletica/solicitacao-criar-atletica-payload";
 
 function normalizarPage(page?: number) {
     if (!page || page < 1) return 1;
@@ -195,6 +205,28 @@ function assertStatusAtualPermitido(
     }
 }
 
+function validarPayloadPorTipo({
+                                   tipoCodigo,
+                                   payload,
+                               }: {
+    tipoCodigo: string;
+    payload: JsonLike;
+}) {
+    switch (tipoCodigo) {
+        case "criar_atletica": {
+            const resultado =
+                validarCriarAtleticaPayload(payload);
+
+            return resultado.payload;
+        }
+
+        default:
+            throw new Error(
+                `O tipo de solicitação "${tipoCodigo}" ainda não permite atualização de dados.`
+            );
+    }
+}
+
 type CreateInboxItemParams = Parameters<typeof inboxService.createItem>[0];
 
 async function criarInboxSeguro(input: CreateInboxItemParams) {
@@ -322,6 +354,8 @@ async function notificarAnalistasSolicitacaoEnviada({
                     statusCodigo: "pending",
                     titulo: "Nova solicitação para análise",
                     mensagem: `A solicitação "${titulo}" foi enviada e aguarda análise.`,
+                    contextoTitulo: `Solicitação #${solicitacaoId}`,
+                    contextoDescricao: titulo,
                     actionUrl: `/sys/solicitacao/${solicitacaoId}`,
                     entidadeTipo: "sys_solicitacao",
                     entidadeId: solicitacaoId,
@@ -349,6 +383,8 @@ async function notificarSolicitanteEmAnalise({
         statusCodigo: "unread",
         titulo: "Solicitação em análise",
         mensagem: `Sua solicitação "${titulo}" foi colocada em análise.`,
+        contextoTitulo: `Solicitação #${solicitacaoId}`,
+        contextoDescricao: titulo,
         actionUrl: `/sys/solicitacao/${solicitacaoId}`,
         entidadeTipo: "sys_solicitacao",
         entidadeId: solicitacaoId,
@@ -375,6 +411,8 @@ async function notificarSolicitanteAjusteSolicitado({
         statusCodigo: "pending",
         titulo: "Ajuste solicitado",
         mensagem: `Foi solicitado um ajuste na sua solicitação "${titulo}". ${descricao}`,
+        contextoTitulo: `Solicitação #${solicitacaoId}`,
+        contextoDescricao: titulo,
         actionUrl: `/sys/solicitacao/${solicitacaoId}`,
         entidadeTipo: "sys_solicitacao",
         entidadeId: solicitacaoId,
@@ -401,6 +439,8 @@ async function notificarSolicitanteRecusa({
         statusCodigo: "rejected",
         titulo: "Solicitação recusada",
         mensagem: `Sua solicitação "${titulo}" foi recusada. Motivo: ${descricao}`,
+        contextoTitulo: `Solicitação #${solicitacaoId}`,
+        contextoDescricao: titulo,
         actionUrl: `/sys/solicitacao/${solicitacaoId}`,
         entidadeTipo: "sys_solicitacao",
         entidadeId: solicitacaoId,
@@ -459,6 +499,158 @@ export const solicitacaoService = {
 
         return solicitacao;
     },
+
+    async atualizarPayload({
+                               solicitacaoId,
+                               sysUsuarioId,
+                               titulo,
+                               descricao,
+                               payload,
+                               metadata,
+                           }: AtualizarPayloadSolicitacaoInput) {
+        const solicitacao =
+            await prisma.sysSolicitacao.findFirst({
+                where: {
+                    id: solicitacaoId,
+                    ativo: 1,
+                    deleted_at: null,
+                },
+                select: {
+                    id: true,
+                    titulo: true,
+                    descricao: true,
+                    payload_text: true,
+                    metadata_text: true,
+                    solicitado_por_usuario_id: true,
+                    sys_solicitacao_status_id: true,
+                    sys_solicitacao_tipo: {
+                        select: {
+                            codigo: true,
+                        },
+                    },
+                    sys_solicitacao_status: {
+                        select: {
+                            codigo: true,
+                        },
+                    },
+                },
+            });
+
+        if (!solicitacao) {
+            throw new Error(
+                "Solicitação não encontrada."
+            );
+        }
+
+        if (
+            solicitacao.solicitado_por_usuario_id !==
+            sysUsuarioId
+        ) {
+            throw new SolicitacaoForbiddenError(
+                "Somente o solicitante pode editar esta solicitação."
+            );
+        }
+
+        assertStatusAtualPermitido(
+            solicitacao.sys_solicitacao_status.codigo,
+            ["rascunho", "ajuste_solicitado"],
+            "editar"
+        );
+
+        const payloadValidado =
+            validarPayloadPorTipo({
+                tipoCodigo:
+                solicitacao.sys_solicitacao_tipo.codigo,
+                payload,
+            });
+
+        const tituloNormalizado =
+            titulo !== undefined
+                ? titulo.trim()
+                : solicitacao.titulo;
+
+        if (!tituloNormalizado) {
+            throw new Error(
+                "O título da solicitação é obrigatório."
+            );
+        }
+
+        const descricaoNormalizada =
+            descricao !== undefined
+                ? descricao?.trim() || null
+                : solicitacao.descricao;
+
+        const metadataAtual =
+            parseJsonSafe(
+                solicitacao.metadata_text
+            );
+
+        const metadataAtualizada =
+            metadata === undefined
+                ? metadataAtual
+                : metadata;
+
+        const now = new Date();
+
+        return prisma.$transaction(async (tx) => {
+            const solicitacaoAtualizada =
+                await tx.sysSolicitacao.update({
+                    where: {
+                        id: solicitacao.id,
+                    },
+                    data: {
+                        titulo: tituloNormalizado,
+                        descricao:
+                        descricaoNormalizada,
+                        payload_text:
+                            serializarJson(
+                                payloadValidado
+                            ),
+                        metadata_text:
+                            serializarJson(
+                                metadataAtualizada
+                            ),
+                        updated_at: now,
+                    },
+                });
+
+            await tx.sysSolicitacaoHistorico.create({
+                data: {
+                    sys_solicitacao_id:
+                    solicitacao.id,
+                    sys_usuario_id:
+                    sysUsuarioId,
+                    sys_solicitacao_status_anterior_id:
+                    solicitacao.sys_solicitacao_status_id,
+                    sys_solicitacao_status_novo_id:
+                    solicitacao.sys_solicitacao_status_id,
+                    acao: "dados_atualizados",
+                    descricao:
+                        solicitacao
+                            .sys_solicitacao_status
+                            .codigo ===
+                        "ajuste_solicitado"
+                            ? "Dados da solicitação atualizados após solicitação de ajuste."
+                            : "Dados da solicitação atualizados.",
+                    metadata_text:
+                        JSON.stringify({
+                            tipo_codigo:
+                            solicitacao
+                                .sys_solicitacao_tipo
+                                .codigo,
+                            status_mantido:
+                            solicitacao
+                                .sys_solicitacao_status
+                                .codigo,
+                        }),
+                    created_at: now,
+                },
+            });
+
+            return solicitacaoAtualizada;
+        });
+    },
+
 
     async enviar({
                      solicitacaoId,
@@ -994,13 +1186,27 @@ export const solicitacaoService = {
             throw new SolicitacaoForbiddenError();
         }
 
-        return mapSolicitacao(solicitacao);
+        const solicitacaoMapeada =
+            mapSolicitacao(solicitacao);
+
+        const detalheEspecifico =
+            solicitacao.sys_solicitacao_tipo.codigo ===
+            "criar_atletica"
+                ? await solicitacaoCriarAtleticaDetalheService.resolver({
+                    payload: solicitacaoMapeada.payload,
+                })
+                : null;
+
+        return {
+            ...solicitacaoMapeada,
+            detalheEspecifico,
+        };
     },
 
     async listar({
                      sysUsuarioId,
                      scope = "minhas",
-                     statusCodigo,
+                     statusCodigos,
                      tipoCodigo,
                      page,
                      pageSize,
@@ -1043,15 +1249,18 @@ export const solicitacaoService = {
             };
         }
 
-        if (statusCodigo) {
+        if (statusCodigos && statusCodigos.length > 0) {
             where.sys_solicitacao_status = {
-                codigo: statusCodigo,
+                codigo: {
+                    in: statusCodigos,
+                },
             };
         }
-
-        if (tipoCodigo) {
-            where.sys_solicitacao_tipo = {
-                codigo: tipoCodigo,
+        if (statusCodigos?.length) {
+            where.sys_solicitacao_status = {
+                codigo: {
+                    in: statusCodigos,
+                },
             };
         }
 

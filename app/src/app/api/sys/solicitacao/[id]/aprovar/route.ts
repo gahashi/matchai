@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { requireApiAccess } from "@/lib/auth/require-api-access";
-import { solicitacaoCriarAtleticaService } from "../../../../../../lib/ent/entidade/solicitacao-criar-atletica";
+import { solicitacaoCriarAtleticaService } from "../../../../../../lib/ent/atletica/solicitacao-criar-atletica";
 import {
     getSolicitacaoErrorStatus,
     solicitacaoService,

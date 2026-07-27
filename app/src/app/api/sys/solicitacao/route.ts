@@ -25,6 +25,37 @@ function toNumber(value: string | null) {
     return numberValue;
 }
 
+const solicitacaoStatusCodigos: SolicitacaoStatusCodigo[] = [
+    "rascunho",
+    "enviada",
+    "em_analise",
+    "ajuste_solicitado",
+    "aprovada",
+    "recusada",
+    "cancelada",
+    "concluida",
+];
+
+function resolveStatusCodigos(
+    value: string | null
+): SolicitacaoStatusCodigo[] {
+    if (!value) {
+        return [];
+    }
+
+    return value
+        .split(",")
+        .map((codigo) => codigo.trim())
+        .filter(
+            (
+                codigo
+            ): codigo is SolicitacaoStatusCodigo =>
+                solicitacaoStatusCodigos.includes(
+                    codigo as SolicitacaoStatusCodigo
+                )
+        );
+}
+
 function slugify(value: string) {
     return value
         .normalize("NFD")
@@ -98,9 +129,9 @@ export async function GET(request: NextRequest) {
                 (searchParams.get("scope") as
                     | SolicitacaoListScope
                     | null) ?? "minhas",
-            statusCodigo: searchParams.get("status") as
-                | SolicitacaoStatusCodigo
-                | undefined,
+            statusCodigos: resolveStatusCodigos(
+                searchParams.get("status")
+            ),
             tipoCodigo: searchParams.get("tipo") as
                 | SolicitacaoTipoCodigo
                 | undefined,

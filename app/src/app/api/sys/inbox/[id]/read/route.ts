@@ -4,7 +4,7 @@ import {
 } from "next/server";
 
 import { requireApiAccess } from "@/lib/auth/require-api-access";
-import { inboxService } from "@/lib/inbox/inbox-service";
+import { inboxService } from "../../../../../../lib/sys/inbox/inbox-service";
 
 type RouteParams = {
     params: Promise<{

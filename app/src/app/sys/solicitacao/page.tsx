@@ -1,8 +1,11 @@
+//solicitacao/page.tsx
 import { redirect } from "next/navigation";
-import { requireAuthPageAccess } from "@/lib/auth/require-access";
+
+import { AppShell } from "@/components/layout/AppShell";
 import {
     userHasGlobalPermission,
 } from "@/lib/auth/permissions";
+import { requireAuthPageAccess } from "@/lib/auth/require-access";
 import {
     SolicitacaoForbiddenError,
     solicitacaoService,
@@ -14,7 +17,6 @@ import {
     SolicitacaoTipoCodigo,
 } from "@/lib/sys/solicitacao/solicitacao-types";
 import { SolicitacaoClient } from "./SolicitacaoClient";
-import {AppShell} from "@/components/layout/AppShell";
 
 type SolicitacaoPageProps = {
     searchParams: Promise<{
@@ -38,20 +40,69 @@ function toNumber(value?: string) {
     return numberValue;
 }
 
+const solicitacaoStatusCodigos: SolicitacaoStatusCodigo[] = [
+    "rascunho",
+    "enviada",
+    "em_analise",
+    "ajuste_solicitado",
+    "aprovada",
+    "recusada",
+    "cancelada",
+    "concluida",
+];
+
+function resolveStatusCodigos(
+    value?: string
+): SolicitacaoStatusCodigo[] {
+    if (!value) {
+        return [];
+    }
+
+    const codigos = value
+        .split(",")
+        .map((codigo) => codigo.trim())
+        .filter(Boolean);
+
+    return codigos.filter(
+        (
+            codigo
+        ): codigo is SolicitacaoStatusCodigo =>
+            solicitacaoStatusCodigos.includes(
+                codigo as SolicitacaoStatusCodigo
+            )
+    );
+}
+
 export default async function SolicitacaoPage({
                                                   searchParams,
                                               }: SolicitacaoPageProps) {
+    const { session } =
+        await requireAuthPageAccess("/sys/solicitacao");
 
-    const { session } = await requireAuthPageAccess("/sys/solicitacao");
     const params = await searchParams;
 
-    const scope = (params.scope as SolicitacaoListScope | undefined) ?? "minhas";
-    const statusCodigo = params.status as SolicitacaoStatusCodigo | undefined;
-    const tipoCodigo = params.tipo as SolicitacaoTipoCodigo | undefined;
-    const sort = (params.sort as SolicitacaoListSort | undefined) ?? "recent";
+    const scope =
+        (params.scope as SolicitacaoListScope | undefined) ??
+        "minhas";
+
+    const statusCodigos =
+        resolveStatusCodigos(params.status);
+
+    const tipoCodigo =
+        params.tipo as SolicitacaoTipoCodigo | undefined;
+
+    const sort =
+        (params.sort as SolicitacaoListSort | undefined) ??
+        "recent";
+
     const page = toNumber(params.page) ?? 1;
 
-    const [canAnalyze, canViewAll] = await Promise.all([
+    const [
+        canAnalyze,
+        canViewAll,
+        canApprove,
+        canReject,
+    ] = await Promise.all([
         userHasGlobalPermission(
             session,
             "solicitacao.analisar"
@@ -59,6 +110,14 @@ export default async function SolicitacaoPage({
         userHasGlobalPermission(
             session,
             "solicitacao.visualizar_todas"
+        ),
+        userHasGlobalPermission(
+            session,
+            "solicitacao.aprovar"
+        ),
+        userHasGlobalPermission(
+            session,
+            "solicitacao.recusar"
         ),
     ]);
 
@@ -68,7 +127,7 @@ export default async function SolicitacaoPage({
         result = await solicitacaoService.listar({
             sysUsuarioId: session.user.id,
             scope,
-            statusCodigo,
+            statusCodigos,
             tipoCodigo,
             sort,
             page,
@@ -84,21 +143,25 @@ export default async function SolicitacaoPage({
 
     return (
         <AppShell>
-
-        <SolicitacaoClient
-            initialItems={result.items}
-            pagination={result.pagination}
-            filters={{
-                scope,
-                statusCodigo,
-                tipoCodigo,
-                sort,
-            }}
-            allowedScopes={{
-                analise: canAnalyze,
-                todas: canViewAll,
-            }}
-        />
+            <SolicitacaoClient
+                initialItems={result.items}
+                pagination={result.pagination}
+                currentUserId={session.user.id}
+                filters={{
+                    scope,
+                    statusCodigos,
+                    tipoCodigo,
+                    sort,
+                }}
+                allowedScopes={{
+                    analise: canAnalyze,
+                    todas: canViewAll,
+                }}
+                allowedActions={{
+                    aprovar: canApprove,
+                    recusar: canReject,
+                }}
+            />
         </AppShell>
     );
 }

@@ -646,7 +646,7 @@ export default function ProfileClient({ usuario }: ProfileClientProps) {
                 open={alterandoSenha}
                 title="Alterar senha"
                 description="Informe sua senha atual e defina uma nova senha segura."
-                onClose={fecharModalSenha}
+                onCloseAction={fecharModalSenha}
             >
                 <form className="bp-grid" onSubmit={handleAlterarSenha}>
                     <div>

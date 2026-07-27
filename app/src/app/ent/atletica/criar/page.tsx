@@ -6,7 +6,9 @@ import { Card, CardBody } from "@/components/ui/Card";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { requireAuthPageAccess } from "@/lib/auth/require-access";
 import { prisma } from "@/lib/prisma";
-import { CriarAtleticaClient } from "./CriarAtleticaClient";
+import {
+    SolicitacaoTipoForm,
+} from "@/components/pages/sys/solicitacao/SolicitacaoTipoForm";
 
 async function getSolicitacaoCriarAtleticaEmAndamento(
     sysUsuarioId: number,
@@ -250,22 +252,21 @@ export default async function CriarAtleticaPage() {
                     </CardBody>
                 </Card>
 
-                <CriarAtleticaClient
-                    solicitacaoEmAndamentoId={
-                        solicitacaoEmAndamento?.id ?? null
-                    }
-                    solicitacaoEmAndamentoTitulo={
-                        solicitacaoEmAndamento?.titulo ?? null
-                    }
-                    instituicaoInicial={
-                        contextoEducacional.instituicaoInicial
-                    }
-                    polosIniciais={
-                        contextoEducacional.polosIniciais
-                    }
-                    cursosIniciais={
-                        contextoEducacional.cursosIniciais
-                    }
+                <SolicitacaoTipoForm
+                    tipoCodigo="criar_atletica"
+                    mode="create"
+                    criarAtleticaProps={{
+                        solicitacaoEmAndamentoId:
+                            solicitacaoEmAndamento?.id ?? null,
+                        solicitacaoEmAndamentoTitulo:
+                            solicitacaoEmAndamento?.titulo ?? null,
+                        instituicaoInicial:
+                        contextoEducacional.instituicaoInicial,
+                        polosIniciais:
+                        contextoEducacional.polosIniciais,
+                        cursosIniciais:
+                        contextoEducacional.cursosIniciais,
+                    }}
                 />
             </div>
         </AppShell>

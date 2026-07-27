@@ -1,128 +1,16 @@
-import { inboxService } from "@/lib/inbox/inbox-service";
 import { prisma } from "@/lib/prisma";
+import { inboxService } from "@/lib/sys/inbox/inbox-service";
 
-type CriarAtleticaPoloPayload = {
-    id: number;
-    principal: boolean;
-};
+import {
+    normalizarCriarAtleticaDate,
+    validarCriarAtleticaPayload,
+} from "@/lib/ent/atletica/solicitacao-criar-atletica-payload";
 
-type CriarAtleticaPayload = {
-    atletica: {
-        nome: string;
-        apelido: string;
-        sigla: string;
-        slug: string;
-        mascote?: string;
-        descricao?: string | null;
-        instituicaoId: number;
-        polos: CriarAtleticaPoloPayload[];
-        cursoIds: number[];
-    };
-    gestao: {
-        nome: string;
-        inicioAt: string | Date;
-        fimAt?: string | Date | null;
-        observacao?: string | null;
-    };
-};
 
 type AplicarCriacaoAtleticaInput = {
     solicitacaoId: number;
     sysUsuarioId: number;
 };
-
-function parseJsonSafe(value?: string | null): CriarAtleticaPayload | null {
-    if (!value) {
-        return null;
-    }
-
-    try {
-        const parsed: unknown = JSON.parse(value);
-
-        if (!parsed || typeof parsed !== "object") {
-            return null;
-        }
-
-        return parsed as CriarAtleticaPayload;
-    } catch {
-        return null;
-    }
-}
-
-function slugify(value: string) {
-    return value
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .trim()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "");
-}
-
-function normalizarDate(value?: string | Date | null) {
-    if (!value) {
-        return null;
-    }
-
-    const date = value instanceof Date ? value : new Date(value);
-
-    if (Number.isNaN(date.getTime())) {
-        return null;
-    }
-
-    return date;
-}
-
-function normalizarIds(values: number[]) {
-    return Array.from(
-        new Set(
-            values
-                .map((id) => Number(id))
-                .filter((id) => Number.isInteger(id) && id > 0)
-        )
-    );
-}
-
-function normalizarPolos(polos: CriarAtleticaPoloPayload[]) {
-    if (!Array.isArray(polos) || polos.length === 0) {
-        throw new Error(
-            "Informe pelo menos um polo vinculado à atlética."
-        );
-    }
-
-    const polosNormalizados = polos
-        .map((polo) => ({
-            id: Number(polo.id),
-            principal: polo.principal === true,
-        }))
-        .filter((polo) => Number.isInteger(polo.id) && polo.id > 0);
-
-    if (polosNormalizados.length !== polos.length) {
-        throw new Error("A lista de polos contém um identificador inválido.");
-    }
-
-    const ids = polosNormalizados.map((polo) => polo.id);
-
-    if (new Set(ids).size !== ids.length) {
-        throw new Error("A lista de polos possui registros duplicados.");
-    }
-
-    const polosPrincipais = polosNormalizados.filter(
-        (polo) => polo.principal
-    );
-
-    if (polosPrincipais.length !== 1) {
-        throw new Error(
-            "A atlética deve possuir exatamente um polo principal."
-        );
-    }
-
-    return {
-        polos: polosNormalizados,
-        poloPrincipalId: polosPrincipais[0].id,
-        poloIds: ids,
-    };
-}
 
 async function getEntidadeTipoId(codigo: string) {
     const tipo = await prisma.entEntidadeTipo.findUnique({
@@ -276,65 +164,25 @@ export const solicitacaoCriarAtleticaService = {
             );
         }
 
-        const payload = parseJsonSafe(solicitacao.payload_text);
+        const {
+            payload,
+            nome,
+            apelido,
+            sigla,
+            slug,
+            mascote,
+            descricao,
+            instituicaoId,
+            cursoIds,
+            polos,
+            poloPrincipalId,
+            poloIds,
+        } = validarCriarAtleticaPayload(
+            solicitacao.payload_text
+        );
 
-        if (!payload?.atletica || !payload.gestao) {
-            throw new Error(
-                "Payload da solicitação de criação da atlética inválido."
-            );
-        }
-
-        const atleticaPayload = payload.atletica;
         const gestaoPayload = payload.gestao;
 
-        const nome = atleticaPayload.nome?.trim();
-        const apelido = atleticaPayload.apelido?.trim();
-        const sigla = atleticaPayload.sigla?.trim().toUpperCase();
-        const mascote =
-            atleticaPayload.mascote?.trim() || "Mascote não informado";
-        const descricao = atleticaPayload.descricao ?? null;
-        const slug = slugify(
-            atleticaPayload.slug || apelido || sigla || nome || ""
-        );
-        const instituicaoId = Number(atleticaPayload.instituicaoId);
-        const cursoIds = normalizarIds(atleticaPayload.cursoIds ?? []);
-        const { polos, poloPrincipalId, poloIds } = normalizarPolos(
-            atleticaPayload.polos ?? []
-        );
-
-        if (!nome) {
-            throw new Error(
-                "Nome da atlética não informado no payload da solicitação."
-            );
-        }
-
-        if (!apelido) {
-            throw new Error(
-                "Apelido da atlética não informado no payload da solicitação."
-            );
-        }
-
-        if (!sigla) {
-            throw new Error(
-                "Sigla da atlética não informada no payload da solicitação."
-            );
-        }
-
-        if (!slug) {
-            throw new Error("Não foi possível gerar o slug da atlética.");
-        }
-
-        if (!Number.isInteger(instituicaoId) || instituicaoId <= 0) {
-            throw new Error(
-                "Instituição da atlética não informada no payload da solicitação."
-            );
-        }
-
-        if (cursoIds.length === 0) {
-            throw new Error(
-                "Informe pelo menos um curso vinculado à atlética."
-            );
-        }
 
         const slugExistente = await prisma.entEntidade.findFirst({
             where: {
@@ -433,10 +281,18 @@ export const solicitacaoCriarAtleticaService = {
         const gestaoNome =
             gestaoPayload.nome?.trim() ||
             `Gestão ${new Date().getFullYear()}`;
+
         const gestaoInicioAt =
-            normalizarDate(gestaoPayload.inicioAt) ?? new Date();
-        const gestaoFimAt = normalizarDate(gestaoPayload.fimAt);
-        const now = new Date();
+            normalizarCriarAtleticaDate(
+                gestaoPayload.inicioAt
+            ) ?? new Date();
+
+        const gestaoFimAt =
+            normalizarCriarAtleticaDate(
+                gestaoPayload.fimAt
+            );
+
+         const now = new Date();
 
         const resultado = await prisma.$transaction(async (tx) => {
             const [
@@ -765,6 +621,8 @@ export const solicitacaoCriarAtleticaService = {
             statusCodigo: "approved",
             titulo: "Atlética criada com sucesso",
             mensagem: `A solicitação foi aprovada e a atlética ${resultado.apelido} (${resultado.sigla}) foi ativada no Brava Pass.`,
+            contextoTitulo: `Solicitação #${solicitacao.id}`,
+            contextoDescricao: `Criação da atlética ${resultado.apelido}`,
             actionUrl: "/ent/atletica",
             entidadeTipo: "ent_entidade",
             entidadeId: resultado.entEntidadeId,

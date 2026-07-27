@@ -1,6 +1,6 @@
 import { AppShell } from "@/components/layout/AppShell";
 import { requireAuthPageAccess } from "@/lib/auth/require-access";
-import { inboxService } from "@/lib/inbox/inbox-service";
+import { inboxService } from "../../../lib/sys/inbox/inbox-service";
 import InboxClient from "./InboxClient";
 
 export default async function InboxPage() {

@@ -51,6 +51,8 @@ export type SysInboxItemMinAggregateOutputType = {
   sys_inbox_item_status_id: number | null
   titulo: string | null
   mensagem: string | null
+  contexto_titulo: string | null
+  contexto_descricao: string | null
   action_url: string | null
   entidade_tipo: string | null
   entidade_id: number | null
@@ -70,6 +72,8 @@ export type SysInboxItemMaxAggregateOutputType = {
   sys_inbox_item_status_id: number | null
   titulo: string | null
   mensagem: string | null
+  contexto_titulo: string | null
+  contexto_descricao: string | null
   action_url: string | null
   entidade_tipo: string | null
   entidade_id: number | null
@@ -89,6 +93,8 @@ export type SysInboxItemCountAggregateOutputType = {
   sys_inbox_item_status_id: number
   titulo: number
   mensagem: number
+  contexto_titulo: number
+  contexto_descricao: number
   action_url: number
   entidade_tipo: number
   entidade_id: number
@@ -128,6 +134,8 @@ export type SysInboxItemMinAggregateInputType = {
   sys_inbox_item_status_id?: true
   titulo?: true
   mensagem?: true
+  contexto_titulo?: true
+  contexto_descricao?: true
   action_url?: true
   entidade_tipo?: true
   entidade_id?: true
@@ -147,6 +155,8 @@ export type SysInboxItemMaxAggregateInputType = {
   sys_inbox_item_status_id?: true
   titulo?: true
   mensagem?: true
+  contexto_titulo?: true
+  contexto_descricao?: true
   action_url?: true
   entidade_tipo?: true
   entidade_id?: true
@@ -166,6 +176,8 @@ export type SysInboxItemCountAggregateInputType = {
   sys_inbox_item_status_id?: true
   titulo?: true
   mensagem?: true
+  contexto_titulo?: true
+  contexto_descricao?: true
   action_url?: true
   entidade_tipo?: true
   entidade_id?: true
@@ -272,6 +284,8 @@ export type SysInboxItemGroupByOutputType = {
   sys_inbox_item_status_id: number
   titulo: string
   mensagem: string
+  contexto_titulo: string | null
+  contexto_descricao: string | null
   action_url: string | null
   entidade_tipo: string | null
   entidade_id: number | null
@@ -314,6 +328,8 @@ export type SysInboxItemWhereInput = {
   sys_inbox_item_status_id?: Prisma.IntFilter<"SysInboxItem"> | number
   titulo?: Prisma.StringFilter<"SysInboxItem"> | string
   mensagem?: Prisma.StringFilter<"SysInboxItem"> | string
+  contexto_titulo?: Prisma.StringNullableFilter<"SysInboxItem"> | string | null
+  contexto_descricao?: Prisma.StringNullableFilter<"SysInboxItem"> | string | null
   action_url?: Prisma.StringNullableFilter<"SysInboxItem"> | string | null
   entidade_tipo?: Prisma.StringNullableFilter<"SysInboxItem"> | string | null
   entidade_id?: Prisma.IntNullableFilter<"SysInboxItem"> | number | null
@@ -336,6 +352,8 @@ export type SysInboxItemOrderByWithRelationInput = {
   sys_inbox_item_status_id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   mensagem?: Prisma.SortOrder
+  contexto_titulo?: Prisma.SortOrderInput | Prisma.SortOrder
+  contexto_descricao?: Prisma.SortOrderInput | Prisma.SortOrder
   action_url?: Prisma.SortOrderInput | Prisma.SortOrder
   entidade_tipo?: Prisma.SortOrderInput | Prisma.SortOrder
   entidade_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -362,6 +380,8 @@ export type SysInboxItemWhereUniqueInput = Prisma.AtLeast<{
   sys_inbox_item_status_id?: Prisma.IntFilter<"SysInboxItem"> | number
   titulo?: Prisma.StringFilter<"SysInboxItem"> | string
   mensagem?: Prisma.StringFilter<"SysInboxItem"> | string
+  contexto_titulo?: Prisma.StringNullableFilter<"SysInboxItem"> | string | null
+  contexto_descricao?: Prisma.StringNullableFilter<"SysInboxItem"> | string | null
   action_url?: Prisma.StringNullableFilter<"SysInboxItem"> | string | null
   entidade_tipo?: Prisma.StringNullableFilter<"SysInboxItem"> | string | null
   entidade_id?: Prisma.IntNullableFilter<"SysInboxItem"> | number | null
@@ -384,6 +404,8 @@ export type SysInboxItemOrderByWithAggregationInput = {
   sys_inbox_item_status_id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   mensagem?: Prisma.SortOrder
+  contexto_titulo?: Prisma.SortOrderInput | Prisma.SortOrder
+  contexto_descricao?: Prisma.SortOrderInput | Prisma.SortOrder
   action_url?: Prisma.SortOrderInput | Prisma.SortOrder
   entidade_tipo?: Prisma.SortOrderInput | Prisma.SortOrder
   entidade_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -411,6 +433,8 @@ export type SysInboxItemScalarWhereWithAggregatesInput = {
   sys_inbox_item_status_id?: Prisma.IntWithAggregatesFilter<"SysInboxItem"> | number
   titulo?: Prisma.StringWithAggregatesFilter<"SysInboxItem"> | string
   mensagem?: Prisma.StringWithAggregatesFilter<"SysInboxItem"> | string
+  contexto_titulo?: Prisma.StringNullableWithAggregatesFilter<"SysInboxItem"> | string | null
+  contexto_descricao?: Prisma.StringNullableWithAggregatesFilter<"SysInboxItem"> | string | null
   action_url?: Prisma.StringNullableWithAggregatesFilter<"SysInboxItem"> | string | null
   entidade_tipo?: Prisma.StringNullableWithAggregatesFilter<"SysInboxItem"> | string | null
   entidade_id?: Prisma.IntNullableWithAggregatesFilter<"SysInboxItem"> | number | null
@@ -426,6 +450,8 @@ export type SysInboxItemScalarWhereWithAggregatesInput = {
 export type SysInboxItemCreateInput = {
   titulo: string
   mensagem: string
+  contexto_titulo?: string | null
+  contexto_descricao?: string | null
   action_url?: string | null
   entidade_tipo?: string | null
   entidade_id?: number | null
@@ -448,6 +474,8 @@ export type SysInboxItemUncheckedCreateInput = {
   sys_inbox_item_status_id: number
   titulo: string
   mensagem: string
+  contexto_titulo?: string | null
+  contexto_descricao?: string | null
   action_url?: string | null
   entidade_tipo?: string | null
   entidade_id?: number | null
@@ -463,6 +491,8 @@ export type SysInboxItemUncheckedCreateInput = {
 export type SysInboxItemUpdateInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   mensagem?: Prisma.StringFieldUpdateOperationsInput | string
+  contexto_titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contexto_descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -485,6 +515,8 @@ export type SysInboxItemUncheckedUpdateInput = {
   sys_inbox_item_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   mensagem?: Prisma.StringFieldUpdateOperationsInput | string
+  contexto_titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contexto_descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -504,6 +536,8 @@ export type SysInboxItemCreateManyInput = {
   sys_inbox_item_status_id: number
   titulo: string
   mensagem: string
+  contexto_titulo?: string | null
+  contexto_descricao?: string | null
   action_url?: string | null
   entidade_tipo?: string | null
   entidade_id?: number | null
@@ -519,6 +553,8 @@ export type SysInboxItemCreateManyInput = {
 export type SysInboxItemUpdateManyMutationInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   mensagem?: Prisma.StringFieldUpdateOperationsInput | string
+  contexto_titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contexto_descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -538,6 +574,8 @@ export type SysInboxItemUncheckedUpdateManyInput = {
   sys_inbox_item_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   mensagem?: Prisma.StringFieldUpdateOperationsInput | string
+  contexto_titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contexto_descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -573,6 +611,8 @@ export type SysInboxItemCountOrderByAggregateInput = {
   sys_inbox_item_status_id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   mensagem?: Prisma.SortOrder
+  contexto_titulo?: Prisma.SortOrder
+  contexto_descricao?: Prisma.SortOrder
   action_url?: Prisma.SortOrder
   entidade_tipo?: Prisma.SortOrder
   entidade_id?: Prisma.SortOrder
@@ -601,6 +641,8 @@ export type SysInboxItemMaxOrderByAggregateInput = {
   sys_inbox_item_status_id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   mensagem?: Prisma.SortOrder
+  contexto_titulo?: Prisma.SortOrder
+  contexto_descricao?: Prisma.SortOrder
   action_url?: Prisma.SortOrder
   entidade_tipo?: Prisma.SortOrder
   entidade_id?: Prisma.SortOrder
@@ -620,6 +662,8 @@ export type SysInboxItemMinOrderByAggregateInput = {
   sys_inbox_item_status_id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   mensagem?: Prisma.SortOrder
+  contexto_titulo?: Prisma.SortOrder
+  contexto_descricao?: Prisma.SortOrder
   action_url?: Prisma.SortOrder
   entidade_tipo?: Prisma.SortOrder
   entidade_id?: Prisma.SortOrder
@@ -770,6 +814,8 @@ export type SysInboxItemUncheckedUpdateManyWithoutSys_inbox_item_statusNestedInp
 export type SysInboxItemCreateWithoutSys_usuarioInput = {
   titulo: string
   mensagem: string
+  contexto_titulo?: string | null
+  contexto_descricao?: string | null
   action_url?: string | null
   entidade_tipo?: string | null
   entidade_id?: number | null
@@ -790,6 +836,8 @@ export type SysInboxItemUncheckedCreateWithoutSys_usuarioInput = {
   sys_inbox_item_status_id: number
   titulo: string
   mensagem: string
+  contexto_titulo?: string | null
+  contexto_descricao?: string | null
   action_url?: string | null
   entidade_tipo?: string | null
   entidade_id?: number | null
@@ -838,6 +886,8 @@ export type SysInboxItemScalarWhereInput = {
   sys_inbox_item_status_id?: Prisma.IntFilter<"SysInboxItem"> | number
   titulo?: Prisma.StringFilter<"SysInboxItem"> | string
   mensagem?: Prisma.StringFilter<"SysInboxItem"> | string
+  contexto_titulo?: Prisma.StringNullableFilter<"SysInboxItem"> | string | null
+  contexto_descricao?: Prisma.StringNullableFilter<"SysInboxItem"> | string | null
   action_url?: Prisma.StringNullableFilter<"SysInboxItem"> | string | null
   entidade_tipo?: Prisma.StringNullableFilter<"SysInboxItem"> | string | null
   entidade_id?: Prisma.IntNullableFilter<"SysInboxItem"> | number | null
@@ -853,6 +903,8 @@ export type SysInboxItemScalarWhereInput = {
 export type SysInboxItemCreateWithoutSys_inbox_item_tipoInput = {
   titulo: string
   mensagem: string
+  contexto_titulo?: string | null
+  contexto_descricao?: string | null
   action_url?: string | null
   entidade_tipo?: string | null
   entidade_id?: number | null
@@ -873,6 +925,8 @@ export type SysInboxItemUncheckedCreateWithoutSys_inbox_item_tipoInput = {
   sys_inbox_item_status_id: number
   titulo: string
   mensagem: string
+  contexto_titulo?: string | null
+  contexto_descricao?: string | null
   action_url?: string | null
   entidade_tipo?: string | null
   entidade_id?: number | null
@@ -914,6 +968,8 @@ export type SysInboxItemUpdateManyWithWhereWithoutSys_inbox_item_tipoInput = {
 export type SysInboxItemCreateWithoutSys_inbox_item_statusInput = {
   titulo: string
   mensagem: string
+  contexto_titulo?: string | null
+  contexto_descricao?: string | null
   action_url?: string | null
   entidade_tipo?: string | null
   entidade_id?: number | null
@@ -934,6 +990,8 @@ export type SysInboxItemUncheckedCreateWithoutSys_inbox_item_statusInput = {
   sys_inbox_item_tipo_id: number
   titulo: string
   mensagem: string
+  contexto_titulo?: string | null
+  contexto_descricao?: string | null
   action_url?: string | null
   entidade_tipo?: string | null
   entidade_id?: number | null
@@ -978,6 +1036,8 @@ export type SysInboxItemCreateManySys_usuarioInput = {
   sys_inbox_item_status_id: number
   titulo: string
   mensagem: string
+  contexto_titulo?: string | null
+  contexto_descricao?: string | null
   action_url?: string | null
   entidade_tipo?: string | null
   entidade_id?: number | null
@@ -993,6 +1053,8 @@ export type SysInboxItemCreateManySys_usuarioInput = {
 export type SysInboxItemUpdateWithoutSys_usuarioInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   mensagem?: Prisma.StringFieldUpdateOperationsInput | string
+  contexto_titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contexto_descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1013,6 +1075,8 @@ export type SysInboxItemUncheckedUpdateWithoutSys_usuarioInput = {
   sys_inbox_item_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   mensagem?: Prisma.StringFieldUpdateOperationsInput | string
+  contexto_titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contexto_descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1031,6 +1095,8 @@ export type SysInboxItemUncheckedUpdateManyWithoutSys_usuarioInput = {
   sys_inbox_item_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   mensagem?: Prisma.StringFieldUpdateOperationsInput | string
+  contexto_titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contexto_descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1049,6 +1115,8 @@ export type SysInboxItemCreateManySys_inbox_item_tipoInput = {
   sys_inbox_item_status_id: number
   titulo: string
   mensagem: string
+  contexto_titulo?: string | null
+  contexto_descricao?: string | null
   action_url?: string | null
   entidade_tipo?: string | null
   entidade_id?: number | null
@@ -1064,6 +1132,8 @@ export type SysInboxItemCreateManySys_inbox_item_tipoInput = {
 export type SysInboxItemUpdateWithoutSys_inbox_item_tipoInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   mensagem?: Prisma.StringFieldUpdateOperationsInput | string
+  contexto_titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contexto_descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1084,6 +1154,8 @@ export type SysInboxItemUncheckedUpdateWithoutSys_inbox_item_tipoInput = {
   sys_inbox_item_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   mensagem?: Prisma.StringFieldUpdateOperationsInput | string
+  contexto_titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contexto_descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1102,6 +1174,8 @@ export type SysInboxItemUncheckedUpdateManyWithoutSys_inbox_item_tipoInput = {
   sys_inbox_item_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   mensagem?: Prisma.StringFieldUpdateOperationsInput | string
+  contexto_titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contexto_descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1120,6 +1194,8 @@ export type SysInboxItemCreateManySys_inbox_item_statusInput = {
   sys_inbox_item_tipo_id: number
   titulo: string
   mensagem: string
+  contexto_titulo?: string | null
+  contexto_descricao?: string | null
   action_url?: string | null
   entidade_tipo?: string | null
   entidade_id?: number | null
@@ -1135,6 +1211,8 @@ export type SysInboxItemCreateManySys_inbox_item_statusInput = {
 export type SysInboxItemUpdateWithoutSys_inbox_item_statusInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   mensagem?: Prisma.StringFieldUpdateOperationsInput | string
+  contexto_titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contexto_descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1155,6 +1233,8 @@ export type SysInboxItemUncheckedUpdateWithoutSys_inbox_item_statusInput = {
   sys_inbox_item_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   mensagem?: Prisma.StringFieldUpdateOperationsInput | string
+  contexto_titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contexto_descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1173,6 +1253,8 @@ export type SysInboxItemUncheckedUpdateManyWithoutSys_inbox_item_statusInput = {
   sys_inbox_item_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   mensagem?: Prisma.StringFieldUpdateOperationsInput | string
+  contexto_titulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contexto_descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_tipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entidade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1194,6 +1276,8 @@ export type SysInboxItemSelect<ExtArgs extends runtime.Types.Extensions.Internal
   sys_inbox_item_status_id?: boolean
   titulo?: boolean
   mensagem?: boolean
+  contexto_titulo?: boolean
+  contexto_descricao?: boolean
   action_url?: boolean
   entidade_tipo?: boolean
   entidade_id?: boolean
@@ -1218,6 +1302,8 @@ export type SysInboxItemSelectScalar = {
   sys_inbox_item_status_id?: boolean
   titulo?: boolean
   mensagem?: boolean
+  contexto_titulo?: boolean
+  contexto_descricao?: boolean
   action_url?: boolean
   entidade_tipo?: boolean
   entidade_id?: boolean
@@ -1230,7 +1316,7 @@ export type SysInboxItemSelectScalar = {
   deleted_at?: boolean
 }
 
-export type SysInboxItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sys_usuario_id" | "sys_inbox_item_tipo_id" | "sys_inbox_item_status_id" | "titulo" | "mensagem" | "action_url" | "entidade_tipo" | "entidade_id" | "metadata_text" | "read_at" | "archived_at" | "ativo" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["sysInboxItem"]>
+export type SysInboxItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sys_usuario_id" | "sys_inbox_item_tipo_id" | "sys_inbox_item_status_id" | "titulo" | "mensagem" | "contexto_titulo" | "contexto_descricao" | "action_url" | "entidade_tipo" | "entidade_id" | "metadata_text" | "read_at" | "archived_at" | "ativo" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["sysInboxItem"]>
 export type SysInboxItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sys_usuario?: boolean | Prisma.SysUsuarioDefaultArgs<ExtArgs>
   sys_inbox_item_tipo?: boolean | Prisma.SysInboxItemTipoDefaultArgs<ExtArgs>
@@ -1251,6 +1337,8 @@ export type $SysInboxItemPayload<ExtArgs extends runtime.Types.Extensions.Intern
     sys_inbox_item_status_id: number
     titulo: string
     mensagem: string
+    contexto_titulo: string | null
+    contexto_descricao: string | null
     action_url: string | null
     entidade_tipo: string | null
     entidade_id: number | null
@@ -1639,6 +1727,8 @@ export interface SysInboxItemFieldRefs {
   readonly sys_inbox_item_status_id: Prisma.FieldRef<"SysInboxItem", 'Int'>
   readonly titulo: Prisma.FieldRef<"SysInboxItem", 'String'>
   readonly mensagem: Prisma.FieldRef<"SysInboxItem", 'String'>
+  readonly contexto_titulo: Prisma.FieldRef<"SysInboxItem", 'String'>
+  readonly contexto_descricao: Prisma.FieldRef<"SysInboxItem", 'String'>
   readonly action_url: Prisma.FieldRef<"SysInboxItem", 'String'>
   readonly entidade_tipo: Prisma.FieldRef<"SysInboxItem", 'String'>
   readonly entidade_id: Prisma.FieldRef<"SysInboxItem", 'Int'>

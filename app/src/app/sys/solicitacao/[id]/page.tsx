@@ -11,6 +11,8 @@ import {
     solicitacaoService,
 } from "@/lib/sys/solicitacao/solicitacao-service";
 import { SolicitacaoDetalheClient } from "./SolicitacaoDetalheClient";
+import {AppLink} from "@/components/ui/AppLink";
+import {ArrowLeft} from "lucide-react";
 
 type SolicitacaoDetalhePageProps = {
     params: Promise<{
@@ -59,6 +61,21 @@ type SolicitacaoHistoricoItem = NonNullable<
     Awaited<ReturnType<typeof solicitacaoService.detalhar>>
 >["sys_solicitacao_historico"][number];
 
+type CriarAtleticaPoloDetalhe = {
+    id: number;
+    nome: string;
+    codigo: string | null;
+    cidade: string | null;
+    estado: string | null;
+    principal: boolean;
+};
+
+type CriarAtleticaCursoDetalhe = {
+    id: number;
+    nome: string;
+    abreviacao: string | null;
+};
+
 export default async function SolicitacaoDetalhePage({
                                                          params,
                                                      }: SolicitacaoDetalhePageProps) {
@@ -68,19 +85,26 @@ export default async function SolicitacaoDetalhePage({
     const { id } = await params;
     const solicitacaoId = Number(id);
 
-    if (!Number.isInteger(solicitacaoId)) {
+    if (
+        !Number.isInteger(solicitacaoId) ||
+        solicitacaoId <= 0
+    ) {
         notFound();
     }
 
     let solicitacao;
 
     try {
-        solicitacao = await solicitacaoService.detalhar({
-            solicitacaoId,
-            sysUsuarioId: session.user.id,
-        });
+        solicitacao =
+            await solicitacaoService.detalhar({
+                solicitacaoId,
+                sysUsuarioId: session.user.id,
+            });
     } catch (error) {
-        if (error instanceof SolicitacaoForbiddenError) {
+        if (
+            error instanceof
+            SolicitacaoForbiddenError
+        ) {
             redirect("/sem-permissao");
         }
 
@@ -121,64 +145,93 @@ export default async function SolicitacaoDetalhePage({
 
     return (
         <AppShell>
+            <div className="bp-detail-back-row">
+                <AppLink
+                    href="/sys/solicitacao"
+                    color="secondary"
+                    variant="ghost"
+                    className="bp-detail-back-action"
+                >
+                    <ArrowLeft size={16} />
+                    Voltar para solicitações
+                </AppLink>
+            </div>
             <PageHeader
                 eyebrow="Solicitação"
                 title={solicitacao.titulo}
-                subtitle="Detalhes, documentos, histórico e ações disponíveis para esta solicitação."
+                subtitle="Detalhes e histórico da solicitação."
                 actions={
-                    <Badge
-                        color={getBadgeColor(
-                            solicitacao.sys_solicitacao_status.color
-                        )}
-                        variant="soft"
-                    >
-                        {solicitacao.sys_solicitacao_status.nome}
-                    </Badge>
+                    <div className="bp-badge-row">
+                        <Badge
+                            color={getBadgeColor(
+                                solicitacao
+                                    .sys_solicitacao_tipo
+                                    .color
+                            )}
+                            variant="soft"
+                        >
+                            {
+                                solicitacao
+                                    .sys_solicitacao_tipo
+                                    .nome
+                            }
+                        </Badge>
+
+                        <Badge
+                            color={getBadgeColor(
+                                solicitacao
+                                    .sys_solicitacao_status
+                                    .color
+                            )}
+                            variant="soft"
+                        >
+                            {
+                                solicitacao
+                                    .sys_solicitacao_status
+                                    .nome
+                            }
+                        </Badge>
+
+                        <Badge
+                            color="secondary"
+                            variant="outline"
+                        >
+                            #{solicitacao.id}
+                        </Badge>
+                    </div>
                 }
             />
 
-            <div className="bp-section-grid">
+            <div className="bp-grid">
                 <Card>
                     <CardBody>
-                        <div className="bp-badge-row bp-mb-16">
-                            <Badge
-                                color={getBadgeColor(
-                                    solicitacao.sys_solicitacao_tipo.color
-                                )}
-                                variant="soft"
-                            >
-                                {solicitacao.sys_solicitacao_tipo.nome}
-                            </Badge>
+                        <h2 className="bp-section-title">
+                            Resumo
+                        </h2>
 
-                            <Badge color="secondary" variant="outline">
-                                #{solicitacao.id}
-                            </Badge>
-                        </div>
+                        <p className="bp-section-subtitle">
+                            {solicitacao.descricao ??
+                                "Nenhuma descrição informada."}
+                        </p>
 
-                        <h2 className="bp-section-title">Resumo</h2>
-
-                        {solicitacao.descricao ? (
-                            <p className="bp-section-subtitle">
-                                {solicitacao.descricao}
-                            </p>
-                        ) : (
-                            <p className="bp-section-subtitle">
-                                Nenhuma descrição informada.
-                            </p>
-                        )}
-
-                        <div className="bp-info-list bp-mt-24">
+                        <div className="bp-detail-info-grid bp-mt-24">
                             <div className="bp-info-row">
                                 <span>Solicitante</span>
                                 <strong>
-                                    {solicitacao.solicitado_por_usuario.nome}
+                                    {
+                                        solicitacao
+                                            .solicitado_por_usuario
+                                            .nome
+                                    }
                                 </strong>
                             </div>
 
                             <div className="bp-info-row">
                                 <span>Responsável</span>
                                 <strong>
-                                    {solicitacao.responsavel_usuario?.nome ??
+                                    {solicitacao
+                                            .responsavel_usuario
+                                            ?.nome ??
                                         "Ainda não definido"}
                                 </strong>
                             </div>
@@ -186,56 +239,282 @@ export default async function SolicitacaoDetalhePage({
                             <div className="bp-info-row">
                                 <span>Criada em</span>
                                 <strong>
-                                    {formatDate(solicitacao.created_at)}
+                                    {formatDate(
+                                        solicitacao.created_at
+                                    )}
                                 </strong>
                             </div>
 
                             <div className="bp-info-row">
                                 <span>Enviada em</span>
                                 <strong>
-                                    {formatDate(solicitacao.enviado_at)}
+                                    {formatDate(
+                                        solicitacao.enviado_at
+                                    )}
                                 </strong>
                             </div>
 
                             <div className="bp-info-row">
                                 <span>Finalizada em</span>
                                 <strong>
-                                    {formatDate(solicitacao.finalizado_at)}
+                                    {formatDate(
+                                        solicitacao.finalizado_at
+                                    )}
                                 </strong>
                             </div>
                         </div>
                     </CardBody>
                 </Card>
 
-                <SolicitacaoDetalheClient
-                    solicitacaoId={solicitacao.id}
-                    statusCodigo={solicitacao.sys_solicitacao_status.codigo}
-                    tipoCodigo={solicitacao.sys_solicitacao_tipo.codigo}
-                    permissions={{
-                        isRequester,
-                        canAnalyze,
-                        canApprove,
-                        canReject,
-                        canRequestAdjustment,
-                    }}
-                />
-            </div>
+                {solicitacao.detalheEspecifico
+                    ?.tipoCodigo ===
+                "criar_atletica" ? (
+                    <Card>
+                        <CardBody>
+                            <h2 className="bp-section-title">
+                                Dados da atlética
+                            </h2>
 
-            <div className="bp-section-grid">
+                            <div className="bp-detail-info-grid bp-mt-24">
+                                <div className="bp-info-row">
+                                    <span>Nome oficial</span>
+                                    <strong>
+                                        {
+                                            solicitacao
+                                                .detalheEspecifico
+                                                .atletica.nome
+                                        }
+                                    </strong>
+                                </div>
+
+                                <div className="bp-info-row">
+                                    <span>Apelido</span>
+                                    <strong>
+                                        {
+                                            solicitacao
+                                                .detalheEspecifico
+                                                .atletica.apelido
+                                        }
+                                    </strong>
+                                </div>
+
+                                <div className="bp-info-row">
+                                    <span>Sigla</span>
+                                    <strong>
+                                        {
+                                            solicitacao
+                                                .detalheEspecifico
+                                                .atletica.sigla
+                                        }
+                                    </strong>
+                                </div>
+
+                                <div className="bp-info-row">
+                                    <span>Slug</span>
+                                    <strong>
+                                        /
+                                        {
+                                            solicitacao
+                                                .detalheEspecifico
+                                                .atletica.slug
+                                        }
+                                    </strong>
+                                </div>
+
+                                <div className="bp-info-row">
+                                    <span>Mascote</span>
+                                    <strong>
+                                        {solicitacao
+                                                .detalheEspecifico
+                                                .atletica.mascote ||
+                                            "Não informado"}
+                                    </strong>
+                                </div>
+
+                                <div className="bp-info-row">
+                                    <span>Instituição</span>
+                                    <strong>
+                                        {solicitacao
+                                            .detalheEspecifico
+                                            .instituicao
+                                            ? solicitacao
+                                                .detalheEspecifico
+                                                .instituicao
+                                                .abreviacao
+                                                ? `${solicitacao.detalheEspecifico.instituicao.abreviacao} — ${solicitacao.detalheEspecifico.instituicao.nome}`
+                                                : solicitacao
+                                                    .detalheEspecifico
+                                                    .instituicao
+                                                    .nome
+                                            : "Não encontrada"}
+                                    </strong>
+                                </div>
+                            </div>
+
+                            <div className="bp-mt-24">
+                                <span className="bp-label">
+                                    Descrição
+                                </span>
+
+                                <p className="bp-section-subtitle">
+                                    {solicitacao
+                                            .detalheEspecifico
+                                            .atletica
+                                            .descricao ??
+                                        "Nenhuma descrição informada."}
+                                </p>
+                            </div>
+
+                            <div className="bp-detail-columns bp-mt-24">
+                                <div>
+                                    <h3 className="bp-section-title">
+                                        Polos
+                                    </h3>
+
+                                    <div className="bp-feature-list">
+                                        {solicitacao.detalheEspecifico.polos.map(
+                                            (
+                                                polo: CriarAtleticaPoloDetalhe
+                                            ) => (
+                                                <div
+                                                    key={
+                                                        polo.id
+                                                    }
+                                                    className="bp-check-item"
+                                                >
+                                                    <div>
+                                                        <strong>
+                                                            {
+                                                                polo.nome
+                                                            }
+                                                        </strong>
+                                                        <br />
+                                                        <span>
+                                                            {[
+                                                                    polo.cidade,
+                                                                    polo.estado,
+                                                                ]
+                                                                    .filter(
+                                                                        Boolean
+                                                                    )
+                                                                    .join(
+                                                                        " / "
+                                                                    ) ||
+                                                                "Localização não informada"}
+                                                        </span>
+                                                    </div>
+
+                                                    {polo.principal ? (
+                                                        <Badge
+                                                            color="primary"
+                                                            variant="soft"
+                                                        >
+                                                            Principal
+                                                        </Badge>
+                                                    ) : null}
+                                                </div>
+                                            )
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 className="bp-section-title">
+                                        Cursos
+                                    </h3>
+
+                                    <div className="bp-feature-list">
+                                        {solicitacao.detalheEspecifico.cursos.map(
+                                            (
+                                                curso: CriarAtleticaCursoDetalhe
+                                            ) => (
+                                                <div
+                                                    key={
+                                                        curso.id
+                                                    }
+                                                    className="bp-check-item"
+                                                >
+                                                    <strong>
+                                                        {
+                                                            curso.nome
+                                                        }
+                                                    </strong>
+
+                                                    {curso.abreviacao ? (
+                                                        <Badge
+                                                            color="secondary"
+                                                            variant="outline"
+                                                        >
+                                                            {
+                                                                curso.abreviacao
+                                                            }
+                                                        </Badge>
+                                                    ) : null}
+                                                </div>
+                                            )
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bp-mt-24">
+                                <h3 className="bp-section-title">
+                                    Gestão inicial
+                                </h3>
+
+                                <div className="bp-detail-info-grid bp-mt-16">
+                                    <div className="bp-info-row">
+                                        <span>Nome</span>
+                                        <strong>
+                                            {
+                                                solicitacao
+                                                    .detalheEspecifico
+                                                    .gestao.nome
+                                            }
+                                        </strong>
+                                    </div>
+
+                                    <div className="bp-info-row">
+                                        <span>
+                                            Data de início
+                                        </span>
+                                        <strong>
+                                            {formatDate(
+                                                solicitacao
+                                                    .detalheEspecifico
+                                                    .gestao
+                                                    .inicioAt
+                                            )}
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </CardBody>
+                    </Card>
+                ) : null}
+
                 <Card>
                     <CardBody>
-                        <h2 className="bp-section-title">Documentos</h2>
+                        <h2 className="bp-section-title">
+                            Documentos
+                        </h2>
 
-                        {solicitacao.sys_solicitacao_documento.length === 0 ? (
+                        {solicitacao
+                            .sys_solicitacao_documento
+                            .length === 0 ? (
                             <p className="bp-section-subtitle">
-                                Nenhum documento anexado nesta solicitação.
+                                Nenhum documento anexado.
                             </p>
                         ) : (
                             <div className="bp-feature-list">
                                 {solicitacao.sys_solicitacao_documento.map(
-                                    (documento: SolicitacaoDocumentoItem) => (
+                                    (
+                                        documento: SolicitacaoDocumentoItem
+                                    ) => (
                                         <div
-                                            key={documento.id}
+                                            key={
+                                                documento.id
+                                            }
                                             className="bp-check-item"
                                         >
                                             <div>
@@ -249,7 +528,8 @@ export default async function SolicitacaoDetalhePage({
                                                 <br />
                                                 <span>
                                                     {documento.titulo ??
-                                                        documento.sys_arquivo
+                                                        documento
+                                                            .sys_arquivo
                                                             ?.nome_original ??
                                                         "Documento anexado"}
                                                 </span>
@@ -279,18 +559,27 @@ export default async function SolicitacaoDetalhePage({
 
                 <Card>
                     <CardBody>
-                        <h2 className="bp-section-title">Histórico</h2>
+                        <h2 className="bp-section-title">
+                            Histórico
+                        </h2>
 
-                        {solicitacao.sys_solicitacao_historico.length === 0 ? (
+                        {solicitacao
+                            .sys_solicitacao_historico
+                            .length === 0 ? (
                             <p className="bp-section-subtitle">
-                                Nenhuma movimentação registrada.
+                                Nenhuma movimentação
+                                registrada.
                             </p>
                         ) : (
                             <div className="bp-feature-list">
                                 {solicitacao.sys_solicitacao_historico.map(
-                                    (historico: SolicitacaoHistoricoItem) => (
+                                    (
+                                        historico: SolicitacaoHistoricoItem
+                                    ) => (
                                         <div
-                                            key={historico.id}
+                                            key={
+                                                historico.id
+                                            }
                                             className="bp-check-item"
                                         >
                                             <div>
@@ -300,8 +589,10 @@ export default async function SolicitacaoDetalhePage({
                                                 </strong>
                                                 <br />
                                                 <span>
-                                                    {historico.sys_usuario
-                                                        ?.nome ?? "Sistema"}{" "}
+                                                    {historico
+                                                            .sys_usuario
+                                                            ?.nome ??
+                                                        "Sistema"}{" "}
                                                     •{" "}
                                                     {formatDate(
                                                         historico.created_at
@@ -309,8 +600,7 @@ export default async function SolicitacaoDetalhePage({
                                                 </span>
                                             </div>
 
-                                            {historico
-                                                .sys_solicitacao_status_novo ? (
+                                            {historico.sys_solicitacao_status_novo ? (
                                                 <Badge
                                                     color={getBadgeColor(
                                                         historico
@@ -333,6 +623,32 @@ export default async function SolicitacaoDetalhePage({
                         )}
                     </CardBody>
                 </Card>
+
+                <SolicitacaoDetalheClient
+                    solicitacaoId={
+                        solicitacao.id
+                    }
+                    titulo={
+                        solicitacao.titulo
+                    }
+                    statusCodigo={
+                        solicitacao
+                            .sys_solicitacao_status
+                            .codigo
+                    }
+                    tipoCodigo={
+                        solicitacao
+                            .sys_solicitacao_tipo
+                            .codigo
+                    }
+                    permissions={{
+                        isRequester,
+                        canAnalyze,
+                        canApprove,
+                        canReject,
+                        canRequestAdjustment,
+                    }}
+                />
             </div>
         </AppShell>
     );

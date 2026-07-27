@@ -4859,6 +4859,8 @@ export const SysInboxItemScalarFieldEnum = {
   sys_inbox_item_status_id: 'sys_inbox_item_status_id',
   titulo: 'titulo',
   mensagem: 'mensagem',
+  contexto_titulo: 'contexto_titulo',
+  contexto_descricao: 'contexto_descricao',
   action_url: 'action_url',
   entidade_tipo: 'entidade_tipo',
   entidade_id: 'entidade_id',
@@ -5416,6 +5418,8 @@ export type SysInboxItemStatusOrderByRelevanceFieldEnum = (typeof SysInboxItemSt
 export const SysInboxItemOrderByRelevanceFieldEnum = {
   titulo: 'titulo',
   mensagem: 'mensagem',
+  contexto_titulo: 'contexto_titulo',
+  contexto_descricao: 'contexto_descricao',
   action_url: 'action_url',
   entidade_tipo: 'entidade_tipo',
   metadata_text: 'metadata_text'

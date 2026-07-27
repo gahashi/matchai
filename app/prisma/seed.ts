@@ -989,6 +989,8 @@ async function main() {
                 titulo: "Bem-vindo ao Brava Pass",
                 mensagem:
                     "Sua caixa de entrada foi criada. Aqui você receberá avisos, solicitações e resultados importantes do sistema.",
+                contexto_titulo: "Brava Pass",
+                contexto_descricao: "Mensagem de boas-vindas",
                 action_url: "/sys/inbox",
                 entidade_tipo: "dev",
                 entidade_id: null,
@@ -1835,6 +1837,46 @@ async function main() {
             updated_at: now(),
         },
     });
+
+    /**
+     * SYS - Dar role admin global para usuário dev
+     */
+    const roleGlobalUsuarioExistente =
+        await prisma.sysUsuarioRole.findFirst({
+            where: {
+                sys_usuario_id: usuarioDev.id,
+                sys_role_id: roleAdminGlobal.id,
+                ent_entidade_id: null,
+                deleted_at: null,
+            },
+            select: {
+                id: true,
+            },
+        });
+
+    if (roleGlobalUsuarioExistente) {
+        await prisma.sysUsuarioRole.update({
+            where: {
+                id: roleGlobalUsuarioExistente.id,
+            },
+            data: {
+                ativo: 1,
+                deleted_at: null,
+                updated_at: now(),
+            },
+        });
+    } else {
+        await prisma.sysUsuarioRole.create({
+            data: {
+                sys_usuario_id: usuarioDev.id,
+                sys_role_id: roleAdminGlobal.id,
+                ent_entidade_id: null,
+                ativo: 1,
+                created_at: now(),
+                updated_at: now(),
+            },
+        });
+    }
 
     /**
      * SYS - Arquivos: discos/storage disponíveis

@@ -27,9 +27,11 @@ export type SolicitacaoHistoricoAcao =
     | "recusada"
     | "cancelada"
     | "concluida"
+    | "dados_atualizados"
     | "documento_anexado"
     | "documento_removido"
     | "acao_aplicada";
+
 
 export type SolicitacaoListScope = "minhas" | "analise" | "todas";
 
@@ -51,7 +53,7 @@ export type CriarRascunhoSolicitacaoInput = {
 export type ListarSolicitacoesInput = {
     sysUsuarioId: number;
     scope?: SolicitacaoListScope;
-    statusCodigo?: SolicitacaoStatusCodigo;
+    statusCodigos?: SolicitacaoStatusCodigo[];
     tipoCodigo?: SolicitacaoTipoCodigo;
     page?: number;
     pageSize?: number;
@@ -102,5 +104,14 @@ export type ConcluirSolicitacaoInput = {
     solicitacaoId: number;
     sysUsuarioId: number;
     descricao?: string | null;
+    metadata?: JsonLike;
+};
+
+export type AtualizarPayloadSolicitacaoInput = {
+    solicitacaoId: number;
+    sysUsuarioId: number;
+    titulo?: string;
+    descricao?: string | null;
+    payload: JsonLike;
     metadata?: JsonLike;
 };

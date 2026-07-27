@@ -956,8 +956,10 @@ model SysInboxItem {
   sys_inbox_item_tipo_id   Int
   sys_inbox_item_status_id Int
 
-  titulo   String @db.VarChar(180)
-  mensagem String @db.Text
+  titulo             String  @db.VarChar(180)
+  mensagem           String  @db.Text
+  contexto_titulo    String? @db.VarChar(180)
+  contexto_descricao String? @db.VarChar(255)
 
   action_url    String? @db.VarChar(1000)
   entidade_tipo String? @db.VarChar(80)

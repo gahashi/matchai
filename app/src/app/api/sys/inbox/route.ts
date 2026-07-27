@@ -8,7 +8,7 @@ import {
     inboxService,
     InboxFilter,
     InboxSort,
-} from "@/lib/inbox/inbox-service";
+} from "../../../../lib/sys/inbox/inbox-service";
 
 const allowedFilters = [
     "all",

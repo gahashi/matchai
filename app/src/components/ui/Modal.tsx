@@ -8,16 +8,22 @@ type ModalProps = {
     title: string;
     description?: string;
     children: ReactNode;
-    onClose: () => void;
+    onCloseAction: () => void;
 };
 
-export function Modal({ open, title, description, children, onClose }: ModalProps) {
+export function Modal({
+                          open,
+                          title,
+                          description,
+                          children,
+                          onCloseAction,
+                      }: ModalProps) {
     useEffect(() => {
         if (!open) return;
 
         function handleKeyDown(event: KeyboardEvent) {
             if (event.key === "Escape") {
-                onClose();
+                onCloseAction();
             }
         }
 
@@ -26,12 +32,12 @@ export function Modal({ open, title, description, children, onClose }: ModalProp
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
         };
-    }, [open, onClose]);
+    }, [open, onCloseAction]);
 
     if (!open) return null;
 
     return (
-        <div className="bp-modal-backdrop" role="presentation" onMouseDown={onClose}>
+        <div className="bp-modal-backdrop" role="presentation" onMouseDown={onCloseAction}>
             <div
                 className="bp-modal"
                 role="dialog"
@@ -53,7 +59,7 @@ export function Modal({ open, title, description, children, onClose }: ModalProp
                     <button
                         type="button"
                         className="bp-modal-close"
-                        onClick={onClose}
+                        onClick={onCloseAction}
                         aria-label="Fechar modal"
                     >
                         <X size={18} />
