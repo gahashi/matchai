@@ -1,8 +1,3 @@
-/*
- * Padrões reutilizáveis do Brava Pass.
- * Usar em várias telas antes de criar CSS específico por página.
- */
-
 /* Espaçamento utilitário simples */
 
 .bp-mb-16 {
@@ -336,6 +331,20 @@
     }
 }
 
+.bp-solicitacao-card-footer {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
+}
+
+.bp-solicitacao-card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
 @media (max-width: 980px) {
     .bp-page-grid,
     .bp-hero-grid,
@@ -646,6 +655,10 @@
         display: grid;
     }
 
+    .bp-inline-edit-actions > * {
+        width: 100%;
+    }
+
     .bp-form-grid {
         grid-template-columns: 1fr;
     }
@@ -719,8 +732,8 @@
     width: 100%;
     min-width: 0;
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    gap: 13px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 16px;
     align-items: flex-start;
     padding: 16px 18px;
     border-bottom: 1px solid var(--color-border);
@@ -767,6 +780,44 @@
     display: grid;
     gap: 6px;
     min-width: 0;
+}
+
+.bp-inbox-notification-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    min-width: 0;
+}
+
+.bp-inbox-notification-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+}
+
+.bp-inbox-notification-heading strong {
+    overflow: hidden;
+    min-width: 0;
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bp-inbox-notification:not(.unread) .bp-inbox-notification-heading strong {
+    color: var(--color-text-muted);
+}
+
+.bp-inbox-notification-message {
+    margin-left: 50px;
+}
+
+.bp-inbox-notification-footer {
+    margin-left: 50px;
 }
 
 .bp-inbox-notification-title-row {
@@ -828,6 +879,16 @@
     justify-content: flex-end;
     gap: 4px;
     min-width: 0;
+}
+
+.bp-inbox-open-action {
+    width: auto !important;
+    min-width: auto;
+    padding-inline: 11px !important;
+}
+
+.bp-inbox-detail-primary-action {
+    margin-left: auto;
 }
 
 .bp-inbox-notification-actions .bp-button {
@@ -926,14 +987,37 @@
     }
 
     .bp-inbox-notification {
-        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-columns: 1fr;
+        gap: 12px;
         padding: 14px;
     }
 
+    .bp-inbox-notification-heading {
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .bp-inbox-notification-message,
+    .bp-inbox-notification-footer {
+        margin-left: 0;
+    }
+
+    .bp-inbox-notification-message {
+        display: block;
+        width: 100%;
+        font-size: var(--font-size-sm);
+        line-height: 1.55;
+    }
+
     .bp-inbox-notification-actions {
-        grid-column: 2;
-        justify-content: flex-start;
-        margin-top: 4px;
+        grid-column: 1;
+        justify-content: flex-end;
+        width: 100%;
+        margin-top: 2px;
+    }
+
+    .bp-inbox-open-action {
+        margin-left: auto;
     }
 
     .bp-inbox-unread-dot {
@@ -964,12 +1048,35 @@
 
     .bp-inbox-detail-actions {
         display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         justify-content: stretch;
     }
 
     .bp-inbox-detail-actions > * {
         width: 100%;
     }
+
+    .bp-inbox-detail-primary-action {
+        grid-column: 1 / -1;
+        margin-left: 0;
+    }
+}
+
+.bp-detail-back-row {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.bp-detail-back-action {
+    width: fit-content;
+}
+
+.bp-modal-action-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 22px;
 }
 
 .bp-detail-info-grid {
@@ -1037,6 +1144,25 @@
 
     .bp-solicitacao-card-actions > :last-child:nth-child(odd) {
         grid-column: 1 / -1;
+    }
+
+    .bp-detail-back-row {
+        width: 100%;
+    }
+
+    .bp-detail-back-action {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .bp-modal-action-footer {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .bp-modal-action-footer > * {
+        width: 100%;
     }
 }
 
