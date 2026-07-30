@@ -1,4 +1,7 @@
 import { prisma } from "@/lib/prisma";
+import {
+    resolveInboxActions,
+} from "@/lib/sys/inbox/inbox-action-policy";
 
 export type InboxFilter =
     | "all"
@@ -193,6 +196,23 @@ function buildOrderBy(sort: InboxSort) {
 }
 
 export const inboxService = {
+
+    async countUnread({
+                          sysUsuarioId,
+                      }: {
+        sysUsuarioId: number;
+    }) {
+        return prisma.sysInboxItem.count({
+            where: {
+                sys_usuario_id: sysUsuarioId,
+                ativo: 1,
+                deleted_at: null,
+                archived_at: null,
+                read_at: null,
+            },
+        });
+    },
+
     async createItem({
                          sysUsuarioId,
                          tipoCodigo = "info",
@@ -289,6 +309,7 @@ export const inboxService = {
                         action_url: true,
                         entidade_tipo: true,
                         entidade_id: true,
+                        metadata_text: true,
                         read_at: true,
                         archived_at: true,
                         created_at: true,
@@ -323,8 +344,30 @@ export const inboxService = {
             )
         );
 
+        const mappedItems = items.map(
+            (item) => ({
+                ...item,
+                actions: resolveInboxActions({
+                    tipoCodigo:
+                    item.sys_inbox_item_tipo
+                        .codigo,
+                    statusCodigo:
+                    item.sys_inbox_item_status
+                        .codigo,
+                    actionUrl: item.action_url,
+                    entidadeTipo:
+                    item.entidade_tipo,
+                    metadataText:
+                    item.metadata_text,
+                    readAt: item.read_at,
+                    archivedAt:
+                    item.archived_at,
+                }),
+            })
+        );
+
         return {
-            items,
+            items: mappedItems,
             pagination: {
                 page: resolvedPage,
                 pageSize:

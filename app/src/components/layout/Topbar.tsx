@@ -1,13 +1,28 @@
-import { Bell, LogIn, Search, UserPlus } from "lucide-react";
+import {
+    LogIn,
+    Search,
+    UserPlus,
+} from "lucide-react";
 
 import { AppLink } from "@/components/ui/AppLink";
 import { Avatar } from "@/components/ui/Avatar";
 import { Input } from "@/components/ui/Input";
 import { getAuthSession } from "@/lib/auth/session";
+import {
+    InboxTopbarButton,
+} from "@/components/layout/InboxTopbarButton";
+import {
+    inboxService,
+} from "@/lib/sys/inbox/inbox-service";
 
 export async function Topbar() {
     const session = await getAuthSession();
     const user = session?.user ?? null;
+    const unreadCount = user
+        ? await inboxService.countUnread({
+            sysUsuarioId: user.id,
+        })
+        : 0;
 
     return (
         <header className="bp-topbar">
@@ -36,14 +51,10 @@ export async function Topbar() {
                 <div className="bp-topbar-mobile-actions">
                     {user ? (
                         <>
-                            <AppLink
-                                href="/sys/inbox"
-                                color="secondary"
-                                variant="ghost"
-                                aria-label="Inbox"
-                            >
-                                <Bell size={17} />
-                            </AppLink>
+                            <InboxTopbarButton
+                                initialUnreadCount={unreadCount}
+                                mobile
+                            />
 
                             <AppLink
                                 href="/perfil"
@@ -91,14 +102,9 @@ export async function Topbar() {
             <div className="bp-topbar-actions">
                 {user ? (
                     <>
-                        <AppLink
-                            href="/sys/inbox"
-                            color="secondary"
-                            variant="ghost"
-                            aria-label="Inbox"
-                        >
-                            <Bell size={17} />
-                        </AppLink>
+                        <InboxTopbarButton
+                            initialUnreadCount={unreadCount}
+                        />
 
                         <AppLink
                             href="/perfil"

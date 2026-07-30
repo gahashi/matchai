@@ -21,6 +21,11 @@ import {
 } from "lucide-react";
 
 import { AppLink } from "@/components/ui/AppLink";
+import {
+    resolveInboxActions,
+    type InboxAvailableAction,
+    type InboxActionCode,
+} from "@/lib/sys/inbox/inbox-action-policy";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -31,6 +36,9 @@ import {
     Snackbar,
     type SnackbarState,
 } from "@/components/ui/Snackbar";
+import {
+    dispatchInboxChanged,
+} from "@/lib/sys/inbox/inbox-events";
 
 type InboxFilter =
     | "all"
@@ -62,6 +70,7 @@ type InboxItem = {
     action_url: string | null;
     entidade_tipo: string | null;
     entidade_id: number | null;
+    metadata_text: string | null;
     read_at: Date | string | null;
     archived_at: Date | string | null;
     created_at: Date | string | null;
@@ -77,6 +86,7 @@ type InboxItem = {
         color: string | null;
         icon: string | null;
     };
+    actions: InboxAvailableAction[];
 };
 
 type InboxClientProps = {
@@ -215,6 +225,43 @@ function temContextoHumano(
         item.contexto_titulo ||
         item.contexto_descricao
     );
+}
+
+function getInboxAction(
+    item: InboxItem,
+    codigo: InboxActionCode
+) {
+    return item.actions.find(
+        (action) => action.codigo === codigo
+    );
+}
+
+function rebuildInboxActions(
+    item: InboxItem,
+    changes: {
+        readAt?: Date | string | null;
+        archivedAt?: Date | string | null;
+        statusCodigo?: string;
+    }
+) {
+    return resolveInboxActions({
+        tipoCodigo:
+        item.sys_inbox_item_tipo.codigo,
+        statusCodigo:
+            changes.statusCodigo ??
+            item.sys_inbox_item_status.codigo,
+        actionUrl: item.action_url,
+        entidadeTipo: item.entidade_tipo,
+        metadataText: item.metadata_text,
+        readAt:
+            changes.readAt !== undefined
+                ? changes.readAt
+                : item.read_at,
+        archivedAt:
+            changes.archivedAt !== undefined
+                ? changes.archivedAt
+                : item.archived_at,
+    });
 }
 
 export default function InboxClient({
@@ -362,23 +409,33 @@ export default function InboxClient({
             );
         }
 
+        const readAt =
+            new Date().toISOString();
+
+        const nextStatus =
+            item.sys_inbox_item_status.codigo ===
+            "unread"
+                ? {
+                    ...item.sys_inbox_item_status,
+                    codigo: "read",
+                    nome: "Lida",
+                    color: "secondary",
+                    icon: "check",
+                }
+                : item.sys_inbox_item_status;
+
         const nextItem: InboxItem = {
             ...item,
-            read_at:
-                new Date().toISOString(),
-            sys_inbox_item_status:
-                item
-                    .sys_inbox_item_status
-                    .codigo === "unread"
-                    ? {
-                        ...item.sys_inbox_item_status,
-                        codigo: "read",
-                        nome: "Lida",
-                        color:
-                            "secondary",
-                        icon: "check",
-                    }
-                    : item.sys_inbox_item_status,
+            read_at: readAt,
+            sys_inbox_item_status: nextStatus,
+            actions: rebuildInboxActions(
+                item,
+                {
+                    readAt,
+                    statusCodigo:
+                    nextStatus.codigo,
+                }
+            ),
         };
 
         setItems((current) =>
@@ -390,6 +447,11 @@ export default function InboxClient({
                         : currentItem
             )
         );
+
+        dispatchInboxChanged({
+            itemId: item.id,
+            action: "read",
+        });
 
         return nextItem;
     }
@@ -442,28 +504,31 @@ export default function InboxClient({
                 );
             }
 
-            const nextItem: InboxItem =
-                {
-                    ...item,
-                    read_at: null,
-                    sys_inbox_item_status:
-                        item
-                            .sys_inbox_item_status
-                            .codigo ===
-                        "read"
-                            ? {
-                                ...item.sys_inbox_item_status,
-                                codigo:
-                                    "unread",
-                                nome:
-                                    "Não lida",
-                                color:
-                                    "primary",
-                                icon:
-                                    "circle",
-                            }
-                            : item.sys_inbox_item_status,
-                };
+            const nextStatus =
+                item.sys_inbox_item_status.codigo ===
+                "read"
+                    ? {
+                        ...item.sys_inbox_item_status,
+                        codigo: "unread",
+                        nome: "Não lida",
+                        color: "primary",
+                        icon: "circle",
+                    }
+                    : item.sys_inbox_item_status;
+
+            const nextItem: InboxItem = {
+                ...item,
+                read_at: null,
+                sys_inbox_item_status: nextStatus,
+                actions: rebuildInboxActions(
+                    item,
+                    {
+                        readAt: null,
+                        statusCodigo:
+                        nextStatus.codigo,
+                    }
+                ),
+            };
 
             setItems((current) =>
                 current.map(
@@ -530,25 +595,31 @@ export default function InboxClient({
                         (currentItem) =>
                             currentItem.id ===
                             item.id
-                                ? {
-                                    ...currentItem,
-                                    read_at:
-                                        new Date().toISOString(),
-                                    archived_at:
-                                        new Date().toISOString(),
-                                    sys_inbox_item_status:
-                                        {
+                                ? (() => {
+                                    const archivedAt =
+                                        new Date().toISOString();
+
+                                    return {
+                                        ...currentItem,
+                                        read_at: archivedAt,
+                                        archived_at: archivedAt,
+                                        sys_inbox_item_status: {
                                             ...currentItem.sys_inbox_item_status,
-                                            codigo:
-                                                "archived",
-                                            nome:
-                                                "Arquivada",
-                                            color:
-                                                "secondary",
-                                            icon:
-                                                "archive",
+                                            codigo: "archived",
+                                            nome: "Arquivada",
+                                            color: "secondary",
+                                            icon: "archive",
                                         },
-                                }
+                                        actions: rebuildInboxActions(
+                                            currentItem,
+                                            {
+                                                readAt: archivedAt,
+                                                archivedAt,
+                                                statusCodigo: "archived",
+                                            }
+                                        ),
+                                    };
+                                })()
                                 : currentItem
                     );
                 }
@@ -575,6 +646,11 @@ export default function InboxClient({
             );
 
             setSelectedItem(null);
+
+            dispatchInboxChanged({
+                itemId: item.id,
+                action: "archive",
+            });
 
             setSnackbar({
                 color: "success",
@@ -700,6 +776,30 @@ export default function InboxClient({
                                 const unread =
                                     !item.read_at;
 
+                                const markReadAction =
+                                    getInboxAction(
+                                        item,
+                                        "marcar_como_lida"
+                                    );
+
+                                const markUnreadAction =
+                                    getInboxAction(
+                                        item,
+                                        "marcar_como_nao_lida"
+                                    );
+
+                                const archiveAction =
+                                    getInboxAction(
+                                        item,
+                                        "arquivar"
+                                    );
+
+                                const openAction =
+                                    getInboxAction(
+                                        item,
+                                        "abrir"
+                                    );
+
                                 return (
                                     <div
                                         key={item.id}
@@ -792,47 +892,45 @@ export default function InboxClient({
                                         </div>
 
                                         <div className="bp-inbox-notification-actions">
-                                            {unread ? (
+                                            {markReadAction ? (
                                                 <Button
-                                                    color="secondary"
-                                                    variant="ghost"
+                                                    color={markReadAction.color}
+                                                    variant={markReadAction.variant}
                                                     size="sm"
-                                                    title="Marcar como lida"
-                                                    aria-label="Marcar como lida"
+                                                    title={markReadAction.label}
+                                                    aria-label={markReadAction.label}
                                                     onClick={(event) => {
                                                         event.stopPropagation();
-                                                        void markItemAsRead(
-                                                            item
-                                                        );
+                                                        void markItemAsRead(item);
                                                     }}
                                                 >
                                                     <MailOpen size={15} />
                                                 </Button>
-                                            ) : (
+                                            ) : null}
+
+                                            {markUnreadAction ? (
                                                 <Button
-                                                    color="secondary"
-                                                    variant="ghost"
+                                                    color={markUnreadAction.color}
+                                                    variant={markUnreadAction.variant}
                                                     size="sm"
-                                                    title="Marcar como não lida"
-                                                    aria-label="Marcar como não lida"
+                                                    title={markUnreadAction.label}
+                                                    aria-label={markUnreadAction.label}
                                                     onClick={(event) => {
                                                         event.stopPropagation();
-                                                        void handleMarkAsUnread(
-                                                            item
-                                                        );
+                                                        void handleMarkAsUnread(item);
                                                     }}
                                                 >
                                                     <Mail size={15} />
                                                 </Button>
-                                            )}
+                                            ) : null}
 
-                                            {!item.archived_at ? (
+                                            {archiveAction ? (
                                                 <Button
-                                                    color="secondary"
-                                                    variant="ghost"
+                                                    color={archiveAction.color}
+                                                    variant={archiveAction.variant}
                                                     size="sm"
-                                                    title="Arquivar"
-                                                    aria-label="Arquivar"
+                                                    title={archiveAction.label}
+                                                    aria-label={archiveAction.label}
                                                     onClick={(event) => {
                                                         event.stopPropagation();
                                                         void handleArchive(item);
@@ -842,22 +940,20 @@ export default function InboxClient({
                                                 </Button>
                                             ) : null}
 
-                                            {item.action_url ? (
+                                            {openAction?.href ? (
                                                 <AppLink
-                                                    href={item.action_url}
-                                                    color="primary"
-                                                    variant="soft"
+                                                    href={openAction.href}
+                                                    color={openAction.color}
+                                                    variant={openAction.variant}
                                                     size="sm"
                                                     className="bp-inbox-open-action"
                                                     onClick={(event) => {
                                                         event.stopPropagation();
-                                                        void markItemAsRead(
-                                                            item
-                                                        );
+                                                        void markItemAsRead(item);
                                                     }}
                                                 >
                                                     <ExternalLink size={15} />
-                                                    Abrir
+                                                    {openAction.label}
                                                 </AppLink>
                                             ) : null}
 
@@ -942,160 +1038,163 @@ export default function InboxClient({
                     setSelectedItem(null)
                 }
             >
-                {selectedItem ? (
-                    <div className="bp-inbox-modal-content">
-                        <div className="bp-inbox-modal-status-row">
-                            <Badge
-                                color={getSafeColor(
-                                    selectedItem
-                                        .sys_inbox_item_status
-                                        .color
-                                )}
-                                variant="soft"
-                            >
-                                {getStatusIcon(
-                                    selectedItem
-                                        .sys_inbox_item_status
-                                        .codigo
-                                )}
+                {selectedItem ? (() => {
+                    const markReadAction =
+                        getInboxAction(
+                            selectedItem,
+                            "marcar_como_lida"
+                        );
 
+                    const markUnreadAction =
+                        getInboxAction(
+                            selectedItem,
+                            "marcar_como_nao_lida"
+                        );
+
+                    const archiveAction =
+                        getInboxAction(
+                            selectedItem,
+                            "arquivar"
+                        );
+
+                    const openAction =
+                        getInboxAction(
+                            selectedItem,
+                            "abrir"
+                        );
+
+                    return (
+                        <div className="bp-inbox-modal-content">
+                            <div className="bp-inbox-modal-status-row">
+                                <Badge
+                                    color={getSafeColor(
+                                        selectedItem
+                                            .sys_inbox_item_status
+                                            .color
+                                    )}
+                                    variant="soft"
+                                >
+                                    {getStatusIcon(
+                                        selectedItem
+                                            .sys_inbox_item_status
+                                            .codigo
+                                    )}
+
+                                    {
+                                        selectedItem
+                                            .sys_inbox_item_status
+                                            .nome
+                                    }
+                                </Badge>
+
+                                {selectedItem.read_at ? (
+                                    <Badge
+                                        color="secondary"
+                                        variant="soft"
+                                    >
+                                        <MailOpen
+                                            size={
+                                                13
+                                            }
+                                        />
+                                        Lida
+                                    </Badge>
+                                ) : (
+                                    <Badge
+                                        color="primary"
+                                        variant="soft"
+                                    >
+                                        <Mail
+                                            size={
+                                                13
+                                            }
+                                        />
+                                        Não lida
+                                    </Badge>
+                                )}
+                            </div>
+
+                            <p className="bp-inbox-message">
                                 {
-                                    selectedItem
-                                        .sys_inbox_item_status
-                                        .nome
+                                    selectedItem.mensagem
                                 }
-                            </Badge>
+                            </p>
 
-                            {selectedItem.read_at ? (
-                                <Badge
-                                    color="secondary"
-                                    variant="soft"
-                                >
-                                    <MailOpen
-                                        size={
-                                            13
-                                        }
-                                    />
-                                    Lida
-                                </Badge>
-                            ) : (
-                                <Badge
-                                    color="primary"
-                                    variant="soft"
-                                >
-                                    <Mail
-                                        size={
-                                            13
-                                        }
-                                    />
-                                    Não lida
-                                </Badge>
-                            )}
-                        </div>
-
-                        <p className="bp-inbox-message">
-                            {
-                                selectedItem.mensagem
-                            }
-                        </p>
-
-                        {temContextoHumano(
-                            selectedItem
-                        ) ? (
-                            <div className="bp-inbox-context">
+                            {temContextoHumano(
+                                selectedItem
+                            ) ? (
+                                <div className="bp-inbox-context">
                                 <span>
                                     Contexto
                                 </span>
 
-                                <strong>
-                                    {selectedItem.contexto_titulo ??
-                                        selectedItem.contexto_descricao}
+                                    <strong>
+                                        {selectedItem.contexto_titulo ??
+                                            selectedItem.contexto_descricao}
 
-                                    {selectedItem.contexto_titulo &&
-                                    selectedItem.contexto_descricao
-                                        ? ` — ${selectedItem.contexto_descricao}`
-                                        : ""}
-                                </strong>
+                                        {selectedItem.contexto_titulo &&
+                                        selectedItem.contexto_descricao
+                                            ? ` — ${selectedItem.contexto_descricao}`
+                                            : ""}
+                                    </strong>
+                                </div>
+                            ) : null}
+
+                            <div className="bp-inbox-detail-actions">
+                                {archiveAction ? (
+                                    <Button
+                                        color={archiveAction.color}
+                                        variant={archiveAction.variant}
+                                        onClick={() =>
+                                            handleArchive(selectedItem)
+                                        }
+                                    >
+                                        <Archive size={17} />
+                                        {archiveAction.label}
+                                    </Button>
+                                ) : null}
+
+                                {markReadAction ? (
+                                    <Button
+                                        color={markReadAction.color}
+                                        variant={markReadAction.variant}
+                                        onClick={() =>
+                                            markItemAsRead(selectedItem)
+                                        }
+                                    >
+                                        <MailOpen size={17} />
+                                        {markReadAction.label}
+                                    </Button>
+                                ) : null}
+
+                                {markUnreadAction ? (
+                                    <Button
+                                        color={markUnreadAction.color}
+                                        variant={markUnreadAction.variant}
+                                        onClick={() =>
+                                            handleMarkAsUnread(selectedItem)
+                                        }
+                                    >
+                                        <Mail size={17} />
+                                        {markUnreadAction.label}
+                                    </Button>
+                                ) : null}
+
+                                {openAction?.href ? (
+                                    <AppLink
+                                        href={openAction.href}
+                                        color={openAction.color}
+                                        variant={openAction.variant}
+                                        className="bp-inbox-detail-primary-action"
+                                    >
+                                        <ExternalLink size={17} />
+                                        {openAction.label}
+                                    </AppLink>
+                                ) : null}
                             </div>
-                        ) : null}
-
-                        <div className="bp-inbox-detail-actions ">
-                            {!selectedItem.archived_at ? (
-                                <Button
-                                    color="secondary"
-                                    variant="ghost"
-                                    onClick={() =>
-                                        handleArchive(
-                                            selectedItem
-                                        )
-                                    }
-                                >
-                                    <Archive
-                                        size={
-                                            17
-                                        }
-                                    />
-                                    Arquivar
-                                </Button>
-                            ) : null}
-
-                            {selectedItem.read_at ? (
-                                <Button
-                                    color="secondary"
-                                    variant="soft"
-                                    onClick={() =>
-                                        handleMarkAsUnread(
-                                            selectedItem
-                                        )
-                                    }
-                                >
-                                    <Mail
-                                        size={
-                                            17
-                                        }
-                                    />
-                                    Marcar como não
-                                    lida
-                                </Button>
-                            ) : (
-                                <Button
-                                    color="secondary"
-                                    variant="soft"
-                                    onClick={() =>
-                                        markItemAsRead(
-                                            selectedItem
-                                        )
-                                    }
-                                >
-                                    <MailOpen
-                                        size={
-                                            17
-                                        }
-                                    />
-                                    Marcar como lida
-                                </Button>
-                            )}
-
-                            {selectedItem.action_url ? (
-                                <AppLink
-                                    href={
-                                        selectedItem.action_url
-                                    }
-                                    color="primary"
-                                    variant="solid"
-                                    className="bp-inbox-detail-primary-action"
-                                >
-                                    <ExternalLink
-                                        size={
-                                            17
-                                        }
-                                    />
-                                    Abrir
-                                </AppLink>
-                            ) : null}
                         </div>
-                    </div>
-                ) : null}
+                    );
+                })() : null}
             </Modal>
 
             {snackbar ? (

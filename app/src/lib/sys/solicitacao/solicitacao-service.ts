@@ -1249,13 +1249,7 @@ export const solicitacaoService = {
             };
         }
 
-        if (statusCodigos && statusCodigos.length > 0) {
-            where.sys_solicitacao_status = {
-                codigo: {
-                    in: statusCodigos,
-                },
-            };
-        }
+
         if (statusCodigos?.length) {
             where.sys_solicitacao_status = {
                 codigo: {

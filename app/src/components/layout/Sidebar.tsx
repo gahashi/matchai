@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-    Building2,
+    Building2, ClipboardList,
     CreditCard,
     Home,
     Settings,
@@ -18,6 +18,7 @@ const navItems = [
     { label: "Assinaturas", icon: CreditCard, href: "/assinaturas" },
     { label: "Organizações", icon: Building2, href: "/organizacoes" },
     { label: "Configurações", icon: Settings, href: "/ent/atletica/tema" },
+    { label: "Solicitações", icon: ClipboardList , href: "/sys/solicitacao" },
 ];
 
 function isActiveRoute(pathname: string, href: string) {
