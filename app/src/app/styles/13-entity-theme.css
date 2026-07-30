@@ -16,3 +16,30 @@
     color: var(--color-text);
     border-color: var(--color-border);
 }
+
+/* Tema estático usado apenas no ambiente de desenvolvimento. */
+[data-theme="dev-atletica"] {
+    --color-background: #07130e;
+    --color-background-2: #06100c;
+    --color-background-glow: rgba(57, 255, 20, 0.14);
+    --color-surface-3: #173a29;
+    --color-border-strong: #3a7a58;
+    --color-surface: #0d1f17;
+    --color-surface-2: #10281d;
+    --color-card: #132b20;
+    --color-card-strong: #173a29;
+    --color-border: #24513b;
+    --color-border-soft: rgba(168, 201, 181, 0.14);
+    --color-primary: #39ff14;
+    --color-primary-hover: #2bd80f;
+    --color-primary-soft: rgba(57, 255, 20, 0.14);
+    --color-primary-border: rgba(57, 255, 20, 0.30);
+    --color-primary-foreground: #07130e;
+    --color-secondary: #183527;
+    --color-secondary-hover: #214733;
+    --color-secondary-foreground: #f4fff8;
+    --color-text: #f4fff8;
+    --color-text-muted: #a8c9b5;
+    --color-text-soft: #71917c;
+    --color-text-disabled: #4c6756;
+}

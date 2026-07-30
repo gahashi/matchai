@@ -1,19 +1,19 @@
 .bp-card {
     border: 1px solid var(--color-border);
-    background: rgba(23, 26, 35, 0.88);
+    background: var(--color-card-translucent);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
     color: var(--color-text);
 }
 
 .bp-card-default {
-    background: rgba(23, 26, 35, 0.88);
+    background: var(--color-card-translucent);
 }
 
 .bp-card-elevated {
     background:
             linear-gradient(135deg, rgba(255, 255, 255, 0.055), transparent 42%),
-            rgba(23, 26, 35, 0.92);
+            var(--color-card-elevated);
     box-shadow: var(--shadow-lg);
 }
 
@@ -527,7 +527,7 @@
     display: grid;
     place-items: center;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.62);
+    background: var(--color-overlay);
     backdrop-filter: blur(10px);
 }
 
@@ -662,14 +662,6 @@
     padding: 0;
 }
 
-.bp-solicitacao-card-actions {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
 .bp-modal-action-impact {
     display: grid;
     gap: 16px;
@@ -688,10 +680,7 @@
         display: none;
     }
 
-    .bp-solicitacao-card-actions {
-        justify-content: flex-start;
-        width: 100%;
-    }
+
 
     .bp-modal-action-footer {
         display: grid;

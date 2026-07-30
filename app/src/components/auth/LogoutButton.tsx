@@ -29,7 +29,7 @@ export function LogoutButton() {
             aria-label="Sair da conta"
         >
             <LogOut size={17} />
-            <span className="hide-mobile">
+            <span className="bp-hidden-mobile">
                 {loading ? "Saindo..." : "Sair"}
             </span>
         </Button>

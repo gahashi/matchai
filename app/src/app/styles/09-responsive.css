@@ -77,9 +77,6 @@
 }
 
 @media (max-width: 720px) {
-    .hide-mobile {
-        display: none !important;
-    }
 
     body {
         font-size: 13px;
@@ -163,10 +160,6 @@
         display: none;
     }
 
-    [style*="grid-template-columns"] {
-        grid-template-columns: 1fr !important;
-    }
-
     .bp-status-page {
         padding: 16px;
     }
@@ -200,7 +193,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 720px) {
     .bp-topbar-user-meta {
         display: none;
     }

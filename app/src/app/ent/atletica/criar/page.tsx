@@ -212,7 +212,7 @@ export default async function CriarAtleticaPage() {
                             <Building2 size={21} />
                         </div>
 
-                        <h2 className="bp-section-title bp-mt-16">
+                        <h2 className="bp-section-title bp-mt-4">
                             Como funciona
                         </h2>
 

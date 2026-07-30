@@ -413,7 +413,7 @@ export default function ProfileClient({ usuario }: ProfileClientProps) {
                 <div className="bp-grid">
                     <form className="bp-card" onSubmit={handleSalvarDados}>
                         <div className="bp-card-body">
-                            <div className="bp-row-between bp-mb-24">
+                            <div className="bp-row-between bp-mb-5">
                                 <div>
                                     <h2 className="bp-section-title">Dados gerais</h2>
                                     <p className="bp-section-subtitle">
@@ -504,7 +504,7 @@ export default function ProfileClient({ usuario }: ProfileClientProps) {
                                             </div>
 
                                             {selectedFile && (
-                                                <div className="bp-avatar-editor bp-mt-18">
+                                                <div className="bp-avatar-editor bp-mt-5">
                                                     <label
                                                         className="bp-label"
                                                         htmlFor="avatarZoom"
@@ -585,7 +585,7 @@ export default function ProfileClient({ usuario }: ProfileClientProps) {
                                 Resumo do seu acesso no sistema.
                             </p>
 
-                            <div className="bp-info-list bp-mt-18">
+                            <div className="bp-info-list bp-mt-5">
                                 <div className="bp-info-row">
                                     <span>Status</span>
                                     <strong>{dados.ativo ? "Ativa" : "Inativa"}</strong>
@@ -611,7 +611,7 @@ export default function ProfileClient({ usuario }: ProfileClientProps) {
                                 </div>
                             </div>
 
-                            <div className="bp-action-row bp-mt-24">
+                            <div className="bp-action-row bp-mt-5">
                                 <LogoutButton />
                             </div>
                         </div>

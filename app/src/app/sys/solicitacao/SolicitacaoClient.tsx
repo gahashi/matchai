@@ -443,7 +443,7 @@ export function SolicitacaoClient({
                 subtitle="Acompanhe solicitações, validações, documentos e processos institucionais do Brava Pass."
             />
 
-            <Card className="bp-mb-24">
+            <Card className="bp-mb-5">
                 <CardBody>
                     <div className="bp-row-between">
                         <div>
@@ -478,7 +478,7 @@ export function SolicitacaoClient({
                         </div>
                     </div>
 
-                    <div className="bp-inbox-filter-tabs bp-mt-16">
+                    <div className="bp-inbox-filter-tabs bp-mt-4">
                         {scopeOptions
                             .filter((option) => {
                                 if (
@@ -523,7 +523,7 @@ export function SolicitacaoClient({
                             })}
                     </div>
 
-                    <div className="bp-inbox-filter-tabs bp-mt-16">
+                    <div className="bp-inbox-filter-tabs bp-mt-4">
                         {statusOptions.map((option) => {
                             const active = option.value
                                 ? filters.statusCodigos.includes(
@@ -619,7 +619,7 @@ export function SolicitacaoClient({
                                 <CardBody>
                                     <div className="bp-row-between">
                                         <div>
-                                            <div className="bp-badge-row bp-mb-16">
+                                            <div className="bp-badge-row bp-mb-4">
                                                 <Badge
                                                     color={getBadgeColor(
                                                         item
@@ -667,7 +667,7 @@ export function SolicitacaoClient({
 
                                     </div>
 
-                                    <div className="bp-action-row bp-mt-16">
+                                    <div className="bp-action-row bp-mt-4">
                                         <Badge
                                             color="secondary"
                                             variant="outline"

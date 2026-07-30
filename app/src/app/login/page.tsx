@@ -364,7 +364,7 @@ function LoginForm() {
                                 {carregando ? "Entrando..." : "Entrar"}
                             </Button>
                         </form>
-                        <div className="bp-auth-message bp-mt-24">
+                        <div className="bp-auth-message bp-mt-5">
                             Não tem conta?{" "}
                             <Link href="/cadastro" style={{ color: "var(--color-primary)", fontWeight: 800 }}>
                                 Criar uma conta

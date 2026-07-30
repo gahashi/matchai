@@ -299,7 +299,7 @@ export default async function EditarSolicitacaoPage({
 
                                 {ultimoAjuste
                                     ?.descricao ? (
-                                    <p className="bp-section-subtitle bp-mt-16">
+                                    <p className="bp-section-subtitle bp-mt-4">
                                         <strong>
                                             Orientação:
                                         </strong>{" "}
@@ -314,7 +314,7 @@ export default async function EditarSolicitacaoPage({
                 </Card>
             ) : null}
 
-            <div className="bp-mt-24">
+            <div className="bp-mt-5">
                 <SolicitacaoTipoForm
                     tipoCodigo={tipoCodigo}
                     mode="edit"

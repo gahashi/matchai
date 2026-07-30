@@ -49,6 +49,3 @@ svg {
     color: var(--color-primary-foreground);
 }
 
-.hide-mobile {
-    display: inline;
-}

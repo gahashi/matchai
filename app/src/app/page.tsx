@@ -250,7 +250,7 @@ export default function HomePage() {
                 </Card>
             </section>
 
-            <section className="bp-grid bp-grid-4 bp-mb-24">
+            <section className="bp-grid bp-grid-4 bp-mb-5">
                 {metricas.map((metrica) => {
                     const Icon = metrica.icon;
 
@@ -276,7 +276,7 @@ export default function HomePage() {
                                         <Icon size={21} />
                                     </div>
 
-                                    <div className="bp-mt-16">
+                                    <div className="bp-mt-4">
                                         <Badge color={metrica.variant}>
                                             {metrica.badge}
                                         </Badge>
@@ -378,7 +378,7 @@ export default function HomePage() {
             <section className="bp-section-grid">
                 <Card className="bp-span-2">
                     <CardBody>
-                        <div className="bp-mb-16">
+                        <div className="bp-mb-4">
                             <h2 className="bp-section-title">Atléticas recentes</h2>
                             <p className="bp-section-subtitle">
                                 Primeiras organizações cadastradas no Brava Pass.

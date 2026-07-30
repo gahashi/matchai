@@ -672,7 +672,7 @@ export function CriarAtleticaSolicitacaoForm({
                                 "Acompanhe a solicitação aberta antes de criar uma nova."}
                         </p>
 
-                        <div className="bp-action-row bp-mt-24">
+                        <div className="bp-action-row bp-mt-5">
                             <AppLink
                                 href={`/sys/solicitacao/${solicitacaoEmAndamentoId}`}
                                 color="primary"
@@ -728,7 +728,7 @@ export function CriarAtleticaSolicitacaoForm({
                         edição.
                     </p>
 
-                    <div className="bp-action-row bp-mt-24">
+                    <div className="bp-action-row bp-mt-5">
                         <AppLink
                             href={
                                 solicitacaoId

@@ -11,3 +11,8 @@
 @import "styles/11-auth.css";
 @import "styles/12-link.css";
 @import "styles/13-entity-theme.css";
+@import "styles/components/popover.css";
+@import "styles/pages/perfil.css";
+@import "styles/pages/solicitacao.css";
+@import "styles/pages/inbox.css";
+@import "styles/14-utilities.css";

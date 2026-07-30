@@ -71,6 +71,7 @@
     --shadow-sm: 0 8px 28px rgba(0, 0, 0, 0.18);
     --shadow-md: 0 18px 60px rgba(0, 0, 0, 0.22);
     --shadow-lg: 0 24px 80px rgba(0, 0, 0, 0.38);
+    --shadow-xl: 0 30px 100px rgba(0, 0, 0, 0.46);
 
     --font-size-xs: 12px;
     --font-size-sm: 13px;
@@ -136,59 +137,20 @@
     --color-info-soft: var(--bp-info-soft);
     --color-info-border: var(--bp-info-border);
     --color-info-foreground: var(--bp-info-foreground);
-}
 
-/*
- * Exemplo de tema de entidade.
- * Usado em páginas internas/públicas de uma atlética específica.
- * Futuramente esses valores podem vir do banco.
- */
-[data-theme="dev-atletica"] {
-    --color-background: #07130e;
-    --color-background-2: #06100c;
-    --color-background-glow: rgba(57, 255, 20, 0.14);
-    --color-surface-3: #173a29;
-    --color-border-strong: #3a7a58;
+    --space-0: 0;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
 
-    --color-surface: #0d1f17;
-    --color-surface-2: #10281d;
-    --color-card: #132b20;
-    --color-card-strong: #173a29;
-    --color-border: #24513b;
-    --color-border-soft: rgba(168, 201, 181, 0.14);
-
-    --color-primary: #39ff14;
-    --color-primary-hover: #2bd80f;
-    --color-primary-soft: rgba(57, 255, 20, 0.14);
-    --color-primary-border: rgba(57, 255, 20, 0.30);
-    --color-primary-foreground: #07130e;
-
-    --color-secondary: #183527;
-    --color-secondary-hover: #214733;
-    --color-secondary-foreground: #f4fff8;
-
-    --color-text: #f4fff8;
-    --color-text-muted: #a8c9b5;
-    --color-text-soft: #71917c;
-    --color-text-disabled: #4c6756;
-
-    --color-success: #22c55e;
-    --color-success-soft: rgba(34, 197, 94, 0.12);
-    --color-success-border: rgba(34, 197, 94, 0.24);
-    --color-success-foreground: #062a15;
-
-    --color-warning: #f59e0b;
-    --color-warning-soft: rgba(245, 158, 11, 0.12);
-    --color-warning-border: rgba(245, 158, 11, 0.24);
-    --color-warning-foreground: #301b00;
-
-    --color-danger: #ef4444;
-    --color-danger-soft: rgba(239, 68, 68, 0.12);
-    --color-danger-border: rgba(239, 68, 68, 0.24);
-    --color-danger-foreground: #2c0707;
-
-    --color-info: #38bdf8;
-    --color-info-soft: rgba(56, 189, 248, 0.12);
-    --color-info-border: rgba(56, 189, 248, 0.24);
-    --color-info-foreground: #031f2f;
+    /* Superfícies translúcidas reutilizáveis */
+    --color-sidebar-background: rgba(17, 19, 27, 0.92);
+    --color-card-translucent: rgba(23, 26, 35, 0.88);
+    --color-card-elevated: rgba(23, 26, 35, 0.92);
+    --color-hover-subtle: rgba(255, 255, 255, 0.035);
+    --color-hover-strong: rgba(255, 255, 255, 0.06);
+    --color-overlay: rgba(0, 0, 0, 0.62);
 }

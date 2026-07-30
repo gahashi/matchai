@@ -214,7 +214,7 @@ export default async function SolicitacaoDetalhePage({
                                 "Nenhuma descrição informada."}
                         </p>
 
-                        <div className="bp-detail-info-grid bp-mt-24">
+                        <div className="bp-detail-info-grid bp-mt-5">
                             <div className="bp-info-row">
                                 <span>Solicitante</span>
                                 <strong>
@@ -275,7 +275,7 @@ export default async function SolicitacaoDetalhePage({
                                 Dados da atlética
                             </h2>
 
-                            <div className="bp-detail-info-grid bp-mt-24">
+                            <div className="bp-detail-info-grid bp-mt-5">
                                 <div className="bp-info-row">
                                     <span>Nome oficial</span>
                                     <strong>
@@ -351,7 +351,7 @@ export default async function SolicitacaoDetalhePage({
                                 </div>
                             </div>
 
-                            <div className="bp-mt-24">
+                            <div className="bp-mt-5">
                                 <span className="bp-label">
                                     Descrição
                                 </span>
@@ -365,7 +365,7 @@ export default async function SolicitacaoDetalhePage({
                                 </p>
                             </div>
 
-                            <div className="bp-detail-columns bp-mt-24">
+                            <div className="bp-detail-columns bp-mt-5">
                                 <div>
                                     <h3 className="bp-section-title">
                                         Polos
@@ -457,12 +457,12 @@ export default async function SolicitacaoDetalhePage({
                                 </div>
                             </div>
 
-                            <div className="bp-mt-24">
+                            <div className="bp-mt-5">
                                 <h3 className="bp-section-title">
                                     Gestão inicial
                                 </h3>
 
-                                <div className="bp-detail-info-grid bp-mt-16">
+                                <div className="bp-detail-info-grid bp-mt-4">
                                     <div className="bp-info-row">
                                         <span>Nome</span>
                                         <strong>

@@ -173,7 +173,7 @@ export default async function AtleticaPage() {
                         <CardBody>
                             <div className="bp-hero-content">
                                 <div>
-                                    <div className="bp-badge-row bp-mb-16">
+                                    <div className="bp-badge-row bp-mb-4">
                                         <Badge color="primary" variant="soft">
                                             {atletica.sigla}
                                         </Badge>
@@ -274,7 +274,7 @@ export default async function AtleticaPage() {
                                 <Building2 size={20} />
                             </div>
 
-                            <h2 className="bp-section-title bp-mt-16">
+                            <h2 className="bp-section-title bp-mt-4">
                                 Dados institucionais
                             </h2>
 
@@ -291,7 +291,7 @@ export default async function AtleticaPage() {
                                 <Settings size={20} />
                             </div>
 
-                            <h2 className="bp-section-title bp-mt-16">
+                            <h2 className="bp-section-title bp-mt-4">
                                 Configurações
                             </h2>
 
@@ -308,7 +308,7 @@ export default async function AtleticaPage() {
                                 <ExternalLink size={20} />
                             </div>
 
-                            <h2 className="bp-section-title bp-mt-16">
+                            <h2 className="bp-section-title bp-mt-4">
                                 Página pública
                             </h2>
 
@@ -349,7 +349,7 @@ export default async function AtleticaPage() {
                     <CardBody>
                         <div className="bp-row-between">
                             <div>
-                                <div className="bp-badge-row bp-mb-16">
+                                <div className="bp-badge-row bp-mb-4">
                                     <Badge color="primary" variant="soft">
                                         Criação de atlética
                                     </Badge>
@@ -382,7 +382,7 @@ export default async function AtleticaPage() {
                             </AppLink>
                         </div>
 
-                        <div className="bp-info-list bp-mt-24">
+                        <div className="bp-info-list bp-mt-5">
                             <div className="bp-info-row">
                                 <span>Status</span>
                                 <strong>

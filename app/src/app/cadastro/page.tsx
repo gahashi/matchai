@@ -285,7 +285,7 @@ export default function CadastroPage() {
                         ) : null}
 
                         {step === 1 && (
-                            <form onSubmit={handleRequestCode} className="bp-auth-form bp-mt-16">
+                            <form onSubmit={handleRequestCode} className="bp-auth-form bp-mt-4">
                                 <Input
                                     label="Email"
                                     type="email"
@@ -316,7 +316,7 @@ export default function CadastroPage() {
                         )}
 
                         {step === 2 && (
-                            <form onSubmit={handleVerifyCode} className="bp-auth-form bp-mt-16">
+                            <form onSubmit={handleVerifyCode} className="bp-auth-form bp-mt-4">
                                 <Input
                                     label="Código de verificação"
                                     value={code}
@@ -345,7 +345,7 @@ export default function CadastroPage() {
                         )}
 
                         {step === 3 && (
-                            <form onSubmit={handleCompleteRegistration} className="bp-auth-form bp-mt-16">
+                            <form onSubmit={handleCompleteRegistration} className="bp-auth-form bp-mt-4">
                                 <Input
                                     label="Nickname"
                                     value={nickname}
@@ -363,7 +363,7 @@ export default function CadastroPage() {
                             </form>
                         )}
 
-                        <div className="bp-auth-message bp-mt-24">
+                        <div className="bp-auth-message bp-mt-5">
                             Já tem conta?{" "}
                             <Link href="/login" style={{ color: "var(--color-primary)", fontWeight: 800 }}>
                                 Entrar no Brava Pass
