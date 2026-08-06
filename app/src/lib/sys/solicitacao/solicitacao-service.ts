@@ -61,6 +61,14 @@ function parseJsonSafe(value?: string | null) {
     }
 }
 
+const solicitacaoStatusEmAndamento: SolicitacaoStatusCodigo[] = [
+    "rascunho",
+    "enviada",
+    "em_analise",
+    "ajuste_solicitado",
+    "aprovada",
+];
+
 
 export class SolicitacaoForbiddenError extends Error {
     readonly statusCode = 403;
@@ -71,8 +79,20 @@ export class SolicitacaoForbiddenError extends Error {
     }
 }
 
+export class SolicitacaoConflictError extends Error {
+    readonly statusCode = 409;
+
+    constructor(message: string) {
+        super(message);
+        this.name = "SolicitacaoConflictError";
+    }
+}
+
 export function getSolicitacaoErrorStatus(error: unknown) {
-    if (error instanceof SolicitacaoForbiddenError) {
+    if (
+        error instanceof SolicitacaoForbiddenError ||
+        error instanceof SolicitacaoConflictError
+    ) {
         return error.statusCode;
     }
 
@@ -450,7 +470,78 @@ async function notificarSolicitanteRecusa({
     });
 }
 
+async function buscarSolicitacaoEmAndamentoPorTipo({
+                                                       sysUsuarioId,
+                                                       tipoCodigo,
+                                                   }: {
+    sysUsuarioId: number;
+    tipoCodigo: SolicitacaoTipoCodigo;
+}) {
+    return prisma.sysSolicitacao.findFirst({
+        where: {
+            solicitado_por_usuario_id:
+            sysUsuarioId,
+            ativo: 1,
+            deleted_at: null,
+
+            sys_solicitacao_tipo: {
+                codigo: tipoCodigo,
+            },
+
+            sys_solicitacao_status: {
+                codigo: {
+                    in: solicitacaoStatusEmAndamento,
+                },
+            },
+        },
+
+        select: {
+            id: true,
+            titulo: true,
+            descricao: true,
+            created_at: true,
+            enviado_at: true,
+            updated_at: true,
+
+            sys_solicitacao_tipo: {
+                select: {
+                    codigo: true,
+                    nome: true,
+                    color: true,
+                    icon: true,
+                },
+            },
+
+            sys_solicitacao_status: {
+                select: {
+                    codigo: true,
+                    nome: true,
+                    color: true,
+                    icon: true,
+                },
+            },
+        },
+
+        orderBy: {
+            created_at: "desc",
+        },
+    });
+}
+
 export const solicitacaoService = {
+    async buscarEmAndamentoPorTipo({
+                                       sysUsuarioId,
+                                       tipoCodigo,
+                                   }: {
+        sysUsuarioId: number;
+        tipoCodigo: SolicitacaoTipoCodigo;
+    }) {
+        return buscarSolicitacaoEmAndamentoPorTipo({
+            sysUsuarioId,
+            tipoCodigo,
+        });
+    },
+
     async criarRascunho({
                             tipoCodigo,
                             solicitadoPorUsuarioId,
@@ -461,6 +552,23 @@ export const solicitacaoService = {
                             payload = null,
                             metadata = null,
                         }: CriarRascunhoSolicitacaoInput) {
+
+        if (tipoCodigo === "criar_atletica") {
+            const solicitacaoExistente =
+                await buscarSolicitacaoEmAndamentoPorTipo({
+                    sysUsuarioId:
+                    solicitadoPorUsuarioId,
+                    tipoCodigo,
+                });
+
+            if (solicitacaoExistente) {
+                throw new SolicitacaoConflictError(
+                    `Você já possui uma solicitação de criação de atlética em andamento (#${solicitacaoExistente.id}).`
+                );
+            }
+        }
+
+
         const [tipoId, statusRascunho] = await Promise.all([
             getTipoId(tipoCodigo),
             getStatus("rascunho"),

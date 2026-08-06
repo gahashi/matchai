@@ -17,7 +17,7 @@ const navItems = [
     { label: "Parceiros",     icon: Store,          href: "/parceiros" },
     { label: "Assinaturas",   icon: CreditCard,     href: "/assinaturas" },
     { label: "Organizações",  icon: Building2,      href: "/organizacoes" },
-    { label: "Configurações", icon: Settings,       href: "/ent/atletica/tema" },
+    { label: "Tema",          icon: Settings,       href: "/ent/atletica/tema" },
     { label: "Solicitações",  icon: ClipboardList , href: "/sys/solicitacao" },
 ];
 

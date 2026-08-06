@@ -4,24 +4,20 @@ import {
     Settings,
     Users,
 } from "lucide-react";
-import { redirect } from "next/navigation";
 
-import { AppShell } from "@/components/layout/AppShell";
-import { Badge } from "@/components/ui/Badge";
+import {
+    Badge,
+} from "@/components/ui/Badge";
 import {
     Card,
     CardBody,
 } from "@/components/ui/Card";
-import { PageHeader } from "@/components/ui/PageHeader";
 import {
-    userHasGlobalPermission,
-} from "@/lib/auth/permissions";
+    PageHeader,
+} from "@/components/ui/PageHeader";
 import {
-    requireAuthPageAccess,
-} from "@/lib/auth/require-access";
-import {
-    contextoEntidadeService,
-} from "@/lib/ent/contexto-entidade";
+    requireEntidadeContexto,
+} from "@/lib/ent/require-entidade-contexto";
 
 type EntidadeContextPageProps = {
     params: Promise<{
@@ -29,97 +25,30 @@ type EntidadeContextPageProps = {
     }>;
 };
 
-function getBadgeColor(
-    color?: string | null
-) {
-    if (
-        color === "primary" ||
-        color === "secondary" ||
-        color === "success" ||
-        color === "warning" ||
-        color === "danger" ||
-        color === "info"
-    ) {
-        return color;
-    }
-
-    return "secondary";
-}
-
 export default async function EntidadeContextPage({
                                                       params,
                                                   }: EntidadeContextPageProps) {
-    const { session } =
-        await requireAuthPageAccess(
-            "/ent/entidade"
-        );
-
     const { slug } = await params;
 
-    const podeVisualizarTodas =
-        await userHasGlobalPermission(
-            session,
-            "entidade.visualizar"
-        );
-
-    const entidade =
-        await contextoEntidadeService
-            .resolverEntidadeAcessivel({
-                sysUsuarioId:
-                session.user.id,
-                slug,
-                podeVisualizarTodas,
-            });
-
-    /*
-     * Não diferenciamos entidade inexistente
-     * de entidade sem acesso para não expor
-     * informações de entidades privadas.
-     */
-    if (!entidade) {
-        redirect("/sem-permissao");
-    }
-
-    const nomeExibicao =
-        entidade.apelido ||
-        entidade.nome;
+    const { entidade } =
+        await requireEntidadeContexto({
+            slug,
+        });
 
     return (
-        <AppShell>
+        <>
             <PageHeader
-                eyebrow={
-                    <div className="bp-badge-row">
-                        <Badge
-                            color="primary"
-                            variant="soft"
-                        >
-                            {
-                                entidade
-                                    .tipo.nome
-                            }
-                        </Badge>
-
-                        <Badge
-                            color={getBadgeColor(
-                                entidade
-                                    .status.color
-                            )}
-                            variant="soft"
-                        >
-                            {
-                                entidade
-                                    .status.nome
-                            }
-                        </Badge>
-                    </div>
+                eyebrow="Entidade"
+                title="Visão geral"
+                subtitle="Informações principais e acesso aos módulos administrativos desta entidade."
+                actions={
+                    <Badge
+                        color="secondary"
+                        variant="outline"
+                    >
+                        /{entidade.slug}
+                    </Badge>
                 }
-                title={nomeExibicao}
-                subtitle={`${entidade.sigla} · ${
-                    entidade.instituicao
-                        .abreviacao ||
-                    entidade.instituicao
-                        .nome
-                }`}
             />
 
             <div className="bp-grid bp-grid-3">
@@ -132,14 +61,21 @@ export default async function EntidadeContextPage({
                         </div>
 
                         <h2 className="bp-section-title bp-mt-4">
-                            Visão geral
+                            Dados institucionais
                         </h2>
 
                         <p className="bp-section-subtitle">
-                            Resumo institucional,
-                            gestão atual e informações
-                            principais da entidade.
+                            {entidade.nome}
                         </p>
+
+                        {entidade.descricao ? (
+                            <p className="bp-section-subtitle bp-mt-4">
+                                {
+                                    entidade
+                                        .descricao
+                                }
+                            </p>
+                        ) : null}
                     </CardBody>
                 </Card>
 
@@ -155,7 +91,8 @@ export default async function EntidadeContextPage({
 
                         <p className="bp-section-subtitle">
                             Membros, cargos, diretoria
-                            e vínculos institucionais.
+                            e gestão serão exibidos
+                            nesta área.
                         </p>
                     </CardBody>
                 </Card>
@@ -195,14 +132,15 @@ export default async function EntidadeContextPage({
                         </h2>
 
                         <p className="bp-section-subtitle">
-                            Ações e configurações
-                            serão disponibilizadas
-                            conforme as permissões do
-                            usuário.
+                            As configurações serão
+                            liberadas gradualmente
+                            conforme permissões,
+                            regras institucionais e
+                            módulos disponíveis.
                         </p>
                     </CardBody>
                 </Card>
             </div>
-        </AppShell>
+        </>
     );
 }

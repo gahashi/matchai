@@ -1,6 +1,9 @@
 import {
     Building2,
     ChevronRight,
+    Clock,
+    FileText,
+    Pencil,
     Plus,
     Shield,
 } from "lucide-react";
@@ -24,6 +27,9 @@ import {
 import {
     contextoEntidadeService,
 } from "@/lib/ent/contexto-entidade";
+import {
+    solicitacaoService,
+} from "@/lib/sys/solicitacao/solicitacao-service";
 
 function getBadgeColor(
     color?: string | null
@@ -40,6 +46,31 @@ function getBadgeColor(
     }
 
     return "secondary";
+}
+
+function formatDate(
+    value: Date | string | null
+) {
+    if (!value) {
+        return "—";
+    }
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+        return "—";
+    }
+
+    return new Intl.DateTimeFormat(
+        "pt-BR",
+        {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+        }
+    ).format(date);
 }
 
 export default async function EntidadesPage() {
@@ -68,6 +99,28 @@ export default async function EntidadesPage() {
         );
     }
 
+    const solicitacaoCriarAtletica =
+        entidades.length === 0
+            ? await solicitacaoService
+                .buscarEmAndamentoPorTipo({
+                    sysUsuarioId:
+                    session.user.id,
+                    tipoCodigo:
+                        "criar_atletica",
+                })
+            : null;
+
+    const podeContinuarSolicitacao =
+        solicitacaoCriarAtletica &&
+        [
+            "rascunho",
+            "ajuste_solicitado",
+        ].includes(
+            solicitacaoCriarAtletica
+                .sys_solicitacao_status
+                .codigo
+        );
+
     return (
         <AppShell>
             <PageHeader
@@ -75,22 +128,153 @@ export default async function EntidadesPage() {
                 title={
                     entidades.length > 1
                         ? "Escolha uma entidade"
-                        : "Suas entidades"
+                        : solicitacaoCriarAtletica
+                            ? "Solicitação em andamento"
+                            : "Suas entidades"
                 }
                 subtitle={
                     entidades.length > 1
                         ? "Selecione em qual entidade deseja operar."
-                        : "Entidades às quais sua conta possui acesso."
+                        : solicitacaoCriarAtletica
+                            ? "Acompanhe o processo de criação e validação da sua atlética."
+                            : "Entidades às quais sua conta possui acesso."
                 }
             />
 
-            {entidades.length === 0 ? (
+            {entidades.length === 0 &&
+            solicitacaoCriarAtletica ? (
+                <Card variant="elevated">
+                    <CardBody>
+                        <div className="bp-row-between">
+                            <div>
+                                <div className="bp-badge-row bp-mb-4">
+                                    <Badge
+                                        color={getBadgeColor(
+                                            solicitacaoCriarAtletica
+                                                .sys_solicitacao_tipo
+                                                .color
+                                        )}
+                                        variant="soft"
+                                    >
+                                        {
+                                            solicitacaoCriarAtletica
+                                                .sys_solicitacao_tipo
+                                                .nome
+                                        }
+                                    </Badge>
+
+                                    <Badge
+                                        color={getBadgeColor(
+                                            solicitacaoCriarAtletica
+                                                .sys_solicitacao_status
+                                                .color
+                                        )}
+                                        variant="soft"
+                                    >
+                                        {
+                                            solicitacaoCriarAtletica
+                                                .sys_solicitacao_status
+                                                .nome
+                                        }
+                                    </Badge>
+                                </div>
+
+                                <h2 className="bp-section-title">
+                                    {
+                                        solicitacaoCriarAtletica
+                                            .titulo
+                                    }
+                                </h2>
+
+                                <p className="bp-section-subtitle">
+                                    {solicitacaoCriarAtletica
+                                            .descricao ??
+                                        "Sua solicitação foi registrada e está seguindo o fluxo de análise do Brava Pass."}
+                                </p>
+                            </div>
+
+                            <AppLink
+                                href={
+                                    podeContinuarSolicitacao
+                                        ? `/sys/solicitacao/${solicitacaoCriarAtletica.id}/editar`
+                                        : `/sys/solicitacao/${solicitacaoCriarAtletica.id}`
+                                }
+                                color="primary"
+                                variant="solid"
+                            >
+                                {podeContinuarSolicitacao ? (
+                                    <>
+                                        <Pencil
+                                            size={16}
+                                        />
+                                        Continuar solicitação
+                                    </>
+                                ) : (
+                                    <>
+                                        <FileText
+                                            size={16}
+                                        />
+                                        Acompanhar solicitação
+                                    </>
+                                )}
+                            </AppLink>
+                        </div>
+
+                        <div className="bp-action-row bp-mt-5">
+                            <Badge
+                                color="secondary"
+                                variant="outline"
+                            >
+                                <FileText
+                                    size={13}
+                                />
+                                #
+                                {
+                                    solicitacaoCriarAtletica
+                                        .id
+                                }
+                            </Badge>
+
+                            <Badge
+                                color="secondary"
+                                variant="outline"
+                            >
+                                <Clock size={13} />
+                                Criada em{" "}
+                                {formatDate(
+                                    solicitacaoCriarAtletica
+                                        .created_at
+                                )}
+                            </Badge>
+
+                            {solicitacaoCriarAtletica
+                                .enviado_at ? (
+                                <Badge
+                                    color="secondary"
+                                    variant="outline"
+                                >
+                                    <Clock
+                                        size={13}
+                                    />
+                                    Enviada em{" "}
+                                    {formatDate(
+                                        solicitacaoCriarAtletica
+                                            .enviado_at
+                                    )}
+                                </Badge>
+                            ) : null}
+                        </div>
+                    </CardBody>
+                </Card>
+            ) : entidades.length === 0 ? (
                 <EmptyState
                     icon={
-                        <Building2 size={28} />
+                        <Building2
+                            size={28}
+                        />
                     }
                     title="Nenhuma entidade disponível"
-                    description="Você ainda não possui vínculo ativo com uma entidade do Brava Pass."
+                    description="Você ainda não possui vínculo ativo com uma entidade nem uma solicitação de criação em andamento."
                     action={
                         <AppLink
                             href="/ent/atletica/criar"

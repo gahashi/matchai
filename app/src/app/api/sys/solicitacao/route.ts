@@ -213,8 +213,10 @@ export async function POST(request: NextRequest) {
                         : "Não foi possível criar a solicitação.",
             },
             {
-                status: 400,
+                status: getSolicitacaoErrorStatus(
+                    error
+                ),
             }
-        );
+            );
     }
 }

@@ -46,10 +46,6 @@ export const routeAccessRules: RouteAccessRule[] = [
         access: "auth",
     },
     {
-        path: "/ent/atletica",
-        access: "auth",
-    },
-    {
         path: "/ent/atletica/criar",
         access: "auth",
     },
@@ -67,29 +63,9 @@ export const routeAccessRules: RouteAccessRule[] = [
         access: "auth",
     },
     {
-        path: "/ent/atletica/tema",
-        access: "permission",
-        permissions: ["tema.visualizar"],
+        path: "/ent/entidade",
+        access: "auth",
     },
-    {
-        path: "/ent/atletica/tema/editar",
-        access: "permission",
-        permissions: ["tema.editar"],
-    },
-    {
-        path: "/ent/membro",
-        access: "permission",
-        permissions: ["membro.visualizar"],
-    },
-    {
-        path: "/ent/membro/novo",
-        access: "permission",
-        permissions: ["membro.criar"],
-    },
-    {
-        path: "/ent/atletica/configuracao",
-        access: "permission",
-        permissions: ["atletica.editar"],
-    },
+
 
 ];
