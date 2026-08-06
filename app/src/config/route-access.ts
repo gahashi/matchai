@@ -53,6 +53,10 @@ export const routeAccessRules: RouteAccessRule[] = [
         path: "/ent/atletica/criar",
         access: "auth",
     },
+    {
+        path: "/ent/entidade",
+        access: "auth",
+    },
 
     /**
      * PERMISSION

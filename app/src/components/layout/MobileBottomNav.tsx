@@ -6,7 +6,7 @@ import { CreditCard, Home, Settings, Shield } from "lucide-react";
 
 const mobileNavItems = [
     { label: "Início", icon: Home, href: "/" },
-    { label: "Atlética", icon: Shield, href: "/ent/atletica" },
+    {label: "Entidade",icon: Shield,href: "/ent/entidade"},
     { label: "Planos", icon: CreditCard, href: "/assinaturas" },
     { label: "Tema", icon: Settings, href: "/ent/atletica/tema" },
 ];
