@@ -51,61 +51,40 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  SysUsuarioTipo: 'SysUsuarioTipo',
   SysUsuario: 'SysUsuario',
-  SysRoleEscopo: 'SysRoleEscopo',
-  SysRole: 'SysRole',
-  SysPermission: 'SysPermission',
-  SysRolePermission: 'SysRolePermission',
-  SysUsuarioRole: 'SysUsuarioRole',
-  SysUsuarioPermissionTipo: 'SysUsuarioPermissionTipo',
-  SysUsuarioPermission: 'SysUsuarioPermission',
-  EduInstituicao: 'EduInstituicao',
-  EduCurso: 'EduCurso',
-  EduInstituicaoCurso: 'EduInstituicaoCurso',
-  EduPolo: 'EduPolo',
-  SysUsuarioPolo: 'SysUsuarioPolo',
-  EntEntidadeTipo: 'EntEntidadeTipo',
-  EntEntidadeStatus: 'EntEntidadeStatus',
-  EntEntidade: 'EntEntidade',
-  EntEntidadeCurso: 'EntEntidadeCurso',
-  EntEntidadePolo: 'EntEntidadePolo',
-  EntEntidadeGestaoStatus: 'EntEntidadeGestaoStatus',
-  EntEntidadeGestao: 'EntEntidadeGestao',
-  EntCargoTipo: 'EntCargoTipo',
-  EntCargo: 'EntCargo',
-  EntEntidadeCargo: 'EntEntidadeCargo',
-  EntEntidadeMembroTipo: 'EntEntidadeMembroTipo',
-  EntEntidadeMembroStatus: 'EntEntidadeMembroStatus',
-  EntEntidadeMembro: 'EntEntidadeMembro',
-  EntEntidadeMembroCargo: 'EntEntidadeMembroCargo',
-  EntEntidadeTema: 'EntEntidadeTema',
-  EntEntidadeRegimento: 'EntEntidadeRegimento',
-  SysAssinaturaPlanoPeriodicidade: 'SysAssinaturaPlanoPeriodicidade',
-  SysAssinaturaPlano: 'SysAssinaturaPlano',
-  EntEntidadeAssinaturaStatus: 'EntEntidadeAssinaturaStatus',
-  EntEntidadeAssinatura: 'EntEntidadeAssinatura',
   User: 'User',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
+  SysAuthLoginLog: 'SysAuthLoginLog',
   SysEmailLog: 'SysEmailLog',
   SysEmailVerificationCode: 'SysEmailVerificationCode',
-  SysAuthLoginLog: 'SysAuthLoginLog',
   SysArquivoDisco: 'SysArquivoDisco',
   SysArquivoVisibilidade: 'SysArquivoVisibilidade',
   SysArquivoTipo: 'SysArquivoTipo',
-  SysArquivoEntidadeTipo: 'SysArquivoEntidadeTipo',
   SysArquivo: 'SysArquivo',
-  SysInboxItemTipo: 'SysInboxItemTipo',
-  SysInboxItemStatus: 'SysInboxItemStatus',
-  SysInboxItem: 'SysInboxItem',
-  SysSolicitacaoTipo: 'SysSolicitacaoTipo',
-  SysSolicitacaoStatus: 'SysSolicitacaoStatus',
-  SysSolicitacao: 'SysSolicitacao',
-  SysSolicitacaoHistorico: 'SysSolicitacaoHistorico',
-  SysSolicitacaoDocumentoTipo: 'SysSolicitacaoDocumentoTipo',
-  SysSolicitacaoDocumentoStatus: 'SysSolicitacaoDocumentoStatus',
-  SysSolicitacaoDocumento: 'SysSolicitacaoDocumento'
+  CadLink: 'CadLink',
+  CadEvento: 'CadEvento',
+  PrdProdutoTipo: 'PrdProdutoTipo',
+  PrdProduto: 'PrdProduto',
+  PrdProdutoImagem: 'PrdProdutoImagem',
+  PrdProdutoVariacao: 'PrdProdutoVariacao',
+  VndCampanhaStatus: 'VndCampanhaStatus',
+  VndCampanha: 'VndCampanha',
+  VndCampanhaProduto: 'VndCampanhaProduto',
+  SocSocioStatus: 'SocSocioStatus',
+  SocSocioOrigem: 'SocSocioOrigem',
+  SocPlano: 'SocPlano',
+  SocSocio: 'SocSocio',
+  VndPedidoStatus: 'VndPedidoStatus',
+  VndEntregaTipo: 'VndEntregaTipo',
+  VndPedido: 'VndPedido',
+  VndPedidoItem: 'VndPedidoItem',
+  VndPedidoHistorico: 'VndPedidoHistorico',
+  FinPagamentoStatus: 'FinPagamentoStatus',
+  FinPagamentoMetodo: 'FinPagamentoMetodo',
+  FinPagamento: 'FinPagamento'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -124,18 +103,28 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const SysUsuarioTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SysUsuarioTipoScalarFieldEnum = (typeof SysUsuarioTipoScalarFieldEnum)[keyof typeof SysUsuarioTipoScalarFieldEnum]
+
+
 export const SysUsuarioScalarFieldEnum = {
   id: 'id',
+  sys_usuario_tipo_id: 'sys_usuario_tipo_id',
   nome: 'nome',
   nickname: 'nickname',
   email: 'email',
   telefone: 'telefone',
-  senha_hash: 'senha_hash',
-  codigo_aluno: 'codigo_aluno',
   documento: 'documento',
   avatar_sys_arquivo_id: 'avatar_sys_arquivo_id',
-  avatar_file_key: 'avatar_file_key',
-  avatar_url: 'avatar_url',
   ativo: 'ativo',
   perfil_completo: 'perfil_completo',
   email_verificado_at: 'email_verificado_at',
@@ -146,490 +135,6 @@ export const SysUsuarioScalarFieldEnum = {
 } as const
 
 export type SysUsuarioScalarFieldEnum = (typeof SysUsuarioScalarFieldEnum)[keyof typeof SysUsuarioScalarFieldEnum]
-
-
-export const SysRoleEscopoScalarFieldEnum = {
-  id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type SysRoleEscopoScalarFieldEnum = (typeof SysRoleEscopoScalarFieldEnum)[keyof typeof SysRoleEscopoScalarFieldEnum]
-
-
-export const SysRoleScalarFieldEnum = {
-  id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  sys_role_escopo_id: 'sys_role_escopo_id',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type SysRoleScalarFieldEnum = (typeof SysRoleScalarFieldEnum)[keyof typeof SysRoleScalarFieldEnum]
-
-
-export const SysPermissionScalarFieldEnum = {
-  id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  modulo: 'modulo',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type SysPermissionScalarFieldEnum = (typeof SysPermissionScalarFieldEnum)[keyof typeof SysPermissionScalarFieldEnum]
-
-
-export const SysRolePermissionScalarFieldEnum = {
-  id: 'id',
-  sys_role_id: 'sys_role_id',
-  sys_permission_id: 'sys_permission_id',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type SysRolePermissionScalarFieldEnum = (typeof SysRolePermissionScalarFieldEnum)[keyof typeof SysRolePermissionScalarFieldEnum]
-
-
-export const SysUsuarioRoleScalarFieldEnum = {
-  id: 'id',
-  sys_usuario_id: 'sys_usuario_id',
-  sys_role_id: 'sys_role_id',
-  ent_entidade_id: 'ent_entidade_id',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type SysUsuarioRoleScalarFieldEnum = (typeof SysUsuarioRoleScalarFieldEnum)[keyof typeof SysUsuarioRoleScalarFieldEnum]
-
-
-export const SysUsuarioPermissionTipoScalarFieldEnum = {
-  id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type SysUsuarioPermissionTipoScalarFieldEnum = (typeof SysUsuarioPermissionTipoScalarFieldEnum)[keyof typeof SysUsuarioPermissionTipoScalarFieldEnum]
-
-
-export const SysUsuarioPermissionScalarFieldEnum = {
-  id: 'id',
-  sys_usuario_id: 'sys_usuario_id',
-  sys_permission_id: 'sys_permission_id',
-  sys_usuario_permission_tipo_id: 'sys_usuario_permission_tipo_id',
-  ent_entidade_id: 'ent_entidade_id',
-  motivo: 'motivo',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type SysUsuarioPermissionScalarFieldEnum = (typeof SysUsuarioPermissionScalarFieldEnum)[keyof typeof SysUsuarioPermissionScalarFieldEnum]
-
-
-export const EduInstituicaoScalarFieldEnum = {
-  id: 'id',
-  nome: 'nome',
-  abreviacao: 'abreviacao',
-  cidade: 'cidade',
-  estado: 'estado',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type EduInstituicaoScalarFieldEnum = (typeof EduInstituicaoScalarFieldEnum)[keyof typeof EduInstituicaoScalarFieldEnum]
-
-
-export const EduCursoScalarFieldEnum = {
-  id: 'id',
-  nome: 'nome',
-  abreviacao: 'abreviacao',
-  periodos: 'periodos',
-  fundado_at: 'fundado_at',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type EduCursoScalarFieldEnum = (typeof EduCursoScalarFieldEnum)[keyof typeof EduCursoScalarFieldEnum]
-
-
-export const EduInstituicaoCursoScalarFieldEnum = {
-  id: 'id',
-  edu_instituicao_id: 'edu_instituicao_id',
-  edu_curso_id: 'edu_curso_id',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type EduInstituicaoCursoScalarFieldEnum = (typeof EduInstituicaoCursoScalarFieldEnum)[keyof typeof EduInstituicaoCursoScalarFieldEnum]
-
-
-export const EduPoloScalarFieldEnum = {
-  id: 'id',
-  edu_instituicao_id: 'edu_instituicao_id',
-  codigo: 'codigo',
-  nome: 'nome',
-  cidade: 'cidade',
-  estado: 'estado',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type EduPoloScalarFieldEnum = (typeof EduPoloScalarFieldEnum)[keyof typeof EduPoloScalarFieldEnum]
-
-
-export const SysUsuarioPoloScalarFieldEnum = {
-  id: 'id',
-  sys_usuario_id: 'sys_usuario_id',
-  edu_polo_id: 'edu_polo_id',
-  principal: 'principal',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type SysUsuarioPoloScalarFieldEnum = (typeof SysUsuarioPoloScalarFieldEnum)[keyof typeof SysUsuarioPoloScalarFieldEnum]
-
-
-export const EntEntidadeTipoScalarFieldEnum = {
-  id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type EntEntidadeTipoScalarFieldEnum = (typeof EntEntidadeTipoScalarFieldEnum)[keyof typeof EntEntidadeTipoScalarFieldEnum]
-
-
-export const EntEntidadeStatusScalarFieldEnum = {
-  id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  color: 'color',
-  icon: 'icon',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type EntEntidadeStatusScalarFieldEnum = (typeof EntEntidadeStatusScalarFieldEnum)[keyof typeof EntEntidadeStatusScalarFieldEnum]
-
-
-export const EntEntidadeScalarFieldEnum = {
-  id: 'id',
-  ent_entidade_tipo_id: 'ent_entidade_tipo_id',
-  ent_entidade_status_id: 'ent_entidade_status_id',
-  edu_instituicao_id: 'edu_instituicao_id',
-  criado_por_sys_usuario_id: 'criado_por_sys_usuario_id',
-  nome: 'nome',
-  apelido: 'apelido',
-  sigla: 'sigla',
-  slug: 'slug',
-  mascote: 'mascote',
-  descricao: 'descricao',
-  fundado_at: 'fundado_at',
-  logo_url: 'logo_url',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type EntEntidadeScalarFieldEnum = (typeof EntEntidadeScalarFieldEnum)[keyof typeof EntEntidadeScalarFieldEnum]
-
-
-export const EntEntidadeCursoScalarFieldEnum = {
-  id: 'id',
-  ent_entidade_id: 'ent_entidade_id',
-  edu_curso_id: 'edu_curso_id',
-  principal: 'principal',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type EntEntidadeCursoScalarFieldEnum = (typeof EntEntidadeCursoScalarFieldEnum)[keyof typeof EntEntidadeCursoScalarFieldEnum]
-
-
-export const EntEntidadePoloScalarFieldEnum = {
-  id: 'id',
-  ent_entidade_id: 'ent_entidade_id',
-  edu_polo_id: 'edu_polo_id',
-  principal: 'principal',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type EntEntidadePoloScalarFieldEnum = (typeof EntEntidadePoloScalarFieldEnum)[keyof typeof EntEntidadePoloScalarFieldEnum]
-
-
-export const EntEntidadeGestaoStatusScalarFieldEnum = {
-  id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  color: 'color',
-  icon: 'icon',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type EntEntidadeGestaoStatusScalarFieldEnum = (typeof EntEntidadeGestaoStatusScalarFieldEnum)[keyof typeof EntEntidadeGestaoStatusScalarFieldEnum]
-
-
-export const EntEntidadeGestaoScalarFieldEnum = {
-  id: 'id',
-  ent_entidade_id: 'ent_entidade_id',
-  ent_entidade_gestao_status_id: 'ent_entidade_gestao_status_id',
-  nome: 'nome',
-  inicio_at: 'inicio_at',
-  fim_at: 'fim_at',
-  observacao: 'observacao',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type EntEntidadeGestaoScalarFieldEnum = (typeof EntEntidadeGestaoScalarFieldEnum)[keyof typeof EntEntidadeGestaoScalarFieldEnum]
-
-
-export const EntCargoTipoScalarFieldEnum = {
-  id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type EntCargoTipoScalarFieldEnum = (typeof EntCargoTipoScalarFieldEnum)[keyof typeof EntCargoTipoScalarFieldEnum]
-
-
-export const EntCargoScalarFieldEnum = {
-  id: 'id',
-  nome: 'nome',
-  codigo: 'codigo',
-  descricao: 'descricao',
-  ent_cargo_tipo_id: 'ent_cargo_tipo_id',
-  ent_entidade_id: 'ent_entidade_id',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type EntCargoScalarFieldEnum = (typeof EntCargoScalarFieldEnum)[keyof typeof EntCargoScalarFieldEnum]
-
-
-export const EntEntidadeCargoScalarFieldEnum = {
-  id: 'id',
-  ent_entidade_id: 'ent_entidade_id',
-  ent_cargo_id: 'ent_cargo_id',
-  nome_exibicao: 'nome_exibicao',
-  descricao_customizada: 'descricao_customizada',
-  ordem: 'ordem',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type EntEntidadeCargoScalarFieldEnum = (typeof EntEntidadeCargoScalarFieldEnum)[keyof typeof EntEntidadeCargoScalarFieldEnum]
-
-
-export const EntEntidadeMembroTipoScalarFieldEnum = {
-  id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type EntEntidadeMembroTipoScalarFieldEnum = (typeof EntEntidadeMembroTipoScalarFieldEnum)[keyof typeof EntEntidadeMembroTipoScalarFieldEnum]
-
-
-export const EntEntidadeMembroStatusScalarFieldEnum = {
-  id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  color: 'color',
-  icon: 'icon',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type EntEntidadeMembroStatusScalarFieldEnum = (typeof EntEntidadeMembroStatusScalarFieldEnum)[keyof typeof EntEntidadeMembroStatusScalarFieldEnum]
-
-
-export const EntEntidadeMembroScalarFieldEnum = {
-  id: 'id',
-  ent_entidade_id: 'ent_entidade_id',
-  sys_usuario_id: 'sys_usuario_id',
-  ent_entidade_membro_tipo_id: 'ent_entidade_membro_tipo_id',
-  ent_entidade_membro_status_id: 'ent_entidade_membro_status_id',
-  entrou_at: 'entrou_at',
-  saiu_at: 'saiu_at',
-  observacao: 'observacao',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type EntEntidadeMembroScalarFieldEnum = (typeof EntEntidadeMembroScalarFieldEnum)[keyof typeof EntEntidadeMembroScalarFieldEnum]
-
-
-export const EntEntidadeMembroCargoScalarFieldEnum = {
-  id: 'id',
-  ent_entidade_membro_id: 'ent_entidade_membro_id',
-  ent_cargo_id: 'ent_cargo_id',
-  inicio_at: 'inicio_at',
-  fim_at: 'fim_at',
-  atual: 'atual',
-  observacao: 'observacao',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type EntEntidadeMembroCargoScalarFieldEnum = (typeof EntEntidadeMembroCargoScalarFieldEnum)[keyof typeof EntEntidadeMembroCargoScalarFieldEnum]
-
-
-export const EntEntidadeTemaScalarFieldEnum = {
-  id: 'id',
-  ent_entidade_id: 'ent_entidade_id',
-  cor_primaria: 'cor_primaria',
-  cor_secundaria: 'cor_secundaria',
-  cor_fundo: 'cor_fundo',
-  cor_texto: 'cor_texto',
-  logo_url: 'logo_url',
-  banner_url: 'banner_url',
-  custom_css: 'custom_css',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type EntEntidadeTemaScalarFieldEnum = (typeof EntEntidadeTemaScalarFieldEnum)[keyof typeof EntEntidadeTemaScalarFieldEnum]
-
-
-export const EntEntidadeRegimentoScalarFieldEnum = {
-  id: 'id',
-  ent_entidade_id: 'ent_entidade_id',
-  titulo: 'titulo',
-  versao: 'versao',
-  conteudo: 'conteudo',
-  arquivo_url: 'arquivo_url',
-  aprovado_at: 'aprovado_at',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type EntEntidadeRegimentoScalarFieldEnum = (typeof EntEntidadeRegimentoScalarFieldEnum)[keyof typeof EntEntidadeRegimentoScalarFieldEnum]
-
-
-export const SysAssinaturaPlanoPeriodicidadeScalarFieldEnum = {
-  id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type SysAssinaturaPlanoPeriodicidadeScalarFieldEnum = (typeof SysAssinaturaPlanoPeriodicidadeScalarFieldEnum)[keyof typeof SysAssinaturaPlanoPeriodicidadeScalarFieldEnum]
-
-
-export const SysAssinaturaPlanoScalarFieldEnum = {
-  id: 'id',
-  nome: 'nome',
-  codigo: 'codigo',
-  descricao: 'descricao',
-  valor: 'valor',
-  sys_assinatura_plano_periodicidade_id: 'sys_assinatura_plano_periodicidade_id',
-  limite_membros: 'limite_membros',
-  limite_eventos: 'limite_eventos',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type SysAssinaturaPlanoScalarFieldEnum = (typeof SysAssinaturaPlanoScalarFieldEnum)[keyof typeof SysAssinaturaPlanoScalarFieldEnum]
-
-
-export const EntEntidadeAssinaturaStatusScalarFieldEnum = {
-  id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  color: 'color',
-  icon: 'icon',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type EntEntidadeAssinaturaStatusScalarFieldEnum = (typeof EntEntidadeAssinaturaStatusScalarFieldEnum)[keyof typeof EntEntidadeAssinaturaStatusScalarFieldEnum]
-
-
-export const EntEntidadeAssinaturaScalarFieldEnum = {
-  id: 'id',
-  ent_entidade_id: 'ent_entidade_id',
-  sys_assinatura_plano_id: 'sys_assinatura_plano_id',
-  ent_entidade_assinatura_status_id: 'ent_entidade_assinatura_status_id',
-  inicio_at: 'inicio_at',
-  fim_at: 'fim_at',
-  observacao: 'observacao',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type EntEntidadeAssinaturaScalarFieldEnum = (typeof EntEntidadeAssinaturaScalarFieldEnum)[keyof typeof EntEntidadeAssinaturaScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -691,6 +196,24 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
+export const SysAuthLoginLogScalarFieldEnum = {
+  id: 'id',
+  sys_usuario_id: 'sys_usuario_id',
+  email: 'email',
+  evento: 'evento',
+  status: 'status',
+  ip_address: 'ip_address',
+  user_agent: 'user_agent',
+  device_text: 'device_text',
+  location_text: 'location_text',
+  error_message: 'error_message',
+  metadata_text: 'metadata_text',
+  created_at: 'created_at'
+} as const
+
+export type SysAuthLoginLogScalarFieldEnum = (typeof SysAuthLoginLogScalarFieldEnum)[keyof typeof SysAuthLoginLogScalarFieldEnum]
+
+
 export const SysEmailLogScalarFieldEnum = {
   id: 'id',
   sys_usuario_id: 'sys_usuario_id',
@@ -729,24 +252,6 @@ export const SysEmailVerificationCodeScalarFieldEnum = {
 export type SysEmailVerificationCodeScalarFieldEnum = (typeof SysEmailVerificationCodeScalarFieldEnum)[keyof typeof SysEmailVerificationCodeScalarFieldEnum]
 
 
-export const SysAuthLoginLogScalarFieldEnum = {
-  id: 'id',
-  sys_usuario_id: 'sys_usuario_id',
-  email: 'email',
-  evento: 'evento',
-  status: 'status',
-  ip_address: 'ip_address',
-  user_agent: 'user_agent',
-  device_text: 'device_text',
-  location_text: 'location_text',
-  error_message: 'error_message',
-  metadata_text: 'metadata_text',
-  created_at: 'created_at'
-} as const
-
-export type SysAuthLoginLogScalarFieldEnum = (typeof SysAuthLoginLogScalarFieldEnum)[keyof typeof SysAuthLoginLogScalarFieldEnum]
-
-
 export const SysArquivoDiscoScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
@@ -783,25 +288,11 @@ export const SysArquivoTipoScalarFieldEnum = {
 export type SysArquivoTipoScalarFieldEnum = (typeof SysArquivoTipoScalarFieldEnum)[keyof typeof SysArquivoTipoScalarFieldEnum]
 
 
-export const SysArquivoEntidadeTipoScalarFieldEnum = {
-  id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type SysArquivoEntidadeTipoScalarFieldEnum = (typeof SysArquivoEntidadeTipoScalarFieldEnum)[keyof typeof SysArquivoEntidadeTipoScalarFieldEnum]
-
-
 export const SysArquivoScalarFieldEnum = {
   id: 'id',
   sys_arquivo_disco_id: 'sys_arquivo_disco_id',
   sys_arquivo_visibilidade_id: 'sys_arquivo_visibilidade_id',
   sys_arquivo_tipo_id: 'sys_arquivo_tipo_id',
-  sys_arquivo_entidade_tipo_id: 'sys_arquivo_entidade_tipo_id',
-  entidade_id: 'entidade_id',
   bucket: 'bucket',
   file_key: 'file_key',
   public_url: 'public_url',
@@ -809,7 +300,7 @@ export const SysArquivoScalarFieldEnum = {
   mime_type: 'mime_type',
   size_bytes: 'size_bytes',
   content_hash: 'content_hash',
-  created_by_usuario_id: 'created_by_usuario_id',
+  created_by_sys_usuario_id: 'created_by_sys_usuario_id',
   created_at: 'created_at',
   updated_at: 'updated_at',
   deleted_at: 'deleted_at',
@@ -819,148 +310,315 @@ export const SysArquivoScalarFieldEnum = {
 export type SysArquivoScalarFieldEnum = (typeof SysArquivoScalarFieldEnum)[keyof typeof SysArquivoScalarFieldEnum]
 
 
-export const SysInboxItemTipoScalarFieldEnum = {
+export const CadLinkScalarFieldEnum = {
   id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  color: 'color',
-  icon: 'icon',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type SysInboxItemTipoScalarFieldEnum = (typeof SysInboxItemTipoScalarFieldEnum)[keyof typeof SysInboxItemTipoScalarFieldEnum]
-
-
-export const SysInboxItemStatusScalarFieldEnum = {
-  id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  color: 'color',
-  icon: 'icon',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type SysInboxItemStatusScalarFieldEnum = (typeof SysInboxItemStatusScalarFieldEnum)[keyof typeof SysInboxItemStatusScalarFieldEnum]
-
-
-export const SysInboxItemScalarFieldEnum = {
-  id: 'id',
-  sys_usuario_id: 'sys_usuario_id',
-  sys_inbox_item_tipo_id: 'sys_inbox_item_tipo_id',
-  sys_inbox_item_status_id: 'sys_inbox_item_status_id',
   titulo: 'titulo',
-  mensagem: 'mensagem',
-  contexto_titulo: 'contexto_titulo',
-  contexto_descricao: 'contexto_descricao',
-  action_url: 'action_url',
-  entidade_tipo: 'entidade_tipo',
-  entidade_id: 'entidade_id',
-  metadata_text: 'metadata_text',
-  read_at: 'read_at',
-  archived_at: 'archived_at',
+  descricao: 'descricao',
+  url: 'url',
+  icon: 'icon',
+  ordem: 'ordem',
+  destaque: 'destaque',
   ativo: 'ativo',
   created_at: 'created_at',
   updated_at: 'updated_at',
   deleted_at: 'deleted_at'
 } as const
 
-export type SysInboxItemScalarFieldEnum = (typeof SysInboxItemScalarFieldEnum)[keyof typeof SysInboxItemScalarFieldEnum]
+export type CadLinkScalarFieldEnum = (typeof CadLinkScalarFieldEnum)[keyof typeof CadLinkScalarFieldEnum]
 
 
-export const SysSolicitacaoTipoScalarFieldEnum = {
+export const CadEventoScalarFieldEnum = {
   id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  color: 'color',
-  icon: 'icon',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type SysSolicitacaoTipoScalarFieldEnum = (typeof SysSolicitacaoTipoScalarFieldEnum)[keyof typeof SysSolicitacaoTipoScalarFieldEnum]
-
-
-export const SysSolicitacaoStatusScalarFieldEnum = {
-  id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  color: 'color',
-  icon: 'icon',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type SysSolicitacaoStatusScalarFieldEnum = (typeof SysSolicitacaoStatusScalarFieldEnum)[keyof typeof SysSolicitacaoStatusScalarFieldEnum]
-
-
-export const SysSolicitacaoScalarFieldEnum = {
-  id: 'id',
-  sys_solicitacao_tipo_id: 'sys_solicitacao_tipo_id',
-  sys_solicitacao_status_id: 'sys_solicitacao_status_id',
-  solicitado_por_usuario_id: 'solicitado_por_usuario_id',
-  responsavel_sys_usuario_id: 'responsavel_sys_usuario_id',
-  edu_instituicao_id: 'edu_instituicao_id',
-  edu_polo_id: 'edu_polo_id',
-  ent_entidade_id: 'ent_entidade_id',
   titulo: 'titulo',
   descricao: 'descricao',
-  entidade_tipo: 'entidade_tipo',
-  entidade_id: 'entidade_id',
-  payload_text: 'payload_text',
-  metadata_text: 'metadata_text',
-  enviado_at: 'enviado_at',
-  finalizado_at: 'finalizado_at',
+  url: 'url',
+  banner_sys_arquivo_id: 'banner_sys_arquivo_id',
+  evento_at: 'evento_at',
+  inicio_exibicao: 'inicio_exibicao',
+  fim_exibicao: 'fim_exibicao',
+  ordem: 'ordem',
+  destaque: 'destaque',
+  ativo: 'ativo',
+  visivel_publico: 'visivel_publico',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type CadEventoScalarFieldEnum = (typeof CadEventoScalarFieldEnum)[keyof typeof CadEventoScalarFieldEnum]
+
+
+export const PrdProdutoTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type PrdProdutoTipoScalarFieldEnum = (typeof PrdProdutoTipoScalarFieldEnum)[keyof typeof PrdProdutoTipoScalarFieldEnum]
+
+
+export const PrdProdutoScalarFieldEnum = {
+  id: 'id',
+  prd_produto_tipo_id: 'prd_produto_tipo_id',
+  codigo: 'codigo',
+  slug: 'slug',
+  nome: 'nome',
+  descricao: 'descricao',
+  preco_custo: 'preco_custo',
+  preco_normal: 'preco_normal',
+  preco_socio: 'preco_socio',
+  controla_estoque: 'controla_estoque',
+  estoque_atual: 'estoque_atual',
+  ativo: 'ativo',
+  destaque: 'destaque',
+  visivel_publico: 'visivel_publico',
+  inicio_exibicao: 'inicio_exibicao',
+  fim_exibicao: 'fim_exibicao',
+  exibir_apos_encerramento: 'exibir_apos_encerramento',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type PrdProdutoScalarFieldEnum = (typeof PrdProdutoScalarFieldEnum)[keyof typeof PrdProdutoScalarFieldEnum]
+
+
+export const PrdProdutoImagemScalarFieldEnum = {
+  id: 'id',
+  prd_produto_id: 'prd_produto_id',
+  sys_arquivo_id: 'sys_arquivo_id',
+  ordem: 'ordem',
+  principal: 'principal',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type PrdProdutoImagemScalarFieldEnum = (typeof PrdProdutoImagemScalarFieldEnum)[keyof typeof PrdProdutoImagemScalarFieldEnum]
+
+
+export const PrdProdutoVariacaoScalarFieldEnum = {
+  id: 'id',
+  prd_produto_id: 'prd_produto_id',
+  sku: 'sku',
+  nome: 'nome',
+  ordem: 'ordem',
+  estoque_atual: 'estoque_atual',
   ativo: 'ativo',
   created_at: 'created_at',
   updated_at: 'updated_at',
   deleted_at: 'deleted_at'
 } as const
 
-export type SysSolicitacaoScalarFieldEnum = (typeof SysSolicitacaoScalarFieldEnum)[keyof typeof SysSolicitacaoScalarFieldEnum]
+export type PrdProdutoVariacaoScalarFieldEnum = (typeof PrdProdutoVariacaoScalarFieldEnum)[keyof typeof PrdProdutoVariacaoScalarFieldEnum]
 
 
-export const SysSolicitacaoHistoricoScalarFieldEnum = {
+export const VndCampanhaStatusScalarFieldEnum = {
   id: 'id',
-  sys_solicitacao_id: 'sys_solicitacao_id',
-  sys_usuario_id: 'sys_usuario_id',
-  sys_solicitacao_status_anterior_id: 'sys_solicitacao_status_anterior_id',
-  sys_solicitacao_status_novo_id: 'sys_solicitacao_status_novo_id',
-  acao: 'acao',
+  codigo: 'codigo',
   descricao: 'descricao',
-  metadata_text: 'metadata_text',
+  color: 'color',
+  icon: 'icon',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type VndCampanhaStatusScalarFieldEnum = (typeof VndCampanhaStatusScalarFieldEnum)[keyof typeof VndCampanhaStatusScalarFieldEnum]
+
+
+export const VndCampanhaScalarFieldEnum = {
+  id: 'id',
+  vnd_campanha_status_id: 'vnd_campanha_status_id',
+  codigo: 'codigo',
+  slug: 'slug',
+  nome: 'nome',
+  descricao: 'descricao',
+  inicio_at: 'inicio_at',
+  fim_at: 'fim_at',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type VndCampanhaScalarFieldEnum = (typeof VndCampanhaScalarFieldEnum)[keyof typeof VndCampanhaScalarFieldEnum]
+
+
+export const VndCampanhaProdutoScalarFieldEnum = {
+  id: 'id',
+  vnd_campanha_id: 'vnd_campanha_id',
+  prd_produto_id: 'prd_produto_id',
+  preco_normal: 'preco_normal',
+  preco_socio: 'preco_socio',
+  limite_por_cliente: 'limite_por_cliente',
+  ordem: 'ordem',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type VndCampanhaProdutoScalarFieldEnum = (typeof VndCampanhaProdutoScalarFieldEnum)[keyof typeof VndCampanhaProdutoScalarFieldEnum]
+
+
+export const SocSocioStatusScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SocSocioStatusScalarFieldEnum = (typeof SocSocioStatusScalarFieldEnum)[keyof typeof SocSocioStatusScalarFieldEnum]
+
+
+export const SocSocioOrigemScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  descricao: 'descricao',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SocSocioOrigemScalarFieldEnum = (typeof SocSocioOrigemScalarFieldEnum)[keyof typeof SocSocioOrigemScalarFieldEnum]
+
+
+export const SocPlanoScalarFieldEnum = {
+  id: 'id',
+  prd_produto_id: 'prd_produto_id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  duracao_dias: 'duracao_dias',
+  ativo: 'ativo',
+  visivel_publico: 'visivel_publico',
+  inicio_exibicao: 'inicio_exibicao',
+  fim_exibicao: 'fim_exibicao',
+  exibir_apos_encerramento: 'exibir_apos_encerramento',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type SocPlanoScalarFieldEnum = (typeof SocPlanoScalarFieldEnum)[keyof typeof SocPlanoScalarFieldEnum]
+
+
+export const SocSocioScalarFieldEnum = {
+  id: 'id',
+  sys_usuario_id: 'sys_usuario_id',
+  soc_plano_id: 'soc_plano_id',
+  soc_socio_status_id: 'soc_socio_status_id',
+  soc_socio_origem_id: 'soc_socio_origem_id',
+  origem_vnd_pedido_item_id: 'origem_vnd_pedido_item_id',
+  inicio_at: 'inicio_at',
+  fim_at: 'fim_at',
+  observacao: 'observacao',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SocSocioScalarFieldEnum = (typeof SocSocioScalarFieldEnum)[keyof typeof SocSocioScalarFieldEnum]
+
+
+export const VndPedidoStatusScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type VndPedidoStatusScalarFieldEnum = (typeof VndPedidoStatusScalarFieldEnum)[keyof typeof VndPedidoStatusScalarFieldEnum]
+
+
+export const VndEntregaTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  descricao: 'descricao',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type VndEntregaTipoScalarFieldEnum = (typeof VndEntregaTipoScalarFieldEnum)[keyof typeof VndEntregaTipoScalarFieldEnum]
+
+
+export const VndPedidoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  sys_usuario_id: 'sys_usuario_id',
+  vnd_campanha_id: 'vnd_campanha_id',
+  vnd_pedido_status_id: 'vnd_pedido_status_id',
+  vnd_entrega_tipo_id: 'vnd_entrega_tipo_id',
+  cliente_nome: 'cliente_nome',
+  cliente_email: 'cliente_email',
+  cliente_telefone: 'cliente_telefone',
+  entrega_endereco: 'entrega_endereco',
+  retirada_local: 'retirada_local',
+  observacao_cliente: 'observacao_cliente',
+  valor_produtos: 'valor_produtos',
+  valor_desconto: 'valor_desconto',
+  valor_frete: 'valor_frete',
+  valor_acrescimo: 'valor_acrescimo',
+  valor_total: 'valor_total',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  cancelado_at: 'cancelado_at',
+  concluido_at: 'concluido_at'
+} as const
+
+export type VndPedidoScalarFieldEnum = (typeof VndPedidoScalarFieldEnum)[keyof typeof VndPedidoScalarFieldEnum]
+
+
+export const VndPedidoItemScalarFieldEnum = {
+  id: 'id',
+  vnd_pedido_id: 'vnd_pedido_id',
+  prd_produto_id: 'prd_produto_id',
+  prd_produto_variacao_id: 'prd_produto_variacao_id',
+  vnd_campanha_id: 'vnd_campanha_id',
+  produto_codigo_snapshot: 'produto_codigo_snapshot',
+  produto_nome_snapshot: 'produto_nome_snapshot',
+  variacao_snapshot: 'variacao_snapshot',
+  quantidade: 'quantidade',
+  preco_tabela: 'preco_tabela',
+  preco_unitario: 'preco_unitario',
+  valor_desconto: 'valor_desconto',
+  subtotal: 'subtotal',
+  socio_aplicado: 'socio_aplicado',
+  personalizacao_nome: 'personalizacao_nome',
+  personalizacao_numero: 'personalizacao_numero',
+  observacao: 'observacao',
   created_at: 'created_at'
 } as const
 
-export type SysSolicitacaoHistoricoScalarFieldEnum = (typeof SysSolicitacaoHistoricoScalarFieldEnum)[keyof typeof SysSolicitacaoHistoricoScalarFieldEnum]
+export type VndPedidoItemScalarFieldEnum = (typeof VndPedidoItemScalarFieldEnum)[keyof typeof VndPedidoItemScalarFieldEnum]
 
 
-export const SysSolicitacaoDocumentoTipoScalarFieldEnum = {
+export const VndPedidoHistoricoScalarFieldEnum = {
   id: 'id',
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  ativo: 'ativo',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
+  vnd_pedido_id: 'vnd_pedido_id',
+  vnd_pedido_status_id: 'vnd_pedido_status_id',
+  sys_usuario_id: 'sys_usuario_id',
+  observacao: 'observacao',
+  created_at: 'created_at'
 } as const
 
-export type SysSolicitacaoDocumentoTipoScalarFieldEnum = (typeof SysSolicitacaoDocumentoTipoScalarFieldEnum)[keyof typeof SysSolicitacaoDocumentoTipoScalarFieldEnum]
+export type VndPedidoHistoricoScalarFieldEnum = (typeof VndPedidoHistoricoScalarFieldEnum)[keyof typeof VndPedidoHistoricoScalarFieldEnum]
 
 
-export const SysSolicitacaoDocumentoStatusScalarFieldEnum = {
+export const FinPagamentoStatusScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
-  nome: 'nome',
   descricao: 'descricao',
   color: 'color',
   icon: 'icon',
@@ -969,25 +627,43 @@ export const SysSolicitacaoDocumentoStatusScalarFieldEnum = {
   updated_at: 'updated_at'
 } as const
 
-export type SysSolicitacaoDocumentoStatusScalarFieldEnum = (typeof SysSolicitacaoDocumentoStatusScalarFieldEnum)[keyof typeof SysSolicitacaoDocumentoStatusScalarFieldEnum]
+export type FinPagamentoStatusScalarFieldEnum = (typeof FinPagamentoStatusScalarFieldEnum)[keyof typeof FinPagamentoStatusScalarFieldEnum]
 
 
-export const SysSolicitacaoDocumentoScalarFieldEnum = {
+export const FinPagamentoMetodoScalarFieldEnum = {
   id: 'id',
-  sys_solicitacao_id: 'sys_solicitacao_id',
-  sys_solicitacao_documento_tipo_id: 'sys_solicitacao_documento_tipo_id',
-  sys_solicitacao_documento_status_id: 'sys_solicitacao_documento_status_id',
-  sys_arquivo_id: 'sys_arquivo_id',
-  titulo: 'titulo',
+  codigo: 'codigo',
   descricao: 'descricao',
-  observacao: 'observacao',
   ativo: 'ativo',
   created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
+  updated_at: 'updated_at'
 } as const
 
-export type SysSolicitacaoDocumentoScalarFieldEnum = (typeof SysSolicitacaoDocumentoScalarFieldEnum)[keyof typeof SysSolicitacaoDocumentoScalarFieldEnum]
+export type FinPagamentoMetodoScalarFieldEnum = (typeof FinPagamentoMetodoScalarFieldEnum)[keyof typeof FinPagamentoMetodoScalarFieldEnum]
+
+
+export const FinPagamentoScalarFieldEnum = {
+  id: 'id',
+  vnd_pedido_id: 'vnd_pedido_id',
+  fin_pagamento_status_id: 'fin_pagamento_status_id',
+  fin_pagamento_metodo_id: 'fin_pagamento_metodo_id',
+  valor: 'valor',
+  taxa_gateway: 'taxa_gateway',
+  valor_liquido: 'valor_liquido',
+  provider: 'provider',
+  external_id: 'external_id',
+  external_reference: 'external_reference',
+  idempotency_key: 'idempotency_key',
+  qr_code_text: 'qr_code_text',
+  payment_url: 'payment_url',
+  aprovado_at: 'aprovado_at',
+  expirado_at: 'expirado_at',
+  cancelado_at: 'cancelado_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type FinPagamentoScalarFieldEnum = (typeof FinPagamentoScalarFieldEnum)[keyof typeof FinPagamentoScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1006,260 +682,24 @@ export const NullsOrder = {
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
+export const SysUsuarioTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type SysUsuarioTipoOrderByRelevanceFieldEnum = (typeof SysUsuarioTipoOrderByRelevanceFieldEnum)[keyof typeof SysUsuarioTipoOrderByRelevanceFieldEnum]
+
+
 export const SysUsuarioOrderByRelevanceFieldEnum = {
   nome: 'nome',
   nickname: 'nickname',
   email: 'email',
   telefone: 'telefone',
-  senha_hash: 'senha_hash',
-  codigo_aluno: 'codigo_aluno',
-  documento: 'documento',
-  avatar_file_key: 'avatar_file_key',
-  avatar_url: 'avatar_url'
+  documento: 'documento'
 } as const
 
 export type SysUsuarioOrderByRelevanceFieldEnum = (typeof SysUsuarioOrderByRelevanceFieldEnum)[keyof typeof SysUsuarioOrderByRelevanceFieldEnum]
-
-
-export const SysRoleEscopoOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao'
-} as const
-
-export type SysRoleEscopoOrderByRelevanceFieldEnum = (typeof SysRoleEscopoOrderByRelevanceFieldEnum)[keyof typeof SysRoleEscopoOrderByRelevanceFieldEnum]
-
-
-export const SysRoleOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao'
-} as const
-
-export type SysRoleOrderByRelevanceFieldEnum = (typeof SysRoleOrderByRelevanceFieldEnum)[keyof typeof SysRoleOrderByRelevanceFieldEnum]
-
-
-export const SysPermissionOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  modulo: 'modulo'
-} as const
-
-export type SysPermissionOrderByRelevanceFieldEnum = (typeof SysPermissionOrderByRelevanceFieldEnum)[keyof typeof SysPermissionOrderByRelevanceFieldEnum]
-
-
-export const SysUsuarioPermissionTipoOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao'
-} as const
-
-export type SysUsuarioPermissionTipoOrderByRelevanceFieldEnum = (typeof SysUsuarioPermissionTipoOrderByRelevanceFieldEnum)[keyof typeof SysUsuarioPermissionTipoOrderByRelevanceFieldEnum]
-
-
-export const SysUsuarioPermissionOrderByRelevanceFieldEnum = {
-  motivo: 'motivo'
-} as const
-
-export type SysUsuarioPermissionOrderByRelevanceFieldEnum = (typeof SysUsuarioPermissionOrderByRelevanceFieldEnum)[keyof typeof SysUsuarioPermissionOrderByRelevanceFieldEnum]
-
-
-export const EduInstituicaoOrderByRelevanceFieldEnum = {
-  nome: 'nome',
-  abreviacao: 'abreviacao',
-  cidade: 'cidade',
-  estado: 'estado'
-} as const
-
-export type EduInstituicaoOrderByRelevanceFieldEnum = (typeof EduInstituicaoOrderByRelevanceFieldEnum)[keyof typeof EduInstituicaoOrderByRelevanceFieldEnum]
-
-
-export const EduCursoOrderByRelevanceFieldEnum = {
-  nome: 'nome',
-  abreviacao: 'abreviacao'
-} as const
-
-export type EduCursoOrderByRelevanceFieldEnum = (typeof EduCursoOrderByRelevanceFieldEnum)[keyof typeof EduCursoOrderByRelevanceFieldEnum]
-
-
-export const EduPoloOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome',
-  cidade: 'cidade',
-  estado: 'estado'
-} as const
-
-export type EduPoloOrderByRelevanceFieldEnum = (typeof EduPoloOrderByRelevanceFieldEnum)[keyof typeof EduPoloOrderByRelevanceFieldEnum]
-
-
-export const EntEntidadeTipoOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao'
-} as const
-
-export type EntEntidadeTipoOrderByRelevanceFieldEnum = (typeof EntEntidadeTipoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeTipoOrderByRelevanceFieldEnum]
-
-
-export const EntEntidadeStatusOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  color: 'color',
-  icon: 'icon'
-} as const
-
-export type EntEntidadeStatusOrderByRelevanceFieldEnum = (typeof EntEntidadeStatusOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeStatusOrderByRelevanceFieldEnum]
-
-
-export const EntEntidadeOrderByRelevanceFieldEnum = {
-  nome: 'nome',
-  apelido: 'apelido',
-  sigla: 'sigla',
-  slug: 'slug',
-  mascote: 'mascote',
-  descricao: 'descricao',
-  logo_url: 'logo_url'
-} as const
-
-export type EntEntidadeOrderByRelevanceFieldEnum = (typeof EntEntidadeOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeOrderByRelevanceFieldEnum]
-
-
-export const EntEntidadeGestaoStatusOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  color: 'color',
-  icon: 'icon'
-} as const
-
-export type EntEntidadeGestaoStatusOrderByRelevanceFieldEnum = (typeof EntEntidadeGestaoStatusOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeGestaoStatusOrderByRelevanceFieldEnum]
-
-
-export const EntEntidadeGestaoOrderByRelevanceFieldEnum = {
-  nome: 'nome',
-  observacao: 'observacao'
-} as const
-
-export type EntEntidadeGestaoOrderByRelevanceFieldEnum = (typeof EntEntidadeGestaoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeGestaoOrderByRelevanceFieldEnum]
-
-
-export const EntCargoTipoOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao'
-} as const
-
-export type EntCargoTipoOrderByRelevanceFieldEnum = (typeof EntCargoTipoOrderByRelevanceFieldEnum)[keyof typeof EntCargoTipoOrderByRelevanceFieldEnum]
-
-
-export const EntCargoOrderByRelevanceFieldEnum = {
-  nome: 'nome',
-  codigo: 'codigo',
-  descricao: 'descricao'
-} as const
-
-export type EntCargoOrderByRelevanceFieldEnum = (typeof EntCargoOrderByRelevanceFieldEnum)[keyof typeof EntCargoOrderByRelevanceFieldEnum]
-
-
-export const EntEntidadeCargoOrderByRelevanceFieldEnum = {
-  nome_exibicao: 'nome_exibicao',
-  descricao_customizada: 'descricao_customizada'
-} as const
-
-export type EntEntidadeCargoOrderByRelevanceFieldEnum = (typeof EntEntidadeCargoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeCargoOrderByRelevanceFieldEnum]
-
-
-export const EntEntidadeMembroTipoOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao'
-} as const
-
-export type EntEntidadeMembroTipoOrderByRelevanceFieldEnum = (typeof EntEntidadeMembroTipoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeMembroTipoOrderByRelevanceFieldEnum]
-
-
-export const EntEntidadeMembroStatusOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome',
-  color: 'color',
-  icon: 'icon'
-} as const
-
-export type EntEntidadeMembroStatusOrderByRelevanceFieldEnum = (typeof EntEntidadeMembroStatusOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeMembroStatusOrderByRelevanceFieldEnum]
-
-
-export const EntEntidadeMembroOrderByRelevanceFieldEnum = {
-  observacao: 'observacao'
-} as const
-
-export type EntEntidadeMembroOrderByRelevanceFieldEnum = (typeof EntEntidadeMembroOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeMembroOrderByRelevanceFieldEnum]
-
-
-export const EntEntidadeMembroCargoOrderByRelevanceFieldEnum = {
-  observacao: 'observacao'
-} as const
-
-export type EntEntidadeMembroCargoOrderByRelevanceFieldEnum = (typeof EntEntidadeMembroCargoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeMembroCargoOrderByRelevanceFieldEnum]
-
-
-export const EntEntidadeTemaOrderByRelevanceFieldEnum = {
-  cor_primaria: 'cor_primaria',
-  cor_secundaria: 'cor_secundaria',
-  cor_fundo: 'cor_fundo',
-  cor_texto: 'cor_texto',
-  logo_url: 'logo_url',
-  banner_url: 'banner_url',
-  custom_css: 'custom_css'
-} as const
-
-export type EntEntidadeTemaOrderByRelevanceFieldEnum = (typeof EntEntidadeTemaOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeTemaOrderByRelevanceFieldEnum]
-
-
-export const EntEntidadeRegimentoOrderByRelevanceFieldEnum = {
-  titulo: 'titulo',
-  versao: 'versao',
-  conteudo: 'conteudo',
-  arquivo_url: 'arquivo_url'
-} as const
-
-export type EntEntidadeRegimentoOrderByRelevanceFieldEnum = (typeof EntEntidadeRegimentoOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeRegimentoOrderByRelevanceFieldEnum]
-
-
-export const SysAssinaturaPlanoPeriodicidadeOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao'
-} as const
-
-export type SysAssinaturaPlanoPeriodicidadeOrderByRelevanceFieldEnum = (typeof SysAssinaturaPlanoPeriodicidadeOrderByRelevanceFieldEnum)[keyof typeof SysAssinaturaPlanoPeriodicidadeOrderByRelevanceFieldEnum]
-
-
-export const SysAssinaturaPlanoOrderByRelevanceFieldEnum = {
-  nome: 'nome',
-  codigo: 'codigo',
-  descricao: 'descricao'
-} as const
-
-export type SysAssinaturaPlanoOrderByRelevanceFieldEnum = (typeof SysAssinaturaPlanoOrderByRelevanceFieldEnum)[keyof typeof SysAssinaturaPlanoOrderByRelevanceFieldEnum]
-
-
-export const EntEntidadeAssinaturaStatusOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome',
-  color: 'color',
-  icon: 'icon'
-} as const
-
-export type EntEntidadeAssinaturaStatusOrderByRelevanceFieldEnum = (typeof EntEntidadeAssinaturaStatusOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeAssinaturaStatusOrderByRelevanceFieldEnum]
-
-
-export const EntEntidadeAssinaturaOrderByRelevanceFieldEnum = {
-  observacao: 'observacao'
-} as const
-
-export type EntEntidadeAssinaturaOrderByRelevanceFieldEnum = (typeof EntEntidadeAssinaturaOrderByRelevanceFieldEnum)[keyof typeof EntEntidadeAssinaturaOrderByRelevanceFieldEnum]
 
 
 export const UserOrderByRelevanceFieldEnum = {
@@ -1307,6 +747,21 @@ export const VerificationOrderByRelevanceFieldEnum = {
 export type VerificationOrderByRelevanceFieldEnum = (typeof VerificationOrderByRelevanceFieldEnum)[keyof typeof VerificationOrderByRelevanceFieldEnum]
 
 
+export const SysAuthLoginLogOrderByRelevanceFieldEnum = {
+  email: 'email',
+  evento: 'evento',
+  status: 'status',
+  ip_address: 'ip_address',
+  user_agent: 'user_agent',
+  device_text: 'device_text',
+  location_text: 'location_text',
+  error_message: 'error_message',
+  metadata_text: 'metadata_text'
+} as const
+
+export type SysAuthLoginLogOrderByRelevanceFieldEnum = (typeof SysAuthLoginLogOrderByRelevanceFieldEnum)[keyof typeof SysAuthLoginLogOrderByRelevanceFieldEnum]
+
+
 export const SysEmailLogOrderByRelevanceFieldEnum = {
   email_to: 'email_to',
   email_from: 'email_from',
@@ -1329,21 +784,6 @@ export const SysEmailVerificationCodeOrderByRelevanceFieldEnum = {
 } as const
 
 export type SysEmailVerificationCodeOrderByRelevanceFieldEnum = (typeof SysEmailVerificationCodeOrderByRelevanceFieldEnum)[keyof typeof SysEmailVerificationCodeOrderByRelevanceFieldEnum]
-
-
-export const SysAuthLoginLogOrderByRelevanceFieldEnum = {
-  email: 'email',
-  evento: 'evento',
-  status: 'status',
-  ip_address: 'ip_address',
-  user_agent: 'user_agent',
-  device_text: 'device_text',
-  location_text: 'location_text',
-  error_message: 'error_message',
-  metadata_text: 'metadata_text'
-} as const
-
-export type SysAuthLoginLogOrderByRelevanceFieldEnum = (typeof SysAuthLoginLogOrderByRelevanceFieldEnum)[keyof typeof SysAuthLoginLogOrderByRelevanceFieldEnum]
 
 
 export const SysArquivoDiscoOrderByRelevanceFieldEnum = {
@@ -1370,14 +810,6 @@ export const SysArquivoTipoOrderByRelevanceFieldEnum = {
 export type SysArquivoTipoOrderByRelevanceFieldEnum = (typeof SysArquivoTipoOrderByRelevanceFieldEnum)[keyof typeof SysArquivoTipoOrderByRelevanceFieldEnum]
 
 
-export const SysArquivoEntidadeTipoOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome'
-} as const
-
-export type SysArquivoEntidadeTipoOrderByRelevanceFieldEnum = (typeof SysArquivoEntidadeTipoOrderByRelevanceFieldEnum)[keyof typeof SysArquivoEntidadeTipoOrderByRelevanceFieldEnum]
-
-
 export const SysArquivoOrderByRelevanceFieldEnum = {
   bucket: 'bucket',
   file_key: 'file_key',
@@ -1390,108 +822,182 @@ export const SysArquivoOrderByRelevanceFieldEnum = {
 export type SysArquivoOrderByRelevanceFieldEnum = (typeof SysArquivoOrderByRelevanceFieldEnum)[keyof typeof SysArquivoOrderByRelevanceFieldEnum]
 
 
-export const SysInboxItemTipoOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  color: 'color',
-  icon: 'icon'
-} as const
-
-export type SysInboxItemTipoOrderByRelevanceFieldEnum = (typeof SysInboxItemTipoOrderByRelevanceFieldEnum)[keyof typeof SysInboxItemTipoOrderByRelevanceFieldEnum]
-
-
-export const SysInboxItemStatusOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  color: 'color',
-  icon: 'icon'
-} as const
-
-export type SysInboxItemStatusOrderByRelevanceFieldEnum = (typeof SysInboxItemStatusOrderByRelevanceFieldEnum)[keyof typeof SysInboxItemStatusOrderByRelevanceFieldEnum]
-
-
-export const SysInboxItemOrderByRelevanceFieldEnum = {
-  titulo: 'titulo',
-  mensagem: 'mensagem',
-  contexto_titulo: 'contexto_titulo',
-  contexto_descricao: 'contexto_descricao',
-  action_url: 'action_url',
-  entidade_tipo: 'entidade_tipo',
-  metadata_text: 'metadata_text'
-} as const
-
-export type SysInboxItemOrderByRelevanceFieldEnum = (typeof SysInboxItemOrderByRelevanceFieldEnum)[keyof typeof SysInboxItemOrderByRelevanceFieldEnum]
-
-
-export const SysSolicitacaoTipoOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  color: 'color',
-  icon: 'icon'
-} as const
-
-export type SysSolicitacaoTipoOrderByRelevanceFieldEnum = (typeof SysSolicitacaoTipoOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoTipoOrderByRelevanceFieldEnum]
-
-
-export const SysSolicitacaoStatusOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  nome: 'nome',
-  descricao: 'descricao',
-  color: 'color',
-  icon: 'icon'
-} as const
-
-export type SysSolicitacaoStatusOrderByRelevanceFieldEnum = (typeof SysSolicitacaoStatusOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoStatusOrderByRelevanceFieldEnum]
-
-
-export const SysSolicitacaoOrderByRelevanceFieldEnum = {
+export const CadLinkOrderByRelevanceFieldEnum = {
   titulo: 'titulo',
   descricao: 'descricao',
-  entidade_tipo: 'entidade_tipo',
-  payload_text: 'payload_text',
-  metadata_text: 'metadata_text'
+  url: 'url',
+  icon: 'icon'
 } as const
 
-export type SysSolicitacaoOrderByRelevanceFieldEnum = (typeof SysSolicitacaoOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoOrderByRelevanceFieldEnum]
+export type CadLinkOrderByRelevanceFieldEnum = (typeof CadLinkOrderByRelevanceFieldEnum)[keyof typeof CadLinkOrderByRelevanceFieldEnum]
 
 
-export const SysSolicitacaoHistoricoOrderByRelevanceFieldEnum = {
-  acao: 'acao',
+export const CadEventoOrderByRelevanceFieldEnum = {
+  titulo: 'titulo',
   descricao: 'descricao',
-  metadata_text: 'metadata_text'
+  url: 'url'
 } as const
 
-export type SysSolicitacaoHistoricoOrderByRelevanceFieldEnum = (typeof SysSolicitacaoHistoricoOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoHistoricoOrderByRelevanceFieldEnum]
+export type CadEventoOrderByRelevanceFieldEnum = (typeof CadEventoOrderByRelevanceFieldEnum)[keyof typeof CadEventoOrderByRelevanceFieldEnum]
 
 
-export const SysSolicitacaoDocumentoTipoOrderByRelevanceFieldEnum = {
+export const PrdProdutoTipoOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   nome: 'nome',
   descricao: 'descricao'
 } as const
 
-export type SysSolicitacaoDocumentoTipoOrderByRelevanceFieldEnum = (typeof SysSolicitacaoDocumentoTipoOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoDocumentoTipoOrderByRelevanceFieldEnum]
+export type PrdProdutoTipoOrderByRelevanceFieldEnum = (typeof PrdProdutoTipoOrderByRelevanceFieldEnum)[keyof typeof PrdProdutoTipoOrderByRelevanceFieldEnum]
 
 
-export const SysSolicitacaoDocumentoStatusOrderByRelevanceFieldEnum = {
+export const PrdProdutoOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
+  slug: 'slug',
   nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type PrdProdutoOrderByRelevanceFieldEnum = (typeof PrdProdutoOrderByRelevanceFieldEnum)[keyof typeof PrdProdutoOrderByRelevanceFieldEnum]
+
+
+export const PrdProdutoVariacaoOrderByRelevanceFieldEnum = {
+  sku: 'sku',
+  nome: 'nome'
+} as const
+
+export type PrdProdutoVariacaoOrderByRelevanceFieldEnum = (typeof PrdProdutoVariacaoOrderByRelevanceFieldEnum)[keyof typeof PrdProdutoVariacaoOrderByRelevanceFieldEnum]
+
+
+export const VndCampanhaStatusOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
   descricao: 'descricao',
   color: 'color',
   icon: 'icon'
 } as const
 
-export type SysSolicitacaoDocumentoStatusOrderByRelevanceFieldEnum = (typeof SysSolicitacaoDocumentoStatusOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoDocumentoStatusOrderByRelevanceFieldEnum]
+export type VndCampanhaStatusOrderByRelevanceFieldEnum = (typeof VndCampanhaStatusOrderByRelevanceFieldEnum)[keyof typeof VndCampanhaStatusOrderByRelevanceFieldEnum]
 
 
-export const SysSolicitacaoDocumentoOrderByRelevanceFieldEnum = {
-  titulo: 'titulo',
+export const VndCampanhaOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  slug: 'slug',
+  nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type VndCampanhaOrderByRelevanceFieldEnum = (typeof VndCampanhaOrderByRelevanceFieldEnum)[keyof typeof VndCampanhaOrderByRelevanceFieldEnum]
+
+
+export const SocSocioStatusOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
   descricao: 'descricao',
+  color: 'color',
+  icon: 'icon'
+} as const
+
+export type SocSocioStatusOrderByRelevanceFieldEnum = (typeof SocSocioStatusOrderByRelevanceFieldEnum)[keyof typeof SocSocioStatusOrderByRelevanceFieldEnum]
+
+
+export const SocSocioOrigemOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  descricao: 'descricao'
+} as const
+
+export type SocSocioOrigemOrderByRelevanceFieldEnum = (typeof SocSocioOrigemOrderByRelevanceFieldEnum)[keyof typeof SocSocioOrigemOrderByRelevanceFieldEnum]
+
+
+export const SocPlanoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type SocPlanoOrderByRelevanceFieldEnum = (typeof SocPlanoOrderByRelevanceFieldEnum)[keyof typeof SocPlanoOrderByRelevanceFieldEnum]
+
+
+export const SocSocioOrderByRelevanceFieldEnum = {
   observacao: 'observacao'
 } as const
 
-export type SysSolicitacaoDocumentoOrderByRelevanceFieldEnum = (typeof SysSolicitacaoDocumentoOrderByRelevanceFieldEnum)[keyof typeof SysSolicitacaoDocumentoOrderByRelevanceFieldEnum]
+export type SocSocioOrderByRelevanceFieldEnum = (typeof SocSocioOrderByRelevanceFieldEnum)[keyof typeof SocSocioOrderByRelevanceFieldEnum]
+
+
+export const VndPedidoStatusOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon'
+} as const
+
+export type VndPedidoStatusOrderByRelevanceFieldEnum = (typeof VndPedidoStatusOrderByRelevanceFieldEnum)[keyof typeof VndPedidoStatusOrderByRelevanceFieldEnum]
+
+
+export const VndEntregaTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  descricao: 'descricao'
+} as const
+
+export type VndEntregaTipoOrderByRelevanceFieldEnum = (typeof VndEntregaTipoOrderByRelevanceFieldEnum)[keyof typeof VndEntregaTipoOrderByRelevanceFieldEnum]
+
+
+export const VndPedidoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  cliente_nome: 'cliente_nome',
+  cliente_email: 'cliente_email',
+  cliente_telefone: 'cliente_telefone',
+  entrega_endereco: 'entrega_endereco',
+  retirada_local: 'retirada_local',
+  observacao_cliente: 'observacao_cliente'
+} as const
+
+export type VndPedidoOrderByRelevanceFieldEnum = (typeof VndPedidoOrderByRelevanceFieldEnum)[keyof typeof VndPedidoOrderByRelevanceFieldEnum]
+
+
+export const VndPedidoItemOrderByRelevanceFieldEnum = {
+  produto_codigo_snapshot: 'produto_codigo_snapshot',
+  produto_nome_snapshot: 'produto_nome_snapshot',
+  variacao_snapshot: 'variacao_snapshot',
+  personalizacao_nome: 'personalizacao_nome',
+  personalizacao_numero: 'personalizacao_numero',
+  observacao: 'observacao'
+} as const
+
+export type VndPedidoItemOrderByRelevanceFieldEnum = (typeof VndPedidoItemOrderByRelevanceFieldEnum)[keyof typeof VndPedidoItemOrderByRelevanceFieldEnum]
+
+
+export const VndPedidoHistoricoOrderByRelevanceFieldEnum = {
+  observacao: 'observacao'
+} as const
+
+export type VndPedidoHistoricoOrderByRelevanceFieldEnum = (typeof VndPedidoHistoricoOrderByRelevanceFieldEnum)[keyof typeof VndPedidoHistoricoOrderByRelevanceFieldEnum]
+
+
+export const FinPagamentoStatusOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  descricao: 'descricao',
+  color: 'color',
+  icon: 'icon'
+} as const
+
+export type FinPagamentoStatusOrderByRelevanceFieldEnum = (typeof FinPagamentoStatusOrderByRelevanceFieldEnum)[keyof typeof FinPagamentoStatusOrderByRelevanceFieldEnum]
+
+
+export const FinPagamentoMetodoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  descricao: 'descricao'
+} as const
+
+export type FinPagamentoMetodoOrderByRelevanceFieldEnum = (typeof FinPagamentoMetodoOrderByRelevanceFieldEnum)[keyof typeof FinPagamentoMetodoOrderByRelevanceFieldEnum]
+
+
+export const FinPagamentoOrderByRelevanceFieldEnum = {
+  provider: 'provider',
+  external_id: 'external_id',
+  external_reference: 'external_reference',
+  idempotency_key: 'idempotency_key',
+  qr_code_text: 'qr_code_text',
+  payment_url: 'payment_url'
+} as const
+
+export type FinPagamentoOrderByRelevanceFieldEnum = (typeof FinPagamentoOrderByRelevanceFieldEnum)[keyof typeof FinPagamentoOrderByRelevanceFieldEnum]
 

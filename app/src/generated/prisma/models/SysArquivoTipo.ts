@@ -228,7 +228,7 @@ export type SysArquivoTipoWhereInput = {
   ativo?: Prisma.IntFilter<"SysArquivoTipo"> | number
   created_at?: Prisma.DateTimeNullableFilter<"SysArquivoTipo"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"SysArquivoTipo"> | Date | string | null
-  arquivos?: Prisma.SysArquivoListRelationFilter
+  sys_arquivos?: Prisma.SysArquivoListRelationFilter
 }
 
 export type SysArquivoTipoOrderByWithRelationInput = {
@@ -238,7 +238,7 @@ export type SysArquivoTipoOrderByWithRelationInput = {
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  arquivos?: Prisma.SysArquivoOrderByRelationAggregateInput
+  sys_arquivos?: Prisma.SysArquivoOrderByRelationAggregateInput
   _relevance?: Prisma.SysArquivoTipoOrderByRelevanceInput
 }
 
@@ -252,7 +252,7 @@ export type SysArquivoTipoWhereUniqueInput = Prisma.AtLeast<{
   ativo?: Prisma.IntFilter<"SysArquivoTipo"> | number
   created_at?: Prisma.DateTimeNullableFilter<"SysArquivoTipo"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"SysArquivoTipo"> | Date | string | null
-  arquivos?: Prisma.SysArquivoListRelationFilter
+  sys_arquivos?: Prisma.SysArquivoListRelationFilter
 }, "id" | "codigo">
 
 export type SysArquivoTipoOrderByWithAggregationInput = {
@@ -287,7 +287,7 @@ export type SysArquivoTipoCreateInput = {
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
-  arquivos?: Prisma.SysArquivoCreateNestedManyWithoutTipoInput
+  sys_arquivos?: Prisma.SysArquivoCreateNestedManyWithoutSys_arquivo_tipoInput
 }
 
 export type SysArquivoTipoUncheckedCreateInput = {
@@ -297,7 +297,7 @@ export type SysArquivoTipoUncheckedCreateInput = {
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
-  arquivos?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutTipoInput
+  sys_arquivos?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutSys_arquivo_tipoInput
 }
 
 export type SysArquivoTipoUpdateInput = {
@@ -306,7 +306,7 @@ export type SysArquivoTipoUpdateInput = {
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  arquivos?: Prisma.SysArquivoUpdateManyWithoutTipoNestedInput
+  sys_arquivos?: Prisma.SysArquivoUpdateManyWithoutSys_arquivo_tipoNestedInput
 }
 
 export type SysArquivoTipoUncheckedUpdateInput = {
@@ -316,7 +316,7 @@ export type SysArquivoTipoUncheckedUpdateInput = {
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  arquivos?: Prisma.SysArquivoUncheckedUpdateManyWithoutTipoNestedInput
+  sys_arquivos?: Prisma.SysArquivoUncheckedUpdateManyWithoutSys_arquivo_tipoNestedInput
 }
 
 export type SysArquivoTipoCreateManyInput = {
@@ -393,23 +393,23 @@ export type SysArquivoTipoNullableScalarRelationFilter = {
   isNot?: Prisma.SysArquivoTipoWhereInput | null
 }
 
-export type SysArquivoTipoCreateNestedOneWithoutArquivosInput = {
-  create?: Prisma.XOR<Prisma.SysArquivoTipoCreateWithoutArquivosInput, Prisma.SysArquivoTipoUncheckedCreateWithoutArquivosInput>
-  connectOrCreate?: Prisma.SysArquivoTipoCreateOrConnectWithoutArquivosInput
+export type SysArquivoTipoCreateNestedOneWithoutSys_arquivosInput = {
+  create?: Prisma.XOR<Prisma.SysArquivoTipoCreateWithoutSys_arquivosInput, Prisma.SysArquivoTipoUncheckedCreateWithoutSys_arquivosInput>
+  connectOrCreate?: Prisma.SysArquivoTipoCreateOrConnectWithoutSys_arquivosInput
   connect?: Prisma.SysArquivoTipoWhereUniqueInput
 }
 
-export type SysArquivoTipoUpdateOneWithoutArquivosNestedInput = {
-  create?: Prisma.XOR<Prisma.SysArquivoTipoCreateWithoutArquivosInput, Prisma.SysArquivoTipoUncheckedCreateWithoutArquivosInput>
-  connectOrCreate?: Prisma.SysArquivoTipoCreateOrConnectWithoutArquivosInput
-  upsert?: Prisma.SysArquivoTipoUpsertWithoutArquivosInput
+export type SysArquivoTipoUpdateOneWithoutSys_arquivosNestedInput = {
+  create?: Prisma.XOR<Prisma.SysArquivoTipoCreateWithoutSys_arquivosInput, Prisma.SysArquivoTipoUncheckedCreateWithoutSys_arquivosInput>
+  connectOrCreate?: Prisma.SysArquivoTipoCreateOrConnectWithoutSys_arquivosInput
+  upsert?: Prisma.SysArquivoTipoUpsertWithoutSys_arquivosInput
   disconnect?: Prisma.SysArquivoTipoWhereInput | boolean
   delete?: Prisma.SysArquivoTipoWhereInput | boolean
   connect?: Prisma.SysArquivoTipoWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.SysArquivoTipoUpdateToOneWithWhereWithoutArquivosInput, Prisma.SysArquivoTipoUpdateWithoutArquivosInput>, Prisma.SysArquivoTipoUncheckedUpdateWithoutArquivosInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SysArquivoTipoUpdateToOneWithWhereWithoutSys_arquivosInput, Prisma.SysArquivoTipoUpdateWithoutSys_arquivosInput>, Prisma.SysArquivoTipoUncheckedUpdateWithoutSys_arquivosInput>
 }
 
-export type SysArquivoTipoCreateWithoutArquivosInput = {
+export type SysArquivoTipoCreateWithoutSys_arquivosInput = {
   codigo: string
   nome: string
   ativo?: number
@@ -417,7 +417,7 @@ export type SysArquivoTipoCreateWithoutArquivosInput = {
   updated_at?: Date | string | null
 }
 
-export type SysArquivoTipoUncheckedCreateWithoutArquivosInput = {
+export type SysArquivoTipoUncheckedCreateWithoutSys_arquivosInput = {
   id?: number
   codigo: string
   nome: string
@@ -426,23 +426,23 @@ export type SysArquivoTipoUncheckedCreateWithoutArquivosInput = {
   updated_at?: Date | string | null
 }
 
-export type SysArquivoTipoCreateOrConnectWithoutArquivosInput = {
+export type SysArquivoTipoCreateOrConnectWithoutSys_arquivosInput = {
   where: Prisma.SysArquivoTipoWhereUniqueInput
-  create: Prisma.XOR<Prisma.SysArquivoTipoCreateWithoutArquivosInput, Prisma.SysArquivoTipoUncheckedCreateWithoutArquivosInput>
+  create: Prisma.XOR<Prisma.SysArquivoTipoCreateWithoutSys_arquivosInput, Prisma.SysArquivoTipoUncheckedCreateWithoutSys_arquivosInput>
 }
 
-export type SysArquivoTipoUpsertWithoutArquivosInput = {
-  update: Prisma.XOR<Prisma.SysArquivoTipoUpdateWithoutArquivosInput, Prisma.SysArquivoTipoUncheckedUpdateWithoutArquivosInput>
-  create: Prisma.XOR<Prisma.SysArquivoTipoCreateWithoutArquivosInput, Prisma.SysArquivoTipoUncheckedCreateWithoutArquivosInput>
+export type SysArquivoTipoUpsertWithoutSys_arquivosInput = {
+  update: Prisma.XOR<Prisma.SysArquivoTipoUpdateWithoutSys_arquivosInput, Prisma.SysArquivoTipoUncheckedUpdateWithoutSys_arquivosInput>
+  create: Prisma.XOR<Prisma.SysArquivoTipoCreateWithoutSys_arquivosInput, Prisma.SysArquivoTipoUncheckedCreateWithoutSys_arquivosInput>
   where?: Prisma.SysArquivoTipoWhereInput
 }
 
-export type SysArquivoTipoUpdateToOneWithWhereWithoutArquivosInput = {
+export type SysArquivoTipoUpdateToOneWithWhereWithoutSys_arquivosInput = {
   where?: Prisma.SysArquivoTipoWhereInput
-  data: Prisma.XOR<Prisma.SysArquivoTipoUpdateWithoutArquivosInput, Prisma.SysArquivoTipoUncheckedUpdateWithoutArquivosInput>
+  data: Prisma.XOR<Prisma.SysArquivoTipoUpdateWithoutSys_arquivosInput, Prisma.SysArquivoTipoUncheckedUpdateWithoutSys_arquivosInput>
 }
 
-export type SysArquivoTipoUpdateWithoutArquivosInput = {
+export type SysArquivoTipoUpdateWithoutSys_arquivosInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -450,7 +450,7 @@ export type SysArquivoTipoUpdateWithoutArquivosInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type SysArquivoTipoUncheckedUpdateWithoutArquivosInput = {
+export type SysArquivoTipoUncheckedUpdateWithoutSys_arquivosInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
@@ -465,11 +465,11 @@ export type SysArquivoTipoUncheckedUpdateWithoutArquivosInput = {
  */
 
 export type SysArquivoTipoCountOutputType = {
-  arquivos: number
+  sys_arquivos: number
 }
 
 export type SysArquivoTipoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  arquivos?: boolean | SysArquivoTipoCountOutputTypeCountArquivosArgs
+  sys_arquivos?: boolean | SysArquivoTipoCountOutputTypeCountSys_arquivosArgs
 }
 
 /**
@@ -485,7 +485,7 @@ export type SysArquivoTipoCountOutputTypeDefaultArgs<ExtArgs extends runtime.Typ
 /**
  * SysArquivoTipoCountOutputType without action
  */
-export type SysArquivoTipoCountOutputTypeCountArquivosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SysArquivoTipoCountOutputTypeCountSys_arquivosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SysArquivoWhereInput
 }
 
@@ -497,7 +497,7 @@ export type SysArquivoTipoSelect<ExtArgs extends runtime.Types.Extensions.Intern
   ativo?: boolean
   created_at?: boolean
   updated_at?: boolean
-  arquivos?: boolean | Prisma.SysArquivoTipo$arquivosArgs<ExtArgs>
+  sys_arquivos?: boolean | Prisma.SysArquivoTipo$sys_arquivosArgs<ExtArgs>
   _count?: boolean | Prisma.SysArquivoTipoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sysArquivoTipo"]>
 
@@ -514,14 +514,14 @@ export type SysArquivoTipoSelectScalar = {
 
 export type SysArquivoTipoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "codigo" | "nome" | "ativo" | "created_at" | "updated_at", ExtArgs["result"]["sysArquivoTipo"]>
 export type SysArquivoTipoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  arquivos?: boolean | Prisma.SysArquivoTipo$arquivosArgs<ExtArgs>
+  sys_arquivos?: boolean | Prisma.SysArquivoTipo$sys_arquivosArgs<ExtArgs>
   _count?: boolean | Prisma.SysArquivoTipoCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $SysArquivoTipoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SysArquivoTipo"
   objects: {
-    arquivos: Prisma.$SysArquivoPayload<ExtArgs>[]
+    sys_arquivos: Prisma.$SysArquivoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -870,7 +870,7 @@ readonly fields: SysArquivoTipoFieldRefs;
  */
 export interface Prisma__SysArquivoTipoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  arquivos<T extends Prisma.SysArquivoTipo$arquivosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivoTipo$arquivosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysArquivoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sys_arquivos<T extends Prisma.SysArquivoTipo$sys_arquivosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivoTipo$sys_arquivosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysArquivoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1254,9 +1254,9 @@ export type SysArquivoTipoDeleteManyArgs<ExtArgs extends runtime.Types.Extension
 }
 
 /**
- * SysArquivoTipo.arquivos
+ * SysArquivoTipo.sys_arquivos
  */
-export type SysArquivoTipo$arquivosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SysArquivoTipo$sys_arquivosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the SysArquivo
    */

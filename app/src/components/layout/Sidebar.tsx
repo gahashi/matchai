@@ -1,65 +1,170 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import {
-    Building2, ClipboardList,
-    CreditCard,
+    CalendarDays,
     Home,
-    Settings,
-    Shield,
-    Store,
+    Package,
+    ShoppingBag,
+    UserRound,
+    UsersRound,
+    WalletCards,
 } from "lucide-react";
 
-const navItems = [
-    { label: "Dashboard",     icon: Home,           href: "/" },
-    {label: "Entidades",      icon: Shield,         href: "/ent/entidade"},
-    { label: "Parceiros",     icon: Store,          href: "/parceiros" },
-    { label: "Assinaturas",   icon: CreditCard,     href: "/assinaturas" },
-    { label: "Organizações",  icon: Building2,      href: "/organizacoes" },
-    { label: "Tema",          icon: Settings,       href: "/ent/atletica/tema" },
-    { label: "Solicitações",  icon: ClipboardList , href: "/sys/solicitacao" },
+
+const defaultNavItems = [
+    {
+        label: "Início",
+        icon: Home,
+        href: "/",
+    },
+    {
+        label: "Minha conta",
+        icon: UserRound,
+        href: "/perfil",
+    },
 ];
 
-function isActiveRoute(pathname: string, href: string) {
+
+const adminNavItems = [
+    {
+        label: "Produtos",
+        icon: Package,
+        href: "/admin/produtos",
+    },
+    {
+        label: "Eventos",
+        icon: CalendarDays,
+        href: "/admin/eventos",
+    },
+    {
+        label: "Planos de sócio",
+        icon: WalletCards,
+        href: "/admin/planos-socio",
+    },
+    {
+        label: "Pedidos",
+        icon: ShoppingBag,
+        href: "/admin/pedidos",
+    },
+    {
+        label: "Sócios",
+        icon: UsersRound,
+        href: "/admin/socios",
+    },
+];
+
+
+function isActiveRoute(
+    pathname: string,
+    href: string,
+) {
     if (href === "/") {
         return pathname === "/";
     }
 
-    return pathname === href || pathname.startsWith(`${href}/`);
+    return (
+        pathname === href ||
+        pathname.startsWith(
+            `${href}/`,
+        )
+    );
 }
 
+
 export function Sidebar() {
-    const pathname = usePathname();
+    const pathname =
+        usePathname();
+
+    const isAdmin =
+        pathname.startsWith(
+            "/admin",
+        );
+
+    const navItems =
+        isAdmin
+            ? adminNavItems
+            : defaultNavItems;
 
     return (
         <aside className="bp-sidebar">
             <div className="bp-sidebar-brand">
-                <Link href="/" className="bp-sidebar-logo-link">
-                    <img
-                        src="/brand/brava-pass-logo-dark.png"
-                        alt="Brava Pass"
+                <Link
+                    href={
+                        isAdmin
+                            ? "/admin"
+                            : "/"
+                    }
+                    className="bp-sidebar-logo-link"
+                    aria-label="AAACCU - Computaria"
+                >
+                    <Image
+                        src="/ent/atletica/aaaccu_logo_001.png"
+                        alt="AAACCU"
+                        width={54}
+                        height={54}
                         className="bp-sidebar-logo"
+                        style={{
+                            objectFit:
+                                "contain",
+                        }}
+                        priority
                     />
+
+                    <span className="bp-sidebar-brand-text">
+                        <strong>
+                            AAACCU
+                        </strong>
+
+                        <small>
+                            {isAdmin
+                                ? "Administração"
+                                : "Computaria"}
+                        </small>
+                    </span>
                 </Link>
             </div>
 
             <nav className="bp-nav">
-                {navItems.map((item) => {
-                    const Icon = item.icon;
-                    const active = isActiveRoute(pathname, item.href);
+                {navItems.map(
+                    (item) => {
+                        const Icon =
+                            item.icon;
 
-                    return (
-                        <Link
-                            key={item.label}
-                            href={item.href}
-                            className={`bp-nav-item ${active ? "active" : ""}`}
-                        >
-                            <Icon size={18} />
-                            {item.label}
-                        </Link>
-                    );
-                })}
+                        const active =
+                            isActiveRoute(
+                                pathname,
+                                item.href,
+                            );
+
+                        return (
+                            <Link
+                                key={
+                                    item.href
+                                }
+                                href={
+                                    item.href
+                                }
+                                className={`bp-nav-item ${
+                                    active
+                                        ? "active"
+                                        : ""
+                                }`}
+                            >
+                                <Icon
+                                    size={18}
+                                />
+
+                                {
+                                    item.label
+                                }
+                            </Link>
+                        );
+                    },
+                )}
             </nav>
         </aside>
     );

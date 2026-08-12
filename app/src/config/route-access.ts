@@ -1,4 +1,9 @@
-export type RouteAccessType = "public" | "guest" | "auth" | "permission";
+export type RouteAccessType =
+    | "public"
+    | "guest"
+    | "auth"
+    | "admin"
+    | "permission";
 
 export type RouteAccessRule = {
     path: string;
@@ -9,16 +14,16 @@ export type RouteAccessRule = {
 export const routeAccessRules: RouteAccessRule[] = [
     /**
      * PUBLIC
-     * Qualquer pessoa pode acessar, logada ou não.
+     * Qualquer pessoa pode acessar.
      */
     {
         path: "/",
-        access: "auth",
+        access: "public",
     },
 
     /**
      * GUEST
-     * Apenas pessoas sem login.
+     * Apenas usuário não autenticado.
      */
     {
         path: "/login",
@@ -35,37 +40,19 @@ export const routeAccessRules: RouteAccessRule[] = [
 
     /**
      * AUTH
-     * Qualquer pessoa logada.
+     * Qualquer usuário autenticado.
      */
     {
         path: "/perfil",
         access: "auth",
     },
-    {
-        path: "/sys/inbox",
-        access: "auth",
-    },
-    {
-        path: "/ent/atletica/criar",
-        access: "auth",
-    },
-    {
-        path: "/ent/entidade",
-        access: "auth",
-    },
 
     /**
-     * PERMISSION
-     * Precisa estar logado e ter permissão.
+     * ADMIN
+     * Apenas usuário do tipo administrador.
      */
     {
-        path: "/sys/solicitacao",
-        access: "auth",
+        path: "/admin",
+        access: "admin",
     },
-    {
-        path: "/ent/entidade",
-        access: "auth",
-    },
-
-
 ];

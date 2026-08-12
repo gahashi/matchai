@@ -23,10 +23,12 @@
      * No tema padrão, primary é claro/branco premium.
      * Sempre usar --color-primary-foreground quando o fundo for primary.
      */
-    --bp-primary: #f4f4f5;
-    --bp-primary-hover: #e4e4e7;
-    --bp-primary-soft: rgba(244, 244, 245, 0.10);
-    --bp-primary-border: rgba(244, 244, 245, 0.24);
+    --bp-primary: #9cd91a;
+    --bp-primary-hover: #afe62d;
+
+    --bp-primary-soft: rgba(156, 217, 26, 0.10);
+    --bp-primary-border: rgba(156, 217, 26, 0.24);
+
     --bp-primary-foreground: #0b0c12;
 
     --bp-secondary: #242938;
@@ -58,8 +60,7 @@
     --bp-info-border: rgba(56, 189, 248, 0.24);
     --bp-info-foreground: #031f2f;
 
-    --bp-background-glow: rgba(244, 244, 245, 0.10);
-
+    --bp-background-glow: rgba(156, 217, 26, 0.10);
     --radius-xs: 6px;
     --radius-sm: 8px;
     --radius-md: 12px;

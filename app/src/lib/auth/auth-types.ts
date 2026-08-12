@@ -4,11 +4,15 @@ export type AuthUser = {
     nickname: string;
     email: string;
     avatar_url?: string | null;
+
+    sys_usuario_tipo: {
+        codigo: string;
+        nome: string;
+    };
 };
 
 export type AuthSession = {
     user: AuthUser;
-    ent_entidade_id?: number | null;
 };
 
 export type PermissionCheckResult = {

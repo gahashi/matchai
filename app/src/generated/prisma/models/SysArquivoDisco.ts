@@ -228,7 +228,7 @@ export type SysArquivoDiscoWhereInput = {
   ativo?: Prisma.IntFilter<"SysArquivoDisco"> | number
   created_at?: Prisma.DateTimeNullableFilter<"SysArquivoDisco"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"SysArquivoDisco"> | Date | string | null
-  arquivos?: Prisma.SysArquivoListRelationFilter
+  sys_arquivos?: Prisma.SysArquivoListRelationFilter
 }
 
 export type SysArquivoDiscoOrderByWithRelationInput = {
@@ -238,7 +238,7 @@ export type SysArquivoDiscoOrderByWithRelationInput = {
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  arquivos?: Prisma.SysArquivoOrderByRelationAggregateInput
+  sys_arquivos?: Prisma.SysArquivoOrderByRelationAggregateInput
   _relevance?: Prisma.SysArquivoDiscoOrderByRelevanceInput
 }
 
@@ -252,7 +252,7 @@ export type SysArquivoDiscoWhereUniqueInput = Prisma.AtLeast<{
   ativo?: Prisma.IntFilter<"SysArquivoDisco"> | number
   created_at?: Prisma.DateTimeNullableFilter<"SysArquivoDisco"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"SysArquivoDisco"> | Date | string | null
-  arquivos?: Prisma.SysArquivoListRelationFilter
+  sys_arquivos?: Prisma.SysArquivoListRelationFilter
 }, "id" | "codigo">
 
 export type SysArquivoDiscoOrderByWithAggregationInput = {
@@ -287,7 +287,7 @@ export type SysArquivoDiscoCreateInput = {
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
-  arquivos?: Prisma.SysArquivoCreateNestedManyWithoutDiscoInput
+  sys_arquivos?: Prisma.SysArquivoCreateNestedManyWithoutSys_arquivo_discoInput
 }
 
 export type SysArquivoDiscoUncheckedCreateInput = {
@@ -297,7 +297,7 @@ export type SysArquivoDiscoUncheckedCreateInput = {
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
-  arquivos?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutDiscoInput
+  sys_arquivos?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutSys_arquivo_discoInput
 }
 
 export type SysArquivoDiscoUpdateInput = {
@@ -306,7 +306,7 @@ export type SysArquivoDiscoUpdateInput = {
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  arquivos?: Prisma.SysArquivoUpdateManyWithoutDiscoNestedInput
+  sys_arquivos?: Prisma.SysArquivoUpdateManyWithoutSys_arquivo_discoNestedInput
 }
 
 export type SysArquivoDiscoUncheckedUpdateInput = {
@@ -316,7 +316,7 @@ export type SysArquivoDiscoUncheckedUpdateInput = {
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  arquivos?: Prisma.SysArquivoUncheckedUpdateManyWithoutDiscoNestedInput
+  sys_arquivos?: Prisma.SysArquivoUncheckedUpdateManyWithoutSys_arquivo_discoNestedInput
 }
 
 export type SysArquivoDiscoCreateManyInput = {
@@ -393,21 +393,21 @@ export type SysArquivoDiscoScalarRelationFilter = {
   isNot?: Prisma.SysArquivoDiscoWhereInput
 }
 
-export type SysArquivoDiscoCreateNestedOneWithoutArquivosInput = {
-  create?: Prisma.XOR<Prisma.SysArquivoDiscoCreateWithoutArquivosInput, Prisma.SysArquivoDiscoUncheckedCreateWithoutArquivosInput>
-  connectOrCreate?: Prisma.SysArquivoDiscoCreateOrConnectWithoutArquivosInput
+export type SysArquivoDiscoCreateNestedOneWithoutSys_arquivosInput = {
+  create?: Prisma.XOR<Prisma.SysArquivoDiscoCreateWithoutSys_arquivosInput, Prisma.SysArquivoDiscoUncheckedCreateWithoutSys_arquivosInput>
+  connectOrCreate?: Prisma.SysArquivoDiscoCreateOrConnectWithoutSys_arquivosInput
   connect?: Prisma.SysArquivoDiscoWhereUniqueInput
 }
 
-export type SysArquivoDiscoUpdateOneRequiredWithoutArquivosNestedInput = {
-  create?: Prisma.XOR<Prisma.SysArquivoDiscoCreateWithoutArquivosInput, Prisma.SysArquivoDiscoUncheckedCreateWithoutArquivosInput>
-  connectOrCreate?: Prisma.SysArquivoDiscoCreateOrConnectWithoutArquivosInput
-  upsert?: Prisma.SysArquivoDiscoUpsertWithoutArquivosInput
+export type SysArquivoDiscoUpdateOneRequiredWithoutSys_arquivosNestedInput = {
+  create?: Prisma.XOR<Prisma.SysArquivoDiscoCreateWithoutSys_arquivosInput, Prisma.SysArquivoDiscoUncheckedCreateWithoutSys_arquivosInput>
+  connectOrCreate?: Prisma.SysArquivoDiscoCreateOrConnectWithoutSys_arquivosInput
+  upsert?: Prisma.SysArquivoDiscoUpsertWithoutSys_arquivosInput
   connect?: Prisma.SysArquivoDiscoWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.SysArquivoDiscoUpdateToOneWithWhereWithoutArquivosInput, Prisma.SysArquivoDiscoUpdateWithoutArquivosInput>, Prisma.SysArquivoDiscoUncheckedUpdateWithoutArquivosInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SysArquivoDiscoUpdateToOneWithWhereWithoutSys_arquivosInput, Prisma.SysArquivoDiscoUpdateWithoutSys_arquivosInput>, Prisma.SysArquivoDiscoUncheckedUpdateWithoutSys_arquivosInput>
 }
 
-export type SysArquivoDiscoCreateWithoutArquivosInput = {
+export type SysArquivoDiscoCreateWithoutSys_arquivosInput = {
   codigo: string
   nome: string
   ativo?: number
@@ -415,7 +415,7 @@ export type SysArquivoDiscoCreateWithoutArquivosInput = {
   updated_at?: Date | string | null
 }
 
-export type SysArquivoDiscoUncheckedCreateWithoutArquivosInput = {
+export type SysArquivoDiscoUncheckedCreateWithoutSys_arquivosInput = {
   id?: number
   codigo: string
   nome: string
@@ -424,23 +424,23 @@ export type SysArquivoDiscoUncheckedCreateWithoutArquivosInput = {
   updated_at?: Date | string | null
 }
 
-export type SysArquivoDiscoCreateOrConnectWithoutArquivosInput = {
+export type SysArquivoDiscoCreateOrConnectWithoutSys_arquivosInput = {
   where: Prisma.SysArquivoDiscoWhereUniqueInput
-  create: Prisma.XOR<Prisma.SysArquivoDiscoCreateWithoutArquivosInput, Prisma.SysArquivoDiscoUncheckedCreateWithoutArquivosInput>
+  create: Prisma.XOR<Prisma.SysArquivoDiscoCreateWithoutSys_arquivosInput, Prisma.SysArquivoDiscoUncheckedCreateWithoutSys_arquivosInput>
 }
 
-export type SysArquivoDiscoUpsertWithoutArquivosInput = {
-  update: Prisma.XOR<Prisma.SysArquivoDiscoUpdateWithoutArquivosInput, Prisma.SysArquivoDiscoUncheckedUpdateWithoutArquivosInput>
-  create: Prisma.XOR<Prisma.SysArquivoDiscoCreateWithoutArquivosInput, Prisma.SysArquivoDiscoUncheckedCreateWithoutArquivosInput>
+export type SysArquivoDiscoUpsertWithoutSys_arquivosInput = {
+  update: Prisma.XOR<Prisma.SysArquivoDiscoUpdateWithoutSys_arquivosInput, Prisma.SysArquivoDiscoUncheckedUpdateWithoutSys_arquivosInput>
+  create: Prisma.XOR<Prisma.SysArquivoDiscoCreateWithoutSys_arquivosInput, Prisma.SysArquivoDiscoUncheckedCreateWithoutSys_arquivosInput>
   where?: Prisma.SysArquivoDiscoWhereInput
 }
 
-export type SysArquivoDiscoUpdateToOneWithWhereWithoutArquivosInput = {
+export type SysArquivoDiscoUpdateToOneWithWhereWithoutSys_arquivosInput = {
   where?: Prisma.SysArquivoDiscoWhereInput
-  data: Prisma.XOR<Prisma.SysArquivoDiscoUpdateWithoutArquivosInput, Prisma.SysArquivoDiscoUncheckedUpdateWithoutArquivosInput>
+  data: Prisma.XOR<Prisma.SysArquivoDiscoUpdateWithoutSys_arquivosInput, Prisma.SysArquivoDiscoUncheckedUpdateWithoutSys_arquivosInput>
 }
 
-export type SysArquivoDiscoUpdateWithoutArquivosInput = {
+export type SysArquivoDiscoUpdateWithoutSys_arquivosInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -448,7 +448,7 @@ export type SysArquivoDiscoUpdateWithoutArquivosInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type SysArquivoDiscoUncheckedUpdateWithoutArquivosInput = {
+export type SysArquivoDiscoUncheckedUpdateWithoutSys_arquivosInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
@@ -463,11 +463,11 @@ export type SysArquivoDiscoUncheckedUpdateWithoutArquivosInput = {
  */
 
 export type SysArquivoDiscoCountOutputType = {
-  arquivos: number
+  sys_arquivos: number
 }
 
 export type SysArquivoDiscoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  arquivos?: boolean | SysArquivoDiscoCountOutputTypeCountArquivosArgs
+  sys_arquivos?: boolean | SysArquivoDiscoCountOutputTypeCountSys_arquivosArgs
 }
 
 /**
@@ -483,7 +483,7 @@ export type SysArquivoDiscoCountOutputTypeDefaultArgs<ExtArgs extends runtime.Ty
 /**
  * SysArquivoDiscoCountOutputType without action
  */
-export type SysArquivoDiscoCountOutputTypeCountArquivosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SysArquivoDiscoCountOutputTypeCountSys_arquivosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SysArquivoWhereInput
 }
 
@@ -495,7 +495,7 @@ export type SysArquivoDiscoSelect<ExtArgs extends runtime.Types.Extensions.Inter
   ativo?: boolean
   created_at?: boolean
   updated_at?: boolean
-  arquivos?: boolean | Prisma.SysArquivoDisco$arquivosArgs<ExtArgs>
+  sys_arquivos?: boolean | Prisma.SysArquivoDisco$sys_arquivosArgs<ExtArgs>
   _count?: boolean | Prisma.SysArquivoDiscoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sysArquivoDisco"]>
 
@@ -512,14 +512,14 @@ export type SysArquivoDiscoSelectScalar = {
 
 export type SysArquivoDiscoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "codigo" | "nome" | "ativo" | "created_at" | "updated_at", ExtArgs["result"]["sysArquivoDisco"]>
 export type SysArquivoDiscoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  arquivos?: boolean | Prisma.SysArquivoDisco$arquivosArgs<ExtArgs>
+  sys_arquivos?: boolean | Prisma.SysArquivoDisco$sys_arquivosArgs<ExtArgs>
   _count?: boolean | Prisma.SysArquivoDiscoCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $SysArquivoDiscoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SysArquivoDisco"
   objects: {
-    arquivos: Prisma.$SysArquivoPayload<ExtArgs>[]
+    sys_arquivos: Prisma.$SysArquivoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -868,7 +868,7 @@ readonly fields: SysArquivoDiscoFieldRefs;
  */
 export interface Prisma__SysArquivoDiscoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  arquivos<T extends Prisma.SysArquivoDisco$arquivosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivoDisco$arquivosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysArquivoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sys_arquivos<T extends Prisma.SysArquivoDisco$sys_arquivosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivoDisco$sys_arquivosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysArquivoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1252,9 +1252,9 @@ export type SysArquivoDiscoDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
- * SysArquivoDisco.arquivos
+ * SysArquivoDisco.sys_arquivos
  */
-export type SysArquivoDisco$arquivosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SysArquivoDisco$sys_arquivosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the SysArquivo
    */

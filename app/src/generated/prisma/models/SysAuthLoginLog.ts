@@ -364,7 +364,7 @@ export type SysAuthLoginLogCreateInput = {
   error_message?: string | null
   metadata_text?: string | null
   created_at?: Date | string | null
-  sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSys_auth_login_logInput
+  sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSys_auth_login_logsInput
 }
 
 export type SysAuthLoginLogUncheckedCreateInput = {
@@ -393,7 +393,7 @@ export type SysAuthLoginLogUpdateInput = {
   error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metadata_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutSys_auth_login_logNestedInput
+  sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutSys_auth_login_logsNestedInput
 }
 
 export type SysAuthLoginLogUncheckedUpdateInput = {

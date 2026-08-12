@@ -1,181 +1,227 @@
-import { headers } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+import {
+    NextRequest,
+    NextResponse,
+} from "next/server";
 
-import { auth } from "@/lib/auth/auth";
+import {
+    requireApiAccess,
+} from "@/lib/auth/require-api-access";
 import { prisma } from "@/lib/prisma";
 
-async function getCurrentSysUsuario() {
-    const session = await auth.api.getSession({
-        headers: await headers(),
-    });
 
-    if (!session?.user) {
-        return null;
-    }
-
-    const sessionUser = session.user as {
-        email?: string | null;
-        sysUsuarioId?: number | null;
-    };
-
-    if (sessionUser.sysUsuarioId) {
-        return prisma.sysUsuario.findUnique({
-            where: {
-                id: Number(sessionUser.sysUsuarioId),
-            },
-        });
-    }
-
-    if (sessionUser.email) {
-        return prisma.sysUsuario.findUnique({
-            where: {
-                email: sessionUser.email,
-            },
-        });
-    }
-
-    return null;
-}
-
-export async function GET() {
-    const usuario = await getCurrentSysUsuario();
-
-    if (!usuario) {
-        return NextResponse.json(
-            {
-                success: false,
-                message: "Usuário não autenticado.",
-            },
-            { status: 401 },
+export async function GET(
+    request: NextRequest,
+) {
+    const access =
+        await requireApiAccess(
+            request,
         );
+
+    if (!access.ok) {
+        return access.response;
     }
 
-    return NextResponse.json({
-        success: true,
-        usuario: {
-            id: usuario.id,
-            nome: usuario.nome,
-            nickname: usuario.nickname,
-            email: usuario.email,
-            telefone: usuario.telefone,
-            codigo_aluno: usuario.codigo_aluno,
-            documento: usuario.documento,
-            avatar_url: usuario.avatar_url,
-            ativo: usuario.ativo,
-            perfil_completo: usuario.perfil_completo,
-            email_verificado_at: usuario.email_verificado_at,
-            ultimo_login_at: usuario.ultimo_login_at,
-            created_at: usuario.created_at,
-        },
-    });
-}
-
-export async function PUT(request: NextRequest) {
     try {
-        const usuario = await getCurrentSysUsuario();
+        const usuario =
+            await prisma.sysUsuario.findUnique({
+                where: {
+                    id:
+                    access.session.user.id,
+                },
+                select: {
+                    id: true,
+                    nome: true,
+                    email: true,
+                    telefone: true,
+                    documento: true,
+                    ativo: true,
+                    perfil_completo: true,
+                    email_verificado_at: true,
+                    ultimo_login_at: true,
+                    created_at: true,
+
+                    avatar_sys_arquivo: {
+                        select: {
+                            public_url: true,
+                        },
+                    },
+                },
+            });
 
         if (!usuario) {
             return NextResponse.json(
                 {
                     success: false,
-                    message: "Usuário não autenticado.",
+                    message:
+                        "Usuário não encontrado.",
                 },
-                { status: 401 },
+                {
+                    status: 404,
+                },
             );
         }
 
-        const body = await request.json();
+        return NextResponse.json({
+            success: true,
 
-        const nome = String(body.nome || "").trim();
-        const nickname = String(body.nickname || "").trim().toLowerCase();
-        const telefone = body.telefone ? String(body.telefone).trim() : null;
+            usuario: {
+                id: usuario.id,
+                nome: usuario.nome,
+                email: usuario.email,
+                telefone: usuario.telefone,
+                documento: usuario.documento,
+                avatar_url:
+                    usuario.avatar_sys_arquivo
+                        ?.public_url ?? null,
+                ativo: usuario.ativo,
+                perfil_completo:
+                usuario.perfil_completo,
+                email_verificado_at:
+                usuario.email_verificado_at,
+                ultimo_login_at:
+                usuario.ultimo_login_at,
+                created_at:
+                usuario.created_at,
+            },
+        });
+    } catch (error) {
+        console.error(
+            "[perfil.get]",
+            error,
+        );
+
+        return NextResponse.json(
+            {
+                success: false,
+                message:
+                    "Erro ao carregar perfil.",
+            },
+            {
+                status: 500,
+            },
+        );
+    }
+}
+
+
+export async function PUT(
+    request: NextRequest,
+) {
+    const access =
+        await requireApiAccess(
+            request,
+        );
+
+    if (!access.ok) {
+        return access.response;
+    }
+
+    try {
+        const body =
+            await request.json();
+
+        const nome =
+            String(
+                body.nome || "",
+            ).trim();
+
+        const telefone =
+            body.telefone
+                ? String(
+                    body.telefone,
+                ).trim()
+                : null;
 
         if (nome.length < 3) {
             return NextResponse.json(
                 {
                     success: false,
-                    message: "Informe um nome com pelo menos 3 caracteres.",
-                },
-                { status: 400 },
-            );
-        }
-
-        if (!/^[a-z0-9._-]{3,50}$/.test(nickname)) {
-            return NextResponse.json(
-                {
-                    success: false,
                     message:
-                        "O nickname deve ter entre 3 e 50 caracteres e usar apenas letras, números, ponto, hífen ou underline.",
+                        "Informe um nome com pelo menos 3 caracteres.",
                 },
-                { status: 400 },
-            );
-        }
-
-        const nicknameExistente = await prisma.sysUsuario.findFirst({
-            where: {
-                nickname,
-                id: {
-                    not: usuario.id,
-                },
-            },
-            select: {
-                id: true,
-            },
-        });
-
-        if (nicknameExistente) {
-            return NextResponse.json(
                 {
-                    success: false,
-                    message: "Este nickname já está em uso.",
+                    status: 400,
                 },
-                { status: 409 },
             );
         }
 
-        const usuarioAtualizado = await prisma.sysUsuario.update({
-            where: {
-                id: usuario.id,
-            },
-            data: {
-                nome,
-                nickname,
-                telefone,
-                updated_at: new Date(),
-            },
-            select: {
-                id: true,
-                nome: true,
-                nickname: true,
-                email: true,
-                telefone: true,
-                avatar_url: true,
-            },
-        });
+        const usuarioAtualizado =
+            await prisma.sysUsuario.update({
+                where: {
+                    id:
+                    access.session.user.id,
+                },
+                data: {
+                    nome,
+                    telefone,
+                    updated_at:
+                        new Date(),
+                },
+                select: {
+                    id: true,
+                    nome: true,
+                    email: true,
+                    telefone: true,
+
+                    avatar_sys_arquivo: {
+                        select: {
+                            public_url:
+                                true,
+                        },
+                    },
+                },
+            });
 
         await prisma.user.updateMany({
             where: {
-                sysUsuarioId: usuario.id,
+                sysUsuarioId:
+                access.session.user.id,
             },
             data: {
-                name: nome,
-                updatedAt: new Date(),
+                name:
+                usuarioAtualizado.nome,
+                updatedAt:
+                    new Date(),
             },
         });
 
         return NextResponse.json({
             success: true,
-            usuario: usuarioAtualizado,
+
+            usuario: {
+                id:
+                usuarioAtualizado.id,
+
+                nome:
+                usuarioAtualizado.nome,
+
+                email:
+                usuarioAtualizado.email,
+
+                telefone:
+                usuarioAtualizado.telefone,
+
+                avatar_url:
+                    usuarioAtualizado
+                        .avatar_sys_arquivo
+                        ?.public_url ?? null,
+            },
         });
     } catch (error) {
-        console.error("[perfil.update]", error);
+        console.error(
+            "[perfil.update]",
+            error,
+        );
 
         return NextResponse.json(
             {
                 success: false,
-                message: "Erro ao atualizar perfil.",
+                message:
+                    "Erro ao atualizar perfil.",
             },
-            { status: 500 },
+            {
+                status: 500,
+            },
         );
     }
 }

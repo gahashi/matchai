@@ -11,10 +11,8 @@ import { authClient } from "@/lib/auth/auth-client";
 type PerfilUsuario = {
     id: number;
     nome: string;
-    nickname: string;
     email: string;
     telefone: string | null;
-    codigo_aluno: string | null;
     documento: string | null;
     avatar_url: string | null;
     ativo: number;
@@ -101,7 +99,6 @@ export default function ProfileClient({ usuario }: ProfileClientProps) {
     const [alterandoSenha, setAlterandoSenha] = useState(false);
 
     const [nome, setNome] = useState(usuario.nome);
-    const [nickname, setNickname] = useState(usuario.nickname);
     const [telefone, setTelefone] = useState(usuario.telefone ?? "");
 
     const [avatarUrl, setAvatarUrl] = useState(usuario.avatar_url);
@@ -144,14 +141,12 @@ export default function ProfileClient({ usuario }: ProfileClientProps) {
     function iniciarEdicaoPerfil() {
         setSnackbar(null);
         setNome(dados.nome);
-        setNickname(dados.nickname);
         setTelefone(dados.telefone ?? "");
         setEditandoPerfil(true);
     }
 
     function cancelarEdicaoPerfil() {
         setNome(dados.nome);
-        setNickname(dados.nickname);
         setTelefone(dados.telefone ?? "");
         limparAvatarSelecionado();
         setEditandoPerfil(false);
@@ -239,7 +234,6 @@ export default function ProfileClient({ usuario }: ProfileClientProps) {
                 },
                 body: JSON.stringify({
                     nome,
-                    nickname,
                     telefone,
                 }),
             });
@@ -256,7 +250,6 @@ export default function ProfileClient({ usuario }: ProfileClientProps) {
             setDados((current) => ({
                 ...current,
                 nome: data.usuario.nome,
-                nickname: data.usuario.nickname,
                 telefone: data.usuario.telefone,
                 avatar_url: novoAvatarUrl,
             }));
@@ -372,7 +365,7 @@ export default function ProfileClient({ usuario }: ProfileClientProps) {
                                 </h1>
 
                                 <p className="bp-page-subtitle">
-                                    @{editandoPerfil ? nickname || dados.nickname : dados.nickname}
+                                    {dados.email}
                                 </p>
 
                                 <div className="bp-account-meta">
@@ -417,7 +410,7 @@ export default function ProfileClient({ usuario }: ProfileClientProps) {
                                 <div>
                                     <h2 className="bp-section-title">Dados gerais</h2>
                                     <p className="bp-section-subtitle">
-                                        Informações básicas exibidas no Brava Pass.
+                                        Informações básicas da sua conta.
                                     </p>
                                 </div>
                             </div>
@@ -435,22 +428,6 @@ export default function ProfileClient({ usuario }: ProfileClientProps) {
                                                 value={nome}
                                                 onChange={(event) => setNome(event.target.value)}
                                                 placeholder="Seu nome"
-                                                required
-                                            />
-                                        </div>
-
-                                        <div>
-                                            <label className="bp-label" htmlFor="nickname">
-                                                Nickname
-                                            </label>
-                                            <input
-                                                id="nickname"
-                                                className="bp-input"
-                                                value={nickname}
-                                                onChange={(event) =>
-                                                    setNickname(event.target.value)
-                                                }
-                                                placeholder="seu_nickname"
                                                 required
                                             />
                                         </div>
@@ -555,11 +532,6 @@ export default function ProfileClient({ usuario }: ProfileClientProps) {
                                     <div className="bp-info-row">
                                         <span>Nome</span>
                                         <strong>{dados.nome}</strong>
-                                    </div>
-
-                                    <div className="bp-info-row">
-                                        <span>Nickname</span>
-                                        <strong>@{dados.nickname}</strong>
                                     </div>
 
                                     <div className="bp-info-row">

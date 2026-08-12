@@ -280,3 +280,94 @@ export async function sendAccountRegistrationCode(params: {
         expiresAt: verification.expiresAt,
     };
 }
+
+export async function sendPasswordResetCode(params: {
+    email: string;
+    nome?: string;
+    sysUsuarioId: number;
+}) {
+    const email = params.email
+        .trim()
+        .toLowerCase();
+
+    const verification =
+        await createEmailVerificationCode({
+            email,
+            tipo: "password_reset",
+            sysUsuarioId:
+            params.sysUsuarioId,
+        });
+
+    const html = baseEmailTemplate({
+        title: "Redefinição de senha",
+
+        preview:
+            "Use este código para redefinir sua senha.",
+
+        content: `
+            <p style="margin:0 0 16px;">
+                Olá${params.nome ? `, ${params.nome}` : ""}.
+            </p>
+
+            <p style="margin:0 0 16px;">
+                Recebemos uma solicitação para redefinir a senha da sua conta.
+            </p>
+
+            <p style="margin:0 0 16px;">
+                Use o código abaixo para continuar:
+            </p>
+
+            <div style="
+                margin: 28px 0;
+                padding: 28px 18px;
+                text-align: center;
+                background: #121411;
+                border: 1px solid #2b3028;
+                border-radius: 22px;
+                color: #9cd91a;
+                font-size: 40px;
+                line-height: 1;
+                font-weight: 900;
+                letter-spacing: 0.20em;
+            ">
+                ${verification.code}
+            </div>
+
+            <p style="margin:0 0 16px;">
+                Este código expira em
+                ${getCodeExpiresMinutes()}
+                minutos.
+            </p>
+
+            <p style="margin:0;">
+                Se você não solicitou esta redefinição,
+                ignore este email.
+            </p>
+        `,
+    });
+
+    await sendEmail({
+        to: email,
+
+        subject:
+            "Código para redefinir sua senha — AAACCU",
+
+        html,
+
+        text:
+            `Seu código para redefinir a senha da AAACCU é: ${verification.code}. ` +
+            `Ele expira em ${getCodeExpiresMinutes()} minutos.`,
+
+        template:
+            "password_reset_code",
+
+        sysUsuarioId:
+        params.sysUsuarioId,
+    });
+
+    return {
+        ok: true,
+        expiresAt:
+        verification.expiresAt,
+    };
+}

@@ -372,7 +372,7 @@ export type SysEmailVerificationCodeCreateInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
-  sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSysEmailVerificationCodesInput
+  sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSys_email_verification_codesInput
 }
 
 export type SysEmailVerificationCodeUncheckedCreateInput = {
@@ -401,7 +401,7 @@ export type SysEmailVerificationCodeUpdateInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutSysEmailVerificationCodesNestedInput
+  sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutSys_email_verification_codesNestedInput
 }
 
 export type SysEmailVerificationCodeUncheckedUpdateInput = {

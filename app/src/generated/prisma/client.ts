@@ -31,8 +31,8 @@ export * from "./enums"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more SysUsuarios
- * const sysUsuarios = await prisma.sysUsuario.findMany()
+ * // Fetch zero or more SysUsuarioTipos
+ * const sysUsuarioTipos = await prisma.sysUsuarioTipo.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -42,170 +42,15 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 /**
+ * Model SysUsuarioTipo
+ * 
+ */
+export type SysUsuarioTipo = Prisma.SysUsuarioTipoModel
+/**
  * Model SysUsuario
  * 
  */
 export type SysUsuario = Prisma.SysUsuarioModel
-/**
- * Model SysRoleEscopo
- * 
- */
-export type SysRoleEscopo = Prisma.SysRoleEscopoModel
-/**
- * Model SysRole
- * 
- */
-export type SysRole = Prisma.SysRoleModel
-/**
- * Model SysPermission
- * 
- */
-export type SysPermission = Prisma.SysPermissionModel
-/**
- * Model SysRolePermission
- * 
- */
-export type SysRolePermission = Prisma.SysRolePermissionModel
-/**
- * Model SysUsuarioRole
- * 
- */
-export type SysUsuarioRole = Prisma.SysUsuarioRoleModel
-/**
- * Model SysUsuarioPermissionTipo
- * 
- */
-export type SysUsuarioPermissionTipo = Prisma.SysUsuarioPermissionTipoModel
-/**
- * Model SysUsuarioPermission
- * 
- */
-export type SysUsuarioPermission = Prisma.SysUsuarioPermissionModel
-/**
- * Model EduInstituicao
- * 
- */
-export type EduInstituicao = Prisma.EduInstituicaoModel
-/**
- * Model EduCurso
- * 
- */
-export type EduCurso = Prisma.EduCursoModel
-/**
- * Model EduInstituicaoCurso
- * 
- */
-export type EduInstituicaoCurso = Prisma.EduInstituicaoCursoModel
-/**
- * Model EduPolo
- * 
- */
-export type EduPolo = Prisma.EduPoloModel
-/**
- * Model SysUsuarioPolo
- * 
- */
-export type SysUsuarioPolo = Prisma.SysUsuarioPoloModel
-/**
- * Model EntEntidadeTipo
- * 
- */
-export type EntEntidadeTipo = Prisma.EntEntidadeTipoModel
-/**
- * Model EntEntidadeStatus
- * 
- */
-export type EntEntidadeStatus = Prisma.EntEntidadeStatusModel
-/**
- * Model EntEntidade
- * 
- */
-export type EntEntidade = Prisma.EntEntidadeModel
-/**
- * Model EntEntidadeCurso
- * 
- */
-export type EntEntidadeCurso = Prisma.EntEntidadeCursoModel
-/**
- * Model EntEntidadePolo
- * 
- */
-export type EntEntidadePolo = Prisma.EntEntidadePoloModel
-/**
- * Model EntEntidadeGestaoStatus
- * 
- */
-export type EntEntidadeGestaoStatus = Prisma.EntEntidadeGestaoStatusModel
-/**
- * Model EntEntidadeGestao
- * 
- */
-export type EntEntidadeGestao = Prisma.EntEntidadeGestaoModel
-/**
- * Model EntCargoTipo
- * 
- */
-export type EntCargoTipo = Prisma.EntCargoTipoModel
-/**
- * Model EntCargo
- * 
- */
-export type EntCargo = Prisma.EntCargoModel
-/**
- * Model EntEntidadeCargo
- * 
- */
-export type EntEntidadeCargo = Prisma.EntEntidadeCargoModel
-/**
- * Model EntEntidadeMembroTipo
- * 
- */
-export type EntEntidadeMembroTipo = Prisma.EntEntidadeMembroTipoModel
-/**
- * Model EntEntidadeMembroStatus
- * 
- */
-export type EntEntidadeMembroStatus = Prisma.EntEntidadeMembroStatusModel
-/**
- * Model EntEntidadeMembro
- * 
- */
-export type EntEntidadeMembro = Prisma.EntEntidadeMembroModel
-/**
- * Model EntEntidadeMembroCargo
- * 
- */
-export type EntEntidadeMembroCargo = Prisma.EntEntidadeMembroCargoModel
-/**
- * Model EntEntidadeTema
- * 
- */
-export type EntEntidadeTema = Prisma.EntEntidadeTemaModel
-/**
- * Model EntEntidadeRegimento
- * 
- */
-export type EntEntidadeRegimento = Prisma.EntEntidadeRegimentoModel
-/**
- * Model SysAssinaturaPlanoPeriodicidade
- * 
- */
-export type SysAssinaturaPlanoPeriodicidade = Prisma.SysAssinaturaPlanoPeriodicidadeModel
-/**
- * Model SysAssinaturaPlano
- * 
- */
-export type SysAssinaturaPlano = Prisma.SysAssinaturaPlanoModel
-/**
- * Model EntEntidadeAssinaturaStatus
- * 
- */
-export type EntEntidadeAssinaturaStatus = Prisma.EntEntidadeAssinaturaStatusModel
-/**
- * Model EntEntidadeAssinatura
- * 
- */
-export type EntEntidadeAssinatura = Prisma.EntEntidadeAssinaturaModel
 /**
  * Model User
  * 
@@ -227,6 +72,11 @@ export type Account = Prisma.AccountModel
  */
 export type Verification = Prisma.VerificationModel
 /**
+ * Model SysAuthLoginLog
+ * 
+ */
+export type SysAuthLoginLog = Prisma.SysAuthLoginLogModel
+/**
  * Model SysEmailLog
  * 
  */
@@ -236,11 +86,6 @@ export type SysEmailLog = Prisma.SysEmailLogModel
  * 
  */
 export type SysEmailVerificationCode = Prisma.SysEmailVerificationCodeModel
-/**
- * Model SysAuthLoginLog
- * 
- */
-export type SysAuthLoginLog = Prisma.SysAuthLoginLogModel
 /**
  * Model SysArquivoDisco
  * 
@@ -257,62 +102,112 @@ export type SysArquivoVisibilidade = Prisma.SysArquivoVisibilidadeModel
  */
 export type SysArquivoTipo = Prisma.SysArquivoTipoModel
 /**
- * Model SysArquivoEntidadeTipo
- * 
- */
-export type SysArquivoEntidadeTipo = Prisma.SysArquivoEntidadeTipoModel
-/**
  * Model SysArquivo
  * 
  */
 export type SysArquivo = Prisma.SysArquivoModel
 /**
- * Model SysInboxItemTipo
+ * Model CadLink
  * 
  */
-export type SysInboxItemTipo = Prisma.SysInboxItemTipoModel
+export type CadLink = Prisma.CadLinkModel
 /**
- * Model SysInboxItemStatus
+ * Model CadEvento
  * 
  */
-export type SysInboxItemStatus = Prisma.SysInboxItemStatusModel
+export type CadEvento = Prisma.CadEventoModel
 /**
- * Model SysInboxItem
+ * Model PrdProdutoTipo
  * 
  */
-export type SysInboxItem = Prisma.SysInboxItemModel
+export type PrdProdutoTipo = Prisma.PrdProdutoTipoModel
 /**
- * Model SysSolicitacaoTipo
+ * Model PrdProduto
  * 
  */
-export type SysSolicitacaoTipo = Prisma.SysSolicitacaoTipoModel
+export type PrdProduto = Prisma.PrdProdutoModel
 /**
- * Model SysSolicitacaoStatus
+ * Model PrdProdutoImagem
  * 
  */
-export type SysSolicitacaoStatus = Prisma.SysSolicitacaoStatusModel
+export type PrdProdutoImagem = Prisma.PrdProdutoImagemModel
 /**
- * Model SysSolicitacao
+ * Model PrdProdutoVariacao
  * 
  */
-export type SysSolicitacao = Prisma.SysSolicitacaoModel
+export type PrdProdutoVariacao = Prisma.PrdProdutoVariacaoModel
 /**
- * Model SysSolicitacaoHistorico
+ * Model VndCampanhaStatus
  * 
  */
-export type SysSolicitacaoHistorico = Prisma.SysSolicitacaoHistoricoModel
+export type VndCampanhaStatus = Prisma.VndCampanhaStatusModel
 /**
- * Model SysSolicitacaoDocumentoTipo
+ * Model VndCampanha
  * 
  */
-export type SysSolicitacaoDocumentoTipo = Prisma.SysSolicitacaoDocumentoTipoModel
+export type VndCampanha = Prisma.VndCampanhaModel
 /**
- * Model SysSolicitacaoDocumentoStatus
+ * Model VndCampanhaProduto
  * 
  */
-export type SysSolicitacaoDocumentoStatus = Prisma.SysSolicitacaoDocumentoStatusModel
+export type VndCampanhaProduto = Prisma.VndCampanhaProdutoModel
 /**
- * Model SysSolicitacaoDocumento
+ * Model SocSocioStatus
  * 
  */
-export type SysSolicitacaoDocumento = Prisma.SysSolicitacaoDocumentoModel
+export type SocSocioStatus = Prisma.SocSocioStatusModel
+/**
+ * Model SocSocioOrigem
+ * 
+ */
+export type SocSocioOrigem = Prisma.SocSocioOrigemModel
+/**
+ * Model SocPlano
+ * 
+ */
+export type SocPlano = Prisma.SocPlanoModel
+/**
+ * Model SocSocio
+ * 
+ */
+export type SocSocio = Prisma.SocSocioModel
+/**
+ * Model VndPedidoStatus
+ * 
+ */
+export type VndPedidoStatus = Prisma.VndPedidoStatusModel
+/**
+ * Model VndEntregaTipo
+ * 
+ */
+export type VndEntregaTipo = Prisma.VndEntregaTipoModel
+/**
+ * Model VndPedido
+ * 
+ */
+export type VndPedido = Prisma.VndPedidoModel
+/**
+ * Model VndPedidoItem
+ * 
+ */
+export type VndPedidoItem = Prisma.VndPedidoItemModel
+/**
+ * Model VndPedidoHistorico
+ * 
+ */
+export type VndPedidoHistorico = Prisma.VndPedidoHistoricoModel
+/**
+ * Model FinPagamentoStatus
+ * 
+ */
+export type FinPagamentoStatus = Prisma.FinPagamentoStatusModel
+/**
+ * Model FinPagamentoMetodo
+ * 
+ */
+export type FinPagamentoMetodo = Prisma.FinPagamentoMetodoModel
+/**
+ * Model FinPagamento
+ * 
+ */
+export type FinPagamento = Prisma.FinPagamentoModel

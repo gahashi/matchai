@@ -5,6 +5,7 @@ import { AuthSession } from "@/lib/auth/auth-types";
 
 type RequireApiAccessOptions = {
     permissions?: string[];
+    admin?: boolean;
 };
 
 type RequireApiAccessSuccess = {
@@ -43,6 +44,25 @@ export async function requireApiAccess(
             ),
         };
     }
+    if (
+        options.admin &&
+        session.user.sys_usuario_tipo.codigo !== "admin"
+    ) {
+        return {
+            ok: false,
+            response: NextResponse.json(
+                {
+                    ok: false,
+                    message:
+                        "Sem permissão para executar esta ação.",
+                },
+                {
+                    status: 403,
+                },
+            ),
+        };
+    }
+
 
     const permissions = options.permissions ?? [];
 

@@ -1,16 +1,26 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { FormEvent, Suspense, useMemo, useState } from "react";
-import { LockKeyhole, ShieldCheck, Sparkles } from "lucide-react";
+import {
+    FormEvent,
+    Suspense,
+    useMemo,
+    useState,
+} from "react";
+import {
+    LockKeyhole,
+    ShoppingBag,
+    TicketCheck,
+    Users,
+} from "lucide-react";
 
 import { authClient } from "@/lib/auth/auth-client";
 import { Button } from "@/components/ui/Button";
 import { Card, CardBody } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
-import {Badge} from "@/components/ui/Badge";
-import Link from "next/link";
+import { Badge } from "@/components/ui/Badge";
 
 type ResolveLoginResponse = {
     ok: boolean;
@@ -22,19 +32,30 @@ function LoginForm() {
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    const [identificador, setIdentificador] = useState("");
-    const [senha, setSenha] = useState("");
-    const [erro, setErro] = useState("");
-    const [carregando, setCarregando] = useState(false);
+    const [identificador, setIdentificador] =
+        useState("");
+
+    const [senha, setSenha] =
+        useState("");
+
+    const [erro, setErro] =
+        useState("");
+
+    const [carregando, setCarregando] =
+        useState(false);
 
     const redirectTo = useMemo(() => {
-        const callbackUrl = searchParams.get("callbackUrl");
+        const callbackUrl =
+            searchParams.get("callbackUrl");
 
         if (!callbackUrl) {
             return "/";
         }
 
-        if (!callbackUrl.startsWith("/") || callbackUrl.startsWith("//")) {
+        if (
+            !callbackUrl.startsWith("/") ||
+            callbackUrl.startsWith("//")
+        ) {
             return "/";
         }
 
@@ -42,50 +63,77 @@ function LoginForm() {
     }, [searchParams]);
 
     async function resolverEmailLogin() {
-        const response = await fetch("/api/auth/resolve-login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
+        const response = await fetch(
+            "/api/auth/resolve-login",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json",
+                },
+
+                body: JSON.stringify({
+                    identificador,
+                }),
             },
-            body: JSON.stringify({
-                identificador,
-            }),
-        });
+        );
 
-        const data = (await response.json()) as ResolveLoginResponse;
+        const data =
+            (await response.json()) as ResolveLoginResponse;
 
-        if (!response.ok || !data.ok || !data.email) {
-            throw new Error(data.message || "Usuário ou senha inválidos.");
+        if (
+            !response.ok ||
+            !data.ok ||
+            !data.email
+        ) {
+            throw new Error(
+                data.message ||
+                "Email ou senha inválidos.",
+            );
         }
 
         return data.email;
     }
 
-    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    async function handleSubmit(
+        event: FormEvent<HTMLFormElement>,
+    ) {
         event.preventDefault();
 
         setErro("");
         setCarregando(true);
 
         try {
-            const email = await resolverEmailLogin();
+            const email =
+                await resolverEmailLogin();
 
-            const { error } = await authClient.signIn.email({
-                email,
-                password: senha,
-                callbackURL: redirectTo,
-            });
+            const { error } =
+                await authClient.signIn.email({
+                    email,
+                    password: senha,
+                    callbackURL: redirectTo,
+                });
 
             if (error) {
-                setErro("Usuário ou senha inválidos.");
+                setErro(
+                    "Email ou senha inválidos.",
+                );
+
                 setCarregando(false);
+
                 return;
             }
 
             router.replace(redirectTo);
             router.refresh();
         } catch (error) {
-            setErro(error instanceof Error ? error.message : "Usuário ou senha inválidos.");
+            setErro(
+                error instanceof Error
+                    ? error.message
+                    : "Email ou senha inválidos.",
+            );
+
             setCarregando(false);
         }
     }
@@ -94,43 +142,60 @@ function LoginForm() {
         <main
             style={{
                 minHeight: "100vh",
+
                 background:
-                    "radial-gradient(circle at top left, rgba(245, 190, 60, 0.16), transparent 34%), radial-gradient(circle at bottom right, rgba(87, 111, 255, 0.12), transparent 36%), var(--color-bg)",
+                    "radial-gradient(circle at top left, rgba(156, 217, 26, 0.12), transparent 34%), radial-gradient(circle at bottom right, rgba(41, 115, 7, 0.10), transparent 38%), var(--color-background)",
+
                 color: "var(--color-text)",
+
                 display: "grid",
                 placeItems: "center",
+
                 padding: 24,
             }}
         >
             <section
+                className="bp-login-shell"
                 style={{
                     width: "100%",
                     maxWidth: 1120,
+
                     display: "grid",
-                    gridTemplateColumns: "minmax(0, 1.05fr) minmax(380px, 0.95fr)",
+
+                    gridTemplateColumns:
+                        "minmax(0, 1.05fr) minmax(380px, 0.95fr)",
+
                     gap: 24,
+
                     alignItems: "stretch",
                 }}
-                className="bp-login-shell"
             >
+                {/* LADO INSTITUCIONAL */}
+
                 <Card
+                    className="bp-login-brand-card"
                     style={{
                         overflow: "hidden",
+
                         minHeight: 620,
+
                         display: "flex",
                         flexDirection: "column",
-                        justifyContent: "space-between",
-                        position: "relative",
 
+                        justifyContent:
+                            "space-between",
+
+                        position: "relative",
                     }}
-                    className="bp-login-brand-card"
                 >
                     <div
                         style={{
                             position: "absolute",
                             inset: 0,
+
                             background:
-                                "linear-gradient(135deg, rgba(255,255,255,0.08), transparent 38%, rgba(255,255,255,0.03))",
+                                "linear-gradient(135deg, rgba(156, 217, 26, 0.08), transparent 38%, rgba(215, 242, 7, 0.025))",
+
                             pointerEvents: "none",
                         }}
                     />
@@ -138,28 +203,34 @@ function LoginForm() {
                     <CardBody
                         style={{
                             position: "relative",
+
                             minHeight: "100%",
+
                             display: "flex",
                             flexDirection: "column",
-                            justifyContent: "space-between",
+
+                            justifyContent:
+                                "space-between",
+
                             gap: 40,
                         }}
                     >
+                        {/* LOGO */}
+
                         <div
                             style={{
                                 display: "flex",
                                 alignItems: "center",
-                                gap: 14,
+                                gap: 16,
                             }}
                         >
                             <Image
-                                src="/brand/brava-pass-app-icon.png"
-                                alt="Brava Pass"
-                                width={48}
-                                height={48}
+                                src="/ent/atletica/aaaccu_logo_001.png"
+                                alt="AAACCU"
+                                width={68}
+                                height={68}
                                 style={{
-                                    borderRadius: 18,
-                                    boxShadow: "0 18px 50px rgba(0,0,0,0.35)",
+                                    objectFit: "contain",
                                 }}
                                 priority
                             />
@@ -168,183 +239,338 @@ function LoginForm() {
                                 <strong
                                     style={{
                                         display: "block",
-                                        fontSize: 18,
-                                        letterSpacing: "-0.03em",
+
+                                        fontSize: 20,
+
+                                        letterSpacing:
+                                            "-0.03em",
                                     }}
                                 >
-                                    Brava Pass
+                                    AAACCU
                                 </strong>
+
                                 <span
                                     style={{
                                         display: "block",
+
                                         marginTop: 3,
-                                        color: "var(--color-text-muted)",
+
+                                        color:
+                                            "var(--color-text-muted)",
+
                                         fontSize: 13,
                                     }}
                                 >
-                                    SaaS universitário premium
+                                    Atlética dos Cursos de
+                                    Computação
                                 </span>
                             </div>
                         </div>
 
-                        <div style={{ maxWidth: 560 }}>
+                        {/* APRESENTAÇÃO */}
+
+                        <div
+                            style={{
+                                maxWidth: 560,
+                            }}
+                        >
                             <Badge
                                 color="primary"
                                 style={{
-                                    display: "inline-flex",
-                                    alignItems: "center",
+                                    display:
+                                        "inline-flex",
+
+                                    alignItems:
+                                        "center",
+
                                     gap: 8,
+
                                     marginBottom: 22,
                                 }}
                             >
-                                <Sparkles size={15} />
-                                Gestão moderna para atléticas e parceiros
+                                <ShoppingBag
+                                    size={15}
+                                />
+
+                                Computaria
                             </Badge>
 
                             <h1
                                 style={{
                                     margin: 0,
-                                    fontSize: "clamp(34px, 4vw, 56px)",
+
+                                    fontSize:
+                                        "clamp(34px, 4vw, 56px)",
+
                                     lineHeight: 1,
-                                    letterSpacing: "-0.06em",
+
+                                    letterSpacing:
+                                        "-0.06em",
                                 }}
                             >
-                                Controle sua operação universitária com segurança.
+                                Tudo da Computaria em um só
+                                lugar.
                             </h1>
 
                             <p
                                 style={{
-                                    margin: "18px 0 0",
-                                    color: "var(--color-text-muted)",
+                                    margin:
+                                        "18px 0 0",
+
+                                    color:
+                                        "var(--color-text-muted)",
+
                                     fontSize: 16,
+
                                     lineHeight: 1.7,
+
                                     maxWidth: 520,
                                 }}
                             >
-                                Acesse sua conta para gerenciar atléticas, membros,
-                                permissões, temas, parceiros, eventos e assinaturas
-                                em uma plataforma SaaS moderna.
+                                Entre na sua conta para
+                                acompanhar pedidos,
+                                consultar sua associação e
+                                aproveitar os benefícios
+                                exclusivos da AAACCU.
                             </p>
                         </div>
 
+                        {/* RECURSOS */}
+
                         <div
+                            className="bp-login-feature-grid"
                             style={{
                                 display: "grid",
-                                gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+
+                                gridTemplateColumns:
+                                    "repeat(3, minmax(0, 1fr))",
+
                                 gap: 12,
                             }}
-                            className="bp-login-feature-grid"
                         >
                             <div className="bp-login-feature">
-                                <ShieldCheck size={19} />
-                                <strong>Permissões</strong>
-                                <span>Roles, allow e deny.</span>
+                                <ShoppingBag size={19} />
+
+                                <strong>
+                                    Produtos
+                                </strong>
+
+                                <span>
+                                    Vendas e pré-vendas da
+                                    Atlética.
+                                </span>
                             </div>
 
                             <div className="bp-login-feature">
-                                <LockKeyhole size={19} />
-                                <strong>Sessão segura</strong>
-                                <span>Login real em produção.</span>
+                                <Users size={19} />
+
+                                <strong>
+                                    Sócios
+                                </strong>
+
+                                <span>
+                                    Benefícios e condições
+                                    exclusivas.
+                                </span>
                             </div>
 
                             <div className="bp-login-feature">
-                                <Sparkles size={19} />
-                                <strong>Planos</strong>
-                                <span>Atléticas e parceiros.</span>
+                                <TicketCheck size={19} />
+
+                                <strong>
+                                    Pedidos
+                                </strong>
+
+                                <span>
+                                    Acompanhe suas compras.
+                                </span>
                             </div>
                         </div>
                     </CardBody>
                 </Card>
 
+                {/* FORMULÁRIO */}
+
                 <Card
                     style={{
                         minHeight: 620,
+
                         display: "flex",
+
                         alignItems: "center",
                     }}
                 >
-                    <CardBody style={{ width: "100%" }}>
-                        <div style={{ marginBottom: 28 }}>
+                    <CardBody
+                        style={{
+                            width: "100%",
+                        }}
+                    >
+                        <div
+                            style={{
+                                marginBottom: 28,
+                            }}
+                        >
                             <div
                                 style={{
                                     width: 48,
                                     height: 48,
+
                                     borderRadius: 18,
-                                    background: "var(--color-primary-soft)",
-                                    color: "var(--color-primary)",
+
+                                    background:
+                                        "var(--color-primary-soft)",
+
+                                    color:
+                                        "var(--color-primary)",
+
                                     display: "grid",
-                                    placeItems: "center",
+                                    placeItems:
+                                        "center",
+
                                     marginBottom: 18,
                                 }}
                             >
-                                <LockKeyhole size={22} />
+                                <LockKeyhole
+                                    size={22}
+                                />
                             </div>
 
                             <p
                                 style={{
                                     margin: 0,
-                                    color: "var(--color-primary)",
+
+                                    color:
+                                        "var(--color-primary)",
+
                                     fontSize: 13,
+
                                     fontWeight: 700,
                                 }}
                             >
-                                Login seguro
+                                Sua conta
                             </p>
 
                             <h2
                                 style={{
-                                    margin: "8px 0 0",
+                                    margin:
+                                        "8px 0 0",
+
                                     fontSize: 32,
+
                                     lineHeight: 1.1,
-                                    letterSpacing: "-0.04em",
+
+                                    letterSpacing:
+                                        "-0.04em",
                                 }}
                             >
-                                Entrar no Brava Pass
+                                Entrar
                             </h2>
 
                             <p
                                 style={{
-                                    margin: "10px 0 0",
-                                    color: "var(--color-text-muted)",
+                                    margin:
+                                        "10px 0 0",
+
+                                    color:
+                                        "var(--color-text-muted)",
+
                                     lineHeight: 1.6,
+
                                     fontSize: 14,
                                 }}
                             >
-                                Use seu email ou nickname para acessar sua conta.
+                                Use seu email e senha para
+                                acessar sua conta.
                             </p>
                         </div>
 
-                        <form onSubmit={handleSubmit} style={{ display: "grid", gap: 16 }}>
+                        <form
+                            onSubmit={handleSubmit}
+                            style={{
+                                display: "grid",
+                                gap: 16,
+                            }}
+                        >
                             <Input
-                                label="Email ou nickname"
+                                label="Email"
                                 value={identificador}
-                                onChange={(event) => setIdentificador(event.target.value)}
-                                placeholder="admin@bravapass.dev ou admin_dev"
+                                onChange={(event) =>
+                                    setIdentificador(
+                                        event.target
+                                            .value,
+                                    )
+                                }
+                                placeholder="seuemail@email.com"
                                 autoComplete="username"
                                 disabled={carregando}
                                 required
                             />
 
-                            <Input
-                                label="Senha"
-                                value={senha}
-                                onChange={(event) => setSenha(event.target.value)}
-                                placeholder="Sua senha"
-                                type="password"
-                                autoComplete="current-password"
-                                disabled={carregando}
-                                required
-                            />
+                            <div>
+                                <Input
+                                    label="Senha"
+                                    value={senha}
+                                    onChange={(event) =>
+                                        setSenha(
+                                            event.target
+                                                .value,
+                                        )
+                                    }
+                                    placeholder="Sua senha"
+                                    type="password"
+                                    autoComplete="current-password"
+                                    disabled={carregando}
+                                    required
+                                />
+
+                                <div
+                                    style={{
+                                        display: "flex",
+
+                                        justifyContent:
+                                            "flex-end",
+
+                                        marginTop: 8,
+                                    }}
+                                >
+                                    <Link
+                                        href="/recuperar-senha"
+                                        style={{
+                                            color:
+                                                "var(--color-primary)",
+
+                                            fontSize: 13,
+
+                                            fontWeight: 700,
+
+                                            textDecoration:
+                                                "none",
+                                        }}
+                                    >
+                                        Esqueceu sua senha?
+                                    </Link>
+                                </div>
+                            </div>
 
                             {erro ? (
                                 <div
                                     style={{
-                                        border: "1px solid rgba(248, 113, 113, 0.25)",
-                                        background: "rgba(248, 113, 113, 0.10)",
-                                        color: "#fecaca",
+                                        border:
+                                            "1px solid var(--color-danger-border)",
+
+                                        background:
+                                            "var(--color-danger-soft)",
+
+                                        color:
+                                            "var(--color-danger)",
+
                                         borderRadius: 18,
-                                        padding: "12px 14px",
+
+                                        padding:
+                                            "12px 14px",
+
                                         fontSize: 13,
+
                                         lineHeight: 1.5,
                                     }}
                                 >
@@ -354,47 +580,38 @@ function LoginForm() {
 
                             <Button
                                 type="submit"
-                                disabled={carregando}
+                                disabled={
+                                    carregando
+                                }
                                 style={{
                                     width: "100%",
-                                    justifyContent: "center",
+
+                                    justifyContent:
+                                        "center",
+
                                     marginTop: 4,
                                 }}
                             >
-                                {carregando ? "Entrando..." : "Entrar"}
+                                {carregando
+                                    ? "Entrando..."
+                                    : "Entrar"}
                             </Button>
                         </form>
-                        <div className="bp-auth-message bp-mt-5">
-                            Não tem conta?{" "}
-                            <Link href="/cadastro" style={{ color: "var(--color-primary)", fontWeight: 800 }}>
-                                Criar uma conta
-                            </Link>
-                        </div>
 
-                        <div
-                            style={{
-                                marginTop: 22,
-                                border: "1px solid var(--color-border)",
-                                background: "rgba(255,255,255,0.03)",
-                                borderRadius: 20,
-                                padding: 16,
-                                color: "var(--color-text-soft)",
-                                fontSize: 13,
-                                lineHeight: 1.65,
-                            }}
-                        >
-                            <strong
+                        <div className="bp-auth-message bp-mt-5">
+                            Ainda não tem uma conta?{" "}
+
+                            <Link
+                                href="/cadastro"
                                 style={{
-                                    display: "block",
-                                    color: "var(--color-text)",
-                                    marginBottom: 4,
+                                    color:
+                                        "var(--color-primary)",
+
+                                    fontWeight: 800,
                                 }}
                             >
-                                Acesso dev
-                            </strong>
-                            <div>Email: admin@bravapass.dev</div>
-                            <div>Nickname: admin_dev</div>
-                            <div>Senha: admin123</div>
+                                Criar conta
+                            </Link>
                         </div>
                     </CardBody>
                 </Card>
@@ -402,39 +619,64 @@ function LoginForm() {
 
             <style jsx>{`
                 .bp-login-feature {
-                    border: 1px solid var(--color-border);
-                    background: rgba(255, 255, 255, 0.035);
+                    border: 1px solid
+                    var(--color-border);
+
+                    background: rgba(
+                            156,
+                            217,
+                            26,
+                            0.035
+                    );
+
                     border-radius: 20px;
+
                     padding: 16px;
+
                     display: grid;
+
                     gap: 7px;
-                    color: var(--color-text-soft);
+
+                    color: var(
+                            --color-text-soft
+                    );
+
                     font-size: 13px;
                 }
 
                 .bp-login-feature svg {
-                    color: var(--color-primary);
+                    color: var(
+                            --color-primary
+                    );
                 }
 
                 .bp-login-feature strong {
-                    color: var(--color-text);
+                    color: var(
+                            --color-text
+                    );
+
                     font-size: 14px;
                 }
 
                 @media (max-width: 920px) {
                     .bp-login-shell {
-                        grid-template-columns: 1fr !important;
-                        max-width: 520px !important;
+                        grid-template-columns:
+                            1fr !important;
+
+                        max-width:
+                                520px !important;
                     }
 
                     .bp-login-brand-card {
-                        display: none !important;
+                        display:
+                                none !important;
                     }
                 }
 
                 @media (max-width: 520px) {
                     main {
-                        padding: 14px !important;
+                        padding:
+                                14px !important;
                     }
                 }
             `}</style>

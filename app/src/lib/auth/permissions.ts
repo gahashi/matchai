@@ -1,154 +1,79 @@
 import { prisma } from "@/lib/prisma";
 import { AuthSession } from "@/lib/auth/auth-types";
 
-type PermissionScope = {
-    entEntidadeId?: number | null;
-    globalOnly?: boolean;
-};
-
-function buildEntityScope({
-                              entEntidadeId = null,
-                              globalOnly = false,
-                          }: PermissionScope) {
-    if (globalOnly || !entEntidadeId) {
-        return [{ ent_entidade_id: null }];
-    }
-
-    return [
-        { ent_entidade_id: null },
-        { ent_entidade_id: entEntidadeId },
-    ];
-}
-
-export async function userHasPermissionByUserId(
-    sysUsuarioId: number,
-    permissionCode: string,
-    scope: PermissionScope = {}
-): Promise<boolean> {
-    const entityScope = buildEntityScope(scope);
-
-    const directDeny = await prisma.sysUsuarioPermission.findFirst({
-        where: {
-            sys_usuario_id: sysUsuarioId,
-            ativo: 1,
-            deleted_at: null,
-            sys_permission: {
-                codigo: permissionCode,
-                ativo: 1,
-            },
-            sys_usuario_permission_tipo: {
-                codigo: "deny",
-                ativo: 1,
-            },
-            OR: entityScope,
-        },
-        select: {
-            id: true,
-        },
-    });
-
-    if (directDeny) {
-        return false;
-    }
-
-    const directAllow = await prisma.sysUsuarioPermission.findFirst({
-        where: {
-            sys_usuario_id: sysUsuarioId,
-            ativo: 1,
-            deleted_at: null,
-            sys_permission: {
-                codigo: permissionCode,
-                ativo: 1,
-            },
-            sys_usuario_permission_tipo: {
-                codigo: "allow",
-                ativo: 1,
-            },
-            OR: entityScope,
-        },
-        select: {
-            id: true,
-        },
-    });
-
-    if (directAllow) {
-        return true;
-    }
-
-    const rolePermission = await prisma.sysUsuarioRole.findFirst({
-        where: {
-            sys_usuario_id: sysUsuarioId,
-            ativo: 1,
-            deleted_at: null,
-            OR: entityScope,
-            sys_role: {
-                ativo: 1,
-                deleted_at: null,
-                sys_role_permission: {
-                    some: {
-                        ativo: 1,
-                        sys_permission: {
-                            codigo: permissionCode,
-                            ativo: 1,
-                        },
-                    },
-                },
-            },
-        },
-        select: {
-            id: true,
-        },
-    });
-
-    return Boolean(rolePermission);
-}
-
-export async function userHasGlobalPermissionByUserId(
-    sysUsuarioId: number,
-    permissionCode: string
-): Promise<boolean> {
-    return userHasPermissionByUserId(sysUsuarioId, permissionCode, {
-        globalOnly: true,
-    });
+export function userIsAdmin(
+    session: AuthSession,
+): boolean {
+    return (
+        session.user.sys_usuario_tipo.codigo ===
+        "admin"
+    );
 }
 
 export async function userHasPermission(
     session: AuthSession,
-    permissionCode: string
+    _permissionCode: string,
 ): Promise<boolean> {
-    return userHasPermissionByUserId(
-        session.user.id,
-        permissionCode,
-        {
-            entEntidadeId: session.ent_entidade_id ?? null,
-        }
-    );
-}
-
-export async function userHasGlobalPermission(
-    session: AuthSession,
-    permissionCode: string
-): Promise<boolean> {
-    return userHasGlobalPermissionByUserId(
-        session.user.id,
-        permissionCode
-    );
+    return userIsAdmin(session);
 }
 
 export async function userHasAnyPermission(
     session: AuthSession,
-    permissionCodes: string[]
+    _permissionCodes: string[],
 ): Promise<boolean> {
-    for (const permissionCode of permissionCodes) {
-        const allowed = await userHasPermission(
-            session,
-            permissionCode
-        );
+    return userIsAdmin(session);
+}
 
-        if (allowed) {
-            return true;
-        }
+export async function userHasGlobalPermission(
+    session: AuthSession,
+    _permissionCode: string,
+): Promise<boolean> {
+    return userIsAdmin(session);
+}
+
+export async function userHasPermissionByUserId(
+    sysUsuarioId: number,
+    _permissionCode: string,
+): Promise<boolean> {
+    const usuario =
+        await prisma.sysUsuario.findUnique({
+            where: {
+                id: sysUsuarioId,
+            },
+            select: {
+                ativo: true,
+                deleted_at: true,
+
+                sys_usuario_tipo: {
+                    select: {
+                        codigo: true,
+                        ativo: true,
+                    },
+                },
+            },
+        });
+
+    if (
+        !usuario ||
+        usuario.ativo !== 1 ||
+        usuario.deleted_at ||
+        usuario.sys_usuario_tipo.ativo !== 1
+    ) {
+        return false;
     }
 
-    return false;
+    return (
+        usuario.sys_usuario_tipo.codigo ===
+        "admin"
+    );
+}
+
+export async function userHasGlobalPermissionByUserId(
+    sysUsuarioId: number,
+    permissionCode: string,
+): Promise<boolean> {
+    return userHasPermissionByUserId(
+        sysUsuarioId,
+        permissionCode,
+    );
 }

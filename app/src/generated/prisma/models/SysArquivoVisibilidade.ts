@@ -228,7 +228,7 @@ export type SysArquivoVisibilidadeWhereInput = {
   ativo?: Prisma.IntFilter<"SysArquivoVisibilidade"> | number
   created_at?: Prisma.DateTimeNullableFilter<"SysArquivoVisibilidade"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"SysArquivoVisibilidade"> | Date | string | null
-  arquivos?: Prisma.SysArquivoListRelationFilter
+  sys_arquivos?: Prisma.SysArquivoListRelationFilter
 }
 
 export type SysArquivoVisibilidadeOrderByWithRelationInput = {
@@ -238,7 +238,7 @@ export type SysArquivoVisibilidadeOrderByWithRelationInput = {
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  arquivos?: Prisma.SysArquivoOrderByRelationAggregateInput
+  sys_arquivos?: Prisma.SysArquivoOrderByRelationAggregateInput
   _relevance?: Prisma.SysArquivoVisibilidadeOrderByRelevanceInput
 }
 
@@ -252,7 +252,7 @@ export type SysArquivoVisibilidadeWhereUniqueInput = Prisma.AtLeast<{
   ativo?: Prisma.IntFilter<"SysArquivoVisibilidade"> | number
   created_at?: Prisma.DateTimeNullableFilter<"SysArquivoVisibilidade"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"SysArquivoVisibilidade"> | Date | string | null
-  arquivos?: Prisma.SysArquivoListRelationFilter
+  sys_arquivos?: Prisma.SysArquivoListRelationFilter
 }, "id" | "codigo">
 
 export type SysArquivoVisibilidadeOrderByWithAggregationInput = {
@@ -287,7 +287,7 @@ export type SysArquivoVisibilidadeCreateInput = {
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
-  arquivos?: Prisma.SysArquivoCreateNestedManyWithoutVisibilidadeInput
+  sys_arquivos?: Prisma.SysArquivoCreateNestedManyWithoutSys_arquivo_visibilidadeInput
 }
 
 export type SysArquivoVisibilidadeUncheckedCreateInput = {
@@ -297,7 +297,7 @@ export type SysArquivoVisibilidadeUncheckedCreateInput = {
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
-  arquivos?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutVisibilidadeInput
+  sys_arquivos?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutSys_arquivo_visibilidadeInput
 }
 
 export type SysArquivoVisibilidadeUpdateInput = {
@@ -306,7 +306,7 @@ export type SysArquivoVisibilidadeUpdateInput = {
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  arquivos?: Prisma.SysArquivoUpdateManyWithoutVisibilidadeNestedInput
+  sys_arquivos?: Prisma.SysArquivoUpdateManyWithoutSys_arquivo_visibilidadeNestedInput
 }
 
 export type SysArquivoVisibilidadeUncheckedUpdateInput = {
@@ -316,7 +316,7 @@ export type SysArquivoVisibilidadeUncheckedUpdateInput = {
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  arquivos?: Prisma.SysArquivoUncheckedUpdateManyWithoutVisibilidadeNestedInput
+  sys_arquivos?: Prisma.SysArquivoUncheckedUpdateManyWithoutSys_arquivo_visibilidadeNestedInput
 }
 
 export type SysArquivoVisibilidadeCreateManyInput = {
@@ -393,21 +393,21 @@ export type SysArquivoVisibilidadeScalarRelationFilter = {
   isNot?: Prisma.SysArquivoVisibilidadeWhereInput
 }
 
-export type SysArquivoVisibilidadeCreateNestedOneWithoutArquivosInput = {
-  create?: Prisma.XOR<Prisma.SysArquivoVisibilidadeCreateWithoutArquivosInput, Prisma.SysArquivoVisibilidadeUncheckedCreateWithoutArquivosInput>
-  connectOrCreate?: Prisma.SysArquivoVisibilidadeCreateOrConnectWithoutArquivosInput
+export type SysArquivoVisibilidadeCreateNestedOneWithoutSys_arquivosInput = {
+  create?: Prisma.XOR<Prisma.SysArquivoVisibilidadeCreateWithoutSys_arquivosInput, Prisma.SysArquivoVisibilidadeUncheckedCreateWithoutSys_arquivosInput>
+  connectOrCreate?: Prisma.SysArquivoVisibilidadeCreateOrConnectWithoutSys_arquivosInput
   connect?: Prisma.SysArquivoVisibilidadeWhereUniqueInput
 }
 
-export type SysArquivoVisibilidadeUpdateOneRequiredWithoutArquivosNestedInput = {
-  create?: Prisma.XOR<Prisma.SysArquivoVisibilidadeCreateWithoutArquivosInput, Prisma.SysArquivoVisibilidadeUncheckedCreateWithoutArquivosInput>
-  connectOrCreate?: Prisma.SysArquivoVisibilidadeCreateOrConnectWithoutArquivosInput
-  upsert?: Prisma.SysArquivoVisibilidadeUpsertWithoutArquivosInput
+export type SysArquivoVisibilidadeUpdateOneRequiredWithoutSys_arquivosNestedInput = {
+  create?: Prisma.XOR<Prisma.SysArquivoVisibilidadeCreateWithoutSys_arquivosInput, Prisma.SysArquivoVisibilidadeUncheckedCreateWithoutSys_arquivosInput>
+  connectOrCreate?: Prisma.SysArquivoVisibilidadeCreateOrConnectWithoutSys_arquivosInput
+  upsert?: Prisma.SysArquivoVisibilidadeUpsertWithoutSys_arquivosInput
   connect?: Prisma.SysArquivoVisibilidadeWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.SysArquivoVisibilidadeUpdateToOneWithWhereWithoutArquivosInput, Prisma.SysArquivoVisibilidadeUpdateWithoutArquivosInput>, Prisma.SysArquivoVisibilidadeUncheckedUpdateWithoutArquivosInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SysArquivoVisibilidadeUpdateToOneWithWhereWithoutSys_arquivosInput, Prisma.SysArquivoVisibilidadeUpdateWithoutSys_arquivosInput>, Prisma.SysArquivoVisibilidadeUncheckedUpdateWithoutSys_arquivosInput>
 }
 
-export type SysArquivoVisibilidadeCreateWithoutArquivosInput = {
+export type SysArquivoVisibilidadeCreateWithoutSys_arquivosInput = {
   codigo: string
   nome: string
   ativo?: number
@@ -415,7 +415,7 @@ export type SysArquivoVisibilidadeCreateWithoutArquivosInput = {
   updated_at?: Date | string | null
 }
 
-export type SysArquivoVisibilidadeUncheckedCreateWithoutArquivosInput = {
+export type SysArquivoVisibilidadeUncheckedCreateWithoutSys_arquivosInput = {
   id?: number
   codigo: string
   nome: string
@@ -424,23 +424,23 @@ export type SysArquivoVisibilidadeUncheckedCreateWithoutArquivosInput = {
   updated_at?: Date | string | null
 }
 
-export type SysArquivoVisibilidadeCreateOrConnectWithoutArquivosInput = {
+export type SysArquivoVisibilidadeCreateOrConnectWithoutSys_arquivosInput = {
   where: Prisma.SysArquivoVisibilidadeWhereUniqueInput
-  create: Prisma.XOR<Prisma.SysArquivoVisibilidadeCreateWithoutArquivosInput, Prisma.SysArquivoVisibilidadeUncheckedCreateWithoutArquivosInput>
+  create: Prisma.XOR<Prisma.SysArquivoVisibilidadeCreateWithoutSys_arquivosInput, Prisma.SysArquivoVisibilidadeUncheckedCreateWithoutSys_arquivosInput>
 }
 
-export type SysArquivoVisibilidadeUpsertWithoutArquivosInput = {
-  update: Prisma.XOR<Prisma.SysArquivoVisibilidadeUpdateWithoutArquivosInput, Prisma.SysArquivoVisibilidadeUncheckedUpdateWithoutArquivosInput>
-  create: Prisma.XOR<Prisma.SysArquivoVisibilidadeCreateWithoutArquivosInput, Prisma.SysArquivoVisibilidadeUncheckedCreateWithoutArquivosInput>
+export type SysArquivoVisibilidadeUpsertWithoutSys_arquivosInput = {
+  update: Prisma.XOR<Prisma.SysArquivoVisibilidadeUpdateWithoutSys_arquivosInput, Prisma.SysArquivoVisibilidadeUncheckedUpdateWithoutSys_arquivosInput>
+  create: Prisma.XOR<Prisma.SysArquivoVisibilidadeCreateWithoutSys_arquivosInput, Prisma.SysArquivoVisibilidadeUncheckedCreateWithoutSys_arquivosInput>
   where?: Prisma.SysArquivoVisibilidadeWhereInput
 }
 
-export type SysArquivoVisibilidadeUpdateToOneWithWhereWithoutArquivosInput = {
+export type SysArquivoVisibilidadeUpdateToOneWithWhereWithoutSys_arquivosInput = {
   where?: Prisma.SysArquivoVisibilidadeWhereInput
-  data: Prisma.XOR<Prisma.SysArquivoVisibilidadeUpdateWithoutArquivosInput, Prisma.SysArquivoVisibilidadeUncheckedUpdateWithoutArquivosInput>
+  data: Prisma.XOR<Prisma.SysArquivoVisibilidadeUpdateWithoutSys_arquivosInput, Prisma.SysArquivoVisibilidadeUncheckedUpdateWithoutSys_arquivosInput>
 }
 
-export type SysArquivoVisibilidadeUpdateWithoutArquivosInput = {
+export type SysArquivoVisibilidadeUpdateWithoutSys_arquivosInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -448,7 +448,7 @@ export type SysArquivoVisibilidadeUpdateWithoutArquivosInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type SysArquivoVisibilidadeUncheckedUpdateWithoutArquivosInput = {
+export type SysArquivoVisibilidadeUncheckedUpdateWithoutSys_arquivosInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
@@ -463,11 +463,11 @@ export type SysArquivoVisibilidadeUncheckedUpdateWithoutArquivosInput = {
  */
 
 export type SysArquivoVisibilidadeCountOutputType = {
-  arquivos: number
+  sys_arquivos: number
 }
 
 export type SysArquivoVisibilidadeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  arquivos?: boolean | SysArquivoVisibilidadeCountOutputTypeCountArquivosArgs
+  sys_arquivos?: boolean | SysArquivoVisibilidadeCountOutputTypeCountSys_arquivosArgs
 }
 
 /**
@@ -483,7 +483,7 @@ export type SysArquivoVisibilidadeCountOutputTypeDefaultArgs<ExtArgs extends run
 /**
  * SysArquivoVisibilidadeCountOutputType without action
  */
-export type SysArquivoVisibilidadeCountOutputTypeCountArquivosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SysArquivoVisibilidadeCountOutputTypeCountSys_arquivosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SysArquivoWhereInput
 }
 
@@ -495,7 +495,7 @@ export type SysArquivoVisibilidadeSelect<ExtArgs extends runtime.Types.Extension
   ativo?: boolean
   created_at?: boolean
   updated_at?: boolean
-  arquivos?: boolean | Prisma.SysArquivoVisibilidade$arquivosArgs<ExtArgs>
+  sys_arquivos?: boolean | Prisma.SysArquivoVisibilidade$sys_arquivosArgs<ExtArgs>
   _count?: boolean | Prisma.SysArquivoVisibilidadeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sysArquivoVisibilidade"]>
 
@@ -512,14 +512,14 @@ export type SysArquivoVisibilidadeSelectScalar = {
 
 export type SysArquivoVisibilidadeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "codigo" | "nome" | "ativo" | "created_at" | "updated_at", ExtArgs["result"]["sysArquivoVisibilidade"]>
 export type SysArquivoVisibilidadeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  arquivos?: boolean | Prisma.SysArquivoVisibilidade$arquivosArgs<ExtArgs>
+  sys_arquivos?: boolean | Prisma.SysArquivoVisibilidade$sys_arquivosArgs<ExtArgs>
   _count?: boolean | Prisma.SysArquivoVisibilidadeCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $SysArquivoVisibilidadePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SysArquivoVisibilidade"
   objects: {
-    arquivos: Prisma.$SysArquivoPayload<ExtArgs>[]
+    sys_arquivos: Prisma.$SysArquivoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -868,7 +868,7 @@ readonly fields: SysArquivoVisibilidadeFieldRefs;
  */
 export interface Prisma__SysArquivoVisibilidadeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  arquivos<T extends Prisma.SysArquivoVisibilidade$arquivosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivoVisibilidade$arquivosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysArquivoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sys_arquivos<T extends Prisma.SysArquivoVisibilidade$sys_arquivosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivoVisibilidade$sys_arquivosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysArquivoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1252,9 +1252,9 @@ export type SysArquivoVisibilidadeDeleteManyArgs<ExtArgs extends runtime.Types.E
 }
 
 /**
- * SysArquivoVisibilidade.arquivos
+ * SysArquivoVisibilidade.sys_arquivos
  */
-export type SysArquivoVisibilidade$arquivosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SysArquivoVisibilidade$sys_arquivosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the SysArquivo
    */

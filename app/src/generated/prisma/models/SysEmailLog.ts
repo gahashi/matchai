@@ -390,7 +390,7 @@ export type SysEmailLogCreateInput = {
   sent_at?: Date | string | null
   created_at?: Date | string | null
   updated_at?: Date | string | null
-  sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSysEmailLogsInput
+  sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSys_email_logsInput
 }
 
 export type SysEmailLogUncheckedCreateInput = {
@@ -423,7 +423,7 @@ export type SysEmailLogUpdateInput = {
   sent_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutSysEmailLogsNestedInput
+  sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutSys_email_logsNestedInput
 }
 
 export type SysEmailLogUncheckedUpdateInput = {
