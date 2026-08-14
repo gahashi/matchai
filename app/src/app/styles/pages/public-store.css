@@ -287,8 +287,8 @@
     border: 1px solid var(--color-border);
     border-radius: 30px;
     background:
-            linear-gradient(145deg, rgba(245, 242, 232, 0.06), transparent 45%),
-            var(--color-surface);
+        linear-gradient(145deg, rgba(245, 242, 232, 0.06), transparent 45%),
+        var(--color-surface);
     overflow: hidden;
     box-shadow: 0 28px 90px rgba(0, 0, 0, 0.38);
     display: flex;
@@ -373,8 +373,8 @@
     border: 1px solid var(--color-border);
     border-radius: 24px;
     background:
-            linear-gradient(145deg, rgba(156, 217, 26, 0.06), transparent 55%),
-            var(--color-surface);
+        linear-gradient(145deg, rgba(156, 217, 26, 0.06), transparent 55%),
+        var(--color-surface);
     display: flex;
     align-items: flex-end;
 }
@@ -451,9 +451,9 @@
     display: flex;
     flex-direction: column;
     transition:
-            transform var(--transition-fast),
-            border-color var(--transition-fast),
-            box-shadow var(--transition-fast);
+        transform var(--transition-fast),
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
 }
 
 .bp-public-product-card:hover {
@@ -466,8 +466,8 @@
     position: relative;
     aspect-ratio: 1 / 1;
     background:
-            radial-gradient(circle at 50% 38%, rgba(245, 242, 232, 0.06), transparent 60%),
-            var(--color-surface-2);
+        radial-gradient(circle at 50% 38%, rgba(245, 242, 232, 0.06), transparent 60%),
+        var(--color-surface-2);
     overflow: hidden;
 }
 
@@ -644,8 +644,8 @@
     border: 1px solid var(--color-primary-border);
     border-radius: 26px;
     background:
-            radial-gradient(circle at 85% 30%, rgba(156, 217, 26, 0.16), transparent 28rem),
-            var(--color-surface);
+        radial-gradient(circle at 85% 30%, rgba(156, 217, 26, 0.16), transparent 28rem),
+        var(--color-surface);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -2041,4 +2041,448 @@ button.bp-public-product-card:focus-visible {
     .bp-public-plan-detail-media {
         border-radius: 14px;
     }
+}
+
+/* =========================================================
+   Checkout — Mercado Pago
+   Mantido neste arquivo porque pertence ao fluxo público da loja.
+   ========================================================= */
+
+.bp-public-checkout-container {
+    padding-top: 28px;
+    padding-bottom: 54px;
+}
+
+.bp-public-checkout-page {
+    display: grid;
+    gap: 22px;
+}
+
+.bp-public-checkout-head {
+    max-width: 760px;
+}
+
+.bp-public-checkout-head h1,
+.bp-public-checkout-result h1 {
+    margin: 8px 0 0;
+    color: var(--color-text);
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1;
+    letter-spacing: -0.05em;
+}
+
+.bp-public-checkout-head p,
+.bp-public-checkout-result > p {
+    margin: 12px 0 0;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.bp-public-checkout-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+    gap: 18px;
+    align-items: start;
+}
+
+.bp-public-checkout-main {
+    display: grid;
+    gap: 14px;
+    min-width: 0;
+}
+
+.bp-public-checkout-card,
+.bp-public-checkout-summary,
+.bp-public-checkout-result {
+    border: 1px solid var(--color-border);
+    background: var(--color-card);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+.bp-public-checkout-card {
+    padding: 18px;
+}
+
+.bp-public-checkout-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.bp-public-checkout-card-head > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.bp-public-checkout-card-head > div > span {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    border-radius: 12px;
+    background: var(--color-primary-soft);
+    border: 1px solid var(--color-primary-border);
+    color: var(--color-primary);
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.bp-public-checkout-card-head strong,
+.bp-public-checkout-card-head small {
+    display: block;
+}
+
+.bp-public-checkout-card-head strong {
+    color: var(--color-text);
+    font-size: 15px;
+}
+
+.bp-public-checkout-card-head small {
+    margin-top: 3px;
+    color: var(--color-text-soft);
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.bp-public-checkout-card-head > button {
+    border: 0;
+    background: transparent;
+    color: var(--color-primary);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.bp-public-checkout-fields {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.bp-public-checkout-fields label {
+    display: grid;
+    gap: 7px;
+    color: var(--color-text-muted);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.bp-public-checkout-fields label:last-of-type {
+    grid-column: 1 / -1;
+}
+
+.bp-public-checkout-fields .bp-input:disabled {
+    opacity: 0.72;
+}
+
+.bp-public-checkout-field-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 2px;
+}
+
+.bp-public-checkout-customer-summary {
+    margin-top: 16px;
+    padding: 14px;
+    display: grid;
+    gap: 4px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-soft);
+    background: var(--color-surface);
+}
+
+.bp-public-checkout-customer-summary strong {
+    color: var(--color-text);
+    font-size: 14px;
+}
+
+.bp-public-checkout-customer-summary span {
+    color: var(--color-text-muted);
+    font-size: 12px;
+}
+
+.bp-public-checkout-locked,
+.bp-public-checkout-brick-loading,
+.bp-public-checkout-processing {
+    margin-top: 16px;
+    min-height: 74px;
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--color-border-strong);
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 16px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.bp-public-checkout-locked.is-danger {
+    border-color: var(--color-danger-border);
+    background: var(--color-danger-soft);
+    color: var(--color-danger);
+}
+
+.bp-public-payment-brick {
+    position: relative;
+    margin-top: 14px;
+    min-height: 180px;
+}
+
+.bp-public-checkout-brick-loading {
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 2;
+    margin: 0;
+    min-height: 86px;
+}
+
+.bp-public-checkout-processing {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    margin: 0;
+    border-style: solid;
+    background: color-mix(in srgb, var(--color-card) 92%, transparent);
+    backdrop-filter: blur(4px);
+}
+
+.bp-public-checkout-summary {
+    position: sticky;
+    top: 18px;
+    padding: 18px;
+    display: grid;
+    gap: 16px;
+}
+
+.bp-public-checkout-summary > span {
+    color: var(--color-text-soft);
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.bp-public-checkout-summary-items {
+    display: grid;
+    gap: 12px;
+}
+
+.bp-public-checkout-summary-items > div {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.bp-public-checkout-summary-items > div > div {
+    min-width: 0;
+    display: grid;
+    gap: 3px;
+}
+
+.bp-public-checkout-summary-items strong {
+    color: var(--color-text);
+    font-size: 12px;
+}
+
+.bp-public-checkout-summary-items small {
+    color: var(--color-text-soft);
+    font-size: 11px;
+}
+
+.bp-public-checkout-summary > .bp-public-cart-summary-total {
+    padding-top: 15px;
+    border-top: 1px solid var(--color-border-soft);
+}
+
+.bp-public-checkout-withdrawal {
+    display: grid;
+    gap: 5px;
+    padding: 13px;
+    border-radius: var(--radius-lg);
+    background: var(--color-primary-soft);
+    border: 1px solid var(--color-primary-border);
+}
+
+.bp-public-checkout-withdrawal strong {
+    color: var(--color-primary);
+    font-size: 12px;
+}
+
+.bp-public-checkout-withdrawal span {
+    color: var(--color-text-muted);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.bp-public-checkout-link {
+    width: 100%;
+    min-height: 42px;
+}
+
+.bp-public-checkout-result {
+    width: min(100%, 720px);
+    margin: 28px auto 54px;
+    padding: clamp(22px, 5vw, 42px);
+    text-align: center;
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+}
+
+.bp-public-checkout-result-icon {
+    width: 62px;
+    height: 62px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 4px;
+    border-radius: 20px;
+    border: 1px solid var(--color-border);
+}
+
+.bp-public-checkout-result-icon.is-success {
+    color: var(--color-success);
+    background: var(--color-success-soft);
+    border-color: var(--color-success-border);
+}
+
+.bp-public-checkout-result-icon.is-pending {
+    color: var(--color-warning);
+    background: var(--color-warning-soft);
+    border-color: var(--color-warning-border);
+}
+
+.bp-public-checkout-result-icon.is-danger {
+    color: var(--color-danger);
+    background: var(--color-danger-soft);
+    border-color: var(--color-danger-border);
+}
+
+.bp-public-pix-qr {
+    width: min(100%, 270px);
+    height: auto;
+    margin-top: 10px;
+    border-radius: var(--radius-lg);
+    background: #fff;
+    padding: 10px;
+}
+
+.bp-public-pix-copy {
+    width: 100%;
+    margin-top: 8px;
+    display: grid;
+    gap: 9px;
+}
+
+.bp-public-pix-copy code {
+    width: 100%;
+    max-height: 110px;
+    overflow: auto;
+    padding: 12px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    font-size: 10px;
+    line-height: 1.45;
+    text-align: left;
+    word-break: break-all;
+}
+
+.bp-public-pix-copy .bp-button {
+    justify-self: center;
+}
+
+.bp-public-checkout-result-actions {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+@media (max-width: 980px) {
+    .bp-public-checkout-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .bp-public-checkout-summary {
+        position: static;
+        order: -1;
+    }
+}
+
+@media (max-width: 640px) {
+    .bp-public-checkout-container {
+        padding-top: 18px;
+        padding-bottom: 36px;
+    }
+
+    .bp-public-checkout-card,
+    .bp-public-checkout-summary,
+    .bp-public-checkout-result {
+        border-radius: var(--radius-lg);
+    }
+
+    .bp-public-checkout-card {
+        padding: 15px;
+    }
+
+    .bp-public-checkout-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .bp-public-checkout-fields label:last-of-type,
+    .bp-public-checkout-field-actions {
+        grid-column: auto;
+    }
+
+    .bp-public-checkout-field-actions .bp-button {
+        width: 100%;
+    }
+
+    .bp-public-checkout-card-head {
+        align-items: flex-start;
+    }
+
+    .bp-public-checkout-card-head small {
+        max-width: 230px;
+    }
+
+    .bp-public-checkout-result-actions,
+    .bp-public-checkout-result-actions .bp-button,
+    .bp-public-checkout-result-actions .bp-public-primary-link,
+    .bp-public-checkout-result-actions .bp-public-secondary-link {
+        width: 100%;
+    }
+}
+
+
+.bp-public-checkout-status-refresh {
+    width: min(100%, 620px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 2px auto 14px;
+    color: var(--color-text-muted);
+    font-size: 12px;
+}
+
+.bp-public-checkout-status-refresh svg {
+    animation: bp-spin 0.9s linear infinite;
 }

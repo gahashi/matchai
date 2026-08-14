@@ -21,6 +21,10 @@ export const routeAccessRules: RouteAccessRule[] = [
         access: "public",
     },
     {
+        path: "/checkout",
+        access: "public",
+    },
+    {
         path: "/acompanhar-pedido",
         access: "public",
     },

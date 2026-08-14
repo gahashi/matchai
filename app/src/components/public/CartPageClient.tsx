@@ -337,12 +337,25 @@ export function CartPageClient() {
                         </p>
                     ) : null}
 
-                    <Button type="button" fullWidth disabled>
-                        Continuar para checkout
-                    </Button>
+                    {!validating &&
+                    !validationError &&
+                    !hasUnavailable &&
+                    validated.length > 0 &&
+                    total > 0 ? (
+                        <Link
+                            href="/checkout"
+                            className="bp-public-primary-link bp-public-checkout-link"
+                        >
+                            Continuar para checkout
+                        </Link>
+                    ) : (
+                        <Button type="button" fullWidth disabled>
+                            Continuar para checkout
+                        </Button>
+                    )}
 
                     <small>
-                        O checkout será conectado na próxima etapa. O carrinho já está persistido e validado no servidor.
+                        O valor será conferido novamente pelo servidor antes do pagamento.
                     </small>
                 </aside>
             </div>
