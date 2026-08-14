@@ -49,3 +49,27 @@ svg {
     color: var(--color-primary-foreground);
 }
 
+/* Scrollbar global */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-strong) var(--color-surface);
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--color-surface);
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border: 2px solid var(--color-surface);
+    border-radius: var(--radius-full);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-soft);
+}

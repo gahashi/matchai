@@ -1,17 +1,27 @@
-import { AppShell } from "@/components/layout/AppShell";
-import { PageHeader } from "@/components/ui/PageHeader";
-import { requirePageAccess } from "@/lib/auth/require-access";
+import {
+    AppShell,
+} from "@/components/layout/AppShell";
+import {
+    requirePageAccess,
+} from "@/lib/auth/require-access";
+import {
+    planoService,
+} from "@/lib/soc/plano-service";
+
+import AdminPlanosSocioClient from "./AdminPlanosSocioClient";
 
 export default async function AdminPlanosSocioPage() {
     await requirePageAccess(
         "/admin/planos-socio",
     );
 
+    const data =
+        await planoService.listAdminData();
+
     return (
         <AppShell>
-            <PageHeader
-                title="Planos de sócio"
-                subtitle="Gerencie os planos de associação."
+            <AdminPlanosSocioClient
+                initialData={data}
             />
         </AppShell>
     );

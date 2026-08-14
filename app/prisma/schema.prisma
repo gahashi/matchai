@@ -317,6 +317,8 @@ model SysArquivo {
 
   cad_eventos_banner CadEvento[] @relation("CadEventoBanner")
 
+  soc_planos_banner SocPlano[] @relation("SocPlanoBanner")
+
   @@index([sys_arquivo_disco_id])
   @@index([sys_arquivo_visibilidade_id])
   @@index([sys_arquivo_tipo_id])
@@ -489,6 +491,11 @@ model PrdProdutoVariacao {
   sku  String? @unique @db.VarChar(80)
   nome String  @db.VarChar(120)
 
+  atributo_1 String? @db.VarChar(60)
+  valor_1    String? @db.VarChar(60)
+  atributo_2 String? @db.VarChar(60)
+  valor_2    String? @db.VarChar(60)
+
   ordem Int @default(0)
 
   estoque_atual Int?
@@ -635,6 +642,8 @@ model SocPlano {
 
   prd_produto_id Int?
 
+  banner_sys_arquivo_id Int?
+
   codigo String @unique @db.VarChar(60)
   nome   String @db.VarChar(150)
 
@@ -656,9 +665,12 @@ model SocPlano {
 
   prd_produto PrdProduto? @relation(fields: [prd_produto_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
+  banner_sys_arquivo SysArquivo? @relation("SocPlanoBanner", fields: [banner_sys_arquivo_id], references: [id], onDelete: SetNull, onUpdate: Restrict)
+
   soc_socios SocSocio[]
 
   @@index([prd_produto_id])
+  @@index([banner_sys_arquivo_id])
   @@index([ativo])
   @@index([ativo, visivel_publico])
   @@index([inicio_exibicao, fim_exibicao])
@@ -750,9 +762,9 @@ model VndPedido {
   vnd_pedido_status_id Int
   vnd_entrega_tipo_id  Int?
 
-  cliente_nome     String @db.VarChar(150)
-  cliente_email    String @db.VarChar(180)
-  cliente_telefone String @db.VarChar(30)
+  cliente_nome     String  @db.VarChar(150)
+  cliente_email    String? @db.VarChar(180)
+  cliente_telefone String  @db.VarChar(30)
 
   entrega_endereco String? @db.VarChar(500)
   retirada_local   String? @db.VarChar(255)

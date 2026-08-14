@@ -21,9 +21,11 @@
     top: 0;
     height: 100vh;
     border-right: 1px solid var(--color-border);
-    background: rgba(17, 19, 27, 0.92);
-    backdrop-filter: blur(18px);
+    background: var(--color-sidebar-background);
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
 }
 
 .bp-sidebar-brand {
@@ -63,7 +65,7 @@
     color: var(--color-text-muted);
     padding: 11px 12px;
     border-radius: var(--radius-md);
-    transition: 0.18s ease;
+    transition: var(--transition-fast);
     font-size: var(--font-size-md);
 }
 
@@ -292,3 +294,39 @@
 
     line-height: 1.2;
 }
+
+/* Navegação compartilhada: Sidebar e área pública usam a mesma estrutura. */
+.bp-nav-section {
+    display: grid;
+    gap: 8px;
+}
+
+.bp-nav-section + .bp-nav-section {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--color-border-soft);
+}
+
+.bp-nav-section-admin {
+    margin-top: auto;
+}
+
+.bp-nav-section-admin.bp-nav-section + .bp-nav-section,
+.bp-nav-section-admin {
+    padding-top: 18px;
+    border-top: 1px solid var(--color-border-soft);
+}
+
+.bp-nav-section-label {
+    padding: 0 12px 2px;
+    color: var(--color-text-soft);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.bp-nav-item svg {
+    flex: 0 0 auto;
+}
+

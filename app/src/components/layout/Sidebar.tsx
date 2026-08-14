@@ -5,99 +5,87 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import {
-    CalendarDays,
-    Home,
-    Package,
-    ShoppingBag,
-    UserRound,
-    UsersRound,
-    WalletCards,
-} from "lucide-react";
+    adminNavigationItems,
+    getPublicDesktopNavigation,
+    isNavigationItemActive,
+    type NavigationItem,
+    type NavigationUserContext,
+} from "@/config/navigation";
 
+type SidebarProps = {
+    mode?: "app" | "public";
+    user?: NavigationUserContext;
+};
 
-const defaultNavItems = [
-    {
-        label: "Início",
-        icon: Home,
-        href: "/",
-    },
-    {
-        label: "Minha conta",
-        icon: UserRound,
-        href: "/perfil",
-    },
-];
+const anonymousUser: NavigationUserContext = {
+    isAuthenticated: false,
+    isAdmin: false,
+};
 
-
-const adminNavItems = [
-    {
-        label: "Produtos",
-        icon: Package,
-        href: "/admin/produtos",
-    },
-    {
-        label: "Eventos",
-        icon: CalendarDays,
-        href: "/admin/eventos",
-    },
-    {
-        label: "Planos de sócio",
-        icon: WalletCards,
-        href: "/admin/planos-socio",
-    },
-    {
-        label: "Pedidos",
-        icon: ShoppingBag,
-        href: "/admin/pedidos",
-    },
-    {
-        label: "Sócios",
-        icon: UsersRound,
-        href: "/admin/socios",
-    },
-];
-
-
-function isActiveRoute(
-    pathname: string,
-    href: string,
-) {
-    if (href === "/") {
-        return pathname === "/";
-    }
-
+function NavigationLinks({
+                             items,
+                             pathname,
+                         }: {
+    items: NavigationItem[];
+    pathname: string;
+}) {
     return (
-        pathname === href ||
-        pathname.startsWith(
-            `${href}/`,
-        )
+        <nav className="bp-nav">
+            {items.map((item) => {
+                const Icon = item.icon;
+                const active = isNavigationItemActive(
+                    pathname,
+                    item,
+                );
+
+                return (
+                    <Link
+                        key={item.href}
+                        href={item.href}
+                        className={`bp-nav-item ${
+                            active ? "active" : ""
+                        }`}
+                        aria-current={
+                            active ? "page" : undefined
+                        }
+                    >
+                        <Icon size={18} />
+                        {item.label}
+                    </Link>
+                );
+            })}
+        </nav>
     );
 }
 
+export function Sidebar({
+                            mode = "app",
+                            user,
+                        }: SidebarProps) {
+    const pathname = usePathname();
+    const isAdminArea =
+        mode === "app" &&
+        pathname.startsWith("/admin");
 
-export function Sidebar() {
-    const pathname =
-        usePathname();
+    const effectiveUser =
+        mode === "public"
+            ? user ?? anonymousUser
+            : {
+                isAuthenticated: true,
+                isAdmin: false,
+            };
 
-    const isAdmin =
-        pathname.startsWith(
-            "/admin",
+    const primaryItems = isAdminArea
+        ? adminNavigationItems
+        : getPublicDesktopNavigation(
+            effectiveUser,
         );
-
-    const navItems =
-        isAdmin
-            ? adminNavItems
-            : defaultNavItems;
 
     return (
         <aside className="bp-sidebar">
             <div className="bp-sidebar-brand">
                 <Link
-                    href={
-                        isAdmin
-                            ? "/admin"
-                            : "/"
-                    }
+                    href={isAdminArea ? "/admin" : "/"}
                     className="bp-sidebar-logo-link"
                     aria-label="AAACCU - Computaria"
                 >
@@ -107,20 +95,13 @@ export function Sidebar() {
                         width={54}
                         height={54}
                         className="bp-sidebar-logo"
-                        style={{
-                            objectFit:
-                                "contain",
-                        }}
                         priority
                     />
 
                     <span className="bp-sidebar-brand-text">
-                        <strong>
-                            AAACCU
-                        </strong>
-
+                        <strong>AAACCU</strong>
                         <small>
-                            {isAdmin
+                            {isAdminArea
                                 ? "Administração"
                                 : "Computaria"}
                         </small>
@@ -128,44 +109,32 @@ export function Sidebar() {
                 </Link>
             </div>
 
-            <nav className="bp-nav">
-                {navItems.map(
-                    (item) => {
-                        const Icon =
-                            item.icon;
+            <section className="bp-nav-section">
+                {mode === "public" ? (
+                    <span className="bp-nav-section-label">
+                        Navegação
+                    </span>
+                ) : null}
 
-                        const active =
-                            isActiveRoute(
-                                pathname,
-                                item.href,
-                            );
+                <NavigationLinks
+                    items={primaryItems}
+                    pathname={pathname}
+                />
+            </section>
 
-                        return (
-                            <Link
-                                key={
-                                    item.href
-                                }
-                                href={
-                                    item.href
-                                }
-                                className={`bp-nav-item ${
-                                    active
-                                        ? "active"
-                                        : ""
-                                }`}
-                            >
-                                <Icon
-                                    size={18}
-                                />
+            {mode === "public" &&
+            effectiveUser.isAdmin ? (
+                <section className="bp-nav-section bp-nav-section-admin">
+                    <span className="bp-nav-section-label">
+                        Administração
+                    </span>
 
-                                {
-                                    item.label
-                                }
-                            </Link>
-                        );
-                    },
-                )}
-            </nav>
+                    <NavigationLinks
+                        items={adminNavigationItems}
+                        pathname={pathname}
+                    />
+                </section>
+            ) : null}
         </aside>
     );
 }

@@ -47,6 +47,10 @@ export type PrdProdutoVariacaoMinAggregateOutputType = {
   prd_produto_id: number | null
   sku: string | null
   nome: string | null
+  atributo_1: string | null
+  valor_1: string | null
+  atributo_2: string | null
+  valor_2: string | null
   ordem: number | null
   estoque_atual: number | null
   ativo: number | null
@@ -60,6 +64,10 @@ export type PrdProdutoVariacaoMaxAggregateOutputType = {
   prd_produto_id: number | null
   sku: string | null
   nome: string | null
+  atributo_1: string | null
+  valor_1: string | null
+  atributo_2: string | null
+  valor_2: string | null
   ordem: number | null
   estoque_atual: number | null
   ativo: number | null
@@ -73,6 +81,10 @@ export type PrdProdutoVariacaoCountAggregateOutputType = {
   prd_produto_id: number
   sku: number
   nome: number
+  atributo_1: number
+  valor_1: number
+  atributo_2: number
+  valor_2: number
   ordem: number
   estoque_atual: number
   ativo: number
@@ -104,6 +116,10 @@ export type PrdProdutoVariacaoMinAggregateInputType = {
   prd_produto_id?: true
   sku?: true
   nome?: true
+  atributo_1?: true
+  valor_1?: true
+  atributo_2?: true
+  valor_2?: true
   ordem?: true
   estoque_atual?: true
   ativo?: true
@@ -117,6 +133,10 @@ export type PrdProdutoVariacaoMaxAggregateInputType = {
   prd_produto_id?: true
   sku?: true
   nome?: true
+  atributo_1?: true
+  valor_1?: true
+  atributo_2?: true
+  valor_2?: true
   ordem?: true
   estoque_atual?: true
   ativo?: true
@@ -130,6 +150,10 @@ export type PrdProdutoVariacaoCountAggregateInputType = {
   prd_produto_id?: true
   sku?: true
   nome?: true
+  atributo_1?: true
+  valor_1?: true
+  atributo_2?: true
+  valor_2?: true
   ordem?: true
   estoque_atual?: true
   ativo?: true
@@ -230,6 +254,10 @@ export type PrdProdutoVariacaoGroupByOutputType = {
   prd_produto_id: number
   sku: string | null
   nome: string
+  atributo_1: string | null
+  valor_1: string | null
+  atributo_2: string | null
+  valor_2: string | null
   ordem: number
   estoque_atual: number | null
   ativo: number
@@ -266,6 +294,10 @@ export type PrdProdutoVariacaoWhereInput = {
   prd_produto_id?: Prisma.IntFilter<"PrdProdutoVariacao"> | number
   sku?: Prisma.StringNullableFilter<"PrdProdutoVariacao"> | string | null
   nome?: Prisma.StringFilter<"PrdProdutoVariacao"> | string
+  atributo_1?: Prisma.StringNullableFilter<"PrdProdutoVariacao"> | string | null
+  valor_1?: Prisma.StringNullableFilter<"PrdProdutoVariacao"> | string | null
+  atributo_2?: Prisma.StringNullableFilter<"PrdProdutoVariacao"> | string | null
+  valor_2?: Prisma.StringNullableFilter<"PrdProdutoVariacao"> | string | null
   ordem?: Prisma.IntFilter<"PrdProdutoVariacao"> | number
   estoque_atual?: Prisma.IntNullableFilter<"PrdProdutoVariacao"> | number | null
   ativo?: Prisma.IntFilter<"PrdProdutoVariacao"> | number
@@ -281,6 +313,10 @@ export type PrdProdutoVariacaoOrderByWithRelationInput = {
   prd_produto_id?: Prisma.SortOrder
   sku?: Prisma.SortOrderInput | Prisma.SortOrder
   nome?: Prisma.SortOrder
+  atributo_1?: Prisma.SortOrderInput | Prisma.SortOrder
+  valor_1?: Prisma.SortOrderInput | Prisma.SortOrder
+  atributo_2?: Prisma.SortOrderInput | Prisma.SortOrder
+  valor_2?: Prisma.SortOrderInput | Prisma.SortOrder
   ordem?: Prisma.SortOrder
   estoque_atual?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
@@ -300,6 +336,10 @@ export type PrdProdutoVariacaoWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.PrdProdutoVariacaoWhereInput | Prisma.PrdProdutoVariacaoWhereInput[]
   prd_produto_id?: Prisma.IntFilter<"PrdProdutoVariacao"> | number
   nome?: Prisma.StringFilter<"PrdProdutoVariacao"> | string
+  atributo_1?: Prisma.StringNullableFilter<"PrdProdutoVariacao"> | string | null
+  valor_1?: Prisma.StringNullableFilter<"PrdProdutoVariacao"> | string | null
+  atributo_2?: Prisma.StringNullableFilter<"PrdProdutoVariacao"> | string | null
+  valor_2?: Prisma.StringNullableFilter<"PrdProdutoVariacao"> | string | null
   ordem?: Prisma.IntFilter<"PrdProdutoVariacao"> | number
   estoque_atual?: Prisma.IntNullableFilter<"PrdProdutoVariacao"> | number | null
   ativo?: Prisma.IntFilter<"PrdProdutoVariacao"> | number
@@ -315,6 +355,10 @@ export type PrdProdutoVariacaoOrderByWithAggregationInput = {
   prd_produto_id?: Prisma.SortOrder
   sku?: Prisma.SortOrderInput | Prisma.SortOrder
   nome?: Prisma.SortOrder
+  atributo_1?: Prisma.SortOrderInput | Prisma.SortOrder
+  valor_1?: Prisma.SortOrderInput | Prisma.SortOrder
+  atributo_2?: Prisma.SortOrderInput | Prisma.SortOrder
+  valor_2?: Prisma.SortOrderInput | Prisma.SortOrder
   ordem?: Prisma.SortOrder
   estoque_atual?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
@@ -336,6 +380,10 @@ export type PrdProdutoVariacaoScalarWhereWithAggregatesInput = {
   prd_produto_id?: Prisma.IntWithAggregatesFilter<"PrdProdutoVariacao"> | number
   sku?: Prisma.StringNullableWithAggregatesFilter<"PrdProdutoVariacao"> | string | null
   nome?: Prisma.StringWithAggregatesFilter<"PrdProdutoVariacao"> | string
+  atributo_1?: Prisma.StringNullableWithAggregatesFilter<"PrdProdutoVariacao"> | string | null
+  valor_1?: Prisma.StringNullableWithAggregatesFilter<"PrdProdutoVariacao"> | string | null
+  atributo_2?: Prisma.StringNullableWithAggregatesFilter<"PrdProdutoVariacao"> | string | null
+  valor_2?: Prisma.StringNullableWithAggregatesFilter<"PrdProdutoVariacao"> | string | null
   ordem?: Prisma.IntWithAggregatesFilter<"PrdProdutoVariacao"> | number
   estoque_atual?: Prisma.IntNullableWithAggregatesFilter<"PrdProdutoVariacao"> | number | null
   ativo?: Prisma.IntWithAggregatesFilter<"PrdProdutoVariacao"> | number
@@ -347,6 +395,10 @@ export type PrdProdutoVariacaoScalarWhereWithAggregatesInput = {
 export type PrdProdutoVariacaoCreateInput = {
   sku?: string | null
   nome: string
+  atributo_1?: string | null
+  valor_1?: string | null
+  atributo_2?: string | null
+  valor_2?: string | null
   ordem?: number
   estoque_atual?: number | null
   ativo?: number
@@ -362,6 +414,10 @@ export type PrdProdutoVariacaoUncheckedCreateInput = {
   prd_produto_id: number
   sku?: string | null
   nome: string
+  atributo_1?: string | null
+  valor_1?: string | null
+  atributo_2?: string | null
+  valor_2?: string | null
   ordem?: number
   estoque_atual?: number | null
   ativo?: number
@@ -374,6 +430,10 @@ export type PrdProdutoVariacaoUncheckedCreateInput = {
 export type PrdProdutoVariacaoUpdateInput = {
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  atributo_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  atributo_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -389,6 +449,10 @@ export type PrdProdutoVariacaoUncheckedUpdateInput = {
   prd_produto_id?: Prisma.IntFieldUpdateOperationsInput | number
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  atributo_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  atributo_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -403,6 +467,10 @@ export type PrdProdutoVariacaoCreateManyInput = {
   prd_produto_id: number
   sku?: string | null
   nome: string
+  atributo_1?: string | null
+  valor_1?: string | null
+  atributo_2?: string | null
+  valor_2?: string | null
   ordem?: number
   estoque_atual?: number | null
   ativo?: number
@@ -414,6 +482,10 @@ export type PrdProdutoVariacaoCreateManyInput = {
 export type PrdProdutoVariacaoUpdateManyMutationInput = {
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  atributo_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  atributo_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -427,6 +499,10 @@ export type PrdProdutoVariacaoUncheckedUpdateManyInput = {
   prd_produto_id?: Prisma.IntFieldUpdateOperationsInput | number
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  atributo_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  atributo_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -456,6 +532,10 @@ export type PrdProdutoVariacaoCountOrderByAggregateInput = {
   prd_produto_id?: Prisma.SortOrder
   sku?: Prisma.SortOrder
   nome?: Prisma.SortOrder
+  atributo_1?: Prisma.SortOrder
+  valor_1?: Prisma.SortOrder
+  atributo_2?: Prisma.SortOrder
+  valor_2?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   estoque_atual?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
@@ -477,6 +557,10 @@ export type PrdProdutoVariacaoMaxOrderByAggregateInput = {
   prd_produto_id?: Prisma.SortOrder
   sku?: Prisma.SortOrder
   nome?: Prisma.SortOrder
+  atributo_1?: Prisma.SortOrder
+  valor_1?: Prisma.SortOrder
+  atributo_2?: Prisma.SortOrder
+  valor_2?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   estoque_atual?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
@@ -490,6 +574,10 @@ export type PrdProdutoVariacaoMinOrderByAggregateInput = {
   prd_produto_id?: Prisma.SortOrder
   sku?: Prisma.SortOrder
   nome?: Prisma.SortOrder
+  atributo_1?: Prisma.SortOrder
+  valor_1?: Prisma.SortOrder
+  atributo_2?: Prisma.SortOrder
+  valor_2?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   estoque_atual?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
@@ -572,6 +660,10 @@ export type PrdProdutoVariacaoUpdateOneWithoutVnd_pedido_itensNestedInput = {
 export type PrdProdutoVariacaoCreateWithoutPrd_produtoInput = {
   sku?: string | null
   nome: string
+  atributo_1?: string | null
+  valor_1?: string | null
+  atributo_2?: string | null
+  valor_2?: string | null
   ordem?: number
   estoque_atual?: number | null
   ativo?: number
@@ -585,6 +677,10 @@ export type PrdProdutoVariacaoUncheckedCreateWithoutPrd_produtoInput = {
   id?: number
   sku?: string | null
   nome: string
+  atributo_1?: string | null
+  valor_1?: string | null
+  atributo_2?: string | null
+  valor_2?: string | null
   ordem?: number
   estoque_atual?: number | null
   ativo?: number
@@ -628,6 +724,10 @@ export type PrdProdutoVariacaoScalarWhereInput = {
   prd_produto_id?: Prisma.IntFilter<"PrdProdutoVariacao"> | number
   sku?: Prisma.StringNullableFilter<"PrdProdutoVariacao"> | string | null
   nome?: Prisma.StringFilter<"PrdProdutoVariacao"> | string
+  atributo_1?: Prisma.StringNullableFilter<"PrdProdutoVariacao"> | string | null
+  valor_1?: Prisma.StringNullableFilter<"PrdProdutoVariacao"> | string | null
+  atributo_2?: Prisma.StringNullableFilter<"PrdProdutoVariacao"> | string | null
+  valor_2?: Prisma.StringNullableFilter<"PrdProdutoVariacao"> | string | null
   ordem?: Prisma.IntFilter<"PrdProdutoVariacao"> | number
   estoque_atual?: Prisma.IntNullableFilter<"PrdProdutoVariacao"> | number | null
   ativo?: Prisma.IntFilter<"PrdProdutoVariacao"> | number
@@ -639,6 +739,10 @@ export type PrdProdutoVariacaoScalarWhereInput = {
 export type PrdProdutoVariacaoCreateWithoutVnd_pedido_itensInput = {
   sku?: string | null
   nome: string
+  atributo_1?: string | null
+  valor_1?: string | null
+  atributo_2?: string | null
+  valor_2?: string | null
   ordem?: number
   estoque_atual?: number | null
   ativo?: number
@@ -653,6 +757,10 @@ export type PrdProdutoVariacaoUncheckedCreateWithoutVnd_pedido_itensInput = {
   prd_produto_id: number
   sku?: string | null
   nome: string
+  atributo_1?: string | null
+  valor_1?: string | null
+  atributo_2?: string | null
+  valor_2?: string | null
   ordem?: number
   estoque_atual?: number | null
   ativo?: number
@@ -680,6 +788,10 @@ export type PrdProdutoVariacaoUpdateToOneWithWhereWithoutVnd_pedido_itensInput =
 export type PrdProdutoVariacaoUpdateWithoutVnd_pedido_itensInput = {
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  atributo_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  atributo_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -694,6 +806,10 @@ export type PrdProdutoVariacaoUncheckedUpdateWithoutVnd_pedido_itensInput = {
   prd_produto_id?: Prisma.IntFieldUpdateOperationsInput | number
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  atributo_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  atributo_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -706,6 +822,10 @@ export type PrdProdutoVariacaoCreateManyPrd_produtoInput = {
   id?: number
   sku?: string | null
   nome: string
+  atributo_1?: string | null
+  valor_1?: string | null
+  atributo_2?: string | null
+  valor_2?: string | null
   ordem?: number
   estoque_atual?: number | null
   ativo?: number
@@ -717,6 +837,10 @@ export type PrdProdutoVariacaoCreateManyPrd_produtoInput = {
 export type PrdProdutoVariacaoUpdateWithoutPrd_produtoInput = {
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  atributo_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  atributo_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -730,6 +854,10 @@ export type PrdProdutoVariacaoUncheckedUpdateWithoutPrd_produtoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  atributo_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  atributo_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -743,6 +871,10 @@ export type PrdProdutoVariacaoUncheckedUpdateManyWithoutPrd_produtoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  atributo_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  atributo_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -787,6 +919,10 @@ export type PrdProdutoVariacaoSelect<ExtArgs extends runtime.Types.Extensions.In
   prd_produto_id?: boolean
   sku?: boolean
   nome?: boolean
+  atributo_1?: boolean
+  valor_1?: boolean
+  atributo_2?: boolean
+  valor_2?: boolean
   ordem?: boolean
   estoque_atual?: boolean
   ativo?: boolean
@@ -805,6 +941,10 @@ export type PrdProdutoVariacaoSelectScalar = {
   prd_produto_id?: boolean
   sku?: boolean
   nome?: boolean
+  atributo_1?: boolean
+  valor_1?: boolean
+  atributo_2?: boolean
+  valor_2?: boolean
   ordem?: boolean
   estoque_atual?: boolean
   ativo?: boolean
@@ -813,7 +953,7 @@ export type PrdProdutoVariacaoSelectScalar = {
   deleted_at?: boolean
 }
 
-export type PrdProdutoVariacaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "prd_produto_id" | "sku" | "nome" | "ordem" | "estoque_atual" | "ativo" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["prdProdutoVariacao"]>
+export type PrdProdutoVariacaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "prd_produto_id" | "sku" | "nome" | "atributo_1" | "valor_1" | "atributo_2" | "valor_2" | "ordem" | "estoque_atual" | "ativo" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["prdProdutoVariacao"]>
 export type PrdProdutoVariacaoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   prd_produto?: boolean | Prisma.PrdProdutoDefaultArgs<ExtArgs>
   vnd_pedido_itens?: boolean | Prisma.PrdProdutoVariacao$vnd_pedido_itensArgs<ExtArgs>
@@ -831,6 +971,10 @@ export type $PrdProdutoVariacaoPayload<ExtArgs extends runtime.Types.Extensions.
     prd_produto_id: number
     sku: string | null
     nome: string
+    atributo_1: string | null
+    valor_1: string | null
+    atributo_2: string | null
+    valor_2: string | null
     ordem: number
     estoque_atual: number | null
     ativo: number
@@ -1212,6 +1356,10 @@ export interface PrdProdutoVariacaoFieldRefs {
   readonly prd_produto_id: Prisma.FieldRef<"PrdProdutoVariacao", 'Int'>
   readonly sku: Prisma.FieldRef<"PrdProdutoVariacao", 'String'>
   readonly nome: Prisma.FieldRef<"PrdProdutoVariacao", 'String'>
+  readonly atributo_1: Prisma.FieldRef<"PrdProdutoVariacao", 'String'>
+  readonly valor_1: Prisma.FieldRef<"PrdProdutoVariacao", 'String'>
+  readonly atributo_2: Prisma.FieldRef<"PrdProdutoVariacao", 'String'>
+  readonly valor_2: Prisma.FieldRef<"PrdProdutoVariacao", 'String'>
   readonly ordem: Prisma.FieldRef<"PrdProdutoVariacao", 'Int'>
   readonly estoque_atual: Prisma.FieldRef<"PrdProdutoVariacao", 'Int'>
   readonly ativo: Prisma.FieldRef<"PrdProdutoVariacao", 'Int'>

@@ -1,30 +1,35 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import { getAuthSession } from "@/lib/auth/session";
 import { userHasAnyPermission } from "@/lib/auth/permissions";
 import { AuthSession } from "@/lib/auth/auth-types";
 
+
 type RequireApiAccessOptions = {
     permissions?: string[];
-    admin?: boolean;
 };
+
 
 type RequireApiAccessSuccess = {
     ok: true;
     session: AuthSession;
 };
 
+
 type RequireApiAccessError = {
     ok: false;
     response: NextResponse;
 };
 
+
 export type RequireApiAccessResult =
     | RequireApiAccessSuccess
     | RequireApiAccessError;
 
+
 export async function requireApiAccess(
     request: NextRequest,
-    options: RequireApiAccessOptions = {}
+    options: RequireApiAccessOptions = {},
 ): Promise<RequireApiAccessResult> {
     const session = await getAuthSession({
         headers: request.headers,
@@ -40,13 +45,59 @@ export async function requireApiAccess(
                 },
                 {
                     status: 401,
-                }
+                },
             ),
         };
     }
+
+    const permissions =
+        options.permissions ?? [];
+
+    if (permissions.length > 0) {
+        const allowed =
+            await userHasAnyPermission(
+                session,
+                permissions,
+            );
+
+        if (!allowed) {
+            return {
+                ok: false,
+                response: NextResponse.json(
+                    {
+                        ok: false,
+                        message:
+                            "Sem permissão para executar esta ação.",
+                    },
+                    {
+                        status: 403,
+                    },
+                ),
+            };
+        }
+    }
+
+    return {
+        ok: true,
+        session,
+    };
+}
+
+
+export async function requireAdminApiAccess(
+    request: NextRequest,
+): Promise<RequireApiAccessResult> {
+    const access =
+        await requireApiAccess(request);
+
+    if (!access.ok) {
+        return access;
+    }
+
     if (
-        options.admin &&
-        session.user.sys_usuario_tipo.codigo !== "admin"
+        access.session.user
+            .sys_usuario_tipo
+            .codigo !== "admin"
     ) {
         return {
             ok: false,
@@ -63,30 +114,5 @@ export async function requireApiAccess(
         };
     }
 
-
-    const permissions = options.permissions ?? [];
-
-    if (permissions.length > 0) {
-        const allowed = await userHasAnyPermission(session, permissions);
-
-        if (!allowed) {
-            return {
-                ok: false,
-                response: NextResponse.json(
-                    {
-                        ok: false,
-                        message: "Sem permissão para executar esta ação.",
-                    },
-                    {
-                        status: 403,
-                    }
-                ),
-            };
-        }
-    }
-
-    return {
-        ok: true,
-        session,
-    };
+    return access;
 }

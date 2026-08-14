@@ -3035,6 +3035,10 @@ export const PrdProdutoVariacaoScalarFieldEnum = {
   prd_produto_id: 'prd_produto_id',
   sku: 'sku',
   nome: 'nome',
+  atributo_1: 'atributo_1',
+  valor_1: 'valor_1',
+  atributo_2: 'atributo_2',
+  valor_2: 'valor_2',
   ordem: 'ordem',
   estoque_atual: 'estoque_atual',
   ativo: 'ativo',
@@ -3123,6 +3127,7 @@ export type SocSocioOrigemScalarFieldEnum = (typeof SocSocioOrigemScalarFieldEnu
 export const SocPlanoScalarFieldEnum = {
   id: 'id',
   prd_produto_id: 'prd_produto_id',
+  banner_sys_arquivo_id: 'banner_sys_arquivo_id',
   codigo: 'codigo',
   nome: 'nome',
   descricao: 'descricao',
@@ -3492,7 +3497,11 @@ export type PrdProdutoOrderByRelevanceFieldEnum = (typeof PrdProdutoOrderByRelev
 
 export const PrdProdutoVariacaoOrderByRelevanceFieldEnum = {
   sku: 'sku',
-  nome: 'nome'
+  nome: 'nome',
+  atributo_1: 'atributo_1',
+  valor_1: 'valor_1',
+  atributo_2: 'atributo_2',
+  valor_2: 'valor_2'
 } as const
 
 export type PrdProdutoVariacaoOrderByRelevanceFieldEnum = (typeof PrdProdutoVariacaoOrderByRelevanceFieldEnum)[keyof typeof PrdProdutoVariacaoOrderByRelevanceFieldEnum]

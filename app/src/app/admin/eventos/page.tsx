@@ -1,17 +1,29 @@
-import { AppShell } from "@/components/layout/AppShell";
-import { PageHeader } from "@/components/ui/PageHeader";
-import { requirePageAccess } from "@/lib/auth/require-access";
+import {
+    AppShell,
+} from "@/components/layout/AppShell";
+
+import {
+    requirePageAccess,
+} from "@/lib/auth/require-access";
+
+import {
+    eventoService,
+} from "@/lib/cad/evento-service";
+
+import AdminEventosClient from "./AdminEventosClient";
 
 export default async function AdminEventosPage() {
     await requirePageAccess(
         "/admin/eventos",
     );
 
+    const data =
+        await eventoService.listAdminData();
+
     return (
         <AppShell>
-            <PageHeader
-                title="Eventos"
-                subtitle="Gerencie eventos e links temporários."
+            <AdminEventosClient
+                initialData={data}
             />
         </AppShell>
     );

@@ -657,7 +657,12 @@ function LoginForm() {
 
                     font-size: 14px;
                 }
-
+                @media (max-width: 1100px) {
+                    .bp-login-feature-grid {
+                        grid-template-columns:
+            1fr !important;
+                    }
+                }
                 @media (max-width: 920px) {
                     .bp-login-shell {
                         grid-template-columns:

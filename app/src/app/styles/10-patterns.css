@@ -454,3 +454,45 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Dashboard administrativo: flex permite que a última linha use 100% do espaço. */
+.bp-admin-option-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.bp-admin-option-link {
+    flex: 1 1 240px;
+    min-width: min(100%, 240px);
+    color: inherit;
+    text-decoration: none;
+}
+
+.bp-admin-option-card {
+    height: 100%;
+}
+
+.bp-admin-option-content {
+    display: grid;
+    gap: 14px;
+}
+
+.bp-admin-option-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    display: grid;
+    place-items: center;
+}
+
+.bp-admin-option-title {
+    margin-bottom: 6px;
+}
+
+.bp-admin-option-description {
+    margin: 0;
+}
+

@@ -45,34 +45,56 @@
     }
 
     .bp-mobile-nav {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
         position: fixed;
         left: 12px;
         right: 12px;
         bottom: 12px;
-        z-index: 20;
+        z-index: 70;
         border: 1px solid var(--color-border);
-        background: rgba(17, 19, 27, 0.94);
-        backdrop-filter: blur(18px);
+        background: var(--color-card);
         border-radius: 22px;
-        padding: 8px;
-        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+        padding: 7px;
+        box-shadow: var(--shadow-md);
+
+        display: flex;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 4px;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+    }
+
+    .bp-mobile-nav::-webkit-scrollbar {
+        display: none;
     }
 
     .bp-mobile-nav a {
+        flex: 1 0 72px;
+        min-width: 72px;
+        min-height: 48px;
+        scroll-snap-align: start;
+
         display: grid;
         place-items: center;
+        align-content: center;
         gap: 4px;
         color: var(--color-text-muted);
-        font-size: 11px;
-        padding: 8px 4px;
+        font-size: 10px;
+        font-weight: 750;
+        padding: 7px 5px;
         border-radius: 14px;
+        white-space: nowrap;
     }
 
+    .bp-mobile-nav a:hover,
     .bp-mobile-nav a.active {
         background: var(--color-primary-soft);
-        color: var(--color-text);
+        color: var(--color-primary);
     }
 }
 
@@ -205,5 +227,43 @@
     .bp-topbar-auth-actions .bp-link {
         min-height: 36px;
         padding-inline: 12px;
+    }
+}
+
+@media (max-width: 900px) {
+    .bp-product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bp-product-variation-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 720px) {
+    .bp-modal-backdrop {
+        padding: 10px;
+    }
+
+    .bp-modal-xl,
+    .bp-modal-lg,
+    .bp-modal-md,
+    .bp-modal-sm {
+        width: 100%;
+        max-height: calc(100vh - 20px);
+    }
+
+    .bp-product-grid,
+    .bp-product-switches,
+    .bp-product-variation-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bp-product-section {
+        padding: 13px;
+    }
+
+    .bp-product-image-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }

@@ -6,15 +6,22 @@ import {
     WalletCards,
 } from "lucide-react";
 
-import { AppShell } from "@/components/layout/AppShell";
-import { AppLink } from "@/components/ui/AppLink";
+import {
+    AppShell,
+} from "@/components/layout/AppShell";
+import {
+    AppLink,
+} from "@/components/ui/AppLink";
 import {
     Card,
     CardBody,
 } from "@/components/ui/Card";
-import { PageHeader } from "@/components/ui/PageHeader";
-import { requirePageAccess } from "@/lib/auth/require-access";
-
+import {
+    PageHeader,
+} from "@/components/ui/PageHeader";
+import {
+    requirePageAccess,
+} from "@/lib/auth/require-access";
 
 const adminOptions = [
     {
@@ -54,7 +61,6 @@ const adminOptions = [
     },
 ];
 
-
 export default async function AdminPage() {
     await requirePageAccess(
         "/admin",
@@ -67,119 +73,41 @@ export default async function AdminPage() {
                 subtitle="Gerencie vendas, eventos e associações da AAACCU."
             />
 
-            <div
-                style={{
-                    display: "grid",
+            <div className="bp-admin-option-grid">
+                {adminOptions.map((option) => {
+                    const Icon = option.icon;
 
-                    gridTemplateColumns:
-                        "repeat(auto-fit, minmax(240px, 1fr))",
-
-                    gap: 16,
-                }}
-            >
-                {adminOptions.map(
-                    (option) => {
-                        const Icon =
-                            option.icon;
-
-                        return (
-                            <AppLink
-                                key={
-                                    option.href
-                                }
-                                href={
-                                    option.href
-                                }
-                                style={{
-                                    display:
-                                        "block",
-
-                                    color:
-                                        "inherit",
-
-                                    textDecoration:
-                                        "none",
-                                }}
+                    return (
+                        <AppLink
+                            key={option.href}
+                            href={option.href}
+                            className="bp-admin-option-link"
+                        >
+                            <Card
+                                variant="outline"
+                                className="bp-admin-option-card"
                             >
-                                <Card
-                                    variant="outline"
-
-                                    style={{
-                                        height:
-                                            "100%",
-                                    }}
-                                >
-                                    <CardBody>
-                                        <div
-                                            style={{
-                                                display:
-                                                    "grid",
-
-                                                gap: 14,
-                                            }}
-                                        >
-                                            <div
-                                                style={{
-                                                    width: 44,
-                                                    height: 44,
-
-                                                    display:
-                                                        "grid",
-
-                                                    placeItems:
-                                                        "center",
-
-                                                    borderRadius:
-                                                        14,
-
-                                                    background:
-                                                        "var(--color-primary-soft)",
-
-                                                    color:
-                                                        "var(--color-primary)",
-                                                }}
-                                            >
-                                                <Icon
-                                                    size={
-                                                        21
-                                                    }
-                                                />
-                                            </div>
-
-                                            <div>
-                                                <h2
-                                                    className="bp-section-title"
-
-                                                    style={{
-                                                        marginBottom:
-                                                            6,
-                                                    }}
-                                                >
-                                                    {
-                                                        option.title
-                                                    }
-                                                </h2>
-
-                                                <p
-                                                    className="bp-section-subtitle"
-
-                                                    style={{
-                                                        margin:
-                                                            0,
-                                                    }}
-                                                >
-                                                    {
-                                                        option.description
-                                                    }
-                                                </p>
-                                            </div>
+                                <CardBody>
+                                    <div className="bp-admin-option-content">
+                                        <div className="bp-admin-option-icon">
+                                            <Icon size={21} />
                                         </div>
-                                    </CardBody>
-                                </Card>
-                            </AppLink>
-                        );
-                    },
-                )}
+
+                                        <div>
+                                            <h2 className="bp-section-title bp-admin-option-title">
+                                                {option.title}
+                                            </h2>
+
+                                            <p className="bp-section-subtitle bp-admin-option-description">
+                                                {option.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </AppLink>
+                    );
+                })}
             </div>
         </AppShell>
     );

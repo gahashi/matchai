@@ -1,18 +1,17 @@
 import { AppShell } from "@/components/layout/AppShell";
-import { PageHeader } from "@/components/ui/PageHeader";
 import { requirePageAccess } from "@/lib/auth/require-access";
+import { socioService } from "@/lib/soc/socio-service";
+
+import SociosAdminClient from "./SociosAdminClient";
 
 export default async function AdminSociosPage() {
-    await requirePageAccess(
-        "/admin/socios",
-    );
+    await requirePageAccess("/admin/socios");
+
+    const data = await socioService.listAdminData();
 
     return (
         <AppShell>
-            <PageHeader
-                title="Sócios"
-                subtitle="Consulte e gerencie as associações."
-            />
+            <SociosAdminClient initialData={data} />
         </AppShell>
     );
 }

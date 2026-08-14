@@ -29,6 +29,7 @@ export type AggregateSocPlano = {
 export type SocPlanoAvgAggregateOutputType = {
   id: number | null
   prd_produto_id: number | null
+  banner_sys_arquivo_id: number | null
   duracao_dias: number | null
   ativo: number | null
   visivel_publico: number | null
@@ -38,6 +39,7 @@ export type SocPlanoAvgAggregateOutputType = {
 export type SocPlanoSumAggregateOutputType = {
   id: number | null
   prd_produto_id: number | null
+  banner_sys_arquivo_id: number | null
   duracao_dias: number | null
   ativo: number | null
   visivel_publico: number | null
@@ -47,6 +49,7 @@ export type SocPlanoSumAggregateOutputType = {
 export type SocPlanoMinAggregateOutputType = {
   id: number | null
   prd_produto_id: number | null
+  banner_sys_arquivo_id: number | null
   codigo: string | null
   nome: string | null
   descricao: string | null
@@ -64,6 +67,7 @@ export type SocPlanoMinAggregateOutputType = {
 export type SocPlanoMaxAggregateOutputType = {
   id: number | null
   prd_produto_id: number | null
+  banner_sys_arquivo_id: number | null
   codigo: string | null
   nome: string | null
   descricao: string | null
@@ -81,6 +85,7 @@ export type SocPlanoMaxAggregateOutputType = {
 export type SocPlanoCountAggregateOutputType = {
   id: number
   prd_produto_id: number
+  banner_sys_arquivo_id: number
   codigo: number
   nome: number
   descricao: number
@@ -100,6 +105,7 @@ export type SocPlanoCountAggregateOutputType = {
 export type SocPlanoAvgAggregateInputType = {
   id?: true
   prd_produto_id?: true
+  banner_sys_arquivo_id?: true
   duracao_dias?: true
   ativo?: true
   visivel_publico?: true
@@ -109,6 +115,7 @@ export type SocPlanoAvgAggregateInputType = {
 export type SocPlanoSumAggregateInputType = {
   id?: true
   prd_produto_id?: true
+  banner_sys_arquivo_id?: true
   duracao_dias?: true
   ativo?: true
   visivel_publico?: true
@@ -118,6 +125,7 @@ export type SocPlanoSumAggregateInputType = {
 export type SocPlanoMinAggregateInputType = {
   id?: true
   prd_produto_id?: true
+  banner_sys_arquivo_id?: true
   codigo?: true
   nome?: true
   descricao?: true
@@ -135,6 +143,7 @@ export type SocPlanoMinAggregateInputType = {
 export type SocPlanoMaxAggregateInputType = {
   id?: true
   prd_produto_id?: true
+  banner_sys_arquivo_id?: true
   codigo?: true
   nome?: true
   descricao?: true
@@ -152,6 +161,7 @@ export type SocPlanoMaxAggregateInputType = {
 export type SocPlanoCountAggregateInputType = {
   id?: true
   prd_produto_id?: true
+  banner_sys_arquivo_id?: true
   codigo?: true
   nome?: true
   descricao?: true
@@ -256,6 +266,7 @@ export type SocPlanoGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type SocPlanoGroupByOutputType = {
   id: number
   prd_produto_id: number | null
+  banner_sys_arquivo_id: number | null
   codigo: string
   nome: string
   descricao: string | null
@@ -296,6 +307,7 @@ export type SocPlanoWhereInput = {
   NOT?: Prisma.SocPlanoWhereInput | Prisma.SocPlanoWhereInput[]
   id?: Prisma.IntFilter<"SocPlano"> | number
   prd_produto_id?: Prisma.IntNullableFilter<"SocPlano"> | number | null
+  banner_sys_arquivo_id?: Prisma.IntNullableFilter<"SocPlano"> | number | null
   codigo?: Prisma.StringFilter<"SocPlano"> | string
   nome?: Prisma.StringFilter<"SocPlano"> | string
   descricao?: Prisma.StringNullableFilter<"SocPlano"> | string | null
@@ -309,12 +321,14 @@ export type SocPlanoWhereInput = {
   updated_at?: Prisma.DateTimeNullableFilter<"SocPlano"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableFilter<"SocPlano"> | Date | string | null
   prd_produto?: Prisma.XOR<Prisma.PrdProdutoNullableScalarRelationFilter, Prisma.PrdProdutoWhereInput> | null
+  banner_sys_arquivo?: Prisma.XOR<Prisma.SysArquivoNullableScalarRelationFilter, Prisma.SysArquivoWhereInput> | null
   soc_socios?: Prisma.SocSocioListRelationFilter
 }
 
 export type SocPlanoOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   prd_produto_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  banner_sys_arquivo_id?: Prisma.SortOrderInput | Prisma.SortOrder
   codigo?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -328,6 +342,7 @@ export type SocPlanoOrderByWithRelationInput = {
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   prd_produto?: Prisma.PrdProdutoOrderByWithRelationInput
+  banner_sys_arquivo?: Prisma.SysArquivoOrderByWithRelationInput
   soc_socios?: Prisma.SocSocioOrderByRelationAggregateInput
   _relevance?: Prisma.SocPlanoOrderByRelevanceInput
 }
@@ -339,6 +354,7 @@ export type SocPlanoWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.SocPlanoWhereInput[]
   NOT?: Prisma.SocPlanoWhereInput | Prisma.SocPlanoWhereInput[]
   prd_produto_id?: Prisma.IntNullableFilter<"SocPlano"> | number | null
+  banner_sys_arquivo_id?: Prisma.IntNullableFilter<"SocPlano"> | number | null
   nome?: Prisma.StringFilter<"SocPlano"> | string
   descricao?: Prisma.StringNullableFilter<"SocPlano"> | string | null
   duracao_dias?: Prisma.IntFilter<"SocPlano"> | number
@@ -351,12 +367,14 @@ export type SocPlanoWhereUniqueInput = Prisma.AtLeast<{
   updated_at?: Prisma.DateTimeNullableFilter<"SocPlano"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableFilter<"SocPlano"> | Date | string | null
   prd_produto?: Prisma.XOR<Prisma.PrdProdutoNullableScalarRelationFilter, Prisma.PrdProdutoWhereInput> | null
+  banner_sys_arquivo?: Prisma.XOR<Prisma.SysArquivoNullableScalarRelationFilter, Prisma.SysArquivoWhereInput> | null
   soc_socios?: Prisma.SocSocioListRelationFilter
 }, "id" | "codigo">
 
 export type SocPlanoOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   prd_produto_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  banner_sys_arquivo_id?: Prisma.SortOrderInput | Prisma.SortOrder
   codigo?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -382,6 +400,7 @@ export type SocPlanoScalarWhereWithAggregatesInput = {
   NOT?: Prisma.SocPlanoScalarWhereWithAggregatesInput | Prisma.SocPlanoScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"SocPlano"> | number
   prd_produto_id?: Prisma.IntNullableWithAggregatesFilter<"SocPlano"> | number | null
+  banner_sys_arquivo_id?: Prisma.IntNullableWithAggregatesFilter<"SocPlano"> | number | null
   codigo?: Prisma.StringWithAggregatesFilter<"SocPlano"> | string
   nome?: Prisma.StringWithAggregatesFilter<"SocPlano"> | string
   descricao?: Prisma.StringNullableWithAggregatesFilter<"SocPlano"> | string | null
@@ -410,12 +429,14 @@ export type SocPlanoCreateInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   prd_produto?: Prisma.PrdProdutoCreateNestedOneWithoutSoc_planosInput
+  banner_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutSoc_planos_bannerInput
   soc_socios?: Prisma.SocSocioCreateNestedManyWithoutSoc_planoInput
 }
 
 export type SocPlanoUncheckedCreateInput = {
   id?: number
   prd_produto_id?: number | null
+  banner_sys_arquivo_id?: number | null
   codigo: string
   nome: string
   descricao?: string | null
@@ -445,12 +466,14 @@ export type SocPlanoUpdateInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   prd_produto?: Prisma.PrdProdutoUpdateOneWithoutSoc_planosNestedInput
+  banner_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutSoc_planos_bannerNestedInput
   soc_socios?: Prisma.SocSocioUpdateManyWithoutSoc_planoNestedInput
 }
 
 export type SocPlanoUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   prd_produto_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  banner_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -469,6 +492,7 @@ export type SocPlanoUncheckedUpdateInput = {
 export type SocPlanoCreateManyInput = {
   id?: number
   prd_produto_id?: number | null
+  banner_sys_arquivo_id?: number | null
   codigo: string
   nome: string
   descricao?: string | null
@@ -501,6 +525,7 @@ export type SocPlanoUpdateManyMutationInput = {
 export type SocPlanoUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   prd_produto_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  banner_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -534,6 +559,7 @@ export type SocPlanoOrderByRelevanceInput = {
 export type SocPlanoCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   prd_produto_id?: Prisma.SortOrder
+  banner_sys_arquivo_id?: Prisma.SortOrder
   codigo?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
@@ -551,6 +577,7 @@ export type SocPlanoCountOrderByAggregateInput = {
 export type SocPlanoAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   prd_produto_id?: Prisma.SortOrder
+  banner_sys_arquivo_id?: Prisma.SortOrder
   duracao_dias?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   visivel_publico?: Prisma.SortOrder
@@ -560,6 +587,7 @@ export type SocPlanoAvgOrderByAggregateInput = {
 export type SocPlanoMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   prd_produto_id?: Prisma.SortOrder
+  banner_sys_arquivo_id?: Prisma.SortOrder
   codigo?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
@@ -577,6 +605,7 @@ export type SocPlanoMaxOrderByAggregateInput = {
 export type SocPlanoMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   prd_produto_id?: Prisma.SortOrder
+  banner_sys_arquivo_id?: Prisma.SortOrder
   codigo?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
@@ -594,6 +623,7 @@ export type SocPlanoMinOrderByAggregateInput = {
 export type SocPlanoSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   prd_produto_id?: Prisma.SortOrder
+  banner_sys_arquivo_id?: Prisma.SortOrder
   duracao_dias?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   visivel_publico?: Prisma.SortOrder
@@ -603,6 +633,48 @@ export type SocPlanoSumOrderByAggregateInput = {
 export type SocPlanoScalarRelationFilter = {
   is?: Prisma.SocPlanoWhereInput
   isNot?: Prisma.SocPlanoWhereInput
+}
+
+export type SocPlanoCreateNestedManyWithoutBanner_sys_arquivoInput = {
+  create?: Prisma.XOR<Prisma.SocPlanoCreateWithoutBanner_sys_arquivoInput, Prisma.SocPlanoUncheckedCreateWithoutBanner_sys_arquivoInput> | Prisma.SocPlanoCreateWithoutBanner_sys_arquivoInput[] | Prisma.SocPlanoUncheckedCreateWithoutBanner_sys_arquivoInput[]
+  connectOrCreate?: Prisma.SocPlanoCreateOrConnectWithoutBanner_sys_arquivoInput | Prisma.SocPlanoCreateOrConnectWithoutBanner_sys_arquivoInput[]
+  createMany?: Prisma.SocPlanoCreateManyBanner_sys_arquivoInputEnvelope
+  connect?: Prisma.SocPlanoWhereUniqueInput | Prisma.SocPlanoWhereUniqueInput[]
+}
+
+export type SocPlanoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput = {
+  create?: Prisma.XOR<Prisma.SocPlanoCreateWithoutBanner_sys_arquivoInput, Prisma.SocPlanoUncheckedCreateWithoutBanner_sys_arquivoInput> | Prisma.SocPlanoCreateWithoutBanner_sys_arquivoInput[] | Prisma.SocPlanoUncheckedCreateWithoutBanner_sys_arquivoInput[]
+  connectOrCreate?: Prisma.SocPlanoCreateOrConnectWithoutBanner_sys_arquivoInput | Prisma.SocPlanoCreateOrConnectWithoutBanner_sys_arquivoInput[]
+  createMany?: Prisma.SocPlanoCreateManyBanner_sys_arquivoInputEnvelope
+  connect?: Prisma.SocPlanoWhereUniqueInput | Prisma.SocPlanoWhereUniqueInput[]
+}
+
+export type SocPlanoUpdateManyWithoutBanner_sys_arquivoNestedInput = {
+  create?: Prisma.XOR<Prisma.SocPlanoCreateWithoutBanner_sys_arquivoInput, Prisma.SocPlanoUncheckedCreateWithoutBanner_sys_arquivoInput> | Prisma.SocPlanoCreateWithoutBanner_sys_arquivoInput[] | Prisma.SocPlanoUncheckedCreateWithoutBanner_sys_arquivoInput[]
+  connectOrCreate?: Prisma.SocPlanoCreateOrConnectWithoutBanner_sys_arquivoInput | Prisma.SocPlanoCreateOrConnectWithoutBanner_sys_arquivoInput[]
+  upsert?: Prisma.SocPlanoUpsertWithWhereUniqueWithoutBanner_sys_arquivoInput | Prisma.SocPlanoUpsertWithWhereUniqueWithoutBanner_sys_arquivoInput[]
+  createMany?: Prisma.SocPlanoCreateManyBanner_sys_arquivoInputEnvelope
+  set?: Prisma.SocPlanoWhereUniqueInput | Prisma.SocPlanoWhereUniqueInput[]
+  disconnect?: Prisma.SocPlanoWhereUniqueInput | Prisma.SocPlanoWhereUniqueInput[]
+  delete?: Prisma.SocPlanoWhereUniqueInput | Prisma.SocPlanoWhereUniqueInput[]
+  connect?: Prisma.SocPlanoWhereUniqueInput | Prisma.SocPlanoWhereUniqueInput[]
+  update?: Prisma.SocPlanoUpdateWithWhereUniqueWithoutBanner_sys_arquivoInput | Prisma.SocPlanoUpdateWithWhereUniqueWithoutBanner_sys_arquivoInput[]
+  updateMany?: Prisma.SocPlanoUpdateManyWithWhereWithoutBanner_sys_arquivoInput | Prisma.SocPlanoUpdateManyWithWhereWithoutBanner_sys_arquivoInput[]
+  deleteMany?: Prisma.SocPlanoScalarWhereInput | Prisma.SocPlanoScalarWhereInput[]
+}
+
+export type SocPlanoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput = {
+  create?: Prisma.XOR<Prisma.SocPlanoCreateWithoutBanner_sys_arquivoInput, Prisma.SocPlanoUncheckedCreateWithoutBanner_sys_arquivoInput> | Prisma.SocPlanoCreateWithoutBanner_sys_arquivoInput[] | Prisma.SocPlanoUncheckedCreateWithoutBanner_sys_arquivoInput[]
+  connectOrCreate?: Prisma.SocPlanoCreateOrConnectWithoutBanner_sys_arquivoInput | Prisma.SocPlanoCreateOrConnectWithoutBanner_sys_arquivoInput[]
+  upsert?: Prisma.SocPlanoUpsertWithWhereUniqueWithoutBanner_sys_arquivoInput | Prisma.SocPlanoUpsertWithWhereUniqueWithoutBanner_sys_arquivoInput[]
+  createMany?: Prisma.SocPlanoCreateManyBanner_sys_arquivoInputEnvelope
+  set?: Prisma.SocPlanoWhereUniqueInput | Prisma.SocPlanoWhereUniqueInput[]
+  disconnect?: Prisma.SocPlanoWhereUniqueInput | Prisma.SocPlanoWhereUniqueInput[]
+  delete?: Prisma.SocPlanoWhereUniqueInput | Prisma.SocPlanoWhereUniqueInput[]
+  connect?: Prisma.SocPlanoWhereUniqueInput | Prisma.SocPlanoWhereUniqueInput[]
+  update?: Prisma.SocPlanoUpdateWithWhereUniqueWithoutBanner_sys_arquivoInput | Prisma.SocPlanoUpdateWithWhereUniqueWithoutBanner_sys_arquivoInput[]
+  updateMany?: Prisma.SocPlanoUpdateManyWithWhereWithoutBanner_sys_arquivoInput | Prisma.SocPlanoUpdateManyWithWhereWithoutBanner_sys_arquivoInput[]
+  deleteMany?: Prisma.SocPlanoScalarWhereInput | Prisma.SocPlanoScalarWhereInput[]
 }
 
 export type SocPlanoCreateNestedManyWithoutPrd_produtoInput = {
@@ -661,6 +733,88 @@ export type SocPlanoUpdateOneRequiredWithoutSoc_sociosNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SocPlanoUpdateToOneWithWhereWithoutSoc_sociosInput, Prisma.SocPlanoUpdateWithoutSoc_sociosInput>, Prisma.SocPlanoUncheckedUpdateWithoutSoc_sociosInput>
 }
 
+export type SocPlanoCreateWithoutBanner_sys_arquivoInput = {
+  codigo: string
+  nome: string
+  descricao?: string | null
+  duracao_dias: number
+  ativo?: number
+  visivel_publico?: number
+  inicio_exibicao?: Date | string | null
+  fim_exibicao?: Date | string | null
+  exibir_apos_encerramento?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  prd_produto?: Prisma.PrdProdutoCreateNestedOneWithoutSoc_planosInput
+  soc_socios?: Prisma.SocSocioCreateNestedManyWithoutSoc_planoInput
+}
+
+export type SocPlanoUncheckedCreateWithoutBanner_sys_arquivoInput = {
+  id?: number
+  prd_produto_id?: number | null
+  codigo: string
+  nome: string
+  descricao?: string | null
+  duracao_dias: number
+  ativo?: number
+  visivel_publico?: number
+  inicio_exibicao?: Date | string | null
+  fim_exibicao?: Date | string | null
+  exibir_apos_encerramento?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  soc_socios?: Prisma.SocSocioUncheckedCreateNestedManyWithoutSoc_planoInput
+}
+
+export type SocPlanoCreateOrConnectWithoutBanner_sys_arquivoInput = {
+  where: Prisma.SocPlanoWhereUniqueInput
+  create: Prisma.XOR<Prisma.SocPlanoCreateWithoutBanner_sys_arquivoInput, Prisma.SocPlanoUncheckedCreateWithoutBanner_sys_arquivoInput>
+}
+
+export type SocPlanoCreateManyBanner_sys_arquivoInputEnvelope = {
+  data: Prisma.SocPlanoCreateManyBanner_sys_arquivoInput | Prisma.SocPlanoCreateManyBanner_sys_arquivoInput[]
+  skipDuplicates?: boolean
+}
+
+export type SocPlanoUpsertWithWhereUniqueWithoutBanner_sys_arquivoInput = {
+  where: Prisma.SocPlanoWhereUniqueInput
+  update: Prisma.XOR<Prisma.SocPlanoUpdateWithoutBanner_sys_arquivoInput, Prisma.SocPlanoUncheckedUpdateWithoutBanner_sys_arquivoInput>
+  create: Prisma.XOR<Prisma.SocPlanoCreateWithoutBanner_sys_arquivoInput, Prisma.SocPlanoUncheckedCreateWithoutBanner_sys_arquivoInput>
+}
+
+export type SocPlanoUpdateWithWhereUniqueWithoutBanner_sys_arquivoInput = {
+  where: Prisma.SocPlanoWhereUniqueInput
+  data: Prisma.XOR<Prisma.SocPlanoUpdateWithoutBanner_sys_arquivoInput, Prisma.SocPlanoUncheckedUpdateWithoutBanner_sys_arquivoInput>
+}
+
+export type SocPlanoUpdateManyWithWhereWithoutBanner_sys_arquivoInput = {
+  where: Prisma.SocPlanoScalarWhereInput
+  data: Prisma.XOR<Prisma.SocPlanoUpdateManyMutationInput, Prisma.SocPlanoUncheckedUpdateManyWithoutBanner_sys_arquivoInput>
+}
+
+export type SocPlanoScalarWhereInput = {
+  AND?: Prisma.SocPlanoScalarWhereInput | Prisma.SocPlanoScalarWhereInput[]
+  OR?: Prisma.SocPlanoScalarWhereInput[]
+  NOT?: Prisma.SocPlanoScalarWhereInput | Prisma.SocPlanoScalarWhereInput[]
+  id?: Prisma.IntFilter<"SocPlano"> | number
+  prd_produto_id?: Prisma.IntNullableFilter<"SocPlano"> | number | null
+  banner_sys_arquivo_id?: Prisma.IntNullableFilter<"SocPlano"> | number | null
+  codigo?: Prisma.StringFilter<"SocPlano"> | string
+  nome?: Prisma.StringFilter<"SocPlano"> | string
+  descricao?: Prisma.StringNullableFilter<"SocPlano"> | string | null
+  duracao_dias?: Prisma.IntFilter<"SocPlano"> | number
+  ativo?: Prisma.IntFilter<"SocPlano"> | number
+  visivel_publico?: Prisma.IntFilter<"SocPlano"> | number
+  inicio_exibicao?: Prisma.DateTimeNullableFilter<"SocPlano"> | Date | string | null
+  fim_exibicao?: Prisma.DateTimeNullableFilter<"SocPlano"> | Date | string | null
+  exibir_apos_encerramento?: Prisma.IntFilter<"SocPlano"> | number
+  created_at?: Prisma.DateTimeNullableFilter<"SocPlano"> | Date | string | null
+  updated_at?: Prisma.DateTimeNullableFilter<"SocPlano"> | Date | string | null
+  deleted_at?: Prisma.DateTimeNullableFilter<"SocPlano"> | Date | string | null
+}
+
 export type SocPlanoCreateWithoutPrd_produtoInput = {
   codigo: string
   nome: string
@@ -674,11 +828,13 @@ export type SocPlanoCreateWithoutPrd_produtoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  banner_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutSoc_planos_bannerInput
   soc_socios?: Prisma.SocSocioCreateNestedManyWithoutSoc_planoInput
 }
 
 export type SocPlanoUncheckedCreateWithoutPrd_produtoInput = {
   id?: number
+  banner_sys_arquivo_id?: number | null
   codigo: string
   nome: string
   descricao?: string | null
@@ -720,26 +876,6 @@ export type SocPlanoUpdateManyWithWhereWithoutPrd_produtoInput = {
   data: Prisma.XOR<Prisma.SocPlanoUpdateManyMutationInput, Prisma.SocPlanoUncheckedUpdateManyWithoutPrd_produtoInput>
 }
 
-export type SocPlanoScalarWhereInput = {
-  AND?: Prisma.SocPlanoScalarWhereInput | Prisma.SocPlanoScalarWhereInput[]
-  OR?: Prisma.SocPlanoScalarWhereInput[]
-  NOT?: Prisma.SocPlanoScalarWhereInput | Prisma.SocPlanoScalarWhereInput[]
-  id?: Prisma.IntFilter<"SocPlano"> | number
-  prd_produto_id?: Prisma.IntNullableFilter<"SocPlano"> | number | null
-  codigo?: Prisma.StringFilter<"SocPlano"> | string
-  nome?: Prisma.StringFilter<"SocPlano"> | string
-  descricao?: Prisma.StringNullableFilter<"SocPlano"> | string | null
-  duracao_dias?: Prisma.IntFilter<"SocPlano"> | number
-  ativo?: Prisma.IntFilter<"SocPlano"> | number
-  visivel_publico?: Prisma.IntFilter<"SocPlano"> | number
-  inicio_exibicao?: Prisma.DateTimeNullableFilter<"SocPlano"> | Date | string | null
-  fim_exibicao?: Prisma.DateTimeNullableFilter<"SocPlano"> | Date | string | null
-  exibir_apos_encerramento?: Prisma.IntFilter<"SocPlano"> | number
-  created_at?: Prisma.DateTimeNullableFilter<"SocPlano"> | Date | string | null
-  updated_at?: Prisma.DateTimeNullableFilter<"SocPlano"> | Date | string | null
-  deleted_at?: Prisma.DateTimeNullableFilter<"SocPlano"> | Date | string | null
-}
-
 export type SocPlanoCreateWithoutSoc_sociosInput = {
   codigo: string
   nome: string
@@ -754,11 +890,13 @@ export type SocPlanoCreateWithoutSoc_sociosInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   prd_produto?: Prisma.PrdProdutoCreateNestedOneWithoutSoc_planosInput
+  banner_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutSoc_planos_bannerInput
 }
 
 export type SocPlanoUncheckedCreateWithoutSoc_sociosInput = {
   id?: number
   prd_produto_id?: number | null
+  banner_sys_arquivo_id?: number | null
   codigo: string
   nome: string
   descricao?: string | null
@@ -803,9 +941,80 @@ export type SocPlanoUpdateWithoutSoc_sociosInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   prd_produto?: Prisma.PrdProdutoUpdateOneWithoutSoc_planosNestedInput
+  banner_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutSoc_planos_bannerNestedInput
 }
 
 export type SocPlanoUncheckedUpdateWithoutSoc_sociosInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  prd_produto_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  banner_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  duracao_dias?: Prisma.IntFieldUpdateOperationsInput | number
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
+  inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type SocPlanoCreateManyBanner_sys_arquivoInput = {
+  id?: number
+  prd_produto_id?: number | null
+  codigo: string
+  nome: string
+  descricao?: string | null
+  duracao_dias: number
+  ativo?: number
+  visivel_publico?: number
+  inicio_exibicao?: Date | string | null
+  fim_exibicao?: Date | string | null
+  exibir_apos_encerramento?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+}
+
+export type SocPlanoUpdateWithoutBanner_sys_arquivoInput = {
+  codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  duracao_dias?: Prisma.IntFieldUpdateOperationsInput | number
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
+  inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  prd_produto?: Prisma.PrdProdutoUpdateOneWithoutSoc_planosNestedInput
+  soc_socios?: Prisma.SocSocioUpdateManyWithoutSoc_planoNestedInput
+}
+
+export type SocPlanoUncheckedUpdateWithoutBanner_sys_arquivoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  prd_produto_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  duracao_dias?: Prisma.IntFieldUpdateOperationsInput | number
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
+  inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  soc_socios?: Prisma.SocSocioUncheckedUpdateManyWithoutSoc_planoNestedInput
+}
+
+export type SocPlanoUncheckedUpdateManyWithoutBanner_sys_arquivoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   prd_produto_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
@@ -824,6 +1033,7 @@ export type SocPlanoUncheckedUpdateWithoutSoc_sociosInput = {
 
 export type SocPlanoCreateManyPrd_produtoInput = {
   id?: number
+  banner_sys_arquivo_id?: number | null
   codigo: string
   nome: string
   descricao?: string | null
@@ -851,11 +1061,13 @@ export type SocPlanoUpdateWithoutPrd_produtoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banner_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutSoc_planos_bannerNestedInput
   soc_socios?: Prisma.SocSocioUpdateManyWithoutSoc_planoNestedInput
 }
 
 export type SocPlanoUncheckedUpdateWithoutPrd_produtoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  banner_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -873,6 +1085,7 @@ export type SocPlanoUncheckedUpdateWithoutPrd_produtoInput = {
 
 export type SocPlanoUncheckedUpdateManyWithoutPrd_produtoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  banner_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -921,6 +1134,7 @@ export type SocPlanoCountOutputTypeCountSoc_sociosArgs<ExtArgs extends runtime.T
 export type SocPlanoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   prd_produto_id?: boolean
+  banner_sys_arquivo_id?: boolean
   codigo?: boolean
   nome?: boolean
   descricao?: boolean
@@ -934,6 +1148,7 @@ export type SocPlanoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   updated_at?: boolean
   deleted_at?: boolean
   prd_produto?: boolean | Prisma.SocPlano$prd_produtoArgs<ExtArgs>
+  banner_sys_arquivo?: boolean | Prisma.SocPlano$banner_sys_arquivoArgs<ExtArgs>
   soc_socios?: boolean | Prisma.SocPlano$soc_sociosArgs<ExtArgs>
   _count?: boolean | Prisma.SocPlanoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["socPlano"]>
@@ -943,6 +1158,7 @@ export type SocPlanoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type SocPlanoSelectScalar = {
   id?: boolean
   prd_produto_id?: boolean
+  banner_sys_arquivo_id?: boolean
   codigo?: boolean
   nome?: boolean
   descricao?: boolean
@@ -957,9 +1173,10 @@ export type SocPlanoSelectScalar = {
   deleted_at?: boolean
 }
 
-export type SocPlanoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "prd_produto_id" | "codigo" | "nome" | "descricao" | "duracao_dias" | "ativo" | "visivel_publico" | "inicio_exibicao" | "fim_exibicao" | "exibir_apos_encerramento" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["socPlano"]>
+export type SocPlanoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "prd_produto_id" | "banner_sys_arquivo_id" | "codigo" | "nome" | "descricao" | "duracao_dias" | "ativo" | "visivel_publico" | "inicio_exibicao" | "fim_exibicao" | "exibir_apos_encerramento" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["socPlano"]>
 export type SocPlanoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   prd_produto?: boolean | Prisma.SocPlano$prd_produtoArgs<ExtArgs>
+  banner_sys_arquivo?: boolean | Prisma.SocPlano$banner_sys_arquivoArgs<ExtArgs>
   soc_socios?: boolean | Prisma.SocPlano$soc_sociosArgs<ExtArgs>
   _count?: boolean | Prisma.SocPlanoCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -968,11 +1185,13 @@ export type $SocPlanoPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "SocPlano"
   objects: {
     prd_produto: Prisma.$PrdProdutoPayload<ExtArgs> | null
+    banner_sys_arquivo: Prisma.$SysArquivoPayload<ExtArgs> | null
     soc_socios: Prisma.$SocSocioPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     prd_produto_id: number | null
+    banner_sys_arquivo_id: number | null
     codigo: string
     nome: string
     descricao: string | null
@@ -1326,6 +1545,7 @@ readonly fields: SocPlanoFieldRefs;
 export interface Prisma__SocPlanoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   prd_produto<T extends Prisma.SocPlano$prd_produtoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SocPlano$prd_produtoArgs<ExtArgs>>): Prisma.Prisma__PrdProdutoClient<runtime.Types.Result.GetResult<Prisma.$PrdProdutoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  banner_sys_arquivo<T extends Prisma.SocPlano$banner_sys_arquivoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SocPlano$banner_sys_arquivoArgs<ExtArgs>>): Prisma.Prisma__SysArquivoClient<runtime.Types.Result.GetResult<Prisma.$SysArquivoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   soc_socios<T extends Prisma.SocPlano$soc_sociosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SocPlano$soc_sociosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SocSocioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1358,6 +1578,7 @@ export interface Prisma__SocPlanoClient<T, Null = never, ExtArgs extends runtime
 export interface SocPlanoFieldRefs {
   readonly id: Prisma.FieldRef<"SocPlano", 'Int'>
   readonly prd_produto_id: Prisma.FieldRef<"SocPlano", 'Int'>
+  readonly banner_sys_arquivo_id: Prisma.FieldRef<"SocPlano", 'Int'>
   readonly codigo: Prisma.FieldRef<"SocPlano", 'String'>
   readonly nome: Prisma.FieldRef<"SocPlano", 'String'>
   readonly descricao: Prisma.FieldRef<"SocPlano", 'String'>
@@ -1734,6 +1955,25 @@ export type SocPlano$prd_produtoArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   include?: Prisma.PrdProdutoInclude<ExtArgs> | null
   where?: Prisma.PrdProdutoWhereInput
+}
+
+/**
+ * SocPlano.banner_sys_arquivo
+ */
+export type SocPlano$banner_sys_arquivoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SysArquivo
+   */
+  select?: Prisma.SysArquivoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SysArquivo
+   */
+  omit?: Prisma.SysArquivoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SysArquivoInclude<ExtArgs> | null
+  where?: Prisma.SysArquivoWhereInput
 }
 
 /**

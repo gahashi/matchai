@@ -1,412 +1,339 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import {
     Building2,
     CalendarDays,
-    CreditCard,
-    LayoutDashboard,
-    Package,
-    Shield,
-    ShieldCheck,
+    MapPin,
+    ShoppingBag,
     Sparkles,
-    Store,
-    Users,
-    WalletCards,
-    Zap,
+    UsersRound,
 } from "lucide-react";
 
-import { AppShell } from "@/components/layout/AppShell";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
-import { Card, CardBody } from "@/components/ui/Card";
-import { PageHeader } from "@/components/ui/PageHeader";
-import { Table } from "@/components/ui/Table";
+import {
+    ProductCard,
+} from "@/components/public/ProductCard";
+import {
+    PublicEventsSection,
+} from "@/components/public/PublicEventsSection";
+import {
+    PublicPlansSection,
+} from "@/components/public/PublicPlansSection";
+import {
+    PublicStoreShell,
+} from "@/components/public/PublicStoreShell";
+import {
+    publicSiteConfig,
+} from "@/config/public-site";
+import {
+    getAuthSession,
+} from "@/lib/auth/session";
+import {
+    eventoPublicService,
+} from "@/lib/cad/evento-public-service";
+import {
+    produtoPublicService,
+} from "@/lib/prd/produto-public-service";
+import {
+    planoPublicService,
+} from "@/lib/soc/plano-public-service";
+import {
+    socioPublicService,
+} from "@/lib/soc/socio-public-service";
 
-const metricas = [
-    {
-        label: "Atléticas ativas",
-        value: "1",
-        icon: Shield,
-        helper: "Plano DEV ativo",
-        badge: "ATL",
-        variant: "success" as const,
-    },
-    {
-        label: "Usuários",
-        value: "1",
-        icon: Users,
-        helper: "Admin inicial",
-        badge: "SYS",
-        variant: "primary" as const,
-    },
-    {
-        label: "Parceiros",
-        value: "0",
-        icon: Building2,
-        helper: "Fase futura",
-        badge: "B2B",
-        variant: "info" as const,
-    },
-    {
-        label: "Assinaturas",
-        value: "1",
-        icon: CreditCard,
-        helper: "Ambiente dev",
-        badge: "DEV",
-        variant: "warning" as const,
-    },
-];
+export const metadata: Metadata = {
+    title: "AAACCU | Computaria",
+    description:
+        "Eventos, produtos, associação e informações da AAACCU — Computaria UNIVALI.",
+};
 
-const atleticas = [
-    {
-        nome: "Computaria",
-        sigla: "AAACCU",
-        instituicao: "UNIVALI",
-        plano: "Dev",
-        status: "Ativa",
-    },
-];
+export default async function HomePage() {
+    const session =
+        await getAuthSession();
 
-const modulos = [
-    {
-        title: "Gestão de atléticas",
-        description:
-            "Controle membros, cargos, diretorias, permissões, tema e regimento interno.",
-        icon: ShieldCheck,
-        badge: "Core",
-        variant: "success" as const,
-    },
-    {
-        title: "Parceiros e eventos",
-        description:
-            "Organize eventos, benefícios, parcerias universitárias e ações comerciais.",
-        icon: CalendarDays,
-        badge: "Futuro",
-        variant: "info" as const,
-    },
-    {
-        title: "Marketplace universitário",
-        description:
-            "Venda produtos de atléticas, combos, ingressos e itens personalizados.",
-        icon: Store,
-        badge: "Commerce",
-        variant: "warning" as const,
-    },
-];
+    const socio = session
+        ? await socioPublicService.getSocioAtual(
+            session.user.id,
+        )
+        : {
+            isSocio: false as const,
+            socio: null,
+        };
 
-const checklist = [
-    {
-        label: "SYS criado",
-        status: "Pronto",
-        variant: "success" as const,
-    },
-    {
-        label: "EDU criado",
-        status: "Pronto",
-        variant: "success" as const,
-    },
-    {
-        label: "ATL criado",
-        status: "Pronto",
-        variant: "success" as const,
-    },
-    {
-        label: "Better Auth instalado",
-        status: "Em validação",
-        variant: "warning" as const,
-    },
-    {
-        label: "Parceiros",
-        status: "Futuro",
-        variant: "info" as const,
-    },
-];
+    const [
+        eventos,
+        produtos,
+        planos,
+    ] = await Promise.all([
+        eventoPublicService.listHomeEvents({
+            limit: 8,
+        }),
 
-const planos = [
-    {
-        name: "Base",
-        badge: "MVP",
-        price: "Uso inicial",
-        description:
-            "Plano mínimo para atléticas começarem a operar no Brava Pass.",
-        items: ["Tema básico", "Membros", "Permissões", "Painel inicial"],
-        variant: "soft" as const,
-        badgeVariant: "primary" as const,
-    },
-    {
-        name: "Premium",
-        badge: "Destaque",
-        price: "Mensal",
-        description:
-            "Mais recursos, menor taxa, relatórios e marketplace com destaque.",
-        items: ["Marketplace", "Eventos", "Relatórios", "Destaque"],
-        variant: "primary" as const,
-        badgeVariant: "primary" as const,
-    },
-    {
-        name: "Parceiro",
-        badge: "B2B",
-        price: "Futuro",
-        description:
-            "Controle de eventos, benefícios, campanhas e parcerias.",
-        items: ["Eventos", "Benefícios", "Campanhas", "Relatórios"],
-        variant: "elevated" as const,
-        badgeVariant: "info" as const,
-    },
-];
+        produtoPublicService.listHomeProducts({
+            isSocio: socio.isSocio,
+            limit: 4,
+        }),
 
-export default function HomePage() {
+        planoPublicService.listHomePlans({
+            limit: 3,
+        }),
+    ]);
+
     return (
-        <AppShell>
-            <PageHeader
-                eyebrow={
-                    <Badge color="primary">
-                        <Sparkles size={13} />
-                        Brava Pass System
-                    </Badge>
-                }
-                title="Dashboard Brava Pass"
-                subtitle="Painel principal do sistema. Aqui usamos a identidade visual oficial do Brava Pass, enquanto páginas de atléticas e parceiros podem receber temas próprios."
-                actions={
-                    <>
-                        <Button color="secondary">Configurar sistema</Button>
-                        <Button>Nova atlética</Button>
-                    </>
-                }
-            />
+        <PublicStoreShell
+            user={
+                session
+                    ? {
+                        nome:
+                        session.user.nome,
+                        avatar_url:
+                            session.user.avatar_url ??
+                            null,
+                        isAdmin:
+                            session.user
+                                .sys_usuario_tipo
+                                .codigo === "admin",
+                    }
+                    : null
+            }
+        >
+            <section className="bp-public-hero">
+                <div className="bp-public-container bp-public-hero-grid">
+                    <div className="bp-public-hero-copy">
+                        <span className="bp-public-kicker">
+                            Atlética dos cursos de computação · UNIVALI
+                        </span>
 
-            <section className="bp-hero-grid">
-                <Card variant="elevated" className="bp-hero-card">
-                    <div className="bp-hero-glow" />
+                        <h1>
+                            Computaria é comunidade dentro e fora da sala.
+                        </h1>
 
-                    <CardBody className="bp-hero-content">
-                        <div className="bp-badge-row">
-                            <Badge color="success">
-                                <ShieldCheck size={13} />
-                                Auth real
-                            </Badge>
-
-                            <Badge color="primary">
-                                <Zap size={13} />
-                                Design system
-                            </Badge>
-
-                            <Badge color="info">
-                                <LayoutDashboard size={13} />
-                                SaaS modular
-                            </Badge>
-                        </div>
-
-                        <div>
-                            <h2 className="bp-hero-title">
-                                Uma base premium para crescer com atléticas, parceiros e marketplace.
-                            </h2>
-
-                            <p className="bp-hero-text">
-                                O Brava Pass separa autenticação, autorização,
-                                assinatura e contexto de organização. O sistema usa o
-                                tema oficial nas áreas globais e permite temas próprios
-                                em páginas de atléticas e parceiros.
-                            </p>
-                        </div>
-
-                        <div className="bp-hero-actions">
-                            <Button>
-                                <ShieldCheck size={16} />
-                                Validar segurança
-                            </Button>
-
-                            <Button color="secondary">
-                                <Package size={16} />
-                                Ver módulos
-                            </Button>
-
-                            <Button variant="ghost">Documentação</Button>
-                        </div>
-                    </CardBody>
-                </Card>
-
-                <Card color="primary" className="bp-highlight-card">
-                    <CardBody>
-                        <div>
-                            <Badge color="primary">
-                                <WalletCards size={13} />
-                                Planos por entidade
-                            </Badge>
-
-                            <h2>Assinatura não é do usuário base.</h2>
-
-                            <p>
-                                Usuários podem existir livremente. Planos e limites
-                                pertencem a atléticas e parceiros, liberando módulos,
-                                destaque, taxa menor e recursos avançados.
-                            </p>
-                        </div>
-
-                        <div className="bp-pill-row">
-                            <span className="bp-pill">Atlética</span>
-                            <span className="bp-pill">Parceiro</span>
-                            <span className="bp-pill">Marketplace</span>
-                        </div>
-                    </CardBody>
-                </Card>
-            </section>
-
-            <section className="bp-grid bp-grid-4 bp-mb-5">
-                {metricas.map((metrica) => {
-                    const Icon = metrica.icon;
-
-                    return (
-                        <Card key={metrica.label} className="bp-metric-card">
-                            <CardBody>
-                                <div>
-                                    <p className="bp-metric-label">
-                                        {metrica.label}
-                                    </p>
-
-                                    <strong className="bp-metric-value">
-                                        {metrica.value}
-                                    </strong>
-
-                                    <span className="bp-metric-helper">
-                                        {metrica.helper}
-                                    </span>
-                                </div>
-
-                                <div>
-                                    <div className="bp-icon-box">
-                                        <Icon size={21} />
-                                    </div>
-
-                                    <div className="bp-mt-4">
-                                        <Badge color={metrica.variant}>
-                                            {metrica.badge}
-                                        </Badge>
-                                    </div>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    );
-                })}
-            </section>
-
-            <section className="bp-section-grid">
-                <Card>
-                    <CardBody>
-                        <div>
-                            <h2 className="bp-section-title">Módulos principais</h2>
-                            <p className="bp-section-subtitle">
-                                Estrutura preparada para crescer sem misturar regras.
-                            </p>
-                        </div>
-
-                        <div className="bp-feature-list">
-                            {modulos.map((modulo) => {
-                                const Icon = modulo.icon;
-
-                                return (
-                                    <div key={modulo.title} className="bp-feature-item">
-                                        <div className="bp-feature-icon">
-                                            <Icon size={18} />
-                                        </div>
-
-                                        <div>
-                                            <div className="bp-feature-head">
-                                                <strong>{modulo.title}</strong>
-
-                                                <Badge color={modulo.variant}>
-                                                    {modulo.badge}
-                                                </Badge>
-                                            </div>
-
-                                            <p>{modulo.description}</p>
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </CardBody>
-                </Card>
-
-                <Card>
-                    <CardBody>
-                        <h2 className="bp-section-title">Próximas ações</h2>
-                        <p className="bp-section-subtitle">
-                            Checklist visual para validar a base inicial.
+                        <p>
+                            Eventos, produtos, esporte e vida universitária em um só lugar. Acompanhe a AAACCU e faça parte da comunidade.
                         </p>
 
-                        <div className="bp-check-list">
-                            {checklist.map((item) => (
-                                <div key={item.label} className="bp-check-item">
-                                    <span>{item.label}</span>
-                                    <Badge color={item.variant}>{item.status}</Badge>
-                                </div>
-                            ))}
+                        <div className="bp-public-hero-actions">
+                            {eventos.length > 0 ? (
+                                <>
+                                    <Link
+                                        href="/#eventos"
+                                        className="bp-public-primary-link"
+                                    >
+                                        <CalendarDays size={17} />
+                                        Ver eventos
+                                    </Link>
+
+                                    <Link
+                                        href="/#produtos"
+                                        className="bp-public-secondary-link"
+                                    >
+                                        <ShoppingBag size={17} />
+                                        Ver produtos
+                                    </Link>
+                                </>
+                            ) : (
+                                <>
+                                    <Link
+                                        href="/#produtos"
+                                        className="bp-public-primary-link"
+                                    >
+                                        <ShoppingBag size={17} />
+                                        Ver produtos
+                                    </Link>
+
+                                    <Link
+                                        href="/#quem-somos"
+                                        className="bp-public-secondary-link"
+                                    >
+                                        Conhecer a AAACCU
+                                    </Link>
+                                </>
+                            )}
                         </div>
-                    </CardBody>
-                </Card>
-            </section>
 
-            <section className="bp-plan-grid">
-                {planos.map((plano) => (
-                    <Card
-                        key={plano.name}
-                        color={plano.variant}
-                        className="bp-plan-card"
-                    >
-                        <CardBody>
-                            <Badge color={plano.badgeVariant}>
-                                {plano.badge}
-                            </Badge>
+                        {session ? (
+                            <div className="bp-public-session-note">
+                                {socio.isSocio ? (
+                                    <>
+                                        <Sparkles size={16} />
+                                        Você é sócio ativo. Valores de sócio já aparecem aplicados.
+                                    </>
+                                ) : (
+                                    <>
+                                        <UsersRound size={16} />
+                                        Você está conectado. Preços de sócio são aplicados somente para associações ativas.
+                                    </>
+                                )}
+                            </div>
+                        ) : null}
+                    </div>
 
-                            <h3>{plano.name}</h3>
+                    <div className="bp-public-hero-logo-card">
+                        <div className="bp-public-hero-logo-glow" />
 
-                            <p>{plano.description}</p>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                            src={
+                                publicSiteConfig.logoPath
+                            }
+                            alt="Logo AAACCU"
+                        />
 
-                            <strong className="bp-plan-price">
-                                {plano.price}
+                        <div>
+                            <strong>
+                                {publicSiteConfig.name}
                             </strong>
 
-                            <div className="bp-plan-list">
-                                {plano.items.map((item) => (
-                                    <span key={item}>• {item}</span>
-                                ))}
-                            </div>
-                        </CardBody>
-                    </Card>
-                ))}
+                            <span>
+                                {publicSiteConfig.displayName} ·{" "}
+                                {publicSiteConfig.institution}
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </section>
 
-            <section className="bp-section-grid">
-                <Card className="bp-span-2">
-                    <CardBody>
-                        <div className="bp-mb-4">
-                            <h2 className="bp-section-title">Atléticas recentes</h2>
-                            <p className="bp-section-subtitle">
-                                Primeiras organizações cadastradas no Brava Pass.
+            <PublicEventsSection
+                eventos={eventos}
+            />
+
+            <section
+                id="quem-somos"
+                className="bp-public-section"
+            >
+                <div className="bp-public-container">
+                    <div className="bp-public-section-head">
+                        <div>
+                            <span className="bp-public-kicker">
+                                Sobre a atlética
+                            </span>
+
+                            <h2>
+                                Quem somos
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div className="bp-public-about-grid">
+                        <article className="bp-public-about-copy">
+                            <p>
+                                {publicSiteConfig.about}
+                            </p>
+                        </article>
+
+                        <div className="bp-public-info-grid">
+                            <article>
+                                <div>
+                                    <CalendarDays size={19} />
+                                </div>
+
+                                <span>
+                                    Fundação
+                                </span>
+
+                                <strong>
+                                    {publicSiteConfig.foundationYear ??
+                                        "A definir"}
+                                </strong>
+                            </article>
+
+                            <article>
+                                <div>
+                                    <Building2 size={19} />
+                                </div>
+
+                                <span>
+                                    Universidade
+                                </span>
+
+                                <strong>
+                                    {publicSiteConfig.institution}
+                                </strong>
+                            </article>
+
+                            <article>
+                                <div>
+                                    <MapPin size={19} />
+                                </div>
+
+                                <span>
+                                    Nossa sede
+                                </span>
+
+                                <strong>
+                                    {publicSiteConfig.headquarters ??
+                                        "A definir"}
+                                </strong>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section
+                id="produtos"
+                className="bp-public-section bp-public-products-section"
+            >
+                <div className="bp-public-container">
+                    <div className="bp-public-section-head">
+                        <div>
+                            <span className="bp-public-kicker">
+                                Loja
+                            </span>
+
+                            <h2>
+                                Nossos produtos
+                            </h2>
+
+                            <p>
+                                Produtos públicos e disponíveis agora. O preço de sócio é aplicado automaticamente para usuários autenticados com associação ativa.
                             </p>
                         </div>
+                    </div>
 
-                        <Table headers={["Atlética", "Instituição", "Plano", "Status"]}>
-                            {atleticas.map((atletica) => (
-                                <tr key={atletica.sigla}>
-                                    <td>
-                                        <div className="bp-table-title">
-                                            <strong>{atletica.nome}</strong>
-                                            <span>{atletica.sigla}</span>
-                                        </div>
-                                    </td>
-                                    <td>{atletica.instituicao}</td>
-                                    <td>{atletica.plano}</td>
-                                    <td>
-                                        <Badge color="success">
-                                            {atletica.status}
-                                        </Badge>
-                                    </td>
-                                </tr>
+                    {produtos.length > 0 ? (
+                        <div className="bp-public-product-grid">
+                            {produtos.map((produto) => (
+                                <ProductCard
+                                    key={produto.id}
+                                    produto={produto}
+                                />
                             ))}
-                        </Table>
-                    </CardBody>
-                </Card>
+                        </div>
+                    ) : (
+                        <div className="bp-public-products-empty">
+                            <ShoppingBag size={25} />
+
+                            <strong>
+                                Nenhum produto disponível no momento.
+                            </strong>
+
+                            <span>
+                                Novos produtos aparecerão aqui quando forem publicados.
+                            </span>
+                        </div>
+                    )}
+                </div>
             </section>
-        </AppShell>
+
+            <PublicPlansSection
+                planos={planos}
+                membership={{
+                    isAuthenticated:
+                        Boolean(session),
+                    isSocio:
+                    socio.isSocio,
+                    planoId:
+                        socio.socio?.plano.id ??
+                        null,
+                    planoNome:
+                        socio.socio?.plano.nome ??
+                        null,
+                    fimAt:
+                        socio.socio?.fim_at
+                            ? socio.socio.fim_at.toISOString()
+                            : null,
+                }}
+            />
+        </PublicStoreShell>
     );
 }

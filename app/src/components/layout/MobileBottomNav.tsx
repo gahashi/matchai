@@ -4,122 +4,82 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import {
-    CalendarDays,
-    Home,
-    Package,
-    ShoppingBag,
-    UserRound,
-    UsersRound,
-} from "lucide-react";
+    adminNavigationItems,
+    getPublicMobileNavigation,
+    isNavigationItemActive,
+    type NavigationUserContext,
+} from "@/config/navigation";
 
+type MobileBottomNavProps = {
+    mode?: "app" | "public";
+    user?: NavigationUserContext;
+};
 
-const defaultMobileNavItems = [
-    {
-        label: "Início",
-        icon: Home,
-        href: "/",
-    },
-    {
-        label: "Minha conta",
-        icon: UserRound,
-        href: "/perfil",
-    },
-];
+const anonymousUser: NavigationUserContext = {
+    isAuthenticated: false,
+    isAdmin: false,
+};
 
+export function MobileBottomNav({
+                                    mode = "app",
+                                    user,
+                                }: MobileBottomNavProps) {
+    const pathname = usePathname();
+    const isAdminArea =
+        mode === "app" &&
+        pathname.startsWith("/admin");
 
-const adminMobileNavItems = [
-    {
-        label: "Produtos",
-        icon: Package,
-        href: "/admin/produtos",
-    },
-    {
-        label: "Eventos",
-        icon: CalendarDays,
-        href: "/admin/eventos",
-    },
-    {
-        label: "Pedidos",
-        icon: ShoppingBag,
-        href: "/admin/pedidos",
-    },
-    {
-        label: "Sócios",
-        icon: UsersRound,
-        href: "/admin/socios",
-    },
-];
+    const effectiveUser =
+        mode === "public"
+            ? user ?? anonymousUser
+            : {
+                isAuthenticated: true,
+                isAdmin: false,
+            };
 
-
-function isActiveRoute(
-    pathname: string,
-    href: string,
-) {
-    if (href === "/") {
-        return pathname === "/";
-    }
+    const items = isAdminArea
+        ? adminNavigationItems
+        : mode === "public"
+            ? getPublicMobileNavigation(
+                effectiveUser,
+            )
+            : getPublicMobileNavigation({
+                isAuthenticated: true,
+                isAdmin: false,
+            }).filter(
+                (item) =>
+                    item.href === "/" ||
+                    item.href === "/perfil",
+            );
 
     return (
-        pathname === href ||
-        pathname.startsWith(
-            `${href}/`,
-        )
-    );
-}
+        <nav
+            className="bp-mobile-nav"
+            aria-label="Navegação móvel"
+        >
+            {items.map((item) => {
+                const Icon = item.icon;
+                const active = isNavigationItemActive(
+                    pathname,
+                    item,
+                );
 
-
-export function MobileBottomNav() {
-    const pathname =
-        usePathname();
-
-    const isAdmin =
-        pathname.startsWith(
-            "/admin",
-        );
-
-    const mobileNavItems =
-        isAdmin
-            ? adminMobileNavItems
-            : defaultMobileNavItems;
-
-    return (
-        <nav className="bp-mobile-nav">
-            {mobileNavItems.map(
-                (item) => {
-                    const Icon =
-                        item.icon;
-
-                    const active =
-                        isActiveRoute(
-                            pathname,
-                            item.href,
-                        );
-
-                    return (
-                        <Link
-                            key={
-                                item.href
-                            }
-                            href={
-                                item.href
-                            }
-                            className={
-                                active
-                                    ? "active"
-                                    : ""
-                            }
-                        >
-                            <Icon
-                                size={17}
-                            />
-
-                            {
-                                item.label
-                            }
-                        </Link>
-                    );
-                },
-            )}
+                return (
+                    <Link
+                        key={`${item.label}-${item.href}`}
+                        href={item.href}
+                        className={
+                            active ? "active" : ""
+                        }
+                        aria-current={
+                            active ? "page" : undefined
+                        }
+                    >
+                        <Icon size={17} />
+                        {item.mobileLabel ?? item.label}
+                    </Link>
+                );
+            })}
         </nav>
     );
 }

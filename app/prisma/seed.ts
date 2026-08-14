@@ -118,23 +118,33 @@ async function main() {
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.sysArquivoVisibilidade, "publico", {
+    await upsertByCodigo(prisma.sysArquivoVisibilidade, "public", {
         nome: "Público",
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.sysArquivoVisibilidade, "privado", {
+    await upsertByCodigo(prisma.sysArquivoVisibilidade, "private", {
         nome: "Privado",
         ativo: 1,
     });
 
-    await upsertByCodigo(prisma.sysArquivoTipo, "avatar", {
-        nome: "Avatar",
+    await upsertByCodigo(prisma.sysArquivoTipo, "avatar_usuario", {
+        nome: "Avatar de usuário",
         ativo: 1,
     });
 
     await upsertByCodigo(prisma.sysArquivoTipo, "produto_imagem", {
         nome: "Imagem de produto",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoTipo, "evento_banner", {
+        nome: "Banner de evento",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoTipo, "plano_socio_banner", {
+        nome: "Banner de plano de sócio",
         ativo: 1,
     });
 

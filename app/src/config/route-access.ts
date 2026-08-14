@@ -12,19 +12,18 @@ export type RouteAccessRule = {
 };
 
 export const routeAccessRules: RouteAccessRule[] = [
-    /**
-     * PUBLIC
-     * Qualquer pessoa pode acessar.
-     */
     {
         path: "/",
         access: "public",
     },
-
-    /**
-     * GUEST
-     * Apenas usuário não autenticado.
-     */
+    {
+        path: "/carrinho",
+        access: "public",
+    },
+    {
+        path: "/acompanhar-pedido",
+        access: "public",
+    },
     {
         path: "/login",
         access: "guest",
@@ -37,20 +36,10 @@ export const routeAccessRules: RouteAccessRule[] = [
         path: "/recuperar-senha",
         access: "guest",
     },
-
-    /**
-     * AUTH
-     * Qualquer usuário autenticado.
-     */
     {
         path: "/perfil",
         access: "auth",
     },
-
-    /**
-     * ADMIN
-     * Apenas usuário do tipo administrador.
-     */
     {
         path: "/admin",
         access: "admin",
