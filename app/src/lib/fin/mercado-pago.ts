@@ -5,6 +5,7 @@ export type MercadoPagoPaymentStatus =
     | "pending"
     | "rejected"
     | "cancelled"
+    | "expired"
     | "refunded"
     | "charged_back";
 
@@ -17,9 +18,16 @@ export type MercadoPagoPaymentResponse = {
     external_reference?: string | null;
     date_of_expiration?: string | null;
     transaction_amount?: number | null;
+    installments?: number | null;
+    fee_details?: Array<{
+        type?: string | null;
+        amount?: number | null;
+        fee_payer?: string | null;
+    }> | null;
     transaction_details?: {
         net_received_amount?: number | null;
         total_paid_amount?: number | null;
+        installment_amount?: number | null;
     } | null;
     point_of_interaction?: {
         transaction_data?: {
@@ -163,6 +171,46 @@ export async function getMercadoPagoPayment(
             typeof data.message === "string"
                 ? data.message
                 : "Não foi possível consultar o pagamento no Mercado Pago.";
+
+        throw new MercadoPagoApiError(
+            message,
+            response.status,
+            data,
+        );
+    }
+
+    return data as MercadoPagoPaymentResponse;
+}
+
+
+export async function cancelMercadoPagoPayment(
+    paymentId: string,
+): Promise<MercadoPagoPaymentResponse> {
+    const response = await fetch(
+        `https://api.mercadopago.com/v1/payments/${encodeURIComponent(
+            paymentId,
+        )}`,
+        {
+            method: "PUT",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${getAccessToken()}`,
+            },
+            body: JSON.stringify({
+                status: "cancelled",
+            }),
+            cache: "no-store",
+        },
+    );
+
+    const data = await parseMercadoPagoResponse(response);
+
+    if (!response.ok) {
+        const message =
+            typeof data.message === "string"
+                ? data.message
+                : "Não foi possível cancelar o pagamento no Mercado Pago.";
 
         throw new MercadoPagoApiError(
             message,

@@ -10,7 +10,6 @@ import {
 import { produtoPublicService } from "@/lib/prd/produto-public-service";
 import { socioPublicService } from "@/lib/soc/socio-public-service";
 import {
-    CheckoutStockError,
     pedidoPublicService,
     type CheckoutPaymentMethod,
     type CheckoutValidatedItem,
@@ -381,10 +380,6 @@ export async function POST(request: NextRequest) {
                     id: existingAttempt.id,
                 },
                 total: Number(existingAttempt.vnd_pedido.valor_total),
-                reservaExpiraAt:
-                    existingAttempt.vnd_pedido
-                        .vnd_estoque_reservas[0]
-                        ?.expira_at ?? null,
             }
             : await pedidoPublicService.createPaymentAttempt({
                 sysUsuarioId: session?.user.id ?? null,
@@ -408,15 +403,6 @@ export async function POST(request: NextRequest) {
             customer.nome,
         );
 
-        if (
-            method === "pix" &&
-            !attempt.reservaExpiraAt
-        ) {
-            throw new Error(
-                "Não foi possível determinar a expiração da reserva do PIX.",
-            );
-        }
-
         const mercadoPagoPayment =
             await createMercadoPagoPayment(
                 {
@@ -424,13 +410,6 @@ export async function POST(request: NextRequest) {
                     description: `Pedido ${attempt.pedido.codigo} - AAACCU`,
                     payment_method_id: paymentMethodId,
                     external_reference: attempt.pedido.codigo,
-                    ...(method === "pix" &&
-                    attempt.reservaExpiraAt
-                        ? {
-                            date_of_expiration:
-                                attempt.reservaExpiraAt.toISOString(),
-                        }
-                        : {}),
                     ...(token ? { token } : {}),
                     ...(installments
                         ? { installments }
@@ -507,9 +486,6 @@ export async function POST(request: NextRequest) {
     } catch (error) {
         console.error("[public.checkout.pay]", error);
 
-        const stockConflict =
-            error instanceof CheckoutStockError;
-
         const rejectedByMercadoPago =
             error instanceof MercadoPagoApiError &&
             error.status >= 400 &&
@@ -546,11 +522,9 @@ export async function POST(request: NextRequest) {
                 },
             },
             {
-                status: stockConflict
-                    ? 409
-                    : rejectedByMercadoPago
-                        ? 400
-                        : 502,
+                status: rejectedByMercadoPago
+                    ? 400
+                    : 502,
             },
         );
     }

@@ -24,6 +24,27 @@
     color: var(--color-text-soft);
 }
 
+/* Autofill do navegador — preserva o tema dos formulários */
+.bp-input:-webkit-autofill,
+.bp-input:-webkit-autofill:hover,
+.bp-input:-webkit-autofill:focus,
+.bp-input:-webkit-autofill:active,
+.bp-textarea:-webkit-autofill,
+.bp-textarea:-webkit-autofill:hover,
+.bp-textarea:-webkit-autofill:focus,
+.bp-textarea:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--color-text);
+    caret-color: var(--color-text);
+    box-shadow: 0 0 0 1000px var(--color-surface) inset;
+    transition: background-color 9999s ease-out 0s;
+}
+
+.bp-input option,
+.bp-select option {
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
 .bp-input:disabled,
 .bp-select:disabled,
 .bp-textarea:disabled {

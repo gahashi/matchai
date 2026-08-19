@@ -100,6 +100,10 @@ function getReservationExpiration(now: Date) {
     );
 }
 
+function buildPaymentExpiration(createdAt: Date) {
+    return getReservationExpiration(createdAt);
+}
+
 type StockReservationInput = {
     pedidoId: number;
     pedidoItemId: number;
@@ -472,6 +476,10 @@ function getPaymentFinancials(
 }
 
 class PedidoPublicService {
+    getPaymentExpiration(createdAt: Date) {
+        return buildPaymentExpiration(createdAt);
+    }
+
     async getCheckoutCustomer(sysUsuarioId: number) {
         return prisma.sysUsuario.findFirst({
             where: {
@@ -499,6 +507,7 @@ class PedidoPublicService {
             select: {
                 id: true,
                 valor: true,
+                created_at: true,
                 external_id: true,
                 external_reference: true,
                 qr_code_text: true,
@@ -869,6 +878,7 @@ class PedidoPublicService {
                 pagamento,
                 total,
                 reservaExpiraAt,
+                pagamentoExpiraAt: reservaExpiraAt,
             };
         });
     }
@@ -1020,6 +1030,45 @@ class PedidoPublicService {
             finStatusCode,
             pedidoStatusCode,
         };
+    }
+
+    async findExpiredPixPayments(limit = 100) {
+        const now = new Date();
+
+        return prisma.finPagamento.findMany({
+            where: {
+                provider: "mercado_pago",
+                external_id: { not: null },
+                fin_pagamento_status: {
+                    codigo: "pendente",
+                },
+                fin_pagamento_metodo: {
+                    codigo: "pix",
+                },
+                vnd_pedido: {
+                    vnd_estoque_reservas: {
+                        some: {
+                            expira_at: { lte: now },
+                            consumida_at: null,
+                            liberada_at: null,
+                        },
+                    },
+                },
+            },
+            orderBy: {
+                created_at: "asc",
+            },
+            take: Math.max(1, Math.min(limit, 500)),
+            select: {
+                id: true,
+                external_id: true,
+                vnd_pedido: {
+                    select: {
+                        codigo: true,
+                    },
+                },
+            },
+        });
     }
 
     async findPaymentForPublicStatus(input: {
