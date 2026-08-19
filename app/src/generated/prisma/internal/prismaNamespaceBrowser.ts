@@ -70,6 +70,8 @@ export const ModelName = {
   PrdProduto: 'PrdProduto',
   PrdProdutoImagem: 'PrdProdutoImagem',
   PrdProdutoVariacao: 'PrdProdutoVariacao',
+  PrdProdutoComponente: 'PrdProdutoComponente',
+  PrdProdutoCampo: 'PrdProdutoCampo',
   VndCampanhaStatus: 'VndCampanhaStatus',
   VndCampanha: 'VndCampanha',
   VndCampanhaProduto: 'VndCampanhaProduto',
@@ -81,6 +83,9 @@ export const ModelName = {
   VndEntregaTipo: 'VndEntregaTipo',
   VndPedido: 'VndPedido',
   VndPedidoItem: 'VndPedidoItem',
+  VndPedidoItemComponente: 'VndPedidoItemComponente',
+  VndPedidoItemCampo: 'VndPedidoItemCampo',
+  VndEstoqueReserva: 'VndEstoqueReserva',
   VndPedidoHistorico: 'VndPedidoHistorico',
   FinPagamentoStatus: 'FinPagamentoStatus',
   FinPagamentoMetodo: 'FinPagamentoMetodo',
@@ -420,6 +425,39 @@ export const PrdProdutoVariacaoScalarFieldEnum = {
 export type PrdProdutoVariacaoScalarFieldEnum = (typeof PrdProdutoVariacaoScalarFieldEnum)[keyof typeof PrdProdutoVariacaoScalarFieldEnum]
 
 
+export const PrdProdutoComponenteScalarFieldEnum = {
+  id: 'id',
+  prd_produto_id: 'prd_produto_id',
+  prd_produto_componente_id: 'prd_produto_componente_id',
+  quantidade: 'quantidade',
+  ordem: 'ordem',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type PrdProdutoComponenteScalarFieldEnum = (typeof PrdProdutoComponenteScalarFieldEnum)[keyof typeof PrdProdutoComponenteScalarFieldEnum]
+
+
+export const PrdProdutoCampoScalarFieldEnum = {
+  id: 'id',
+  prd_produto_id: 'prd_produto_id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  tipo: 'tipo',
+  obrigatorio: 'obrigatorio',
+  valor_unico: 'valor_unico',
+  ordem: 'ordem',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type PrdProdutoCampoScalarFieldEnum = (typeof PrdProdutoCampoScalarFieldEnum)[keyof typeof PrdProdutoCampoScalarFieldEnum]
+
+
 export const VndCampanhaStatusScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
@@ -456,6 +494,7 @@ export const VndCampanhaProdutoScalarFieldEnum = {
   id: 'id',
   vnd_campanha_id: 'vnd_campanha_id',
   prd_produto_id: 'prd_produto_id',
+  modalidade_venda: 'modalidade_venda',
   preco_normal: 'preco_normal',
   preco_socio: 'preco_socio',
   limite_por_cliente: 'limite_por_cliente',
@@ -607,6 +646,55 @@ export const VndPedidoItemScalarFieldEnum = {
 } as const
 
 export type VndPedidoItemScalarFieldEnum = (typeof VndPedidoItemScalarFieldEnum)[keyof typeof VndPedidoItemScalarFieldEnum]
+
+
+export const VndPedidoItemComponenteScalarFieldEnum = {
+  id: 'id',
+  vnd_pedido_item_id: 'vnd_pedido_item_id',
+  prd_produto_id: 'prd_produto_id',
+  prd_produto_variacao_id: 'prd_produto_variacao_id',
+  produto_codigo_snapshot: 'produto_codigo_snapshot',
+  produto_nome_snapshot: 'produto_nome_snapshot',
+  variacao_snapshot: 'variacao_snapshot',
+  quantidade: 'quantidade',
+  created_at: 'created_at'
+} as const
+
+export type VndPedidoItemComponenteScalarFieldEnum = (typeof VndPedidoItemComponenteScalarFieldEnum)[keyof typeof VndPedidoItemComponenteScalarFieldEnum]
+
+
+export const VndPedidoItemCampoScalarFieldEnum = {
+  id: 'id',
+  vnd_pedido_item_id: 'vnd_pedido_item_id',
+  vnd_pedido_item_componente_id: 'vnd_pedido_item_componente_id',
+  prd_produto_campo_id: 'prd_produto_campo_id',
+  campo_codigo_snapshot: 'campo_codigo_snapshot',
+  campo_nome_snapshot: 'campo_nome_snapshot',
+  campo_tipo_snapshot: 'campo_tipo_snapshot',
+  valor: 'valor',
+  valor_normalizado: 'valor_normalizado',
+  created_at: 'created_at'
+} as const
+
+export type VndPedidoItemCampoScalarFieldEnum = (typeof VndPedidoItemCampoScalarFieldEnum)[keyof typeof VndPedidoItemCampoScalarFieldEnum]
+
+
+export const VndEstoqueReservaScalarFieldEnum = {
+  id: 'id',
+  vnd_pedido_id: 'vnd_pedido_id',
+  vnd_pedido_item_id: 'vnd_pedido_item_id',
+  vnd_pedido_item_componente_id: 'vnd_pedido_item_componente_id',
+  prd_produto_id: 'prd_produto_id',
+  prd_produto_variacao_id: 'prd_produto_variacao_id',
+  quantidade: 'quantidade',
+  expira_at: 'expira_at',
+  consumida_at: 'consumida_at',
+  liberada_at: 'liberada_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type VndEstoqueReservaScalarFieldEnum = (typeof VndEstoqueReservaScalarFieldEnum)[keyof typeof VndEstoqueReservaScalarFieldEnum]
 
 
 export const VndPedidoHistoricoScalarFieldEnum = {
@@ -877,6 +965,16 @@ export const PrdProdutoVariacaoOrderByRelevanceFieldEnum = {
 export type PrdProdutoVariacaoOrderByRelevanceFieldEnum = (typeof PrdProdutoVariacaoOrderByRelevanceFieldEnum)[keyof typeof PrdProdutoVariacaoOrderByRelevanceFieldEnum]
 
 
+export const PrdProdutoCampoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  tipo: 'tipo'
+} as const
+
+export type PrdProdutoCampoOrderByRelevanceFieldEnum = (typeof PrdProdutoCampoOrderByRelevanceFieldEnum)[keyof typeof PrdProdutoCampoOrderByRelevanceFieldEnum]
+
+
 export const VndCampanhaStatusOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   descricao: 'descricao',
@@ -895,6 +993,13 @@ export const VndCampanhaOrderByRelevanceFieldEnum = {
 } as const
 
 export type VndCampanhaOrderByRelevanceFieldEnum = (typeof VndCampanhaOrderByRelevanceFieldEnum)[keyof typeof VndCampanhaOrderByRelevanceFieldEnum]
+
+
+export const VndCampanhaProdutoOrderByRelevanceFieldEnum = {
+  modalidade_venda: 'modalidade_venda'
+} as const
+
+export type VndCampanhaProdutoOrderByRelevanceFieldEnum = (typeof VndCampanhaProdutoOrderByRelevanceFieldEnum)[keyof typeof VndCampanhaProdutoOrderByRelevanceFieldEnum]
 
 
 export const SocSocioStatusOrderByRelevanceFieldEnum = {
@@ -972,6 +1077,26 @@ export const VndPedidoItemOrderByRelevanceFieldEnum = {
 } as const
 
 export type VndPedidoItemOrderByRelevanceFieldEnum = (typeof VndPedidoItemOrderByRelevanceFieldEnum)[keyof typeof VndPedidoItemOrderByRelevanceFieldEnum]
+
+
+export const VndPedidoItemComponenteOrderByRelevanceFieldEnum = {
+  produto_codigo_snapshot: 'produto_codigo_snapshot',
+  produto_nome_snapshot: 'produto_nome_snapshot',
+  variacao_snapshot: 'variacao_snapshot'
+} as const
+
+export type VndPedidoItemComponenteOrderByRelevanceFieldEnum = (typeof VndPedidoItemComponenteOrderByRelevanceFieldEnum)[keyof typeof VndPedidoItemComponenteOrderByRelevanceFieldEnum]
+
+
+export const VndPedidoItemCampoOrderByRelevanceFieldEnum = {
+  campo_codigo_snapshot: 'campo_codigo_snapshot',
+  campo_nome_snapshot: 'campo_nome_snapshot',
+  campo_tipo_snapshot: 'campo_tipo_snapshot',
+  valor: 'valor',
+  valor_normalizado: 'valor_normalizado'
+} as const
+
+export type VndPedidoItemCampoOrderByRelevanceFieldEnum = (typeof VndPedidoItemCampoOrderByRelevanceFieldEnum)[keyof typeof VndPedidoItemCampoOrderByRelevanceFieldEnum]
 
 
 export const VndPedidoHistoricoOrderByRelevanceFieldEnum = {

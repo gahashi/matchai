@@ -365,6 +365,9 @@ export type VndPedidoItemWhereInput = {
   prd_produto_variacao?: Prisma.XOR<Prisma.PrdProdutoVariacaoNullableScalarRelationFilter, Prisma.PrdProdutoVariacaoWhereInput> | null
   vnd_campanha?: Prisma.XOR<Prisma.VndCampanhaNullableScalarRelationFilter, Prisma.VndCampanhaWhereInput> | null
   soc_socios_gerados?: Prisma.SocSocioListRelationFilter
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteListRelationFilter
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoListRelationFilter
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaListRelationFilter
 }
 
 export type VndPedidoItemOrderByWithRelationInput = {
@@ -391,6 +394,9 @@ export type VndPedidoItemOrderByWithRelationInput = {
   prd_produto_variacao?: Prisma.PrdProdutoVariacaoOrderByWithRelationInput
   vnd_campanha?: Prisma.VndCampanhaOrderByWithRelationInput
   soc_socios_gerados?: Prisma.SocSocioOrderByRelationAggregateInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteOrderByRelationAggregateInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoOrderByRelationAggregateInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaOrderByRelationAggregateInput
   _relevance?: Prisma.VndPedidoItemOrderByRelevanceInput
 }
 
@@ -421,6 +427,9 @@ export type VndPedidoItemWhereUniqueInput = Prisma.AtLeast<{
   prd_produto_variacao?: Prisma.XOR<Prisma.PrdProdutoVariacaoNullableScalarRelationFilter, Prisma.PrdProdutoVariacaoWhereInput> | null
   vnd_campanha?: Prisma.XOR<Prisma.VndCampanhaNullableScalarRelationFilter, Prisma.VndCampanhaWhereInput> | null
   soc_socios_gerados?: Prisma.SocSocioListRelationFilter
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteListRelationFilter
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoListRelationFilter
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaListRelationFilter
 }, "id">
 
 export type VndPedidoItemOrderByWithAggregationInput = {
@@ -492,6 +501,9 @@ export type VndPedidoItemCreateInput = {
   prd_produto_variacao?: Prisma.PrdProdutoVariacaoCreateNestedOneWithoutVnd_pedido_itensInput
   vnd_campanha?: Prisma.VndCampanhaCreateNestedOneWithoutVnd_pedido_itensInput
   soc_socios_gerados?: Prisma.SocSocioCreateNestedManyWithoutOrigem_vnd_pedido_itemInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutVnd_pedido_itemInput
 }
 
 export type VndPedidoItemUncheckedCreateInput = {
@@ -514,6 +526,9 @@ export type VndPedidoItemUncheckedCreateInput = {
   observacao?: string | null
   created_at?: Date | string | null
   soc_socios_gerados?: Prisma.SocSocioUncheckedCreateNestedManyWithoutOrigem_vnd_pedido_itemInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
 }
 
 export type VndPedidoItemUpdateInput = {
@@ -535,6 +550,9 @@ export type VndPedidoItemUpdateInput = {
   prd_produto_variacao?: Prisma.PrdProdutoVariacaoUpdateOneWithoutVnd_pedido_itensNestedInput
   vnd_campanha?: Prisma.VndCampanhaUpdateOneWithoutVnd_pedido_itensNestedInput
   soc_socios_gerados?: Prisma.SocSocioUpdateManyWithoutOrigem_vnd_pedido_itemNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutVnd_pedido_itemNestedInput
 }
 
 export type VndPedidoItemUncheckedUpdateInput = {
@@ -557,6 +575,9 @@ export type VndPedidoItemUncheckedUpdateInput = {
   observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   soc_socios_gerados?: Prisma.SocSocioUncheckedUpdateManyWithoutOrigem_vnd_pedido_itemNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
 }
 
 export type VndPedidoItemCreateManyInput = {
@@ -727,6 +748,11 @@ export type VndPedidoItemSumOrderByAggregateInput = {
   valor_desconto?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   socio_aplicado?: Prisma.SortOrder
+}
+
+export type VndPedidoItemScalarRelationFilter = {
+  is?: Prisma.VndPedidoItemWhereInput
+  isNot?: Prisma.VndPedidoItemWhereInput
 }
 
 export type VndPedidoItemCreateNestedManyWithoutPrd_produtoInput = {
@@ -913,6 +939,48 @@ export type VndPedidoItemUncheckedUpdateManyWithoutVnd_pedidoNestedInput = {
   deleteMany?: Prisma.VndPedidoItemScalarWhereInput | Prisma.VndPedidoItemScalarWhereInput[]
 }
 
+export type VndPedidoItemCreateNestedOneWithoutVnd_pedido_item_componentesInput = {
+  create?: Prisma.XOR<Prisma.VndPedidoItemCreateWithoutVnd_pedido_item_componentesInput, Prisma.VndPedidoItemUncheckedCreateWithoutVnd_pedido_item_componentesInput>
+  connectOrCreate?: Prisma.VndPedidoItemCreateOrConnectWithoutVnd_pedido_item_componentesInput
+  connect?: Prisma.VndPedidoItemWhereUniqueInput
+}
+
+export type VndPedidoItemUpdateOneRequiredWithoutVnd_pedido_item_componentesNestedInput = {
+  create?: Prisma.XOR<Prisma.VndPedidoItemCreateWithoutVnd_pedido_item_componentesInput, Prisma.VndPedidoItemUncheckedCreateWithoutVnd_pedido_item_componentesInput>
+  connectOrCreate?: Prisma.VndPedidoItemCreateOrConnectWithoutVnd_pedido_item_componentesInput
+  upsert?: Prisma.VndPedidoItemUpsertWithoutVnd_pedido_item_componentesInput
+  connect?: Prisma.VndPedidoItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VndPedidoItemUpdateToOneWithWhereWithoutVnd_pedido_item_componentesInput, Prisma.VndPedidoItemUpdateWithoutVnd_pedido_item_componentesInput>, Prisma.VndPedidoItemUncheckedUpdateWithoutVnd_pedido_item_componentesInput>
+}
+
+export type VndPedidoItemCreateNestedOneWithoutVnd_pedido_item_camposInput = {
+  create?: Prisma.XOR<Prisma.VndPedidoItemCreateWithoutVnd_pedido_item_camposInput, Prisma.VndPedidoItemUncheckedCreateWithoutVnd_pedido_item_camposInput>
+  connectOrCreate?: Prisma.VndPedidoItemCreateOrConnectWithoutVnd_pedido_item_camposInput
+  connect?: Prisma.VndPedidoItemWhereUniqueInput
+}
+
+export type VndPedidoItemUpdateOneRequiredWithoutVnd_pedido_item_camposNestedInput = {
+  create?: Prisma.XOR<Prisma.VndPedidoItemCreateWithoutVnd_pedido_item_camposInput, Prisma.VndPedidoItemUncheckedCreateWithoutVnd_pedido_item_camposInput>
+  connectOrCreate?: Prisma.VndPedidoItemCreateOrConnectWithoutVnd_pedido_item_camposInput
+  upsert?: Prisma.VndPedidoItemUpsertWithoutVnd_pedido_item_camposInput
+  connect?: Prisma.VndPedidoItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VndPedidoItemUpdateToOneWithWhereWithoutVnd_pedido_item_camposInput, Prisma.VndPedidoItemUpdateWithoutVnd_pedido_item_camposInput>, Prisma.VndPedidoItemUncheckedUpdateWithoutVnd_pedido_item_camposInput>
+}
+
+export type VndPedidoItemCreateNestedOneWithoutVnd_estoque_reservasInput = {
+  create?: Prisma.XOR<Prisma.VndPedidoItemCreateWithoutVnd_estoque_reservasInput, Prisma.VndPedidoItemUncheckedCreateWithoutVnd_estoque_reservasInput>
+  connectOrCreate?: Prisma.VndPedidoItemCreateOrConnectWithoutVnd_estoque_reservasInput
+  connect?: Prisma.VndPedidoItemWhereUniqueInput
+}
+
+export type VndPedidoItemUpdateOneRequiredWithoutVnd_estoque_reservasNestedInput = {
+  create?: Prisma.XOR<Prisma.VndPedidoItemCreateWithoutVnd_estoque_reservasInput, Prisma.VndPedidoItemUncheckedCreateWithoutVnd_estoque_reservasInput>
+  connectOrCreate?: Prisma.VndPedidoItemCreateOrConnectWithoutVnd_estoque_reservasInput
+  upsert?: Prisma.VndPedidoItemUpsertWithoutVnd_estoque_reservasInput
+  connect?: Prisma.VndPedidoItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VndPedidoItemUpdateToOneWithWhereWithoutVnd_estoque_reservasInput, Prisma.VndPedidoItemUpdateWithoutVnd_estoque_reservasInput>, Prisma.VndPedidoItemUncheckedUpdateWithoutVnd_estoque_reservasInput>
+}
+
 export type VndPedidoItemCreateWithoutPrd_produtoInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
@@ -931,6 +999,9 @@ export type VndPedidoItemCreateWithoutPrd_produtoInput = {
   prd_produto_variacao?: Prisma.PrdProdutoVariacaoCreateNestedOneWithoutVnd_pedido_itensInput
   vnd_campanha?: Prisma.VndCampanhaCreateNestedOneWithoutVnd_pedido_itensInput
   soc_socios_gerados?: Prisma.SocSocioCreateNestedManyWithoutOrigem_vnd_pedido_itemInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutVnd_pedido_itemInput
 }
 
 export type VndPedidoItemUncheckedCreateWithoutPrd_produtoInput = {
@@ -952,6 +1023,9 @@ export type VndPedidoItemUncheckedCreateWithoutPrd_produtoInput = {
   observacao?: string | null
   created_at?: Date | string | null
   soc_socios_gerados?: Prisma.SocSocioUncheckedCreateNestedManyWithoutOrigem_vnd_pedido_itemInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
 }
 
 export type VndPedidoItemCreateOrConnectWithoutPrd_produtoInput = {
@@ -1022,6 +1096,9 @@ export type VndPedidoItemCreateWithoutPrd_produto_variacaoInput = {
   prd_produto?: Prisma.PrdProdutoCreateNestedOneWithoutVnd_pedido_itensInput
   vnd_campanha?: Prisma.VndCampanhaCreateNestedOneWithoutVnd_pedido_itensInput
   soc_socios_gerados?: Prisma.SocSocioCreateNestedManyWithoutOrigem_vnd_pedido_itemInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutVnd_pedido_itemInput
 }
 
 export type VndPedidoItemUncheckedCreateWithoutPrd_produto_variacaoInput = {
@@ -1043,6 +1120,9 @@ export type VndPedidoItemUncheckedCreateWithoutPrd_produto_variacaoInput = {
   observacao?: string | null
   created_at?: Date | string | null
   soc_socios_gerados?: Prisma.SocSocioUncheckedCreateNestedManyWithoutOrigem_vnd_pedido_itemInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
 }
 
 export type VndPedidoItemCreateOrConnectWithoutPrd_produto_variacaoInput = {
@@ -1089,6 +1169,9 @@ export type VndPedidoItemCreateWithoutVnd_campanhaInput = {
   prd_produto?: Prisma.PrdProdutoCreateNestedOneWithoutVnd_pedido_itensInput
   prd_produto_variacao?: Prisma.PrdProdutoVariacaoCreateNestedOneWithoutVnd_pedido_itensInput
   soc_socios_gerados?: Prisma.SocSocioCreateNestedManyWithoutOrigem_vnd_pedido_itemInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutVnd_pedido_itemInput
 }
 
 export type VndPedidoItemUncheckedCreateWithoutVnd_campanhaInput = {
@@ -1110,6 +1193,9 @@ export type VndPedidoItemUncheckedCreateWithoutVnd_campanhaInput = {
   observacao?: string | null
   created_at?: Date | string | null
   soc_socios_gerados?: Prisma.SocSocioUncheckedCreateNestedManyWithoutOrigem_vnd_pedido_itemInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
 }
 
 export type VndPedidoItemCreateOrConnectWithoutVnd_campanhaInput = {
@@ -1156,6 +1242,9 @@ export type VndPedidoItemCreateWithoutSoc_socios_geradosInput = {
   prd_produto?: Prisma.PrdProdutoCreateNestedOneWithoutVnd_pedido_itensInput
   prd_produto_variacao?: Prisma.PrdProdutoVariacaoCreateNestedOneWithoutVnd_pedido_itensInput
   vnd_campanha?: Prisma.VndCampanhaCreateNestedOneWithoutVnd_pedido_itensInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutVnd_pedido_itemInput
 }
 
 export type VndPedidoItemUncheckedCreateWithoutSoc_socios_geradosInput = {
@@ -1177,6 +1266,9 @@ export type VndPedidoItemUncheckedCreateWithoutSoc_socios_geradosInput = {
   personalizacao_numero?: string | null
   observacao?: string | null
   created_at?: Date | string | null
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
 }
 
 export type VndPedidoItemCreateOrConnectWithoutSoc_socios_geradosInput = {
@@ -1213,6 +1305,9 @@ export type VndPedidoItemUpdateWithoutSoc_socios_geradosInput = {
   prd_produto?: Prisma.PrdProdutoUpdateOneWithoutVnd_pedido_itensNestedInput
   prd_produto_variacao?: Prisma.PrdProdutoVariacaoUpdateOneWithoutVnd_pedido_itensNestedInput
   vnd_campanha?: Prisma.VndCampanhaUpdateOneWithoutVnd_pedido_itensNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutVnd_pedido_itemNestedInput
 }
 
 export type VndPedidoItemUncheckedUpdateWithoutSoc_socios_geradosInput = {
@@ -1234,6 +1329,9 @@ export type VndPedidoItemUncheckedUpdateWithoutSoc_socios_geradosInput = {
   personalizacao_numero?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
 }
 
 export type VndPedidoItemCreateWithoutVnd_pedidoInput = {
@@ -1254,6 +1352,9 @@ export type VndPedidoItemCreateWithoutVnd_pedidoInput = {
   prd_produto_variacao?: Prisma.PrdProdutoVariacaoCreateNestedOneWithoutVnd_pedido_itensInput
   vnd_campanha?: Prisma.VndCampanhaCreateNestedOneWithoutVnd_pedido_itensInput
   soc_socios_gerados?: Prisma.SocSocioCreateNestedManyWithoutOrigem_vnd_pedido_itemInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutVnd_pedido_itemInput
 }
 
 export type VndPedidoItemUncheckedCreateWithoutVnd_pedidoInput = {
@@ -1275,6 +1376,9 @@ export type VndPedidoItemUncheckedCreateWithoutVnd_pedidoInput = {
   observacao?: string | null
   created_at?: Date | string | null
   soc_socios_gerados?: Prisma.SocSocioUncheckedCreateNestedManyWithoutOrigem_vnd_pedido_itemInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
 }
 
 export type VndPedidoItemCreateOrConnectWithoutVnd_pedidoInput = {
@@ -1301,6 +1405,336 @@ export type VndPedidoItemUpdateWithWhereUniqueWithoutVnd_pedidoInput = {
 export type VndPedidoItemUpdateManyWithWhereWithoutVnd_pedidoInput = {
   where: Prisma.VndPedidoItemScalarWhereInput
   data: Prisma.XOR<Prisma.VndPedidoItemUpdateManyMutationInput, Prisma.VndPedidoItemUncheckedUpdateManyWithoutVnd_pedidoInput>
+}
+
+export type VndPedidoItemCreateWithoutVnd_pedido_item_componentesInput = {
+  produto_codigo_snapshot: string
+  produto_nome_snapshot: string
+  variacao_snapshot?: string | null
+  quantidade: number
+  preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
+  preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_desconto?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  socio_aplicado?: number
+  personalizacao_nome?: string | null
+  personalizacao_numero?: string | null
+  observacao?: string | null
+  created_at?: Date | string | null
+  vnd_pedido: Prisma.VndPedidoCreateNestedOneWithoutVnd_pedido_itensInput
+  prd_produto?: Prisma.PrdProdutoCreateNestedOneWithoutVnd_pedido_itensInput
+  prd_produto_variacao?: Prisma.PrdProdutoVariacaoCreateNestedOneWithoutVnd_pedido_itensInput
+  vnd_campanha?: Prisma.VndCampanhaCreateNestedOneWithoutVnd_pedido_itensInput
+  soc_socios_gerados?: Prisma.SocSocioCreateNestedManyWithoutOrigem_vnd_pedido_itemInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutVnd_pedido_itemInput
+}
+
+export type VndPedidoItemUncheckedCreateWithoutVnd_pedido_item_componentesInput = {
+  id?: number
+  vnd_pedido_id: number
+  prd_produto_id?: number | null
+  prd_produto_variacao_id?: number | null
+  vnd_campanha_id?: number | null
+  produto_codigo_snapshot: string
+  produto_nome_snapshot: string
+  variacao_snapshot?: string | null
+  quantidade: number
+  preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
+  preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_desconto?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  socio_aplicado?: number
+  personalizacao_nome?: string | null
+  personalizacao_numero?: string | null
+  observacao?: string | null
+  created_at?: Date | string | null
+  soc_socios_gerados?: Prisma.SocSocioUncheckedCreateNestedManyWithoutOrigem_vnd_pedido_itemInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+}
+
+export type VndPedidoItemCreateOrConnectWithoutVnd_pedido_item_componentesInput = {
+  where: Prisma.VndPedidoItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.VndPedidoItemCreateWithoutVnd_pedido_item_componentesInput, Prisma.VndPedidoItemUncheckedCreateWithoutVnd_pedido_item_componentesInput>
+}
+
+export type VndPedidoItemUpsertWithoutVnd_pedido_item_componentesInput = {
+  update: Prisma.XOR<Prisma.VndPedidoItemUpdateWithoutVnd_pedido_item_componentesInput, Prisma.VndPedidoItemUncheckedUpdateWithoutVnd_pedido_item_componentesInput>
+  create: Prisma.XOR<Prisma.VndPedidoItemCreateWithoutVnd_pedido_item_componentesInput, Prisma.VndPedidoItemUncheckedCreateWithoutVnd_pedido_item_componentesInput>
+  where?: Prisma.VndPedidoItemWhereInput
+}
+
+export type VndPedidoItemUpdateToOneWithWhereWithoutVnd_pedido_item_componentesInput = {
+  where?: Prisma.VndPedidoItemWhereInput
+  data: Prisma.XOR<Prisma.VndPedidoItemUpdateWithoutVnd_pedido_item_componentesInput, Prisma.VndPedidoItemUncheckedUpdateWithoutVnd_pedido_item_componentesInput>
+}
+
+export type VndPedidoItemUpdateWithoutVnd_pedido_item_componentesInput = {
+  produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantidade?: Prisma.IntFieldUpdateOperationsInput | number
+  preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_desconto?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  socio_aplicado?: Prisma.IntFieldUpdateOperationsInput | number
+  personalizacao_nome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalizacao_numero?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vnd_pedido?: Prisma.VndPedidoUpdateOneRequiredWithoutVnd_pedido_itensNestedInput
+  prd_produto?: Prisma.PrdProdutoUpdateOneWithoutVnd_pedido_itensNestedInput
+  prd_produto_variacao?: Prisma.PrdProdutoVariacaoUpdateOneWithoutVnd_pedido_itensNestedInput
+  vnd_campanha?: Prisma.VndCampanhaUpdateOneWithoutVnd_pedido_itensNestedInput
+  soc_socios_gerados?: Prisma.SocSocioUpdateManyWithoutOrigem_vnd_pedido_itemNestedInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutVnd_pedido_itemNestedInput
+}
+
+export type VndPedidoItemUncheckedUpdateWithoutVnd_pedido_item_componentesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vnd_pedido_id?: Prisma.IntFieldUpdateOperationsInput | number
+  prd_produto_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  prd_produto_variacao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantidade?: Prisma.IntFieldUpdateOperationsInput | number
+  preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_desconto?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  socio_aplicado?: Prisma.IntFieldUpdateOperationsInput | number
+  personalizacao_nome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalizacao_numero?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  soc_socios_gerados?: Prisma.SocSocioUncheckedUpdateManyWithoutOrigem_vnd_pedido_itemNestedInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
+}
+
+export type VndPedidoItemCreateWithoutVnd_pedido_item_camposInput = {
+  produto_codigo_snapshot: string
+  produto_nome_snapshot: string
+  variacao_snapshot?: string | null
+  quantidade: number
+  preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
+  preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_desconto?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  socio_aplicado?: number
+  personalizacao_nome?: string | null
+  personalizacao_numero?: string | null
+  observacao?: string | null
+  created_at?: Date | string | null
+  vnd_pedido: Prisma.VndPedidoCreateNestedOneWithoutVnd_pedido_itensInput
+  prd_produto?: Prisma.PrdProdutoCreateNestedOneWithoutVnd_pedido_itensInput
+  prd_produto_variacao?: Prisma.PrdProdutoVariacaoCreateNestedOneWithoutVnd_pedido_itensInput
+  vnd_campanha?: Prisma.VndCampanhaCreateNestedOneWithoutVnd_pedido_itensInput
+  soc_socios_gerados?: Prisma.SocSocioCreateNestedManyWithoutOrigem_vnd_pedido_itemInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutVnd_pedido_itemInput
+}
+
+export type VndPedidoItemUncheckedCreateWithoutVnd_pedido_item_camposInput = {
+  id?: number
+  vnd_pedido_id: number
+  prd_produto_id?: number | null
+  prd_produto_variacao_id?: number | null
+  vnd_campanha_id?: number | null
+  produto_codigo_snapshot: string
+  produto_nome_snapshot: string
+  variacao_snapshot?: string | null
+  quantidade: number
+  preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
+  preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_desconto?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  socio_aplicado?: number
+  personalizacao_nome?: string | null
+  personalizacao_numero?: string | null
+  observacao?: string | null
+  created_at?: Date | string | null
+  soc_socios_gerados?: Prisma.SocSocioUncheckedCreateNestedManyWithoutOrigem_vnd_pedido_itemInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+}
+
+export type VndPedidoItemCreateOrConnectWithoutVnd_pedido_item_camposInput = {
+  where: Prisma.VndPedidoItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.VndPedidoItemCreateWithoutVnd_pedido_item_camposInput, Prisma.VndPedidoItemUncheckedCreateWithoutVnd_pedido_item_camposInput>
+}
+
+export type VndPedidoItemUpsertWithoutVnd_pedido_item_camposInput = {
+  update: Prisma.XOR<Prisma.VndPedidoItemUpdateWithoutVnd_pedido_item_camposInput, Prisma.VndPedidoItemUncheckedUpdateWithoutVnd_pedido_item_camposInput>
+  create: Prisma.XOR<Prisma.VndPedidoItemCreateWithoutVnd_pedido_item_camposInput, Prisma.VndPedidoItemUncheckedCreateWithoutVnd_pedido_item_camposInput>
+  where?: Prisma.VndPedidoItemWhereInput
+}
+
+export type VndPedidoItemUpdateToOneWithWhereWithoutVnd_pedido_item_camposInput = {
+  where?: Prisma.VndPedidoItemWhereInput
+  data: Prisma.XOR<Prisma.VndPedidoItemUpdateWithoutVnd_pedido_item_camposInput, Prisma.VndPedidoItemUncheckedUpdateWithoutVnd_pedido_item_camposInput>
+}
+
+export type VndPedidoItemUpdateWithoutVnd_pedido_item_camposInput = {
+  produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantidade?: Prisma.IntFieldUpdateOperationsInput | number
+  preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_desconto?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  socio_aplicado?: Prisma.IntFieldUpdateOperationsInput | number
+  personalizacao_nome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalizacao_numero?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vnd_pedido?: Prisma.VndPedidoUpdateOneRequiredWithoutVnd_pedido_itensNestedInput
+  prd_produto?: Prisma.PrdProdutoUpdateOneWithoutVnd_pedido_itensNestedInput
+  prd_produto_variacao?: Prisma.PrdProdutoVariacaoUpdateOneWithoutVnd_pedido_itensNestedInput
+  vnd_campanha?: Prisma.VndCampanhaUpdateOneWithoutVnd_pedido_itensNestedInput
+  soc_socios_gerados?: Prisma.SocSocioUpdateManyWithoutOrigem_vnd_pedido_itemNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutVnd_pedido_itemNestedInput
+}
+
+export type VndPedidoItemUncheckedUpdateWithoutVnd_pedido_item_camposInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vnd_pedido_id?: Prisma.IntFieldUpdateOperationsInput | number
+  prd_produto_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  prd_produto_variacao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantidade?: Prisma.IntFieldUpdateOperationsInput | number
+  preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_desconto?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  socio_aplicado?: Prisma.IntFieldUpdateOperationsInput | number
+  personalizacao_nome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalizacao_numero?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  soc_socios_gerados?: Prisma.SocSocioUncheckedUpdateManyWithoutOrigem_vnd_pedido_itemNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
+}
+
+export type VndPedidoItemCreateWithoutVnd_estoque_reservasInput = {
+  produto_codigo_snapshot: string
+  produto_nome_snapshot: string
+  variacao_snapshot?: string | null
+  quantidade: number
+  preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
+  preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_desconto?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  socio_aplicado?: number
+  personalizacao_nome?: string | null
+  personalizacao_numero?: string | null
+  observacao?: string | null
+  created_at?: Date | string | null
+  vnd_pedido: Prisma.VndPedidoCreateNestedOneWithoutVnd_pedido_itensInput
+  prd_produto?: Prisma.PrdProdutoCreateNestedOneWithoutVnd_pedido_itensInput
+  prd_produto_variacao?: Prisma.PrdProdutoVariacaoCreateNestedOneWithoutVnd_pedido_itensInput
+  vnd_campanha?: Prisma.VndCampanhaCreateNestedOneWithoutVnd_pedido_itensInput
+  soc_socios_gerados?: Prisma.SocSocioCreateNestedManyWithoutOrigem_vnd_pedido_itemInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoCreateNestedManyWithoutVnd_pedido_itemInput
+}
+
+export type VndPedidoItemUncheckedCreateWithoutVnd_estoque_reservasInput = {
+  id?: number
+  vnd_pedido_id: number
+  prd_produto_id?: number | null
+  prd_produto_variacao_id?: number | null
+  vnd_campanha_id?: number | null
+  produto_codigo_snapshot: string
+  produto_nome_snapshot: string
+  variacao_snapshot?: string | null
+  quantidade: number
+  preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
+  preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_desconto?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  socio_aplicado?: number
+  personalizacao_nome?: string | null
+  personalizacao_numero?: string | null
+  observacao?: string | null
+  created_at?: Date | string | null
+  soc_socios_gerados?: Prisma.SocSocioUncheckedCreateNestedManyWithoutOrigem_vnd_pedido_itemInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUncheckedCreateNestedManyWithoutVnd_pedido_itemInput
+}
+
+export type VndPedidoItemCreateOrConnectWithoutVnd_estoque_reservasInput = {
+  where: Prisma.VndPedidoItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.VndPedidoItemCreateWithoutVnd_estoque_reservasInput, Prisma.VndPedidoItemUncheckedCreateWithoutVnd_estoque_reservasInput>
+}
+
+export type VndPedidoItemUpsertWithoutVnd_estoque_reservasInput = {
+  update: Prisma.XOR<Prisma.VndPedidoItemUpdateWithoutVnd_estoque_reservasInput, Prisma.VndPedidoItemUncheckedUpdateWithoutVnd_estoque_reservasInput>
+  create: Prisma.XOR<Prisma.VndPedidoItemCreateWithoutVnd_estoque_reservasInput, Prisma.VndPedidoItemUncheckedCreateWithoutVnd_estoque_reservasInput>
+  where?: Prisma.VndPedidoItemWhereInput
+}
+
+export type VndPedidoItemUpdateToOneWithWhereWithoutVnd_estoque_reservasInput = {
+  where?: Prisma.VndPedidoItemWhereInput
+  data: Prisma.XOR<Prisma.VndPedidoItemUpdateWithoutVnd_estoque_reservasInput, Prisma.VndPedidoItemUncheckedUpdateWithoutVnd_estoque_reservasInput>
+}
+
+export type VndPedidoItemUpdateWithoutVnd_estoque_reservasInput = {
+  produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantidade?: Prisma.IntFieldUpdateOperationsInput | number
+  preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_desconto?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  socio_aplicado?: Prisma.IntFieldUpdateOperationsInput | number
+  personalizacao_nome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalizacao_numero?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vnd_pedido?: Prisma.VndPedidoUpdateOneRequiredWithoutVnd_pedido_itensNestedInput
+  prd_produto?: Prisma.PrdProdutoUpdateOneWithoutVnd_pedido_itensNestedInput
+  prd_produto_variacao?: Prisma.PrdProdutoVariacaoUpdateOneWithoutVnd_pedido_itensNestedInput
+  vnd_campanha?: Prisma.VndCampanhaUpdateOneWithoutVnd_pedido_itensNestedInput
+  soc_socios_gerados?: Prisma.SocSocioUpdateManyWithoutOrigem_vnd_pedido_itemNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUpdateManyWithoutVnd_pedido_itemNestedInput
+}
+
+export type VndPedidoItemUncheckedUpdateWithoutVnd_estoque_reservasInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vnd_pedido_id?: Prisma.IntFieldUpdateOperationsInput | number
+  prd_produto_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  prd_produto_variacao_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantidade?: Prisma.IntFieldUpdateOperationsInput | number
+  preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_desconto?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  socio_aplicado?: Prisma.IntFieldUpdateOperationsInput | number
+  personalizacao_nome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  personalizacao_numero?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  soc_socios_gerados?: Prisma.SocSocioUncheckedUpdateManyWithoutOrigem_vnd_pedido_itemNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
 }
 
 export type VndPedidoItemCreateManyPrd_produtoInput = {
@@ -1341,6 +1775,9 @@ export type VndPedidoItemUpdateWithoutPrd_produtoInput = {
   prd_produto_variacao?: Prisma.PrdProdutoVariacaoUpdateOneWithoutVnd_pedido_itensNestedInput
   vnd_campanha?: Prisma.VndCampanhaUpdateOneWithoutVnd_pedido_itensNestedInput
   soc_socios_gerados?: Prisma.SocSocioUpdateManyWithoutOrigem_vnd_pedido_itemNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutVnd_pedido_itemNestedInput
 }
 
 export type VndPedidoItemUncheckedUpdateWithoutPrd_produtoInput = {
@@ -1362,6 +1799,9 @@ export type VndPedidoItemUncheckedUpdateWithoutPrd_produtoInput = {
   observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   soc_socios_gerados?: Prisma.SocSocioUncheckedUpdateManyWithoutOrigem_vnd_pedido_itemNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
 }
 
 export type VndPedidoItemUncheckedUpdateManyWithoutPrd_produtoInput = {
@@ -1422,6 +1862,9 @@ export type VndPedidoItemUpdateWithoutPrd_produto_variacaoInput = {
   prd_produto?: Prisma.PrdProdutoUpdateOneWithoutVnd_pedido_itensNestedInput
   vnd_campanha?: Prisma.VndCampanhaUpdateOneWithoutVnd_pedido_itensNestedInput
   soc_socios_gerados?: Prisma.SocSocioUpdateManyWithoutOrigem_vnd_pedido_itemNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutVnd_pedido_itemNestedInput
 }
 
 export type VndPedidoItemUncheckedUpdateWithoutPrd_produto_variacaoInput = {
@@ -1443,6 +1886,9 @@ export type VndPedidoItemUncheckedUpdateWithoutPrd_produto_variacaoInput = {
   observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   soc_socios_gerados?: Prisma.SocSocioUncheckedUpdateManyWithoutOrigem_vnd_pedido_itemNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
 }
 
 export type VndPedidoItemUncheckedUpdateManyWithoutPrd_produto_variacaoInput = {
@@ -1503,6 +1949,9 @@ export type VndPedidoItemUpdateWithoutVnd_campanhaInput = {
   prd_produto?: Prisma.PrdProdutoUpdateOneWithoutVnd_pedido_itensNestedInput
   prd_produto_variacao?: Prisma.PrdProdutoVariacaoUpdateOneWithoutVnd_pedido_itensNestedInput
   soc_socios_gerados?: Prisma.SocSocioUpdateManyWithoutOrigem_vnd_pedido_itemNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutVnd_pedido_itemNestedInput
 }
 
 export type VndPedidoItemUncheckedUpdateWithoutVnd_campanhaInput = {
@@ -1524,6 +1973,9 @@ export type VndPedidoItemUncheckedUpdateWithoutVnd_campanhaInput = {
   observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   soc_socios_gerados?: Prisma.SocSocioUncheckedUpdateManyWithoutOrigem_vnd_pedido_itemNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
 }
 
 export type VndPedidoItemUncheckedUpdateManyWithoutVnd_campanhaInput = {
@@ -1584,6 +2036,9 @@ export type VndPedidoItemUpdateWithoutVnd_pedidoInput = {
   prd_produto_variacao?: Prisma.PrdProdutoVariacaoUpdateOneWithoutVnd_pedido_itensNestedInput
   vnd_campanha?: Prisma.VndCampanhaUpdateOneWithoutVnd_pedido_itensNestedInput
   soc_socios_gerados?: Prisma.SocSocioUpdateManyWithoutOrigem_vnd_pedido_itemNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutVnd_pedido_itemNestedInput
 }
 
 export type VndPedidoItemUncheckedUpdateWithoutVnd_pedidoInput = {
@@ -1605,6 +2060,9 @@ export type VndPedidoItemUncheckedUpdateWithoutVnd_pedidoInput = {
   observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   soc_socios_gerados?: Prisma.SocSocioUncheckedUpdateManyWithoutOrigem_vnd_pedido_itemNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_pedido_item_campos?: Prisma.VndPedidoItemCampoUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutVnd_pedido_itemNestedInput
 }
 
 export type VndPedidoItemUncheckedUpdateManyWithoutVnd_pedidoInput = {
@@ -1634,10 +2092,16 @@ export type VndPedidoItemUncheckedUpdateManyWithoutVnd_pedidoInput = {
 
 export type VndPedidoItemCountOutputType = {
   soc_socios_gerados: number
+  vnd_pedido_item_componentes: number
+  vnd_pedido_item_campos: number
+  vnd_estoque_reservas: number
 }
 
 export type VndPedidoItemCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   soc_socios_gerados?: boolean | VndPedidoItemCountOutputTypeCountSoc_socios_geradosArgs
+  vnd_pedido_item_componentes?: boolean | VndPedidoItemCountOutputTypeCountVnd_pedido_item_componentesArgs
+  vnd_pedido_item_campos?: boolean | VndPedidoItemCountOutputTypeCountVnd_pedido_item_camposArgs
+  vnd_estoque_reservas?: boolean | VndPedidoItemCountOutputTypeCountVnd_estoque_reservasArgs
 }
 
 /**
@@ -1655,6 +2119,27 @@ export type VndPedidoItemCountOutputTypeDefaultArgs<ExtArgs extends runtime.Type
  */
 export type VndPedidoItemCountOutputTypeCountSoc_socios_geradosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SocSocioWhereInput
+}
+
+/**
+ * VndPedidoItemCountOutputType without action
+ */
+export type VndPedidoItemCountOutputTypeCountVnd_pedido_item_componentesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VndPedidoItemComponenteWhereInput
+}
+
+/**
+ * VndPedidoItemCountOutputType without action
+ */
+export type VndPedidoItemCountOutputTypeCountVnd_pedido_item_camposArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VndPedidoItemCampoWhereInput
+}
+
+/**
+ * VndPedidoItemCountOutputType without action
+ */
+export type VndPedidoItemCountOutputTypeCountVnd_estoque_reservasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VndEstoqueReservaWhereInput
 }
 
 
@@ -1682,6 +2167,9 @@ export type VndPedidoItemSelect<ExtArgs extends runtime.Types.Extensions.Interna
   prd_produto_variacao?: boolean | Prisma.VndPedidoItem$prd_produto_variacaoArgs<ExtArgs>
   vnd_campanha?: boolean | Prisma.VndPedidoItem$vnd_campanhaArgs<ExtArgs>
   soc_socios_gerados?: boolean | Prisma.VndPedidoItem$soc_socios_geradosArgs<ExtArgs>
+  vnd_pedido_item_componentes?: boolean | Prisma.VndPedidoItem$vnd_pedido_item_componentesArgs<ExtArgs>
+  vnd_pedido_item_campos?: boolean | Prisma.VndPedidoItem$vnd_pedido_item_camposArgs<ExtArgs>
+  vnd_estoque_reservas?: boolean | Prisma.VndPedidoItem$vnd_estoque_reservasArgs<ExtArgs>
   _count?: boolean | Prisma.VndPedidoItemCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["vndPedidoItem"]>
 
@@ -1715,6 +2203,9 @@ export type VndPedidoItemInclude<ExtArgs extends runtime.Types.Extensions.Intern
   prd_produto_variacao?: boolean | Prisma.VndPedidoItem$prd_produto_variacaoArgs<ExtArgs>
   vnd_campanha?: boolean | Prisma.VndPedidoItem$vnd_campanhaArgs<ExtArgs>
   soc_socios_gerados?: boolean | Prisma.VndPedidoItem$soc_socios_geradosArgs<ExtArgs>
+  vnd_pedido_item_componentes?: boolean | Prisma.VndPedidoItem$vnd_pedido_item_componentesArgs<ExtArgs>
+  vnd_pedido_item_campos?: boolean | Prisma.VndPedidoItem$vnd_pedido_item_camposArgs<ExtArgs>
+  vnd_estoque_reservas?: boolean | Prisma.VndPedidoItem$vnd_estoque_reservasArgs<ExtArgs>
   _count?: boolean | Prisma.VndPedidoItemCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1726,6 +2217,9 @@ export type $VndPedidoItemPayload<ExtArgs extends runtime.Types.Extensions.Inter
     prd_produto_variacao: Prisma.$PrdProdutoVariacaoPayload<ExtArgs> | null
     vnd_campanha: Prisma.$VndCampanhaPayload<ExtArgs> | null
     soc_socios_gerados: Prisma.$SocSocioPayload<ExtArgs>[]
+    vnd_pedido_item_componentes: Prisma.$VndPedidoItemComponentePayload<ExtArgs>[]
+    vnd_pedido_item_campos: Prisma.$VndPedidoItemCampoPayload<ExtArgs>[]
+    vnd_estoque_reservas: Prisma.$VndEstoqueReservaPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2091,6 +2585,9 @@ export interface Prisma__VndPedidoItemClient<T, Null = never, ExtArgs extends ru
   prd_produto_variacao<T extends Prisma.VndPedidoItem$prd_produto_variacaoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VndPedidoItem$prd_produto_variacaoArgs<ExtArgs>>): Prisma.Prisma__PrdProdutoVariacaoClient<runtime.Types.Result.GetResult<Prisma.$PrdProdutoVariacaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vnd_campanha<T extends Prisma.VndPedidoItem$vnd_campanhaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VndPedidoItem$vnd_campanhaArgs<ExtArgs>>): Prisma.Prisma__VndCampanhaClient<runtime.Types.Result.GetResult<Prisma.$VndCampanhaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   soc_socios_gerados<T extends Prisma.VndPedidoItem$soc_socios_geradosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VndPedidoItem$soc_socios_geradosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SocSocioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vnd_pedido_item_componentes<T extends Prisma.VndPedidoItem$vnd_pedido_item_componentesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VndPedidoItem$vnd_pedido_item_componentesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VndPedidoItemComponentePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vnd_pedido_item_campos<T extends Prisma.VndPedidoItem$vnd_pedido_item_camposArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VndPedidoItem$vnd_pedido_item_camposArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VndPedidoItemCampoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vnd_estoque_reservas<T extends Prisma.VndPedidoItem$vnd_estoque_reservasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VndPedidoItem$vnd_estoque_reservasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VndEstoqueReservaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2564,6 +3061,78 @@ export type VndPedidoItem$soc_socios_geradosArgs<ExtArgs extends runtime.Types.E
   take?: number
   skip?: number
   distinct?: Prisma.SocSocioScalarFieldEnum | Prisma.SocSocioScalarFieldEnum[]
+}
+
+/**
+ * VndPedidoItem.vnd_pedido_item_componentes
+ */
+export type VndPedidoItem$vnd_pedido_item_componentesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VndPedidoItemComponente
+   */
+  select?: Prisma.VndPedidoItemComponenteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VndPedidoItemComponente
+   */
+  omit?: Prisma.VndPedidoItemComponenteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VndPedidoItemComponenteInclude<ExtArgs> | null
+  where?: Prisma.VndPedidoItemComponenteWhereInput
+  orderBy?: Prisma.VndPedidoItemComponenteOrderByWithRelationInput | Prisma.VndPedidoItemComponenteOrderByWithRelationInput[]
+  cursor?: Prisma.VndPedidoItemComponenteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VndPedidoItemComponenteScalarFieldEnum | Prisma.VndPedidoItemComponenteScalarFieldEnum[]
+}
+
+/**
+ * VndPedidoItem.vnd_pedido_item_campos
+ */
+export type VndPedidoItem$vnd_pedido_item_camposArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VndPedidoItemCampo
+   */
+  select?: Prisma.VndPedidoItemCampoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VndPedidoItemCampo
+   */
+  omit?: Prisma.VndPedidoItemCampoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VndPedidoItemCampoInclude<ExtArgs> | null
+  where?: Prisma.VndPedidoItemCampoWhereInput
+  orderBy?: Prisma.VndPedidoItemCampoOrderByWithRelationInput | Prisma.VndPedidoItemCampoOrderByWithRelationInput[]
+  cursor?: Prisma.VndPedidoItemCampoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VndPedidoItemCampoScalarFieldEnum | Prisma.VndPedidoItemCampoScalarFieldEnum[]
+}
+
+/**
+ * VndPedidoItem.vnd_estoque_reservas
+ */
+export type VndPedidoItem$vnd_estoque_reservasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VndEstoqueReserva
+   */
+  select?: Prisma.VndEstoqueReservaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VndEstoqueReserva
+   */
+  omit?: Prisma.VndEstoqueReservaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VndEstoqueReservaInclude<ExtArgs> | null
+  where?: Prisma.VndEstoqueReservaWhereInput
+  orderBy?: Prisma.VndEstoqueReservaOrderByWithRelationInput | Prisma.VndEstoqueReservaOrderByWithRelationInput[]
+  cursor?: Prisma.VndEstoqueReservaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VndEstoqueReservaScalarFieldEnum | Prisma.VndEstoqueReservaScalarFieldEnum[]
 }
 
 /**

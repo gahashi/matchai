@@ -10,19 +10,37 @@ import {
 import { produtoPublicService } from "@/lib/prd/produto-public-service";
 import { socioPublicService } from "@/lib/soc/socio-public-service";
 import {
+    CheckoutStockError,
     pedidoPublicService,
     type CheckoutPaymentMethod,
     type CheckoutValidatedItem,
 } from "@/lib/vnd/pedido-public-service";
+
+const campoSchema = z.object({
+    campo_id: z.number().int().positive(),
+    valor: z.string().max(255),
+});
+
+const componenteSchema = z.object({
+    componente_id: z.number().int().positive(),
+    variacao_id: z.number().int().positive().nullable(),
+    campos: z.array(campoSchema).max(20).default([]),
+});
 
 const schema = z.object({
     attempt_id: z.string().uuid(),
     items: z
         .array(
             z.object({
+                line_key: z.string().min(1).max(2000),
                 produto_id: z.number().int().positive(),
                 variacao_id: z.number().int().positive().nullable(),
                 quantidade: z.number().int().min(1).max(99),
+                campos: z.array(campoSchema).max(20).default([]),
+                componentes: z
+                    .array(componenteSchema)
+                    .max(30)
+                    .default([]),
             }),
         )
         .min(1)
@@ -255,9 +273,29 @@ export async function POST(request: NextRequest) {
         const validatedItems =
             await produtoPublicService.validateCart(
                 parsed.data.items.map((item) => ({
+                    lineKey: item.line_key,
                     produtoId: item.produto_id,
                     variacaoId: item.variacao_id,
                     quantidade: item.quantidade,
+                    campos: item.campos.map((campo) => ({
+                        campoId: campo.campo_id,
+                        valor: campo.valor,
+                    })),
+                    componentes: item.componentes.map(
+                        (componente) => ({
+                            componenteId:
+                            componente.componente_id,
+                            variacaoId:
+                            componente.variacao_id,
+                            campos: componente.campos.map(
+                                (campo) => ({
+                                    campoId:
+                                    campo.campo_id,
+                                    valor: campo.valor,
+                                }),
+                            ),
+                        }),
+                    ),
                 })),
                 {
                     isSocio: socio.isSocio,
@@ -318,20 +356,20 @@ export async function POST(request: NextRequest) {
                 ok: true,
                 data: {
                     pedido_codigo:
-                        existingAttempt.vnd_pedido.codigo,
+                    existingAttempt.vnd_pedido.codigo,
                     pagamento_id:
-                        existingAttempt.external_id,
+                    existingAttempt.external_id,
                     metodo:
-                        existingAttempt.fin_pagamento_metodo.codigo,
+                    existingAttempt.fin_pagamento_metodo.codigo,
                     status: localStatusToClient(
                         existingAttempt.fin_pagamento_status.codigo,
                     ),
                     status_detail: null,
                     qr_code_text:
-                        existingAttempt.qr_code_text,
+                    existingAttempt.qr_code_text,
                     qr_code_base64: null,
                     payment_url:
-                        existingAttempt.payment_url,
+                    existingAttempt.payment_url,
                 },
             });
         }
@@ -343,6 +381,10 @@ export async function POST(request: NextRequest) {
                     id: existingAttempt.id,
                 },
                 total: Number(existingAttempt.vnd_pedido.valor_total),
+                reservaExpiraAt:
+                    existingAttempt.vnd_pedido
+                        .vnd_estoque_reservas[0]
+                        ?.expira_at ?? null,
             }
             : await pedidoPublicService.createPaymentAttempt({
                 sysUsuarioId: session?.user.id ?? null,
@@ -366,6 +408,15 @@ export async function POST(request: NextRequest) {
             customer.nome,
         );
 
+        if (
+            method === "pix" &&
+            !attempt.reservaExpiraAt
+        ) {
+            throw new Error(
+                "Não foi possível determinar a expiração da reserva do PIX.",
+            );
+        }
+
         const mercadoPagoPayment =
             await createMercadoPagoPayment(
                 {
@@ -373,6 +424,13 @@ export async function POST(request: NextRequest) {
                     description: `Pedido ${attempt.pedido.codigo} - AAACCU`,
                     payment_method_id: paymentMethodId,
                     external_reference: attempt.pedido.codigo,
+                    ...(method === "pix" &&
+                    attempt.reservaExpiraAt
+                        ? {
+                            date_of_expiration:
+                                attempt.reservaExpiraAt.toISOString(),
+                        }
+                        : {}),
                     ...(token ? { token } : {}),
                     ...(installments
                         ? { installments }
@@ -449,6 +507,9 @@ export async function POST(request: NextRequest) {
     } catch (error) {
         console.error("[public.checkout.pay]", error);
 
+        const stockConflict =
+            error instanceof CheckoutStockError;
+
         const rejectedByMercadoPago =
             error instanceof MercadoPagoApiError &&
             error.status >= 400 &&
@@ -485,9 +546,11 @@ export async function POST(request: NextRequest) {
                 },
             },
             {
-                status: rejectedByMercadoPago
-                    ? 400
-                    : 502,
+                status: stockConflict
+                    ? 409
+                    : rejectedByMercadoPago
+                        ? 400
+                        : 502,
             },
         );
     }

@@ -416,6 +416,8 @@ export const ModelName = {
   PrdProduto: 'PrdProduto',
   PrdProdutoImagem: 'PrdProdutoImagem',
   PrdProdutoVariacao: 'PrdProdutoVariacao',
+  PrdProdutoComponente: 'PrdProdutoComponente',
+  PrdProdutoCampo: 'PrdProdutoCampo',
   VndCampanhaStatus: 'VndCampanhaStatus',
   VndCampanha: 'VndCampanha',
   VndCampanhaProduto: 'VndCampanhaProduto',
@@ -427,6 +429,9 @@ export const ModelName = {
   VndEntregaTipo: 'VndEntregaTipo',
   VndPedido: 'VndPedido',
   VndPedidoItem: 'VndPedidoItem',
+  VndPedidoItemComponente: 'VndPedidoItemComponente',
+  VndPedidoItemCampo: 'VndPedidoItemCampo',
+  VndEstoqueReserva: 'VndEstoqueReserva',
   VndPedidoHistorico: 'VndPedidoHistorico',
   FinPagamentoStatus: 'FinPagamentoStatus',
   FinPagamentoMetodo: 'FinPagamentoMetodo',
@@ -446,7 +451,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "sysUsuarioTipo" | "sysUsuario" | "user" | "session" | "account" | "verification" | "sysAuthLoginLog" | "sysEmailLog" | "sysEmailVerificationCode" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivo" | "cadLink" | "cadEvento" | "prdProdutoTipo" | "prdProduto" | "prdProdutoImagem" | "prdProdutoVariacao" | "vndCampanhaStatus" | "vndCampanha" | "vndCampanhaProduto" | "socSocioStatus" | "socSocioOrigem" | "socPlano" | "socSocio" | "vndPedidoStatus" | "vndEntregaTipo" | "vndPedido" | "vndPedidoItem" | "vndPedidoHistorico" | "finPagamentoStatus" | "finPagamentoMetodo" | "finPagamento"
+    modelProps: "sysUsuarioTipo" | "sysUsuario" | "user" | "session" | "account" | "verification" | "sysAuthLoginLog" | "sysEmailLog" | "sysEmailVerificationCode" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivo" | "cadLink" | "cadEvento" | "prdProdutoTipo" | "prdProduto" | "prdProdutoImagem" | "prdProdutoVariacao" | "prdProdutoComponente" | "prdProdutoCampo" | "vndCampanhaStatus" | "vndCampanha" | "vndCampanhaProduto" | "socSocioStatus" | "socSocioOrigem" | "socPlano" | "socSocio" | "vndPedidoStatus" | "vndEntregaTipo" | "vndPedido" | "vndPedidoItem" | "vndPedidoItemComponente" | "vndPedidoItemCampo" | "vndEstoqueReserva" | "vndPedidoHistorico" | "finPagamentoStatus" | "finPagamentoMetodo" | "finPagamento"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1704,6 +1709,138 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PrdProdutoComponente: {
+      payload: Prisma.$PrdProdutoComponentePayload<ExtArgs>
+      fields: Prisma.PrdProdutoComponenteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PrdProdutoComponenteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoComponentePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PrdProdutoComponenteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoComponentePayload>
+        }
+        findFirst: {
+          args: Prisma.PrdProdutoComponenteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoComponentePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PrdProdutoComponenteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoComponentePayload>
+        }
+        findMany: {
+          args: Prisma.PrdProdutoComponenteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoComponentePayload>[]
+        }
+        create: {
+          args: Prisma.PrdProdutoComponenteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoComponentePayload>
+        }
+        createMany: {
+          args: Prisma.PrdProdutoComponenteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.PrdProdutoComponenteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoComponentePayload>
+        }
+        update: {
+          args: Prisma.PrdProdutoComponenteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoComponentePayload>
+        }
+        deleteMany: {
+          args: Prisma.PrdProdutoComponenteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PrdProdutoComponenteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.PrdProdutoComponenteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoComponentePayload>
+        }
+        aggregate: {
+          args: Prisma.PrdProdutoComponenteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePrdProdutoComponente>
+        }
+        groupBy: {
+          args: Prisma.PrdProdutoComponenteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PrdProdutoComponenteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PrdProdutoComponenteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PrdProdutoComponenteCountAggregateOutputType> | number
+        }
+      }
+    }
+    PrdProdutoCampo: {
+      payload: Prisma.$PrdProdutoCampoPayload<ExtArgs>
+      fields: Prisma.PrdProdutoCampoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PrdProdutoCampoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoCampoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PrdProdutoCampoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoCampoPayload>
+        }
+        findFirst: {
+          args: Prisma.PrdProdutoCampoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoCampoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PrdProdutoCampoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoCampoPayload>
+        }
+        findMany: {
+          args: Prisma.PrdProdutoCampoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoCampoPayload>[]
+        }
+        create: {
+          args: Prisma.PrdProdutoCampoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoCampoPayload>
+        }
+        createMany: {
+          args: Prisma.PrdProdutoCampoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.PrdProdutoCampoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoCampoPayload>
+        }
+        update: {
+          args: Prisma.PrdProdutoCampoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoCampoPayload>
+        }
+        deleteMany: {
+          args: Prisma.PrdProdutoCampoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PrdProdutoCampoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.PrdProdutoCampoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrdProdutoCampoPayload>
+        }
+        aggregate: {
+          args: Prisma.PrdProdutoCampoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePrdProdutoCampo>
+        }
+        groupBy: {
+          args: Prisma.PrdProdutoCampoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PrdProdutoCampoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PrdProdutoCampoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PrdProdutoCampoCountAggregateOutputType> | number
+        }
+      }
+    }
     VndCampanhaStatus: {
       payload: Prisma.$VndCampanhaStatusPayload<ExtArgs>
       fields: Prisma.VndCampanhaStatusFieldRefs
@@ -2430,6 +2567,204 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    VndPedidoItemComponente: {
+      payload: Prisma.$VndPedidoItemComponentePayload<ExtArgs>
+      fields: Prisma.VndPedidoItemComponenteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VndPedidoItemComponenteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemComponentePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VndPedidoItemComponenteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemComponentePayload>
+        }
+        findFirst: {
+          args: Prisma.VndPedidoItemComponenteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemComponentePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VndPedidoItemComponenteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemComponentePayload>
+        }
+        findMany: {
+          args: Prisma.VndPedidoItemComponenteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemComponentePayload>[]
+        }
+        create: {
+          args: Prisma.VndPedidoItemComponenteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemComponentePayload>
+        }
+        createMany: {
+          args: Prisma.VndPedidoItemComponenteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.VndPedidoItemComponenteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemComponentePayload>
+        }
+        update: {
+          args: Prisma.VndPedidoItemComponenteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemComponentePayload>
+        }
+        deleteMany: {
+          args: Prisma.VndPedidoItemComponenteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VndPedidoItemComponenteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.VndPedidoItemComponenteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemComponentePayload>
+        }
+        aggregate: {
+          args: Prisma.VndPedidoItemComponenteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVndPedidoItemComponente>
+        }
+        groupBy: {
+          args: Prisma.VndPedidoItemComponenteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VndPedidoItemComponenteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VndPedidoItemComponenteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VndPedidoItemComponenteCountAggregateOutputType> | number
+        }
+      }
+    }
+    VndPedidoItemCampo: {
+      payload: Prisma.$VndPedidoItemCampoPayload<ExtArgs>
+      fields: Prisma.VndPedidoItemCampoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VndPedidoItemCampoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemCampoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VndPedidoItemCampoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemCampoPayload>
+        }
+        findFirst: {
+          args: Prisma.VndPedidoItemCampoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemCampoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VndPedidoItemCampoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemCampoPayload>
+        }
+        findMany: {
+          args: Prisma.VndPedidoItemCampoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemCampoPayload>[]
+        }
+        create: {
+          args: Prisma.VndPedidoItemCampoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemCampoPayload>
+        }
+        createMany: {
+          args: Prisma.VndPedidoItemCampoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.VndPedidoItemCampoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemCampoPayload>
+        }
+        update: {
+          args: Prisma.VndPedidoItemCampoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemCampoPayload>
+        }
+        deleteMany: {
+          args: Prisma.VndPedidoItemCampoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VndPedidoItemCampoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.VndPedidoItemCampoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndPedidoItemCampoPayload>
+        }
+        aggregate: {
+          args: Prisma.VndPedidoItemCampoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVndPedidoItemCampo>
+        }
+        groupBy: {
+          args: Prisma.VndPedidoItemCampoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VndPedidoItemCampoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VndPedidoItemCampoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VndPedidoItemCampoCountAggregateOutputType> | number
+        }
+      }
+    }
+    VndEstoqueReserva: {
+      payload: Prisma.$VndEstoqueReservaPayload<ExtArgs>
+      fields: Prisma.VndEstoqueReservaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VndEstoqueReservaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndEstoqueReservaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VndEstoqueReservaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndEstoqueReservaPayload>
+        }
+        findFirst: {
+          args: Prisma.VndEstoqueReservaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndEstoqueReservaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VndEstoqueReservaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndEstoqueReservaPayload>
+        }
+        findMany: {
+          args: Prisma.VndEstoqueReservaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndEstoqueReservaPayload>[]
+        }
+        create: {
+          args: Prisma.VndEstoqueReservaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndEstoqueReservaPayload>
+        }
+        createMany: {
+          args: Prisma.VndEstoqueReservaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.VndEstoqueReservaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndEstoqueReservaPayload>
+        }
+        update: {
+          args: Prisma.VndEstoqueReservaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndEstoqueReservaPayload>
+        }
+        deleteMany: {
+          args: Prisma.VndEstoqueReservaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VndEstoqueReservaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.VndEstoqueReservaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VndEstoqueReservaPayload>
+        }
+        aggregate: {
+          args: Prisma.VndEstoqueReservaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVndEstoqueReserva>
+        }
+        groupBy: {
+          args: Prisma.VndEstoqueReservaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VndEstoqueReservaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VndEstoqueReservaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VndEstoqueReservaCountAggregateOutputType> | number
+        }
+      }
+    }
     VndPedidoHistorico: {
       payload: Prisma.$VndPedidoHistoricoPayload<ExtArgs>
       fields: Prisma.VndPedidoHistoricoFieldRefs
@@ -3050,6 +3385,39 @@ export const PrdProdutoVariacaoScalarFieldEnum = {
 export type PrdProdutoVariacaoScalarFieldEnum = (typeof PrdProdutoVariacaoScalarFieldEnum)[keyof typeof PrdProdutoVariacaoScalarFieldEnum]
 
 
+export const PrdProdutoComponenteScalarFieldEnum = {
+  id: 'id',
+  prd_produto_id: 'prd_produto_id',
+  prd_produto_componente_id: 'prd_produto_componente_id',
+  quantidade: 'quantidade',
+  ordem: 'ordem',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type PrdProdutoComponenteScalarFieldEnum = (typeof PrdProdutoComponenteScalarFieldEnum)[keyof typeof PrdProdutoComponenteScalarFieldEnum]
+
+
+export const PrdProdutoCampoScalarFieldEnum = {
+  id: 'id',
+  prd_produto_id: 'prd_produto_id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  tipo: 'tipo',
+  obrigatorio: 'obrigatorio',
+  valor_unico: 'valor_unico',
+  ordem: 'ordem',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type PrdProdutoCampoScalarFieldEnum = (typeof PrdProdutoCampoScalarFieldEnum)[keyof typeof PrdProdutoCampoScalarFieldEnum]
+
+
 export const VndCampanhaStatusScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
@@ -3086,6 +3454,7 @@ export const VndCampanhaProdutoScalarFieldEnum = {
   id: 'id',
   vnd_campanha_id: 'vnd_campanha_id',
   prd_produto_id: 'prd_produto_id',
+  modalidade_venda: 'modalidade_venda',
   preco_normal: 'preco_normal',
   preco_socio: 'preco_socio',
   limite_por_cliente: 'limite_por_cliente',
@@ -3237,6 +3606,55 @@ export const VndPedidoItemScalarFieldEnum = {
 } as const
 
 export type VndPedidoItemScalarFieldEnum = (typeof VndPedidoItemScalarFieldEnum)[keyof typeof VndPedidoItemScalarFieldEnum]
+
+
+export const VndPedidoItemComponenteScalarFieldEnum = {
+  id: 'id',
+  vnd_pedido_item_id: 'vnd_pedido_item_id',
+  prd_produto_id: 'prd_produto_id',
+  prd_produto_variacao_id: 'prd_produto_variacao_id',
+  produto_codigo_snapshot: 'produto_codigo_snapshot',
+  produto_nome_snapshot: 'produto_nome_snapshot',
+  variacao_snapshot: 'variacao_snapshot',
+  quantidade: 'quantidade',
+  created_at: 'created_at'
+} as const
+
+export type VndPedidoItemComponenteScalarFieldEnum = (typeof VndPedidoItemComponenteScalarFieldEnum)[keyof typeof VndPedidoItemComponenteScalarFieldEnum]
+
+
+export const VndPedidoItemCampoScalarFieldEnum = {
+  id: 'id',
+  vnd_pedido_item_id: 'vnd_pedido_item_id',
+  vnd_pedido_item_componente_id: 'vnd_pedido_item_componente_id',
+  prd_produto_campo_id: 'prd_produto_campo_id',
+  campo_codigo_snapshot: 'campo_codigo_snapshot',
+  campo_nome_snapshot: 'campo_nome_snapshot',
+  campo_tipo_snapshot: 'campo_tipo_snapshot',
+  valor: 'valor',
+  valor_normalizado: 'valor_normalizado',
+  created_at: 'created_at'
+} as const
+
+export type VndPedidoItemCampoScalarFieldEnum = (typeof VndPedidoItemCampoScalarFieldEnum)[keyof typeof VndPedidoItemCampoScalarFieldEnum]
+
+
+export const VndEstoqueReservaScalarFieldEnum = {
+  id: 'id',
+  vnd_pedido_id: 'vnd_pedido_id',
+  vnd_pedido_item_id: 'vnd_pedido_item_id',
+  vnd_pedido_item_componente_id: 'vnd_pedido_item_componente_id',
+  prd_produto_id: 'prd_produto_id',
+  prd_produto_variacao_id: 'prd_produto_variacao_id',
+  quantidade: 'quantidade',
+  expira_at: 'expira_at',
+  consumida_at: 'consumida_at',
+  liberada_at: 'liberada_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type VndEstoqueReservaScalarFieldEnum = (typeof VndEstoqueReservaScalarFieldEnum)[keyof typeof VndEstoqueReservaScalarFieldEnum]
 
 
 export const VndPedidoHistoricoScalarFieldEnum = {
@@ -3507,6 +3925,16 @@ export const PrdProdutoVariacaoOrderByRelevanceFieldEnum = {
 export type PrdProdutoVariacaoOrderByRelevanceFieldEnum = (typeof PrdProdutoVariacaoOrderByRelevanceFieldEnum)[keyof typeof PrdProdutoVariacaoOrderByRelevanceFieldEnum]
 
 
+export const PrdProdutoCampoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  tipo: 'tipo'
+} as const
+
+export type PrdProdutoCampoOrderByRelevanceFieldEnum = (typeof PrdProdutoCampoOrderByRelevanceFieldEnum)[keyof typeof PrdProdutoCampoOrderByRelevanceFieldEnum]
+
+
 export const VndCampanhaStatusOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   descricao: 'descricao',
@@ -3525,6 +3953,13 @@ export const VndCampanhaOrderByRelevanceFieldEnum = {
 } as const
 
 export type VndCampanhaOrderByRelevanceFieldEnum = (typeof VndCampanhaOrderByRelevanceFieldEnum)[keyof typeof VndCampanhaOrderByRelevanceFieldEnum]
+
+
+export const VndCampanhaProdutoOrderByRelevanceFieldEnum = {
+  modalidade_venda: 'modalidade_venda'
+} as const
+
+export type VndCampanhaProdutoOrderByRelevanceFieldEnum = (typeof VndCampanhaProdutoOrderByRelevanceFieldEnum)[keyof typeof VndCampanhaProdutoOrderByRelevanceFieldEnum]
 
 
 export const SocSocioStatusOrderByRelevanceFieldEnum = {
@@ -3602,6 +4037,26 @@ export const VndPedidoItemOrderByRelevanceFieldEnum = {
 } as const
 
 export type VndPedidoItemOrderByRelevanceFieldEnum = (typeof VndPedidoItemOrderByRelevanceFieldEnum)[keyof typeof VndPedidoItemOrderByRelevanceFieldEnum]
+
+
+export const VndPedidoItemComponenteOrderByRelevanceFieldEnum = {
+  produto_codigo_snapshot: 'produto_codigo_snapshot',
+  produto_nome_snapshot: 'produto_nome_snapshot',
+  variacao_snapshot: 'variacao_snapshot'
+} as const
+
+export type VndPedidoItemComponenteOrderByRelevanceFieldEnum = (typeof VndPedidoItemComponenteOrderByRelevanceFieldEnum)[keyof typeof VndPedidoItemComponenteOrderByRelevanceFieldEnum]
+
+
+export const VndPedidoItemCampoOrderByRelevanceFieldEnum = {
+  campo_codigo_snapshot: 'campo_codigo_snapshot',
+  campo_nome_snapshot: 'campo_nome_snapshot',
+  campo_tipo_snapshot: 'campo_tipo_snapshot',
+  valor: 'valor',
+  valor_normalizado: 'valor_normalizado'
+} as const
+
+export type VndPedidoItemCampoOrderByRelevanceFieldEnum = (typeof VndPedidoItemCampoOrderByRelevanceFieldEnum)[keyof typeof VndPedidoItemCampoOrderByRelevanceFieldEnum]
 
 
 export const VndPedidoHistoricoOrderByRelevanceFieldEnum = {
@@ -3858,6 +4313,8 @@ export type GlobalOmitConfig = {
   prdProduto?: Prisma.PrdProdutoOmit
   prdProdutoImagem?: Prisma.PrdProdutoImagemOmit
   prdProdutoVariacao?: Prisma.PrdProdutoVariacaoOmit
+  prdProdutoComponente?: Prisma.PrdProdutoComponenteOmit
+  prdProdutoCampo?: Prisma.PrdProdutoCampoOmit
   vndCampanhaStatus?: Prisma.VndCampanhaStatusOmit
   vndCampanha?: Prisma.VndCampanhaOmit
   vndCampanhaProduto?: Prisma.VndCampanhaProdutoOmit
@@ -3869,6 +4326,9 @@ export type GlobalOmitConfig = {
   vndEntregaTipo?: Prisma.VndEntregaTipoOmit
   vndPedido?: Prisma.VndPedidoOmit
   vndPedidoItem?: Prisma.VndPedidoItemOmit
+  vndPedidoItemComponente?: Prisma.VndPedidoItemComponenteOmit
+  vndPedidoItemCampo?: Prisma.VndPedidoItemCampoOmit
+  vndEstoqueReserva?: Prisma.VndEstoqueReservaOmit
   vndPedidoHistorico?: Prisma.VndPedidoHistoricoOmit
   finPagamentoStatus?: Prisma.FinPagamentoStatusOmit
   finPagamentoMetodo?: Prisma.FinPagamentoMetodoOmit

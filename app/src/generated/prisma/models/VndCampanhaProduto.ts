@@ -52,6 +52,7 @@ export type VndCampanhaProdutoMinAggregateOutputType = {
   id: number | null
   vnd_campanha_id: number | null
   prd_produto_id: number | null
+  modalidade_venda: string | null
   preco_normal: runtime.Decimal | null
   preco_socio: runtime.Decimal | null
   limite_por_cliente: number | null
@@ -65,6 +66,7 @@ export type VndCampanhaProdutoMaxAggregateOutputType = {
   id: number | null
   vnd_campanha_id: number | null
   prd_produto_id: number | null
+  modalidade_venda: string | null
   preco_normal: runtime.Decimal | null
   preco_socio: runtime.Decimal | null
   limite_por_cliente: number | null
@@ -78,6 +80,7 @@ export type VndCampanhaProdutoCountAggregateOutputType = {
   id: number
   vnd_campanha_id: number
   prd_produto_id: number
+  modalidade_venda: number
   preco_normal: number
   preco_socio: number
   limite_por_cliente: number
@@ -115,6 +118,7 @@ export type VndCampanhaProdutoMinAggregateInputType = {
   id?: true
   vnd_campanha_id?: true
   prd_produto_id?: true
+  modalidade_venda?: true
   preco_normal?: true
   preco_socio?: true
   limite_por_cliente?: true
@@ -128,6 +132,7 @@ export type VndCampanhaProdutoMaxAggregateInputType = {
   id?: true
   vnd_campanha_id?: true
   prd_produto_id?: true
+  modalidade_venda?: true
   preco_normal?: true
   preco_socio?: true
   limite_por_cliente?: true
@@ -141,6 +146,7 @@ export type VndCampanhaProdutoCountAggregateInputType = {
   id?: true
   vnd_campanha_id?: true
   prd_produto_id?: true
+  modalidade_venda?: true
   preco_normal?: true
   preco_socio?: true
   limite_por_cliente?: true
@@ -241,6 +247,7 @@ export type VndCampanhaProdutoGroupByOutputType = {
   id: number
   vnd_campanha_id: number
   prd_produto_id: number
+  modalidade_venda: string
   preco_normal: runtime.Decimal | null
   preco_socio: runtime.Decimal | null
   limite_por_cliente: number | null
@@ -277,6 +284,7 @@ export type VndCampanhaProdutoWhereInput = {
   id?: Prisma.IntFilter<"VndCampanhaProduto"> | number
   vnd_campanha_id?: Prisma.IntFilter<"VndCampanhaProduto"> | number
   prd_produto_id?: Prisma.IntFilter<"VndCampanhaProduto"> | number
+  modalidade_venda?: Prisma.StringFilter<"VndCampanhaProduto"> | string
   preco_normal?: Prisma.DecimalNullableFilter<"VndCampanhaProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: Prisma.DecimalNullableFilter<"VndCampanhaProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: Prisma.IntNullableFilter<"VndCampanhaProduto"> | number | null
@@ -292,6 +300,7 @@ export type VndCampanhaProdutoOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vnd_campanha_id?: Prisma.SortOrder
   prd_produto_id?: Prisma.SortOrder
+  modalidade_venda?: Prisma.SortOrder
   preco_normal?: Prisma.SortOrderInput | Prisma.SortOrder
   preco_socio?: Prisma.SortOrderInput | Prisma.SortOrder
   limite_por_cliente?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -301,6 +310,7 @@ export type VndCampanhaProdutoOrderByWithRelationInput = {
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   vnd_campanha?: Prisma.VndCampanhaOrderByWithRelationInput
   prd_produto?: Prisma.PrdProdutoOrderByWithRelationInput
+  _relevance?: Prisma.VndCampanhaProdutoOrderByRelevanceInput
 }
 
 export type VndCampanhaProdutoWhereUniqueInput = Prisma.AtLeast<{
@@ -311,6 +321,7 @@ export type VndCampanhaProdutoWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.VndCampanhaProdutoWhereInput | Prisma.VndCampanhaProdutoWhereInput[]
   vnd_campanha_id?: Prisma.IntFilter<"VndCampanhaProduto"> | number
   prd_produto_id?: Prisma.IntFilter<"VndCampanhaProduto"> | number
+  modalidade_venda?: Prisma.StringFilter<"VndCampanhaProduto"> | string
   preco_normal?: Prisma.DecimalNullableFilter<"VndCampanhaProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: Prisma.DecimalNullableFilter<"VndCampanhaProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: Prisma.IntNullableFilter<"VndCampanhaProduto"> | number | null
@@ -326,6 +337,7 @@ export type VndCampanhaProdutoOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vnd_campanha_id?: Prisma.SortOrder
   prd_produto_id?: Prisma.SortOrder
+  modalidade_venda?: Prisma.SortOrder
   preco_normal?: Prisma.SortOrderInput | Prisma.SortOrder
   preco_socio?: Prisma.SortOrderInput | Prisma.SortOrder
   limite_por_cliente?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -347,6 +359,7 @@ export type VndCampanhaProdutoScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"VndCampanhaProduto"> | number
   vnd_campanha_id?: Prisma.IntWithAggregatesFilter<"VndCampanhaProduto"> | number
   prd_produto_id?: Prisma.IntWithAggregatesFilter<"VndCampanhaProduto"> | number
+  modalidade_venda?: Prisma.StringWithAggregatesFilter<"VndCampanhaProduto"> | string
   preco_normal?: Prisma.DecimalNullableWithAggregatesFilter<"VndCampanhaProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: Prisma.DecimalNullableWithAggregatesFilter<"VndCampanhaProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: Prisma.IntNullableWithAggregatesFilter<"VndCampanhaProduto"> | number | null
@@ -357,6 +370,7 @@ export type VndCampanhaProdutoScalarWhereWithAggregatesInput = {
 }
 
 export type VndCampanhaProdutoCreateInput = {
+  modalidade_venda?: string
   preco_normal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: number | null
@@ -372,6 +386,7 @@ export type VndCampanhaProdutoUncheckedCreateInput = {
   id?: number
   vnd_campanha_id: number
   prd_produto_id: number
+  modalidade_venda?: string
   preco_normal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: number | null
@@ -382,6 +397,7 @@ export type VndCampanhaProdutoUncheckedCreateInput = {
 }
 
 export type VndCampanhaProdutoUpdateInput = {
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   preco_normal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -397,6 +413,7 @@ export type VndCampanhaProdutoUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vnd_campanha_id?: Prisma.IntFieldUpdateOperationsInput | number
   prd_produto_id?: Prisma.IntFieldUpdateOperationsInput | number
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   preco_normal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -410,6 +427,7 @@ export type VndCampanhaProdutoCreateManyInput = {
   id?: number
   vnd_campanha_id: number
   prd_produto_id: number
+  modalidade_venda?: string
   preco_normal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: number | null
@@ -420,6 +438,7 @@ export type VndCampanhaProdutoCreateManyInput = {
 }
 
 export type VndCampanhaProdutoUpdateManyMutationInput = {
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   preco_normal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -433,6 +452,7 @@ export type VndCampanhaProdutoUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vnd_campanha_id?: Prisma.IntFieldUpdateOperationsInput | number
   prd_produto_id?: Prisma.IntFieldUpdateOperationsInput | number
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   preco_normal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -452,6 +472,12 @@ export type VndCampanhaProdutoOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type VndCampanhaProdutoOrderByRelevanceInput = {
+  fields: Prisma.VndCampanhaProdutoOrderByRelevanceFieldEnum | Prisma.VndCampanhaProdutoOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
+}
+
 export type VndCampanhaProdutoVnd_campanha_idPrd_produto_idCompoundUniqueInput = {
   vnd_campanha_id: number
   prd_produto_id: number
@@ -461,6 +487,7 @@ export type VndCampanhaProdutoCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vnd_campanha_id?: Prisma.SortOrder
   prd_produto_id?: Prisma.SortOrder
+  modalidade_venda?: Prisma.SortOrder
   preco_normal?: Prisma.SortOrder
   preco_socio?: Prisma.SortOrder
   limite_por_cliente?: Prisma.SortOrder
@@ -485,6 +512,7 @@ export type VndCampanhaProdutoMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vnd_campanha_id?: Prisma.SortOrder
   prd_produto_id?: Prisma.SortOrder
+  modalidade_venda?: Prisma.SortOrder
   preco_normal?: Prisma.SortOrder
   preco_socio?: Prisma.SortOrder
   limite_por_cliente?: Prisma.SortOrder
@@ -498,6 +526,7 @@ export type VndCampanhaProdutoMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vnd_campanha_id?: Prisma.SortOrder
   prd_produto_id?: Prisma.SortOrder
+  modalidade_venda?: Prisma.SortOrder
   preco_normal?: Prisma.SortOrder
   preco_socio?: Prisma.SortOrder
   limite_por_cliente?: Prisma.SortOrder
@@ -603,6 +632,7 @@ export type VndCampanhaProdutoUncheckedUpdateManyWithoutVnd_campanhaNestedInput 
 }
 
 export type VndCampanhaProdutoCreateWithoutPrd_produtoInput = {
+  modalidade_venda?: string
   preco_normal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: number | null
@@ -616,6 +646,7 @@ export type VndCampanhaProdutoCreateWithoutPrd_produtoInput = {
 export type VndCampanhaProdutoUncheckedCreateWithoutPrd_produtoInput = {
   id?: number
   vnd_campanha_id: number
+  modalidade_venda?: string
   preco_normal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: number | null
@@ -658,6 +689,7 @@ export type VndCampanhaProdutoScalarWhereInput = {
   id?: Prisma.IntFilter<"VndCampanhaProduto"> | number
   vnd_campanha_id?: Prisma.IntFilter<"VndCampanhaProduto"> | number
   prd_produto_id?: Prisma.IntFilter<"VndCampanhaProduto"> | number
+  modalidade_venda?: Prisma.StringFilter<"VndCampanhaProduto"> | string
   preco_normal?: Prisma.DecimalNullableFilter<"VndCampanhaProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: Prisma.DecimalNullableFilter<"VndCampanhaProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: Prisma.IntNullableFilter<"VndCampanhaProduto"> | number | null
@@ -668,6 +700,7 @@ export type VndCampanhaProdutoScalarWhereInput = {
 }
 
 export type VndCampanhaProdutoCreateWithoutVnd_campanhaInput = {
+  modalidade_venda?: string
   preco_normal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: number | null
@@ -681,6 +714,7 @@ export type VndCampanhaProdutoCreateWithoutVnd_campanhaInput = {
 export type VndCampanhaProdutoUncheckedCreateWithoutVnd_campanhaInput = {
   id?: number
   prd_produto_id: number
+  modalidade_venda?: string
   preco_normal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: number | null
@@ -719,6 +753,7 @@ export type VndCampanhaProdutoUpdateManyWithWhereWithoutVnd_campanhaInput = {
 export type VndCampanhaProdutoCreateManyPrd_produtoInput = {
   id?: number
   vnd_campanha_id: number
+  modalidade_venda?: string
   preco_normal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: number | null
@@ -729,6 +764,7 @@ export type VndCampanhaProdutoCreateManyPrd_produtoInput = {
 }
 
 export type VndCampanhaProdutoUpdateWithoutPrd_produtoInput = {
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   preco_normal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -742,6 +778,7 @@ export type VndCampanhaProdutoUpdateWithoutPrd_produtoInput = {
 export type VndCampanhaProdutoUncheckedUpdateWithoutPrd_produtoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vnd_campanha_id?: Prisma.IntFieldUpdateOperationsInput | number
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   preco_normal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -754,6 +791,7 @@ export type VndCampanhaProdutoUncheckedUpdateWithoutPrd_produtoInput = {
 export type VndCampanhaProdutoUncheckedUpdateManyWithoutPrd_produtoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vnd_campanha_id?: Prisma.IntFieldUpdateOperationsInput | number
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   preco_normal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -766,6 +804,7 @@ export type VndCampanhaProdutoUncheckedUpdateManyWithoutPrd_produtoInput = {
 export type VndCampanhaProdutoCreateManyVnd_campanhaInput = {
   id?: number
   prd_produto_id: number
+  modalidade_venda?: string
   preco_normal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: number | null
@@ -776,6 +815,7 @@ export type VndCampanhaProdutoCreateManyVnd_campanhaInput = {
 }
 
 export type VndCampanhaProdutoUpdateWithoutVnd_campanhaInput = {
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   preco_normal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -789,6 +829,7 @@ export type VndCampanhaProdutoUpdateWithoutVnd_campanhaInput = {
 export type VndCampanhaProdutoUncheckedUpdateWithoutVnd_campanhaInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   prd_produto_id?: Prisma.IntFieldUpdateOperationsInput | number
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   preco_normal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -801,6 +842,7 @@ export type VndCampanhaProdutoUncheckedUpdateWithoutVnd_campanhaInput = {
 export type VndCampanhaProdutoUncheckedUpdateManyWithoutVnd_campanhaInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   prd_produto_id?: Prisma.IntFieldUpdateOperationsInput | number
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   preco_normal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   limite_por_cliente?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -816,6 +858,7 @@ export type VndCampanhaProdutoSelect<ExtArgs extends runtime.Types.Extensions.In
   id?: boolean
   vnd_campanha_id?: boolean
   prd_produto_id?: boolean
+  modalidade_venda?: boolean
   preco_normal?: boolean
   preco_socio?: boolean
   limite_por_cliente?: boolean
@@ -833,6 +876,7 @@ export type VndCampanhaProdutoSelectScalar = {
   id?: boolean
   vnd_campanha_id?: boolean
   prd_produto_id?: boolean
+  modalidade_venda?: boolean
   preco_normal?: boolean
   preco_socio?: boolean
   limite_por_cliente?: boolean
@@ -842,7 +886,7 @@ export type VndCampanhaProdutoSelectScalar = {
   updated_at?: boolean
 }
 
-export type VndCampanhaProdutoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vnd_campanha_id" | "prd_produto_id" | "preco_normal" | "preco_socio" | "limite_por_cliente" | "ordem" | "ativo" | "created_at" | "updated_at", ExtArgs["result"]["vndCampanhaProduto"]>
+export type VndCampanhaProdutoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vnd_campanha_id" | "prd_produto_id" | "modalidade_venda" | "preco_normal" | "preco_socio" | "limite_por_cliente" | "ordem" | "ativo" | "created_at" | "updated_at", ExtArgs["result"]["vndCampanhaProduto"]>
 export type VndCampanhaProdutoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vnd_campanha?: boolean | Prisma.VndCampanhaDefaultArgs<ExtArgs>
   prd_produto?: boolean | Prisma.PrdProdutoDefaultArgs<ExtArgs>
@@ -858,6 +902,7 @@ export type $VndCampanhaProdutoPayload<ExtArgs extends runtime.Types.Extensions.
     id: number
     vnd_campanha_id: number
     prd_produto_id: number
+    modalidade_venda: string
     preco_normal: runtime.Decimal | null
     preco_socio: runtime.Decimal | null
     limite_por_cliente: number | null
@@ -1239,6 +1284,7 @@ export interface VndCampanhaProdutoFieldRefs {
   readonly id: Prisma.FieldRef<"VndCampanhaProduto", 'Int'>
   readonly vnd_campanha_id: Prisma.FieldRef<"VndCampanhaProduto", 'Int'>
   readonly prd_produto_id: Prisma.FieldRef<"VndCampanhaProduto", 'Int'>
+  readonly modalidade_venda: Prisma.FieldRef<"VndCampanhaProduto", 'String'>
   readonly preco_normal: Prisma.FieldRef<"VndCampanhaProduto", 'Decimal'>
   readonly preco_socio: Prisma.FieldRef<"VndCampanhaProduto", 'Decimal'>
   readonly limite_por_cliente: Prisma.FieldRef<"VndCampanhaProduto", 'Int'>

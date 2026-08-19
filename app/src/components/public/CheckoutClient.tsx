@@ -38,6 +38,7 @@ export type CheckoutInitialCustomer = {
 };
 
 type ValidatedItem = {
+    line_key: string;
     produto_id: number;
     variacao_id: number | null;
     quantidade: number;
@@ -58,6 +59,33 @@ type ValidatedItem = {
     preco_unitario?: number;
     subtotal?: number;
     socio_aplicado?: boolean;
+    campos?: Array<{
+        campo_id: number;
+        codigo: string;
+        nome: string;
+        tipo: "texto" | "numero";
+        valor: string;
+        valor_normalizado: string;
+        valor_unico: boolean;
+    }>;
+    componentes?: Array<{
+        componente_id: number;
+        produto_id: number;
+        produto_codigo: string;
+        produto_nome: string;
+        quantidade_por_kit: number;
+        variacao_id: number | null;
+        variacao_nome: string | null;
+        campos: Array<{
+            campo_id: number;
+            codigo: string;
+            nome: string;
+            tipo: "texto" | "numero";
+            valor: string;
+            valor_normalizado: string;
+            valor_unico: boolean;
+        }>;
+    }>;
 };
 
 type CheckoutPaymentResult = {
@@ -103,9 +131,9 @@ function customerIsValid(input: {
 }
 
 export function CheckoutClient({
-    publicKey,
-    initialCustomer,
-}: {
+                                   publicKey,
+                                   initialCustomer,
+                               }: {
     publicKey: string;
     initialCustomer: CheckoutInitialCustomer;
 }) {
@@ -135,11 +163,11 @@ export function CheckoutClient({
 
     const [customerReady, setCustomerReady] = useState(
         initialCustomer.isAuthenticated &&
-            customerIsValid({
-                nome: initialCustomer.nome,
-                email: initialCustomer.email,
-                telefone: initialCustomer.telefone,
-            }),
+        customerIsValid({
+            nome: initialCustomer.nome,
+            email: initialCustomer.email,
+            telefone: initialCustomer.telefone,
+        }),
     );
 
     useEffect(() => {
@@ -178,9 +206,28 @@ export function CheckoutClient({
                         },
                         body: JSON.stringify({
                             items: items.map((item) => ({
+                                line_key: item.lineKey,
                                 produto_id: item.produtoId,
                                 variacao_id: item.variacaoId,
                                 quantidade: item.quantidade,
+                                campos: item.campos.map((campo) => ({
+                                    campo_id: campo.campoId,
+                                    valor: campo.valor,
+                                })),
+                                componentes: item.componentes.map(
+                                    (componente) => ({
+                                        componente_id:
+                                        componente.componenteId,
+                                        variacao_id:
+                                        componente.variacaoId,
+                                        campos: componente.campos.map(
+                                            (campo) => ({
+                                                campo_id: campo.campoId,
+                                                valor: campo.valor,
+                                            }),
+                                        ),
+                                    }),
+                                ),
                             })),
                         }),
                         signal: controller.signal,
@@ -192,7 +239,7 @@ export function CheckoutClient({
                 if (!response.ok || !result.ok) {
                     throw new Error(
                         result.message ||
-                            "Não foi possível validar o carrinho.",
+                        "Não foi possível validar o carrinho.",
                     );
                 }
 
@@ -254,9 +301,9 @@ export function CheckoutClient({
                         },
                         body: JSON.stringify({
                             pedido_codigo:
-                                paymentResult.pedido_codigo,
+                            paymentResult.pedido_codigo,
                             pagamento_id:
-                                paymentResult.pagamento_id,
+                            paymentResult.pagamento_id,
                         }),
                     },
                 );
@@ -420,9 +467,28 @@ export function CheckoutClient({
                                 telefone: customer.telefone.trim(),
                             },
                             items: items.map((item) => ({
+                                line_key: item.lineKey,
                                 produto_id: item.produtoId,
                                 variacao_id: item.variacaoId,
                                 quantidade: item.quantidade,
+                                campos: item.campos.map((campo) => ({
+                                    campo_id: campo.campoId,
+                                    valor: campo.valor,
+                                })),
+                                componentes: item.componentes.map(
+                                    (componente) => ({
+                                        componente_id:
+                                        componente.componenteId,
+                                        variacao_id:
+                                        componente.variacaoId,
+                                        campos: componente.campos.map(
+                                            (campo) => ({
+                                                campo_id: campo.campoId,
+                                                valor: campo.valor,
+                                            }),
+                                        ),
+                                    }),
+                                ),
                             })),
                             mercado_pago: mercadoPagoData,
                         }),
@@ -434,7 +500,7 @@ export function CheckoutClient({
                 if (!response.ok || !result.ok) {
                     const submitError = new Error(
                         result.message ||
-                            "Não foi possível processar o pagamento.",
+                        "Não foi possível processar o pagamento.",
                     ) as CheckoutSubmitError;
 
                     submitError.resetAttempt = Boolean(
@@ -880,9 +946,7 @@ export function CheckoutClient({
                     <div className="bp-public-checkout-summary-items">
                         {validated.map((item) => (
                             <div
-                                key={`${item.produto_id}:${
-                                    item.variacao_id ?? "none"
-                                }`}
+                                key={item.line_key}
                             >
                                 <div>
                                     <strong>
@@ -894,6 +958,30 @@ export function CheckoutClient({
                                             : ""}
                                         {item.quantidade}x
                                     </small>
+                                    {item.componentes?.length ? (
+                                        <small>
+                                            {item.componentes
+                                                .map((componente) =>
+                                                    `${componente.produto_nome}${
+                                                        componente.variacao_nome
+                                                            ? ` (${componente.variacao_nome})`
+                                                            : ""
+                                                    }`,
+                                                )
+                                                .join(" · ")}
+                                        </small>
+                                    ) : null}
+
+                                    {item.campos?.length ? (
+                                        <small>
+                                            {item.campos
+                                                .map(
+                                                    (campo) =>
+                                                        `${campo.nome}: ${campo.valor}`,
+                                                )
+                                                .join(" · ")}
+                                        </small>
+                                    ) : null}
                                 </div>
                                 <strong>
                                     {money(item.subtotal ?? 0)}

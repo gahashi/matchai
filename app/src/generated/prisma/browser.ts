@@ -113,6 +113,16 @@ export type PrdProdutoImagem = Prisma.PrdProdutoImagemModel
  */
 export type PrdProdutoVariacao = Prisma.PrdProdutoVariacaoModel
 /**
+ * Model PrdProdutoComponente
+ * 
+ */
+export type PrdProdutoComponente = Prisma.PrdProdutoComponenteModel
+/**
+ * Model PrdProdutoCampo
+ * 
+ */
+export type PrdProdutoCampo = Prisma.PrdProdutoCampoModel
+/**
  * Model VndCampanhaStatus
  * 
  */
@@ -167,6 +177,21 @@ export type VndPedido = Prisma.VndPedidoModel
  * 
  */
 export type VndPedidoItem = Prisma.VndPedidoItemModel
+/**
+ * Model VndPedidoItemComponente
+ * 
+ */
+export type VndPedidoItemComponente = Prisma.VndPedidoItemComponenteModel
+/**
+ * Model VndPedidoItemCampo
+ * 
+ */
+export type VndPedidoItemCampo = Prisma.VndPedidoItemCampoModel
+/**
+ * Model VndEstoqueReserva
+ * 
+ */
+export type VndEstoqueReserva = Prisma.VndEstoqueReservaModel
 /**
  * Model VndPedidoHistorico
  * 

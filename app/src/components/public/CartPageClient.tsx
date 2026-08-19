@@ -15,6 +15,7 @@ import { usePublicCart } from "@/components/public/PublicCartProvider";
 import { Button } from "@/components/ui/Button";
 
 type ValidatedItem = {
+    line_key: string;
     produto_id: number;
     variacao_id: number | null;
     quantidade: number;
@@ -22,16 +23,16 @@ type ValidatedItem = {
     motivo: string | null;
     produto:
         | {
-            nome: string;
-            codigo: string;
-            imagem_principal: {
-                public_url: string | null;
-            } | null;
-            preco_normal: number;
-            preco_socio: number | null;
-            preco_aplicado: number;
-            socio_aplicado: boolean;
-        }
+        nome: string;
+        codigo: string;
+        imagem_principal: {
+            public_url: string | null;
+        } | null;
+        preco_normal: number;
+        preco_socio: number | null;
+        preco_aplicado: number;
+        socio_aplicado: boolean;
+    }
         | null;
     variacao?: {
         id: number;
@@ -48,10 +49,6 @@ function money(value: number) {
         style: "currency",
         currency: "BRL",
     }).format(value);
-}
-
-function key(produtoId: number, variacaoId: number | null) {
-    return `${produtoId}:${variacaoId ?? "none"}`;
 }
 
 export function CartPageClient() {
@@ -91,9 +88,30 @@ export function CartPageClient() {
                     },
                     body: JSON.stringify({
                         items: items.map((item) => ({
+                            line_key: item.lineKey,
                             produto_id: item.produtoId,
                             variacao_id: item.variacaoId,
                             quantidade: item.quantidade,
+
+                            campos: item.campos.map((campo) => ({
+                                campo_id: campo.campoId,
+                                valor: campo.valor,
+                            })),
+
+                            componentes: item.componentes.map(
+                                (componente) => ({
+                                    componente_id:
+                                    componente.componenteId,
+                                    variacao_id:
+                                    componente.variacaoId,
+                                    campos: componente.campos.map(
+                                        (campo) => ({
+                                            campo_id: campo.campoId,
+                                            valor: campo.valor,
+                                        }),
+                                    ),
+                                }),
+                            ),
                         })),
                     }),
                     signal: controller.signal,
@@ -133,7 +151,7 @@ export function CartPageClient() {
         () =>
             new Map(
                 validated.map((item) => [
-                    key(item.produto_id, item.variacao_id),
+                    item.line_key,
                     item,
                 ]),
             ),
@@ -206,7 +224,7 @@ export function CartPageClient() {
                 <section className="bp-public-cart-items">
                     {items.map((item) => {
                         const authoritative = validatedMap.get(
-                            key(item.produtoId, item.variacaoId),
+                            item.lineKey,
                         );
                         const produto = authoritative?.produto ?? null;
                         const available = authoritative
@@ -217,7 +235,7 @@ export function CartPageClient() {
 
                         return (
                             <article
-                                key={key(item.produtoId, item.variacaoId)}
+                                key={item.lineKey}
                                 className={`bp-public-cart-item ${
                                     available ? "" : "is-unavailable"
                                 }`}
@@ -245,6 +263,71 @@ export function CartPageClient() {
                                         </span>
                                     ) : null}
 
+                                    {item.componentes.length > 0 ? (
+                                        <div
+                                            style={{
+                                                display: "grid",
+                                                gap: 4,
+                                                marginTop: 6,
+                                            }}
+                                        >
+                                            {item.componentes.map(
+                                                (componente) => (
+                                                    <span
+                                                        key={componente.componenteId}
+                                                        className="bp-public-cart-item-variation"
+                                                    >
+                                                        {componente.produtoNome}
+                                                        {componente.variacaoNome
+                                                            ? ` · ${componente.variacaoNome}`
+                                                            : ""}
+                                                        {componente.quantidadePorKit > 1
+                                                            ? ` × ${componente.quantidadePorKit}`
+                                                            : ""}
+                                                    </span>
+                                                ),
+                                            )}
+                                        </div>
+                                    ) : null}
+
+                                    {(item.campos.length > 0 ||
+                                        item.componentes.some(
+                                            (componente) =>
+                                                componente.campos.length > 0,
+                                        )) ? (
+                                        <div
+                                            style={{
+                                                display: "grid",
+                                                gap: 3,
+                                                marginTop: 6,
+                                            }}
+                                        >
+                                            {item.campos.map((campo) => (
+                                                <small key={`produto:${campo.campoId}`}>
+                                                    {campo.nome}:{" "}
+                                                    <strong>{campo.valor}</strong>
+                                                </small>
+                                            ))}
+
+                                            {item.componentes.flatMap(
+                                                (componente) =>
+                                                    componente.campos.map(
+                                                        (campo) => (
+                                                            <small
+                                                                key={`${componente.componenteId}:${campo.campoId}`}
+                                                            >
+                                                                {componente.produtoNome} ·{" "}
+                                                                {campo.nome}:{" "}
+                                                                <strong>
+                                                                    {campo.valor}
+                                                                </strong>
+                                                            </small>
+                                                        ),
+                                                    ),
+                                            )}
+                                        </div>
+                                    ) : null}
+
                                     {!available ? (
                                         <span className="bp-public-cart-item-error">
                                             {authoritative?.motivo ??
@@ -263,7 +346,7 @@ export function CartPageClient() {
                                     <strong>
                                         {money(
                                             authoritative?.preco_unitario ??
-                                                item.precoVisual,
+                                            item.precoVisual,
                                         )}
                                     </strong>
 
@@ -272,8 +355,7 @@ export function CartPageClient() {
                                             type="button"
                                             onClick={() =>
                                                 setQuantity(
-                                                    item.produtoId,
-                                                    item.variacaoId,
+                                                    item.lineKey,
                                                     item.quantidade - 1,
                                                 )
                                             }
@@ -286,8 +368,7 @@ export function CartPageClient() {
                                             type="button"
                                             onClick={() =>
                                                 setQuantity(
-                                                    item.produtoId,
-                                                    item.variacaoId,
+                                                    item.lineKey,
                                                     item.quantidade + 1,
                                                 )
                                             }
@@ -302,8 +383,7 @@ export function CartPageClient() {
                                         className="bp-public-remove-item"
                                         onClick={() =>
                                             removeItem(
-                                                item.produtoId,
-                                                item.variacaoId,
+                                                item.lineKey,
                                             )
                                         }
                                     >
@@ -337,25 +417,26 @@ export function CartPageClient() {
                         </p>
                     ) : null}
 
-                    {!validating &&
-                    !validationError &&
-                    !hasUnavailable &&
-                    validated.length > 0 &&
-                    total > 0 ? (
-                        <Link
-                            href="/checkout"
-                            className="bp-public-primary-link bp-public-checkout-link"
-                        >
-                            Continuar para checkout
-                        </Link>
-                    ) : (
-                        <Button type="button" fullWidth disabled>
-                            Continuar para checkout
-                        </Button>
-                    )}
+                    <Link
+                        href="/checkout"
+                        className="bp-public-primary-link"
+                        aria-disabled={
+                            validating || hasUnavailable
+                        }
+                        onClick={(event) => {
+                            if (
+                                validating ||
+                                hasUnavailable
+                            ) {
+                                event.preventDefault();
+                            }
+                        }}
+                    >
+                        Continuar para checkout
+                    </Link>
 
                     <small>
-                        O valor será conferido novamente pelo servidor antes do pagamento.
+                        O estoque e os preços serão conferidos novamente no checkout antes do pagamento.
                     </small>
                 </aside>
             </div>

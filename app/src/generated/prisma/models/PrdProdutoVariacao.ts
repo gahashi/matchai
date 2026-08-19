@@ -306,6 +306,8 @@ export type PrdProdutoVariacaoWhereInput = {
   deleted_at?: Prisma.DateTimeNullableFilter<"PrdProdutoVariacao"> | Date | string | null
   prd_produto?: Prisma.XOR<Prisma.PrdProdutoScalarRelationFilter, Prisma.PrdProdutoWhereInput>
   vnd_pedido_itens?: Prisma.VndPedidoItemListRelationFilter
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteListRelationFilter
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaListRelationFilter
 }
 
 export type PrdProdutoVariacaoOrderByWithRelationInput = {
@@ -325,6 +327,8 @@ export type PrdProdutoVariacaoOrderByWithRelationInput = {
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   prd_produto?: Prisma.PrdProdutoOrderByWithRelationInput
   vnd_pedido_itens?: Prisma.VndPedidoItemOrderByRelationAggregateInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteOrderByRelationAggregateInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaOrderByRelationAggregateInput
   _relevance?: Prisma.PrdProdutoVariacaoOrderByRelevanceInput
 }
 
@@ -348,6 +352,8 @@ export type PrdProdutoVariacaoWhereUniqueInput = Prisma.AtLeast<{
   deleted_at?: Prisma.DateTimeNullableFilter<"PrdProdutoVariacao"> | Date | string | null
   prd_produto?: Prisma.XOR<Prisma.PrdProdutoScalarRelationFilter, Prisma.PrdProdutoWhereInput>
   vnd_pedido_itens?: Prisma.VndPedidoItemListRelationFilter
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteListRelationFilter
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaListRelationFilter
 }, "id" | "sku">
 
 export type PrdProdutoVariacaoOrderByWithAggregationInput = {
@@ -407,6 +413,8 @@ export type PrdProdutoVariacaoCreateInput = {
   deleted_at?: Date | string | null
   prd_produto: Prisma.PrdProdutoCreateNestedOneWithoutPrd_produto_variacoesInput
   vnd_pedido_itens?: Prisma.VndPedidoItemCreateNestedManyWithoutPrd_produto_variacaoInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteCreateNestedManyWithoutPrd_produto_variacaoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutPrd_produto_variacaoInput
 }
 
 export type PrdProdutoVariacaoUncheckedCreateInput = {
@@ -425,6 +433,8 @@ export type PrdProdutoVariacaoUncheckedCreateInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedCreateNestedManyWithoutPrd_produto_variacaoInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedCreateNestedManyWithoutPrd_produto_variacaoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutPrd_produto_variacaoInput
 }
 
 export type PrdProdutoVariacaoUpdateInput = {
@@ -442,6 +452,8 @@ export type PrdProdutoVariacaoUpdateInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   prd_produto?: Prisma.PrdProdutoUpdateOneRequiredWithoutPrd_produto_variacoesNestedInput
   vnd_pedido_itens?: Prisma.VndPedidoItemUpdateManyWithoutPrd_produto_variacaoNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUpdateManyWithoutPrd_produto_variacaoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutPrd_produto_variacaoNestedInput
 }
 
 export type PrdProdutoVariacaoUncheckedUpdateInput = {
@@ -460,6 +472,8 @@ export type PrdProdutoVariacaoUncheckedUpdateInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedUpdateManyWithoutPrd_produto_variacaoNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedUpdateManyWithoutPrd_produto_variacaoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutPrd_produto_variacaoNestedInput
 }
 
 export type PrdProdutoVariacaoCreateManyInput = {
@@ -657,6 +671,38 @@ export type PrdProdutoVariacaoUpdateOneWithoutVnd_pedido_itensNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PrdProdutoVariacaoUpdateToOneWithWhereWithoutVnd_pedido_itensInput, Prisma.PrdProdutoVariacaoUpdateWithoutVnd_pedido_itensInput>, Prisma.PrdProdutoVariacaoUncheckedUpdateWithoutVnd_pedido_itensInput>
 }
 
+export type PrdProdutoVariacaoCreateNestedOneWithoutVnd_pedido_item_componentesInput = {
+  create?: Prisma.XOR<Prisma.PrdProdutoVariacaoCreateWithoutVnd_pedido_item_componentesInput, Prisma.PrdProdutoVariacaoUncheckedCreateWithoutVnd_pedido_item_componentesInput>
+  connectOrCreate?: Prisma.PrdProdutoVariacaoCreateOrConnectWithoutVnd_pedido_item_componentesInput
+  connect?: Prisma.PrdProdutoVariacaoWhereUniqueInput
+}
+
+export type PrdProdutoVariacaoUpdateOneWithoutVnd_pedido_item_componentesNestedInput = {
+  create?: Prisma.XOR<Prisma.PrdProdutoVariacaoCreateWithoutVnd_pedido_item_componentesInput, Prisma.PrdProdutoVariacaoUncheckedCreateWithoutVnd_pedido_item_componentesInput>
+  connectOrCreate?: Prisma.PrdProdutoVariacaoCreateOrConnectWithoutVnd_pedido_item_componentesInput
+  upsert?: Prisma.PrdProdutoVariacaoUpsertWithoutVnd_pedido_item_componentesInput
+  disconnect?: Prisma.PrdProdutoVariacaoWhereInput | boolean
+  delete?: Prisma.PrdProdutoVariacaoWhereInput | boolean
+  connect?: Prisma.PrdProdutoVariacaoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PrdProdutoVariacaoUpdateToOneWithWhereWithoutVnd_pedido_item_componentesInput, Prisma.PrdProdutoVariacaoUpdateWithoutVnd_pedido_item_componentesInput>, Prisma.PrdProdutoVariacaoUncheckedUpdateWithoutVnd_pedido_item_componentesInput>
+}
+
+export type PrdProdutoVariacaoCreateNestedOneWithoutVnd_estoque_reservasInput = {
+  create?: Prisma.XOR<Prisma.PrdProdutoVariacaoCreateWithoutVnd_estoque_reservasInput, Prisma.PrdProdutoVariacaoUncheckedCreateWithoutVnd_estoque_reservasInput>
+  connectOrCreate?: Prisma.PrdProdutoVariacaoCreateOrConnectWithoutVnd_estoque_reservasInput
+  connect?: Prisma.PrdProdutoVariacaoWhereUniqueInput
+}
+
+export type PrdProdutoVariacaoUpdateOneWithoutVnd_estoque_reservasNestedInput = {
+  create?: Prisma.XOR<Prisma.PrdProdutoVariacaoCreateWithoutVnd_estoque_reservasInput, Prisma.PrdProdutoVariacaoUncheckedCreateWithoutVnd_estoque_reservasInput>
+  connectOrCreate?: Prisma.PrdProdutoVariacaoCreateOrConnectWithoutVnd_estoque_reservasInput
+  upsert?: Prisma.PrdProdutoVariacaoUpsertWithoutVnd_estoque_reservasInput
+  disconnect?: Prisma.PrdProdutoVariacaoWhereInput | boolean
+  delete?: Prisma.PrdProdutoVariacaoWhereInput | boolean
+  connect?: Prisma.PrdProdutoVariacaoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PrdProdutoVariacaoUpdateToOneWithWhereWithoutVnd_estoque_reservasInput, Prisma.PrdProdutoVariacaoUpdateWithoutVnd_estoque_reservasInput>, Prisma.PrdProdutoVariacaoUncheckedUpdateWithoutVnd_estoque_reservasInput>
+}
+
 export type PrdProdutoVariacaoCreateWithoutPrd_produtoInput = {
   sku?: string | null
   nome: string
@@ -671,6 +717,8 @@ export type PrdProdutoVariacaoCreateWithoutPrd_produtoInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemCreateNestedManyWithoutPrd_produto_variacaoInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteCreateNestedManyWithoutPrd_produto_variacaoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutPrd_produto_variacaoInput
 }
 
 export type PrdProdutoVariacaoUncheckedCreateWithoutPrd_produtoInput = {
@@ -688,6 +736,8 @@ export type PrdProdutoVariacaoUncheckedCreateWithoutPrd_produtoInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedCreateNestedManyWithoutPrd_produto_variacaoInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedCreateNestedManyWithoutPrd_produto_variacaoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutPrd_produto_variacaoInput
 }
 
 export type PrdProdutoVariacaoCreateOrConnectWithoutPrd_produtoInput = {
@@ -750,6 +800,8 @@ export type PrdProdutoVariacaoCreateWithoutVnd_pedido_itensInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   prd_produto: Prisma.PrdProdutoCreateNestedOneWithoutPrd_produto_variacoesInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteCreateNestedManyWithoutPrd_produto_variacaoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutPrd_produto_variacaoInput
 }
 
 export type PrdProdutoVariacaoUncheckedCreateWithoutVnd_pedido_itensInput = {
@@ -767,6 +819,8 @@ export type PrdProdutoVariacaoUncheckedCreateWithoutVnd_pedido_itensInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedCreateNestedManyWithoutPrd_produto_variacaoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutPrd_produto_variacaoInput
 }
 
 export type PrdProdutoVariacaoCreateOrConnectWithoutVnd_pedido_itensInput = {
@@ -799,6 +853,8 @@ export type PrdProdutoVariacaoUpdateWithoutVnd_pedido_itensInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   prd_produto?: Prisma.PrdProdutoUpdateOneRequiredWithoutPrd_produto_variacoesNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUpdateManyWithoutPrd_produto_variacaoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutPrd_produto_variacaoNestedInput
 }
 
 export type PrdProdutoVariacaoUncheckedUpdateWithoutVnd_pedido_itensInput = {
@@ -816,6 +872,188 @@ export type PrdProdutoVariacaoUncheckedUpdateWithoutVnd_pedido_itensInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedUpdateManyWithoutPrd_produto_variacaoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutPrd_produto_variacaoNestedInput
+}
+
+export type PrdProdutoVariacaoCreateWithoutVnd_pedido_item_componentesInput = {
+  sku?: string | null
+  nome: string
+  atributo_1?: string | null
+  valor_1?: string | null
+  atributo_2?: string | null
+  valor_2?: string | null
+  ordem?: number
+  estoque_atual?: number | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  prd_produto: Prisma.PrdProdutoCreateNestedOneWithoutPrd_produto_variacoesInput
+  vnd_pedido_itens?: Prisma.VndPedidoItemCreateNestedManyWithoutPrd_produto_variacaoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutPrd_produto_variacaoInput
+}
+
+export type PrdProdutoVariacaoUncheckedCreateWithoutVnd_pedido_item_componentesInput = {
+  id?: number
+  prd_produto_id: number
+  sku?: string | null
+  nome: string
+  atributo_1?: string | null
+  valor_1?: string | null
+  atributo_2?: string | null
+  valor_2?: string | null
+  ordem?: number
+  estoque_atual?: number | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedCreateNestedManyWithoutPrd_produto_variacaoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutPrd_produto_variacaoInput
+}
+
+export type PrdProdutoVariacaoCreateOrConnectWithoutVnd_pedido_item_componentesInput = {
+  where: Prisma.PrdProdutoVariacaoWhereUniqueInput
+  create: Prisma.XOR<Prisma.PrdProdutoVariacaoCreateWithoutVnd_pedido_item_componentesInput, Prisma.PrdProdutoVariacaoUncheckedCreateWithoutVnd_pedido_item_componentesInput>
+}
+
+export type PrdProdutoVariacaoUpsertWithoutVnd_pedido_item_componentesInput = {
+  update: Prisma.XOR<Prisma.PrdProdutoVariacaoUpdateWithoutVnd_pedido_item_componentesInput, Prisma.PrdProdutoVariacaoUncheckedUpdateWithoutVnd_pedido_item_componentesInput>
+  create: Prisma.XOR<Prisma.PrdProdutoVariacaoCreateWithoutVnd_pedido_item_componentesInput, Prisma.PrdProdutoVariacaoUncheckedCreateWithoutVnd_pedido_item_componentesInput>
+  where?: Prisma.PrdProdutoVariacaoWhereInput
+}
+
+export type PrdProdutoVariacaoUpdateToOneWithWhereWithoutVnd_pedido_item_componentesInput = {
+  where?: Prisma.PrdProdutoVariacaoWhereInput
+  data: Prisma.XOR<Prisma.PrdProdutoVariacaoUpdateWithoutVnd_pedido_item_componentesInput, Prisma.PrdProdutoVariacaoUncheckedUpdateWithoutVnd_pedido_item_componentesInput>
+}
+
+export type PrdProdutoVariacaoUpdateWithoutVnd_pedido_item_componentesInput = {
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  atributo_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  atributo_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  prd_produto?: Prisma.PrdProdutoUpdateOneRequiredWithoutPrd_produto_variacoesNestedInput
+  vnd_pedido_itens?: Prisma.VndPedidoItemUpdateManyWithoutPrd_produto_variacaoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutPrd_produto_variacaoNestedInput
+}
+
+export type PrdProdutoVariacaoUncheckedUpdateWithoutVnd_pedido_item_componentesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  prd_produto_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  atributo_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  atributo_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedUpdateManyWithoutPrd_produto_variacaoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutPrd_produto_variacaoNestedInput
+}
+
+export type PrdProdutoVariacaoCreateWithoutVnd_estoque_reservasInput = {
+  sku?: string | null
+  nome: string
+  atributo_1?: string | null
+  valor_1?: string | null
+  atributo_2?: string | null
+  valor_2?: string | null
+  ordem?: number
+  estoque_atual?: number | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  prd_produto: Prisma.PrdProdutoCreateNestedOneWithoutPrd_produto_variacoesInput
+  vnd_pedido_itens?: Prisma.VndPedidoItemCreateNestedManyWithoutPrd_produto_variacaoInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteCreateNestedManyWithoutPrd_produto_variacaoInput
+}
+
+export type PrdProdutoVariacaoUncheckedCreateWithoutVnd_estoque_reservasInput = {
+  id?: number
+  prd_produto_id: number
+  sku?: string | null
+  nome: string
+  atributo_1?: string | null
+  valor_1?: string | null
+  atributo_2?: string | null
+  valor_2?: string | null
+  ordem?: number
+  estoque_atual?: number | null
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedCreateNestedManyWithoutPrd_produto_variacaoInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedCreateNestedManyWithoutPrd_produto_variacaoInput
+}
+
+export type PrdProdutoVariacaoCreateOrConnectWithoutVnd_estoque_reservasInput = {
+  where: Prisma.PrdProdutoVariacaoWhereUniqueInput
+  create: Prisma.XOR<Prisma.PrdProdutoVariacaoCreateWithoutVnd_estoque_reservasInput, Prisma.PrdProdutoVariacaoUncheckedCreateWithoutVnd_estoque_reservasInput>
+}
+
+export type PrdProdutoVariacaoUpsertWithoutVnd_estoque_reservasInput = {
+  update: Prisma.XOR<Prisma.PrdProdutoVariacaoUpdateWithoutVnd_estoque_reservasInput, Prisma.PrdProdutoVariacaoUncheckedUpdateWithoutVnd_estoque_reservasInput>
+  create: Prisma.XOR<Prisma.PrdProdutoVariacaoCreateWithoutVnd_estoque_reservasInput, Prisma.PrdProdutoVariacaoUncheckedCreateWithoutVnd_estoque_reservasInput>
+  where?: Prisma.PrdProdutoVariacaoWhereInput
+}
+
+export type PrdProdutoVariacaoUpdateToOneWithWhereWithoutVnd_estoque_reservasInput = {
+  where?: Prisma.PrdProdutoVariacaoWhereInput
+  data: Prisma.XOR<Prisma.PrdProdutoVariacaoUpdateWithoutVnd_estoque_reservasInput, Prisma.PrdProdutoVariacaoUncheckedUpdateWithoutVnd_estoque_reservasInput>
+}
+
+export type PrdProdutoVariacaoUpdateWithoutVnd_estoque_reservasInput = {
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  atributo_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  atributo_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  prd_produto?: Prisma.PrdProdutoUpdateOneRequiredWithoutPrd_produto_variacoesNestedInput
+  vnd_pedido_itens?: Prisma.VndPedidoItemUpdateManyWithoutPrd_produto_variacaoNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUpdateManyWithoutPrd_produto_variacaoNestedInput
+}
+
+export type PrdProdutoVariacaoUncheckedUpdateWithoutVnd_estoque_reservasInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  prd_produto_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  atributo_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  atributo_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedUpdateManyWithoutPrd_produto_variacaoNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedUpdateManyWithoutPrd_produto_variacaoNestedInput
 }
 
 export type PrdProdutoVariacaoCreateManyPrd_produtoInput = {
@@ -848,6 +1086,8 @@ export type PrdProdutoVariacaoUpdateWithoutPrd_produtoInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUpdateManyWithoutPrd_produto_variacaoNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUpdateManyWithoutPrd_produto_variacaoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutPrd_produto_variacaoNestedInput
 }
 
 export type PrdProdutoVariacaoUncheckedUpdateWithoutPrd_produtoInput = {
@@ -865,6 +1105,8 @@ export type PrdProdutoVariacaoUncheckedUpdateWithoutPrd_produtoInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedUpdateManyWithoutPrd_produto_variacaoNestedInput
+  vnd_pedido_item_componentes?: Prisma.VndPedidoItemComponenteUncheckedUpdateManyWithoutPrd_produto_variacaoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutPrd_produto_variacaoNestedInput
 }
 
 export type PrdProdutoVariacaoUncheckedUpdateManyWithoutPrd_produtoInput = {
@@ -890,10 +1132,14 @@ export type PrdProdutoVariacaoUncheckedUpdateManyWithoutPrd_produtoInput = {
 
 export type PrdProdutoVariacaoCountOutputType = {
   vnd_pedido_itens: number
+  vnd_pedido_item_componentes: number
+  vnd_estoque_reservas: number
 }
 
 export type PrdProdutoVariacaoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vnd_pedido_itens?: boolean | PrdProdutoVariacaoCountOutputTypeCountVnd_pedido_itensArgs
+  vnd_pedido_item_componentes?: boolean | PrdProdutoVariacaoCountOutputTypeCountVnd_pedido_item_componentesArgs
+  vnd_estoque_reservas?: boolean | PrdProdutoVariacaoCountOutputTypeCountVnd_estoque_reservasArgs
 }
 
 /**
@@ -911,6 +1157,20 @@ export type PrdProdutoVariacaoCountOutputTypeDefaultArgs<ExtArgs extends runtime
  */
 export type PrdProdutoVariacaoCountOutputTypeCountVnd_pedido_itensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.VndPedidoItemWhereInput
+}
+
+/**
+ * PrdProdutoVariacaoCountOutputType without action
+ */
+export type PrdProdutoVariacaoCountOutputTypeCountVnd_pedido_item_componentesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VndPedidoItemComponenteWhereInput
+}
+
+/**
+ * PrdProdutoVariacaoCountOutputType without action
+ */
+export type PrdProdutoVariacaoCountOutputTypeCountVnd_estoque_reservasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VndEstoqueReservaWhereInput
 }
 
 
@@ -931,6 +1191,8 @@ export type PrdProdutoVariacaoSelect<ExtArgs extends runtime.Types.Extensions.In
   deleted_at?: boolean
   prd_produto?: boolean | Prisma.PrdProdutoDefaultArgs<ExtArgs>
   vnd_pedido_itens?: boolean | Prisma.PrdProdutoVariacao$vnd_pedido_itensArgs<ExtArgs>
+  vnd_pedido_item_componentes?: boolean | Prisma.PrdProdutoVariacao$vnd_pedido_item_componentesArgs<ExtArgs>
+  vnd_estoque_reservas?: boolean | Prisma.PrdProdutoVariacao$vnd_estoque_reservasArgs<ExtArgs>
   _count?: boolean | Prisma.PrdProdutoVariacaoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["prdProdutoVariacao"]>
 
@@ -957,6 +1219,8 @@ export type PrdProdutoVariacaoOmit<ExtArgs extends runtime.Types.Extensions.Inte
 export type PrdProdutoVariacaoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   prd_produto?: boolean | Prisma.PrdProdutoDefaultArgs<ExtArgs>
   vnd_pedido_itens?: boolean | Prisma.PrdProdutoVariacao$vnd_pedido_itensArgs<ExtArgs>
+  vnd_pedido_item_componentes?: boolean | Prisma.PrdProdutoVariacao$vnd_pedido_item_componentesArgs<ExtArgs>
+  vnd_estoque_reservas?: boolean | Prisma.PrdProdutoVariacao$vnd_estoque_reservasArgs<ExtArgs>
   _count?: boolean | Prisma.PrdProdutoVariacaoCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -965,6 +1229,8 @@ export type $PrdProdutoVariacaoPayload<ExtArgs extends runtime.Types.Extensions.
   objects: {
     prd_produto: Prisma.$PrdProdutoPayload<ExtArgs>
     vnd_pedido_itens: Prisma.$VndPedidoItemPayload<ExtArgs>[]
+    vnd_pedido_item_componentes: Prisma.$VndPedidoItemComponentePayload<ExtArgs>[]
+    vnd_estoque_reservas: Prisma.$VndEstoqueReservaPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1323,6 +1589,8 @@ export interface Prisma__PrdProdutoVariacaoClient<T, Null = never, ExtArgs exten
   readonly [Symbol.toStringTag]: "PrismaPromise"
   prd_produto<T extends Prisma.PrdProdutoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PrdProdutoDefaultArgs<ExtArgs>>): Prisma.Prisma__PrdProdutoClient<runtime.Types.Result.GetResult<Prisma.$PrdProdutoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vnd_pedido_itens<T extends Prisma.PrdProdutoVariacao$vnd_pedido_itensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PrdProdutoVariacao$vnd_pedido_itensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VndPedidoItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vnd_pedido_item_componentes<T extends Prisma.PrdProdutoVariacao$vnd_pedido_item_componentesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PrdProdutoVariacao$vnd_pedido_item_componentesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VndPedidoItemComponentePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vnd_estoque_reservas<T extends Prisma.PrdProdutoVariacao$vnd_estoque_reservasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PrdProdutoVariacao$vnd_estoque_reservasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VndEstoqueReservaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1735,6 +2003,54 @@ export type PrdProdutoVariacao$vnd_pedido_itensArgs<ExtArgs extends runtime.Type
   take?: number
   skip?: number
   distinct?: Prisma.VndPedidoItemScalarFieldEnum | Prisma.VndPedidoItemScalarFieldEnum[]
+}
+
+/**
+ * PrdProdutoVariacao.vnd_pedido_item_componentes
+ */
+export type PrdProdutoVariacao$vnd_pedido_item_componentesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VndPedidoItemComponente
+   */
+  select?: Prisma.VndPedidoItemComponenteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VndPedidoItemComponente
+   */
+  omit?: Prisma.VndPedidoItemComponenteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VndPedidoItemComponenteInclude<ExtArgs> | null
+  where?: Prisma.VndPedidoItemComponenteWhereInput
+  orderBy?: Prisma.VndPedidoItemComponenteOrderByWithRelationInput | Prisma.VndPedidoItemComponenteOrderByWithRelationInput[]
+  cursor?: Prisma.VndPedidoItemComponenteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VndPedidoItemComponenteScalarFieldEnum | Prisma.VndPedidoItemComponenteScalarFieldEnum[]
+}
+
+/**
+ * PrdProdutoVariacao.vnd_estoque_reservas
+ */
+export type PrdProdutoVariacao$vnd_estoque_reservasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VndEstoqueReserva
+   */
+  select?: Prisma.VndEstoqueReservaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VndEstoqueReserva
+   */
+  omit?: Prisma.VndEstoqueReservaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VndEstoqueReservaInclude<ExtArgs> | null
+  where?: Prisma.VndEstoqueReservaWhereInput
+  orderBy?: Prisma.VndEstoqueReservaOrderByWithRelationInput | Prisma.VndEstoqueReservaOrderByWithRelationInput[]
+  cursor?: Prisma.VndEstoqueReservaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VndEstoqueReservaScalarFieldEnum | Prisma.VndEstoqueReservaScalarFieldEnum[]
 }
 
 /**

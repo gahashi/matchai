@@ -66,6 +66,39 @@ type ProdutoVariacao = {
     ativo: number;
 };
 
+type ProdutoCampo = {
+    id: number;
+    codigo: string;
+    nome: string;
+    descricao: string | null;
+    tipo: "texto" | "numero";
+    obrigatorio: number;
+    valor_unico: number;
+    ordem: number;
+    ativo: number;
+};
+
+type ProdutoComponente = {
+    id: number;
+    prd_produto_componente_id: number;
+    quantidade: number;
+    ordem: number;
+    ativo: number;
+    produto: {
+        id: number;
+        codigo: string;
+        nome: string;
+        ativo: number;
+        controla_estoque: number;
+        estoque_atual: number | null;
+        variacoes: Array<{
+            id: number;
+            nome: string;
+            estoque_atual: number | null;
+        }>;
+    };
+};
+
 type Produto = {
     id: number;
     prd_produto_tipo_id: number;
@@ -94,6 +127,9 @@ type Produto = {
     imagens: ProdutoImagem[];
     imagem_principal: ProdutoImagem | null;
     variacoes: ProdutoVariacao[];
+    campos: ProdutoCampo[];
+    componentes: ProdutoComponente[];
+    eh_kit: boolean;
 
     status:
         | "ativo"
@@ -140,6 +176,24 @@ type VariacaoForm = {
     atributo_2: string;
     valor_2: string;
     estoque_atual: string;
+    ativo: boolean;
+};
+
+type ComponenteForm = {
+    clientKey: string;
+    produtoId: string;
+    quantidade: string;
+};
+
+type CampoForm = {
+    clientKey: string;
+    id?: number;
+    codigo: string;
+    nome: string;
+    descricao: string;
+    tipo: "texto" | "numero";
+    obrigatorio: boolean;
+    valorUnico: boolean;
     ativo: boolean;
 };
 
@@ -286,6 +340,34 @@ function produtoVariacoesToForm(
     }));
 }
 
+function produtoComponentesToForm(
+    componentes: ProdutoComponente[],
+): ComponenteForm[] {
+    return componentes
+        .filter((componente) => Boolean(componente.ativo))
+        .map((componente) => ({
+            clientKey: createClientKey("componente"),
+            produtoId: String(componente.prd_produto_componente_id),
+            quantidade: String(componente.quantidade),
+        }));
+}
+
+function produtoCamposToForm(
+    campos: ProdutoCampo[],
+): CampoForm[] {
+    return campos.map((campo) => ({
+        clientKey: createClientKey("campo"),
+        id: campo.id,
+        codigo: campo.codigo,
+        nome: campo.nome,
+        descricao: campo.descricao ?? "",
+        tipo: campo.tipo,
+        obrigatorio: Boolean(campo.obrigatorio),
+        valorUnico: Boolean(campo.valor_unico),
+        ativo: Boolean(campo.ativo),
+    }));
+}
+
 export default function AdminProdutosClient({
                                                 initialData,
                                             }: AdminProdutosClientProps) {
@@ -309,6 +391,10 @@ export default function AdminProdutosClient({
 
     const [variacoes, setVariacoes] =
         useState<VariacaoForm[]>([]);
+    const [componentes, setComponentes] =
+        useState<ComponenteForm[]>([]);
+    const [campos, setCampos] =
+        useState<CampoForm[]>([]);
     const [salvando, setSalvando] = useState(false);
     const [snackbar, setSnackbar] =
         useState<SnackbarState | null>(null);
@@ -332,6 +418,23 @@ export default function AdminProdutosClient({
             })),
         [data.tipos],
     );
+
+    const produtosComponenteOptions = useMemo(
+        () =>
+            data.produtos
+                .filter(
+                    (produto) =>
+                        produto.id !== editingProduto?.id &&
+                        Boolean(produto.ativo),
+                )
+                .map((produto) => ({
+                    value: produto.id,
+                    label: `${produto.nome} · ${produto.codigo}`,
+                })),
+        [data.produtos, editingProduto?.id],
+    );
+
+    const ehKit = componentes.length > 0;
 
     const imagensExistentesVisiveis = useMemo(
         () =>
@@ -376,6 +479,8 @@ export default function AdminProdutosClient({
         resetImagens();
         setEditingProduto(null);
         setVariacoes([]);
+        setComponentes([]);
+        setCampos([]);
         setCodigoManual(false);
         setForm({
             ...emptyForm,
@@ -392,6 +497,12 @@ export default function AdminProdutosClient({
         setEditingProduto(produto);
         setVariacoes(
             produtoVariacoesToForm(produto.variacoes ?? []),
+        );
+        setComponentes(
+            produtoComponentesToForm(produto.componentes ?? []),
+        );
+        setCampos(
+            produtoCamposToForm(produto.campos ?? []),
         );
         setCodigoManual(true);
         setForm(produtoToForm(produto));
@@ -413,6 +524,8 @@ export default function AdminProdutosClient({
         setModalOpen(false);
         setEditingProduto(null);
         setVariacoes([]);
+        setComponentes([]);
+        setCampos([]);
         setForm(emptyForm);
         setCodigoManual(false);
     }
@@ -602,6 +715,88 @@ export default function AdminProdutosClient({
         );
     }
 
+    function adicionarComponente() {
+        setComponentes((current) => [
+            ...current,
+            {
+                clientKey: createClientKey("componente"),
+                produtoId: "",
+                quantidade: "1",
+            },
+        ]);
+
+        if (form.controla_estoque) {
+            updateForm("controla_estoque", false);
+        }
+    }
+
+    function updateComponente(
+        clientKey: string,
+        field: "produtoId" | "quantidade",
+        value: string,
+    ) {
+        setComponentes((current) =>
+            current.map((componente) =>
+                componente.clientKey === clientKey
+                    ? {
+                        ...componente,
+                        [field]: value,
+                    }
+                    : componente,
+            ),
+        );
+    }
+
+    function removerComponente(clientKey: string) {
+        setComponentes((current) =>
+            current.filter(
+                (componente) =>
+                    componente.clientKey !== clientKey,
+            ),
+        );
+    }
+
+    function adicionarCampo() {
+        setCampos((current) => [
+            ...current,
+            {
+                clientKey: createClientKey("campo"),
+                codigo: "",
+                nome: "",
+                descricao: "",
+                tipo: "texto",
+                obrigatorio: false,
+                valorUnico: false,
+                ativo: true,
+            },
+        ]);
+    }
+
+    function updateCampo(
+        clientKey: string,
+        field: keyof Omit<CampoForm, "clientKey" | "id">,
+        value: string | boolean,
+    ) {
+        setCampos((current) =>
+            current.map((campo) =>
+                campo.clientKey === clientKey
+                    ? {
+                        ...campo,
+                        [field]: value,
+                    }
+                    : campo,
+            ),
+        );
+    }
+
+    function removerCampo(clientKey: string) {
+        setCampos((current) =>
+            current.filter(
+                (campo) => campo.clientKey !== clientKey,
+            ),
+        );
+    }
+
     function buildPrincipalRef() {
         if (!principalImageKey) return "";
 
@@ -632,11 +827,13 @@ export default function AdminProdutosClient({
         payload.set("preco_socio", form.preco_socio);
         payload.set(
             "controla_estoque",
-            form.controla_estoque ? "1" : "0",
+            !ehKit && form.controla_estoque ? "1" : "0",
         );
         payload.set(
             "estoque_atual",
-            variacoes.length > 0 ? "" : form.estoque_atual,
+            ehKit || variacoes.length > 0
+                ? ""
+                : form.estoque_atual,
         );
         payload.set("ativo", form.ativo ? "1" : "0");
         payload.set(
@@ -685,6 +882,36 @@ export default function AdminProdutosClient({
         );
 
         payload.set(
+            "componentes",
+            JSON.stringify(
+                componentes.map((componente) => ({
+                    prd_produto_componente_id: Number(
+                        componente.produtoId,
+                    ),
+                    quantidade: Number(
+                        componente.quantidade,
+                    ),
+                })),
+            ),
+        );
+
+        payload.set(
+            "campos",
+            JSON.stringify(
+                campos.map((campo) => ({
+                    id: campo.id,
+                    codigo: campo.codigo,
+                    nome: campo.nome,
+                    descricao: campo.descricao || null,
+                    tipo: campo.tipo,
+                    obrigatorio: campo.obrigatorio,
+                    valor_unico: campo.valorUnico,
+                    ativo: campo.ativo,
+                })),
+            ),
+        );
+
+        payload.set(
             "remover_imagem_ids",
             JSON.stringify(imagemIdsRemover),
         );
@@ -725,6 +952,63 @@ export default function AdminProdutosClient({
                 title: "Variação incompleta",
                 message:
                     "Informe um nome para todas as variações.",
+            });
+            return;
+        }
+
+        if (componentes.length > 0 && variacoes.length > 0) {
+            setSnackbar({
+                color: "warning",
+                title: "Kit com variação própria",
+                message:
+                    "Um kit não deve possuir variações próprias. As opções são escolhidas nas variações dos produtos que compõem o kit.",
+            });
+            return;
+        }
+
+        if (
+            componentes.some(
+                (componente) =>
+                    !componente.produtoId ||
+                    !Number.isInteger(Number(componente.quantidade)) ||
+                    Number(componente.quantidade) <= 0,
+            )
+        ) {
+            setSnackbar({
+                color: "warning",
+                title: "Componente incompleto",
+                message:
+                    "Selecione o produto e informe uma quantidade válida para todos os componentes do kit.",
+            });
+            return;
+        }
+
+        if (
+            new Set(
+                componentes.map((componente) => componente.produtoId),
+            ).size !== componentes.length
+        ) {
+            setSnackbar({
+                color: "warning",
+                title: "Componente repetido",
+                message:
+                    "O mesmo produto não pode aparecer duas vezes no kit.",
+            });
+            return;
+        }
+
+        if (
+            campos.some(
+                (campo) =>
+                    campo.nome.trim().length < 2 ||
+                    campo.codigo.trim().length === 0,
+            )
+        ) {
+            setSnackbar({
+                color: "warning",
+                title: "Campo personalizado incompleto",
+                message:
+                    "Informe nome e código para todos os campos personalizados.",
             });
             return;
         }
@@ -778,6 +1062,8 @@ export default function AdminProdutosClient({
             setModalOpen(false);
             setEditingProduto(null);
             setVariacoes([]);
+            setComponentes([]);
+            setCampos([]);
             setForm(emptyForm);
             setCodigoManual(false);
 
@@ -1088,12 +1374,13 @@ export default function AdminProdutosClient({
                                                 </strong>
                                                 <div className="bp-product-table-meta">
                                                     {produto.codigo}
-                                                    {produto
-                                                        .variacoes
-                                                        .length >
-                                                    0
-                                                        ? ` · ${produto.variacoes.length} variação(ões)`
-                                                        : ""}
+                                                    {produto.eh_kit
+                                                        ? ` · Kit com ${produto.componentes.length} item(ns)`
+                                                        : produto
+                                                            .variacoes
+                                                            .length > 0
+                                                            ? ` · ${produto.variacoes.length} variação(ões)`
+                                                            : ""}
                                                 </div>
                                             </div>
                                         </div>
@@ -1127,13 +1414,15 @@ export default function AdminProdutosClient({
                                     </td>
 
                                     <td>
-                                        {produto.variacoes.length >
-                                        0
-                                            ? "Por variação"
-                                            : produto.controla_estoque
-                                                ? produto.estoque_atual ??
-                                                0
-                                                : "Livre"}
+                                        {produto.eh_kit
+                                            ? "Por componentes"
+                                            : produto.variacoes.length >
+                                            0
+                                                ? "Por variação"
+                                                : produto.controla_estoque
+                                                    ? produto.estoque_atual ??
+                                                    0
+                                                    : "Livre"}
                                     </td>
 
                                     <td>
@@ -1320,16 +1609,18 @@ export default function AdminProdutosClient({
                                         <div>
                                             <span>Estoque</span>
                                             <strong>
-                                                {produto
-                                                    .variacoes
-                                                    .length > 0
-                                                    ? "Por variação"
-                                                    : produto.controla_estoque
-                                                        ? String(
-                                                            produto.estoque_atual ??
-                                                            0,
-                                                        )
-                                                        : "Livre"}
+                                                {produto.eh_kit
+                                                    ? "Por componentes"
+                                                    : produto
+                                                        .variacoes
+                                                        .length > 0
+                                                        ? "Por variação"
+                                                        : produto.controla_estoque
+                                                            ? String(
+                                                                produto.estoque_atual ??
+                                                                0,
+                                                            )
+                                                            : "Livre"}
                                             </strong>
                                         </div>
 
@@ -1524,8 +1815,8 @@ export default function AdminProdutosClient({
                 }
                 description={
                     editingProduto
-                        ? "Atualize as informações, imagens e variações do produto."
-                        : "Cadastre o produto e, se necessário, suas imagens e variações."
+                        ? "Atualize as informações, imagens, variações, kit e personalização do produto."
+                        : "Cadastre o produto e configure, quando necessário, variações, kit e personalização."
                 }
                 onCloseAction={fecharModal}
                 footer={
@@ -2160,6 +2451,359 @@ export default function AdminProdutosClient({
 
                     <section className="bp-product-section">
                         <div className="bp-product-section-header">
+                            <div>
+                                <h3 className="bp-product-section-title">
+                                    Composição do kit
+                                </h3>
+                                <span className="bp-field-help">
+                                    Adicione produtos quando este cadastro representar um pacote. Se um componente possuir variações, como tamanho de camiseta, o cliente escolherá a variação desse componente na compra.
+                                </span>
+                            </div>
+
+                            <Button
+                                type="button"
+                                color="secondary"
+                                variant="soft"
+                                size="sm"
+                                onClick={adicionarComponente}
+                            >
+                                <Plus size={15} />
+                                Adicionar produto
+                            </Button>
+                        </div>
+
+                        {componentes.length === 0 ? (
+                            <div className="bp-field-help">
+                                Este produto não é um kit.
+                            </div>
+                        ) : (
+                            <div className="bp-product-variation-list">
+                                {componentes.map(
+                                    (componente, index) => {
+                                        const produtoSelecionado =
+                                            data.produtos.find(
+                                                (produto) =>
+                                                    produto.id ===
+                                                    Number(
+                                                        componente.produtoId,
+                                                    ),
+                                            );
+
+                                        return (
+                                            <div
+                                                key={
+                                                    componente.clientKey
+                                                }
+                                                className="bp-product-variation"
+                                            >
+                                                <div className="bp-product-section-header">
+                                                    <strong>
+                                                        Componente{" "}
+                                                        {index + 1}
+                                                    </strong>
+
+                                                    <Button
+                                                        type="button"
+                                                        color="danger"
+                                                        variant="ghost"
+                                                        size="sm"
+                                                        onClick={() =>
+                                                            removerComponente(
+                                                                componente.clientKey,
+                                                            )
+                                                        }
+                                                    >
+                                                        <Trash2
+                                                            size={15}
+                                                        />
+                                                        Remover
+                                                    </Button>
+                                                </div>
+
+                                                <div className="bp-product-grid">
+                                                    <SelectMenu
+                                                        label="Produto"
+                                                        value={
+                                                            componente.produtoId
+                                                        }
+                                                        onChange={(
+                                                            value,
+                                                        ) =>
+                                                            updateComponente(
+                                                                componente.clientKey,
+                                                                "produtoId",
+                                                                String(
+                                                                    value,
+                                                                ),
+                                                            )
+                                                        }
+                                                        options={
+                                                            produtosComponenteOptions
+                                                        }
+                                                        placeholder="Selecione um produto"
+                                                    />
+
+                                                    <Input
+                                                        label="Quantidade no kit"
+                                                        type="number"
+                                                        min="1"
+                                                        step="1"
+                                                        value={
+                                                            componente.quantidade
+                                                        }
+                                                        onChange={(
+                                                            event,
+                                                        ) =>
+                                                            updateComponente(
+                                                                componente.clientKey,
+                                                                "quantidade",
+                                                                event
+                                                                    .target
+                                                                    .value,
+                                                            )
+                                                        }
+                                                        required
+                                                    />
+                                                </div>
+
+                                                {produtoSelecionado ? (
+                                                    <div className="bp-field-help">
+                                                        {produtoSelecionado
+                                                            .variacoes
+                                                            .length >
+                                                        0
+                                                            ? `${produtoSelecionado.nome} possui ${produtoSelecionado.variacoes.length} variação(ões). A escolha será feita pelo cliente dentro do kit.`
+                                                            : `${produtoSelecionado.nome} não possui variações.`}
+                                                    </div>
+                                                ) : null}
+                                            </div>
+                                        );
+                                    },
+                                )}
+                            </div>
+                        )}
+
+                        {ehKit ? (
+                            <div
+                                className="bp-field-help"
+                                style={{ marginTop: 12 }}
+                            >
+                                Kits não possuem estoque próprio. A disponibilidade será calculada pelo estoque dos componentes selecionados.
+                            </div>
+                        ) : null}
+                    </section>
+
+                    <section className="bp-product-section">
+                        <div className="bp-product-section-header">
+                            <div>
+                                <h3 className="bp-product-section-title">
+                                    Campos de personalização
+                                </h3>
+                                <span className="bp-field-help">
+                                    Use para dados que o cliente precisa informar na compra, como nome nas costas ou número da camiseta.
+                                </span>
+                            </div>
+
+                            <Button
+                                type="button"
+                                color="secondary"
+                                variant="soft"
+                                size="sm"
+                                onClick={adicionarCampo}
+                            >
+                                <Plus size={15} />
+                                Adicionar campo
+                            </Button>
+                        </div>
+
+                        {campos.length === 0 ? (
+                            <div className="bp-field-help">
+                                Nenhuma personalização configurada.
+                            </div>
+                        ) : (
+                            <div className="bp-product-variation-list">
+                                {campos.map((campo, index) => (
+                                    <div
+                                        key={campo.clientKey}
+                                        className="bp-product-variation"
+                                    >
+                                        <div className="bp-product-section-header">
+                                            <strong>
+                                                Campo {index + 1}
+                                            </strong>
+
+                                            <Button
+                                                type="button"
+                                                color="danger"
+                                                variant="ghost"
+                                                size="sm"
+                                                onClick={() =>
+                                                    removerCampo(
+                                                        campo.clientKey,
+                                                    )
+                                                }
+                                            >
+                                                <Trash2 size={15} />
+                                                Remover
+                                            </Button>
+                                        </div>
+
+                                        <div className="bp-product-grid">
+                                            <Input
+                                                label="Nome"
+                                                value={campo.nome}
+                                                onChange={(event) =>
+                                                    updateCampo(
+                                                        campo.clientKey,
+                                                        "nome",
+                                                        event.target
+                                                            .value,
+                                                    )
+                                                }
+                                                placeholder="Ex.: Nome nas costas"
+                                                required
+                                            />
+
+                                            <Input
+                                                label="Código"
+                                                value={campo.codigo}
+                                                onChange={(event) =>
+                                                    updateCampo(
+                                                        campo.clientKey,
+                                                        "codigo",
+                                                        event.target.value
+                                                            .toLowerCase()
+                                                            .replace(
+                                                                /\s+/g,
+                                                                "_",
+                                                            )
+                                                            .slice(
+                                                                0,
+                                                                60,
+                                                            ),
+                                                    )
+                                                }
+                                                placeholder="nome_costas"
+                                                helperText="Identificador interno do campo."
+                                                required
+                                            />
+
+                                            <SelectMenu
+                                                label="Tipo"
+                                                value={campo.tipo}
+                                                onChange={(value) =>
+                                                    updateCampo(
+                                                        campo.clientKey,
+                                                        "tipo",
+                                                        String(
+                                                            value,
+                                                        ) ===
+                                                        "numero"
+                                                            ? "numero"
+                                                            : "texto",
+                                                    )
+                                                }
+                                                options={[
+                                                    {
+                                                        value: "texto",
+                                                        label: "Texto",
+                                                    },
+                                                    {
+                                                        value: "numero",
+                                                        label: "Número",
+                                                    },
+                                                ]}
+                                            />
+                                        </div>
+
+                                        <Textarea
+                                            label="Descrição"
+                                            value={campo.descricao}
+                                            onChange={(event) =>
+                                                updateCampo(
+                                                    campo.clientKey,
+                                                    "descricao",
+                                                    event.target.value,
+                                                )
+                                            }
+                                            rows={2}
+                                            placeholder="Orientação opcional para o cliente."
+                                        />
+
+                                        <div className="bp-product-switches">
+                                            <label className="bp-check">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={
+                                                        campo.obrigatorio
+                                                    }
+                                                    onChange={(
+                                                        event,
+                                                    ) =>
+                                                        updateCampo(
+                                                            campo.clientKey,
+                                                            "obrigatorio",
+                                                            event.target
+                                                                .checked,
+                                                        )
+                                                    }
+                                                />
+                                                Campo obrigatório
+                                            </label>
+
+                                            <label className="bp-check">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={
+                                                        campo.valorUnico
+                                                    }
+                                                    onChange={(
+                                                        event,
+                                                    ) =>
+                                                        updateCampo(
+                                                            campo.clientKey,
+                                                            "valorUnico",
+                                                            event.target
+                                                                .checked,
+                                                        )
+                                                    }
+                                                />
+                                                <span>
+                                                    Valor único
+                                                    <span className="bp-field-help">
+                                                        Impede repetir o mesmo valor dentro do contexto de venda. Ex.: número da jersey.
+                                                    </span>
+                                                </span>
+                                            </label>
+
+                                            <label className="bp-check">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={
+                                                        campo.ativo
+                                                    }
+                                                    onChange={(
+                                                        event,
+                                                    ) =>
+                                                        updateCampo(
+                                                            campo.clientKey,
+                                                            "ativo",
+                                                            event.target
+                                                                .checked,
+                                                        )
+                                                    }
+                                                />
+                                                Campo ativo
+                                            </label>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </section>
+
+                    <section className="bp-product-section">
+                        <div className="bp-product-section-header">
                             <h3 className="bp-product-section-title">
                                 Estoque e publicação
                             </h3>
@@ -2190,7 +2834,8 @@ export default function AdminProdutosClient({
                                 }
                             />
 
-                            {form.controla_estoque &&
+                            {!ehKit &&
+                            form.controla_estoque &&
                             variacoes.length === 0 ? (
                                 <Input
                                     label="Estoque atual"
@@ -2214,8 +2859,10 @@ export default function AdminProdutosClient({
                                 <input
                                     type="checkbox"
                                     checked={
+                                        !ehKit &&
                                         form.controla_estoque
                                     }
+                                    disabled={ehKit}
                                     onChange={(event) =>
                                         updateForm(
                                             "controla_estoque",
@@ -2225,7 +2872,11 @@ export default function AdminProdutosClient({
                                 />
                                 <span>
                                     Controlar estoque
-                                    {variacoes.length > 0 ? (
+                                    {ehKit ? (
+                                        <span className="bp-field-help">
+                                            O estoque do kit será calculado pelos componentes.
+                                        </span>
+                                    ) : variacoes.length > 0 ? (
                                         <span className="bp-field-help">
                                             O estoque será informado
                                             em cada variação.
@@ -2420,6 +3071,102 @@ export default function AdminProdutosClient({
                                     </span>
                                 ) : null}
                             </div>
+
+                            {previewProduto.eh_kit ? (
+                                <div className="bp-store-preview-variations">
+                                    <span className="bp-label">
+                                        Itens do kit
+                                    </span>
+
+                                    <div
+                                        style={{
+                                            display: "grid",
+                                            gap: 8,
+                                        }}
+                                    >
+                                        {previewProduto.componentes
+                                            .filter(
+                                                (componente) =>
+                                                    Boolean(
+                                                        componente.ativo,
+                                                    ),
+                                            )
+                                            .map((componente) => (
+                                                <div
+                                                    key={
+                                                        componente.id
+                                                    }
+                                                    className="bp-store-preview-stock"
+                                                >
+                                                    <strong>
+                                                        {
+                                                            componente
+                                                                .produto
+                                                                .nome
+                                                        }
+                                                    </strong>{" "}
+                                                    ×{" "}
+                                                    {
+                                                        componente.quantidade
+                                                    }
+                                                    {componente
+                                                        .produto
+                                                        .variacoes
+                                                        .length >
+                                                    0 ? (
+                                                        <span>
+                                                            {" "}
+                                                            · escolha de
+                                                            variação na
+                                                            compra
+                                                        </span>
+                                                    ) : null}
+                                                </div>
+                                            ))}
+                                    </div>
+                                </div>
+                            ) : null}
+
+                            {previewProduto.campos.length > 0 ? (
+                                <div className="bp-store-preview-variations">
+                                    <span className="bp-label">
+                                        Personalização
+                                    </span>
+
+                                    <div
+                                        style={{
+                                            display: "grid",
+                                            gap: 10,
+                                        }}
+                                    >
+                                        {previewProduto.campos
+                                            .filter((campo) =>
+                                                Boolean(campo.ativo),
+                                            )
+                                            .map((campo) => (
+                                                <Input
+                                                    key={campo.id}
+                                                    label={`${campo.nome}${
+                                                        campo.obrigatorio
+                                                            ? " *"
+                                                            : ""
+                                                    }`}
+                                                    type={
+                                                        campo.tipo ===
+                                                        "numero"
+                                                            ? "number"
+                                                            : "text"
+                                                    }
+                                                    placeholder={
+                                                        campo.descricao ??
+                                                        undefined
+                                                    }
+                                                    disabled
+                                                />
+                                            ))}
+                                    </div>
+                                </div>
+                            ) : null}
 
                             {previewProduto.variacoes.length >
                             0 ? (

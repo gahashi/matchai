@@ -319,7 +319,7 @@ export type VndPedidoGroupByOutputType = {
   vnd_pedido_status_id: number
   vnd_entrega_tipo_id: number | null
   cliente_nome: string
-  cliente_email: string
+  cliente_email: string | null
   cliente_telefone: string
   entrega_endereco: string | null
   retirada_local: string | null
@@ -366,7 +366,7 @@ export type VndPedidoWhereInput = {
   vnd_pedido_status_id?: Prisma.IntFilter<"VndPedido"> | number
   vnd_entrega_tipo_id?: Prisma.IntNullableFilter<"VndPedido"> | number | null
   cliente_nome?: Prisma.StringFilter<"VndPedido"> | string
-  cliente_email?: Prisma.StringFilter<"VndPedido"> | string
+  cliente_email?: Prisma.StringNullableFilter<"VndPedido"> | string | null
   cliente_telefone?: Prisma.StringFilter<"VndPedido"> | string
   entrega_endereco?: Prisma.StringNullableFilter<"VndPedido"> | string | null
   retirada_local?: Prisma.StringNullableFilter<"VndPedido"> | string | null
@@ -386,6 +386,7 @@ export type VndPedidoWhereInput = {
   vnd_entrega_tipo?: Prisma.XOR<Prisma.VndEntregaTipoNullableScalarRelationFilter, Prisma.VndEntregaTipoWhereInput> | null
   vnd_pedido_itens?: Prisma.VndPedidoItemListRelationFilter
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoListRelationFilter
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaListRelationFilter
   fin_pagamentos?: Prisma.FinPagamentoListRelationFilter
 }
 
@@ -397,7 +398,7 @@ export type VndPedidoOrderByWithRelationInput = {
   vnd_pedido_status_id?: Prisma.SortOrder
   vnd_entrega_tipo_id?: Prisma.SortOrderInput | Prisma.SortOrder
   cliente_nome?: Prisma.SortOrder
-  cliente_email?: Prisma.SortOrder
+  cliente_email?: Prisma.SortOrderInput | Prisma.SortOrder
   cliente_telefone?: Prisma.SortOrder
   entrega_endereco?: Prisma.SortOrderInput | Prisma.SortOrder
   retirada_local?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -417,6 +418,7 @@ export type VndPedidoOrderByWithRelationInput = {
   vnd_entrega_tipo?: Prisma.VndEntregaTipoOrderByWithRelationInput
   vnd_pedido_itens?: Prisma.VndPedidoItemOrderByRelationAggregateInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoOrderByRelationAggregateInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaOrderByRelationAggregateInput
   fin_pagamentos?: Prisma.FinPagamentoOrderByRelationAggregateInput
   _relevance?: Prisma.VndPedidoOrderByRelevanceInput
 }
@@ -432,7 +434,7 @@ export type VndPedidoWhereUniqueInput = Prisma.AtLeast<{
   vnd_pedido_status_id?: Prisma.IntFilter<"VndPedido"> | number
   vnd_entrega_tipo_id?: Prisma.IntNullableFilter<"VndPedido"> | number | null
   cliente_nome?: Prisma.StringFilter<"VndPedido"> | string
-  cliente_email?: Prisma.StringFilter<"VndPedido"> | string
+  cliente_email?: Prisma.StringNullableFilter<"VndPedido"> | string | null
   cliente_telefone?: Prisma.StringFilter<"VndPedido"> | string
   entrega_endereco?: Prisma.StringNullableFilter<"VndPedido"> | string | null
   retirada_local?: Prisma.StringNullableFilter<"VndPedido"> | string | null
@@ -452,6 +454,7 @@ export type VndPedidoWhereUniqueInput = Prisma.AtLeast<{
   vnd_entrega_tipo?: Prisma.XOR<Prisma.VndEntregaTipoNullableScalarRelationFilter, Prisma.VndEntregaTipoWhereInput> | null
   vnd_pedido_itens?: Prisma.VndPedidoItemListRelationFilter
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoListRelationFilter
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaListRelationFilter
   fin_pagamentos?: Prisma.FinPagamentoListRelationFilter
 }, "id" | "codigo">
 
@@ -463,7 +466,7 @@ export type VndPedidoOrderByWithAggregationInput = {
   vnd_pedido_status_id?: Prisma.SortOrder
   vnd_entrega_tipo_id?: Prisma.SortOrderInput | Prisma.SortOrder
   cliente_nome?: Prisma.SortOrder
-  cliente_email?: Prisma.SortOrder
+  cliente_email?: Prisma.SortOrderInput | Prisma.SortOrder
   cliente_telefone?: Prisma.SortOrder
   entrega_endereco?: Prisma.SortOrderInput | Prisma.SortOrder
   retirada_local?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -495,7 +498,7 @@ export type VndPedidoScalarWhereWithAggregatesInput = {
   vnd_pedido_status_id?: Prisma.IntWithAggregatesFilter<"VndPedido"> | number
   vnd_entrega_tipo_id?: Prisma.IntNullableWithAggregatesFilter<"VndPedido"> | number | null
   cliente_nome?: Prisma.StringWithAggregatesFilter<"VndPedido"> | string
-  cliente_email?: Prisma.StringWithAggregatesFilter<"VndPedido"> | string
+  cliente_email?: Prisma.StringNullableWithAggregatesFilter<"VndPedido"> | string | null
   cliente_telefone?: Prisma.StringWithAggregatesFilter<"VndPedido"> | string
   entrega_endereco?: Prisma.StringNullableWithAggregatesFilter<"VndPedido"> | string | null
   retirada_local?: Prisma.StringNullableWithAggregatesFilter<"VndPedido"> | string | null
@@ -514,7 +517,7 @@ export type VndPedidoScalarWhereWithAggregatesInput = {
 export type VndPedidoCreateInput = {
   codigo: string
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -534,6 +537,7 @@ export type VndPedidoCreateInput = {
   vnd_entrega_tipo?: Prisma.VndEntregaTipoCreateNestedOneWithoutVnd_pedidosInput
   vnd_pedido_itens?: Prisma.VndPedidoItemCreateNestedManyWithoutVnd_pedidoInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutVnd_pedidoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutVnd_pedidoInput
   fin_pagamentos?: Prisma.FinPagamentoCreateNestedManyWithoutVnd_pedidoInput
 }
 
@@ -545,7 +549,7 @@ export type VndPedidoUncheckedCreateInput = {
   vnd_pedido_status_id: number
   vnd_entrega_tipo_id?: number | null
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -561,13 +565,14 @@ export type VndPedidoUncheckedCreateInput = {
   concluido_at?: Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedCreateNestedManyWithoutVnd_pedidoInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutVnd_pedidoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutVnd_pedidoInput
   fin_pagamentos?: Prisma.FinPagamentoUncheckedCreateNestedManyWithoutVnd_pedidoInput
 }
 
 export type VndPedidoUpdateInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -587,6 +592,7 @@ export type VndPedidoUpdateInput = {
   vnd_entrega_tipo?: Prisma.VndEntregaTipoUpdateOneWithoutVnd_pedidosNestedInput
   vnd_pedido_itens?: Prisma.VndPedidoItemUpdateManyWithoutVnd_pedidoNestedInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutVnd_pedidoNestedInput
   fin_pagamentos?: Prisma.FinPagamentoUpdateManyWithoutVnd_pedidoNestedInput
 }
 
@@ -598,7 +604,7 @@ export type VndPedidoUncheckedUpdateInput = {
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -614,6 +620,7 @@ export type VndPedidoUncheckedUpdateInput = {
   concluido_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedUpdateManyWithoutVnd_pedidoNestedInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutVnd_pedidoNestedInput
   fin_pagamentos?: Prisma.FinPagamentoUncheckedUpdateManyWithoutVnd_pedidoNestedInput
 }
 
@@ -625,7 +632,7 @@ export type VndPedidoCreateManyInput = {
   vnd_pedido_status_id: number
   vnd_entrega_tipo_id?: number | null
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -644,7 +651,7 @@ export type VndPedidoCreateManyInput = {
 export type VndPedidoUpdateManyMutationInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -668,7 +675,7 @@ export type VndPedidoUncheckedUpdateManyInput = {
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -985,6 +992,20 @@ export type VndPedidoUpdateOneRequiredWithoutVnd_pedido_itensNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.VndPedidoUpdateToOneWithWhereWithoutVnd_pedido_itensInput, Prisma.VndPedidoUpdateWithoutVnd_pedido_itensInput>, Prisma.VndPedidoUncheckedUpdateWithoutVnd_pedido_itensInput>
 }
 
+export type VndPedidoCreateNestedOneWithoutVnd_estoque_reservasInput = {
+  create?: Prisma.XOR<Prisma.VndPedidoCreateWithoutVnd_estoque_reservasInput, Prisma.VndPedidoUncheckedCreateWithoutVnd_estoque_reservasInput>
+  connectOrCreate?: Prisma.VndPedidoCreateOrConnectWithoutVnd_estoque_reservasInput
+  connect?: Prisma.VndPedidoWhereUniqueInput
+}
+
+export type VndPedidoUpdateOneRequiredWithoutVnd_estoque_reservasNestedInput = {
+  create?: Prisma.XOR<Prisma.VndPedidoCreateWithoutVnd_estoque_reservasInput, Prisma.VndPedidoUncheckedCreateWithoutVnd_estoque_reservasInput>
+  connectOrCreate?: Prisma.VndPedidoCreateOrConnectWithoutVnd_estoque_reservasInput
+  upsert?: Prisma.VndPedidoUpsertWithoutVnd_estoque_reservasInput
+  connect?: Prisma.VndPedidoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VndPedidoUpdateToOneWithWhereWithoutVnd_estoque_reservasInput, Prisma.VndPedidoUpdateWithoutVnd_estoque_reservasInput>, Prisma.VndPedidoUncheckedUpdateWithoutVnd_estoque_reservasInput>
+}
+
 export type VndPedidoCreateNestedOneWithoutVnd_pedido_historicosInput = {
   create?: Prisma.XOR<Prisma.VndPedidoCreateWithoutVnd_pedido_historicosInput, Prisma.VndPedidoUncheckedCreateWithoutVnd_pedido_historicosInput>
   connectOrCreate?: Prisma.VndPedidoCreateOrConnectWithoutVnd_pedido_historicosInput
@@ -1016,7 +1037,7 @@ export type VndPedidoUpdateOneRequiredWithoutFin_pagamentosNestedInput = {
 export type VndPedidoCreateWithoutSys_usuarioInput = {
   codigo: string
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -1035,6 +1056,7 @@ export type VndPedidoCreateWithoutSys_usuarioInput = {
   vnd_entrega_tipo?: Prisma.VndEntregaTipoCreateNestedOneWithoutVnd_pedidosInput
   vnd_pedido_itens?: Prisma.VndPedidoItemCreateNestedManyWithoutVnd_pedidoInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutVnd_pedidoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutVnd_pedidoInput
   fin_pagamentos?: Prisma.FinPagamentoCreateNestedManyWithoutVnd_pedidoInput
 }
 
@@ -1045,7 +1067,7 @@ export type VndPedidoUncheckedCreateWithoutSys_usuarioInput = {
   vnd_pedido_status_id: number
   vnd_entrega_tipo_id?: number | null
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -1061,6 +1083,7 @@ export type VndPedidoUncheckedCreateWithoutSys_usuarioInput = {
   concluido_at?: Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedCreateNestedManyWithoutVnd_pedidoInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutVnd_pedidoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutVnd_pedidoInput
   fin_pagamentos?: Prisma.FinPagamentoUncheckedCreateNestedManyWithoutVnd_pedidoInput
 }
 
@@ -1101,7 +1124,7 @@ export type VndPedidoScalarWhereInput = {
   vnd_pedido_status_id?: Prisma.IntFilter<"VndPedido"> | number
   vnd_entrega_tipo_id?: Prisma.IntNullableFilter<"VndPedido"> | number | null
   cliente_nome?: Prisma.StringFilter<"VndPedido"> | string
-  cliente_email?: Prisma.StringFilter<"VndPedido"> | string
+  cliente_email?: Prisma.StringNullableFilter<"VndPedido"> | string | null
   cliente_telefone?: Prisma.StringFilter<"VndPedido"> | string
   entrega_endereco?: Prisma.StringNullableFilter<"VndPedido"> | string | null
   retirada_local?: Prisma.StringNullableFilter<"VndPedido"> | string | null
@@ -1120,7 +1143,7 @@ export type VndPedidoScalarWhereInput = {
 export type VndPedidoCreateWithoutVnd_campanhaInput = {
   codigo: string
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -1139,6 +1162,7 @@ export type VndPedidoCreateWithoutVnd_campanhaInput = {
   vnd_entrega_tipo?: Prisma.VndEntregaTipoCreateNestedOneWithoutVnd_pedidosInput
   vnd_pedido_itens?: Prisma.VndPedidoItemCreateNestedManyWithoutVnd_pedidoInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutVnd_pedidoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutVnd_pedidoInput
   fin_pagamentos?: Prisma.FinPagamentoCreateNestedManyWithoutVnd_pedidoInput
 }
 
@@ -1149,7 +1173,7 @@ export type VndPedidoUncheckedCreateWithoutVnd_campanhaInput = {
   vnd_pedido_status_id: number
   vnd_entrega_tipo_id?: number | null
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -1165,6 +1189,7 @@ export type VndPedidoUncheckedCreateWithoutVnd_campanhaInput = {
   concluido_at?: Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedCreateNestedManyWithoutVnd_pedidoInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutVnd_pedidoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutVnd_pedidoInput
   fin_pagamentos?: Prisma.FinPagamentoUncheckedCreateNestedManyWithoutVnd_pedidoInput
 }
 
@@ -1197,7 +1222,7 @@ export type VndPedidoUpdateManyWithWhereWithoutVnd_campanhaInput = {
 export type VndPedidoCreateWithoutVnd_pedido_statusInput = {
   codigo: string
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -1216,6 +1241,7 @@ export type VndPedidoCreateWithoutVnd_pedido_statusInput = {
   vnd_entrega_tipo?: Prisma.VndEntregaTipoCreateNestedOneWithoutVnd_pedidosInput
   vnd_pedido_itens?: Prisma.VndPedidoItemCreateNestedManyWithoutVnd_pedidoInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutVnd_pedidoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutVnd_pedidoInput
   fin_pagamentos?: Prisma.FinPagamentoCreateNestedManyWithoutVnd_pedidoInput
 }
 
@@ -1226,7 +1252,7 @@ export type VndPedidoUncheckedCreateWithoutVnd_pedido_statusInput = {
   vnd_campanha_id?: number | null
   vnd_entrega_tipo_id?: number | null
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -1242,6 +1268,7 @@ export type VndPedidoUncheckedCreateWithoutVnd_pedido_statusInput = {
   concluido_at?: Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedCreateNestedManyWithoutVnd_pedidoInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutVnd_pedidoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutVnd_pedidoInput
   fin_pagamentos?: Prisma.FinPagamentoUncheckedCreateNestedManyWithoutVnd_pedidoInput
 }
 
@@ -1274,7 +1301,7 @@ export type VndPedidoUpdateManyWithWhereWithoutVnd_pedido_statusInput = {
 export type VndPedidoCreateWithoutVnd_entrega_tipoInput = {
   codigo: string
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -1293,6 +1320,7 @@ export type VndPedidoCreateWithoutVnd_entrega_tipoInput = {
   vnd_pedido_status: Prisma.VndPedidoStatusCreateNestedOneWithoutVnd_pedidosInput
   vnd_pedido_itens?: Prisma.VndPedidoItemCreateNestedManyWithoutVnd_pedidoInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutVnd_pedidoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutVnd_pedidoInput
   fin_pagamentos?: Prisma.FinPagamentoCreateNestedManyWithoutVnd_pedidoInput
 }
 
@@ -1303,7 +1331,7 @@ export type VndPedidoUncheckedCreateWithoutVnd_entrega_tipoInput = {
   vnd_campanha_id?: number | null
   vnd_pedido_status_id: number
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -1319,6 +1347,7 @@ export type VndPedidoUncheckedCreateWithoutVnd_entrega_tipoInput = {
   concluido_at?: Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedCreateNestedManyWithoutVnd_pedidoInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutVnd_pedidoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutVnd_pedidoInput
   fin_pagamentos?: Prisma.FinPagamentoUncheckedCreateNestedManyWithoutVnd_pedidoInput
 }
 
@@ -1351,7 +1380,7 @@ export type VndPedidoUpdateManyWithWhereWithoutVnd_entrega_tipoInput = {
 export type VndPedidoCreateWithoutVnd_pedido_itensInput = {
   codigo: string
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -1370,6 +1399,7 @@ export type VndPedidoCreateWithoutVnd_pedido_itensInput = {
   vnd_pedido_status: Prisma.VndPedidoStatusCreateNestedOneWithoutVnd_pedidosInput
   vnd_entrega_tipo?: Prisma.VndEntregaTipoCreateNestedOneWithoutVnd_pedidosInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutVnd_pedidoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutVnd_pedidoInput
   fin_pagamentos?: Prisma.FinPagamentoCreateNestedManyWithoutVnd_pedidoInput
 }
 
@@ -1381,7 +1411,7 @@ export type VndPedidoUncheckedCreateWithoutVnd_pedido_itensInput = {
   vnd_pedido_status_id: number
   vnd_entrega_tipo_id?: number | null
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -1396,6 +1426,7 @@ export type VndPedidoUncheckedCreateWithoutVnd_pedido_itensInput = {
   cancelado_at?: Date | string | null
   concluido_at?: Date | string | null
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutVnd_pedidoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutVnd_pedidoInput
   fin_pagamentos?: Prisma.FinPagamentoUncheckedCreateNestedManyWithoutVnd_pedidoInput
 }
 
@@ -1418,7 +1449,7 @@ export type VndPedidoUpdateToOneWithWhereWithoutVnd_pedido_itensInput = {
 export type VndPedidoUpdateWithoutVnd_pedido_itensInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1437,6 +1468,7 @@ export type VndPedidoUpdateWithoutVnd_pedido_itensInput = {
   vnd_pedido_status?: Prisma.VndPedidoStatusUpdateOneRequiredWithoutVnd_pedidosNestedInput
   vnd_entrega_tipo?: Prisma.VndEntregaTipoUpdateOneWithoutVnd_pedidosNestedInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutVnd_pedidoNestedInput
   fin_pagamentos?: Prisma.FinPagamentoUpdateManyWithoutVnd_pedidoNestedInput
 }
 
@@ -1448,7 +1480,7 @@ export type VndPedidoUncheckedUpdateWithoutVnd_pedido_itensInput = {
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1463,13 +1495,14 @@ export type VndPedidoUncheckedUpdateWithoutVnd_pedido_itensInput = {
   cancelado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   concluido_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutVnd_pedidoNestedInput
   fin_pagamentos?: Prisma.FinPagamentoUncheckedUpdateManyWithoutVnd_pedidoNestedInput
 }
 
-export type VndPedidoCreateWithoutVnd_pedido_historicosInput = {
+export type VndPedidoCreateWithoutVnd_estoque_reservasInput = {
   codigo: string
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -1488,10 +1521,11 @@ export type VndPedidoCreateWithoutVnd_pedido_historicosInput = {
   vnd_pedido_status: Prisma.VndPedidoStatusCreateNestedOneWithoutVnd_pedidosInput
   vnd_entrega_tipo?: Prisma.VndEntregaTipoCreateNestedOneWithoutVnd_pedidosInput
   vnd_pedido_itens?: Prisma.VndPedidoItemCreateNestedManyWithoutVnd_pedidoInput
+  vnd_pedido_historicos?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutVnd_pedidoInput
   fin_pagamentos?: Prisma.FinPagamentoCreateNestedManyWithoutVnd_pedidoInput
 }
 
-export type VndPedidoUncheckedCreateWithoutVnd_pedido_historicosInput = {
+export type VndPedidoUncheckedCreateWithoutVnd_estoque_reservasInput = {
   id?: number
   codigo: string
   sys_usuario_id?: number | null
@@ -1499,7 +1533,7 @@ export type VndPedidoUncheckedCreateWithoutVnd_pedido_historicosInput = {
   vnd_pedido_status_id: number
   vnd_entrega_tipo_id?: number | null
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -1514,6 +1548,129 @@ export type VndPedidoUncheckedCreateWithoutVnd_pedido_historicosInput = {
   cancelado_at?: Date | string | null
   concluido_at?: Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedCreateNestedManyWithoutVnd_pedidoInput
+  vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutVnd_pedidoInput
+  fin_pagamentos?: Prisma.FinPagamentoUncheckedCreateNestedManyWithoutVnd_pedidoInput
+}
+
+export type VndPedidoCreateOrConnectWithoutVnd_estoque_reservasInput = {
+  where: Prisma.VndPedidoWhereUniqueInput
+  create: Prisma.XOR<Prisma.VndPedidoCreateWithoutVnd_estoque_reservasInput, Prisma.VndPedidoUncheckedCreateWithoutVnd_estoque_reservasInput>
+}
+
+export type VndPedidoUpsertWithoutVnd_estoque_reservasInput = {
+  update: Prisma.XOR<Prisma.VndPedidoUpdateWithoutVnd_estoque_reservasInput, Prisma.VndPedidoUncheckedUpdateWithoutVnd_estoque_reservasInput>
+  create: Prisma.XOR<Prisma.VndPedidoCreateWithoutVnd_estoque_reservasInput, Prisma.VndPedidoUncheckedCreateWithoutVnd_estoque_reservasInput>
+  where?: Prisma.VndPedidoWhereInput
+}
+
+export type VndPedidoUpdateToOneWithWhereWithoutVnd_estoque_reservasInput = {
+  where?: Prisma.VndPedidoWhereInput
+  data: Prisma.XOR<Prisma.VndPedidoUpdateWithoutVnd_estoque_reservasInput, Prisma.VndPedidoUncheckedUpdateWithoutVnd_estoque_reservasInput>
+}
+
+export type VndPedidoUpdateWithoutVnd_estoque_reservasInput = {
+  codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
+  entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observacao_cliente?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_produtos?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_desconto?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_frete?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_acrescimo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  concluido_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutVnd_pedidosNestedInput
+  vnd_campanha?: Prisma.VndCampanhaUpdateOneWithoutVnd_pedidosNestedInput
+  vnd_pedido_status?: Prisma.VndPedidoStatusUpdateOneRequiredWithoutVnd_pedidosNestedInput
+  vnd_entrega_tipo?: Prisma.VndEntregaTipoUpdateOneWithoutVnd_pedidosNestedInput
+  vnd_pedido_itens?: Prisma.VndPedidoItemUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUpdateManyWithoutVnd_pedidoNestedInput
+  fin_pagamentos?: Prisma.FinPagamentoUpdateManyWithoutVnd_pedidoNestedInput
+}
+
+export type VndPedidoUncheckedUpdateWithoutVnd_estoque_reservasInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
+  entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observacao_cliente?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valor_produtos?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_desconto?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_frete?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_acrescimo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  concluido_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutVnd_pedidoNestedInput
+  fin_pagamentos?: Prisma.FinPagamentoUncheckedUpdateManyWithoutVnd_pedidoNestedInput
+}
+
+export type VndPedidoCreateWithoutVnd_pedido_historicosInput = {
+  codigo: string
+  cliente_nome: string
+  cliente_email?: string | null
+  cliente_telefone: string
+  entrega_endereco?: string | null
+  retirada_local?: string | null
+  observacao_cliente?: string | null
+  valor_produtos: runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_desconto?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_frete?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_acrescimo?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_total: runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  cancelado_at?: Date | string | null
+  concluido_at?: Date | string | null
+  sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutVnd_pedidosInput
+  vnd_campanha?: Prisma.VndCampanhaCreateNestedOneWithoutVnd_pedidosInput
+  vnd_pedido_status: Prisma.VndPedidoStatusCreateNestedOneWithoutVnd_pedidosInput
+  vnd_entrega_tipo?: Prisma.VndEntregaTipoCreateNestedOneWithoutVnd_pedidosInput
+  vnd_pedido_itens?: Prisma.VndPedidoItemCreateNestedManyWithoutVnd_pedidoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutVnd_pedidoInput
+  fin_pagamentos?: Prisma.FinPagamentoCreateNestedManyWithoutVnd_pedidoInput
+}
+
+export type VndPedidoUncheckedCreateWithoutVnd_pedido_historicosInput = {
+  id?: number
+  codigo: string
+  sys_usuario_id?: number | null
+  vnd_campanha_id?: number | null
+  vnd_pedido_status_id: number
+  vnd_entrega_tipo_id?: number | null
+  cliente_nome: string
+  cliente_email?: string | null
+  cliente_telefone: string
+  entrega_endereco?: string | null
+  retirada_local?: string | null
+  observacao_cliente?: string | null
+  valor_produtos: runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_desconto?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_frete?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_acrescimo?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  valor_total: runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  cancelado_at?: Date | string | null
+  concluido_at?: Date | string | null
+  vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedCreateNestedManyWithoutVnd_pedidoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutVnd_pedidoInput
   fin_pagamentos?: Prisma.FinPagamentoUncheckedCreateNestedManyWithoutVnd_pedidoInput
 }
 
@@ -1536,7 +1693,7 @@ export type VndPedidoUpdateToOneWithWhereWithoutVnd_pedido_historicosInput = {
 export type VndPedidoUpdateWithoutVnd_pedido_historicosInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1555,6 +1712,7 @@ export type VndPedidoUpdateWithoutVnd_pedido_historicosInput = {
   vnd_pedido_status?: Prisma.VndPedidoStatusUpdateOneRequiredWithoutVnd_pedidosNestedInput
   vnd_entrega_tipo?: Prisma.VndEntregaTipoUpdateOneWithoutVnd_pedidosNestedInput
   vnd_pedido_itens?: Prisma.VndPedidoItemUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutVnd_pedidoNestedInput
   fin_pagamentos?: Prisma.FinPagamentoUpdateManyWithoutVnd_pedidoNestedInput
 }
 
@@ -1566,7 +1724,7 @@ export type VndPedidoUncheckedUpdateWithoutVnd_pedido_historicosInput = {
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1581,13 +1739,14 @@ export type VndPedidoUncheckedUpdateWithoutVnd_pedido_historicosInput = {
   cancelado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   concluido_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutVnd_pedidoNestedInput
   fin_pagamentos?: Prisma.FinPagamentoUncheckedUpdateManyWithoutVnd_pedidoNestedInput
 }
 
 export type VndPedidoCreateWithoutFin_pagamentosInput = {
   codigo: string
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -1607,6 +1766,7 @@ export type VndPedidoCreateWithoutFin_pagamentosInput = {
   vnd_entrega_tipo?: Prisma.VndEntregaTipoCreateNestedOneWithoutVnd_pedidosInput
   vnd_pedido_itens?: Prisma.VndPedidoItemCreateNestedManyWithoutVnd_pedidoInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutVnd_pedidoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaCreateNestedManyWithoutVnd_pedidoInput
 }
 
 export type VndPedidoUncheckedCreateWithoutFin_pagamentosInput = {
@@ -1617,7 +1777,7 @@ export type VndPedidoUncheckedCreateWithoutFin_pagamentosInput = {
   vnd_pedido_status_id: number
   vnd_entrega_tipo_id?: number | null
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -1633,6 +1793,7 @@ export type VndPedidoUncheckedCreateWithoutFin_pagamentosInput = {
   concluido_at?: Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedCreateNestedManyWithoutVnd_pedidoInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutVnd_pedidoInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedCreateNestedManyWithoutVnd_pedidoInput
 }
 
 export type VndPedidoCreateOrConnectWithoutFin_pagamentosInput = {
@@ -1654,7 +1815,7 @@ export type VndPedidoUpdateToOneWithWhereWithoutFin_pagamentosInput = {
 export type VndPedidoUpdateWithoutFin_pagamentosInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1674,6 +1835,7 @@ export type VndPedidoUpdateWithoutFin_pagamentosInput = {
   vnd_entrega_tipo?: Prisma.VndEntregaTipoUpdateOneWithoutVnd_pedidosNestedInput
   vnd_pedido_itens?: Prisma.VndPedidoItemUpdateManyWithoutVnd_pedidoNestedInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutVnd_pedidoNestedInput
 }
 
 export type VndPedidoUncheckedUpdateWithoutFin_pagamentosInput = {
@@ -1684,7 +1846,7 @@ export type VndPedidoUncheckedUpdateWithoutFin_pagamentosInput = {
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1700,6 +1862,7 @@ export type VndPedidoUncheckedUpdateWithoutFin_pagamentosInput = {
   concluido_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedUpdateManyWithoutVnd_pedidoNestedInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutVnd_pedidoNestedInput
 }
 
 export type VndPedidoCreateManySys_usuarioInput = {
@@ -1709,7 +1872,7 @@ export type VndPedidoCreateManySys_usuarioInput = {
   vnd_pedido_status_id: number
   vnd_entrega_tipo_id?: number | null
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -1728,7 +1891,7 @@ export type VndPedidoCreateManySys_usuarioInput = {
 export type VndPedidoUpdateWithoutSys_usuarioInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1747,6 +1910,7 @@ export type VndPedidoUpdateWithoutSys_usuarioInput = {
   vnd_entrega_tipo?: Prisma.VndEntregaTipoUpdateOneWithoutVnd_pedidosNestedInput
   vnd_pedido_itens?: Prisma.VndPedidoItemUpdateManyWithoutVnd_pedidoNestedInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutVnd_pedidoNestedInput
   fin_pagamentos?: Prisma.FinPagamentoUpdateManyWithoutVnd_pedidoNestedInput
 }
 
@@ -1757,7 +1921,7 @@ export type VndPedidoUncheckedUpdateWithoutSys_usuarioInput = {
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1773,6 +1937,7 @@ export type VndPedidoUncheckedUpdateWithoutSys_usuarioInput = {
   concluido_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedUpdateManyWithoutVnd_pedidoNestedInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutVnd_pedidoNestedInput
   fin_pagamentos?: Prisma.FinPagamentoUncheckedUpdateManyWithoutVnd_pedidoNestedInput
 }
 
@@ -1783,7 +1948,7 @@ export type VndPedidoUncheckedUpdateManyWithoutSys_usuarioInput = {
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1806,7 +1971,7 @@ export type VndPedidoCreateManyVnd_campanhaInput = {
   vnd_pedido_status_id: number
   vnd_entrega_tipo_id?: number | null
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -1825,7 +1990,7 @@ export type VndPedidoCreateManyVnd_campanhaInput = {
 export type VndPedidoUpdateWithoutVnd_campanhaInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1844,6 +2009,7 @@ export type VndPedidoUpdateWithoutVnd_campanhaInput = {
   vnd_entrega_tipo?: Prisma.VndEntregaTipoUpdateOneWithoutVnd_pedidosNestedInput
   vnd_pedido_itens?: Prisma.VndPedidoItemUpdateManyWithoutVnd_pedidoNestedInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutVnd_pedidoNestedInput
   fin_pagamentos?: Prisma.FinPagamentoUpdateManyWithoutVnd_pedidoNestedInput
 }
 
@@ -1854,7 +2020,7 @@ export type VndPedidoUncheckedUpdateWithoutVnd_campanhaInput = {
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1870,6 +2036,7 @@ export type VndPedidoUncheckedUpdateWithoutVnd_campanhaInput = {
   concluido_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedUpdateManyWithoutVnd_pedidoNestedInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutVnd_pedidoNestedInput
   fin_pagamentos?: Prisma.FinPagamentoUncheckedUpdateManyWithoutVnd_pedidoNestedInput
 }
 
@@ -1880,7 +2047,7 @@ export type VndPedidoUncheckedUpdateManyWithoutVnd_campanhaInput = {
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1903,7 +2070,7 @@ export type VndPedidoCreateManyVnd_pedido_statusInput = {
   vnd_campanha_id?: number | null
   vnd_entrega_tipo_id?: number | null
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -1922,7 +2089,7 @@ export type VndPedidoCreateManyVnd_pedido_statusInput = {
 export type VndPedidoUpdateWithoutVnd_pedido_statusInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1941,6 +2108,7 @@ export type VndPedidoUpdateWithoutVnd_pedido_statusInput = {
   vnd_entrega_tipo?: Prisma.VndEntregaTipoUpdateOneWithoutVnd_pedidosNestedInput
   vnd_pedido_itens?: Prisma.VndPedidoItemUpdateManyWithoutVnd_pedidoNestedInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutVnd_pedidoNestedInput
   fin_pagamentos?: Prisma.FinPagamentoUpdateManyWithoutVnd_pedidoNestedInput
 }
 
@@ -1951,7 +2119,7 @@ export type VndPedidoUncheckedUpdateWithoutVnd_pedido_statusInput = {
   vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1967,6 +2135,7 @@ export type VndPedidoUncheckedUpdateWithoutVnd_pedido_statusInput = {
   concluido_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedUpdateManyWithoutVnd_pedidoNestedInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutVnd_pedidoNestedInput
   fin_pagamentos?: Prisma.FinPagamentoUncheckedUpdateManyWithoutVnd_pedidoNestedInput
 }
 
@@ -1977,7 +2146,7 @@ export type VndPedidoUncheckedUpdateManyWithoutVnd_pedido_statusInput = {
   vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2000,7 +2169,7 @@ export type VndPedidoCreateManyVnd_entrega_tipoInput = {
   vnd_campanha_id?: number | null
   vnd_pedido_status_id: number
   cliente_nome: string
-  cliente_email: string
+  cliente_email?: string | null
   cliente_telefone: string
   entrega_endereco?: string | null
   retirada_local?: string | null
@@ -2019,7 +2188,7 @@ export type VndPedidoCreateManyVnd_entrega_tipoInput = {
 export type VndPedidoUpdateWithoutVnd_entrega_tipoInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2038,6 +2207,7 @@ export type VndPedidoUpdateWithoutVnd_entrega_tipoInput = {
   vnd_pedido_status?: Prisma.VndPedidoStatusUpdateOneRequiredWithoutVnd_pedidosNestedInput
   vnd_pedido_itens?: Prisma.VndPedidoItemUpdateManyWithoutVnd_pedidoNestedInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUpdateManyWithoutVnd_pedidoNestedInput
   fin_pagamentos?: Prisma.FinPagamentoUpdateManyWithoutVnd_pedidoNestedInput
 }
 
@@ -2048,7 +2218,7 @@ export type VndPedidoUncheckedUpdateWithoutVnd_entrega_tipoInput = {
   vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2064,6 +2234,7 @@ export type VndPedidoUncheckedUpdateWithoutVnd_entrega_tipoInput = {
   concluido_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vnd_pedido_itens?: Prisma.VndPedidoItemUncheckedUpdateManyWithoutVnd_pedidoNestedInput
   vnd_pedido_historicos?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutVnd_pedidoNestedInput
+  vnd_estoque_reservas?: Prisma.VndEstoqueReservaUncheckedUpdateManyWithoutVnd_pedidoNestedInput
   fin_pagamentos?: Prisma.FinPagamentoUncheckedUpdateManyWithoutVnd_pedidoNestedInput
 }
 
@@ -2074,7 +2245,7 @@ export type VndPedidoUncheckedUpdateManyWithoutVnd_entrega_tipoInput = {
   vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
-  cliente_email?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
   entrega_endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   retirada_local?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2098,12 +2269,14 @@ export type VndPedidoUncheckedUpdateManyWithoutVnd_entrega_tipoInput = {
 export type VndPedidoCountOutputType = {
   vnd_pedido_itens: number
   vnd_pedido_historicos: number
+  vnd_estoque_reservas: number
   fin_pagamentos: number
 }
 
 export type VndPedidoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vnd_pedido_itens?: boolean | VndPedidoCountOutputTypeCountVnd_pedido_itensArgs
   vnd_pedido_historicos?: boolean | VndPedidoCountOutputTypeCountVnd_pedido_historicosArgs
+  vnd_estoque_reservas?: boolean | VndPedidoCountOutputTypeCountVnd_estoque_reservasArgs
   fin_pagamentos?: boolean | VndPedidoCountOutputTypeCountFin_pagamentosArgs
 }
 
@@ -2129,6 +2302,13 @@ export type VndPedidoCountOutputTypeCountVnd_pedido_itensArgs<ExtArgs extends ru
  */
 export type VndPedidoCountOutputTypeCountVnd_pedido_historicosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.VndPedidoHistoricoWhereInput
+}
+
+/**
+ * VndPedidoCountOutputType without action
+ */
+export type VndPedidoCountOutputTypeCountVnd_estoque_reservasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VndEstoqueReservaWhereInput
 }
 
 /**
@@ -2167,6 +2347,7 @@ export type VndPedidoSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   vnd_entrega_tipo?: boolean | Prisma.VndPedido$vnd_entrega_tipoArgs<ExtArgs>
   vnd_pedido_itens?: boolean | Prisma.VndPedido$vnd_pedido_itensArgs<ExtArgs>
   vnd_pedido_historicos?: boolean | Prisma.VndPedido$vnd_pedido_historicosArgs<ExtArgs>
+  vnd_estoque_reservas?: boolean | Prisma.VndPedido$vnd_estoque_reservasArgs<ExtArgs>
   fin_pagamentos?: boolean | Prisma.VndPedido$fin_pagamentosArgs<ExtArgs>
   _count?: boolean | Prisma.VndPedidoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["vndPedido"]>
@@ -2205,6 +2386,7 @@ export type VndPedidoInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   vnd_entrega_tipo?: boolean | Prisma.VndPedido$vnd_entrega_tipoArgs<ExtArgs>
   vnd_pedido_itens?: boolean | Prisma.VndPedido$vnd_pedido_itensArgs<ExtArgs>
   vnd_pedido_historicos?: boolean | Prisma.VndPedido$vnd_pedido_historicosArgs<ExtArgs>
+  vnd_estoque_reservas?: boolean | Prisma.VndPedido$vnd_estoque_reservasArgs<ExtArgs>
   fin_pagamentos?: boolean | Prisma.VndPedido$fin_pagamentosArgs<ExtArgs>
   _count?: boolean | Prisma.VndPedidoCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -2218,6 +2400,7 @@ export type $VndPedidoPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     vnd_entrega_tipo: Prisma.$VndEntregaTipoPayload<ExtArgs> | null
     vnd_pedido_itens: Prisma.$VndPedidoItemPayload<ExtArgs>[]
     vnd_pedido_historicos: Prisma.$VndPedidoHistoricoPayload<ExtArgs>[]
+    vnd_estoque_reservas: Prisma.$VndEstoqueReservaPayload<ExtArgs>[]
     fin_pagamentos: Prisma.$FinPagamentoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -2228,7 +2411,7 @@ export type $VndPedidoPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     vnd_pedido_status_id: number
     vnd_entrega_tipo_id: number | null
     cliente_nome: string
-    cliente_email: string
+    cliente_email: string | null
     cliente_telefone: string
     entrega_endereco: string | null
     retirada_local: string | null
@@ -2588,6 +2771,7 @@ export interface Prisma__VndPedidoClient<T, Null = never, ExtArgs extends runtim
   vnd_entrega_tipo<T extends Prisma.VndPedido$vnd_entrega_tipoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VndPedido$vnd_entrega_tipoArgs<ExtArgs>>): Prisma.Prisma__VndEntregaTipoClient<runtime.Types.Result.GetResult<Prisma.$VndEntregaTipoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vnd_pedido_itens<T extends Prisma.VndPedido$vnd_pedido_itensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VndPedido$vnd_pedido_itensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VndPedidoItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vnd_pedido_historicos<T extends Prisma.VndPedido$vnd_pedido_historicosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VndPedido$vnd_pedido_historicosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VndPedidoHistoricoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vnd_estoque_reservas<T extends Prisma.VndPedido$vnd_estoque_reservasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VndPedido$vnd_estoque_reservasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VndEstoqueReservaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   fin_pagamentos<T extends Prisma.VndPedido$fin_pagamentosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VndPedido$fin_pagamentosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinPagamentoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3089,6 +3273,30 @@ export type VndPedido$vnd_pedido_historicosArgs<ExtArgs extends runtime.Types.Ex
   take?: number
   skip?: number
   distinct?: Prisma.VndPedidoHistoricoScalarFieldEnum | Prisma.VndPedidoHistoricoScalarFieldEnum[]
+}
+
+/**
+ * VndPedido.vnd_estoque_reservas
+ */
+export type VndPedido$vnd_estoque_reservasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VndEstoqueReserva
+   */
+  select?: Prisma.VndEstoqueReservaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VndEstoqueReserva
+   */
+  omit?: Prisma.VndEstoqueReservaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VndEstoqueReservaInclude<ExtArgs> | null
+  where?: Prisma.VndEstoqueReservaWhereInput
+  orderBy?: Prisma.VndEstoqueReservaOrderByWithRelationInput | Prisma.VndEstoqueReservaOrderByWithRelationInput[]
+  cursor?: Prisma.VndEstoqueReservaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VndEstoqueReservaScalarFieldEnum | Prisma.VndEstoqueReservaScalarFieldEnum[]
 }
 
 /**

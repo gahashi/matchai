@@ -446,9 +446,15 @@ model PrdProduto {
 
   prd_produto_imagens   PrdProdutoImagem[]
   prd_produto_variacoes PrdProdutoVariacao[]
+  prd_produto_campos    PrdProdutoCampo[]
 
-  vnd_campanha_produtos VndCampanhaProduto[]
-  vnd_pedido_itens      VndPedidoItem[]
+  prd_produto_componentes PrdProdutoComponente[] @relation("PrdProdutoKit")
+  prd_componente_de_kits  PrdProdutoComponente[] @relation("PrdProdutoComponente")
+
+  vnd_campanha_produtos       VndCampanhaProduto[]
+  vnd_pedido_itens            VndPedidoItem[]
+  vnd_pedido_item_componentes VndPedidoItemComponente[]
+  vnd_estoque_reservas        VndEstoqueReserva[]
 
   soc_planos SocPlano[]
 
@@ -508,11 +514,67 @@ model PrdProdutoVariacao {
 
   prd_produto PrdProduto @relation(fields: [prd_produto_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
-  vnd_pedido_itens VndPedidoItem[]
+  vnd_pedido_itens            VndPedidoItem[]
+  vnd_pedido_item_componentes VndPedidoItemComponente[]
+  vnd_estoque_reservas        VndEstoqueReserva[]
 
   @@index([prd_produto_id, ativo])
   @@index([deleted_at])
   @@map("prd_produto_variacao")
+}
+
+model PrdProdutoComponente {
+  id Int @id @default(autoincrement())
+
+  prd_produto_id            Int
+  prd_produto_componente_id Int
+
+  quantidade Int @default(1)
+  ordem      Int @default(0)
+  ativo      Int @default(1)
+
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  prd_produto PrdProduto @relation("PrdProdutoKit", fields: [prd_produto_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  prd_produto_componente PrdProduto @relation("PrdProdutoComponente", fields: [prd_produto_componente_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@unique([prd_produto_id, prd_produto_componente_id])
+  @@index([prd_produto_id, ativo, ordem])
+  @@index([prd_produto_componente_id])
+  @@map("prd_produto_componente")
+}
+
+model PrdProdutoCampo {
+  id Int @id @default(autoincrement())
+
+  prd_produto_id Int
+
+  codigo    String  @db.VarChar(60)
+  nome      String  @db.VarChar(100)
+  descricao String? @db.VarChar(255)
+
+  tipo String @default("texto") @db.VarChar(30)
+
+  obrigatorio Int @default(0)
+  valor_unico Int @default(0)
+
+  ordem Int @default(0)
+  ativo Int @default(1)
+
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+  deleted_at DateTime? @db.DateTime(0)
+
+  prd_produto PrdProduto @relation(fields: [prd_produto_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  vnd_pedido_item_campos VndPedidoItemCampo[]
+
+  @@unique([prd_produto_id, codigo])
+  @@index([prd_produto_id, ativo])
+  @@index([deleted_at])
+  @@map("prd_produto_campo")
 }
 
 // =========================================================
@@ -577,6 +639,8 @@ model VndCampanhaProduto {
   vnd_campanha_id Int
   prd_produto_id  Int
 
+  modalidade_venda String @default("estoque") @db.VarChar(30)
+
   preco_normal Decimal? @db.Decimal(10, 2)
   preco_socio  Decimal? @db.Decimal(10, 2)
 
@@ -595,6 +659,7 @@ model VndCampanhaProduto {
   @@unique([vnd_campanha_id, prd_produto_id])
   @@index([vnd_campanha_id, ativo])
   @@index([prd_produto_id])
+  @@index([modalidade_venda])
   @@map("vnd_campanha_produto")
 }
 
@@ -792,6 +857,7 @@ model VndPedido {
 
   vnd_pedido_itens      VndPedidoItem[]
   vnd_pedido_historicos VndPedidoHistorico[]
+  vnd_estoque_reservas  VndEstoqueReserva[]
 
   fin_pagamentos FinPagamento[]
 
@@ -844,11 +910,113 @@ model VndPedidoItem {
 
   soc_socios_gerados SocSocio[] @relation("SocSocioOrigemPedidoItem")
 
+  vnd_pedido_item_componentes VndPedidoItemComponente[]
+  vnd_pedido_item_campos      VndPedidoItemCampo[]
+  vnd_estoque_reservas        VndEstoqueReserva[]
+
   @@index([vnd_pedido_id])
   @@index([prd_produto_id])
   @@index([prd_produto_variacao_id])
   @@index([vnd_campanha_id])
   @@map("vnd_pedido_item")
+}
+
+model VndPedidoItemComponente {
+  id Int @id @default(autoincrement())
+
+  vnd_pedido_item_id Int
+
+  prd_produto_id          Int?
+  prd_produto_variacao_id Int?
+
+  produto_codigo_snapshot String  @db.VarChar(60)
+  produto_nome_snapshot   String  @db.VarChar(150)
+  variacao_snapshot       String? @db.VarChar(120)
+
+  quantidade Int
+
+  created_at DateTime? @db.DateTime(0)
+
+  vnd_pedido_item VndPedidoItem @relation(fields: [vnd_pedido_item_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  prd_produto PrdProduto? @relation(fields: [prd_produto_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  prd_produto_variacao PrdProdutoVariacao? @relation(fields: [prd_produto_variacao_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  vnd_pedido_item_campos VndPedidoItemCampo[]
+  vnd_estoque_reservas   VndEstoqueReserva[]
+
+  @@index([vnd_pedido_item_id])
+  @@index([prd_produto_id])
+  @@index([prd_produto_variacao_id])
+  @@map("vnd_pedido_item_componente")
+}
+
+model VndPedidoItemCampo {
+  id Int @id @default(autoincrement())
+
+  vnd_pedido_item_id            Int
+  vnd_pedido_item_componente_id Int?
+  prd_produto_campo_id          Int?
+
+  campo_codigo_snapshot String @db.VarChar(60)
+  campo_nome_snapshot   String @db.VarChar(100)
+  campo_tipo_snapshot   String @db.VarChar(30)
+
+  valor             String @db.VarChar(255)
+  valor_normalizado String @db.VarChar(255)
+
+  created_at DateTime? @db.DateTime(0)
+
+  vnd_pedido_item VndPedidoItem @relation(fields: [vnd_pedido_item_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  vnd_pedido_item_componente VndPedidoItemComponente? @relation(fields: [vnd_pedido_item_componente_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  prd_produto_campo PrdProdutoCampo? @relation(fields: [prd_produto_campo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@index([vnd_pedido_item_id])
+  @@index([vnd_pedido_item_componente_id])
+  @@index([prd_produto_campo_id])
+  @@index([prd_produto_campo_id, valor_normalizado])
+  @@map("vnd_pedido_item_campo")
+}
+
+model VndEstoqueReserva {
+  id Int @id @default(autoincrement())
+
+  vnd_pedido_id                 Int
+  vnd_pedido_item_id            Int
+  vnd_pedido_item_componente_id Int?
+
+  prd_produto_id          Int
+  prd_produto_variacao_id Int?
+
+  quantidade Int
+
+  expira_at DateTime @db.DateTime(0)
+
+  consumida_at DateTime? @db.DateTime(0)
+  liberada_at  DateTime? @db.DateTime(0)
+
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  vnd_pedido VndPedido @relation(fields: [vnd_pedido_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  vnd_pedido_item VndPedidoItem @relation(fields: [vnd_pedido_item_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  vnd_pedido_item_componente VndPedidoItemComponente? @relation(fields: [vnd_pedido_item_componente_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  prd_produto PrdProduto @relation(fields: [prd_produto_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  prd_produto_variacao PrdProdutoVariacao? @relation(fields: [prd_produto_variacao_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@index([vnd_pedido_id])
+  @@index([vnd_pedido_item_id])
+  @@index([vnd_pedido_item_componente_id])
+  @@index([prd_produto_id, expira_at])
+  @@index([prd_produto_variacao_id, expira_at])
+  @@map("vnd_estoque_reserva")
 }
 
 model VndPedidoHistorico {

@@ -15,6 +15,7 @@ export type MercadoPagoPaymentResponse = {
     payment_method_id?: string | null;
     payment_type_id?: string | null;
     external_reference?: string | null;
+    date_of_expiration?: string | null;
     transaction_amount?: number | null;
     transaction_details?: {
         net_received_amount?: number | null;
@@ -51,6 +52,7 @@ export type MercadoPagoPaymentCreateInput = {
     description: string;
     payment_method_id: string;
     external_reference: string;
+    date_of_expiration?: string;
     token?: string;
     installments?: number;
     issuer_id?: string | number;

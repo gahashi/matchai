@@ -8,7 +8,29 @@ import type {
 const ORDER_CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 const ORDER_CODE_LENGTH = 6;
 
+export type CheckoutValidatedCampo = {
+    campo_id: number;
+    codigo: string;
+    nome: string;
+    tipo: "texto" | "numero";
+    valor: string;
+    valor_normalizado: string;
+    valor_unico: boolean;
+};
+
+export type CheckoutValidatedComponente = {
+    componente_id: number;
+    produto_id: number;
+    produto_codigo: string;
+    produto_nome: string;
+    quantidade_por_kit: number;
+    variacao_id: number | null;
+    variacao_nome: string | null;
+    campos: CheckoutValidatedCampo[];
+};
+
 export type CheckoutValidatedItem = {
+    line_key: string;
     produto_id: number;
     variacao_id: number | null;
     quantidade: number;
@@ -25,6 +47,8 @@ export type CheckoutValidatedItem = {
         id: number;
         nome: string;
     } | null;
+    campos?: CheckoutValidatedCampo[];
+    componentes?: CheckoutValidatedComponente[];
     preco_tabela?: number;
     preco_unitario?: number;
     subtotal?: number;
@@ -39,6 +63,315 @@ export type CheckoutCustomer = {
 
 export type CheckoutPaymentMethod = "pix" | "cartao";
 
+
+export class CheckoutStockError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = "CheckoutStockError";
+    }
+}
+
+function getStockReservationMinutes() {
+    const configured = Number(
+        process.env.STOCK_RESERVATION_MINUTES,
+    );
+
+    if (
+        Number.isInteger(configured) &&
+        configured > 0
+    ) {
+        return configured;
+    }
+
+    return 30;
+}
+
+/*
+ * expira_at é mantido como referência da janela local de reserva.
+ * Enquanto a expiração do pagamento não estiver sincronizada com o
+ * Mercado Pago, a reserva só deixa de bloquear estoque quando for
+ * explicitamente consumida ou liberada por um status terminal.
+ */
+function getReservationExpiration(now: Date) {
+    return new Date(
+        now.getTime() +
+        getStockReservationMinutes() *
+        60_000,
+    );
+}
+
+type StockReservationInput = {
+    pedidoId: number;
+    pedidoItemId: number;
+    pedidoItemComponenteId: number | null;
+    produtoId: number;
+    variacaoId: number | null;
+    quantidade: number;
+    expiraAt: Date;
+};
+
+async function lockStockRow(
+    tx: any,
+    produtoId: number,
+    variacaoId: number | null,
+) {
+    if (variacaoId !== null) {
+        await tx.$queryRawUnsafe(
+            "SELECT id FROM prd_produto_variacao WHERE id = ? FOR UPDATE",
+            variacaoId,
+        );
+        return;
+    }
+
+    await tx.$queryRawUnsafe(
+        "SELECT id FROM prd_produto WHERE id = ? FOR UPDATE",
+        produtoId,
+    );
+}
+
+async function createStockReservation(
+    tx: any,
+    input: StockReservationInput,
+    now: Date,
+) {
+    if (
+        !Number.isInteger(input.quantidade) ||
+        input.quantidade <= 0
+    ) {
+        throw new CheckoutStockError(
+            "Quantidade de estoque inválida.",
+        );
+    }
+
+    await lockStockRow(
+        tx,
+        input.produtoId,
+        input.variacaoId,
+    );
+
+    const produto =
+        await tx.prdProduto.findFirst({
+            where: {
+                id: input.produtoId,
+                ativo: 1,
+                deleted_at: null,
+            },
+            select: {
+                id: true,
+                nome: true,
+                controla_estoque: true,
+                estoque_atual: true,
+            },
+        });
+
+    if (!produto) {
+        throw new CheckoutStockError(
+            "Produto de estoque não encontrado.",
+        );
+    }
+
+    if (!produto.controla_estoque) {
+        return;
+    }
+
+    let estoqueFisico: number | null =
+        produto.estoque_atual;
+
+    let variacaoNome: string | null = null;
+
+    if (input.variacaoId !== null) {
+        const variacao =
+            await tx.prdProdutoVariacao.findFirst({
+                where: {
+                    id: input.variacaoId,
+                    prd_produto_id:
+                    input.produtoId,
+                    ativo: 1,
+                    deleted_at: null,
+                },
+                select: {
+                    id: true,
+                    nome: true,
+                    estoque_atual: true,
+                },
+            });
+
+        if (!variacao) {
+            throw new CheckoutStockError(
+                `A variação selecionada de "${produto.nome}" não está disponível.`,
+            );
+        }
+
+        estoqueFisico =
+            variacao.estoque_atual;
+        variacaoNome = variacao.nome;
+    }
+
+    // null representa estoque sem limite físico.
+    if (estoqueFisico === null) {
+        return;
+    }
+
+    const reservado =
+        await tx.vndEstoqueReserva.aggregate({
+            where: {
+                prd_produto_id:
+                input.produtoId,
+                prd_produto_variacao_id:
+                input.variacaoId,
+                consumida_at: null,
+                liberada_at: null,
+            },
+            _sum: {
+                quantidade: true,
+            },
+        });
+
+    const quantidadeReservada =
+        reservado._sum.quantidade ?? 0;
+
+    const disponivel =
+        estoqueFisico -
+        quantidadeReservada;
+
+    if (
+        disponivel <
+        input.quantidade
+    ) {
+        const nomeEstoque =
+            variacaoNome
+                ? `${produto.nome} · ${variacaoNome}`
+                : produto.nome;
+
+        throw new CheckoutStockError(
+            disponivel > 0
+                ? `Estoque disponível de "${nomeEstoque}": ${disponivel}.`
+                : `"${nomeEstoque}" está temporariamente sem estoque disponível.`,
+        );
+    }
+
+    await tx.vndEstoqueReserva.create({
+        data: {
+            vnd_pedido_id:
+            input.pedidoId,
+            vnd_pedido_item_id:
+            input.pedidoItemId,
+            vnd_pedido_item_componente_id:
+            input.pedidoItemComponenteId,
+            prd_produto_id:
+            input.produtoId,
+            prd_produto_variacao_id:
+            input.variacaoId,
+            quantidade:
+            input.quantidade,
+            expira_at:
+            input.expiraAt,
+            consumida_at: null,
+            liberada_at: null,
+            created_at: now,
+            updated_at: now,
+        },
+    });
+}
+
+async function consumeOrderReservations(
+    tx: any,
+    pedidoId: number,
+    now: Date,
+) {
+    const reservas =
+        await tx.vndEstoqueReserva.findMany({
+            where: {
+                vnd_pedido_id: pedidoId,
+                consumida_at: null,
+                liberada_at: null,
+            },
+            orderBy: {
+                id: "asc",
+            },
+        });
+
+    for (const reserva of reservas) {
+        await lockStockRow(
+            tx,
+            reserva.prd_produto_id,
+            reserva.prd_produto_variacao_id,
+        );
+
+        const updateResult =
+            reserva.prd_produto_variacao_id !==
+            null
+                ? await tx.prdProdutoVariacao.updateMany(
+                    {
+                        where: {
+                            id: reserva.prd_produto_variacao_id,
+                            estoque_atual: {
+                                gte: reserva.quantidade,
+                            },
+                        },
+                        data: {
+                            estoque_atual: {
+                                decrement:
+                                reserva.quantidade,
+                            },
+                            updated_at: now,
+                        },
+                    },
+                )
+                : await tx.prdProduto.updateMany(
+                    {
+                        where: {
+                            id: reserva.prd_produto_id,
+                            estoque_atual: {
+                                gte: reserva.quantidade,
+                            },
+                        },
+                        data: {
+                            estoque_atual: {
+                                decrement:
+                                reserva.quantidade,
+                            },
+                            updated_at: now,
+                        },
+                    },
+                );
+
+        if (updateResult.count !== 1) {
+            throw new CheckoutStockError(
+                "O estoque reservado ficou inconsistente antes da confirmação do pagamento.",
+            );
+        }
+
+        await tx.vndEstoqueReserva.update({
+            where: {
+                id: reserva.id,
+            },
+            data: {
+                consumida_at: now,
+                updated_at: now,
+            },
+        });
+    }
+}
+
+async function releaseOrderReservations(
+    tx: any,
+    pedidoId: number,
+    now: Date,
+) {
+    await tx.vndEstoqueReserva.updateMany({
+        where: {
+            vnd_pedido_id: pedidoId,
+            consumida_at: null,
+            liberada_at: null,
+        },
+        data: {
+            liberada_at: now,
+            updated_at: now,
+        },
+    });
+}
+
 function roundMoney(value: number) {
     return Number(value.toFixed(2));
 }
@@ -49,7 +382,7 @@ function buildOrderCode() {
     for (let index = 0; index < ORDER_CODE_LENGTH; index += 1) {
         code += ORDER_CODE_ALPHABET[
             randomInt(0, ORDER_CODE_ALPHABET.length)
-        ];
+            ];
     }
 
     return code;
@@ -185,6 +518,19 @@ class PedidoPublicService {
                         id: true,
                         codigo: true,
                         valor_total: true,
+                        vnd_estoque_reservas: {
+                            where: {
+                                consumida_at: null,
+                                liberada_at: null,
+                            },
+                            orderBy: {
+                                expira_at: "asc",
+                            },
+                            take: 1,
+                            select: {
+                                expira_at: true,
+                            },
+                        },
                     },
                 },
             },
@@ -263,6 +609,8 @@ class PedidoPublicService {
 
         const codigo = await generateUniqueOrderCode();
         const now = new Date();
+        const reservaExpiraAt =
+            getReservationExpiration(now);
 
         return prisma.$transaction(async (tx) => {
             const pedido = await tx.vndPedido.create({
@@ -293,41 +641,196 @@ class PedidoPublicService {
                 },
             });
 
-            await tx.vndPedidoItem.createMany({
-                data: input.items.map((item) => ({
-                    vnd_pedido_id: pedido.id,
-                    prd_produto_id: item.produto_id,
-                    prd_produto_variacao_id:
-                        item.variacao_id,
-                    vnd_campanha_id: null,
-                    produto_codigo_snapshot:
-                        item.produto?.codigo ?? String(item.produto_id),
-                    produto_nome_snapshot:
-                        item.produto?.nome ?? "Produto",
-                    variacao_snapshot:
-                        item.variacao?.nome ?? null,
-                    quantidade: item.quantidade,
-                    preco_tabela:
-                        item.preco_tabela ??
-                        item.produto?.preco_normal ??
-                        0,
-                    preco_unitario:
-                        item.preco_unitario ??
-                        item.produto?.preco_aplicado ??
-                        0,
-                    valor_desconto: 0,
-                    subtotal: item.subtotal ?? 0,
-                    socio_aplicado:
-                        item.socio_aplicado ||
-                        item.produto?.socio_aplicado
-                            ? 1
-                            : 0,
-                    personalizacao_nome: null,
-                    personalizacao_numero: null,
-                    observacao: null,
-                    created_at: now,
-                })),
-            });
+            for (const item of input.items) {
+                const pedidoItem =
+                    await tx.vndPedidoItem.create({
+                        data: {
+                            vnd_pedido_id: pedido.id,
+                            prd_produto_id:
+                            item.produto_id,
+                            prd_produto_variacao_id:
+                            item.variacao_id,
+                            vnd_campanha_id: null,
+                            produto_codigo_snapshot:
+                                item.produto?.codigo ??
+                                String(item.produto_id),
+                            produto_nome_snapshot:
+                                item.produto?.nome ??
+                                "Produto",
+                            variacao_snapshot:
+                                item.variacao?.nome ??
+                                null,
+                            quantidade:
+                            item.quantidade,
+                            preco_tabela:
+                                item.preco_tabela ??
+                                item.produto
+                                    ?.preco_normal ??
+                                0,
+                            preco_unitario:
+                                item.preco_unitario ??
+                                item.produto
+                                    ?.preco_aplicado ??
+                                0,
+                            valor_desconto: 0,
+                            subtotal:
+                                item.subtotal ?? 0,
+                            socio_aplicado:
+                                item.socio_aplicado ||
+                                item.produto
+                                    ?.socio_aplicado
+                                    ? 1
+                                    : 0,
+
+                            // Campos legados preservados até o novo
+                            // modelo de personalização substituir todos
+                            // os consumidores antigos.
+                            personalizacao_nome: null,
+                            personalizacao_numero: null,
+
+                            observacao: null,
+                            created_at: now,
+                        },
+                        select: {
+                            id: true,
+                        },
+                    });
+
+                const itemCampos =
+                    item.campos ?? [];
+
+                if (itemCampos.length > 0) {
+                    await tx.vndPedidoItemCampo.createMany({
+                        data: itemCampos.map(
+                            (campo) => ({
+                                vnd_pedido_item_id:
+                                pedidoItem.id,
+                                vnd_pedido_item_componente_id:
+                                    null,
+                                prd_produto_campo_id:
+                                campo.campo_id,
+                                campo_codigo_snapshot:
+                                campo.codigo,
+                                campo_nome_snapshot:
+                                campo.nome,
+                                campo_tipo_snapshot:
+                                campo.tipo,
+                                valor: campo.valor,
+                                valor_normalizado:
+                                campo.valor_normalizado,
+                                created_at: now,
+                            }),
+                        ),
+                    });
+                }
+
+                const componentes =
+                    item.componentes ?? [];
+
+                // Produto normal reserva o próprio estoque.
+                // Kit reserva somente os componentes reais.
+                if (componentes.length === 0) {
+                    await createStockReservation(
+                        tx,
+                        {
+                            pedidoId: pedido.id,
+                            pedidoItemId:
+                            pedidoItem.id,
+                            pedidoItemComponenteId:
+                                null,
+                            produtoId:
+                            item.produto_id,
+                            variacaoId:
+                            item.variacao_id,
+                            quantidade:
+                            item.quantidade,
+                            expiraAt:
+                            reservaExpiraAt,
+                        },
+                        now,
+                    );
+                }
+
+                for (const componente of
+                    componentes) {
+                    const pedidoItemComponente =
+                        await tx.vndPedidoItemComponente.create(
+                            {
+                                data: {
+                                    vnd_pedido_item_id:
+                                    pedidoItem.id,
+                                    prd_produto_id:
+                                    componente.produto_id,
+                                    prd_produto_variacao_id:
+                                    componente.variacao_id,
+                                    produto_codigo_snapshot:
+                                    componente.produto_codigo,
+                                    produto_nome_snapshot:
+                                    componente.produto_nome,
+                                    variacao_snapshot:
+                                    componente.variacao_nome,
+                                    quantidade:
+                                    componente.quantidade_por_kit,
+                                    created_at: now,
+                                },
+                                select: {
+                                    id: true,
+                                },
+                            },
+                        );
+
+                    if (
+                        componente.campos.length > 0
+                    ) {
+                        await tx.vndPedidoItemCampo.createMany(
+                            {
+                                data: componente.campos.map(
+                                    (campo) => ({
+                                        vnd_pedido_item_id:
+                                        pedidoItem.id,
+                                        vnd_pedido_item_componente_id:
+                                        pedidoItemComponente.id,
+                                        prd_produto_campo_id:
+                                        campo.campo_id,
+                                        campo_codigo_snapshot:
+                                        campo.codigo,
+                                        campo_nome_snapshot:
+                                        campo.nome,
+                                        campo_tipo_snapshot:
+                                        campo.tipo,
+                                        valor:
+                                        campo.valor,
+                                        valor_normalizado:
+                                        campo.valor_normalizado,
+                                        created_at: now,
+                                    }),
+                                ),
+                            },
+                        );
+                    }
+
+                    await createStockReservation(
+                        tx,
+                        {
+                            pedidoId: pedido.id,
+                            pedidoItemId:
+                            pedidoItem.id,
+                            pedidoItemComponenteId:
+                            pedidoItemComponente.id,
+                            produtoId:
+                            componente.produto_id,
+                            variacaoId:
+                            componente.variacao_id,
+                            quantidade:
+                                item.quantidade *
+                                componente.quantidade_por_kit,
+                            expiraAt:
+                            reservaExpiraAt,
+                        },
+                        now,
+                    );
+                }
+            }
 
             await tx.vndPedidoHistorico.create({
                 data: {
@@ -365,6 +868,7 @@ class PedidoPublicService {
                 pedido,
                 pagamento,
                 total,
+                reservaExpiraAt,
             };
         });
     }
@@ -432,6 +936,24 @@ class PedidoPublicService {
         );
 
         await prisma.$transaction(async (tx) => {
+            if (finStatusCode === "aprovado") {
+                await consumeOrderReservations(
+                    tx,
+                    pagamento.vnd_pedido_id,
+                    now,
+                );
+            } else if (
+                finStatusCode === "recusado" ||
+                finStatusCode === "cancelado" ||
+                finStatusCode === "expirado"
+            ) {
+                await releaseOrderReservations(
+                    tx,
+                    pagamento.vnd_pedido_id,
+                    now,
+                );
+            }
+
             await tx.finPagamento.update({
                 where: { id: pagamento.id },
                 data: {
