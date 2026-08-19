@@ -25,6 +25,10 @@ class StorageService {
         });
     }
 
+    get(fileKey: string) {
+        return this.provider.get(fileKey);
+    }
+
     delete(fileKey: string): Promise<void> {
         return this.provider.delete(fileKey);
     }

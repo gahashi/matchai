@@ -23,7 +23,15 @@ export type UploadedFileResult = {
     visibility: StorageVisibility;
 };
 
+export type StoredFileResult = {
+    body: Uint8Array;
+    contentType: string | null;
+    contentLength: number | null;
+    etag: string | null;
+};
+
 export type StorageProvider = {
+    get(fileKey: string): Promise<StoredFileResult>;
     upload(input: UploadFileInput): Promise<UploadedFileResult>;
     delete(fileKey: string): Promise<void>;
     getPublicUrl(fileKey: string): string;

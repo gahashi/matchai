@@ -11,6 +11,10 @@ export const auth = betterAuth({
     appName: "AAACCU",
 
     baseURL: process.env.BETTER_AUTH_URL,
+    trustedOrigins: [
+        "http://localhost:3000",
+        "https://brava-pass.camel-theropod.ts.net",
+    ],
 
     database: prismaAdapter(prisma, {
         provider: "mysql",

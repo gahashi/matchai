@@ -1,8 +1,18 @@
-import { DeleteObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import {
+    DeleteObjectCommand,
+    GetObjectCommand,
+    PutObjectCommand,
+    S3Client,
+} from "@aws-sdk/client-s3";
 import { createHash, randomUUID } from "crypto";
 
 import { getStorageConfig } from "./storage-config";
-import type { StorageProvider, UploadFileInput, UploadedFileResult } from "./storage-types";
+import type {
+    StorageProvider,
+    StoredFileResult,
+    UploadFileInput,
+    UploadedFileResult,
+} from "./storage-types";
 import { getExtensionFromMimeType, validateUploadFile } from "./upload-rules";
 
 function sanitizePathPart(value: string): string {
@@ -94,6 +104,28 @@ export class S3StorageProvider implements StorageProvider {
                 Key: fileKey,
             }),
         );
+    }
+
+    async get(fileKey: string): Promise<StoredFileResult> {
+        const response = await this.client.send(
+            new GetObjectCommand({
+                Bucket: this.bucket,
+                Key: fileKey,
+            }),
+        );
+
+        if (!response.Body) {
+            throw new Error(
+                `Arquivo sem conteúdo no storage: ${fileKey}`,
+            );
+        }
+
+        return {
+            body: await response.Body.transformToByteArray(),
+            contentType: response.ContentType ?? null,
+            contentLength: response.ContentLength ?? null,
+            etag: response.ETag ?? null,
+        };
     }
 
     getPublicUrl(fileKey: string): string {
