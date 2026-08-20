@@ -36,6 +36,16 @@ function money(value: number) {
     }).format(value);
 }
 
+function formatDate(value: string) {
+    const [year, month, day] = value.split("-");
+
+    if (!year || !month || !day) {
+        return value;
+    }
+
+    return `${day}/${month}/${year}`;
+}
+
 function campoStateKey(
     scope: "produto" | "componente",
     scopeId: number,
@@ -683,6 +693,14 @@ export function ProductCard({
                         </p>
                     ) : null}
 
+                    {produto.modalidade_venda === "pre_venda" &&
+                    produto.previsao_entrega ? (
+                        <p className="bp-public-product-description">
+                            Previsão de entrega:{" "}
+                            {formatDate(produto.previsao_entrega)}
+                        </p>
+                    ) : null}
+
                     <div className="bp-public-product-prices">
                         <div>
                             <span>
@@ -932,6 +950,14 @@ export function ProductCard({
                                     {
                                         produto.descricao
                                     }
+                                </p>
+                            ) : null}
+
+                            {produto.modalidade_venda === "pre_venda" &&
+                            produto.previsao_entrega ? (
+                                <p>
+                                    <strong>Previsão de entrega:</strong>{" "}
+                                    {formatDate(produto.previsao_entrega)}
                                 </p>
                             ) : null}
                         </div>

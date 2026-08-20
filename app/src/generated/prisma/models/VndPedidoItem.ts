@@ -63,6 +63,7 @@ export type VndPedidoItemMinAggregateOutputType = {
   produto_codigo_snapshot: string | null
   produto_nome_snapshot: string | null
   variacao_snapshot: string | null
+  previsao_entrega_snapshot: Date | null
   quantidade: number | null
   preco_tabela: runtime.Decimal | null
   preco_unitario: runtime.Decimal | null
@@ -84,6 +85,7 @@ export type VndPedidoItemMaxAggregateOutputType = {
   produto_codigo_snapshot: string | null
   produto_nome_snapshot: string | null
   variacao_snapshot: string | null
+  previsao_entrega_snapshot: Date | null
   quantidade: number | null
   preco_tabela: runtime.Decimal | null
   preco_unitario: runtime.Decimal | null
@@ -105,6 +107,7 @@ export type VndPedidoItemCountAggregateOutputType = {
   produto_codigo_snapshot: number
   produto_nome_snapshot: number
   variacao_snapshot: number
+  previsao_entrega_snapshot: number
   quantidade: number
   preco_tabela: number
   preco_unitario: number
@@ -156,6 +159,7 @@ export type VndPedidoItemMinAggregateInputType = {
   produto_codigo_snapshot?: true
   produto_nome_snapshot?: true
   variacao_snapshot?: true
+  previsao_entrega_snapshot?: true
   quantidade?: true
   preco_tabela?: true
   preco_unitario?: true
@@ -177,6 +181,7 @@ export type VndPedidoItemMaxAggregateInputType = {
   produto_codigo_snapshot?: true
   produto_nome_snapshot?: true
   variacao_snapshot?: true
+  previsao_entrega_snapshot?: true
   quantidade?: true
   preco_tabela?: true
   preco_unitario?: true
@@ -198,6 +203,7 @@ export type VndPedidoItemCountAggregateInputType = {
   produto_codigo_snapshot?: true
   produto_nome_snapshot?: true
   variacao_snapshot?: true
+  previsao_entrega_snapshot?: true
   quantidade?: true
   preco_tabela?: true
   preco_unitario?: true
@@ -306,6 +312,7 @@ export type VndPedidoItemGroupByOutputType = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot: string | null
+  previsao_entrega_snapshot: Date | null
   quantidade: number
   preco_tabela: runtime.Decimal
   preco_unitario: runtime.Decimal
@@ -350,6 +357,7 @@ export type VndPedidoItemWhereInput = {
   produto_codigo_snapshot?: Prisma.StringFilter<"VndPedidoItem"> | string
   produto_nome_snapshot?: Prisma.StringFilter<"VndPedidoItem"> | string
   variacao_snapshot?: Prisma.StringNullableFilter<"VndPedidoItem"> | string | null
+  previsao_entrega_snapshot?: Prisma.DateTimeNullableFilter<"VndPedidoItem"> | Date | string | null
   quantidade?: Prisma.IntFilter<"VndPedidoItem"> | number
   preco_tabela?: Prisma.DecimalFilter<"VndPedidoItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFilter<"VndPedidoItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -379,6 +387,7 @@ export type VndPedidoItemOrderByWithRelationInput = {
   produto_codigo_snapshot?: Prisma.SortOrder
   produto_nome_snapshot?: Prisma.SortOrder
   variacao_snapshot?: Prisma.SortOrderInput | Prisma.SortOrder
+  previsao_entrega_snapshot?: Prisma.SortOrderInput | Prisma.SortOrder
   quantidade?: Prisma.SortOrder
   preco_tabela?: Prisma.SortOrder
   preco_unitario?: Prisma.SortOrder
@@ -412,6 +421,7 @@ export type VndPedidoItemWhereUniqueInput = Prisma.AtLeast<{
   produto_codigo_snapshot?: Prisma.StringFilter<"VndPedidoItem"> | string
   produto_nome_snapshot?: Prisma.StringFilter<"VndPedidoItem"> | string
   variacao_snapshot?: Prisma.StringNullableFilter<"VndPedidoItem"> | string | null
+  previsao_entrega_snapshot?: Prisma.DateTimeNullableFilter<"VndPedidoItem"> | Date | string | null
   quantidade?: Prisma.IntFilter<"VndPedidoItem"> | number
   preco_tabela?: Prisma.DecimalFilter<"VndPedidoItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFilter<"VndPedidoItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -441,6 +451,7 @@ export type VndPedidoItemOrderByWithAggregationInput = {
   produto_codigo_snapshot?: Prisma.SortOrder
   produto_nome_snapshot?: Prisma.SortOrder
   variacao_snapshot?: Prisma.SortOrderInput | Prisma.SortOrder
+  previsao_entrega_snapshot?: Prisma.SortOrderInput | Prisma.SortOrder
   quantidade?: Prisma.SortOrder
   preco_tabela?: Prisma.SortOrder
   preco_unitario?: Prisma.SortOrder
@@ -470,6 +481,7 @@ export type VndPedidoItemScalarWhereWithAggregatesInput = {
   produto_codigo_snapshot?: Prisma.StringWithAggregatesFilter<"VndPedidoItem"> | string
   produto_nome_snapshot?: Prisma.StringWithAggregatesFilter<"VndPedidoItem"> | string
   variacao_snapshot?: Prisma.StringNullableWithAggregatesFilter<"VndPedidoItem"> | string | null
+  previsao_entrega_snapshot?: Prisma.DateTimeNullableWithAggregatesFilter<"VndPedidoItem"> | Date | string | null
   quantidade?: Prisma.IntWithAggregatesFilter<"VndPedidoItem"> | number
   preco_tabela?: Prisma.DecimalWithAggregatesFilter<"VndPedidoItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalWithAggregatesFilter<"VndPedidoItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -486,6 +498,7 @@ export type VndPedidoItemCreateInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -515,6 +528,7 @@ export type VndPedidoItemUncheckedCreateInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -535,6 +549,7 @@ export type VndPedidoItemUpdateInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -564,6 +579,7 @@ export type VndPedidoItemUncheckedUpdateInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -589,6 +605,7 @@ export type VndPedidoItemCreateManyInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -605,6 +622,7 @@ export type VndPedidoItemUpdateManyMutationInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -626,6 +644,7 @@ export type VndPedidoItemUncheckedUpdateManyInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -668,6 +687,7 @@ export type VndPedidoItemCountOrderByAggregateInput = {
   produto_codigo_snapshot?: Prisma.SortOrder
   produto_nome_snapshot?: Prisma.SortOrder
   variacao_snapshot?: Prisma.SortOrder
+  previsao_entrega_snapshot?: Prisma.SortOrder
   quantidade?: Prisma.SortOrder
   preco_tabela?: Prisma.SortOrder
   preco_unitario?: Prisma.SortOrder
@@ -703,6 +723,7 @@ export type VndPedidoItemMaxOrderByAggregateInput = {
   produto_codigo_snapshot?: Prisma.SortOrder
   produto_nome_snapshot?: Prisma.SortOrder
   variacao_snapshot?: Prisma.SortOrder
+  previsao_entrega_snapshot?: Prisma.SortOrder
   quantidade?: Prisma.SortOrder
   preco_tabela?: Prisma.SortOrder
   preco_unitario?: Prisma.SortOrder
@@ -724,6 +745,7 @@ export type VndPedidoItemMinOrderByAggregateInput = {
   produto_codigo_snapshot?: Prisma.SortOrder
   produto_nome_snapshot?: Prisma.SortOrder
   variacao_snapshot?: Prisma.SortOrder
+  previsao_entrega_snapshot?: Prisma.SortOrder
   quantidade?: Prisma.SortOrder
   preco_tabela?: Prisma.SortOrder
   preco_unitario?: Prisma.SortOrder
@@ -985,6 +1007,7 @@ export type VndPedidoItemCreateWithoutPrd_produtoInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1012,6 +1035,7 @@ export type VndPedidoItemUncheckedCreateWithoutPrd_produtoInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1066,6 +1090,7 @@ export type VndPedidoItemScalarWhereInput = {
   produto_codigo_snapshot?: Prisma.StringFilter<"VndPedidoItem"> | string
   produto_nome_snapshot?: Prisma.StringFilter<"VndPedidoItem"> | string
   variacao_snapshot?: Prisma.StringNullableFilter<"VndPedidoItem"> | string | null
+  previsao_entrega_snapshot?: Prisma.DateTimeNullableFilter<"VndPedidoItem"> | Date | string | null
   quantidade?: Prisma.IntFilter<"VndPedidoItem"> | number
   preco_tabela?: Prisma.DecimalFilter<"VndPedidoItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFilter<"VndPedidoItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1082,6 +1107,7 @@ export type VndPedidoItemCreateWithoutPrd_produto_variacaoInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1109,6 +1135,7 @@ export type VndPedidoItemUncheckedCreateWithoutPrd_produto_variacaoInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1155,6 +1182,7 @@ export type VndPedidoItemCreateWithoutVnd_campanhaInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1182,6 +1210,7 @@ export type VndPedidoItemUncheckedCreateWithoutVnd_campanhaInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1228,6 +1257,7 @@ export type VndPedidoItemCreateWithoutSoc_socios_geradosInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1256,6 +1286,7 @@ export type VndPedidoItemUncheckedCreateWithoutSoc_socios_geradosInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1291,6 +1322,7 @@ export type VndPedidoItemUpdateWithoutSoc_socios_geradosInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1319,6 +1351,7 @@ export type VndPedidoItemUncheckedUpdateWithoutSoc_socios_geradosInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1338,6 +1371,7 @@ export type VndPedidoItemCreateWithoutVnd_pedidoInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1365,6 +1399,7 @@ export type VndPedidoItemUncheckedCreateWithoutVnd_pedidoInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1411,6 +1446,7 @@ export type VndPedidoItemCreateWithoutVnd_pedido_item_componentesInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1439,6 +1475,7 @@ export type VndPedidoItemUncheckedCreateWithoutVnd_pedido_item_componentesInput 
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1474,6 +1511,7 @@ export type VndPedidoItemUpdateWithoutVnd_pedido_item_componentesInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1502,6 +1540,7 @@ export type VndPedidoItemUncheckedUpdateWithoutVnd_pedido_item_componentesInput 
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1521,6 +1560,7 @@ export type VndPedidoItemCreateWithoutVnd_pedido_item_camposInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1549,6 +1589,7 @@ export type VndPedidoItemUncheckedCreateWithoutVnd_pedido_item_camposInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1584,6 +1625,7 @@ export type VndPedidoItemUpdateWithoutVnd_pedido_item_camposInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1612,6 +1654,7 @@ export type VndPedidoItemUncheckedUpdateWithoutVnd_pedido_item_camposInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1631,6 +1674,7 @@ export type VndPedidoItemCreateWithoutVnd_estoque_reservasInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1659,6 +1703,7 @@ export type VndPedidoItemUncheckedCreateWithoutVnd_estoque_reservasInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1694,6 +1739,7 @@ export type VndPedidoItemUpdateWithoutVnd_estoque_reservasInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1722,6 +1768,7 @@ export type VndPedidoItemUncheckedUpdateWithoutVnd_estoque_reservasInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1745,6 +1792,7 @@ export type VndPedidoItemCreateManyPrd_produtoInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1761,6 +1809,7 @@ export type VndPedidoItemUpdateWithoutPrd_produtoInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1788,6 +1837,7 @@ export type VndPedidoItemUncheckedUpdateWithoutPrd_produtoInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1812,6 +1862,7 @@ export type VndPedidoItemUncheckedUpdateManyWithoutPrd_produtoInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1832,6 +1883,7 @@ export type VndPedidoItemCreateManyPrd_produto_variacaoInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1848,6 +1900,7 @@ export type VndPedidoItemUpdateWithoutPrd_produto_variacaoInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1875,6 +1928,7 @@ export type VndPedidoItemUncheckedUpdateWithoutPrd_produto_variacaoInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1899,6 +1953,7 @@ export type VndPedidoItemUncheckedUpdateManyWithoutPrd_produto_variacaoInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1919,6 +1974,7 @@ export type VndPedidoItemCreateManyVnd_campanhaInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1935,6 +1991,7 @@ export type VndPedidoItemUpdateWithoutVnd_campanhaInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1962,6 +2019,7 @@ export type VndPedidoItemUncheckedUpdateWithoutVnd_campanhaInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1986,6 +2044,7 @@ export type VndPedidoItemUncheckedUpdateManyWithoutVnd_campanhaInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2006,6 +2065,7 @@ export type VndPedidoItemCreateManyVnd_pedidoInput = {
   produto_codigo_snapshot: string
   produto_nome_snapshot: string
   variacao_snapshot?: string | null
+  previsao_entrega_snapshot?: Date | string | null
   quantidade: number
   preco_tabela: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2022,6 +2082,7 @@ export type VndPedidoItemUpdateWithoutVnd_pedidoInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2049,6 +2110,7 @@ export type VndPedidoItemUncheckedUpdateWithoutVnd_pedidoInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2073,6 +2135,7 @@ export type VndPedidoItemUncheckedUpdateManyWithoutVnd_pedidoInput = {
   produto_codigo_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   produto_nome_snapshot?: Prisma.StringFieldUpdateOperationsInput | string
   variacao_snapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previsao_entrega_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   preco_tabela?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_unitario?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2152,6 +2215,7 @@ export type VndPedidoItemSelect<ExtArgs extends runtime.Types.Extensions.Interna
   produto_codigo_snapshot?: boolean
   produto_nome_snapshot?: boolean
   variacao_snapshot?: boolean
+  previsao_entrega_snapshot?: boolean
   quantidade?: boolean
   preco_tabela?: boolean
   preco_unitario?: boolean
@@ -2184,6 +2248,7 @@ export type VndPedidoItemSelectScalar = {
   produto_codigo_snapshot?: boolean
   produto_nome_snapshot?: boolean
   variacao_snapshot?: boolean
+  previsao_entrega_snapshot?: boolean
   quantidade?: boolean
   preco_tabela?: boolean
   preco_unitario?: boolean
@@ -2196,7 +2261,7 @@ export type VndPedidoItemSelectScalar = {
   created_at?: boolean
 }
 
-export type VndPedidoItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vnd_pedido_id" | "prd_produto_id" | "prd_produto_variacao_id" | "vnd_campanha_id" | "produto_codigo_snapshot" | "produto_nome_snapshot" | "variacao_snapshot" | "quantidade" | "preco_tabela" | "preco_unitario" | "valor_desconto" | "subtotal" | "socio_aplicado" | "personalizacao_nome" | "personalizacao_numero" | "observacao" | "created_at", ExtArgs["result"]["vndPedidoItem"]>
+export type VndPedidoItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vnd_pedido_id" | "prd_produto_id" | "prd_produto_variacao_id" | "vnd_campanha_id" | "produto_codigo_snapshot" | "produto_nome_snapshot" | "variacao_snapshot" | "previsao_entrega_snapshot" | "quantidade" | "preco_tabela" | "preco_unitario" | "valor_desconto" | "subtotal" | "socio_aplicado" | "personalizacao_nome" | "personalizacao_numero" | "observacao" | "created_at", ExtArgs["result"]["vndPedidoItem"]>
 export type VndPedidoItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vnd_pedido?: boolean | Prisma.VndPedidoDefaultArgs<ExtArgs>
   prd_produto?: boolean | Prisma.VndPedidoItem$prd_produtoArgs<ExtArgs>
@@ -2230,6 +2295,7 @@ export type $VndPedidoItemPayload<ExtArgs extends runtime.Types.Extensions.Inter
     produto_codigo_snapshot: string
     produto_nome_snapshot: string
     variacao_snapshot: string | null
+    previsao_entrega_snapshot: Date | null
     quantidade: number
     preco_tabela: runtime.Decimal
     preco_unitario: runtime.Decimal
@@ -2625,6 +2691,7 @@ export interface VndPedidoItemFieldRefs {
   readonly produto_codigo_snapshot: Prisma.FieldRef<"VndPedidoItem", 'String'>
   readonly produto_nome_snapshot: Prisma.FieldRef<"VndPedidoItem", 'String'>
   readonly variacao_snapshot: Prisma.FieldRef<"VndPedidoItem", 'String'>
+  readonly previsao_entrega_snapshot: Prisma.FieldRef<"VndPedidoItem", 'DateTime'>
   readonly quantidade: Prisma.FieldRef<"VndPedidoItem", 'Int'>
   readonly preco_tabela: Prisma.FieldRef<"VndPedidoItem", 'Decimal'>
   readonly preco_unitario: Prisma.FieldRef<"VndPedidoItem", 'Decimal'>

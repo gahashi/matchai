@@ -43,6 +43,7 @@ export type CheckoutValidatedItem = {
         preco_aplicado: number;
         socio_aplicado: boolean;
         modalidade_venda: "estoque" | "pre_venda";
+        previsao_entrega: string | null;
     } | null;
     variacao?: {
         id: number;
@@ -670,6 +671,12 @@ class PedidoPublicService {
                             variacao_snapshot:
                                 item.variacao?.nome ??
                                 null,
+                            previsao_entrega_snapshot:
+                                item.produto?.previsao_entrega
+                                    ? new Date(
+                                        `${item.produto.previsao_entrega}T12:00:00`,
+                                    )
+                                    : null,
                             quantidade:
                             item.quantidade,
                             preco_tabela:

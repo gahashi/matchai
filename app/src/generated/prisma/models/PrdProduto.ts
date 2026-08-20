@@ -72,6 +72,7 @@ export type PrdProdutoMinAggregateOutputType = {
   visivel_publico: number | null
   inicio_exibicao: Date | null
   fim_exibicao: Date | null
+  previsao_entrega: Date | null
   exibir_apos_encerramento: number | null
   created_at: Date | null
   updated_at: Date | null
@@ -96,6 +97,7 @@ export type PrdProdutoMaxAggregateOutputType = {
   visivel_publico: number | null
   inicio_exibicao: Date | null
   fim_exibicao: Date | null
+  previsao_entrega: Date | null
   exibir_apos_encerramento: number | null
   created_at: Date | null
   updated_at: Date | null
@@ -120,6 +122,7 @@ export type PrdProdutoCountAggregateOutputType = {
   visivel_publico: number
   inicio_exibicao: number
   fim_exibicao: number
+  previsao_entrega: number
   exibir_apos_encerramento: number
   created_at: number
   updated_at: number
@@ -174,6 +177,7 @@ export type PrdProdutoMinAggregateInputType = {
   visivel_publico?: true
   inicio_exibicao?: true
   fim_exibicao?: true
+  previsao_entrega?: true
   exibir_apos_encerramento?: true
   created_at?: true
   updated_at?: true
@@ -198,6 +202,7 @@ export type PrdProdutoMaxAggregateInputType = {
   visivel_publico?: true
   inicio_exibicao?: true
   fim_exibicao?: true
+  previsao_entrega?: true
   exibir_apos_encerramento?: true
   created_at?: true
   updated_at?: true
@@ -222,6 +227,7 @@ export type PrdProdutoCountAggregateInputType = {
   visivel_publico?: true
   inicio_exibicao?: true
   fim_exibicao?: true
+  previsao_entrega?: true
   exibir_apos_encerramento?: true
   created_at?: true
   updated_at?: true
@@ -333,6 +339,7 @@ export type PrdProdutoGroupByOutputType = {
   visivel_publico: number
   inicio_exibicao: Date | null
   fim_exibicao: Date | null
+  previsao_entrega: Date | null
   exibir_apos_encerramento: number
   created_at: Date | null
   updated_at: Date | null
@@ -380,6 +387,7 @@ export type PrdProdutoWhereInput = {
   visivel_publico?: Prisma.IntFilter<"PrdProduto"> | number
   inicio_exibicao?: Prisma.DateTimeNullableFilter<"PrdProduto"> | Date | string | null
   fim_exibicao?: Prisma.DateTimeNullableFilter<"PrdProduto"> | Date | string | null
+  previsao_entrega?: Prisma.DateTimeNullableFilter<"PrdProduto"> | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFilter<"PrdProduto"> | number
   created_at?: Prisma.DateTimeNullableFilter<"PrdProduto"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"PrdProduto"> | Date | string | null
@@ -415,6 +423,7 @@ export type PrdProdutoOrderByWithRelationInput = {
   visivel_publico?: Prisma.SortOrder
   inicio_exibicao?: Prisma.SortOrderInput | Prisma.SortOrder
   fim_exibicao?: Prisma.SortOrderInput | Prisma.SortOrder
+  previsao_entrega?: Prisma.SortOrderInput | Prisma.SortOrder
   exibir_apos_encerramento?: Prisma.SortOrder
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -454,6 +463,7 @@ export type PrdProdutoWhereUniqueInput = Prisma.AtLeast<{
   visivel_publico?: Prisma.IntFilter<"PrdProduto"> | number
   inicio_exibicao?: Prisma.DateTimeNullableFilter<"PrdProduto"> | Date | string | null
   fim_exibicao?: Prisma.DateTimeNullableFilter<"PrdProduto"> | Date | string | null
+  previsao_entrega?: Prisma.DateTimeNullableFilter<"PrdProduto"> | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFilter<"PrdProduto"> | number
   created_at?: Prisma.DateTimeNullableFilter<"PrdProduto"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"PrdProduto"> | Date | string | null
@@ -489,6 +499,7 @@ export type PrdProdutoOrderByWithAggregationInput = {
   visivel_publico?: Prisma.SortOrder
   inicio_exibicao?: Prisma.SortOrderInput | Prisma.SortOrder
   fim_exibicao?: Prisma.SortOrderInput | Prisma.SortOrder
+  previsao_entrega?: Prisma.SortOrderInput | Prisma.SortOrder
   exibir_apos_encerramento?: Prisma.SortOrder
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -521,6 +532,7 @@ export type PrdProdutoScalarWhereWithAggregatesInput = {
   visivel_publico?: Prisma.IntWithAggregatesFilter<"PrdProduto"> | number
   inicio_exibicao?: Prisma.DateTimeNullableWithAggregatesFilter<"PrdProduto"> | Date | string | null
   fim_exibicao?: Prisma.DateTimeNullableWithAggregatesFilter<"PrdProduto"> | Date | string | null
+  previsao_entrega?: Prisma.DateTimeNullableWithAggregatesFilter<"PrdProduto"> | Date | string | null
   exibir_apos_encerramento?: Prisma.IntWithAggregatesFilter<"PrdProduto"> | number
   created_at?: Prisma.DateTimeNullableWithAggregatesFilter<"PrdProduto"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableWithAggregatesFilter<"PrdProduto"> | Date | string | null
@@ -543,6 +555,7 @@ export type PrdProdutoCreateInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -578,6 +591,7 @@ export type PrdProdutoUncheckedCreateInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -610,6 +624,7 @@ export type PrdProdutoUpdateInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -645,6 +660,7 @@ export type PrdProdutoUncheckedUpdateInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -679,6 +695,7 @@ export type PrdProdutoCreateManyInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -701,6 +718,7 @@ export type PrdProdutoUpdateManyMutationInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -725,6 +743,7 @@ export type PrdProdutoUncheckedUpdateManyInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -765,6 +784,7 @@ export type PrdProdutoCountOrderByAggregateInput = {
   visivel_publico?: Prisma.SortOrder
   inicio_exibicao?: Prisma.SortOrder
   fim_exibicao?: Prisma.SortOrder
+  previsao_entrega?: Prisma.SortOrder
   exibir_apos_encerramento?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -803,6 +823,7 @@ export type PrdProdutoMaxOrderByAggregateInput = {
   visivel_publico?: Prisma.SortOrder
   inicio_exibicao?: Prisma.SortOrder
   fim_exibicao?: Prisma.SortOrder
+  previsao_entrega?: Prisma.SortOrder
   exibir_apos_encerramento?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -827,6 +848,7 @@ export type PrdProdutoMinOrderByAggregateInput = {
   visivel_publico?: Prisma.SortOrder
   inicio_exibicao?: Prisma.SortOrder
   fim_exibicao?: Prisma.SortOrder
+  previsao_entrega?: Prisma.SortOrder
   exibir_apos_encerramento?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -1077,6 +1099,7 @@ export type PrdProdutoCreateWithoutPrd_produto_tipoInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -1110,6 +1133,7 @@ export type PrdProdutoUncheckedCreateWithoutPrd_produto_tipoInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -1173,6 +1197,7 @@ export type PrdProdutoScalarWhereInput = {
   visivel_publico?: Prisma.IntFilter<"PrdProduto"> | number
   inicio_exibicao?: Prisma.DateTimeNullableFilter<"PrdProduto"> | Date | string | null
   fim_exibicao?: Prisma.DateTimeNullableFilter<"PrdProduto"> | Date | string | null
+  previsao_entrega?: Prisma.DateTimeNullableFilter<"PrdProduto"> | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFilter<"PrdProduto"> | number
   created_at?: Prisma.DateTimeNullableFilter<"PrdProduto"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"PrdProduto"> | Date | string | null
@@ -1195,6 +1220,7 @@ export type PrdProdutoCreateWithoutPrd_produto_imagensInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -1229,6 +1255,7 @@ export type PrdProdutoUncheckedCreateWithoutPrd_produto_imagensInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -1276,6 +1303,7 @@ export type PrdProdutoUpdateWithoutPrd_produto_imagensInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1310,6 +1338,7 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_produto_imagensInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1341,6 +1370,7 @@ export type PrdProdutoCreateWithoutPrd_produto_variacoesInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -1375,6 +1405,7 @@ export type PrdProdutoUncheckedCreateWithoutPrd_produto_variacoesInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -1422,6 +1453,7 @@ export type PrdProdutoUpdateWithoutPrd_produto_variacoesInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1456,6 +1488,7 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_produto_variacoesInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1487,6 +1520,7 @@ export type PrdProdutoCreateWithoutPrd_produto_componentesInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -1521,6 +1555,7 @@ export type PrdProdutoUncheckedCreateWithoutPrd_produto_componentesInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -1557,6 +1592,7 @@ export type PrdProdutoCreateWithoutPrd_componente_de_kitsInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -1591,6 +1627,7 @@ export type PrdProdutoUncheckedCreateWithoutPrd_componente_de_kitsInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -1638,6 +1675,7 @@ export type PrdProdutoUpdateWithoutPrd_produto_componentesInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1672,6 +1710,7 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_produto_componentesInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1714,6 +1753,7 @@ export type PrdProdutoUpdateWithoutPrd_componente_de_kitsInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1748,6 +1788,7 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_componente_de_kitsInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1779,6 +1820,7 @@ export type PrdProdutoCreateWithoutPrd_produto_camposInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -1813,6 +1855,7 @@ export type PrdProdutoUncheckedCreateWithoutPrd_produto_camposInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -1860,6 +1903,7 @@ export type PrdProdutoUpdateWithoutPrd_produto_camposInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1894,6 +1938,7 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_produto_camposInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1925,6 +1970,7 @@ export type PrdProdutoCreateWithoutVnd_campanha_produtosInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -1959,6 +2005,7 @@ export type PrdProdutoUncheckedCreateWithoutVnd_campanha_produtosInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -2006,6 +2053,7 @@ export type PrdProdutoUpdateWithoutVnd_campanha_produtosInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2040,6 +2088,7 @@ export type PrdProdutoUncheckedUpdateWithoutVnd_campanha_produtosInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2071,6 +2120,7 @@ export type PrdProdutoCreateWithoutSoc_planosInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -2105,6 +2155,7 @@ export type PrdProdutoUncheckedCreateWithoutSoc_planosInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -2152,6 +2203,7 @@ export type PrdProdutoUpdateWithoutSoc_planosInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2186,6 +2238,7 @@ export type PrdProdutoUncheckedUpdateWithoutSoc_planosInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2217,6 +2270,7 @@ export type PrdProdutoCreateWithoutVnd_pedido_itensInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -2251,6 +2305,7 @@ export type PrdProdutoUncheckedCreateWithoutVnd_pedido_itensInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -2298,6 +2353,7 @@ export type PrdProdutoUpdateWithoutVnd_pedido_itensInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2332,6 +2388,7 @@ export type PrdProdutoUncheckedUpdateWithoutVnd_pedido_itensInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2363,6 +2420,7 @@ export type PrdProdutoCreateWithoutVnd_pedido_item_componentesInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -2397,6 +2455,7 @@ export type PrdProdutoUncheckedCreateWithoutVnd_pedido_item_componentesInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -2444,6 +2503,7 @@ export type PrdProdutoUpdateWithoutVnd_pedido_item_componentesInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2478,6 +2538,7 @@ export type PrdProdutoUncheckedUpdateWithoutVnd_pedido_item_componentesInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2509,6 +2570,7 @@ export type PrdProdutoCreateWithoutVnd_estoque_reservasInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -2543,6 +2605,7 @@ export type PrdProdutoUncheckedCreateWithoutVnd_estoque_reservasInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -2590,6 +2653,7 @@ export type PrdProdutoUpdateWithoutVnd_estoque_reservasInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2624,6 +2688,7 @@ export type PrdProdutoUncheckedUpdateWithoutVnd_estoque_reservasInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2656,6 +2721,7 @@ export type PrdProdutoCreateManyPrd_produto_tipoInput = {
   visivel_publico?: number
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
+  previsao_entrega?: Date | string | null
   exibir_apos_encerramento?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -2678,6 +2744,7 @@ export type PrdProdutoUpdateWithoutPrd_produto_tipoInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2711,6 +2778,7 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_produto_tipoInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2744,6 +2812,7 @@ export type PrdProdutoUncheckedUpdateManyWithoutPrd_produto_tipoInput = {
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previsao_entrega?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   exibir_apos_encerramento?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2880,6 +2949,7 @@ export type PrdProdutoSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   visivel_publico?: boolean
   inicio_exibicao?: boolean
   fim_exibicao?: boolean
+  previsao_entrega?: boolean
   exibir_apos_encerramento?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -2918,13 +2988,14 @@ export type PrdProdutoSelectScalar = {
   visivel_publico?: boolean
   inicio_exibicao?: boolean
   fim_exibicao?: boolean
+  previsao_entrega?: boolean
   exibir_apos_encerramento?: boolean
   created_at?: boolean
   updated_at?: boolean
   deleted_at?: boolean
 }
 
-export type PrdProdutoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "prd_produto_tipo_id" | "codigo" | "slug" | "nome" | "descricao" | "preco_custo" | "preco_normal" | "preco_socio" | "modalidade_venda" | "controla_estoque" | "estoque_atual" | "ativo" | "destaque" | "visivel_publico" | "inicio_exibicao" | "fim_exibicao" | "exibir_apos_encerramento" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["prdProduto"]>
+export type PrdProdutoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "prd_produto_tipo_id" | "codigo" | "slug" | "nome" | "descricao" | "preco_custo" | "preco_normal" | "preco_socio" | "modalidade_venda" | "controla_estoque" | "estoque_atual" | "ativo" | "destaque" | "visivel_publico" | "inicio_exibicao" | "fim_exibicao" | "previsao_entrega" | "exibir_apos_encerramento" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["prdProduto"]>
 export type PrdProdutoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   prd_produto_tipo?: boolean | Prisma.PrdProdutoTipoDefaultArgs<ExtArgs>
   prd_produto_imagens?: boolean | Prisma.PrdProduto$prd_produto_imagensArgs<ExtArgs>
@@ -2973,6 +3044,7 @@ export type $PrdProdutoPayload<ExtArgs extends runtime.Types.Extensions.Internal
     visivel_publico: number
     inicio_exibicao: Date | null
     fim_exibicao: Date | null
+    previsao_entrega: Date | null
     exibir_apos_encerramento: number
     created_at: Date | null
     updated_at: Date | null
@@ -3374,6 +3446,7 @@ export interface PrdProdutoFieldRefs {
   readonly visivel_publico: Prisma.FieldRef<"PrdProduto", 'Int'>
   readonly inicio_exibicao: Prisma.FieldRef<"PrdProduto", 'DateTime'>
   readonly fim_exibicao: Prisma.FieldRef<"PrdProduto", 'DateTime'>
+  readonly previsao_entrega: Prisma.FieldRef<"PrdProduto", 'DateTime'>
   readonly exibir_apos_encerramento: Prisma.FieldRef<"PrdProduto", 'Int'>
   readonly created_at: Prisma.FieldRef<"PrdProduto", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"PrdProduto", 'DateTime'>

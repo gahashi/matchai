@@ -56,6 +56,7 @@ const publicProdutoSelect = {
     preco_normal: true,
     preco_socio: true,
     modalidade_venda: true,
+    previsao_entrega: true,
     controla_estoque: true,
     estoque_atual: true,
     destaque: true,
@@ -601,8 +602,14 @@ function serializePublicProduto(
             : precoNormal,
         socio_aplicado: socioAplicado,
         modalidade_venda: modalidadeVenda,
+        previsao_entrega:
+            isPreVenda && produto.previsao_entrega
+                ? produto.previsao_entrega
+                    .toISOString()
+                    .slice(0, 10)
+                : null,
 
-        // Kit não possui uma fonte independente de estoque.
+// Kit não possui
         controla_estoque:
             !isPreVenda &&
             !ehKit &&

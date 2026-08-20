@@ -269,6 +269,10 @@ function parseProdutoFormData(formData: FormData) {
         fimExibicao: optionalDate(
             formData.get("fim_exibicao"),
         ),
+        previsaoEntrega: optionalDate(
+            formData.get("previsao_entrega"),
+        ),
+
         exibirAposEncerramento: booleanValue(
             formData.get("exibir_apos_encerramento"),
         ),

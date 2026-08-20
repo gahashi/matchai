@@ -117,6 +117,7 @@ type Produto = {
     visivel_publico: number;
     inicio_exibicao: string | Date | null;
     fim_exibicao: string | Date | null;
+    previsao_entrega: string | Date | null;
     exibir_apos_encerramento: number;
 
     prd_produto_tipo: {
@@ -165,6 +166,7 @@ type ProdutoFormState = {
     visivel_publico: boolean;
     inicio_exibicao: string;
     fim_exibicao: string;
+    previsao_entrega: string;
     exibir_apos_encerramento: boolean;
 };
 
@@ -221,6 +223,7 @@ const emptyForm: ProdutoFormState = {
     visivel_publico: true,
     inicio_exibicao: "",
     fim_exibicao: "",
+    previsao_entrega: "",
     exibir_apos_encerramento: false,
 };
 
@@ -249,6 +252,16 @@ function toDateTimeLocal(value: string | Date | null) {
         ":",
         pad(date.getMinutes()),
     ].join("");
+}
+
+function toDateInput(value: string | Date | null) {
+    if (!value) return "";
+
+    if (typeof value === "string") {
+        return value.slice(0, 10);
+    }
+
+    return value.toISOString().slice(0, 10);
 }
 
 function money(value: number) {
@@ -318,6 +331,7 @@ function produtoToForm(produto: Produto): ProdutoFormState {
         visivel_publico: Boolean(produto.visivel_publico),
         inicio_exibicao: toDateTimeLocal(produto.inicio_exibicao),
         fim_exibicao: toDateTimeLocal(produto.fim_exibicao),
+        previsao_entrega: toDateInput(produto.previsao_entrega),
         exibir_apos_encerramento: Boolean(
             produto.exibir_apos_encerramento,
         ),
@@ -830,6 +844,13 @@ export default function AdminProdutosClient({
         payload.set("preco_normal", form.preco_normal);
         payload.set("preco_socio", form.preco_socio);
         payload.set("modalidade_venda", form.modalidade_venda);
+        payload.set(
+            "previsao_entrega",
+            form.modalidade_venda === "pre_venda"
+                ? form.previsao_entrega
+                : "",
+        );
+
         payload.set(
             "controla_estoque",
             !ehKit && form.controla_estoque ? "1" : "0",
@@ -2834,6 +2855,20 @@ export default function AdminProdutosClient({
                                         : "Venda normal usando estoque e reservas."
                                 }
                             />
+                            {form.modalidade_venda === "pre_venda" ? (
+                                <Input
+                                    label="Previsão de entrega"
+                                    type="date"
+                                    value={form.previsao_entrega}
+                                    onChange={(event) =>
+                                        updateForm(
+                                            "previsao_entrega",
+                                            event.target.value,
+                                        )
+                                    }
+                                    helperText="Data prevista para entrega dos pedidos desta pré-venda."
+                                />
+                            ) : null}
 
                             <Input
                                 label="Início da exibição"

@@ -55,6 +55,8 @@ export type VndPedidoSumAggregateOutputType = {
 export type VndPedidoMinAggregateOutputType = {
   id: number | null
   codigo: string | null
+  origem: string | null
+  data_original: Date | null
   sys_usuario_id: number | null
   vnd_campanha_id: number | null
   vnd_pedido_status_id: number | null
@@ -79,6 +81,8 @@ export type VndPedidoMinAggregateOutputType = {
 export type VndPedidoMaxAggregateOutputType = {
   id: number | null
   codigo: string | null
+  origem: string | null
+  data_original: Date | null
   sys_usuario_id: number | null
   vnd_campanha_id: number | null
   vnd_pedido_status_id: number | null
@@ -103,6 +107,8 @@ export type VndPedidoMaxAggregateOutputType = {
 export type VndPedidoCountAggregateOutputType = {
   id: number
   codigo: number
+  origem: number
+  data_original: number
   sys_usuario_id: number
   vnd_campanha_id: number
   vnd_pedido_status_id: number
@@ -155,6 +161,8 @@ export type VndPedidoSumAggregateInputType = {
 export type VndPedidoMinAggregateInputType = {
   id?: true
   codigo?: true
+  origem?: true
+  data_original?: true
   sys_usuario_id?: true
   vnd_campanha_id?: true
   vnd_pedido_status_id?: true
@@ -179,6 +187,8 @@ export type VndPedidoMinAggregateInputType = {
 export type VndPedidoMaxAggregateInputType = {
   id?: true
   codigo?: true
+  origem?: true
+  data_original?: true
   sys_usuario_id?: true
   vnd_campanha_id?: true
   vnd_pedido_status_id?: true
@@ -203,6 +213,8 @@ export type VndPedidoMaxAggregateInputType = {
 export type VndPedidoCountAggregateInputType = {
   id?: true
   codigo?: true
+  origem?: true
+  data_original?: true
   sys_usuario_id?: true
   vnd_campanha_id?: true
   vnd_pedido_status_id?: true
@@ -314,6 +326,8 @@ export type VndPedidoGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 export type VndPedidoGroupByOutputType = {
   id: number
   codigo: string
+  origem: string
+  data_original: Date | null
   sys_usuario_id: number | null
   vnd_campanha_id: number | null
   vnd_pedido_status_id: number
@@ -361,6 +375,8 @@ export type VndPedidoWhereInput = {
   NOT?: Prisma.VndPedidoWhereInput | Prisma.VndPedidoWhereInput[]
   id?: Prisma.IntFilter<"VndPedido"> | number
   codigo?: Prisma.StringFilter<"VndPedido"> | string
+  origem?: Prisma.StringFilter<"VndPedido"> | string
+  data_original?: Prisma.DateTimeNullableFilter<"VndPedido"> | Date | string | null
   sys_usuario_id?: Prisma.IntNullableFilter<"VndPedido"> | number | null
   vnd_campanha_id?: Prisma.IntNullableFilter<"VndPedido"> | number | null
   vnd_pedido_status_id?: Prisma.IntFilter<"VndPedido"> | number
@@ -393,6 +409,8 @@ export type VndPedidoWhereInput = {
 export type VndPedidoOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   codigo?: Prisma.SortOrder
+  origem?: Prisma.SortOrder
+  data_original?: Prisma.SortOrderInput | Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrderInput | Prisma.SortOrder
   vnd_campanha_id?: Prisma.SortOrderInput | Prisma.SortOrder
   vnd_pedido_status_id?: Prisma.SortOrder
@@ -429,6 +447,8 @@ export type VndPedidoWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.VndPedidoWhereInput | Prisma.VndPedidoWhereInput[]
   OR?: Prisma.VndPedidoWhereInput[]
   NOT?: Prisma.VndPedidoWhereInput | Prisma.VndPedidoWhereInput[]
+  origem?: Prisma.StringFilter<"VndPedido"> | string
+  data_original?: Prisma.DateTimeNullableFilter<"VndPedido"> | Date | string | null
   sys_usuario_id?: Prisma.IntNullableFilter<"VndPedido"> | number | null
   vnd_campanha_id?: Prisma.IntNullableFilter<"VndPedido"> | number | null
   vnd_pedido_status_id?: Prisma.IntFilter<"VndPedido"> | number
@@ -461,6 +481,8 @@ export type VndPedidoWhereUniqueInput = Prisma.AtLeast<{
 export type VndPedidoOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   codigo?: Prisma.SortOrder
+  origem?: Prisma.SortOrder
+  data_original?: Prisma.SortOrderInput | Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrderInput | Prisma.SortOrder
   vnd_campanha_id?: Prisma.SortOrderInput | Prisma.SortOrder
   vnd_pedido_status_id?: Prisma.SortOrder
@@ -493,6 +515,8 @@ export type VndPedidoScalarWhereWithAggregatesInput = {
   NOT?: Prisma.VndPedidoScalarWhereWithAggregatesInput | Prisma.VndPedidoScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"VndPedido"> | number
   codigo?: Prisma.StringWithAggregatesFilter<"VndPedido"> | string
+  origem?: Prisma.StringWithAggregatesFilter<"VndPedido"> | string
+  data_original?: Prisma.DateTimeNullableWithAggregatesFilter<"VndPedido"> | Date | string | null
   sys_usuario_id?: Prisma.IntNullableWithAggregatesFilter<"VndPedido"> | number | null
   vnd_campanha_id?: Prisma.IntNullableWithAggregatesFilter<"VndPedido"> | number | null
   vnd_pedido_status_id?: Prisma.IntWithAggregatesFilter<"VndPedido"> | number
@@ -516,6 +540,8 @@ export type VndPedidoScalarWhereWithAggregatesInput = {
 
 export type VndPedidoCreateInput = {
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   cliente_nome: string
   cliente_email?: string | null
   cliente_telefone: string
@@ -544,6 +570,8 @@ export type VndPedidoCreateInput = {
 export type VndPedidoUncheckedCreateInput = {
   id?: number
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   sys_usuario_id?: number | null
   vnd_campanha_id?: number | null
   vnd_pedido_status_id: number
@@ -571,6 +599,8 @@ export type VndPedidoUncheckedCreateInput = {
 
 export type VndPedidoUpdateInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -599,6 +629,8 @@ export type VndPedidoUpdateInput = {
 export type VndPedidoUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -627,6 +659,8 @@ export type VndPedidoUncheckedUpdateInput = {
 export type VndPedidoCreateManyInput = {
   id?: number
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   sys_usuario_id?: number | null
   vnd_campanha_id?: number | null
   vnd_pedido_status_id: number
@@ -650,6 +684,8 @@ export type VndPedidoCreateManyInput = {
 
 export type VndPedidoUpdateManyMutationInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -670,6 +706,8 @@ export type VndPedidoUpdateManyMutationInput = {
 export type VndPedidoUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -710,6 +748,8 @@ export type VndPedidoOrderByRelevanceInput = {
 export type VndPedidoCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   codigo?: Prisma.SortOrder
+  origem?: Prisma.SortOrder
+  data_original?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
   vnd_campanha_id?: Prisma.SortOrder
   vnd_pedido_status_id?: Prisma.SortOrder
@@ -747,6 +787,8 @@ export type VndPedidoAvgOrderByAggregateInput = {
 export type VndPedidoMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   codigo?: Prisma.SortOrder
+  origem?: Prisma.SortOrder
+  data_original?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
   vnd_campanha_id?: Prisma.SortOrder
   vnd_pedido_status_id?: Prisma.SortOrder
@@ -771,6 +813,8 @@ export type VndPedidoMaxOrderByAggregateInput = {
 export type VndPedidoMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   codigo?: Prisma.SortOrder
+  origem?: Prisma.SortOrder
+  data_original?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
   vnd_campanha_id?: Prisma.SortOrder
   vnd_pedido_status_id?: Prisma.SortOrder
@@ -1036,6 +1080,8 @@ export type VndPedidoUpdateOneRequiredWithoutFin_pagamentosNestedInput = {
 
 export type VndPedidoCreateWithoutSys_usuarioInput = {
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   cliente_nome: string
   cliente_email?: string | null
   cliente_telefone: string
@@ -1063,6 +1109,8 @@ export type VndPedidoCreateWithoutSys_usuarioInput = {
 export type VndPedidoUncheckedCreateWithoutSys_usuarioInput = {
   id?: number
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   vnd_campanha_id?: number | null
   vnd_pedido_status_id: number
   vnd_entrega_tipo_id?: number | null
@@ -1119,6 +1167,8 @@ export type VndPedidoScalarWhereInput = {
   NOT?: Prisma.VndPedidoScalarWhereInput | Prisma.VndPedidoScalarWhereInput[]
   id?: Prisma.IntFilter<"VndPedido"> | number
   codigo?: Prisma.StringFilter<"VndPedido"> | string
+  origem?: Prisma.StringFilter<"VndPedido"> | string
+  data_original?: Prisma.DateTimeNullableFilter<"VndPedido"> | Date | string | null
   sys_usuario_id?: Prisma.IntNullableFilter<"VndPedido"> | number | null
   vnd_campanha_id?: Prisma.IntNullableFilter<"VndPedido"> | number | null
   vnd_pedido_status_id?: Prisma.IntFilter<"VndPedido"> | number
@@ -1142,6 +1192,8 @@ export type VndPedidoScalarWhereInput = {
 
 export type VndPedidoCreateWithoutVnd_campanhaInput = {
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   cliente_nome: string
   cliente_email?: string | null
   cliente_telefone: string
@@ -1169,6 +1221,8 @@ export type VndPedidoCreateWithoutVnd_campanhaInput = {
 export type VndPedidoUncheckedCreateWithoutVnd_campanhaInput = {
   id?: number
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   sys_usuario_id?: number | null
   vnd_pedido_status_id: number
   vnd_entrega_tipo_id?: number | null
@@ -1221,6 +1275,8 @@ export type VndPedidoUpdateManyWithWhereWithoutVnd_campanhaInput = {
 
 export type VndPedidoCreateWithoutVnd_pedido_statusInput = {
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   cliente_nome: string
   cliente_email?: string | null
   cliente_telefone: string
@@ -1248,6 +1304,8 @@ export type VndPedidoCreateWithoutVnd_pedido_statusInput = {
 export type VndPedidoUncheckedCreateWithoutVnd_pedido_statusInput = {
   id?: number
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   sys_usuario_id?: number | null
   vnd_campanha_id?: number | null
   vnd_entrega_tipo_id?: number | null
@@ -1300,6 +1358,8 @@ export type VndPedidoUpdateManyWithWhereWithoutVnd_pedido_statusInput = {
 
 export type VndPedidoCreateWithoutVnd_entrega_tipoInput = {
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   cliente_nome: string
   cliente_email?: string | null
   cliente_telefone: string
@@ -1327,6 +1387,8 @@ export type VndPedidoCreateWithoutVnd_entrega_tipoInput = {
 export type VndPedidoUncheckedCreateWithoutVnd_entrega_tipoInput = {
   id?: number
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   sys_usuario_id?: number | null
   vnd_campanha_id?: number | null
   vnd_pedido_status_id: number
@@ -1379,6 +1441,8 @@ export type VndPedidoUpdateManyWithWhereWithoutVnd_entrega_tipoInput = {
 
 export type VndPedidoCreateWithoutVnd_pedido_itensInput = {
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   cliente_nome: string
   cliente_email?: string | null
   cliente_telefone: string
@@ -1406,6 +1470,8 @@ export type VndPedidoCreateWithoutVnd_pedido_itensInput = {
 export type VndPedidoUncheckedCreateWithoutVnd_pedido_itensInput = {
   id?: number
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   sys_usuario_id?: number | null
   vnd_campanha_id?: number | null
   vnd_pedido_status_id: number
@@ -1448,6 +1514,8 @@ export type VndPedidoUpdateToOneWithWhereWithoutVnd_pedido_itensInput = {
 
 export type VndPedidoUpdateWithoutVnd_pedido_itensInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1475,6 +1543,8 @@ export type VndPedidoUpdateWithoutVnd_pedido_itensInput = {
 export type VndPedidoUncheckedUpdateWithoutVnd_pedido_itensInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1501,6 +1571,8 @@ export type VndPedidoUncheckedUpdateWithoutVnd_pedido_itensInput = {
 
 export type VndPedidoCreateWithoutVnd_estoque_reservasInput = {
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   cliente_nome: string
   cliente_email?: string | null
   cliente_telefone: string
@@ -1528,6 +1600,8 @@ export type VndPedidoCreateWithoutVnd_estoque_reservasInput = {
 export type VndPedidoUncheckedCreateWithoutVnd_estoque_reservasInput = {
   id?: number
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   sys_usuario_id?: number | null
   vnd_campanha_id?: number | null
   vnd_pedido_status_id: number
@@ -1570,6 +1644,8 @@ export type VndPedidoUpdateToOneWithWhereWithoutVnd_estoque_reservasInput = {
 
 export type VndPedidoUpdateWithoutVnd_estoque_reservasInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1597,6 +1673,8 @@ export type VndPedidoUpdateWithoutVnd_estoque_reservasInput = {
 export type VndPedidoUncheckedUpdateWithoutVnd_estoque_reservasInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1623,6 +1701,8 @@ export type VndPedidoUncheckedUpdateWithoutVnd_estoque_reservasInput = {
 
 export type VndPedidoCreateWithoutVnd_pedido_historicosInput = {
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   cliente_nome: string
   cliente_email?: string | null
   cliente_telefone: string
@@ -1650,6 +1730,8 @@ export type VndPedidoCreateWithoutVnd_pedido_historicosInput = {
 export type VndPedidoUncheckedCreateWithoutVnd_pedido_historicosInput = {
   id?: number
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   sys_usuario_id?: number | null
   vnd_campanha_id?: number | null
   vnd_pedido_status_id: number
@@ -1692,6 +1774,8 @@ export type VndPedidoUpdateToOneWithWhereWithoutVnd_pedido_historicosInput = {
 
 export type VndPedidoUpdateWithoutVnd_pedido_historicosInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1719,6 +1803,8 @@ export type VndPedidoUpdateWithoutVnd_pedido_historicosInput = {
 export type VndPedidoUncheckedUpdateWithoutVnd_pedido_historicosInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1745,6 +1831,8 @@ export type VndPedidoUncheckedUpdateWithoutVnd_pedido_historicosInput = {
 
 export type VndPedidoCreateWithoutFin_pagamentosInput = {
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   cliente_nome: string
   cliente_email?: string | null
   cliente_telefone: string
@@ -1772,6 +1860,8 @@ export type VndPedidoCreateWithoutFin_pagamentosInput = {
 export type VndPedidoUncheckedCreateWithoutFin_pagamentosInput = {
   id?: number
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   sys_usuario_id?: number | null
   vnd_campanha_id?: number | null
   vnd_pedido_status_id: number
@@ -1814,6 +1904,8 @@ export type VndPedidoUpdateToOneWithWhereWithoutFin_pagamentosInput = {
 
 export type VndPedidoUpdateWithoutFin_pagamentosInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1841,6 +1933,8 @@ export type VndPedidoUpdateWithoutFin_pagamentosInput = {
 export type VndPedidoUncheckedUpdateWithoutFin_pagamentosInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1868,6 +1962,8 @@ export type VndPedidoUncheckedUpdateWithoutFin_pagamentosInput = {
 export type VndPedidoCreateManySys_usuarioInput = {
   id?: number
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   vnd_campanha_id?: number | null
   vnd_pedido_status_id: number
   vnd_entrega_tipo_id?: number | null
@@ -1890,6 +1986,8 @@ export type VndPedidoCreateManySys_usuarioInput = {
 
 export type VndPedidoUpdateWithoutSys_usuarioInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1917,6 +2015,8 @@ export type VndPedidoUpdateWithoutSys_usuarioInput = {
 export type VndPedidoUncheckedUpdateWithoutSys_usuarioInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1944,6 +2044,8 @@ export type VndPedidoUncheckedUpdateWithoutSys_usuarioInput = {
 export type VndPedidoUncheckedUpdateManyWithoutSys_usuarioInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1967,6 +2069,8 @@ export type VndPedidoUncheckedUpdateManyWithoutSys_usuarioInput = {
 export type VndPedidoCreateManyVnd_campanhaInput = {
   id?: number
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   sys_usuario_id?: number | null
   vnd_pedido_status_id: number
   vnd_entrega_tipo_id?: number | null
@@ -1989,6 +2093,8 @@ export type VndPedidoCreateManyVnd_campanhaInput = {
 
 export type VndPedidoUpdateWithoutVnd_campanhaInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2016,6 +2122,8 @@ export type VndPedidoUpdateWithoutVnd_campanhaInput = {
 export type VndPedidoUncheckedUpdateWithoutVnd_campanhaInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2043,6 +2151,8 @@ export type VndPedidoUncheckedUpdateWithoutVnd_campanhaInput = {
 export type VndPedidoUncheckedUpdateManyWithoutVnd_campanhaInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
   vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2066,6 +2176,8 @@ export type VndPedidoUncheckedUpdateManyWithoutVnd_campanhaInput = {
 export type VndPedidoCreateManyVnd_pedido_statusInput = {
   id?: number
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   sys_usuario_id?: number | null
   vnd_campanha_id?: number | null
   vnd_entrega_tipo_id?: number | null
@@ -2088,6 +2200,8 @@ export type VndPedidoCreateManyVnd_pedido_statusInput = {
 
 export type VndPedidoUpdateWithoutVnd_pedido_statusInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2115,6 +2229,8 @@ export type VndPedidoUpdateWithoutVnd_pedido_statusInput = {
 export type VndPedidoUncheckedUpdateWithoutVnd_pedido_statusInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2142,6 +2258,8 @@ export type VndPedidoUncheckedUpdateWithoutVnd_pedido_statusInput = {
 export type VndPedidoUncheckedUpdateManyWithoutVnd_pedido_statusInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_entrega_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2165,6 +2283,8 @@ export type VndPedidoUncheckedUpdateManyWithoutVnd_pedido_statusInput = {
 export type VndPedidoCreateManyVnd_entrega_tipoInput = {
   id?: number
   codigo: string
+  origem?: string
+  data_original?: Date | string | null
   sys_usuario_id?: number | null
   vnd_campanha_id?: number | null
   vnd_pedido_status_id: number
@@ -2187,6 +2307,8 @@ export type VndPedidoCreateManyVnd_entrega_tipoInput = {
 
 export type VndPedidoUpdateWithoutVnd_entrega_tipoInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cliente_nome?: Prisma.StringFieldUpdateOperationsInput | string
   cliente_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cliente_telefone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2214,6 +2336,8 @@ export type VndPedidoUpdateWithoutVnd_entrega_tipoInput = {
 export type VndPedidoUncheckedUpdateWithoutVnd_entrega_tipoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2241,6 +2365,8 @@ export type VndPedidoUncheckedUpdateWithoutVnd_entrega_tipoInput = {
 export type VndPedidoUncheckedUpdateManyWithoutVnd_entrega_tipoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  origem?: Prisma.StringFieldUpdateOperationsInput | string
+  data_original?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_campanha_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vnd_pedido_status_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2322,6 +2448,8 @@ export type VndPedidoCountOutputTypeCountFin_pagamentosArgs<ExtArgs extends runt
 export type VndPedidoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   codigo?: boolean
+  origem?: boolean
+  data_original?: boolean
   sys_usuario_id?: boolean
   vnd_campanha_id?: boolean
   vnd_pedido_status_id?: boolean
@@ -2357,6 +2485,8 @@ export type VndPedidoSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type VndPedidoSelectScalar = {
   id?: boolean
   codigo?: boolean
+  origem?: boolean
+  data_original?: boolean
   sys_usuario_id?: boolean
   vnd_campanha_id?: boolean
   vnd_pedido_status_id?: boolean
@@ -2378,7 +2508,7 @@ export type VndPedidoSelectScalar = {
   concluido_at?: boolean
 }
 
-export type VndPedidoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "codigo" | "sys_usuario_id" | "vnd_campanha_id" | "vnd_pedido_status_id" | "vnd_entrega_tipo_id" | "cliente_nome" | "cliente_email" | "cliente_telefone" | "entrega_endereco" | "retirada_local" | "observacao_cliente" | "valor_produtos" | "valor_desconto" | "valor_frete" | "valor_acrescimo" | "valor_total" | "created_at" | "updated_at" | "cancelado_at" | "concluido_at", ExtArgs["result"]["vndPedido"]>
+export type VndPedidoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "codigo" | "origem" | "data_original" | "sys_usuario_id" | "vnd_campanha_id" | "vnd_pedido_status_id" | "vnd_entrega_tipo_id" | "cliente_nome" | "cliente_email" | "cliente_telefone" | "entrega_endereco" | "retirada_local" | "observacao_cliente" | "valor_produtos" | "valor_desconto" | "valor_frete" | "valor_acrescimo" | "valor_total" | "created_at" | "updated_at" | "cancelado_at" | "concluido_at", ExtArgs["result"]["vndPedido"]>
 export type VndPedidoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sys_usuario?: boolean | Prisma.VndPedido$sys_usuarioArgs<ExtArgs>
   vnd_campanha?: boolean | Prisma.VndPedido$vnd_campanhaArgs<ExtArgs>
@@ -2406,6 +2536,8 @@ export type $VndPedidoPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     codigo: string
+    origem: string
+    data_original: Date | null
     sys_usuario_id: number | null
     vnd_campanha_id: number | null
     vnd_pedido_status_id: number
@@ -2804,6 +2936,8 @@ export interface Prisma__VndPedidoClient<T, Null = never, ExtArgs extends runtim
 export interface VndPedidoFieldRefs {
   readonly id: Prisma.FieldRef<"VndPedido", 'Int'>
   readonly codigo: Prisma.FieldRef<"VndPedido", 'String'>
+  readonly origem: Prisma.FieldRef<"VndPedido", 'String'>
+  readonly data_original: Prisma.FieldRef<"VndPedido", 'DateTime'>
   readonly sys_usuario_id: Prisma.FieldRef<"VndPedido", 'Int'>
   readonly vnd_campanha_id: Prisma.FieldRef<"VndPedido", 'Int'>
   readonly vnd_pedido_status_id: Prisma.FieldRef<"VndPedido", 'Int'>

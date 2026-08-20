@@ -434,8 +434,9 @@ model PrdProduto {
 
   visivel_publico Int @default(1)
 
-  inicio_exibicao DateTime? @db.DateTime(0)
-  fim_exibicao    DateTime? @db.DateTime(0)
+  inicio_exibicao  DateTime? @db.DateTime(0)
+  fim_exibicao     DateTime? @db.DateTime(0)
+  previsao_entrega DateTime? @db.Date
 
   exibir_apos_encerramento Int @default(0)
 
@@ -823,6 +824,9 @@ model VndPedido {
 
   codigo String @unique @db.VarChar(20)
 
+  origem        String    @default("loja") @db.VarChar(30)
+  data_original DateTime? @db.DateTime(0)
+
   sys_usuario_id       Int?
   vnd_campanha_id      Int?
   vnd_pedido_status_id Int
@@ -862,6 +866,8 @@ model VndPedido {
 
   fin_pagamentos FinPagamento[]
 
+  @@index([origem])
+  @@index([data_original])
   @@index([sys_usuario_id])
   @@index([vnd_campanha_id])
   @@index([vnd_pedido_status_id, created_at])
@@ -880,9 +886,10 @@ model VndPedidoItem {
 
   vnd_campanha_id Int?
 
-  produto_codigo_snapshot String  @db.VarChar(60)
-  produto_nome_snapshot   String  @db.VarChar(150)
-  variacao_snapshot       String? @db.VarChar(120)
+  produto_codigo_snapshot   String    @db.VarChar(60)
+  produto_nome_snapshot     String    @db.VarChar(150)
+  variacao_snapshot         String?   @db.VarChar(120)
+  previsao_entrega_snapshot DateTime? @db.Date
 
   quantidade Int
 

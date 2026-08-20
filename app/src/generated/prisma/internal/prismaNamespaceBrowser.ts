@@ -384,6 +384,7 @@ export const PrdProdutoScalarFieldEnum = {
   visivel_publico: 'visivel_publico',
   inicio_exibicao: 'inicio_exibicao',
   fim_exibicao: 'fim_exibicao',
+  previsao_entrega: 'previsao_entrega',
   exibir_apos_encerramento: 'exibir_apos_encerramento',
   created_at: 'created_at',
   updated_at: 'updated_at',
@@ -601,6 +602,8 @@ export type VndEntregaTipoScalarFieldEnum = (typeof VndEntregaTipoScalarFieldEnu
 export const VndPedidoScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
+  origem: 'origem',
+  data_original: 'data_original',
   sys_usuario_id: 'sys_usuario_id',
   vnd_campanha_id: 'vnd_campanha_id',
   vnd_pedido_status_id: 'vnd_pedido_status_id',
@@ -634,6 +637,7 @@ export const VndPedidoItemScalarFieldEnum = {
   produto_codigo_snapshot: 'produto_codigo_snapshot',
   produto_nome_snapshot: 'produto_nome_snapshot',
   variacao_snapshot: 'variacao_snapshot',
+  previsao_entrega_snapshot: 'previsao_entrega_snapshot',
   quantidade: 'quantidade',
   preco_tabela: 'preco_tabela',
   preco_unitario: 'preco_unitario',
@@ -1058,6 +1062,7 @@ export type VndEntregaTipoOrderByRelevanceFieldEnum = (typeof VndEntregaTipoOrde
 
 export const VndPedidoOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
+  origem: 'origem',
   cliente_nome: 'cliente_nome',
   cliente_email: 'cliente_email',
   cliente_telefone: 'cliente_telefone',

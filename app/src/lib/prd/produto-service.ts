@@ -45,6 +45,7 @@ type ProdutoWriteInput = {
     visivelPublico: boolean;
     inicioExibicao?: Date | null;
     fimExibicao?: Date | null;
+    previsaoEntrega?: Date | null;
     exibirAposEncerramento: boolean;
     variacoes: ProdutoVariacaoWriteInput[];
 
@@ -399,6 +400,7 @@ const produtoSelect = {
     visivel_publico: true,
     inicio_exibicao: true,
     fim_exibicao: true,
+    previsao_entrega: true,
     exibir_apos_encerramento: true,
     created_at: true,
     updated_at: true,
@@ -539,6 +541,7 @@ function serializeProduto(produto: any) {
         visivel_publico: produto.visivel_publico,
         inicio_exibicao: produto.inicio_exibicao,
         fim_exibicao: produto.fim_exibicao,
+        previsao_entrega: produto.previsao_entrega,
         exibir_apos_encerramento: produto.exibir_apos_encerramento,
         created_at: produto.created_at,
         updated_at: produto.updated_at,
@@ -668,6 +671,10 @@ class ProdutoService {
                 visivel_publico: input.visivelPublico ? 1 : 0,
                 inicio_exibicao: input.inicioExibicao ?? null,
                 fim_exibicao: input.fimExibicao ?? null,
+                previsao_entrega:
+                    input.modalidadeVenda === "pre_venda"
+                        ? input.previsaoEntrega ?? null
+                        : null,
                 exibir_apos_encerramento:
                     input.exibirAposEncerramento ? 1 : 0,
                 created_at: new Date(),
@@ -777,6 +784,10 @@ class ProdutoService {
                 visivel_publico: input.visivelPublico ? 1 : 0,
                 inicio_exibicao: input.inicioExibicao ?? null,
                 fim_exibicao: input.fimExibicao ?? null,
+                previsao_entrega:
+                    input.modalidadeVenda === "pre_venda"
+                        ? input.previsaoEntrega ?? null
+                        : null,
                 exibir_apos_encerramento:
                     input.exibirAposEncerramento ? 1 : 0,
                 updated_at: new Date(),
