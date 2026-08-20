@@ -598,9 +598,11 @@ export function ProductCard({
             : produto.status ===
             "esgotado"
                 ? "Esgotado"
-                : produto.destaque
-                    ? "Destaque"
-                    : null;
+                : produto.modalidade_venda === "pre_venda"
+                    ? "Pré-venda"
+                    : produto.destaque
+                        ? "Destaque"
+                        : null;
 
     const missingSelectionLabel =
         produto.eh_kit &&

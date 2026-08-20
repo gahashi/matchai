@@ -64,6 +64,7 @@ export type PrdProdutoMinAggregateOutputType = {
   preco_custo: runtime.Decimal | null
   preco_normal: runtime.Decimal | null
   preco_socio: runtime.Decimal | null
+  modalidade_venda: string | null
   controla_estoque: number | null
   estoque_atual: number | null
   ativo: number | null
@@ -87,6 +88,7 @@ export type PrdProdutoMaxAggregateOutputType = {
   preco_custo: runtime.Decimal | null
   preco_normal: runtime.Decimal | null
   preco_socio: runtime.Decimal | null
+  modalidade_venda: string | null
   controla_estoque: number | null
   estoque_atual: number | null
   ativo: number | null
@@ -110,6 +112,7 @@ export type PrdProdutoCountAggregateOutputType = {
   preco_custo: number
   preco_normal: number
   preco_socio: number
+  modalidade_venda: number
   controla_estoque: number
   estoque_atual: number
   ativo: number
@@ -163,6 +166,7 @@ export type PrdProdutoMinAggregateInputType = {
   preco_custo?: true
   preco_normal?: true
   preco_socio?: true
+  modalidade_venda?: true
   controla_estoque?: true
   estoque_atual?: true
   ativo?: true
@@ -186,6 +190,7 @@ export type PrdProdutoMaxAggregateInputType = {
   preco_custo?: true
   preco_normal?: true
   preco_socio?: true
+  modalidade_venda?: true
   controla_estoque?: true
   estoque_atual?: true
   ativo?: true
@@ -209,6 +214,7 @@ export type PrdProdutoCountAggregateInputType = {
   preco_custo?: true
   preco_normal?: true
   preco_socio?: true
+  modalidade_venda?: true
   controla_estoque?: true
   estoque_atual?: true
   ativo?: true
@@ -319,6 +325,7 @@ export type PrdProdutoGroupByOutputType = {
   preco_custo: runtime.Decimal | null
   preco_normal: runtime.Decimal
   preco_socio: runtime.Decimal | null
+  modalidade_venda: string
   controla_estoque: number
   estoque_atual: number | null
   ativo: number
@@ -365,6 +372,7 @@ export type PrdProdutoWhereInput = {
   preco_custo?: Prisma.DecimalNullableFilter<"PrdProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFilter<"PrdProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.DecimalNullableFilter<"PrdProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFilter<"PrdProduto"> | string
   controla_estoque?: Prisma.IntFilter<"PrdProduto"> | number
   estoque_atual?: Prisma.IntNullableFilter<"PrdProduto"> | number | null
   ativo?: Prisma.IntFilter<"PrdProduto"> | number
@@ -399,6 +407,7 @@ export type PrdProdutoOrderByWithRelationInput = {
   preco_custo?: Prisma.SortOrderInput | Prisma.SortOrder
   preco_normal?: Prisma.SortOrder
   preco_socio?: Prisma.SortOrderInput | Prisma.SortOrder
+  modalidade_venda?: Prisma.SortOrder
   controla_estoque?: Prisma.SortOrder
   estoque_atual?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
@@ -437,6 +446,7 @@ export type PrdProdutoWhereUniqueInput = Prisma.AtLeast<{
   preco_custo?: Prisma.DecimalNullableFilter<"PrdProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFilter<"PrdProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.DecimalNullableFilter<"PrdProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFilter<"PrdProduto"> | string
   controla_estoque?: Prisma.IntFilter<"PrdProduto"> | number
   estoque_atual?: Prisma.IntNullableFilter<"PrdProduto"> | number | null
   ativo?: Prisma.IntFilter<"PrdProduto"> | number
@@ -471,6 +481,7 @@ export type PrdProdutoOrderByWithAggregationInput = {
   preco_custo?: Prisma.SortOrderInput | Prisma.SortOrder
   preco_normal?: Prisma.SortOrder
   preco_socio?: Prisma.SortOrderInput | Prisma.SortOrder
+  modalidade_venda?: Prisma.SortOrder
   controla_estoque?: Prisma.SortOrder
   estoque_atual?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
@@ -502,6 +513,7 @@ export type PrdProdutoScalarWhereWithAggregatesInput = {
   preco_custo?: Prisma.DecimalNullableWithAggregatesFilter<"PrdProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalWithAggregatesFilter<"PrdProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.DecimalNullableWithAggregatesFilter<"PrdProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringWithAggregatesFilter<"PrdProduto"> | string
   controla_estoque?: Prisma.IntWithAggregatesFilter<"PrdProduto"> | number
   estoque_atual?: Prisma.IntNullableWithAggregatesFilter<"PrdProduto"> | number | null
   ativo?: Prisma.IntWithAggregatesFilter<"PrdProduto"> | number
@@ -523,6 +535,7 @@ export type PrdProdutoCreateInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -557,6 +570,7 @@ export type PrdProdutoUncheckedCreateInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -588,6 +602,7 @@ export type PrdProdutoUpdateInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -622,6 +637,7 @@ export type PrdProdutoUncheckedUpdateInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -655,6 +671,7 @@ export type PrdProdutoCreateManyInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -676,6 +693,7 @@ export type PrdProdutoUpdateManyMutationInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -699,6 +717,7 @@ export type PrdProdutoUncheckedUpdateManyInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -738,6 +757,7 @@ export type PrdProdutoCountOrderByAggregateInput = {
   preco_custo?: Prisma.SortOrder
   preco_normal?: Prisma.SortOrder
   preco_socio?: Prisma.SortOrder
+  modalidade_venda?: Prisma.SortOrder
   controla_estoque?: Prisma.SortOrder
   estoque_atual?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
@@ -775,6 +795,7 @@ export type PrdProdutoMaxOrderByAggregateInput = {
   preco_custo?: Prisma.SortOrder
   preco_normal?: Prisma.SortOrder
   preco_socio?: Prisma.SortOrder
+  modalidade_venda?: Prisma.SortOrder
   controla_estoque?: Prisma.SortOrder
   estoque_atual?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
@@ -798,6 +819,7 @@ export type PrdProdutoMinOrderByAggregateInput = {
   preco_custo?: Prisma.SortOrder
   preco_normal?: Prisma.SortOrder
   preco_socio?: Prisma.SortOrder
+  modalidade_venda?: Prisma.SortOrder
   controla_estoque?: Prisma.SortOrder
   estoque_atual?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
@@ -1047,6 +1069,7 @@ export type PrdProdutoCreateWithoutPrd_produto_tipoInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -1079,6 +1102,7 @@ export type PrdProdutoUncheckedCreateWithoutPrd_produto_tipoInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -1141,6 +1165,7 @@ export type PrdProdutoScalarWhereInput = {
   preco_custo?: Prisma.DecimalNullableFilter<"PrdProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFilter<"PrdProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.DecimalNullableFilter<"PrdProduto"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFilter<"PrdProduto"> | string
   controla_estoque?: Prisma.IntFilter<"PrdProduto"> | number
   estoque_atual?: Prisma.IntNullableFilter<"PrdProduto"> | number | null
   ativo?: Prisma.IntFilter<"PrdProduto"> | number
@@ -1162,6 +1187,7 @@ export type PrdProdutoCreateWithoutPrd_produto_imagensInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -1195,6 +1221,7 @@ export type PrdProdutoUncheckedCreateWithoutPrd_produto_imagensInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -1241,6 +1268,7 @@ export type PrdProdutoUpdateWithoutPrd_produto_imagensInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1274,6 +1302,7 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_produto_imagensInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1304,6 +1333,7 @@ export type PrdProdutoCreateWithoutPrd_produto_variacoesInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -1337,6 +1367,7 @@ export type PrdProdutoUncheckedCreateWithoutPrd_produto_variacoesInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -1383,6 +1414,7 @@ export type PrdProdutoUpdateWithoutPrd_produto_variacoesInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1416,6 +1448,7 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_produto_variacoesInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1446,6 +1479,7 @@ export type PrdProdutoCreateWithoutPrd_produto_componentesInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -1479,6 +1513,7 @@ export type PrdProdutoUncheckedCreateWithoutPrd_produto_componentesInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -1514,6 +1549,7 @@ export type PrdProdutoCreateWithoutPrd_componente_de_kitsInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -1547,6 +1583,7 @@ export type PrdProdutoUncheckedCreateWithoutPrd_componente_de_kitsInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -1593,6 +1630,7 @@ export type PrdProdutoUpdateWithoutPrd_produto_componentesInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1626,6 +1664,7 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_produto_componentesInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1667,6 +1706,7 @@ export type PrdProdutoUpdateWithoutPrd_componente_de_kitsInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1700,6 +1740,7 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_componente_de_kitsInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1730,6 +1771,7 @@ export type PrdProdutoCreateWithoutPrd_produto_camposInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -1763,6 +1805,7 @@ export type PrdProdutoUncheckedCreateWithoutPrd_produto_camposInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -1809,6 +1852,7 @@ export type PrdProdutoUpdateWithoutPrd_produto_camposInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1842,6 +1886,7 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_produto_camposInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1872,6 +1917,7 @@ export type PrdProdutoCreateWithoutVnd_campanha_produtosInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -1905,6 +1951,7 @@ export type PrdProdutoUncheckedCreateWithoutVnd_campanha_produtosInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -1951,6 +1998,7 @@ export type PrdProdutoUpdateWithoutVnd_campanha_produtosInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1984,6 +2032,7 @@ export type PrdProdutoUncheckedUpdateWithoutVnd_campanha_produtosInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2014,6 +2063,7 @@ export type PrdProdutoCreateWithoutSoc_planosInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -2047,6 +2097,7 @@ export type PrdProdutoUncheckedCreateWithoutSoc_planosInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -2093,6 +2144,7 @@ export type PrdProdutoUpdateWithoutSoc_planosInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2126,6 +2178,7 @@ export type PrdProdutoUncheckedUpdateWithoutSoc_planosInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2156,6 +2209,7 @@ export type PrdProdutoCreateWithoutVnd_pedido_itensInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -2189,6 +2243,7 @@ export type PrdProdutoUncheckedCreateWithoutVnd_pedido_itensInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -2235,6 +2290,7 @@ export type PrdProdutoUpdateWithoutVnd_pedido_itensInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2268,6 +2324,7 @@ export type PrdProdutoUncheckedUpdateWithoutVnd_pedido_itensInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2298,6 +2355,7 @@ export type PrdProdutoCreateWithoutVnd_pedido_item_componentesInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -2331,6 +2389,7 @@ export type PrdProdutoUncheckedCreateWithoutVnd_pedido_item_componentesInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -2377,6 +2436,7 @@ export type PrdProdutoUpdateWithoutVnd_pedido_item_componentesInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2410,6 +2470,7 @@ export type PrdProdutoUncheckedUpdateWithoutVnd_pedido_item_componentesInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2440,6 +2501,7 @@ export type PrdProdutoCreateWithoutVnd_estoque_reservasInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -2473,6 +2535,7 @@ export type PrdProdutoUncheckedCreateWithoutVnd_estoque_reservasInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -2519,6 +2582,7 @@ export type PrdProdutoUpdateWithoutVnd_estoque_reservasInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2552,6 +2616,7 @@ export type PrdProdutoUncheckedUpdateWithoutVnd_estoque_reservasInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2583,6 +2648,7 @@ export type PrdProdutoCreateManyPrd_produto_tipoInput = {
   preco_custo?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal: runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
   ativo?: number
@@ -2604,6 +2670,7 @@ export type PrdProdutoUpdateWithoutPrd_produto_tipoInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2636,6 +2703,7 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_produto_tipoInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2668,6 +2736,7 @@ export type PrdProdutoUncheckedUpdateManyWithoutPrd_produto_tipoInput = {
   preco_custo?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   preco_normal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   preco_socio?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2803,6 +2872,7 @@ export type PrdProdutoSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   preco_custo?: boolean
   preco_normal?: boolean
   preco_socio?: boolean
+  modalidade_venda?: boolean
   controla_estoque?: boolean
   estoque_atual?: boolean
   ativo?: boolean
@@ -2840,6 +2910,7 @@ export type PrdProdutoSelectScalar = {
   preco_custo?: boolean
   preco_normal?: boolean
   preco_socio?: boolean
+  modalidade_venda?: boolean
   controla_estoque?: boolean
   estoque_atual?: boolean
   ativo?: boolean
@@ -2853,7 +2924,7 @@ export type PrdProdutoSelectScalar = {
   deleted_at?: boolean
 }
 
-export type PrdProdutoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "prd_produto_tipo_id" | "codigo" | "slug" | "nome" | "descricao" | "preco_custo" | "preco_normal" | "preco_socio" | "controla_estoque" | "estoque_atual" | "ativo" | "destaque" | "visivel_publico" | "inicio_exibicao" | "fim_exibicao" | "exibir_apos_encerramento" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["prdProduto"]>
+export type PrdProdutoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "prd_produto_tipo_id" | "codigo" | "slug" | "nome" | "descricao" | "preco_custo" | "preco_normal" | "preco_socio" | "modalidade_venda" | "controla_estoque" | "estoque_atual" | "ativo" | "destaque" | "visivel_publico" | "inicio_exibicao" | "fim_exibicao" | "exibir_apos_encerramento" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["prdProduto"]>
 export type PrdProdutoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   prd_produto_tipo?: boolean | Prisma.PrdProdutoTipoDefaultArgs<ExtArgs>
   prd_produto_imagens?: boolean | Prisma.PrdProduto$prd_produto_imagensArgs<ExtArgs>
@@ -2894,6 +2965,7 @@ export type $PrdProdutoPayload<ExtArgs extends runtime.Types.Extensions.Internal
     preco_custo: runtime.Decimal | null
     preco_normal: runtime.Decimal
     preco_socio: runtime.Decimal | null
+    modalidade_venda: string
     controla_estoque: number
     estoque_atual: number | null
     ativo: number
@@ -3294,6 +3366,7 @@ export interface PrdProdutoFieldRefs {
   readonly preco_custo: Prisma.FieldRef<"PrdProduto", 'Decimal'>
   readonly preco_normal: Prisma.FieldRef<"PrdProduto", 'Decimal'>
   readonly preco_socio: Prisma.FieldRef<"PrdProduto", 'Decimal'>
+  readonly modalidade_venda: Prisma.FieldRef<"PrdProduto", 'String'>
   readonly controla_estoque: Prisma.FieldRef<"PrdProduto", 'Int'>
   readonly estoque_atual: Prisma.FieldRef<"PrdProduto", 'Int'>
   readonly ativo: Prisma.FieldRef<"PrdProduto", 'Int'>

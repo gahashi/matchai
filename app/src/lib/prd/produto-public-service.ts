@@ -55,6 +55,7 @@ const publicProdutoSelect = {
     descricao: true,
     preco_normal: true,
     preco_socio: true,
+    modalidade_venda: true,
     controla_estoque: true,
     estoque_atual: true,
     destaque: true,
@@ -411,13 +412,14 @@ function hasComponentStock(
 function serializeComponente(
     componente: any,
     reservations: ReservationTotals,
+    ignoreStock = false,
 ): PublicProdutoComponente {
     const produto =
         componente.prd_produto_componente;
 
-    const controlaEstoque = Boolean(
-        produto.controla_estoque,
-    );
+    const controlaEstoque =
+        !ignoreStock &&
+        Boolean(produto.controla_estoque);
 
     const estoqueDisponivel =
         controlaEstoque
@@ -435,10 +437,12 @@ function serializeComponente(
         quantidade: componente.quantidade,
         controla_estoque: controlaEstoque,
         estoque_atual: estoqueDisponivel,
-        disponivel: hasComponentStock(
-            componente,
-            reservations,
-        ),
+        disponivel:
+            ignoreStock ||
+            hasComponentStock(
+                componente,
+                reservations,
+            ),
 
         variacoes: (
             produto.prd_produto_variacoes ?? []
@@ -527,12 +531,19 @@ function serializePublicProduto(
 
     const imagem = imagens[0] ?? null;
 
+    const modalidadeVenda =
+        produto.modalidade_venda === "pre_venda"
+            ? "pre_venda"
+            : "estoque";
+    const isPreVenda = modalidadeVenda === "pre_venda";
+
     const componentes = (
         produto.prd_produto_componentes ?? []
     ).map((componente: any) =>
         serializeComponente(
             componente,
             options.reservations,
+            isPreVenda,
         ),
     );
 
@@ -544,6 +555,7 @@ function serializePublicProduto(
     );
 
     const stockAvailable =
+        isPreVenda ||
         hasAvailableStock(
             produto,
             options.reservations,
@@ -588,9 +600,11 @@ function serializePublicProduto(
             ? precoSocio!
             : precoNormal,
         socio_aplicado: socioAplicado,
+        modalidade_venda: modalidadeVenda,
 
         // Kit não possui uma fonte independente de estoque.
         controla_estoque:
+            !isPreVenda &&
             !ehKit &&
             Boolean(produto.controla_estoque),
 
@@ -619,6 +633,7 @@ function serializePublicProduto(
         ).map((variacao: any) =>
             serializeVariacao(
                 variacao,
+                !isPreVenda &&
                 Boolean(
                     produto.controla_estoque,
                 ),
@@ -797,6 +812,8 @@ function validateKitConfiguration(
     produto: PublicProduto,
     item: ValidateCartInput,
 ) {
+    const ignoreStock =
+        produto.modalidade_venda === "pre_venda";
     if (item.variacaoId !== null) {
         return {
             ok: false as const,
@@ -896,7 +913,7 @@ function validateKitConfiguration(
                 };
             }
 
-            if (!variacao.disponivel) {
+            if (!ignoreStock && !variacao.disponivel) {
                 return {
                     ok: false as const,
                     motivo: `A opção "${variacao.nome}" de "${definicao.nome}" está esgotada.`,
@@ -933,10 +950,12 @@ function validateKitConfiguration(
         }
 
         const limite =
-            getComponentMaxQuantity(
-                definicao,
-                variacao?.id ?? null,
-            );
+            ignoreStock
+                ? null
+                : getComponentMaxQuantity(
+                    definicao,
+                    variacao?.id ?? null,
+                );
 
         limites.push(limite);
 

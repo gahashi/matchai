@@ -3336,6 +3336,7 @@ export const PrdProdutoScalarFieldEnum = {
   preco_custo: 'preco_custo',
   preco_normal: 'preco_normal',
   preco_socio: 'preco_socio',
+  modalidade_venda: 'modalidade_venda',
   controla_estoque: 'controla_estoque',
   estoque_atual: 'estoque_atual',
   ativo: 'ativo',
@@ -3907,7 +3908,8 @@ export const PrdProdutoOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   slug: 'slug',
   nome: 'nome',
-  descricao: 'descricao'
+  descricao: 'descricao',
+  modalidade_venda: 'modalidade_venda'
 } as const
 
 export type PrdProdutoOrderByRelevanceFieldEnum = (typeof PrdProdutoOrderByRelevanceFieldEnum)[keyof typeof PrdProdutoOrderByRelevanceFieldEnum]

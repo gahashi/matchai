@@ -37,6 +37,7 @@ type ProdutoWriteInput = {
     precoCusto?: number | null;
     precoNormal: number;
     precoSocio?: number | null;
+    modalidadeVenda: "estoque" | "pre_venda";
     controlaEstoque: boolean;
     estoqueAtual?: number | null;
     ativo: boolean;
@@ -284,6 +285,13 @@ function validateProdutoInput(input: ProdutoWriteInput) {
         throw new Error("Informe o código do produto.");
     }
 
+    if (
+        input.modalidadeVenda !== "estoque" &&
+        input.modalidadeVenda !== "pre_venda"
+    ) {
+        throw new Error("Modalidade de venda inválida.");
+    }
+
     if (!Number.isFinite(input.precoNormal) || input.precoNormal < 0) {
         throw new Error("Informe um preço normal válido.");
     }
@@ -383,6 +391,7 @@ const produtoSelect = {
     preco_custo: true,
     preco_normal: true,
     preco_socio: true,
+    modalidade_venda: true,
     controla_estoque: true,
     estoque_atual: true,
     ativo: true,
@@ -522,6 +531,7 @@ function serializeProduto(produto: any) {
         preco_normal: Number(produto.preco_normal),
         preco_socio:
             produto.preco_socio !== null ? Number(produto.preco_socio) : null,
+        modalidade_venda: produto.modalidade_venda,
         controla_estoque: produto.controla_estoque,
         estoque_atual: produto.estoque_atual,
         ativo: produto.ativo,
@@ -644,6 +654,7 @@ class ProdutoService {
                 preco_custo: input.precoCusto ?? null,
                 preco_normal: input.precoNormal,
                 preco_socio: input.precoSocio ?? null,
+                modalidade_venda: input.modalidadeVenda,
                 controla_estoque:
                     !ehKit && input.controlaEstoque ? 1 : 0,
                 estoque_atual:
@@ -752,6 +763,7 @@ class ProdutoService {
                 preco_custo: input.precoCusto ?? null,
                 preco_normal: input.precoNormal,
                 preco_socio: input.precoSocio ?? null,
+                modalidade_venda: input.modalidadeVenda,
                 controla_estoque:
                     !ehKit && input.controlaEstoque ? 1 : 0,
                 estoque_atual:

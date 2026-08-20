@@ -425,7 +425,8 @@ model PrdProduto {
   preco_normal Decimal  @db.Decimal(10, 2)
   preco_socio  Decimal? @db.Decimal(10, 2)
 
-  controla_estoque Int  @default(0)
+  modalidade_venda String @default("estoque") @db.VarChar(30)
+  controla_estoque Int    @default(0)
   estoque_atual    Int?
 
   ativo    Int @default(1)

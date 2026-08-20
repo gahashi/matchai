@@ -42,6 +42,7 @@ export type CheckoutValidatedItem = {
         preco_normal: number;
         preco_aplicado: number;
         socio_aplicado: boolean;
+        modalidade_venda: "estoque" | "pre_venda";
     } | null;
     variacao?: {
         id: number;
@@ -738,7 +739,10 @@ class PedidoPublicService {
 
                 // Produto normal reserva o próprio estoque.
                 // Kit reserva somente os componentes reais.
-                if (componentes.length === 0) {
+                const isPreVenda =
+                    item.produto?.modalidade_venda === "pre_venda";
+
+                if (componentes.length === 0 && !isPreVenda) {
                     await createStockReservation(
                         tx,
                         {
@@ -818,26 +822,28 @@ class PedidoPublicService {
                         );
                     }
 
-                    await createStockReservation(
-                        tx,
-                        {
-                            pedidoId: pedido.id,
-                            pedidoItemId:
-                            pedidoItem.id,
-                            pedidoItemComponenteId:
-                            pedidoItemComponente.id,
-                            produtoId:
-                            componente.produto_id,
-                            variacaoId:
-                            componente.variacao_id,
-                            quantidade:
-                                item.quantidade *
-                                componente.quantidade_por_kit,
-                            expiraAt:
-                            reservaExpiraAt,
-                        },
-                        now,
-                    );
+                    if (!isPreVenda) {
+                        await createStockReservation(
+                            tx,
+                            {
+                                pedidoId: pedido.id,
+                                pedidoItemId:
+                                pedidoItem.id,
+                                pedidoItemComponenteId:
+                                pedidoItemComponente.id,
+                                produtoId:
+                                componente.produto_id,
+                                variacaoId:
+                                componente.variacao_id,
+                                quantidade:
+                                    item.quantidade *
+                                    componente.quantidade_por_kit,
+                                expiraAt:
+                                reservaExpiraAt,
+                            },
+                            now,
+                        );
+                    }
                 }
             }
 

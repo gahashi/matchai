@@ -8,6 +8,7 @@ app/.next/
 out/
 dist/
 build/
+app/logs
 
 # TypeScript cache
 tsconfig.tsbuildinfo

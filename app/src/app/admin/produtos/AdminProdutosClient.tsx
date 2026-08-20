@@ -109,6 +109,7 @@ type Produto = {
     preco_custo: number | null;
     preco_normal: number;
     preco_socio: number | null;
+    modalidade_venda: "estoque" | "pre_venda";
     controla_estoque: number;
     estoque_atual: number | null;
     ativo: number;
@@ -156,6 +157,7 @@ type ProdutoFormState = {
     preco_custo: string;
     preco_normal: string;
     preco_socio: string;
+    modalidade_venda: "estoque" | "pre_venda";
     controla_estoque: boolean;
     estoque_atual: string;
     ativo: boolean;
@@ -211,6 +213,7 @@ const emptyForm: ProdutoFormState = {
     preco_custo: "",
     preco_normal: "",
     preco_socio: "",
+    modalidade_venda: "estoque",
     controla_estoque: false,
     estoque_atual: "",
     ativo: true,
@@ -304,6 +307,7 @@ function produtoToForm(produto: Produto): ProdutoFormState {
             produto.preco_socio !== null
                 ? String(produto.preco_socio)
                 : "",
+        modalidade_venda: produto.modalidade_venda ?? "estoque",
         controla_estoque: Boolean(produto.controla_estoque),
         estoque_atual:
             produto.estoque_atual !== null
@@ -825,6 +829,7 @@ export default function AdminProdutosClient({
         payload.set("preco_custo", form.preco_custo);
         payload.set("preco_normal", form.preco_normal);
         payload.set("preco_socio", form.preco_socio);
+        payload.set("modalidade_venda", form.modalidade_venda);
         payload.set(
             "controla_estoque",
             !ehKit && form.controla_estoque ? "1" : "0",
@@ -2810,6 +2815,26 @@ export default function AdminProdutosClient({
                         </div>
 
                         <div className="bp-product-grid">
+                            <SelectMenu
+                                label="Modalidade da venda"
+                                value={form.modalidade_venda}
+                                onChange={(value) =>
+                                    updateForm(
+                                        "modalidade_venda",
+                                        value as "estoque" | "pre_venda",
+                                    )
+                                }
+                                options={[
+                                    { value: "estoque", label: "Estoque" },
+                                    { value: "pre_venda", label: "Pré-venda" },
+                                ]}
+                                helperText={
+                                    form.modalidade_venda === "pre_venda"
+                                        ? "Pré-venda não limita a compra pelo estoque físico."
+                                        : "Venda normal usando estoque e reservas."
+                                }
+                            />
+
                             <Input
                                 label="Início da exibição"
                                 type="datetime-local"

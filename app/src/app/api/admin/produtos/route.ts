@@ -110,6 +110,18 @@ type RawCampo = {
     ativo?: boolean | number | string;
 };
 
+function parseModalidadeVenda(
+    value: FormDataEntryValue | null,
+): "estoque" | "pre_venda" {
+    const modalidade = String(value || "estoque").trim();
+
+    if (modalidade === "estoque" || modalidade === "pre_venda") {
+        return modalidade;
+    }
+
+    throw new Error("Modalidade de venda inválida.");
+}
+
 function parseProdutoFormData(formData: FormData) {
     const variacoes = parseJsonArray<RawVariacao>(
         formData.get("variacoes"),
@@ -235,6 +247,9 @@ function parseProdutoFormData(formData: FormData) {
         precoCusto: optionalNumber(formData.get("preco_custo")),
         precoNormal: Number(formData.get("preco_normal")),
         precoSocio: optionalNumber(formData.get("preco_socio")),
+        modalidadeVenda: parseModalidadeVenda(
+            formData.get("modalidade_venda"),
+        ),
         controlaEstoque: booleanValue(
             formData.get("controla_estoque"),
         ),

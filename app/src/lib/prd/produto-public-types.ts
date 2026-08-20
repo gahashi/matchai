@@ -51,6 +51,7 @@ export type PublicProduto = {
     preco_socio: number | null;
     preco_aplicado: number;
     socio_aplicado: boolean;
+    modalidade_venda: "estoque" | "pre_venda";
 
     controla_estoque: boolean;
     estoque_atual: number | null;

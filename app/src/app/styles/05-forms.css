@@ -2112,3 +2112,29 @@
         width: fit-content;
     }
 }
+/* Inputs nativos de data e hora */
+input[type="date"],
+input[type="datetime-local"],
+input[type="time"] {
+    color-scheme: dark;
+}
+
+/* Ícone nativo do calendário */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.8;
+    filter: invert(1);
+    transition:
+            opacity 0.2s ease,
+            transform 0.2s ease;
+}
+
+/* Hover do ícone */
+input[type="date"]::-webkit-calendar-picker-indicator:hover,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover,
+input[type="time"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+    transform: scale(1.08);
+}
