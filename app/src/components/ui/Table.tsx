@@ -2,7 +2,7 @@ import { ReactNode, TableHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 type TableProps = TableHTMLAttributes<HTMLTableElement> & {
-    headers: string[];
+    headers: ReactNode[];
     children: ReactNode;
     emptyMessage?: string;
 };
@@ -21,8 +21,10 @@ export function Table({
             <table className={cn("bp-table", className)} {...props}>
                 <thead>
                 <tr>
-                    {headers.map((header) => (
-                        <th key={header}>{header}</th>
+                    {headers.map((header, index) => (
+                        <th key={index}>
+                            {header}
+                        </th>
                     ))}
                 </tr>
                 </thead>

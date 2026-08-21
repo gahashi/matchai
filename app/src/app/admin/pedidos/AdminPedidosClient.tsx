@@ -47,6 +47,10 @@ import {
     type PedidoManualProduto,
 } from "./PedidoManualModal";
 
+import {
+    PedidoDetalheModal,
+} from "./PedidoDetalheModal";
+
 
 type PedidoStatus = {
     id: number;
@@ -150,6 +154,48 @@ type BadgeColor =
     | "warning"
     | "danger"
     | "info";
+
+type BulkAction = {
+    statusCode: string;
+    label: string;
+};
+
+const BULK_ACTIONS_BY_STATUS: Record<
+    string,
+    BulkAction[]
+> = {
+    confirmado: [
+        {
+            statusCode: "em_preparacao",
+            label: "Iniciar preparação",
+        },
+    ],
+
+    em_preparacao: [
+        {
+            statusCode: "pronto_retirada",
+            label: "Marcar como pronto",
+        },
+        {
+            statusCode: "enviado",
+            label: "Marcar como enviado",
+        },
+    ],
+
+    pronto_retirada: [
+        {
+            statusCode: "entregue",
+            label: "Marcar como entregue",
+        },
+    ],
+
+    enviado: [
+        {
+            statusCode: "entregue",
+            label: "Marcar como entregue",
+        },
+    ],
+};
 
 
 function money(value: number) {
@@ -286,13 +332,78 @@ export default function AdminPedidosClient({
     const [modalOpen, setModalOpen] =
         useState(false);
 
+    const [
+        pedidoDetalheId,
+        setPedidoDetalheId,
+    ] =
+        useState<number | null>(
+            null,
+        );
+
     const [snackbar, setSnackbar] =
         useState<SnackbarState | null>(
             null,
         );
 
+    const [
+        selecionados,
+        setSelecionados,
+    ] =
+        useState<number[]>([]);
+
+    const [
+        executandoLote,
+        setExecutandoLote,
+    ] =
+        useState(false);
+
     const primeiraBusca =
         useRef(true);
+
+    const pedidosSelecionados =
+        data.pedidos.filter(
+            (pedido) =>
+                selecionados.includes(
+                    pedido.id,
+                ),
+        );
+
+    const todosVisiveisSelecionados =
+        data.pedidos.length > 0 &&
+        data.pedidos.every(
+            (pedido) =>
+                selecionados.includes(
+                    pedido.id,
+                ),
+        );
+
+    const statusSelecionados =
+        Array.from(
+            new Set(
+                pedidosSelecionados.map(
+                    (pedido) =>
+                        pedido.status.codigo,
+                ),
+            ),
+        );
+
+    const selecaoMista =
+        statusSelecionados.length > 1;
+
+    const acoesLote =
+        statusSelecionados.length === 1
+            ? BULK_ACTIONS_BY_STATUS[
+            statusSelecionados[0]
+            ] ?? []
+            : [];
+
+
+    useEffect(() => {
+        setSelecionados([]);
+    }, [
+        busca,
+        statusSelecionado,
+    ]);
 
 
     useEffect(() => {
@@ -517,6 +628,179 @@ export default function AdminPedidosClient({
         });
     }
 
+    async function pedidoAtualizado(
+        message: string,
+    ) {
+        setSnackbar({
+            color: "success",
+            title:
+                "Pedido atualizado",
+            message,
+        });
+
+        await recarregar();
+    }
+
+
+    function alternarPedidoSelecionado(
+        pedidoId: number,
+    ) {
+        setSelecionados((current) =>
+            current.includes(pedidoId)
+                ? current.filter(
+                    (id) =>
+                        id !== pedidoId,
+                )
+                : [
+                    ...current,
+                    pedidoId,
+                ],
+        );
+    }
+
+    function alternarTodosVisiveis() {
+        if (
+            todosVisiveisSelecionados
+        ) {
+            setSelecionados([]);
+            return;
+        }
+
+        setSelecionados(
+            data.pedidos.map(
+                (pedido) =>
+                    pedido.id,
+            ),
+        );
+    }
+
+    async function executarAcaoLote(
+        action: BulkAction,
+    ) {
+        if (
+            pedidosSelecionados.length ===
+            0
+        ) {
+            return;
+        }
+
+        if (selecaoMista) {
+            setSnackbar({
+                color: "warning",
+                title:
+                    "Seleção incompatível",
+                message:
+                    "Os pedidos selecionados possuem status diferentes. Selecione pedidos do mesmo status para executar uma ação em lote.",
+            });
+            return;
+        }
+
+        try {
+            setExecutandoLote(true);
+
+            let atualizados = 0;
+            const falhas: string[] = [];
+
+            for (
+                const pedido of
+                pedidosSelecionados
+                ) {
+                try {
+                    const response =
+                        await fetch(
+                            `/api/admin/pedidos/${pedido.id}`,
+                            {
+                                method:
+                                    "PATCH",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json",
+                                    Accept:
+                                        "application/json",
+                                },
+
+                                body:
+                                    JSON.stringify(
+                                        {
+                                            action:
+                                                "set_status",
+
+                                            status_code:
+                                            action.statusCode,
+
+                                            observacao:
+                                                "Atualização em lote pelo painel administrativo.",
+                                        },
+                                    ),
+                            },
+                        );
+
+                    const result =
+                        await response.json();
+
+                    if (
+                        !response.ok ||
+                        !result.ok
+                    ) {
+                        throw new Error(
+                            result.message ||
+                            "Falha ao atualizar pedido.",
+                        );
+                    }
+
+                    atualizados += 1;
+                } catch (error) {
+                    falhas.push(
+                        `${pedido.codigo}: ${
+                            error instanceof Error
+                                ? error.message
+                                : "erro desconhecido"
+                        }`,
+                    );
+                }
+            }
+
+            setSelecionados([]);
+            await recarregar();
+
+            if (
+                falhas.length === 0
+            ) {
+                setSnackbar({
+                    color: "success",
+                    title:
+                        "Pedidos atualizados",
+                    message:
+                        `${atualizados} pedido(s) atualizado(s) com sucesso.`,
+                });
+
+                return;
+            }
+
+            setSnackbar({
+                color:
+                    atualizados > 0
+                        ? "warning"
+                        : "danger",
+
+                title:
+                    atualizados > 0
+                        ? "Atualização parcial"
+                        : "Falha na atualização",
+
+                message:
+                    `${atualizados} atualizado(s). ${falhas.length} falha(s): ${falhas.join(
+                        " | ",
+                    )}`,
+
+                autoClose: false,
+            });
+        } finally {
+            setExecutandoLote(false);
+        }
+    }
+
 
     return (
         <>
@@ -700,6 +984,99 @@ export default function AdminPedidosClient({
                 </div>
             </div>
 
+            {selecionados.length > 0 ? (
+                <div className="bp-card bp-mb-4">
+                    <div
+                        className="bp-card-body"
+                        style={{
+                            display: "grid",
+                            gap: 12,
+                        }}
+                    >
+                        <div className="bp-row-between">
+                            <div>
+                                <strong>
+                                    {selecionados.length} pedido(s) selecionado(s)
+                                </strong>
+
+                                <div
+                                    style={{
+                                        marginTop: 4,
+                                        color:
+                                            "var(--color-text-muted)",
+                                        fontSize: 12,
+                                    }}
+                                >
+                                    As ações aparecem apenas quando todos os pedidos selecionados são compatíveis.
+                                </div>
+                            </div>
+
+                            <Button
+                                color="secondary"
+                                variant="ghost"
+                                size="sm"
+                                onClick={() =>
+                                    setSelecionados([])
+                                }
+                                disabled={
+                                    executandoLote
+                                }
+                            >
+                                Limpar seleção
+                            </Button>
+                        </div>
+
+                        {selecaoMista ? (
+                            <Alert
+                                color="warning"
+                                title="Status diferentes"
+                            >
+                                Os pedidos selecionados possuem status diferentes. Selecione pedidos do mesmo status para executar uma ação em lote.
+                            </Alert>
+                        ) : acoesLote.length > 0 ? (
+                            <div className="bp-action-row">
+                                {acoesLote.map(
+                                    (action) => (
+                                        <Button
+                                            key={
+                                                action.statusCode
+                                            }
+                                            onClick={() =>
+                                                void executarAcaoLote(
+                                                    action,
+                                                )
+                                            }
+                                            disabled={
+                                                executandoLote
+                                            }
+                                        >
+                                            {executandoLote ? (
+                                                <Loader2
+                                                    size={
+                                                        16
+                                                    }
+                                                />
+                                            ) : null}
+
+                                            {
+                                                action.label
+                                            }
+                                        </Button>
+                                    ),
+                                )}
+                            </div>
+                        ) : (
+                            <Alert
+                                color="info"
+                                title="Nenhuma ação em lote disponível"
+                            >
+                                O status atual dos pedidos selecionados não possui uma ação operacional em lote nesta etapa.
+                            </Alert>
+                        )}
+                    </div>
+                </div>
+            ) : null}
+
             <div className="bp-card">
                 <div className="bp-card-body">
                     <div className="bp-row-between bp-mb-3">
@@ -757,6 +1134,22 @@ export default function AdminPedidosClient({
 
                     <Table
                         headers={[
+                            <label
+                                key="selecionar"
+                                className="bp-check"
+                                title="Selecionar todos os pedidos visíveis"
+                            >
+                                <input
+                                    type="checkbox"
+                                    checked={
+                                        todosVisiveisSelecionados
+                                    }
+                                    onChange={
+                                        alternarTodosVisiveis
+                                    }
+                                    aria-label="Selecionar todos os pedidos visíveis"
+                                />
+                            </label>,
                             "Código",
                             "Cliente",
                             "Data",
@@ -779,6 +1172,26 @@ export default function AdminPedidosClient({
                                         pedido.id
                                     }
                                 >
+                                    <td>
+                                        <label
+                                            className="bp-check"
+                                            title={`Selecionar pedido ${pedido.codigo}`}
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                checked={selecionados.includes(
+                                                    pedido.id,
+                                                )}
+                                                onChange={() =>
+                                                    alternarPedidoSelecionado(
+                                                        pedido.id,
+                                                    )
+                                                }
+                                                aria-label={`Selecionar pedido ${pedido.codigo}`}
+                                            />
+                                        </label>
+                                    </td>
+
                                     <td>
                                         <strong>
                                             {
@@ -983,8 +1396,11 @@ export default function AdminPedidosClient({
                                             color="secondary"
                                             variant="ghost"
                                             size="sm"
-                                            disabled
-                                            title="O detalhe do pedido será conectado na próxima etapa."
+                                            onClick={() =>
+                                                setPedidoDetalheId(
+                                                    pedido.id,
+                                                )
+                                            }
                                         >
                                             <Eye
                                                 size={
@@ -1000,6 +1416,24 @@ export default function AdminPedidosClient({
                     </Table>
                 </div>
             </div>
+
+            <PedidoDetalheModal
+                open={
+                    pedidoDetalheId !==
+                    null
+                }
+                pedidoId={
+                    pedidoDetalheId
+                }
+                onClose={() =>
+                    setPedidoDetalheId(
+                        null,
+                    )
+                }
+                onUpdated={
+                    pedidoAtualizado
+                }
+            />
 
             <PedidoManualModal
                 open={modalOpen}

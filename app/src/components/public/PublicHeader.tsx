@@ -3,6 +3,7 @@
 import Link from "next/link";
 import {
     LogIn,
+    Package,
     ShoppingBag,
 } from "lucide-react";
 
@@ -77,24 +78,35 @@ export function PublicHeader({
                     </Link>
 
                     {user ? (
-                        <Link
-                            href="/perfil"
-                            className="bp-topbar-user bp-public-account-link"
-                            aria-label="Minha conta"
-                        >
-                            <Avatar
-                                name={user.nome}
-                                src={
-                                    user.avatar_url ??
-                                    undefined
-                                }
-                            />
+                        <>
+                            <Link
+                                href="/minhas-compras"
+                                className="bp-public-account-link bp-public-account-guest"
+                                aria-label="Minhas compras"
+                            >
+                                <Package size={17} />
+                                <span>Minhas compras</span>
+                            </Link>
 
-                            <span className="bp-topbar-user-meta">
+                            <Link
+                                href="/perfil"
+                                className="bp-topbar-user bp-public-account-link"
+                                aria-label="Minha conta"
+                            >
+                                <Avatar
+                                    name={user.nome}
+                                    src={
+                                        user.avatar_url ??
+                                        undefined
+                                    }
+                                />
+
+                                <span className="bp-topbar-user-meta">
                                 <strong>{user.nome}</strong>
                                 <span>Minha conta</span>
                             </span>
-                        </Link>
+                            </Link>
+                        </>
                     ) : (
                         <Link
                             href="/login"

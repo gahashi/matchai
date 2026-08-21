@@ -2563,6 +2563,21 @@ class PedidoService {
             }
         }
 
+        const observacao =
+            normalizeOptional(
+                input.observacao,
+            );
+
+        if (
+            input.statusCode ===
+            "cancelado" &&
+            !observacao
+        ) {
+            throw new Error(
+                "Informe o motivo do cancelamento.",
+            );
+        }
+
         const statusDestino =
             await prisma.vndPedidoStatus.findFirst(
                 {
@@ -2615,6 +2630,34 @@ class PedidoService {
                     },
                 });
 
+
+
+                if (
+                    input.statusCode ===
+                    "cancelado"
+                ) {
+                    await tx.vndEstoqueReserva.updateMany({
+                        where: {
+                            vnd_pedido_id:
+                            input.id,
+
+                            consumida_at:
+                                null,
+
+                            liberada_at:
+                                null,
+                        },
+
+                        data: {
+                            liberada_at:
+                            now,
+
+                            updated_at:
+                            now,
+                        },
+                    });
+                }
+
                 await tx.vndPedidoHistorico.create(
                     {
                         data: {
@@ -2629,9 +2672,7 @@ class PedidoService {
                                 .updatedBySysUsuarioId,
 
                             observacao:
-                                normalizeOptional(
-                                    input.observacao,
-                                ) ??
+                                observacao ??
                                 `Status alterado para ${input.statusCode} pelo administrador.`,
 
                             created_at:

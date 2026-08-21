@@ -378,6 +378,22 @@ async function releaseOrderReservations(
     });
 }
 
+function normalizePublicPhone(
+    value: string,
+) {
+    const numeros =
+        value.replace(/\D/g, "");
+
+    if (
+        numeros.length === 13 &&
+        numeros.startsWith("55")
+    ) {
+        return numeros.slice(2);
+    }
+
+    return numeros;
+}
+
 function roundMoney(value: number) {
     return Number(value.toFixed(2));
 }
@@ -1042,6 +1058,735 @@ class PedidoPublicService {
         return {
             finStatusCode,
             pedidoStatusCode,
+        };
+    }
+
+    async findPublicOrderByCodeAndPhone(
+        input: {
+            codigo: string;
+            telefone: string;
+        },
+    ) {
+        const codigo =
+            input.codigo
+                .trim()
+                .toUpperCase();
+
+        const telefone =
+            normalizePublicPhone(
+                input.telefone,
+            );
+
+        if (
+            !codigo ||
+            telefone.length < 10 ||
+            telefone.length > 11
+        ) {
+            return null;
+        }
+
+        const pedido =
+            await prisma.vndPedido.findUnique({
+                where: {
+                    codigo,
+                },
+
+                select: {
+                    codigo: true,
+
+                    cliente_nome: true,
+                    cliente_telefone: true,
+
+                    valor_total: true,
+
+                    created_at: true,
+                    concluido_at: true,
+                    cancelado_at: true,
+
+                    vnd_pedido_status: {
+                        select: {
+                            codigo: true,
+                            descricao: true,
+                            color: true,
+                            icon: true,
+                        },
+                    },
+
+                    vnd_entrega_tipo: {
+                        select: {
+                            codigo: true,
+                            descricao: true,
+                        },
+                    },
+
+                    vnd_pedido_itens: {
+                        orderBy: {
+                            id: "asc",
+                        },
+
+                        select: {
+                            id: true,
+
+                            produto_nome_snapshot:
+                                true,
+
+                            variacao_snapshot:
+                                true,
+
+                            quantidade: true,
+
+                            previsao_entrega_snapshot:
+                                true,
+
+                            vnd_pedido_item_componentes:
+                                {
+                                    orderBy: {
+                                        id: "asc",
+                                    },
+
+                                    select: {
+                                        id: true,
+
+                                        produto_nome_snapshot:
+                                            true,
+
+                                        variacao_snapshot:
+                                            true,
+
+                                        quantidade:
+                                            true,
+                                    },
+                                },
+                        },
+                    },
+
+                    vnd_pedido_historicos: {
+                        orderBy: [
+                            {
+                                created_at:
+                                    "asc",
+                            },
+                            {
+                                id: "asc",
+                            },
+                        ],
+
+                        select: {
+                            id: true,
+                            created_at: true,
+
+                            vnd_pedido_status: {
+                                select: {
+                                    codigo: true,
+                                    descricao: true,
+                                    color: true,
+                                    icon: true,
+                                },
+                            },
+                        },
+                    },
+                },
+            });
+
+        if (!pedido) {
+            return null;
+        }
+
+        const telefonePedido =
+            normalizePublicPhone(
+                pedido.cliente_telefone,
+            );
+
+        if (
+            telefonePedido !==
+            telefone
+        ) {
+            return null;
+        }
+
+        return {
+            codigo:
+            pedido.codigo,
+
+            cliente: {
+                nome:
+                pedido.cliente_nome,
+            },
+
+            status: {
+                codigo:
+                pedido
+                    .vnd_pedido_status
+                    .codigo,
+
+                descricao:
+                pedido
+                    .vnd_pedido_status
+                    .descricao,
+
+                color:
+                pedido
+                    .vnd_pedido_status
+                    .color,
+
+                icon:
+                pedido
+                    .vnd_pedido_status
+                    .icon,
+            },
+
+            entrega_tipo:
+                pedido.vnd_entrega_tipo
+                    ? {
+                        codigo:
+                        pedido
+                            .vnd_entrega_tipo
+                            .codigo,
+
+                        descricao:
+                        pedido
+                            .vnd_entrega_tipo
+                            .descricao,
+                    }
+                    : null,
+
+            valor_total:
+                Number(
+                    pedido.valor_total,
+                ),
+
+            created_at:
+            pedido.created_at,
+
+            concluido_at:
+            pedido.concluido_at,
+
+            cancelado_at:
+            pedido.cancelado_at,
+
+            itens:
+                pedido.vnd_pedido_itens.map(
+                    (item) => ({
+                        id:
+                        item.id,
+
+                        produto_nome:
+                        item
+                            .produto_nome_snapshot,
+
+                        variacao:
+                        item
+                            .variacao_snapshot,
+
+                        quantidade:
+                        item.quantidade,
+
+                        previsao_entrega:
+                        item
+                            .previsao_entrega_snapshot,
+
+                        componentes:
+                            item
+                                .vnd_pedido_item_componentes
+                                .map(
+                                    (
+                                        componente,
+                                    ) => ({
+                                        id:
+                                        componente.id,
+
+                                        produto_nome:
+                                        componente
+                                            .produto_nome_snapshot,
+
+                                        variacao:
+                                        componente
+                                            .variacao_snapshot,
+
+                                        quantidade:
+                                        componente
+                                            .quantidade,
+                                    }),
+                                ),
+                    }),
+                ),
+
+            historico:
+                pedido
+                    .vnd_pedido_historicos
+                    .map(
+                        (
+                            historico,
+                        ) => ({
+                            id:
+                            historico.id,
+
+                            status: {
+                                codigo:
+                                historico
+                                    .vnd_pedido_status
+                                    .codigo,
+
+                                descricao:
+                                historico
+                                    .vnd_pedido_status
+                                    .descricao,
+
+                                color:
+                                historico
+                                    .vnd_pedido_status
+                                    .color,
+
+                                icon:
+                                historico
+                                    .vnd_pedido_status
+                                    .icon,
+                            },
+
+                            created_at:
+                            historico
+                                .created_at,
+                        }),
+                    ),
+        };
+    }
+
+    async listUserOrders(
+        sysUsuarioId: number,
+    ) {
+        const pedidos =
+            await prisma.vndPedido.findMany({
+                where: {
+                    sys_usuario_id:
+                    sysUsuarioId,
+                },
+
+                orderBy: [
+                    {
+                        created_at:
+                            "desc",
+                    },
+                    {
+                        id: "desc",
+                    },
+                ],
+
+                select: {
+                    id: true,
+                    codigo: true,
+                    valor_total: true,
+                    created_at: true,
+
+                    vnd_pedido_status: {
+                        select: {
+                            codigo: true,
+                            descricao: true,
+                            color: true,
+                            icon: true,
+                        },
+                    },
+
+                    vnd_pedido_itens: {
+                        orderBy: {
+                            id: "asc",
+                        },
+
+                        select: {
+                            produto_nome_snapshot:
+                                true,
+
+                            previsao_entrega_snapshot:
+                                true,
+                        },
+                    },
+
+                    _count: {
+                        select: {
+                            vnd_pedido_itens:
+                                true,
+                        },
+                    },
+                },
+            });
+
+        return pedidos.map(
+            (pedido) => {
+                const previsaoEntrega =
+                    pedido.vnd_pedido_itens
+                        .find(
+                            (item) =>
+                                item
+                                    .previsao_entrega_snapshot !==
+                                null,
+                        )
+                        ?.previsao_entrega_snapshot ??
+                    null;
+
+                const primeiroItem =
+                    pedido
+                        .vnd_pedido_itens[0] ??
+                    null;
+
+                return {
+                    id:
+                    pedido.id,
+
+                    codigo:
+                    pedido.codigo,
+
+                    valor_total:
+                        Number(
+                            pedido.valor_total,
+                        ),
+
+                    created_at:
+                    pedido.created_at,
+
+                    status: {
+                        codigo:
+                        pedido
+                            .vnd_pedido_status
+                            .codigo,
+
+                        descricao:
+                        pedido
+                            .vnd_pedido_status
+                            .descricao,
+
+                        color:
+                        pedido
+                            .vnd_pedido_status
+                            .color,
+
+                        icon:
+                        pedido
+                            .vnd_pedido_status
+                            .icon,
+                    },
+
+                    quantidade_itens:
+                    pedido._count
+                        .vnd_pedido_itens,
+
+                    primeiro_item:
+                        primeiroItem
+                            ? {
+                                produto_nome:
+                                primeiroItem
+                                    .produto_nome_snapshot,
+                            }
+                            : null,
+
+                    previsao_entrega:
+                    previsaoEntrega,
+                };
+            },
+        );
+    }
+
+    async findUserOrderByCode(
+        input: {
+            sysUsuarioId: number;
+            codigo: string;
+        },
+    ) {
+        const codigo =
+            input.codigo
+                .trim()
+                .toUpperCase();
+
+        if (!codigo) {
+            return null;
+        }
+
+        const pedido =
+            await prisma.vndPedido.findFirst({
+                where: {
+                    codigo,
+
+                    sys_usuario_id:
+                    input.sysUsuarioId,
+                },
+
+                select: {
+                    codigo: true,
+                    valor_total: true,
+                    created_at: true,
+
+                    vnd_pedido_status: {
+                        select: {
+                            codigo: true,
+                            descricao: true,
+                            color: true,
+                            icon: true,
+                        },
+                    },
+
+                    vnd_pedido_itens: {
+                        orderBy: {
+                            id: "asc",
+                        },
+
+                        select: {
+                            id: true,
+
+                            produto_nome_snapshot:
+                                true,
+
+                            variacao_snapshot:
+                                true,
+
+                            quantidade:
+                                true,
+
+                            previsao_entrega_snapshot:
+                                true,
+
+                            vnd_pedido_item_componentes:
+                                {
+                                    orderBy: {
+                                        id: "asc",
+                                    },
+
+                                    select: {
+                                        id: true,
+
+                                        produto_nome_snapshot:
+                                            true,
+
+                                        variacao_snapshot:
+                                            true,
+
+                                        quantidade:
+                                            true,
+                                    },
+                                },
+                        },
+                    },
+
+                    fin_pagamentos: {
+                        orderBy: {
+                            id: "desc",
+                        },
+
+                        take: 1,
+
+                        select: {
+                            valor: true,
+
+                            fin_pagamento_status: {
+                                select: {
+                                    codigo: true,
+                                    descricao:
+                                        true,
+                                    color: true,
+                                },
+                            },
+
+                            fin_pagamento_metodo: {
+                                select: {
+                                    codigo: true,
+                                    descricao:
+                                        true,
+                                },
+                            },
+                        },
+                    },
+
+                    vnd_pedido_historicos: {
+                        orderBy: [
+                            {
+                                created_at:
+                                    "asc",
+                            },
+                            {
+                                id: "asc",
+                            },
+                        ],
+
+                        select: {
+                            id: true,
+                            created_at: true,
+
+                            vnd_pedido_status: {
+                                select: {
+                                    codigo: true,
+                                    descricao:
+                                        true,
+                                    color: true,
+                                    icon: true,
+                                },
+                            },
+                        },
+                    },
+                },
+            });
+
+        if (!pedido) {
+            return null;
+        }
+
+        const pagamento =
+            pedido.fin_pagamentos[0] ??
+            null;
+
+        return {
+            codigo:
+            pedido.codigo,
+
+            valor_total:
+                Number(
+                    pedido.valor_total,
+                ),
+
+            created_at:
+            pedido.created_at,
+
+            status: {
+                codigo:
+                pedido
+                    .vnd_pedido_status
+                    .codigo,
+
+                descricao:
+                pedido
+                    .vnd_pedido_status
+                    .descricao,
+
+                color:
+                pedido
+                    .vnd_pedido_status
+                    .color,
+
+                icon:
+                pedido
+                    .vnd_pedido_status
+                    .icon,
+            },
+
+            itens:
+                pedido.vnd_pedido_itens.map(
+                    (item) => ({
+                        id:
+                        item.id,
+
+                        produto_nome:
+                        item
+                            .produto_nome_snapshot,
+
+                        variacao:
+                        item
+                            .variacao_snapshot,
+
+                        quantidade:
+                        item.quantidade,
+
+                        previsao_entrega:
+                        item
+                            .previsao_entrega_snapshot,
+
+                        componentes:
+                            item
+                                .vnd_pedido_item_componentes
+                                .map(
+                                    (
+                                        componente,
+                                    ) => ({
+                                        id:
+                                        componente.id,
+
+                                        produto_nome:
+                                        componente
+                                            .produto_nome_snapshot,
+
+                                        variacao:
+                                        componente
+                                            .variacao_snapshot,
+
+                                        quantidade:
+                                        componente
+                                            .quantidade,
+                                    }),
+                                ),
+                    }),
+                ),
+
+            pagamento:
+                pagamento
+                    ? {
+                        valor:
+                            Number(
+                                pagamento.valor,
+                            ),
+
+                        status: {
+                            codigo:
+                            pagamento
+                                .fin_pagamento_status
+                                .codigo,
+
+                            descricao:
+                            pagamento
+                                .fin_pagamento_status
+                                .descricao,
+
+                            color:
+                            pagamento
+                                .fin_pagamento_status
+                                .color,
+                        },
+
+                        metodo: {
+                            codigo:
+                            pagamento
+                                .fin_pagamento_metodo
+                                .codigo,
+
+                            descricao:
+                            pagamento
+                                .fin_pagamento_metodo
+                                .descricao,
+                        },
+                    }
+                    : null,
+
+            historico:
+                pedido
+                    .vnd_pedido_historicos
+                    .map(
+                        (
+                            historico,
+                        ) => ({
+                            id:
+                            historico.id,
+
+                            status: {
+                                codigo:
+                                historico
+                                    .vnd_pedido_status
+                                    .codigo,
+
+                                descricao:
+                                historico
+                                    .vnd_pedido_status
+                                    .descricao,
+
+                                color:
+                                historico
+                                    .vnd_pedido_status
+                                    .color,
+
+                                icon:
+                                historico
+                                    .vnd_pedido_status
+                                    .icon,
+                            },
+
+                            created_at:
+                            historico
+                                .created_at,
+                        }),
+                    ),
         };
     }
 
