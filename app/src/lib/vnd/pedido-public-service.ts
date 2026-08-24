@@ -4,6 +4,11 @@ import { prisma } from "@/lib/prisma";
 import type {
     MercadoPagoPaymentResponse,
 } from "@/lib/fin/mercado-pago";
+import {
+    getPedidoAcompanhamentoUrl,
+    sendPedidoCanceladoEmail,
+    sendPedidoPagamentoAprovadoEmail,
+} from "@/lib/email/pedido-email";
 
 const ORDER_CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 const ORDER_CODE_LENGTH = 6;
@@ -459,6 +464,44 @@ function mapOrderStatus(
         default:
             return "aguardando_pagamento";
     }
+}
+
+function canApplyPaymentTransition(
+    currentStatus: string,
+    nextStatus: string,
+) {
+    if (currentStatus === nextStatus) {
+        return true;
+    }
+
+    /*
+     * Enquanto está pendente, o Mercado Pago ainda pode
+     * chegar a qualquer estado definitivo.
+     */
+    if (currentStatus === "pendente") {
+        return true;
+    }
+
+    /*
+     * Um pagamento aprovado ainda pode posteriormente
+     * ser estornado/chargeback.
+     *
+     * Não permitimos voltar de aprovado para pendente,
+     * cancelado, recusado ou expirado por causa de uma
+     * resposta antiga chegando fora de ordem.
+     */
+    if (
+        currentStatus === "aprovado" &&
+        nextStatus === "estornado"
+    ) {
+        return true;
+    }
+
+    /*
+     * recusado, cancelado, expirado e estornado são
+     * tratados como estados terminais.
+     */
+    return false;
 }
 
 function getPaymentFinancials(
@@ -918,46 +961,31 @@ class PedidoPublicService {
         qrCodeText: string | null;
         paymentUrl: string | null;
     }) {
-        const pagamento = await prisma.finPagamento.findUnique({
-            where: { id: input.finPagamentoId },
-            select: {
-                id: true,
-                vnd_pedido_id: true,
-                valor: true,
-                fin_pagamento_status: {
-                    select: { codigo: true },
-                },
-                vnd_pedido: {
-                    select: {
-                        id: true,
-                        codigo: true,
-                        vnd_pedido_status: {
-                            select: { codigo: true },
-                        },
-                    },
-                },
-            },
-        });
-
-        if (!pagamento) {
-            throw new Error("Pagamento local não encontrado.");
-        }
-
         const finStatusCode = mapPaymentStatus(
             input.payment.status,
         );
+
         const pedidoStatusCode = mapOrderStatus(
             input.payment.status,
         );
 
         const [finStatus, pedidoStatus] = await Promise.all([
             prisma.finPagamentoStatus.findUnique({
-                where: { codigo: finStatusCode },
-                select: { id: true },
+                where: {
+                    codigo: finStatusCode,
+                },
+                select: {
+                    id: true,
+                },
             }),
+
             prisma.vndPedidoStatus.findUnique({
-                where: { codigo: pedidoStatusCode },
-                select: { id: true },
+                where: {
+                    codigo: pedidoStatusCode,
+                },
+                select: {
+                    id: true,
+                },
             }),
         ]);
 
@@ -967,100 +995,570 @@ class PedidoPublicService {
             );
         }
 
-        const now = new Date();
-        const orderTotal = Number(pagamento.valor);
-        const financials = getPaymentFinancials(
-            input.payment,
-            orderTotal,
-        );
+        const result =
+            await prisma.$transaction(
+                async (tx) => {
+                    /*
+                     * Todas as entradas que alteram este pagamento
+                     * precisam passar uma por vez:
+                     *
+                     * checkout
+                     * polling
+                     * webhook
+                     * scheduler PIX
+                     */
+                    await tx.$queryRawUnsafe(
+                        "SELECT id FROM fin_pagamento WHERE id = ? FOR UPDATE",
+                        input.finPagamentoId,
+                    );
 
-        await prisma.$transaction(async (tx) => {
-            if (finStatusCode === "aprovado") {
-                await consumeOrderReservations(
-                    tx,
-                    pagamento.vnd_pedido_id,
-                    now,
-                );
-            } else if (
-                finStatusCode === "recusado" ||
-                finStatusCode === "cancelado" ||
-                finStatusCode === "expirado"
-            ) {
-                await releaseOrderReservations(
-                    tx,
-                    pagamento.vnd_pedido_id,
-                    now,
-                );
-            }
+                    /*
+                     * IMPORTANTE:
+                     * a leitura do estado acontece DEPOIS do lock.
+                     *
+                     * Assim não usamos o status que existia antes
+                     * de outra transação terminar.
+                     */
+                    const pagamento =
+                        await tx.finPagamento.findUnique({
+                            where: {
+                                id:
+                                input.finPagamentoId,
+                            },
 
-            await tx.finPagamento.update({
-                where: { id: pagamento.id },
-                data: {
-                    fin_pagamento_status_id: finStatus.id,
-                    external_id:
-                        input.payment.id !== undefined
-                            ? String(input.payment.id)
-                            : undefined,
-                    external_reference:
-                        input.payment.external_reference ??
-                        pagamento.vnd_pedido.codigo,
-                    qr_code_text: input.qrCodeText,
-                    payment_url: input.paymentUrl,
-                    valor_liquido: financials.valorLiquido,
-                    taxa_gateway: financials.taxaGateway,
-                    aprovado_at:
-                        finStatusCode === "aprovado"
-                            ? now
-                            : null,
-                    expirado_at:
-                        finStatusCode === "expirado"
-                            ? now
-                            : null,
-                    cancelado_at:
-                        finStatusCode === "cancelado"
-                            ? now
-                            : null,
-                    updated_at: now,
+                            select: {
+                                id: true,
+
+                                vnd_pedido_id:
+                                    true,
+
+                                valor: true,
+
+                                external_id:
+                                    true,
+
+                                external_reference:
+                                    true,
+
+                                qr_code_text:
+                                    true,
+
+                                payment_url:
+                                    true,
+
+                                aprovado_at:
+                                    true,
+
+                                expirado_at:
+                                    true,
+
+                                cancelado_at:
+                                    true,
+
+                                valor_liquido:
+                                    true,
+
+                                taxa_gateway:
+                                    true,
+
+                                fin_pagamento_status:
+                                    {
+                                        select: {
+                                            codigo:
+                                                true,
+                                        },
+                                    },
+
+                                vnd_pedido: {
+                                    select: {
+                                        id: true,
+
+                                        codigo:
+                                            true,
+
+                                        vnd_pedido_status:
+                                            {
+                                                select:
+                                                    {
+                                                        codigo:
+                                                            true,
+                                                    },
+                                            },
+                                    },
+                                },
+                            },
+                        });
+
+                    if (!pagamento) {
+                        throw new Error(
+                            "Pagamento local não encontrado.",
+                        );
+                    }
+
+                    const currentFinStatusCode =
+                        pagamento
+                            .fin_pagamento_status
+                            .codigo;
+
+                    const canApplyTransition =
+                        canApplyPaymentTransition(
+                            currentFinStatusCode,
+                            finStatusCode,
+                        );
+
+                    /*
+                     * Exemplo:
+                     *
+                     * banco = aprovado
+                     * resposta antiga = pending
+                     *
+                     * Não deixamos essa resposta antiga
+                     * voltar o pagamento para pendente.
+                     */
+                    if (!canApplyTransition) {
+                        return {
+                            finStatusCode:
+                            currentFinStatusCode,
+
+                            pedidoStatusCode:
+                            pagamento
+                                .vnd_pedido
+                                .vnd_pedido_status
+                                .codigo,
+
+                            ignored: true,
+
+                            pedidoId:
+                            pagamento.vnd_pedido_id,
+
+                            shouldSendPagamentoAprovadoEmail:
+                                false,
+
+                            shouldSendPedidoCanceladoEmail:
+                                false,
+                        };
+                    }
+
+                    const now = new Date();
+
+                    const statusChanged =
+                        currentFinStatusCode !==
+                        finStatusCode;
+
+                    const pedidoStatusChanged =
+                        statusChanged &&
+                        pagamento
+                            .vnd_pedido
+                            .vnd_pedido_status
+                            .codigo !==
+                        pedidoStatusCode;
+
+                    const orderTotal =
+                        Number(
+                            pagamento.valor,
+                        );
+
+                    const financials =
+                        getPaymentFinancials(
+                            input.payment,
+                            orderTotal,
+                        );
+
+                    /*
+                     * Estoque só sofre efeito quando realmente
+                     * entramos em um novo estado.
+                     *
+                     * Um webhook duplicado "approved" não tenta
+                     * consumir novamente.
+                     */
+                    if (statusChanged) {
+                        if (
+                            finStatusCode ===
+                            "aprovado"
+                        ) {
+                            await consumeOrderReservations(
+                                tx,
+                                pagamento.vnd_pedido_id,
+                                now,
+                            );
+                        } else if (
+                            finStatusCode ===
+                            "recusado" ||
+                            finStatusCode ===
+                            "cancelado" ||
+                            finStatusCode ===
+                            "expirado"
+                        ) {
+                            await releaseOrderReservations(
+                                tx,
+                                pagamento.vnd_pedido_id,
+                                now,
+                            );
+                        }
+                    }
+
+                    await tx.finPagamento.update({
+                        where: {
+                            id: pagamento.id,
+                        },
+
+                        data: {
+                            fin_pagamento_status_id:
+                            finStatus.id,
+
+                            external_id:
+                                input.payment.id !==
+                                undefined
+                                    ? String(
+                                        input.payment.id,
+                                    )
+                                    : pagamento.external_id,
+
+                            external_reference:
+                                input.payment
+                                    .external_reference ??
+                                pagamento
+                                    .external_reference ??
+                                pagamento
+                                    .vnd_pedido
+                                    .codigo,
+
+                            qr_code_text:
+                                input.qrCodeText ??
+                                pagamento.qr_code_text,
+
+                            payment_url:
+                                input.paymentUrl ??
+                                pagamento.payment_url,
+
+                            /*
+                             * Em status aprovado repetido podemos
+                             * receber dados financeiros mais completos.
+                             */
+                            valor_liquido:
+                                finStatusCode ===
+                                "aprovado"
+                                    ? financials.valorLiquido ??
+                                    pagamento.valor_liquido
+                                    : pagamento.valor_liquido,
+
+                            taxa_gateway:
+                                finStatusCode ===
+                                "aprovado"
+                                    ? financials.taxaGateway ??
+                                    pagamento.taxa_gateway
+                                    : pagamento.taxa_gateway,
+
+                            aprovado_at:
+                                finStatusCode ===
+                                "aprovado"
+                                    ? pagamento.aprovado_at ??
+                                    now
+                                    : pagamento.aprovado_at,
+
+                            expirado_at:
+                                finStatusCode ===
+                                "expirado"
+                                    ? pagamento.expirado_at ??
+                                    now
+                                    : pagamento.expirado_at,
+
+                            cancelado_at:
+                                finStatusCode ===
+                                "cancelado" ||
+                                finStatusCode ===
+                                "recusado" ||
+                                finStatusCode ===
+                                "estornado"
+                                    ? pagamento.cancelado_at ??
+                                    now
+                                    : pagamento.cancelado_at,
+
+                            updated_at:
+                            now,
+                        },
+                    });
+
+                    /*
+                     * O pedido só acompanha o pagamento quando
+                     * o estado financeiro REALMENTE mudou.
+                     *
+                     * Isso também impede webhook repetido de
+                     * jogar um pedido "em_preparacao" de volta
+                     * para "confirmado".
+                     */
+                    if (pedidoStatusChanged) {
+                        await tx.vndPedido.update({
+                            where: {
+                                id:
+                                pagamento.vnd_pedido_id,
+                            },
+
+                            data: {
+                                vnd_pedido_status_id:
+                                pedidoStatus.id,
+
+                                cancelado_at:
+                                    pedidoStatusCode ===
+                                    "cancelado"
+                                        ? now
+                                        : null,
+
+                                updated_at:
+                                now,
+                            },
+                        });
+
+                        await tx.vndPedidoHistorico.create({
+                            data: {
+                                vnd_pedido_id:
+                                pagamento
+                                    .vnd_pedido_id,
+
+                                vnd_pedido_status_id:
+                                pedidoStatus.id,
+
+                                sys_usuario_id:
+                                    null,
+
+                                observacao:
+                                    input.payment
+                                        .status_detail
+                                        ? `Mercado Pago: ${input.payment.status_detail}`
+                                        : "Status atualizado pelo Mercado Pago.",
+
+                                created_at:
+                                now,
+                            },
+                        });
+                    }
+
+                    return {
+                        finStatusCode,
+                        pedidoStatusCode,
+                        ignored: false,
+
+                        pedidoId:
+                        pagamento.vnd_pedido_id,
+
+                        shouldSendPagamentoAprovadoEmail:
+                            pedidoStatusChanged &&
+                            finStatusCode === "aprovado",
+
+                        shouldSendPedidoCanceladoEmail:
+                            pedidoStatusChanged &&
+                            pedidoStatusCode === "cancelado" &&
+                            input.payment.status_detail !==
+                            "payment_method_changed",
+                    };
                 },
-            });
+            );
 
-            if (
-                pagamento.vnd_pedido.vnd_pedido_status.codigo !==
-                pedidoStatusCode
-            ) {
-                await tx.vndPedido.update({
-                    where: { id: pagamento.vnd_pedido_id },
-                    data: {
-                        vnd_pedido_status_id: pedidoStatus.id,
-                        cancelado_at:
-                            pedidoStatusCode === "cancelado"
-                                ? now
-                                : null,
-                        updated_at: now,
-                    },
-                });
+        if (
+            result.shouldSendPagamentoAprovadoEmail
+        ) {
+            try {
+                const pedidoEmail =
+                    await prisma.vndPedido.findUnique({
+                        where: {
+                            id: result.pedidoId,
+                        },
 
-                await tx.vndPedidoHistorico.create({
-                    data: {
-                        vnd_pedido_id: pagamento.vnd_pedido_id,
-                        vnd_pedido_status_id: pedidoStatus.id,
-                        sys_usuario_id: null,
-                        observacao:
-                            input.payment.status_detail
-                                ? `Mercado Pago: ${input.payment.status_detail}`
-                                : "Status atualizado pelo Mercado Pago.",
-                        created_at: now,
+                        select: {
+                            id: true,
+                            codigo: true,
+
+                            sys_usuario_id:
+                                true,
+
+                            cliente_nome:
+                                true,
+
+                            cliente_email:
+                                true,
+
+                            vnd_pedido_itens: {
+                                orderBy: {
+                                    id: "asc",
+                                },
+
+                                select: {
+                                    produto_nome_snapshot:
+                                        true,
+
+                                    variacao_snapshot:
+                                        true,
+
+                                    quantidade:
+                                        true,
+                                },
+                            },
+                        },
+                    });
+
+                if (
+                    pedidoEmail?.cliente_email
+                ) {
+                    await sendPedidoPagamentoAprovadoEmail({
+                        pedidoId:
+                        pedidoEmail.id,
+
+                        codigo:
+                        pedidoEmail.codigo,
+
+                        sysUsuarioId:
+                        pedidoEmail.sys_usuario_id,
+
+                        clienteNome:
+                        pedidoEmail.cliente_nome,
+
+                        clienteEmail:
+                        pedidoEmail.cliente_email,
+
+                        itens:
+                            pedidoEmail
+                                .vnd_pedido_itens
+                                .map((item) => ({
+                                    nome:
+                                    item
+                                        .produto_nome_snapshot,
+
+                                    variacao:
+                                    item
+                                        .variacao_snapshot,
+
+                                    quantidade:
+                                    item.quantidade,
+                                })),
+
+                        acompanhamentoUrl:
+                            getPedidoAcompanhamentoUrl(),
+                    });
+                }
+            } catch (error) {
+                /*
+                 * Email nunca pode desfazer ou invalidar:
+                 *
+                 * - aprovação do pagamento
+                 * - consumo de estoque
+                 * - confirmação do pedido
+                 *
+                 * Se falhar, fica para reenvio manual.
+                 */
+                console.error(
+                    "[pedido.email.pagamento_aprovado]",
+                    {
+                        pedidoId:
+                        result.pedidoId,
+
+                        error,
                     },
-                });
+                );
             }
-        });
+        }
 
-        return {
-            finStatusCode,
-            pedidoStatusCode,
-        };
-    }
+        if (
+            result.shouldSendPedidoCanceladoEmail
+        ) {
+            try {
+                const pedidoEmail =
+                    await prisma.vndPedido.findUnique({
+                        where: {
+                            id: result.pedidoId,
+                        },
 
+                        select: {
+                            id: true,
+                            codigo: true,
+
+                            sys_usuario_id:
+                                true,
+
+                            cliente_nome:
+                                true,
+
+                            cliente_email:
+                                true,
+
+                            vnd_pedido_itens: {
+                                orderBy: {
+                                    id: "asc",
+                                },
+
+                                select: {
+                                    produto_nome_snapshot:
+                                        true,
+
+                                    variacao_snapshot:
+                                        true,
+
+                                    quantidade:
+                                        true,
+                                },
+                            },
+                        },
+                    });
+
+                if (
+                    pedidoEmail?.cliente_email
+                ) {
+                    await sendPedidoCanceladoEmail({
+                        pedidoId:
+                        pedidoEmail.id,
+
+                        codigo:
+                        pedidoEmail.codigo,
+
+                        sysUsuarioId:
+                        pedidoEmail.sys_usuario_id,
+
+                        clienteNome:
+                        pedidoEmail.cliente_nome,
+
+                        clienteEmail:
+                        pedidoEmail.cliente_email,
+
+                        itens:
+                            pedidoEmail
+                                .vnd_pedido_itens
+                                .map((item) => ({
+                                    nome:
+                                    item
+                                        .produto_nome_snapshot,
+
+                                    variacao:
+                                    item
+                                        .variacao_snapshot,
+
+                                    quantidade:
+                                    item.quantidade,
+                                })),
+
+                        acompanhamentoUrl:
+                            getPedidoAcompanhamentoUrl(),
+                    });
+                }
+            } catch (error) {
+                /*
+                 * Falha no email não interfere no
+                 * cancelamento financeiro ou do pedido.
+                 *
+                 * O reenvio ficará para ação manual
+                 * do administrador.
+                 */
+                console.error(
+                    "[pedido.email.cancelado]",
+                    {
+                        pedidoId:
+                        result.pedidoId,
+
+                        error,
+                    },
+                );
+            }
+        }
+
+        return result;    }
     async findPublicOrderByCodeAndPhone(
         input: {
             codigo: string;
@@ -1790,39 +2288,73 @@ class PedidoPublicService {
         };
     }
 
-    async findExpiredPixPayments(limit = 100) {
+    async findExpiredPaymentReservations(
+        limit = 100,
+    ) {
         const now = new Date();
 
         return prisma.finPagamento.findMany({
             where: {
-                provider: "mercado_pago",
-                external_id: { not: null },
+                provider:
+                    "mercado_pago",
+
                 fin_pagamento_status: {
-                    codigo: "pendente",
+                    codigo:
+                        "pendente",
                 },
-                fin_pagamento_metodo: {
-                    codigo: "pix",
-                },
+
                 vnd_pedido: {
                     vnd_estoque_reservas: {
                         some: {
-                            expira_at: { lte: now },
-                            consumida_at: null,
-                            liberada_at: null,
+                            expira_at: {
+                                lte: now,
+                            },
+
+                            consumida_at:
+                                null,
+
+                            liberada_at:
+                                null,
                         },
                     },
                 },
             },
+
             orderBy: {
-                created_at: "asc",
+                created_at:
+                    "asc",
             },
-            take: Math.max(1, Math.min(limit, 500)),
+
+            take:
+                Math.max(
+                    1,
+                    Math.min(
+                        limit,
+                        500,
+                    ),
+                ),
+
             select: {
-                id: true,
-                external_id: true,
+                id:
+                    true,
+
+                external_id:
+                    true,
+
+                external_reference:
+                    true,
+
+                fin_pagamento_metodo: {
+                    select: {
+                        codigo:
+                            true,
+                    },
+                },
+
                 vnd_pedido: {
                     select: {
-                        codigo: true,
+                        codigo:
+                            true,
                     },
                 },
             },

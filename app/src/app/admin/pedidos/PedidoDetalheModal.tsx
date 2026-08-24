@@ -8,6 +8,7 @@ import {
 import {
     Clock3,
     Loader2,
+    Mail,
     Package,
     ReceiptText,
     UserRound,
@@ -218,7 +219,39 @@ type PedidoDetalhe = {
 
 type PedidoDetalheResponse = {
     pedido: PedidoDetalhe;
-    proximos_status: string[];
+
+    emails:
+        PedidoEmailStatus[];
+
+    proximos_status:
+        string[];
+};
+
+type PedidoEmailStatus = {
+    evento:
+        | "confirmado"
+        | "pronto_retirada"
+        | "cancelado";
+
+    label: string;
+    template: string;
+    status: string;
+
+    error_message:
+        | string
+        | null;
+
+    sent_at:
+        | string
+        | Date
+        | null;
+
+    created_at:
+        | string
+        | Date
+        | null;
+
+    can_resend: boolean;
 };
 
 type Props = {
@@ -431,6 +464,14 @@ export function PedidoDetalheModal({
         useState(false);
 
     const [
+        reenviandoEmail,
+        setReenviandoEmail,
+    ] =
+        useState<string | null>(
+            null,
+        );
+
+    const [
         observacaoStatus,
         setObservacaoStatus,
     ] =
@@ -596,12 +637,86 @@ export function PedidoDetalheModal({
         }
     }
 
+    async function reenviarEmail(
+        evento: PedidoEmailStatus["evento"],
+    ) {
+        if (!pedidoId) {
+            return;
+        }
+
+        try {
+            setReenviandoEmail(
+                evento,
+            );
+
+            setErro(null);
+
+            const response =
+                await fetch(
+                    `/api/admin/pedidos/${pedidoId}`,
+                    {
+                        method: "PATCH",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json",
+
+                            Accept:
+                                "application/json",
+                        },
+
+                        body: JSON.stringify({
+                            action:
+                                "resend_email",
+
+                            evento,
+                        }),
+                    },
+                );
+
+            const result =
+                await response.json();
+
+            if (
+                !response.ok ||
+                !result.ok
+            ) {
+                throw new Error(
+                    result.message ||
+                    "Não foi possível reenviar o e-mail.",
+                );
+            }
+
+            setDetalhe(
+                result.data,
+            );
+
+            await onUpdated(
+                result.message ||
+                "E-mail reenviado com sucesso.",
+            );
+        } catch (error) {
+            setErro(
+                error instanceof Error
+                    ? error.message
+                    : "Não foi possível reenviar o e-mail.",
+            );
+        } finally {
+            setReenviandoEmail(
+                null,
+            );
+        }
+    }
+
 
     const pedido =
         detalhe?.pedido ?? null;
 
     const proximosStatus =
         detalhe?.proximos_status ?? [];
+
+    const emails =
+        detalhe?.emails ?? [];
 
     const proximosStatusOperacionais =
         proximosStatus.filter(
@@ -1517,7 +1632,158 @@ export function PedidoDetalheModal({
                             </div>
                         </section>
                     </div>
+                    {emails.length > 0 ? (
+                        <section className="bp-card bp-card-outline">
+                            <div
+                                className="bp-card-body"
+                                style={{
+                                    display: "grid",
+                                    gap: 12,
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: 8,
+                                    }}
+                                >
+                                    <Mail size={17} />
 
+                                    <strong>
+                                        E-mails do pedido
+                                    </strong>
+                                </div>
+
+                                {emails.map(
+                                    (email) => (
+                                        <div
+                                            key={
+                                                email.evento
+                                            }
+                                            className="bp-card bp-card-soft"
+                                        >
+                                            <div
+                                                className="bp-card-body"
+                                                style={{
+                                                    display:
+                                                        "grid",
+
+                                                    gap: 8,
+                                                }}
+                                            >
+                                                <div className="bp-row-between">
+                                                    <strong>
+                                                        {
+                                                            email.label
+                                                        }
+                                                    </strong>
+
+                                                    <Badge
+                                                        color={
+                                                            email.status ===
+                                                            "sent"
+                                                                ? "success"
+                                                                : email.status ===
+                                                                "failed"
+                                                                    ? "danger"
+                                                                    : "secondary"
+                                                        }
+                                                    >
+                                                        {email.status ===
+                                                        "sent"
+                                                            ? "Enviado"
+                                                            : email.status ===
+                                                            "failed"
+                                                                ? "Falhou"
+                                                                : email.status}
+                                                    </Badge>
+                                                </div>
+
+                                                <div
+                                                    style={{
+                                                        display:
+                                                            "grid",
+
+                                                        gap: 4,
+
+                                                        color:
+                                                            "var(--color-text-muted)",
+
+                                                        fontSize:
+                                                            12,
+                                                    }}
+                                                >
+                                                    {email.sent_at ? (
+                                                        <span>
+                                        Enviado:{" "}
+                                                            {formatDate(
+                                                                email.sent_at,
+                                                            )}
+                                    </span>
+                                                    ) : (
+                                                        <span>
+                                        Tentativa:{" "}
+                                                            {formatDate(
+                                                                email.created_at,
+                                                            )}
+                                    </span>
+                                                    )}
+
+                                                    {email.status ===
+                                                    "failed" &&
+                                                    email.error_message ? (
+                                                        <span>
+                                        Erro:{" "}
+                                                            {
+                                                                email.error_message
+                                                            }
+                                    </span>
+                                                    ) : null}
+                                                </div>
+
+                                                {email.can_resend ? (
+                                                    <div className="bp-action-row">
+                                                        <Button
+                                                            size="sm"
+                                                            variant="soft"
+                                                            color="warning"
+                                                            disabled={
+                                                                reenviandoEmail !==
+                                                                null
+                                                            }
+                                                            onClick={() =>
+                                                                void reenviarEmail(
+                                                                    email.evento,
+                                                                )
+                                                            }
+                                                        >
+                                                            {reenviandoEmail ===
+                                                            email.evento ? (
+                                                                <Loader2
+                                                                    size={
+                                                                        15
+                                                                    }
+                                                                />
+                                                            ) : (
+                                                                <Mail
+                                                                    size={
+                                                                        15
+                                                                    }
+                                                                />
+                                                            )}
+
+                                                            Reenviar e-mail
+                                                        </Button>
+                                                    </div>
+                                                ) : null}
+                                            </div>
+                                        </div>
+                                    ),
+                                )}
+                            </div>
+                        </section>
+                    ) : null}
 
                     <section
                         style={{

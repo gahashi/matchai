@@ -120,6 +120,115 @@ function localStatusToClient(status: string) {
     }
 }
 
+function isPrismaUniqueConstraintError(
+    error: unknown,
+) {
+    return (
+        typeof error === "object" &&
+        error !== null &&
+        "code" in error &&
+        (error as { code?: unknown }).code ===
+        "P2002"
+    );
+}
+
+function isDatabaseDeadlockError(
+    error: unknown,
+) {
+    const message =
+        error instanceof Error
+            ? error.message
+            : "";
+
+    if (
+        message.includes(
+            "Deadlock found when trying to get lock",
+        ) ||
+        message.includes("1213")
+    ) {
+        return true;
+    }
+
+    if (
+        typeof error !== "object" ||
+        error === null ||
+        !("meta" in error)
+    ) {
+        return false;
+    }
+
+    const meta =
+        (error as { meta?: unknown }).meta;
+
+    if (
+        typeof meta !== "object" ||
+        meta === null ||
+        !("code" in meta)
+    ) {
+        return false;
+    }
+
+    return String(
+        (meta as { code?: unknown }).code,
+    ) === "1213";
+}
+
+function isMercadoPagoIdempotencyConflict(
+    error: unknown,
+) {
+    if (!(error instanceof MercadoPagoApiError)) {
+        return false;
+    }
+
+    const message = error.message.toLowerCase();
+
+    return (
+        error.status === 423 ||
+        message.includes(
+            "already posted the same request in the last minute",
+        ) ||
+        message.includes("resource is locked")
+    );
+}
+
+function waitForRetry(
+    milliseconds: number,
+) {
+    return new Promise<void>((resolve) => {
+        setTimeout(resolve, milliseconds);
+    });
+}
+
+async function withDeadlockRetry<T>(
+    operation: () => Promise<T>,
+    maxAttempts = 3,
+) {
+    let lastError: unknown = null;
+
+    for (
+        let attempt = 1;
+        attempt <= maxAttempts;
+        attempt += 1
+    ) {
+        try {
+            return await operation();
+        } catch (error) {
+            lastError = error;
+
+            if (
+                !isDatabaseDeadlockError(error) ||
+                attempt === maxAttempts
+            ) {
+                throw error;
+            }
+
+            await waitForRetry(attempt * 75);
+        }
+    }
+
+    throw lastError;
+}
+
 export async function POST(request: NextRequest) {
     let localPaymentId: number | null = null;
 
@@ -269,56 +378,8 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const validatedItems =
-            await produtoPublicService.validateCart(
-                parsed.data.items.map((item) => ({
-                    lineKey: item.line_key,
-                    produtoId: item.produto_id,
-                    variacaoId: item.variacao_id,
-                    quantidade: item.quantidade,
-                    campos: item.campos.map((campo) => ({
-                        campoId: campo.campo_id,
-                        valor: campo.valor,
-                    })),
-                    componentes: item.componentes.map(
-                        (componente) => ({
-                            componenteId:
-                            componente.componente_id,
-                            variacaoId:
-                            componente.variacao_id,
-                            campos: componente.campos.map(
-                                (campo) => ({
-                                    campoId:
-                                    campo.campo_id,
-                                    valor: campo.valor,
-                                }),
-                            ),
-                        }),
-                    ),
-                })),
-                {
-                    isSocio: socio.isSocio,
-                },
-            ) as CheckoutValidatedItem[];
-
-        const unavailable = validatedItems.find(
-            (item) => !item.disponivel,
-        );
-
-        if (unavailable) {
-            return NextResponse.json(
-                {
-                    ok: false,
-                    message:
-                        unavailable.motivo ??
-                        "Um item do carrinho não está mais disponível.",
-                },
-                { status: 409 },
-            );
-        }
-
         const idempotencyKey = `checkout:${parsed.data.attempt_id}`;
-        const existingAttempt =
+        let existingAttempt =
             await pedidoPublicService.getPaymentAttemptByIdempotencyKey(
                 idempotencyKey,
             );
@@ -327,15 +388,17 @@ export async function POST(request: NextRequest) {
             existingAttempt &&
             existingAttempt.fin_pagamento_metodo.codigo !== method
         ) {
-            await pedidoPublicService.applyMercadoPagoPayment({
-                finPagamentoId: existingAttempt.id,
-                payment: {
-                    status: "cancelled",
-                    status_detail: "payment_method_changed",
-                },
-                qrCodeText: null,
-                paymentUrl: null,
-            });
+            await withDeadlockRetry(() =>
+                pedidoPublicService.applyMercadoPagoPayment({
+                    finPagamentoId: existingAttempt!.id,
+                    payment: {
+                        status: "cancelled",
+                        status_detail: "payment_method_changed",
+                    },
+                    qrCodeText: null,
+                    paymentUrl: null,
+                }),
+            );
 
             return NextResponse.json(
                 {
@@ -373,23 +436,259 @@ export async function POST(request: NextRequest) {
             });
         }
 
-        const attempt = existingAttempt
-            ? {
-                pedido: existingAttempt.vnd_pedido,
-                pagamento: {
-                    id: existingAttempt.id,
-                },
-                total: Number(existingAttempt.vnd_pedido.valor_total),
-            }
-            : await pedidoPublicService.createPaymentAttempt({
-                sysUsuarioId: session?.user.id ?? null,
-                customer,
-                items: validatedItems,
-                method,
-                idempotencyKey,
-            });
+        let validatedItems: CheckoutValidatedItem[] = [];
 
-        localPaymentId = attempt.pagamento.id;
+        /*
+         * Uma tentativa já criada possui a própria reserva de estoque.
+         * Revalidar o carrinho aqui faria a repetição idempotente
+         * enxergar a própria reserva como estoque indisponível.
+         *
+         * Por isso a validação de estoque só acontece quando ainda
+         * precisamos criar uma nova tentativa local.
+         */
+        if (!existingAttempt) {
+            validatedItems =
+                await produtoPublicService.validateCart(
+                    parsed.data.items.map((item) => ({
+                        lineKey: item.line_key,
+                        produtoId: item.produto_id,
+                        variacaoId: item.variacao_id,
+                        quantidade: item.quantidade,
+                        campos: item.campos.map((campo) => ({
+                            campoId: campo.campo_id,
+                            valor: campo.valor,
+                        })),
+                        componentes: item.componentes.map(
+                            (componente) => ({
+                                componenteId:
+                                componente.componente_id,
+                                variacaoId:
+                                componente.variacao_id,
+                                campos: componente.campos.map(
+                                    (campo) => ({
+                                        campoId:
+                                        campo.campo_id,
+                                        valor: campo.valor,
+                                    }),
+                                ),
+                            }),
+                        ),
+                    })),
+                    {
+                        isSocio: socio.isSocio,
+                    },
+                ) as CheckoutValidatedItem[];
+
+            const unavailable = validatedItems.find(
+                (item) => !item.disponivel,
+            );
+
+            if (unavailable) {
+                return NextResponse.json(
+                    {
+                        ok: false,
+                        message:
+                            unavailable.motivo ??
+                            "Um item do carrinho não está mais disponível.",
+                    },
+                    { status: 409 },
+                );
+            }
+        }
+
+        let attempt;
+
+        if (existingAttempt) {
+            attempt = {
+                pedido:
+                existingAttempt.vnd_pedido,
+
+                pagamento: {
+                    id:
+                    existingAttempt.id,
+                },
+
+                total:
+                    Number(
+                        existingAttempt
+                            .vnd_pedido
+                            .valor_total,
+                    ),
+            };
+        } else {
+            let createError: unknown = null;
+
+            for (
+                let createAttempt = 1;
+                createAttempt <= 3;
+                createAttempt += 1
+            ) {
+                try {
+                    attempt =
+                        await pedidoPublicService.createPaymentAttempt({
+                            sysUsuarioId:
+                                session?.user.id ??
+                                null,
+
+                            customer,
+
+                            items:
+                            validatedItems,
+
+                            method,
+
+                            idempotencyKey,
+                        });
+
+                    break;
+                } catch (error) {
+                    createError = error;
+
+                    const uniqueConstraint =
+                        isPrismaUniqueConstraintError(error);
+
+                    const deadlock =
+                        isDatabaseDeadlockError(error);
+
+                    if (
+                        !uniqueConstraint &&
+                        !deadlock
+                    ) {
+                        throw error;
+                    }
+
+                    /*
+                     * Em concorrência, a outra requisição pode ter
+                     * vencido a criação da tentativa. Damos tempo
+                     * para o COMMIT e buscamos pela chave idempotente.
+                     */
+                    await waitForRetry(
+                        createAttempt * 100,
+                    );
+
+                    existingAttempt =
+                        await pedidoPublicService
+                            .getPaymentAttemptByIdempotencyKey(
+                                idempotencyKey,
+                            );
+
+                    if (existingAttempt) {
+                        break;
+                    }
+
+                    /*
+                     * P2002 sem uma tentativa com esta chave pode vir
+                     * de outra constraint unique, como código do pedido.
+                     */
+                    if (uniqueConstraint) {
+                        throw error;
+                    }
+
+                    if (createAttempt === 3) {
+                        throw error;
+                    }
+                }
+            }
+
+            if (!attempt && !existingAttempt) {
+                throw createError ??
+                new Error(
+                    "Não foi possível criar a tentativa de pagamento.",
+                );
+            }
+
+            if (!attempt && existingAttempt) {
+                if (
+                    existingAttempt
+                        .fin_pagamento_metodo
+                        .codigo !== method
+                ) {
+                    await withDeadlockRetry(() =>
+                        pedidoPublicService
+                            .applyMercadoPagoPayment({
+                                finPagamentoId:
+                                existingAttempt!.id,
+
+                                payment: {
+                                    status: "cancelled",
+                                    status_detail:
+                                        "payment_method_changed",
+                                },
+
+                                qrCodeText: null,
+                                paymentUrl: null,
+                            }),
+                    );
+
+                    return NextResponse.json(
+                        {
+                            ok: false,
+                            message:
+                                "A forma de pagamento mudou. Envie novamente para iniciar uma nova tentativa.",
+                            data: {
+                                reset_attempt: true,
+                            },
+                        },
+                        { status: 409 },
+                    );
+                }
+
+                if (existingAttempt.external_id) {
+                    return NextResponse.json({
+                        ok: true,
+                        data: {
+                            pedido_codigo:
+                            existingAttempt
+                                .vnd_pedido
+                                .codigo,
+                            pagamento_id:
+                            existingAttempt
+                                .external_id,
+                            metodo:
+                            existingAttempt
+                                .fin_pagamento_metodo
+                                .codigo,
+                            status:
+                                localStatusToClient(
+                                    existingAttempt
+                                        .fin_pagamento_status
+                                        .codigo,
+                                ),
+                            status_detail: null,
+                            qr_code_text:
+                            existingAttempt
+                                .qr_code_text,
+                            qr_code_base64: null,
+                            payment_url:
+                            existingAttempt
+                                .payment_url,
+                        },
+                    });
+                }
+
+                attempt = {
+                    pedido:
+                    existingAttempt.vnd_pedido,
+                    pagamento: {
+                        id: existingAttempt.id,
+                    },
+                    total: Number(
+                        existingAttempt
+                            .vnd_pedido
+                            .valor_total,
+                    ),
+                };
+            }
+        }
+
+        if (!attempt) {
+            throw new Error(
+                "Não foi possível recuperar a tentativa de pagamento.",
+            );
+        }
+
+        localPaymentId =
+            attempt.pagamento.id;
 
         const payerIdentification =
             formData?.payer?.identification;
@@ -403,35 +702,35 @@ export async function POST(request: NextRequest) {
             customer.nome,
         );
 
-        const mercadoPagoPayment =
-            await createMercadoPagoPayment(
-                {
-                    transaction_amount: attempt.total,
-                    description: `Pedido ${attempt.pedido.codigo} - AAACCU`,
-                    payment_method_id: paymentMethodId,
-                    external_reference: attempt.pedido.codigo,
-                    ...(token ? { token } : {}),
-                    ...(installments
-                        ? { installments }
-                        : {}),
-                    ...(issuerId
-                        ? { issuer_id: issuerId }
-                        : {}),
-                    payer: {
-                        email: customer.email,
-                        first_name: firstName,
-                        ...(lastName
-                            ? { last_name: lastName }
-                            : {}),
-                        ...(identificationType && identificationNumber
-                            ? {
-                                identification: {
-                                    type: identificationType,
-                                    number: identificationNumber,
-                                },
-                            }
-                            : {}),
-                    },
+        const mercadoPagoRequest = {
+            transaction_amount: attempt.total,
+            description: `Pedido ${attempt.pedido.codigo} - AAACCU`,
+            payment_method_id: paymentMethodId,
+            external_reference: attempt.pedido.codigo,
+            ...(token ? { token } : {}),
+            ...(installments
+                ? { installments }
+                : {}),
+            ...(issuerId
+                ? { issuer_id: issuerId }
+                : {}),
+            payer: {
+                email: customer.email,
+                first_name: firstName,
+                ...(lastName
+                    ? { last_name: lastName }
+                    : {}),
+                ...(identificationType && identificationNumber
+                    ? {
+                        identification: {
+                            type: identificationType,
+                            number: identificationNumber,
+                        },
+                    }
+                    : {}),
+            },
+            ...(validatedItems.length > 0
+                ? {
                     additional_info: {
                         items: validatedItems.map((item) => ({
                             id: String(item.produto_id),
@@ -448,20 +747,103 @@ export async function POST(request: NextRequest) {
                                 0,
                         })),
                     },
-                },
-                idempotencyKey,
+                }
+                : {}),
+        };
+
+        let mercadoPagoPayment;
+
+        for (let mpAttempt = 1; mpAttempt <= 4; mpAttempt += 1) {
+            try {
+                mercadoPagoPayment =
+                    await createMercadoPagoPayment(
+                        mercadoPagoRequest,
+                        idempotencyKey,
+                    );
+
+                break;
+            } catch (error) {
+                if (!isMercadoPagoIdempotencyConflict(error)) {
+                    throw error;
+                }
+
+                /*
+                 * Outra requisição com a mesma chave pode estar criando
+                 * exatamente este pagamento no Mercado Pago. Esperamos
+                 * a vencedora salvar o external_id antes de tentar de novo.
+                 */
+                for (let recoveryAttempt = 1; recoveryAttempt <= 5; recoveryAttempt += 1) {
+                    await waitForRetry(recoveryAttempt * 100);
+
+                    const recoveredAttempt =
+                        await pedidoPublicService
+                            .getPaymentAttemptByIdempotencyKey(
+                                idempotencyKey,
+                            );
+
+                    if (recoveredAttempt?.external_id) {
+                        return NextResponse.json({
+                            ok: true,
+                            data: {
+                                pedido_codigo:
+                                recoveredAttempt.vnd_pedido.codigo,
+                                pagamento_id:
+                                recoveredAttempt.external_id,
+                                metodo:
+                                recoveredAttempt.fin_pagamento_metodo.codigo,
+                                status:
+                                    localStatusToClient(
+                                        recoveredAttempt
+                                            .fin_pagamento_status
+                                            .codigo,
+                                    ),
+                                status_detail: null,
+                                qr_code_text:
+                                recoveredAttempt.qr_code_text,
+                                qr_code_base64: null,
+                                payment_url:
+                                recoveredAttempt.payment_url,
+                            },
+                        });
+                    }
+                }
+
+                if (mpAttempt === 4) {
+                    return NextResponse.json(
+                        {
+                            ok: false,
+                            message:
+                                "O pagamento ainda está sendo processado. Tente novamente em instantes.",
+                            data: {
+                                reset_attempt: false,
+                            },
+                        },
+                        { status: 503 },
+                    );
+                }
+
+                await waitForRetry(mpAttempt * 250);
+            }
+        }
+
+        if (!mercadoPagoPayment) {
+            throw new Error(
+                "Não foi possível recuperar o pagamento do Mercado Pago.",
             );
+        }
 
         const pix = getMercadoPagoPixData(
             mercadoPagoPayment,
         );
 
-        await pedidoPublicService.applyMercadoPagoPayment({
-            finPagamentoId: attempt.pagamento.id,
-            payment: mercadoPagoPayment,
-            qrCodeText: pix.qrCodeText,
-            paymentUrl: pix.ticketUrl,
-        });
+        await withDeadlockRetry(() =>
+            pedidoPublicService.applyMercadoPagoPayment({
+                finPagamentoId: attempt.pagamento.id,
+                payment: mercadoPagoPayment,
+                qrCodeText: pix.qrCodeText,
+                paymentUrl: pix.ticketUrl,
+            }),
+        );
 
         return NextResponse.json({
             ok: true,
@@ -486,22 +868,28 @@ export async function POST(request: NextRequest) {
     } catch (error) {
         console.error("[public.checkout.pay]", error);
 
+        const idempotencyConflict =
+            isMercadoPagoIdempotencyConflict(error);
+
         const rejectedByMercadoPago =
             error instanceof MercadoPagoApiError &&
             error.status >= 400 &&
-            error.status < 500;
+            error.status < 500 &&
+            !idempotencyConflict;
 
         if (localPaymentId && rejectedByMercadoPago) {
             try {
-                await pedidoPublicService.applyMercadoPagoPayment({
-                    finPagamentoId: localPaymentId,
-                    payment: {
-                        status: "rejected",
-                        status_detail: error.message,
-                    },
-                    qrCodeText: null,
-                    paymentUrl: null,
-                });
+                await withDeadlockRetry(() =>
+                    pedidoPublicService.applyMercadoPagoPayment({
+                        finPagamentoId: localPaymentId!,
+                        payment: {
+                            status: "rejected",
+                            status_detail: error.message,
+                        },
+                        qrCodeText: null,
+                        paymentUrl: null,
+                    }),
+                );
             } catch (statusError) {
                 console.error(
                     "[public.checkout.pay.status]",

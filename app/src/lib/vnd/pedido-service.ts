@@ -2,6 +2,13 @@ import { randomInt } from "node:crypto";
 
 import { prisma } from "@/lib/prisma";
 
+import {
+    getPedidoAcompanhamentoUrl,
+    sendPedidoCanceladoEmail,
+    sendPedidoPagamentoAprovadoEmail,
+    sendPedidoProntoRetiradaEmail,
+} from "@/lib/email/pedido-email";
+
 export type PedidoStatusCode =
     | "recebido"
     | "aguardando_pagamento"
@@ -10,6 +17,11 @@ export type PedidoStatusCode =
     | "pronto_retirada"
     | "enviado"
     | "entregue"
+    | "cancelado";
+
+export type PedidoEmailEvento =
+    | "confirmado"
+    | "pronto_retirada"
     | "cancelado";
 
 type ListAdminPedidosInput = {
@@ -487,6 +499,45 @@ function serializeMoney(value: unknown) {
 
     return Number(value);
 }
+
+const PEDIDO_EMAIL_TEMPLATE_BY_EVENTO: Record<
+    PedidoEmailEvento,
+    string
+> = {
+    confirmado:
+        "order_payment_approved",
+
+    pronto_retirada:
+        "order_ready_for_pickup",
+
+    cancelado:
+        "order_cancelled",
+};
+
+const PEDIDO_EMAIL_LABEL_BY_EVENTO: Record<
+    PedidoEmailEvento,
+    string
+> = {
+    confirmado:
+        "Compra aprovada",
+
+    pronto_retirada:
+        "Pronto para retirada",
+
+    cancelado:
+        "Pedido cancelado",
+};
+
+function isPedidoEmailEvento(
+    value: string,
+): value is PedidoEmailEvento {
+    return (
+        value === "confirmado" ||
+        value === "pronto_retirada" ||
+        value === "cancelado"
+    );
+}
+
 
 function serializePedidoResumo(pedido: any) {
     const pagamento =
@@ -1249,6 +1300,251 @@ class PedidoService {
                 pedido,
             )
             : null;
+    }
+
+    async getEmailNotifications(
+        pedidoId: number,
+    ) {
+        const logs =
+            await prisma.sysEmailLog.findMany({
+                where: {
+                    template: {
+                        in: Object.values(
+                            PEDIDO_EMAIL_TEMPLATE_BY_EVENTO,
+                        ),
+                    },
+
+                    metadata_text: {
+                        contains:
+                            `"pedido_id":${pedidoId},`,
+                    },
+                },
+
+                orderBy: {
+                    id: "desc",
+                },
+
+                select: {
+                    id: true,
+                    template: true,
+                    status: true,
+                    error_message: true,
+                    sent_at: true,
+                    created_at: true,
+                },
+            });
+
+        const result: Array<{
+            evento: PedidoEmailEvento;
+            label: string;
+            template: string;
+            status: string;
+            error_message: string | null;
+            sent_at: Date | null;
+            created_at: Date | null;
+            can_resend: boolean;
+        }> = [];
+
+        for (
+            const evento of [
+            "confirmado",
+            "pronto_retirada",
+            "cancelado",
+        ] as PedidoEmailEvento[]
+            ) {
+            const template =
+                PEDIDO_EMAIL_TEMPLATE_BY_EVENTO[
+                    evento
+                    ];
+
+            const log =
+                logs.find(
+                    (item) =>
+                        item.template === template,
+                );
+
+            if (!log) {
+                continue;
+            }
+
+            result.push({
+                evento,
+
+                label:
+                    PEDIDO_EMAIL_LABEL_BY_EVENTO[
+                        evento
+                        ],
+
+                template,
+
+                status:
+                log.status,
+
+                error_message:
+                log.error_message,
+
+                sent_at:
+                log.sent_at,
+
+                created_at:
+                log.created_at,
+
+                can_resend:
+                    log.status === "failed",
+            });
+        }
+
+        return result;
+    }
+
+    async resendEmail(input: {
+        pedidoId: number;
+        evento: PedidoEmailEvento;
+    }) {
+        const pedido =
+            await this.findById(
+                input.pedidoId,
+            );
+
+        if (!pedido) {
+            throw new Error(
+                "Pedido não encontrado.",
+            );
+        }
+
+        if (!pedido.cliente.email) {
+            throw new Error(
+                "O pedido não possui e-mail do cliente.",
+            );
+        }
+
+        const template =
+            PEDIDO_EMAIL_TEMPLATE_BY_EVENTO[
+                input.evento
+                ];
+
+        const ultimoLog =
+            await prisma.sysEmailLog.findFirst({
+                where: {
+                    template,
+
+                    metadata_text: {
+                        contains:
+                            `"pedido_id":${input.pedidoId},`,
+                    },
+                },
+
+                orderBy: {
+                    id: "desc",
+                },
+
+                select: {
+                    id: true,
+                    status: true,
+                },
+            });
+
+        if (!ultimoLog) {
+            throw new Error(
+                "Não existe envio de e-mail registrado para este evento.",
+            );
+        }
+
+        if (
+            ultimoLog.status !== "failed"
+        ) {
+            throw new Error(
+                "O último envio deste e-mail não está com falha.",
+            );
+        }
+
+        const emailBase = {
+            pedidoId:
+            pedido.id,
+
+            codigo:
+            pedido.codigo,
+
+            sysUsuarioId:
+            pedido.sys_usuario_id,
+
+            clienteNome:
+            pedido.cliente.nome,
+
+            clienteEmail:
+            pedido.cliente.email,
+
+            itens:
+                pedido.itens.map(
+                    (item: {
+                        produto_nome: string;
+                        variacao: string | null;
+                        quantidade: number;
+                    }) => ({
+                        nome:
+                        item.produto_nome,
+
+                        variacao:
+                        item.variacao,
+
+                        quantidade:
+                        item.quantidade,
+                    }),
+                ),
+
+            acompanhamentoUrl:
+                getPedidoAcompanhamentoUrl(),
+        };
+
+        switch (input.evento) {
+            case "confirmado":
+                await sendPedidoPagamentoAprovadoEmail(
+                    emailBase,
+                );
+                break;
+
+            case "pronto_retirada":
+                await sendPedidoProntoRetiradaEmail({
+                    ...emailBase,
+
+                    retiradaLocal:
+                    pedido.retirada_local,
+                });
+                break;
+
+            case "cancelado": {
+                const cancelamento =
+                    [...pedido.historico]
+                        .reverse()
+                        .find(
+                            (item: {
+                                status: {
+                                    codigo: string;
+                                };
+                                observacao: string | null;
+                            }) =>
+                                item.status.codigo ===
+                                "cancelado",
+                        );
+
+                await sendPedidoCanceladoEmail({
+                    ...emailBase,
+
+                    motivo:
+                        cancelamento?.observacao ??
+                        null,
+                });
+
+                break;
+            }
+        }
+
+        return {
+            emails:
+                await this.getEmailNotifications(
+                    input.pedidoId,
+                ),
+        };
     }
 
     async createManual(
@@ -2692,6 +2988,95 @@ class PedidoService {
             throw new Error(
                 "Pedido não encontrado após a atualização.",
             );
+        }
+
+        if (
+            (
+                input.statusCode === "pronto_retirada" ||
+                input.statusCode === "cancelado"
+            ) &&
+            pedidoAtualizado.cliente.email
+        ) {
+            try {
+                const emailBase = {
+                    pedidoId:
+                    pedidoAtualizado.id,
+
+                    codigo:
+                    pedidoAtualizado.codigo,
+
+                    sysUsuarioId:
+                    pedidoAtualizado.sys_usuario_id,
+
+                    clienteNome:
+                    pedidoAtualizado.cliente.nome,
+
+                    clienteEmail:
+                    pedidoAtualizado.cliente.email,
+
+                    itens:
+                        pedidoAtualizado.itens.map(
+                            (item: {
+                                produto_nome: string;
+                                variacao: string | null;
+                                quantidade: number;
+                            }) => ({
+                                nome:
+                                item.produto_nome,
+
+                                variacao:
+                                item.variacao,
+
+                                quantidade:
+                                item.quantidade,
+                            }),
+                        ),
+
+                    acompanhamentoUrl:
+                        getPedidoAcompanhamentoUrl(),
+                };
+
+                if (
+                    input.statusCode ===
+                    "pronto_retirada"
+                ) {
+                    await sendPedidoProntoRetiradaEmail({
+                        ...emailBase,
+
+                        retiradaLocal:
+                        pedidoAtualizado
+                            .retirada_local,
+                    });
+                } else {
+                    await sendPedidoCanceladoEmail({
+                        ...emailBase,
+
+                        motivo:
+                        observacao,
+                    });
+                }
+            } catch (error) {
+                /*
+                 * Falha de email não pode reverter
+                 * a alteração de status do pedido.
+                 *
+                 * O erro já fica registrado no
+                 * SysEmailLog e poderá ser reenviado
+                 * manualmente pelo administrador.
+                 */
+                console.error(
+                    "[pedido.email.status]",
+                    {
+                        pedidoId:
+                        pedidoAtualizado.id,
+
+                        status:
+                        input.statusCode,
+
+                        error,
+                    },
+                );
+            }
         }
 
         return pedidoAtualizado;

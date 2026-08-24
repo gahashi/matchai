@@ -114,6 +114,42 @@ function onlyDigits(value: string) {
     return value.replace(/\D/g, "");
 }
 
+function formatBrazilPhone(value: string) {
+    let digits = onlyDigits(value);
+
+    // Remove o DDI 55 quando o telefone vier salvo como +55...
+    if (
+        digits.length > 11 &&
+        digits.startsWith("55")
+    ) {
+        digits = digits.slice(2);
+    }
+
+    // Celular/telefone brasileiro: DDD + até 9 dígitos.
+    digits = digits.slice(0, 11);
+
+    if (digits.length === 0) {
+        return "";
+    }
+
+    if (digits.length <= 2) {
+        return `(${digits}`;
+    }
+
+    const ddd = digits.slice(0, 2);
+    const number = digits.slice(2);
+
+    if (number.length <= 4) {
+        return `(${ddd}) ${number}`;
+    }
+
+    if (number.length <= 8) {
+        return `(${ddd}) ${number.slice(0, 4)}-${number.slice(4)}`;
+    }
+
+    return `(${ddd}) ${number.slice(0, 5)}-${number.slice(5)}`;
+}
+
 function customerIsValid(input: {
     nome: string;
     email: string;
@@ -155,10 +191,13 @@ export function CheckoutClient({
     const [paymentRenderKey, setPaymentRenderKey] = useState(0);
     const attemptIdRef = useRef<string | null>(null);
 
+
     const [customer, setCustomer] = useState({
         nome: initialCustomer.nome,
         email: initialCustomer.email,
-        telefone: initialCustomer.telefone,
+        telefone: formatBrazilPhone(
+            initialCustomer.telefone,
+        ),
     });
 
     const [customerReady, setCustomerReady] = useState(
@@ -166,9 +205,13 @@ export function CheckoutClient({
         customerIsValid({
             nome: initialCustomer.nome,
             email: initialCustomer.email,
-            telefone: initialCustomer.telefone,
+            telefone: formatBrazilPhone(
+                initialCustomer.telefone,
+            ),
         }),
     );
+
+
 
     useEffect(() => {
         if (!publicKey) {
@@ -838,15 +881,20 @@ export function CheckoutClient({
                                     <span>Telefone</span>
                                     <input
                                         className="bp-input"
+                                        type="tel"
+                                        inputMode="numeric"
                                         value={customer.telefone}
                                         onChange={(event) =>
                                             setCustomer((current) => ({
                                                 ...current,
-                                                telefone: event.target.value,
+                                                telefone: formatBrazilPhone(
+                                                    event.target.value,
+                                                ),
                                             }))
                                         }
                                         placeholder="(47) 99999-9999"
                                         autoComplete="tel"
+                                        maxLength={15}
                                     />
                                 </label>
 

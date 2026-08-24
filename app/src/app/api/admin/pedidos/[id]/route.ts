@@ -9,6 +9,7 @@ import {
 
 import {
     pedidoService,
+    type PedidoEmailEvento,
     type PedidoStatusCode,
 } from "@/lib/vnd/pedido-service";
 
@@ -85,10 +86,18 @@ export async function GET(
             );
         }
 
+        const emails =
+            await pedidoService
+                .getEmailNotifications(
+                    pedidoId,
+                );
+
         return NextResponse.json({
             ok: true,
             data: {
                 pedido,
+
+                emails,
 
                 proximos_status:
                     pedidoService
@@ -154,9 +163,14 @@ export async function PATCH(
         const body =
             await request.json();
 
+        const action =
+            String(
+                body?.action ?? "",
+            ).trim();
+
         if (
-            body?.action !==
-            "set_status"
+            action !== "set_status" &&
+            action !== "resend_email"
         ) {
             return NextResponse.json(
                 {
@@ -168,6 +182,73 @@ export async function PATCH(
                     status: 400,
                 },
             );
+        }
+
+        if (
+            action === "resend_email"
+        ) {
+            const evento =
+                String(
+                    body.evento ?? "",
+                ).trim();
+
+            if (
+                evento !== "confirmado" &&
+                evento !== "pronto_retirada" &&
+                evento !== "cancelado"
+            ) {
+                return NextResponse.json(
+                    {
+                        ok: false,
+                        message:
+                            "Evento de e-mail inválido.",
+                    },
+                    {
+                        status: 400,
+                    },
+                );
+            }
+
+            const result =
+                await pedidoService.resendEmail({
+                    pedidoId,
+
+                    evento:
+                        evento as PedidoEmailEvento,
+                });
+
+            const pedido =
+                await pedidoService.findById(
+                    pedidoId,
+                );
+
+            if (!pedido) {
+                throw new Error(
+                    "Pedido não encontrado após o reenvio.",
+                );
+            }
+
+            return NextResponse.json({
+                ok: true,
+
+                message:
+                    "E-mail reenviado com sucesso.",
+
+                data: {
+                    pedido,
+
+                    emails:
+                    result.emails,
+
+                    proximos_status:
+                        pedidoService
+                            .getAllowedNextStatuses(
+                                pedido
+                                    .status
+                                    .codigo,
+                            ),
+                },
+            });
         }
 
         const statusCode =

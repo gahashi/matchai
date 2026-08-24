@@ -183,6 +183,133 @@ export async function getMercadoPagoPayment(
 }
 
 
+export async function findMercadoPagoPaymentByExternalReference(
+    externalReference: string,
+): Promise<MercadoPagoPaymentResponse | null> {
+    const params = new URLSearchParams({
+        external_reference:
+        externalReference,
+
+        sort:
+            "date_created",
+
+        criteria:
+            "desc",
+
+        range:
+            "date_created",
+
+        begin_date:
+            "NOW-365DAYS",
+
+        end_date:
+            "NOW",
+
+        limit:
+            "10",
+    });
+
+    const response = await fetch(
+        `https://api.mercadopago.com/v1/payments/search?${params.toString()}`,
+        {
+            method: "GET",
+
+            headers: {
+                Accept:
+                    "application/json",
+
+                Authorization:
+                    `Bearer ${getAccessToken()}`,
+            },
+
+            cache:
+                "no-store",
+        },
+    );
+
+    const data =
+        await parseMercadoPagoResponse(
+            response,
+        );
+
+    if (!response.ok) {
+        const message =
+            typeof data.message ===
+            "string"
+                ? data.message
+                : "Não foi possível buscar o pagamento no Mercado Pago.";
+
+        throw new MercadoPagoApiError(
+            message,
+            response.status,
+            data,
+        );
+    }
+
+    const results =
+        Array.isArray(data.results)
+            ? data.results
+            : [];
+
+    const found =
+        results.find(
+            (item) => {
+                if (
+                    typeof item !==
+                    "object" ||
+                    item === null
+                ) {
+                    return false;
+                }
+
+                const candidate =
+                    item as Record<
+                        string,
+                        unknown
+                    >;
+
+                return (
+                    candidate.id !==
+                    undefined &&
+                    candidate
+                        .external_reference ===
+                    externalReference
+                );
+            },
+        ) ?? null;
+
+    if (
+        typeof found !== "object" ||
+        found === null
+    ) {
+        return null;
+    }
+
+    const paymentId =
+        (found as Record<
+            string,
+            unknown
+        >).id;
+
+    if (
+        typeof paymentId !== "string" &&
+        typeof paymentId !== "number"
+    ) {
+        return null;
+    }
+
+    /*
+     * A busca serve somente para localizar o ID.
+     * Depois consultamos /payments/{id} para trabalhar
+     * sempre com o estado completo e atual do pagamento.
+     */
+    return getMercadoPagoPayment(
+        String(paymentId),
+    );
+}
+
+
+
 export async function cancelMercadoPagoPayment(
     paymentId: string,
 ): Promise<MercadoPagoPaymentResponse> {
