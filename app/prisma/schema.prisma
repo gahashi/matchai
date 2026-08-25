@@ -429,11 +429,30 @@ model ParParceiro {
   @@map("par_parceiro")
 }
 
+model ParParceiroUsuarioTipo {
+  id Int @id @default(autoincrement())
+
+  codigo    String  @unique @db.VarChar(50)
+  nome      String  @db.VarChar(100)
+  descricao String? @db.VarChar(255)
+
+  ativo Int @default(1)
+
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  par_parceiro_usuarios ParParceiroUsuario[]
+
+  @@index([ativo])
+  @@map("par_parceiro_usuario_tipo")
+}
+
 model ParParceiroUsuario {
   id Int @id @default(autoincrement())
 
-  par_parceiro_id Int
-  sys_usuario_id  Int
+  par_parceiro_id              Int
+  sys_usuario_id               Int
+  par_parceiro_usuario_tipo_id Int
 
   ativo Int @default(1)
 
@@ -444,9 +463,12 @@ model ParParceiroUsuario {
 
   sys_usuario SysUsuario @relation(fields: [sys_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
+  par_parceiro_usuario_tipo ParParceiroUsuarioTipo @relation(fields: [par_parceiro_usuario_tipo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
   @@unique([par_parceiro_id, sys_usuario_id])
   @@index([par_parceiro_id, ativo])
   @@index([sys_usuario_id, ativo])
+  @@index([par_parceiro_usuario_tipo_id])
   @@map("par_parceiro_usuario")
 }
 

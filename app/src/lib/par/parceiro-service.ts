@@ -598,6 +598,33 @@ class ParceiroService {
     }
 
 
+    private async getProprietarioTipoId() {
+        const tipo =
+            await prisma
+                .parParceiroUsuarioTipo
+                .findFirst({
+                    where: {
+                        codigo:
+                            "proprietario",
+
+                        ativo: 1,
+                    },
+
+                    select: {
+                        id: true,
+                    },
+                });
+
+        if (!tipo) {
+            throw new Error(
+                "Tipo de acesso proprietário não configurado.",
+            );
+        }
+
+        return tipo.id;
+    }
+
+
     async create(
         input: CreateParceiroInput,
     ) {
@@ -620,6 +647,10 @@ class ParceiroService {
                 .validarUsuarios(
                     input.usuarioIds,
                 );
+
+        const proprietarioTipoId =
+            await this
+                .getProprietarioTipoId();
 
         await Promise.all([
             this.ensureCodigoDisponivel(
@@ -793,6 +824,9 @@ class ParceiroService {
                                                 sys_usuario_id:
                                                 sysUsuarioId,
 
+                                                par_parceiro_usuario_tipo_id:
+                                                proprietarioTipoId,
+
                                                 ativo: 1,
 
                                                 created_at:
@@ -938,6 +972,10 @@ class ParceiroService {
                 .validarUsuarios(
                     input.usuarioIds,
                 );
+
+        const proprietarioTipoId =
+            await this
+                .getProprietarioTipoId();
 
         await Promise.all([
             this.ensureCodigoDisponivel(
@@ -1191,6 +1229,9 @@ class ParceiroService {
                                         sys_usuario_id:
                                         usuarioId,
 
+                                        par_parceiro_usuario_tipo_id:
+                                        proprietarioTipoId,
+
                                         ativo: 1,
 
                                         created_at:
@@ -1201,6 +1242,9 @@ class ParceiroService {
                                     },
 
                                     update: {
+                                        par_parceiro_usuario_tipo_id:
+                                        proprietarioTipoId,
+
                                         ativo: 1,
 
                                         updated_at:

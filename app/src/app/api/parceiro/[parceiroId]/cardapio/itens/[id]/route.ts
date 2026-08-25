@@ -14,10 +14,10 @@ import {
 
 type RouteParams = {
     params: Promise<{
+        parceiroId: string;
         id: string;
     }>;
 };
-
 
 function parseId(
     value: string,
@@ -67,9 +67,16 @@ export async function PATCH(
         params,
     }: RouteParams,
 ) {
+    const {
+        parceiroId,
+        id,
+    } =
+        await params;
+
     const access =
         await requireParceiroApiAccess(
             request,
+            parceiroId,
         );
 
     if (!access.ok) {
@@ -77,9 +84,6 @@ export async function PATCH(
     }
 
     try {
-        const {
-            id,
-        } = await params;
 
         const itemId =
             parseId(id);
@@ -278,9 +282,16 @@ export async function DELETE(
         params,
     }: RouteParams,
 ) {
+    const {
+        parceiroId,
+        id,
+    } =
+        await params;
+
     const access =
         await requireParceiroApiAccess(
             request,
+            parceiroId,
         );
 
     if (!access.ok) {
@@ -288,9 +299,6 @@ export async function DELETE(
     }
 
     try {
-        const {
-            id,
-        } = await params;
 
         const itemId =
             parseId(id);

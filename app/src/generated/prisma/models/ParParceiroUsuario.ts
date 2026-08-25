@@ -30,6 +30,7 @@ export type ParParceiroUsuarioAvgAggregateOutputType = {
   id: number | null
   par_parceiro_id: number | null
   sys_usuario_id: number | null
+  par_parceiro_usuario_tipo_id: number | null
   ativo: number | null
 }
 
@@ -37,6 +38,7 @@ export type ParParceiroUsuarioSumAggregateOutputType = {
   id: number | null
   par_parceiro_id: number | null
   sys_usuario_id: number | null
+  par_parceiro_usuario_tipo_id: number | null
   ativo: number | null
 }
 
@@ -44,6 +46,7 @@ export type ParParceiroUsuarioMinAggregateOutputType = {
   id: number | null
   par_parceiro_id: number | null
   sys_usuario_id: number | null
+  par_parceiro_usuario_tipo_id: number | null
   ativo: number | null
   created_at: Date | null
   updated_at: Date | null
@@ -53,6 +56,7 @@ export type ParParceiroUsuarioMaxAggregateOutputType = {
   id: number | null
   par_parceiro_id: number | null
   sys_usuario_id: number | null
+  par_parceiro_usuario_tipo_id: number | null
   ativo: number | null
   created_at: Date | null
   updated_at: Date | null
@@ -62,6 +66,7 @@ export type ParParceiroUsuarioCountAggregateOutputType = {
   id: number
   par_parceiro_id: number
   sys_usuario_id: number
+  par_parceiro_usuario_tipo_id: number
   ativo: number
   created_at: number
   updated_at: number
@@ -73,6 +78,7 @@ export type ParParceiroUsuarioAvgAggregateInputType = {
   id?: true
   par_parceiro_id?: true
   sys_usuario_id?: true
+  par_parceiro_usuario_tipo_id?: true
   ativo?: true
 }
 
@@ -80,6 +86,7 @@ export type ParParceiroUsuarioSumAggregateInputType = {
   id?: true
   par_parceiro_id?: true
   sys_usuario_id?: true
+  par_parceiro_usuario_tipo_id?: true
   ativo?: true
 }
 
@@ -87,6 +94,7 @@ export type ParParceiroUsuarioMinAggregateInputType = {
   id?: true
   par_parceiro_id?: true
   sys_usuario_id?: true
+  par_parceiro_usuario_tipo_id?: true
   ativo?: true
   created_at?: true
   updated_at?: true
@@ -96,6 +104,7 @@ export type ParParceiroUsuarioMaxAggregateInputType = {
   id?: true
   par_parceiro_id?: true
   sys_usuario_id?: true
+  par_parceiro_usuario_tipo_id?: true
   ativo?: true
   created_at?: true
   updated_at?: true
@@ -105,6 +114,7 @@ export type ParParceiroUsuarioCountAggregateInputType = {
   id?: true
   par_parceiro_id?: true
   sys_usuario_id?: true
+  par_parceiro_usuario_tipo_id?: true
   ativo?: true
   created_at?: true
   updated_at?: true
@@ -201,6 +211,7 @@ export type ParParceiroUsuarioGroupByOutputType = {
   id: number
   par_parceiro_id: number
   sys_usuario_id: number
+  par_parceiro_usuario_tipo_id: number
   ativo: number
   created_at: Date | null
   updated_at: Date | null
@@ -233,22 +244,26 @@ export type ParParceiroUsuarioWhereInput = {
   id?: Prisma.IntFilter<"ParParceiroUsuario"> | number
   par_parceiro_id?: Prisma.IntFilter<"ParParceiroUsuario"> | number
   sys_usuario_id?: Prisma.IntFilter<"ParParceiroUsuario"> | number
+  par_parceiro_usuario_tipo_id?: Prisma.IntFilter<"ParParceiroUsuario"> | number
   ativo?: Prisma.IntFilter<"ParParceiroUsuario"> | number
   created_at?: Prisma.DateTimeNullableFilter<"ParParceiroUsuario"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"ParParceiroUsuario"> | Date | string | null
   par_parceiro?: Prisma.XOR<Prisma.ParParceiroScalarRelationFilter, Prisma.ParParceiroWhereInput>
   sys_usuario?: Prisma.XOR<Prisma.SysUsuarioScalarRelationFilter, Prisma.SysUsuarioWhereInput>
+  par_parceiro_usuario_tipo?: Prisma.XOR<Prisma.ParParceiroUsuarioTipoScalarRelationFilter, Prisma.ParParceiroUsuarioTipoWhereInput>
 }
 
 export type ParParceiroUsuarioOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   par_parceiro_id?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
+  par_parceiro_usuario_tipo_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   par_parceiro?: Prisma.ParParceiroOrderByWithRelationInput
   sys_usuario?: Prisma.SysUsuarioOrderByWithRelationInput
+  par_parceiro_usuario_tipo?: Prisma.ParParceiroUsuarioTipoOrderByWithRelationInput
 }
 
 export type ParParceiroUsuarioWhereUniqueInput = Prisma.AtLeast<{
@@ -259,17 +274,20 @@ export type ParParceiroUsuarioWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ParParceiroUsuarioWhereInput | Prisma.ParParceiroUsuarioWhereInput[]
   par_parceiro_id?: Prisma.IntFilter<"ParParceiroUsuario"> | number
   sys_usuario_id?: Prisma.IntFilter<"ParParceiroUsuario"> | number
+  par_parceiro_usuario_tipo_id?: Prisma.IntFilter<"ParParceiroUsuario"> | number
   ativo?: Prisma.IntFilter<"ParParceiroUsuario"> | number
   created_at?: Prisma.DateTimeNullableFilter<"ParParceiroUsuario"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"ParParceiroUsuario"> | Date | string | null
   par_parceiro?: Prisma.XOR<Prisma.ParParceiroScalarRelationFilter, Prisma.ParParceiroWhereInput>
   sys_usuario?: Prisma.XOR<Prisma.SysUsuarioScalarRelationFilter, Prisma.SysUsuarioWhereInput>
+  par_parceiro_usuario_tipo?: Prisma.XOR<Prisma.ParParceiroUsuarioTipoScalarRelationFilter, Prisma.ParParceiroUsuarioTipoWhereInput>
 }, "id" | "par_parceiro_id_sys_usuario_id">
 
 export type ParParceiroUsuarioOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   par_parceiro_id?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
+  par_parceiro_usuario_tipo_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -287,6 +305,7 @@ export type ParParceiroUsuarioScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"ParParceiroUsuario"> | number
   par_parceiro_id?: Prisma.IntWithAggregatesFilter<"ParParceiroUsuario"> | number
   sys_usuario_id?: Prisma.IntWithAggregatesFilter<"ParParceiroUsuario"> | number
+  par_parceiro_usuario_tipo_id?: Prisma.IntWithAggregatesFilter<"ParParceiroUsuario"> | number
   ativo?: Prisma.IntWithAggregatesFilter<"ParParceiroUsuario"> | number
   created_at?: Prisma.DateTimeNullableWithAggregatesFilter<"ParParceiroUsuario"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableWithAggregatesFilter<"ParParceiroUsuario"> | Date | string | null
@@ -298,12 +317,14 @@ export type ParParceiroUsuarioCreateInput = {
   updated_at?: Date | string | null
   par_parceiro: Prisma.ParParceiroCreateNestedOneWithoutPar_parceiro_usuariosInput
   sys_usuario: Prisma.SysUsuarioCreateNestedOneWithoutPar_parceiro_usuariosInput
+  par_parceiro_usuario_tipo: Prisma.ParParceiroUsuarioTipoCreateNestedOneWithoutPar_parceiro_usuariosInput
 }
 
 export type ParParceiroUsuarioUncheckedCreateInput = {
   id?: number
   par_parceiro_id: number
   sys_usuario_id: number
+  par_parceiro_usuario_tipo_id: number
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -315,12 +336,14 @@ export type ParParceiroUsuarioUpdateInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   par_parceiro?: Prisma.ParParceiroUpdateOneRequiredWithoutPar_parceiro_usuariosNestedInput
   sys_usuario?: Prisma.SysUsuarioUpdateOneRequiredWithoutPar_parceiro_usuariosNestedInput
+  par_parceiro_usuario_tipo?: Prisma.ParParceiroUsuarioTipoUpdateOneRequiredWithoutPar_parceiro_usuariosNestedInput
 }
 
 export type ParParceiroUsuarioUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   par_parceiro_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
+  par_parceiro_usuario_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -330,6 +353,7 @@ export type ParParceiroUsuarioCreateManyInput = {
   id?: number
   par_parceiro_id: number
   sys_usuario_id: number
+  par_parceiro_usuario_tipo_id: number
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -345,6 +369,7 @@ export type ParParceiroUsuarioUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   par_parceiro_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
+  par_parceiro_usuario_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -369,6 +394,7 @@ export type ParParceiroUsuarioCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   par_parceiro_id?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
+  par_parceiro_usuario_tipo_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -378,6 +404,7 @@ export type ParParceiroUsuarioAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   par_parceiro_id?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
+  par_parceiro_usuario_tipo_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
 }
 
@@ -385,6 +412,7 @@ export type ParParceiroUsuarioMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   par_parceiro_id?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
+  par_parceiro_usuario_tipo_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -394,6 +422,7 @@ export type ParParceiroUsuarioMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   par_parceiro_id?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
+  par_parceiro_usuario_tipo_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -403,6 +432,7 @@ export type ParParceiroUsuarioSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   par_parceiro_id?: Prisma.SortOrder
   sys_usuario_id?: Prisma.SortOrder
+  par_parceiro_usuario_tipo_id?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
 }
 
@@ -490,16 +520,60 @@ export type ParParceiroUsuarioUncheckedUpdateManyWithoutPar_parceiroNestedInput 
   deleteMany?: Prisma.ParParceiroUsuarioScalarWhereInput | Prisma.ParParceiroUsuarioScalarWhereInput[]
 }
 
+export type ParParceiroUsuarioCreateNestedManyWithoutPar_parceiro_usuario_tipoInput = {
+  create?: Prisma.XOR<Prisma.ParParceiroUsuarioCreateWithoutPar_parceiro_usuario_tipoInput, Prisma.ParParceiroUsuarioUncheckedCreateWithoutPar_parceiro_usuario_tipoInput> | Prisma.ParParceiroUsuarioCreateWithoutPar_parceiro_usuario_tipoInput[] | Prisma.ParParceiroUsuarioUncheckedCreateWithoutPar_parceiro_usuario_tipoInput[]
+  connectOrCreate?: Prisma.ParParceiroUsuarioCreateOrConnectWithoutPar_parceiro_usuario_tipoInput | Prisma.ParParceiroUsuarioCreateOrConnectWithoutPar_parceiro_usuario_tipoInput[]
+  createMany?: Prisma.ParParceiroUsuarioCreateManyPar_parceiro_usuario_tipoInputEnvelope
+  connect?: Prisma.ParParceiroUsuarioWhereUniqueInput | Prisma.ParParceiroUsuarioWhereUniqueInput[]
+}
+
+export type ParParceiroUsuarioUncheckedCreateNestedManyWithoutPar_parceiro_usuario_tipoInput = {
+  create?: Prisma.XOR<Prisma.ParParceiroUsuarioCreateWithoutPar_parceiro_usuario_tipoInput, Prisma.ParParceiroUsuarioUncheckedCreateWithoutPar_parceiro_usuario_tipoInput> | Prisma.ParParceiroUsuarioCreateWithoutPar_parceiro_usuario_tipoInput[] | Prisma.ParParceiroUsuarioUncheckedCreateWithoutPar_parceiro_usuario_tipoInput[]
+  connectOrCreate?: Prisma.ParParceiroUsuarioCreateOrConnectWithoutPar_parceiro_usuario_tipoInput | Prisma.ParParceiroUsuarioCreateOrConnectWithoutPar_parceiro_usuario_tipoInput[]
+  createMany?: Prisma.ParParceiroUsuarioCreateManyPar_parceiro_usuario_tipoInputEnvelope
+  connect?: Prisma.ParParceiroUsuarioWhereUniqueInput | Prisma.ParParceiroUsuarioWhereUniqueInput[]
+}
+
+export type ParParceiroUsuarioUpdateManyWithoutPar_parceiro_usuario_tipoNestedInput = {
+  create?: Prisma.XOR<Prisma.ParParceiroUsuarioCreateWithoutPar_parceiro_usuario_tipoInput, Prisma.ParParceiroUsuarioUncheckedCreateWithoutPar_parceiro_usuario_tipoInput> | Prisma.ParParceiroUsuarioCreateWithoutPar_parceiro_usuario_tipoInput[] | Prisma.ParParceiroUsuarioUncheckedCreateWithoutPar_parceiro_usuario_tipoInput[]
+  connectOrCreate?: Prisma.ParParceiroUsuarioCreateOrConnectWithoutPar_parceiro_usuario_tipoInput | Prisma.ParParceiroUsuarioCreateOrConnectWithoutPar_parceiro_usuario_tipoInput[]
+  upsert?: Prisma.ParParceiroUsuarioUpsertWithWhereUniqueWithoutPar_parceiro_usuario_tipoInput | Prisma.ParParceiroUsuarioUpsertWithWhereUniqueWithoutPar_parceiro_usuario_tipoInput[]
+  createMany?: Prisma.ParParceiroUsuarioCreateManyPar_parceiro_usuario_tipoInputEnvelope
+  set?: Prisma.ParParceiroUsuarioWhereUniqueInput | Prisma.ParParceiroUsuarioWhereUniqueInput[]
+  disconnect?: Prisma.ParParceiroUsuarioWhereUniqueInput | Prisma.ParParceiroUsuarioWhereUniqueInput[]
+  delete?: Prisma.ParParceiroUsuarioWhereUniqueInput | Prisma.ParParceiroUsuarioWhereUniqueInput[]
+  connect?: Prisma.ParParceiroUsuarioWhereUniqueInput | Prisma.ParParceiroUsuarioWhereUniqueInput[]
+  update?: Prisma.ParParceiroUsuarioUpdateWithWhereUniqueWithoutPar_parceiro_usuario_tipoInput | Prisma.ParParceiroUsuarioUpdateWithWhereUniqueWithoutPar_parceiro_usuario_tipoInput[]
+  updateMany?: Prisma.ParParceiroUsuarioUpdateManyWithWhereWithoutPar_parceiro_usuario_tipoInput | Prisma.ParParceiroUsuarioUpdateManyWithWhereWithoutPar_parceiro_usuario_tipoInput[]
+  deleteMany?: Prisma.ParParceiroUsuarioScalarWhereInput | Prisma.ParParceiroUsuarioScalarWhereInput[]
+}
+
+export type ParParceiroUsuarioUncheckedUpdateManyWithoutPar_parceiro_usuario_tipoNestedInput = {
+  create?: Prisma.XOR<Prisma.ParParceiroUsuarioCreateWithoutPar_parceiro_usuario_tipoInput, Prisma.ParParceiroUsuarioUncheckedCreateWithoutPar_parceiro_usuario_tipoInput> | Prisma.ParParceiroUsuarioCreateWithoutPar_parceiro_usuario_tipoInput[] | Prisma.ParParceiroUsuarioUncheckedCreateWithoutPar_parceiro_usuario_tipoInput[]
+  connectOrCreate?: Prisma.ParParceiroUsuarioCreateOrConnectWithoutPar_parceiro_usuario_tipoInput | Prisma.ParParceiroUsuarioCreateOrConnectWithoutPar_parceiro_usuario_tipoInput[]
+  upsert?: Prisma.ParParceiroUsuarioUpsertWithWhereUniqueWithoutPar_parceiro_usuario_tipoInput | Prisma.ParParceiroUsuarioUpsertWithWhereUniqueWithoutPar_parceiro_usuario_tipoInput[]
+  createMany?: Prisma.ParParceiroUsuarioCreateManyPar_parceiro_usuario_tipoInputEnvelope
+  set?: Prisma.ParParceiroUsuarioWhereUniqueInput | Prisma.ParParceiroUsuarioWhereUniqueInput[]
+  disconnect?: Prisma.ParParceiroUsuarioWhereUniqueInput | Prisma.ParParceiroUsuarioWhereUniqueInput[]
+  delete?: Prisma.ParParceiroUsuarioWhereUniqueInput | Prisma.ParParceiroUsuarioWhereUniqueInput[]
+  connect?: Prisma.ParParceiroUsuarioWhereUniqueInput | Prisma.ParParceiroUsuarioWhereUniqueInput[]
+  update?: Prisma.ParParceiroUsuarioUpdateWithWhereUniqueWithoutPar_parceiro_usuario_tipoInput | Prisma.ParParceiroUsuarioUpdateWithWhereUniqueWithoutPar_parceiro_usuario_tipoInput[]
+  updateMany?: Prisma.ParParceiroUsuarioUpdateManyWithWhereWithoutPar_parceiro_usuario_tipoInput | Prisma.ParParceiroUsuarioUpdateManyWithWhereWithoutPar_parceiro_usuario_tipoInput[]
+  deleteMany?: Prisma.ParParceiroUsuarioScalarWhereInput | Prisma.ParParceiroUsuarioScalarWhereInput[]
+}
+
 export type ParParceiroUsuarioCreateWithoutSys_usuarioInput = {
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
   par_parceiro: Prisma.ParParceiroCreateNestedOneWithoutPar_parceiro_usuariosInput
+  par_parceiro_usuario_tipo: Prisma.ParParceiroUsuarioTipoCreateNestedOneWithoutPar_parceiro_usuariosInput
 }
 
 export type ParParceiroUsuarioUncheckedCreateWithoutSys_usuarioInput = {
   id?: number
   par_parceiro_id: number
+  par_parceiro_usuario_tipo_id: number
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -538,6 +612,7 @@ export type ParParceiroUsuarioScalarWhereInput = {
   id?: Prisma.IntFilter<"ParParceiroUsuario"> | number
   par_parceiro_id?: Prisma.IntFilter<"ParParceiroUsuario"> | number
   sys_usuario_id?: Prisma.IntFilter<"ParParceiroUsuario"> | number
+  par_parceiro_usuario_tipo_id?: Prisma.IntFilter<"ParParceiroUsuario"> | number
   ativo?: Prisma.IntFilter<"ParParceiroUsuario"> | number
   created_at?: Prisma.DateTimeNullableFilter<"ParParceiroUsuario"> | Date | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"ParParceiroUsuario"> | Date | string | null
@@ -548,11 +623,13 @@ export type ParParceiroUsuarioCreateWithoutPar_parceiroInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   sys_usuario: Prisma.SysUsuarioCreateNestedOneWithoutPar_parceiro_usuariosInput
+  par_parceiro_usuario_tipo: Prisma.ParParceiroUsuarioTipoCreateNestedOneWithoutPar_parceiro_usuariosInput
 }
 
 export type ParParceiroUsuarioUncheckedCreateWithoutPar_parceiroInput = {
   id?: number
   sys_usuario_id: number
+  par_parceiro_usuario_tipo_id: number
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -584,9 +661,53 @@ export type ParParceiroUsuarioUpdateManyWithWhereWithoutPar_parceiroInput = {
   data: Prisma.XOR<Prisma.ParParceiroUsuarioUpdateManyMutationInput, Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutPar_parceiroInput>
 }
 
+export type ParParceiroUsuarioCreateWithoutPar_parceiro_usuario_tipoInput = {
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  par_parceiro: Prisma.ParParceiroCreateNestedOneWithoutPar_parceiro_usuariosInput
+  sys_usuario: Prisma.SysUsuarioCreateNestedOneWithoutPar_parceiro_usuariosInput
+}
+
+export type ParParceiroUsuarioUncheckedCreateWithoutPar_parceiro_usuario_tipoInput = {
+  id?: number
+  par_parceiro_id: number
+  sys_usuario_id: number
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+}
+
+export type ParParceiroUsuarioCreateOrConnectWithoutPar_parceiro_usuario_tipoInput = {
+  where: Prisma.ParParceiroUsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.ParParceiroUsuarioCreateWithoutPar_parceiro_usuario_tipoInput, Prisma.ParParceiroUsuarioUncheckedCreateWithoutPar_parceiro_usuario_tipoInput>
+}
+
+export type ParParceiroUsuarioCreateManyPar_parceiro_usuario_tipoInputEnvelope = {
+  data: Prisma.ParParceiroUsuarioCreateManyPar_parceiro_usuario_tipoInput | Prisma.ParParceiroUsuarioCreateManyPar_parceiro_usuario_tipoInput[]
+  skipDuplicates?: boolean
+}
+
+export type ParParceiroUsuarioUpsertWithWhereUniqueWithoutPar_parceiro_usuario_tipoInput = {
+  where: Prisma.ParParceiroUsuarioWhereUniqueInput
+  update: Prisma.XOR<Prisma.ParParceiroUsuarioUpdateWithoutPar_parceiro_usuario_tipoInput, Prisma.ParParceiroUsuarioUncheckedUpdateWithoutPar_parceiro_usuario_tipoInput>
+  create: Prisma.XOR<Prisma.ParParceiroUsuarioCreateWithoutPar_parceiro_usuario_tipoInput, Prisma.ParParceiroUsuarioUncheckedCreateWithoutPar_parceiro_usuario_tipoInput>
+}
+
+export type ParParceiroUsuarioUpdateWithWhereUniqueWithoutPar_parceiro_usuario_tipoInput = {
+  where: Prisma.ParParceiroUsuarioWhereUniqueInput
+  data: Prisma.XOR<Prisma.ParParceiroUsuarioUpdateWithoutPar_parceiro_usuario_tipoInput, Prisma.ParParceiroUsuarioUncheckedUpdateWithoutPar_parceiro_usuario_tipoInput>
+}
+
+export type ParParceiroUsuarioUpdateManyWithWhereWithoutPar_parceiro_usuario_tipoInput = {
+  where: Prisma.ParParceiroUsuarioScalarWhereInput
+  data: Prisma.XOR<Prisma.ParParceiroUsuarioUpdateManyMutationInput, Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutPar_parceiro_usuario_tipoInput>
+}
+
 export type ParParceiroUsuarioCreateManySys_usuarioInput = {
   id?: number
   par_parceiro_id: number
+  par_parceiro_usuario_tipo_id: number
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -597,11 +718,13 @@ export type ParParceiroUsuarioUpdateWithoutSys_usuarioInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   par_parceiro?: Prisma.ParParceiroUpdateOneRequiredWithoutPar_parceiro_usuariosNestedInput
+  par_parceiro_usuario_tipo?: Prisma.ParParceiroUsuarioTipoUpdateOneRequiredWithoutPar_parceiro_usuariosNestedInput
 }
 
 export type ParParceiroUsuarioUncheckedUpdateWithoutSys_usuarioInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   par_parceiro_id?: Prisma.IntFieldUpdateOperationsInput | number
+  par_parceiro_usuario_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -610,6 +733,7 @@ export type ParParceiroUsuarioUncheckedUpdateWithoutSys_usuarioInput = {
 export type ParParceiroUsuarioUncheckedUpdateManyWithoutSys_usuarioInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   par_parceiro_id?: Prisma.IntFieldUpdateOperationsInput | number
+  par_parceiro_usuario_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -618,6 +742,7 @@ export type ParParceiroUsuarioUncheckedUpdateManyWithoutSys_usuarioInput = {
 export type ParParceiroUsuarioCreateManyPar_parceiroInput = {
   id?: number
   sys_usuario_id: number
+  par_parceiro_usuario_tipo_id: number
   ativo?: number
   created_at?: Date | string | null
   updated_at?: Date | string | null
@@ -628,11 +753,13 @@ export type ParParceiroUsuarioUpdateWithoutPar_parceiroInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario?: Prisma.SysUsuarioUpdateOneRequiredWithoutPar_parceiro_usuariosNestedInput
+  par_parceiro_usuario_tipo?: Prisma.ParParceiroUsuarioTipoUpdateOneRequiredWithoutPar_parceiro_usuariosNestedInput
 }
 
 export type ParParceiroUsuarioUncheckedUpdateWithoutPar_parceiroInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
+  par_parceiro_usuario_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -640,6 +767,42 @@ export type ParParceiroUsuarioUncheckedUpdateWithoutPar_parceiroInput = {
 
 export type ParParceiroUsuarioUncheckedUpdateManyWithoutPar_parceiroInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
+  par_parceiro_usuario_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type ParParceiroUsuarioCreateManyPar_parceiro_usuario_tipoInput = {
+  id?: number
+  par_parceiro_id: number
+  sys_usuario_id: number
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+}
+
+export type ParParceiroUsuarioUpdateWithoutPar_parceiro_usuario_tipoInput = {
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  par_parceiro?: Prisma.ParParceiroUpdateOneRequiredWithoutPar_parceiro_usuariosNestedInput
+  sys_usuario?: Prisma.SysUsuarioUpdateOneRequiredWithoutPar_parceiro_usuariosNestedInput
+}
+
+export type ParParceiroUsuarioUncheckedUpdateWithoutPar_parceiro_usuario_tipoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  par_parceiro_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type ParParceiroUsuarioUncheckedUpdateManyWithoutPar_parceiro_usuario_tipoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  par_parceiro_id?: Prisma.IntFieldUpdateOperationsInput | number
   sys_usuario_id?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -652,11 +815,13 @@ export type ParParceiroUsuarioSelect<ExtArgs extends runtime.Types.Extensions.In
   id?: boolean
   par_parceiro_id?: boolean
   sys_usuario_id?: boolean
+  par_parceiro_usuario_tipo_id?: boolean
   ativo?: boolean
   created_at?: boolean
   updated_at?: boolean
   par_parceiro?: boolean | Prisma.ParParceiroDefaultArgs<ExtArgs>
   sys_usuario?: boolean | Prisma.SysUsuarioDefaultArgs<ExtArgs>
+  par_parceiro_usuario_tipo?: boolean | Prisma.ParParceiroUsuarioTipoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["parParceiroUsuario"]>
 
 
@@ -665,15 +830,17 @@ export type ParParceiroUsuarioSelectScalar = {
   id?: boolean
   par_parceiro_id?: boolean
   sys_usuario_id?: boolean
+  par_parceiro_usuario_tipo_id?: boolean
   ativo?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type ParParceiroUsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "par_parceiro_id" | "sys_usuario_id" | "ativo" | "created_at" | "updated_at", ExtArgs["result"]["parParceiroUsuario"]>
+export type ParParceiroUsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "par_parceiro_id" | "sys_usuario_id" | "par_parceiro_usuario_tipo_id" | "ativo" | "created_at" | "updated_at", ExtArgs["result"]["parParceiroUsuario"]>
 export type ParParceiroUsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   par_parceiro?: boolean | Prisma.ParParceiroDefaultArgs<ExtArgs>
   sys_usuario?: boolean | Prisma.SysUsuarioDefaultArgs<ExtArgs>
+  par_parceiro_usuario_tipo?: boolean | Prisma.ParParceiroUsuarioTipoDefaultArgs<ExtArgs>
 }
 
 export type $ParParceiroUsuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -681,11 +848,13 @@ export type $ParParceiroUsuarioPayload<ExtArgs extends runtime.Types.Extensions.
   objects: {
     par_parceiro: Prisma.$ParParceiroPayload<ExtArgs>
     sys_usuario: Prisma.$SysUsuarioPayload<ExtArgs>
+    par_parceiro_usuario_tipo: Prisma.$ParParceiroUsuarioTipoPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     par_parceiro_id: number
     sys_usuario_id: number
+    par_parceiro_usuario_tipo_id: number
     ativo: number
     created_at: Date | null
     updated_at: Date | null
@@ -1031,6 +1200,7 @@ export interface Prisma__ParParceiroUsuarioClient<T, Null = never, ExtArgs exten
   readonly [Symbol.toStringTag]: "PrismaPromise"
   par_parceiro<T extends Prisma.ParParceiroDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ParParceiroDefaultArgs<ExtArgs>>): Prisma.Prisma__ParParceiroClient<runtime.Types.Result.GetResult<Prisma.$ParParceiroPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   sys_usuario<T extends Prisma.SysUsuarioDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuarioDefaultArgs<ExtArgs>>): Prisma.Prisma__SysUsuarioClient<runtime.Types.Result.GetResult<Prisma.$SysUsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  par_parceiro_usuario_tipo<T extends Prisma.ParParceiroUsuarioTipoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ParParceiroUsuarioTipoDefaultArgs<ExtArgs>>): Prisma.Prisma__ParParceiroUsuarioTipoClient<runtime.Types.Result.GetResult<Prisma.$ParParceiroUsuarioTipoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1063,6 +1233,7 @@ export interface ParParceiroUsuarioFieldRefs {
   readonly id: Prisma.FieldRef<"ParParceiroUsuario", 'Int'>
   readonly par_parceiro_id: Prisma.FieldRef<"ParParceiroUsuario", 'Int'>
   readonly sys_usuario_id: Prisma.FieldRef<"ParParceiroUsuario", 'Int'>
+  readonly par_parceiro_usuario_tipo_id: Prisma.FieldRef<"ParParceiroUsuario", 'Int'>
   readonly ativo: Prisma.FieldRef<"ParParceiroUsuario", 'Int'>
   readonly created_at: Prisma.FieldRef<"ParParceiroUsuario", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"ParParceiroUsuario", 'DateTime'>

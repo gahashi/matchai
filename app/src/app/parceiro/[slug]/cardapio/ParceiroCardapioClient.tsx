@@ -9,6 +9,7 @@ import {
 } from "react";
 
 import {
+    Eye,
     FolderOpen,
     ImagePlus,
     Pencil,
@@ -20,6 +21,11 @@ import {
     Upload,
     X,
 } from "lucide-react";
+
+import {
+    CardapioView,
+    type CardapioViewParceiro,
+} from "@/components/public/CardapioView";
 
 import {
     Badge,
@@ -115,7 +121,19 @@ type CardapioData = {
 type Props = {
     parceiro: {
         id: number;
+        slug: string;
         nome: string;
+        descricao: string | null;
+
+        tema: {
+            cor_primaria: string | null;
+            cor_secundaria: string | null;
+            cor_fundo: string | null;
+            cor_texto: string | null;
+
+            logo_url: string | null;
+            banner_url: string | null;
+        };
     };
 
     initialData: CardapioData;
@@ -257,10 +275,13 @@ export default function ParceiroCardapioClient({
                                                    parceiro,
                                                    initialData,
                                                }: Props) {
+    const apiBase =`/api/parceiro/${parceiro.id}/cardapio`;
+
     const fileInputRef =
         useRef<HTMLInputElement | null>(
             null,
         );
+
 
     const [
         data,
@@ -354,6 +375,13 @@ export default function ParceiroCardapioClient({
         );
 
     const [
+        previewOpen,
+        setPreviewOpen,
+    ] =
+        useState(false);
+
+
+    const [
         snackbar,
         setSnackbar,
     ] =
@@ -392,6 +420,127 @@ export default function ParceiroCardapioClient({
             [
                 data.categorias,
                 editingItem,
+            ],
+        );
+
+
+    const previewData =
+        useMemo<CardapioViewParceiro>(
+            () => {
+                const categorias =
+                    [...data.categorias]
+                        .filter(
+                            (
+                                categoria,
+                            ) =>
+                                Boolean(
+                                    categoria.ativo,
+                                ),
+                        )
+                        .sort(
+                            (
+                                a,
+                                b,
+                            ) =>
+                                a.ordem -
+                                b.ordem ||
+                                a.id -
+                                b.id,
+                        )
+                        .map(
+                            (
+                                categoria,
+                            ) => {
+                                const itens =
+                                    data
+                                        .itens
+                                        .filter(
+                                            (
+                                                item,
+                                            ) =>
+                                                Boolean(
+                                                    item.ativo,
+                                                ) &&
+                                                item.crd_categoria_id ===
+                                                categoria.id,
+                                        )
+                                        .sort(
+                                            (
+                                                a,
+                                                b,
+                                            ) =>
+                                                a.ordem -
+                                                b.ordem ||
+                                                a.id -
+                                                b.id,
+                                        )
+                                        .map(
+                                            (
+                                                item,
+                                            ) => ({
+                                                id:
+                                                item.id,
+
+                                                nome:
+                                                item.nome,
+
+                                                descricao:
+                                                item.descricao,
+
+                                                preco:
+                                                item.preco,
+
+                                                imagem_url:
+                                                    item
+                                                        .imagem
+                                                        ?.public_url ??
+                                                    null,
+                                            }),
+                                        );
+
+                                return {
+                                    id:
+                                    categoria.id,
+
+                                    nome:
+                                    categoria.nome,
+
+                                    descricao:
+                                    categoria.descricao,
+
+                                    itens,
+                                };
+                            },
+                        )
+                        .filter(
+                            (
+                                categoria,
+                            ) =>
+                                categoria
+                                    .itens
+                                    .length >
+                                0,
+                        );
+
+                return {
+                    nome:
+                    parceiro.nome,
+
+                    descricao:
+                    parceiro.descricao,
+
+                    tema:
+                    parceiro.tema,
+
+                    categorias,
+                };
+            },
+            [
+                data.categorias,
+                data.itens,
+                parceiro.descricao,
+                parceiro.nome,
+                parceiro.tema,
             ],
         );
 
@@ -471,13 +620,7 @@ export default function ParceiroCardapioClient({
 
         setSnackbar(null);
     }
-
-
-    function fecharCategoriaModal() {
-        if (salvando) {
-            return;
-        }
-
+    function resetCategoriaModal() {
         setCategoriaModalOpen(
             false,
         );
@@ -489,6 +632,14 @@ export default function ParceiroCardapioClient({
         setCategoriaForm(
             emptyCategoriaForm,
         );
+    }
+
+    function fecharCategoriaModal() {
+        if (salvando) {
+            return;
+        }
+
+        resetCategoriaModal();
     }
 
 
@@ -555,8 +706,8 @@ export default function ParceiroCardapioClient({
             const response =
                 await fetch(
                     isEditing
-                        ? `/api/parceiro/cardapio/categorias/${editingCategoria!.id}`
-                        : "/api/parceiro/cardapio/categorias",
+                        ? `${apiBase}/categorias/${editingCategoria!.id}`
+                        : `${apiBase}/categorias`,
                     {
                         method:
                             isEditing
@@ -643,8 +794,7 @@ export default function ParceiroCardapioClient({
                 },
             );
 
-            fecharCategoriaModal();
-
+            resetCategoriaModal();
             setSnackbar({
                 color:
                     "success",
@@ -697,7 +847,7 @@ export default function ParceiroCardapioClient({
 
             const response =
                 await fetch(
-                    `/api/parceiro/cardapio/categorias/${categoria.id}`,
+                    `${apiBase}/categorias/${categoria.id}`,
                     {
                         method:
                             "PATCH",
@@ -811,7 +961,7 @@ export default function ParceiroCardapioClient({
 
             const response =
                 await fetch(
-                    `/api/parceiro/cardapio/categorias/${categoria.id}`,
+                    `${apiBase}/categorias/${categoria.id}`,
                     {
                         method:
                             "DELETE",
@@ -1008,17 +1158,8 @@ export default function ParceiroCardapioClient({
         setSnackbar(null);
     }
 
-
-    function fecharItemModal() {
-        if (salvando) {
-            return;
-        }
-
+    function resetItemModal() {
         limparImagemNova();
-
-        setRemoverImagem(
-            false,
-        );
 
         setItemModalOpen(
             false,
@@ -1031,8 +1172,19 @@ export default function ParceiroCardapioClient({
         setItemForm(
             emptyItemForm,
         );
+
+        setRemoverImagem(
+            false,
+        );
     }
 
+    function fecharItemModal() {
+        if (salvando) {
+            return;
+        }
+
+        resetItemModal();
+    }
 
     function handleImagemChange(
         event:
@@ -1290,8 +1442,8 @@ export default function ParceiroCardapioClient({
             const response =
                 await fetch(
                     isEditing
-                        ? `/api/parceiro/cardapio/itens/${editingItem!.id}`
-                        : "/api/parceiro/cardapio/itens",
+                        ? `${apiBase}/itens/${editingItem!.id}`
+                        : `${apiBase}/itens`,
                     {
                         method:
                             isEditing
@@ -1380,7 +1532,7 @@ export default function ParceiroCardapioClient({
                 },
             );
 
-            fecharItemModal();
+            resetItemModal();
 
             setSnackbar({
                 color:
@@ -1434,8 +1586,7 @@ export default function ParceiroCardapioClient({
 
             const response =
                 await fetch(
-                    `/api/parceiro/cardapio/itens/${item.id}`,
-                    {
+                    `${apiBase}/itens/${item.id}`,                   {
                         method:
                             "PATCH",
 
@@ -1548,8 +1699,7 @@ export default function ParceiroCardapioClient({
 
             const response =
                 await fetch(
-                    `/api/parceiro/cardapio/itens/${item.id}`,
-                    {
+                    `${apiBase}/itens/${item.id}`,                    {
                         method:
                             "DELETE",
                     },
@@ -1658,6 +1808,22 @@ export default function ParceiroCardapioClient({
                                 "wrap",
                         }}
                     >
+                        <Button
+                            color="secondary"
+                            variant="soft"
+                            onClick={() =>
+                                setPreviewOpen(
+                                    true,
+                                )
+                            }
+                        >
+                            <Eye
+                                size={17}
+                            />
+
+                            Visualizar cardápio
+                        </Button>
+
                         <Button
                             color="secondary"
                             variant="soft"
@@ -2534,6 +2700,31 @@ export default function ParceiroCardapioClient({
                     </>
                 )}
             </section>
+
+
+            <Modal
+                open={
+                    previewOpen
+                }
+                title="Prévia do cardápio"
+                description="Esta prévia considera somente categorias e itens ativos, exatamente como serão apresentados ao cliente."
+                onCloseAction={() =>
+                    setPreviewOpen(
+                        false,
+                    )
+                }
+                size="full"
+                scrollMode="body"
+            >
+                <div className="bp-cardapio-preview-frame">
+                    <CardapioView
+                        parceiro={
+                            previewData
+                        }
+                        preview
+                    />
+                </div>
+            </Modal>
 
 
             <Modal

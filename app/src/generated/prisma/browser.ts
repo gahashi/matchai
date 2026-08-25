@@ -98,6 +98,11 @@ export type CadEvento = Prisma.CadEventoModel
  */
 export type ParParceiro = Prisma.ParParceiroModel
 /**
+ * Model ParParceiroUsuarioTipo
+ * 
+ */
+export type ParParceiroUsuarioTipo = Prisma.ParParceiroUsuarioTipoModel
+/**
  * Model ParParceiroUsuario
  * 
  */

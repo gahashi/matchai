@@ -19,6 +19,30 @@
     transition: 0.16s ease;
 }
 
+/* Seletor nativo de cor */
+.bp-input[type="color"] {
+    width: 64px;
+    min-width: 64px;
+    height: 42px;
+    min-height: 42px;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.bp-input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.bp-input[type="color"]::-webkit-color-swatch {
+    border: 0;
+    border-radius: 8px;
+}
+
+.bp-input[type="color"]::-moz-color-swatch {
+    border: 0;
+    border-radius: 8px;
+}
+
 .bp-input::placeholder,
 .bp-textarea::placeholder {
     color: var(--color-text-soft);
@@ -2137,4 +2161,64 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover,
 input[type="time"]::-webkit-calendar-picker-indicator:hover {
     opacity: 1;
     transform: scale(1.08);
+}
+
+.bp-color-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bp-color-field > span {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.bp-file-button {
+    min-height: 42px;
+    padding: 0 16px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    width: fit-content;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+
+    background: var(--color-surface-2);
+    color: var(--color-text);
+
+    cursor: pointer;
+    font-weight: 750;
+    white-space: nowrap;
+
+    transition:
+            background var(--transition-fast),
+            border-color var(--transition-fast),
+            color var(--transition-fast);
+}
+
+.bp-file-button:hover {
+    background: var(--color-secondary);
+    color: var(--color-secondary-foreground);
+    border-color: var(--color-secondary);
+}
+
+.bp-file-button:focus-within {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.bp-theme-color-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.bp-theme-color-grid > * {
+    min-width: 0;
 }

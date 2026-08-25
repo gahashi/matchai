@@ -495,4 +495,11 @@
 .bp-admin-option-description {
     margin: 0;
 }
-
+.bp-card-stack {
+    display: grid;
+    gap: 16px;
+}
+.bp-card-stack {
+    display: grid;
+    gap: 16px;
+}

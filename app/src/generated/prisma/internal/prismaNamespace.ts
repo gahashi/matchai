@@ -413,6 +413,7 @@ export const ModelName = {
   CadLink: 'CadLink',
   CadEvento: 'CadEvento',
   ParParceiro: 'ParParceiro',
+  ParParceiroUsuarioTipo: 'ParParceiroUsuarioTipo',
   ParParceiroUsuario: 'ParParceiroUsuario',
   ParParceiroTema: 'ParParceiroTema',
   CrdCategoria: 'CrdCategoria',
@@ -457,7 +458,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "sysUsuarioTipo" | "sysUsuario" | "user" | "session" | "account" | "verification" | "sysAuthLoginLog" | "sysEmailLog" | "sysEmailVerificationCode" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivo" | "cadLink" | "cadEvento" | "parParceiro" | "parParceiroUsuario" | "parParceiroTema" | "crdCategoria" | "crdItem" | "prdProdutoTipo" | "prdProduto" | "prdProdutoImagem" | "prdProdutoVariacao" | "prdProdutoComponente" | "prdProdutoCampo" | "vndCampanhaStatus" | "vndCampanha" | "vndCampanhaProduto" | "socSocioStatus" | "socSocioOrigem" | "socPlano" | "socSocio" | "vndPedidoStatus" | "vndEntregaTipo" | "vndPedido" | "vndPedidoItem" | "vndPedidoItemComponente" | "vndPedidoItemCampo" | "vndEstoqueReserva" | "vndPedidoHistorico" | "finPagamentoStatus" | "finPagamentoMetodo" | "finPagamento" | "sysAnalyticsEvento"
+    modelProps: "sysUsuarioTipo" | "sysUsuario" | "user" | "session" | "account" | "verification" | "sysAuthLoginLog" | "sysEmailLog" | "sysEmailVerificationCode" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivo" | "cadLink" | "cadEvento" | "parParceiro" | "parParceiroUsuarioTipo" | "parParceiroUsuario" | "parParceiroTema" | "crdCategoria" | "crdItem" | "prdProdutoTipo" | "prdProduto" | "prdProdutoImagem" | "prdProdutoVariacao" | "prdProdutoComponente" | "prdProdutoCampo" | "vndCampanhaStatus" | "vndCampanha" | "vndCampanhaProduto" | "socSocioStatus" | "socSocioOrigem" | "socPlano" | "socSocio" | "vndPedidoStatus" | "vndEntregaTipo" | "vndPedido" | "vndPedidoItem" | "vndPedidoItemComponente" | "vndPedidoItemCampo" | "vndEstoqueReserva" | "vndPedidoHistorico" | "finPagamentoStatus" | "finPagamentoMetodo" | "finPagamento" | "sysAnalyticsEvento"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1514,6 +1515,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ParParceiroCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ParParceiroCountAggregateOutputType> | number
+        }
+      }
+    }
+    ParParceiroUsuarioTipo: {
+      payload: Prisma.$ParParceiroUsuarioTipoPayload<ExtArgs>
+      fields: Prisma.ParParceiroUsuarioTipoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ParParceiroUsuarioTipoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioTipoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ParParceiroUsuarioTipoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioTipoPayload>
+        }
+        findFirst: {
+          args: Prisma.ParParceiroUsuarioTipoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioTipoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ParParceiroUsuarioTipoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioTipoPayload>
+        }
+        findMany: {
+          args: Prisma.ParParceiroUsuarioTipoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioTipoPayload>[]
+        }
+        create: {
+          args: Prisma.ParParceiroUsuarioTipoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioTipoPayload>
+        }
+        createMany: {
+          args: Prisma.ParParceiroUsuarioTipoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.ParParceiroUsuarioTipoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioTipoPayload>
+        }
+        update: {
+          args: Prisma.ParParceiroUsuarioTipoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioTipoPayload>
+        }
+        deleteMany: {
+          args: Prisma.ParParceiroUsuarioTipoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ParParceiroUsuarioTipoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.ParParceiroUsuarioTipoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioTipoPayload>
+        }
+        aggregate: {
+          args: Prisma.ParParceiroUsuarioTipoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateParParceiroUsuarioTipo>
+        }
+        groupBy: {
+          args: Prisma.ParParceiroUsuarioTipoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ParParceiroUsuarioTipoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ParParceiroUsuarioTipoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ParParceiroUsuarioTipoCountAggregateOutputType> | number
         }
       }
     }
@@ -3731,10 +3798,24 @@ export const ParParceiroScalarFieldEnum = {
 export type ParParceiroScalarFieldEnum = (typeof ParParceiroScalarFieldEnum)[keyof typeof ParParceiroScalarFieldEnum]
 
 
+export const ParParceiroUsuarioTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ParParceiroUsuarioTipoScalarFieldEnum = (typeof ParParceiroUsuarioTipoScalarFieldEnum)[keyof typeof ParParceiroUsuarioTipoScalarFieldEnum]
+
+
 export const ParParceiroUsuarioScalarFieldEnum = {
   id: 'id',
   par_parceiro_id: 'par_parceiro_id',
   sys_usuario_id: 'sys_usuario_id',
+  par_parceiro_usuario_tipo_id: 'par_parceiro_usuario_tipo_id',
   ativo: 'ativo',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -4405,6 +4486,15 @@ export const ParParceiroOrderByRelevanceFieldEnum = {
 export type ParParceiroOrderByRelevanceFieldEnum = (typeof ParParceiroOrderByRelevanceFieldEnum)[keyof typeof ParParceiroOrderByRelevanceFieldEnum]
 
 
+export const ParParceiroUsuarioTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type ParParceiroUsuarioTipoOrderByRelevanceFieldEnum = (typeof ParParceiroUsuarioTipoOrderByRelevanceFieldEnum)[keyof typeof ParParceiroUsuarioTipoOrderByRelevanceFieldEnum]
+
+
 export const ParParceiroTemaOrderByRelevanceFieldEnum = {
   cor_primaria: 'cor_primaria',
   cor_secundaria: 'cor_secundaria',
@@ -4861,6 +4951,7 @@ export type GlobalOmitConfig = {
   cadLink?: Prisma.CadLinkOmit
   cadEvento?: Prisma.CadEventoOmit
   parParceiro?: Prisma.ParParceiroOmit
+  parParceiroUsuarioTipo?: Prisma.ParParceiroUsuarioTipoOmit
   parParceiroUsuario?: Prisma.ParParceiroUsuarioOmit
   parParceiroTema?: Prisma.ParParceiroTemaOmit
   crdCategoria?: Prisma.CrdCategoriaOmit

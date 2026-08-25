@@ -4,12 +4,19 @@ import {
 } from "next/server";
 
 import {
-    cardapioService,
-} from "@/lib/crd/cardapio-service";
+    parceiroConfigService,
+} from "@/lib/par/parceiro-config-service";
 
 import {
     requireParceiroApiAccess,
 } from "@/lib/par/require-parceiro-api-access";
+
+
+type RouteParams = {
+    params: Promise<{
+        parceiroId: string;
+    }>;
+};
 
 
 function booleanValue(
@@ -39,102 +46,116 @@ function fileValue(
 }
 
 
-export async function POST(
+export async function PATCH(
     request: NextRequest,
+    {
+        params,
+    }: RouteParams,
 ) {
+    const {
+        parceiroId,
+    } =
+        await params;
+
     const access =
         await requireParceiroApiAccess(
             request,
+            parceiroId,
         );
 
     if (!access.ok) {
         return access.response;
     }
 
+
     try {
         const formData =
             await request.formData();
 
-        const item =
-            await cardapioService
-                .createItem({
+        const parceiro =
+            await parceiroConfigService
+                .updateAparencia({
                     parceiroId:
-                    access
-                        .parceiro
-                        .id,
+                    access.parceiro.id,
 
-                    categoriaId:
-                        Number(
-                            formData.get(
-                                "crd_categoria_id",
-                            ),
-                        ),
-
-                    nome:
+                    corPrimaria:
                         String(
                             formData.get(
-                                "nome",
+                                "cor_primaria",
                             ) ??
                             "",
                         ),
 
-                    descricao:
+                    corSecundaria:
                         String(
                             formData.get(
-                                "descricao",
+                                "cor_secundaria",
                             ) ??
                             "",
                         ),
 
-                    preco:
-                        Number(
+                    corFundo:
+                        String(
                             formData.get(
-                                "preco",
-                            ),
-                        ),
-
-                    ordem:
-                        Number(
-                            formData.get(
-                                "ordem",
+                                "cor_fundo",
                             ) ??
-                            0,
+                            "",
                         ),
 
-                    ativo:
-                        booleanValue(
+                    corTexto:
+                        String(
                             formData.get(
-                                "ativo",
-                            ),
+                                "cor_texto",
+                            ) ??
+                            "",
                         ),
 
-                    imagem:
+                    logo:
                         fileValue(
                             formData.get(
-                                "imagem",
+                                "logo",
+                            ),
+                        ),
+
+                    banner:
+                        fileValue(
+                            formData.get(
+                                "banner",
+                            ),
+                        ),
+
+                    removerLogo:
+                        booleanValue(
+                            formData.get(
+                                "remover_logo",
+                            ),
+                        ),
+
+                    removerBanner:
+                        booleanValue(
+                            formData.get(
+                                "remover_banner",
                             ),
                         ),
 
                     sysUsuarioId:
-                    access
-                        .session
-                        .user
-                        .id,
+                    access.session.user.id,
                 });
+
 
         return NextResponse.json({
             ok: true,
 
             message:
-                "Item criado com sucesso.",
+                "Aparência atualizada com sucesso.",
 
             data: {
-                item,
+                parceiro,
             },
         });
     } catch (error) {
         console.error(
-            "[parceiro.cardapio.item.create]",
+            "[parceiro.configuracao.aparencia.update]",
             error,
         );
 
@@ -145,7 +166,7 @@ export async function POST(
                 message:
                     error instanceof Error
                         ? error.message
-                        : "Não foi possível criar o item.",
+                        : "Não foi possível atualizar a aparência.",
             },
             {
                 status: 400,

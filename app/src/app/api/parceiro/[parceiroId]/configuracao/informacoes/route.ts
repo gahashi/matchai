@@ -4,37 +4,52 @@ import {
 } from "next/server";
 
 import {
-    cardapioService,
-} from "@/lib/crd/cardapio-service";
+    parceiroConfigService,
+} from "@/lib/par/parceiro-config-service";
 
 import {
     requireParceiroApiAccess,
 } from "@/lib/par/require-parceiro-api-access";
 
 
-export async function POST(
+type RouteParams = {
+    params: Promise<{
+        parceiroId: string;
+    }>;
+};
+
+
+export async function PATCH(
     request: NextRequest,
+    {
+        params,
+    }: RouteParams,
 ) {
+    const {
+        parceiroId,
+    } =
+        await params;
+
     const access =
         await requireParceiroApiAccess(
             request,
+            parceiroId,
         );
 
     if (!access.ok) {
         return access.response;
     }
 
+
     try {
         const body =
             await request.json();
 
-        const categoria =
-            await cardapioService
-                .createCategoria({
+        const parceiro =
+            await parceiroConfigService
+                .updateInformacoes({
                     parceiroId:
-                    access
-                        .parceiro
-                        .id,
+                    access.parceiro.id,
 
                     nome:
                         String(
@@ -49,30 +64,26 @@ export async function POST(
                             )
                             : null,
 
-                    ordem:
-                        Number(
-                            body?.ordem ??
-                            0,
+                    slug:
+                        String(
+                            body?.slug ??
+                            "",
                         ),
-
-                    ativo:
-                        body?.ativo !==
-                        false,
                 });
 
         return NextResponse.json({
             ok: true,
 
             message:
-                "Categoria criada com sucesso.",
+                "Informações atualizadas com sucesso.",
 
             data: {
-                categoria,
+                parceiro,
             },
         });
     } catch (error) {
         console.error(
-            "[parceiro.cardapio.categoria.create]",
+            "[parceiro.configuracao.informacoes.update]",
             error,
         );
 
@@ -83,7 +94,7 @@ export async function POST(
                 message:
                     error instanceof Error
                         ? error.message
-                        : "Não foi possível criar a categoria.",
+                        : "Não foi possível atualizar as informações.",
             },
             {
                 status: 400,

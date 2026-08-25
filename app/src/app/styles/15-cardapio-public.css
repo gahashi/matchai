@@ -452,3 +452,38 @@
         min-height: 72px;
     }
 }
+
+/* PREVIEW ADMINISTRATIVO */
+
+.bp-cardapio-preview-frame {
+    width: 100%;
+    overflow: hidden;
+    border:
+            1px solid
+            var(--color-border);
+    border-radius: 20px;
+    background:
+            var(--color-surface);
+}
+
+.bp-cardapio-public.bp-cardapio-preview {
+    min-height: auto;
+}
+
+.bp-cardapio-public.bp-cardapio-preview
+.bp-cardapio-hero {
+    min-height: 260px;
+}
+
+
+@media (max-width: 720px) {
+    .bp-cardapio-preview-frame {
+        border-radius: 16px;
+    }
+
+    .bp-cardapio-public.bp-cardapio-preview
+    .bp-cardapio-hero {
+        min-height: 230px;
+    }
+}
+

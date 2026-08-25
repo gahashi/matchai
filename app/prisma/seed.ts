@@ -110,6 +110,32 @@ async function main() {
     });
 
     // =====================================================
+    // PAR — TIPOS DE ACESSO DO PARCEIRO
+    // =====================================================
+
+    await upsertByCodigo(prisma.parParceiroUsuarioTipo, "proprietario", {
+        nome: "Proprietário",
+        descricao:
+            "Responsável principal pelo parceiro e pela gestão de acessos.",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.parParceiroUsuarioTipo, "administrador", {
+        nome: "Administrador",
+        descricao:
+            "Pode operar o parceiro e gerenciar membros comuns.",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.parParceiroUsuarioTipo, "membro", {
+        nome: "Membro",
+        descricao:
+            "Pode acessar os recursos operacionais liberados para o parceiro.",
+        ativo: 1,
+    });
+
+
+    // =====================================================
     // SYS — STORAGE
     // =====================================================
 

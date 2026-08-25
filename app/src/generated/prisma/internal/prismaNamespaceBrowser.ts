@@ -67,6 +67,7 @@ export const ModelName = {
   CadLink: 'CadLink',
   CadEvento: 'CadEvento',
   ParParceiro: 'ParParceiro',
+  ParParceiroUsuarioTipo: 'ParParceiroUsuarioTipo',
   ParParceiroUsuario: 'ParParceiroUsuario',
   ParParceiroTema: 'ParParceiroTema',
   CrdCategoria: 'CrdCategoria',
@@ -375,10 +376,24 @@ export const ParParceiroScalarFieldEnum = {
 export type ParParceiroScalarFieldEnum = (typeof ParParceiroScalarFieldEnum)[keyof typeof ParParceiroScalarFieldEnum]
 
 
+export const ParParceiroUsuarioTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ParParceiroUsuarioTipoScalarFieldEnum = (typeof ParParceiroUsuarioTipoScalarFieldEnum)[keyof typeof ParParceiroUsuarioTipoScalarFieldEnum]
+
+
 export const ParParceiroUsuarioScalarFieldEnum = {
   id: 'id',
   par_parceiro_id: 'par_parceiro_id',
   sys_usuario_id: 'sys_usuario_id',
+  par_parceiro_usuario_tipo_id: 'par_parceiro_usuario_tipo_id',
   ativo: 'ativo',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -1047,6 +1062,15 @@ export const ParParceiroOrderByRelevanceFieldEnum = {
 } as const
 
 export type ParParceiroOrderByRelevanceFieldEnum = (typeof ParParceiroOrderByRelevanceFieldEnum)[keyof typeof ParParceiroOrderByRelevanceFieldEnum]
+
+
+export const ParParceiroUsuarioTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type ParParceiroUsuarioTipoOrderByRelevanceFieldEnum = (typeof ParParceiroUsuarioTipoOrderByRelevanceFieldEnum)[keyof typeof ParParceiroUsuarioTipoOrderByRelevanceFieldEnum]
 
 
 export const ParParceiroTemaOrderByRelevanceFieldEnum = {
