@@ -322,6 +322,7 @@ export type SysUsuarioWhereInput = {
   sys_arquivos_criados?: Prisma.SysArquivoListRelationFilter
   vnd_pedidos?: Prisma.VndPedidoListRelationFilter
   soc_socios?: Prisma.SocSocioListRelationFilter
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioListRelationFilter
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoListRelationFilter
 }
 
@@ -351,6 +352,7 @@ export type SysUsuarioOrderByWithRelationInput = {
   sys_arquivos_criados?: Prisma.SysArquivoOrderByRelationAggregateInput
   vnd_pedidos?: Prisma.VndPedidoOrderByRelationAggregateInput
   soc_socios?: Prisma.SocSocioOrderByRelationAggregateInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioOrderByRelationAggregateInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoOrderByRelationAggregateInput
   _relevance?: Prisma.SysUsuarioOrderByRelevanceInput
 }
@@ -384,6 +386,7 @@ export type SysUsuarioWhereUniqueInput = Prisma.AtLeast<{
   sys_arquivos_criados?: Prisma.SysArquivoListRelationFilter
   vnd_pedidos?: Prisma.VndPedidoListRelationFilter
   soc_socios?: Prisma.SocSocioListRelationFilter
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioListRelationFilter
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoListRelationFilter
 }, "id" | "nickname" | "email">
 
@@ -454,6 +457,7 @@ export type SysUsuarioCreateInput = {
   sys_arquivos_criados?: Prisma.SysArquivoCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -481,6 +485,7 @@ export type SysUsuarioUncheckedCreateInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioUncheckedCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -507,6 +512,7 @@ export type SysUsuarioUpdateInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -534,6 +540,7 @@ export type SysUsuarioUncheckedUpdateInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -854,6 +861,20 @@ export type SysUsuarioUncheckedUpdateManyWithoutAvatar_sys_arquivoNestedInput = 
   deleteMany?: Prisma.SysUsuarioScalarWhereInput | Prisma.SysUsuarioScalarWhereInput[]
 }
 
+export type SysUsuarioCreateNestedOneWithoutPar_parceiro_usuariosInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioCreateWithoutPar_parceiro_usuariosInput, Prisma.SysUsuarioUncheckedCreateWithoutPar_parceiro_usuariosInput>
+  connectOrCreate?: Prisma.SysUsuarioCreateOrConnectWithoutPar_parceiro_usuariosInput
+  connect?: Prisma.SysUsuarioWhereUniqueInput
+}
+
+export type SysUsuarioUpdateOneRequiredWithoutPar_parceiro_usuariosNestedInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioCreateWithoutPar_parceiro_usuariosInput, Prisma.SysUsuarioUncheckedCreateWithoutPar_parceiro_usuariosInput>
+  connectOrCreate?: Prisma.SysUsuarioCreateOrConnectWithoutPar_parceiro_usuariosInput
+  upsert?: Prisma.SysUsuarioUpsertWithoutPar_parceiro_usuariosInput
+  connect?: Prisma.SysUsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SysUsuarioUpdateToOneWithWhereWithoutPar_parceiro_usuariosInput, Prisma.SysUsuarioUpdateWithoutPar_parceiro_usuariosInput>, Prisma.SysUsuarioUncheckedUpdateWithoutPar_parceiro_usuariosInput>
+}
+
 export type SysUsuarioCreateNestedOneWithoutSoc_sociosInput = {
   create?: Prisma.XOR<Prisma.SysUsuarioCreateWithoutSoc_sociosInput, Prisma.SysUsuarioUncheckedCreateWithoutSoc_sociosInput>
   connectOrCreate?: Prisma.SysUsuarioCreateOrConnectWithoutSoc_sociosInput
@@ -938,6 +959,7 @@ export type SysUsuarioCreateWithoutSys_usuario_tipoInput = {
   sys_arquivos_criados?: Prisma.SysArquivoCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -964,6 +986,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_usuario_tipoInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioUncheckedCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -1036,6 +1059,7 @@ export type SysUsuarioCreateWithoutSys_auth_userInput = {
   sys_arquivos_criados?: Prisma.SysArquivoCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -1062,6 +1086,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_auth_userInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioUncheckedCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -1103,6 +1128,7 @@ export type SysUsuarioUpdateWithoutSys_auth_userInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -1129,6 +1155,7 @@ export type SysUsuarioUncheckedUpdateWithoutSys_auth_userInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -1154,6 +1181,7 @@ export type SysUsuarioCreateWithoutSys_auth_login_logsInput = {
   sys_arquivos_criados?: Prisma.SysArquivoCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -1180,6 +1208,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_auth_login_logsInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioUncheckedCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -1221,6 +1250,7 @@ export type SysUsuarioUpdateWithoutSys_auth_login_logsInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -1247,6 +1277,7 @@ export type SysUsuarioUncheckedUpdateWithoutSys_auth_login_logsInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -1272,6 +1303,7 @@ export type SysUsuarioCreateWithoutSys_email_logsInput = {
   sys_arquivos_criados?: Prisma.SysArquivoCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -1298,6 +1330,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_email_logsInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioUncheckedCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -1339,6 +1372,7 @@ export type SysUsuarioUpdateWithoutSys_email_logsInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -1365,6 +1399,7 @@ export type SysUsuarioUncheckedUpdateWithoutSys_email_logsInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -1390,6 +1425,7 @@ export type SysUsuarioCreateWithoutSys_email_verification_codesInput = {
   sys_arquivos_criados?: Prisma.SysArquivoCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -1416,6 +1452,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_email_verification_codesInput = 
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioUncheckedCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -1457,6 +1494,7 @@ export type SysUsuarioUpdateWithoutSys_email_verification_codesInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -1483,6 +1521,7 @@ export type SysUsuarioUncheckedUpdateWithoutSys_email_verification_codesInput = 
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -1508,6 +1547,7 @@ export type SysUsuarioCreateWithoutSys_arquivos_criadosInput = {
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeCreateNestedManyWithoutSys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -1534,6 +1574,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_arquivos_criadosInput = {
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUncheckedCreateNestedManyWithoutSys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioUncheckedCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -1564,6 +1605,7 @@ export type SysUsuarioCreateWithoutAvatar_sys_arquivoInput = {
   sys_arquivos_criados?: Prisma.SysArquivoCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -1590,6 +1632,7 @@ export type SysUsuarioUncheckedCreateWithoutAvatar_sys_arquivoInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioUncheckedCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -1636,6 +1679,7 @@ export type SysUsuarioUpdateWithoutSys_arquivos_criadosInput = {
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -1662,6 +1706,7 @@ export type SysUsuarioUncheckedUpdateWithoutSys_arquivos_criadosInput = {
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUncheckedUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -1679,6 +1724,128 @@ export type SysUsuarioUpdateWithWhereUniqueWithoutAvatar_sys_arquivoInput = {
 export type SysUsuarioUpdateManyWithWhereWithoutAvatar_sys_arquivoInput = {
   where: Prisma.SysUsuarioScalarWhereInput
   data: Prisma.XOR<Prisma.SysUsuarioUpdateManyMutationInput, Prisma.SysUsuarioUncheckedUpdateManyWithoutAvatar_sys_arquivoInput>
+}
+
+export type SysUsuarioCreateWithoutPar_parceiro_usuariosInput = {
+  nome: string
+  nickname: string
+  email: string
+  telefone?: string | null
+  documento?: string | null
+  ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_usuario_tipo: Prisma.SysUsuarioTipoCreateNestedOneWithoutSys_usuariosInput
+  avatar_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutSys_usuarios_avatarInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
+  sys_auth_login_logs?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
+  sys_email_logs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
+  sys_email_verification_codes?: Prisma.SysEmailVerificationCodeCreateNestedManyWithoutSys_usuarioInput
+  sys_arquivos_criados?: Prisma.SysArquivoCreateNestedManyWithoutCreated_by_sys_usuarioInput
+  vnd_pedidos?: Prisma.VndPedidoCreateNestedManyWithoutSys_usuarioInput
+  soc_socios?: Prisma.SocSocioCreateNestedManyWithoutSys_usuarioInput
+  vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutSys_usuario_operadorInput
+}
+
+export type SysUsuarioUncheckedCreateWithoutPar_parceiro_usuariosInput = {
+  id?: number
+  sys_usuario_tipo_id: number
+  nome: string
+  nickname: string
+  email: string
+  telefone?: string | null
+  documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
+  sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_email_logs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_arquivos_criados?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutCreated_by_sys_usuarioInput
+  vnd_pedidos?: Prisma.VndPedidoUncheckedCreateNestedManyWithoutSys_usuarioInput
+  soc_socios?: Prisma.SocSocioUncheckedCreateNestedManyWithoutSys_usuarioInput
+  vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutSys_usuario_operadorInput
+}
+
+export type SysUsuarioCreateOrConnectWithoutPar_parceiro_usuariosInput = {
+  where: Prisma.SysUsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.SysUsuarioCreateWithoutPar_parceiro_usuariosInput, Prisma.SysUsuarioUncheckedCreateWithoutPar_parceiro_usuariosInput>
+}
+
+export type SysUsuarioUpsertWithoutPar_parceiro_usuariosInput = {
+  update: Prisma.XOR<Prisma.SysUsuarioUpdateWithoutPar_parceiro_usuariosInput, Prisma.SysUsuarioUncheckedUpdateWithoutPar_parceiro_usuariosInput>
+  create: Prisma.XOR<Prisma.SysUsuarioCreateWithoutPar_parceiro_usuariosInput, Prisma.SysUsuarioUncheckedCreateWithoutPar_parceiro_usuariosInput>
+  where?: Prisma.SysUsuarioWhereInput
+}
+
+export type SysUsuarioUpdateToOneWithWhereWithoutPar_parceiro_usuariosInput = {
+  where?: Prisma.SysUsuarioWhereInput
+  data: Prisma.XOR<Prisma.SysUsuarioUpdateWithoutPar_parceiro_usuariosInput, Prisma.SysUsuarioUncheckedUpdateWithoutPar_parceiro_usuariosInput>
+}
+
+export type SysUsuarioUpdateWithoutPar_parceiro_usuariosInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  nickname?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_usuario_tipo?: Prisma.SysUsuarioTipoUpdateOneRequiredWithoutSys_usuariosNestedInput
+  avatar_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutSys_usuarios_avatarNestedInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
+  sys_auth_login_logs?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
+  sys_email_logs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
+  sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUpdateManyWithoutSys_usuarioNestedInput
+  sys_arquivos_criados?: Prisma.SysArquivoUpdateManyWithoutCreated_by_sys_usuarioNestedInput
+  vnd_pedidos?: Prisma.VndPedidoUpdateManyWithoutSys_usuarioNestedInput
+  soc_socios?: Prisma.SocSocioUpdateManyWithoutSys_usuarioNestedInput
+  vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUpdateManyWithoutSys_usuario_operadorNestedInput
+}
+
+export type SysUsuarioUncheckedUpdateWithoutPar_parceiro_usuariosInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_usuario_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  nickname?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
+  sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_email_logs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_arquivos_criados?: Prisma.SysArquivoUncheckedUpdateManyWithoutCreated_by_sys_usuarioNestedInput
+  vnd_pedidos?: Prisma.VndPedidoUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  soc_socios?: Prisma.SocSocioUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
 export type SysUsuarioCreateWithoutSoc_sociosInput = {
@@ -1703,6 +1870,7 @@ export type SysUsuarioCreateWithoutSoc_sociosInput = {
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeCreateNestedManyWithoutSys_usuarioInput
   sys_arquivos_criados?: Prisma.SysArquivoCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -1729,6 +1897,7 @@ export type SysUsuarioUncheckedCreateWithoutSoc_sociosInput = {
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -1770,6 +1939,7 @@ export type SysUsuarioUpdateWithoutSoc_sociosInput = {
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUpdateManyWithoutSys_usuarioNestedInput
   sys_arquivos_criados?: Prisma.SysArquivoUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -1796,6 +1966,7 @@ export type SysUsuarioUncheckedUpdateWithoutSoc_sociosInput = {
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -1821,6 +1992,7 @@ export type SysUsuarioCreateWithoutVnd_pedidosInput = {
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeCreateNestedManyWithoutSys_usuarioInput
   sys_arquivos_criados?: Prisma.SysArquivoCreateNestedManyWithoutCreated_by_sys_usuarioInput
   soc_socios?: Prisma.SocSocioCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -1847,6 +2019,7 @@ export type SysUsuarioUncheckedCreateWithoutVnd_pedidosInput = {
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutCreated_by_sys_usuarioInput
   soc_socios?: Prisma.SocSocioUncheckedCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -1888,6 +2061,7 @@ export type SysUsuarioUpdateWithoutVnd_pedidosInput = {
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUpdateManyWithoutSys_usuarioNestedInput
   sys_arquivos_criados?: Prisma.SysArquivoUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -1914,6 +2088,7 @@ export type SysUsuarioUncheckedUpdateWithoutVnd_pedidosInput = {
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -1940,6 +2115,7 @@ export type SysUsuarioCreateWithoutVnd_pedido_historicos_operadosInput = {
   sys_arquivos_criados?: Prisma.SysArquivoCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioCreateNestedManyWithoutSys_usuarioInput
 }
 
 export type SysUsuarioUncheckedCreateWithoutVnd_pedido_historicos_operadosInput = {
@@ -1966,6 +2142,7 @@ export type SysUsuarioUncheckedCreateWithoutVnd_pedido_historicos_operadosInput 
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioUncheckedCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedCreateNestedManyWithoutSys_usuarioInput
 }
 
 export type SysUsuarioCreateOrConnectWithoutVnd_pedido_historicos_operadosInput = {
@@ -2007,6 +2184,7 @@ export type SysUsuarioUpdateWithoutVnd_pedido_historicos_operadosInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUpdateManyWithoutSys_usuarioNestedInput
 }
 
 export type SysUsuarioUncheckedUpdateWithoutVnd_pedido_historicos_operadosInput = {
@@ -2033,6 +2211,7 @@ export type SysUsuarioUncheckedUpdateWithoutVnd_pedido_historicos_operadosInput 
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutSys_usuarioNestedInput
 }
 
 export type SysUsuarioCreateWithoutSys_analytics_eventosInput = {
@@ -2057,6 +2236,7 @@ export type SysUsuarioCreateWithoutSys_analytics_eventosInput = {
   sys_arquivos_criados?: Prisma.SysArquivoCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -2083,6 +2263,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_analytics_eventosInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutCreated_by_sys_usuarioInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedCreateNestedManyWithoutSys_usuarioInput
   soc_socios?: Prisma.SocSocioUncheckedCreateNestedManyWithoutSys_usuarioInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedCreateNestedManyWithoutSys_usuarioInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutSys_usuario_operadorInput
 }
 
@@ -2124,6 +2305,7 @@ export type SysUsuarioUpdateWithoutSys_analytics_eventosInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -2150,6 +2332,7 @@ export type SysUsuarioUncheckedUpdateWithoutSys_analytics_eventosInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -2192,6 +2375,7 @@ export type SysUsuarioUpdateWithoutSys_usuario_tipoInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -2218,6 +2402,7 @@ export type SysUsuarioUncheckedUpdateWithoutSys_usuario_tipoInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -2277,6 +2462,7 @@ export type SysUsuarioUpdateWithoutAvatar_sys_arquivoInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -2303,6 +2489,7 @@ export type SysUsuarioUncheckedUpdateWithoutAvatar_sys_arquivoInput = {
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutSys_usuarioNestedInput
   vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
@@ -2336,6 +2523,7 @@ export type SysUsuarioCountOutputType = {
   sys_arquivos_criados: number
   vnd_pedidos: number
   soc_socios: number
+  par_parceiro_usuarios: number
   vnd_pedido_historicos_operados: number
 }
 
@@ -2347,6 +2535,7 @@ export type SysUsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   sys_arquivos_criados?: boolean | SysUsuarioCountOutputTypeCountSys_arquivos_criadosArgs
   vnd_pedidos?: boolean | SysUsuarioCountOutputTypeCountVnd_pedidosArgs
   soc_socios?: boolean | SysUsuarioCountOutputTypeCountSoc_sociosArgs
+  par_parceiro_usuarios?: boolean | SysUsuarioCountOutputTypeCountPar_parceiro_usuariosArgs
   vnd_pedido_historicos_operados?: boolean | SysUsuarioCountOutputTypeCountVnd_pedido_historicos_operadosArgs
 }
 
@@ -2412,6 +2601,13 @@ export type SysUsuarioCountOutputTypeCountSoc_sociosArgs<ExtArgs extends runtime
 /**
  * SysUsuarioCountOutputType without action
  */
+export type SysUsuarioCountOutputTypeCountPar_parceiro_usuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ParParceiroUsuarioWhereInput
+}
+
+/**
+ * SysUsuarioCountOutputType without action
+ */
 export type SysUsuarioCountOutputTypeCountVnd_pedido_historicos_operadosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.VndPedidoHistoricoWhereInput
 }
@@ -2443,6 +2639,7 @@ export type SysUsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   sys_arquivos_criados?: boolean | Prisma.SysUsuario$sys_arquivos_criadosArgs<ExtArgs>
   vnd_pedidos?: boolean | Prisma.SysUsuario$vnd_pedidosArgs<ExtArgs>
   soc_socios?: boolean | Prisma.SysUsuario$soc_sociosArgs<ExtArgs>
+  par_parceiro_usuarios?: boolean | Prisma.SysUsuario$par_parceiro_usuariosArgs<ExtArgs>
   vnd_pedido_historicos_operados?: boolean | Prisma.SysUsuario$vnd_pedido_historicos_operadosArgs<ExtArgs>
   _count?: boolean | Prisma.SysUsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sysUsuario"]>
@@ -2479,6 +2676,7 @@ export type SysUsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   sys_arquivos_criados?: boolean | Prisma.SysUsuario$sys_arquivos_criadosArgs<ExtArgs>
   vnd_pedidos?: boolean | Prisma.SysUsuario$vnd_pedidosArgs<ExtArgs>
   soc_socios?: boolean | Prisma.SysUsuario$soc_sociosArgs<ExtArgs>
+  par_parceiro_usuarios?: boolean | Prisma.SysUsuario$par_parceiro_usuariosArgs<ExtArgs>
   vnd_pedido_historicos_operados?: boolean | Prisma.SysUsuario$vnd_pedido_historicos_operadosArgs<ExtArgs>
   _count?: boolean | Prisma.SysUsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -2496,6 +2694,7 @@ export type $SysUsuarioPayload<ExtArgs extends runtime.Types.Extensions.Internal
     sys_arquivos_criados: Prisma.$SysArquivoPayload<ExtArgs>[]
     vnd_pedidos: Prisma.$VndPedidoPayload<ExtArgs>[]
     soc_socios: Prisma.$SocSocioPayload<ExtArgs>[]
+    par_parceiro_usuarios: Prisma.$ParParceiroUsuarioPayload<ExtArgs>[]
     vnd_pedido_historicos_operados: Prisma.$VndPedidoHistoricoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -2864,6 +3063,7 @@ export interface Prisma__SysUsuarioClient<T, Null = never, ExtArgs extends runti
   sys_arquivos_criados<T extends Prisma.SysUsuario$sys_arquivos_criadosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$sys_arquivos_criadosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysArquivoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vnd_pedidos<T extends Prisma.SysUsuario$vnd_pedidosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$vnd_pedidosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VndPedidoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   soc_socios<T extends Prisma.SysUsuario$soc_sociosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$soc_sociosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SocSocioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  par_parceiro_usuarios<T extends Prisma.SysUsuario$par_parceiro_usuariosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$par_parceiro_usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ParParceiroUsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vnd_pedido_historicos_operados<T extends Prisma.SysUsuario$vnd_pedido_historicos_operadosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$vnd_pedido_historicos_operadosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VndPedidoHistoricoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3460,6 +3660,30 @@ export type SysUsuario$soc_sociosArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.SocSocioScalarFieldEnum | Prisma.SocSocioScalarFieldEnum[]
+}
+
+/**
+ * SysUsuario.par_parceiro_usuarios
+ */
+export type SysUsuario$par_parceiro_usuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ParParceiroUsuario
+   */
+  select?: Prisma.ParParceiroUsuarioSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ParParceiroUsuario
+   */
+  omit?: Prisma.ParParceiroUsuarioOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ParParceiroUsuarioInclude<ExtArgs> | null
+  where?: Prisma.ParParceiroUsuarioWhereInput
+  orderBy?: Prisma.ParParceiroUsuarioOrderByWithRelationInput | Prisma.ParParceiroUsuarioOrderByWithRelationInput[]
+  cursor?: Prisma.ParParceiroUsuarioWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ParParceiroUsuarioScalarFieldEnum | Prisma.ParParceiroUsuarioScalarFieldEnum[]
 }
 
 /**

@@ -58,7 +58,8 @@ model SysUsuario {
 
   vnd_pedidos VndPedido[]
 
-  soc_socios SocSocio[]
+  soc_socios            SocSocio[]
+  par_parceiro_usuarios ParParceiroUsuario[]
 
   vnd_pedido_historicos_operados VndPedidoHistorico[]
 
@@ -318,7 +319,10 @@ model SysArquivo {
 
   cad_eventos_banner CadEvento[] @relation("CadEventoBanner")
 
-  soc_planos_banner SocPlano[] @relation("SocPlanoBanner")
+  soc_planos_banner    SocPlano[]        @relation("SocPlanoBanner")
+  par_parceiros_logo   ParParceiroTema[] @relation("ParParceiroTemaLogo")
+  par_parceiros_banner ParParceiroTema[] @relation("ParParceiroTemaBanner")
+  crd_itens_imagem     CrdItem[]         @relation("CrdItemImagem")
 
   @@index([sys_arquivo_disco_id])
   @@index([sys_arquivo_visibilidade_id])
@@ -392,6 +396,153 @@ model CadEvento {
   @@index([banner_sys_arquivo_id])
   @@index([deleted_at])
   @@map("cad_evento")
+}
+
+// =========================================================
+// PAR — PARCEIROS
+// =========================================================
+
+model ParParceiro {
+  id Int @id @default(autoincrement())
+
+  codigo String @unique @db.VarChar(60)
+  slug   String @unique @db.VarChar(150)
+
+  nome      String  @db.VarChar(150)
+  descricao String? @db.Text
+
+  ativo           Int @default(1)
+  visivel_publico Int @default(1)
+
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+  deleted_at DateTime? @db.DateTime(0)
+
+  par_parceiro_usuarios ParParceiroUsuario[]
+  par_parceiro_tema     ParParceiroTema?
+  crd_categorias        CrdCategoria[]
+  crd_itens             CrdItem[]
+
+  @@index([ativo])
+  @@index([ativo, visivel_publico])
+  @@index([deleted_at])
+  @@map("par_parceiro")
+}
+
+model ParParceiroUsuario {
+  id Int @id @default(autoincrement())
+
+  par_parceiro_id Int
+  sys_usuario_id  Int
+
+  ativo Int @default(1)
+
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  par_parceiro ParParceiro @relation(fields: [par_parceiro_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  sys_usuario SysUsuario @relation(fields: [sys_usuario_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@unique([par_parceiro_id, sys_usuario_id])
+  @@index([par_parceiro_id, ativo])
+  @@index([sys_usuario_id, ativo])
+  @@map("par_parceiro_usuario")
+}
+
+model ParParceiroTema {
+  id Int @id @default(autoincrement())
+
+  par_parceiro_id Int @unique
+
+  logo_sys_arquivo_id   Int?
+  banner_sys_arquivo_id Int?
+
+  cor_primaria   String? @db.VarChar(20)
+  cor_secundaria String? @db.VarChar(20)
+  cor_fundo      String? @db.VarChar(20)
+  cor_texto      String? @db.VarChar(20)
+
+  ativo Int @default(1)
+
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  par_parceiro ParParceiro @relation(fields: [par_parceiro_id], references: [id], onDelete: Cascade, onUpdate: Restrict)
+
+  logo_sys_arquivo SysArquivo? @relation("ParParceiroTemaLogo", fields: [logo_sys_arquivo_id], references: [id], onDelete: SetNull, onUpdate: Restrict)
+
+  banner_sys_arquivo SysArquivo? @relation("ParParceiroTemaBanner", fields: [banner_sys_arquivo_id], references: [id], onDelete: SetNull, onUpdate: Restrict)
+
+  @@index([logo_sys_arquivo_id])
+  @@index([banner_sys_arquivo_id])
+  @@index([ativo])
+  @@map("par_parceiro_tema")
+}
+
+// =========================================================
+// CRD — CARDÁPIO
+// =========================================================
+
+model CrdCategoria {
+  id Int @id @default(autoincrement())
+
+  par_parceiro_id Int
+
+  nome      String  @db.VarChar(120)
+  descricao String? @db.VarChar(500)
+
+  ordem Int @default(0)
+  ativo Int @default(1)
+
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+  deleted_at DateTime? @db.DateTime(0)
+
+  par_parceiro ParParceiro @relation(fields: [par_parceiro_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  crd_itens CrdItem[]
+
+  @@index([par_parceiro_id])
+  @@index([par_parceiro_id, ativo])
+  @@index([par_parceiro_id, ordem])
+  @@index([deleted_at])
+  @@map("crd_categoria")
+}
+
+model CrdItem {
+  id Int @id @default(autoincrement())
+
+  par_parceiro_id       Int
+  crd_categoria_id      Int
+  imagem_sys_arquivo_id Int?
+
+  nome      String  @db.VarChar(150)
+  descricao String? @db.Text
+
+  preco Decimal @db.Decimal(10, 2)
+
+  ordem Int @default(0)
+  ativo Int @default(1)
+
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+  deleted_at DateTime? @db.DateTime(0)
+
+  par_parceiro ParParceiro @relation(fields: [par_parceiro_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  crd_categoria CrdCategoria @relation(fields: [crd_categoria_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  imagem_sys_arquivo SysArquivo? @relation("CrdItemImagem", fields: [imagem_sys_arquivo_id], references: [id], onDelete: SetNull, onUpdate: Restrict)
+
+  @@index([par_parceiro_id])
+  @@index([crd_categoria_id])
+  @@index([imagem_sys_arquivo_id])
+  @@index([par_parceiro_id, ativo])
+  @@index([par_parceiro_id, crd_categoria_id, ativo])
+  @@index([crd_categoria_id, ordem])
+  @@index([deleted_at])
+  @@map("crd_item")
 }
 
 // =========================================================

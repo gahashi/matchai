@@ -412,6 +412,11 @@ export const ModelName = {
   SysArquivo: 'SysArquivo',
   CadLink: 'CadLink',
   CadEvento: 'CadEvento',
+  ParParceiro: 'ParParceiro',
+  ParParceiroUsuario: 'ParParceiroUsuario',
+  ParParceiroTema: 'ParParceiroTema',
+  CrdCategoria: 'CrdCategoria',
+  CrdItem: 'CrdItem',
   PrdProdutoTipo: 'PrdProdutoTipo',
   PrdProduto: 'PrdProduto',
   PrdProdutoImagem: 'PrdProdutoImagem',
@@ -452,7 +457,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "sysUsuarioTipo" | "sysUsuario" | "user" | "session" | "account" | "verification" | "sysAuthLoginLog" | "sysEmailLog" | "sysEmailVerificationCode" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivo" | "cadLink" | "cadEvento" | "prdProdutoTipo" | "prdProduto" | "prdProdutoImagem" | "prdProdutoVariacao" | "prdProdutoComponente" | "prdProdutoCampo" | "vndCampanhaStatus" | "vndCampanha" | "vndCampanhaProduto" | "socSocioStatus" | "socSocioOrigem" | "socPlano" | "socSocio" | "vndPedidoStatus" | "vndEntregaTipo" | "vndPedido" | "vndPedidoItem" | "vndPedidoItemComponente" | "vndPedidoItemCampo" | "vndEstoqueReserva" | "vndPedidoHistorico" | "finPagamentoStatus" | "finPagamentoMetodo" | "finPagamento" | "sysAnalyticsEvento"
+    modelProps: "sysUsuarioTipo" | "sysUsuario" | "user" | "session" | "account" | "verification" | "sysAuthLoginLog" | "sysEmailLog" | "sysEmailVerificationCode" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivo" | "cadLink" | "cadEvento" | "parParceiro" | "parParceiroUsuario" | "parParceiroTema" | "crdCategoria" | "crdItem" | "prdProdutoTipo" | "prdProduto" | "prdProdutoImagem" | "prdProdutoVariacao" | "prdProdutoComponente" | "prdProdutoCampo" | "vndCampanhaStatus" | "vndCampanha" | "vndCampanhaProduto" | "socSocioStatus" | "socSocioOrigem" | "socPlano" | "socSocio" | "vndPedidoStatus" | "vndEntregaTipo" | "vndPedido" | "vndPedidoItem" | "vndPedidoItemComponente" | "vndPedidoItemCampo" | "vndEstoqueReserva" | "vndPedidoHistorico" | "finPagamentoStatus" | "finPagamentoMetodo" | "finPagamento" | "sysAnalyticsEvento"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1443,6 +1448,336 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CadEventoCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CadEventoCountAggregateOutputType> | number
+        }
+      }
+    }
+    ParParceiro: {
+      payload: Prisma.$ParParceiroPayload<ExtArgs>
+      fields: Prisma.ParParceiroFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ParParceiroFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ParParceiroFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroPayload>
+        }
+        findFirst: {
+          args: Prisma.ParParceiroFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ParParceiroFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroPayload>
+        }
+        findMany: {
+          args: Prisma.ParParceiroFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroPayload>[]
+        }
+        create: {
+          args: Prisma.ParParceiroCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroPayload>
+        }
+        createMany: {
+          args: Prisma.ParParceiroCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.ParParceiroDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroPayload>
+        }
+        update: {
+          args: Prisma.ParParceiroUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroPayload>
+        }
+        deleteMany: {
+          args: Prisma.ParParceiroDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ParParceiroUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.ParParceiroUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroPayload>
+        }
+        aggregate: {
+          args: Prisma.ParParceiroAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateParParceiro>
+        }
+        groupBy: {
+          args: Prisma.ParParceiroGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ParParceiroGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ParParceiroCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ParParceiroCountAggregateOutputType> | number
+        }
+      }
+    }
+    ParParceiroUsuario: {
+      payload: Prisma.$ParParceiroUsuarioPayload<ExtArgs>
+      fields: Prisma.ParParceiroUsuarioFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ParParceiroUsuarioFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ParParceiroUsuarioFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioPayload>
+        }
+        findFirst: {
+          args: Prisma.ParParceiroUsuarioFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ParParceiroUsuarioFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioPayload>
+        }
+        findMany: {
+          args: Prisma.ParParceiroUsuarioFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioPayload>[]
+        }
+        create: {
+          args: Prisma.ParParceiroUsuarioCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioPayload>
+        }
+        createMany: {
+          args: Prisma.ParParceiroUsuarioCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.ParParceiroUsuarioDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioPayload>
+        }
+        update: {
+          args: Prisma.ParParceiroUsuarioUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioPayload>
+        }
+        deleteMany: {
+          args: Prisma.ParParceiroUsuarioDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ParParceiroUsuarioUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.ParParceiroUsuarioUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroUsuarioPayload>
+        }
+        aggregate: {
+          args: Prisma.ParParceiroUsuarioAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateParParceiroUsuario>
+        }
+        groupBy: {
+          args: Prisma.ParParceiroUsuarioGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ParParceiroUsuarioGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ParParceiroUsuarioCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ParParceiroUsuarioCountAggregateOutputType> | number
+        }
+      }
+    }
+    ParParceiroTema: {
+      payload: Prisma.$ParParceiroTemaPayload<ExtArgs>
+      fields: Prisma.ParParceiroTemaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ParParceiroTemaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroTemaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ParParceiroTemaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroTemaPayload>
+        }
+        findFirst: {
+          args: Prisma.ParParceiroTemaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroTemaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ParParceiroTemaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroTemaPayload>
+        }
+        findMany: {
+          args: Prisma.ParParceiroTemaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroTemaPayload>[]
+        }
+        create: {
+          args: Prisma.ParParceiroTemaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroTemaPayload>
+        }
+        createMany: {
+          args: Prisma.ParParceiroTemaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.ParParceiroTemaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroTemaPayload>
+        }
+        update: {
+          args: Prisma.ParParceiroTemaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroTemaPayload>
+        }
+        deleteMany: {
+          args: Prisma.ParParceiroTemaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ParParceiroTemaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.ParParceiroTemaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ParParceiroTemaPayload>
+        }
+        aggregate: {
+          args: Prisma.ParParceiroTemaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateParParceiroTema>
+        }
+        groupBy: {
+          args: Prisma.ParParceiroTemaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ParParceiroTemaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ParParceiroTemaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ParParceiroTemaCountAggregateOutputType> | number
+        }
+      }
+    }
+    CrdCategoria: {
+      payload: Prisma.$CrdCategoriaPayload<ExtArgs>
+      fields: Prisma.CrdCategoriaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CrdCategoriaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdCategoriaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CrdCategoriaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdCategoriaPayload>
+        }
+        findFirst: {
+          args: Prisma.CrdCategoriaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdCategoriaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CrdCategoriaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdCategoriaPayload>
+        }
+        findMany: {
+          args: Prisma.CrdCategoriaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdCategoriaPayload>[]
+        }
+        create: {
+          args: Prisma.CrdCategoriaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdCategoriaPayload>
+        }
+        createMany: {
+          args: Prisma.CrdCategoriaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CrdCategoriaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdCategoriaPayload>
+        }
+        update: {
+          args: Prisma.CrdCategoriaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdCategoriaPayload>
+        }
+        deleteMany: {
+          args: Prisma.CrdCategoriaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CrdCategoriaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CrdCategoriaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdCategoriaPayload>
+        }
+        aggregate: {
+          args: Prisma.CrdCategoriaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCrdCategoria>
+        }
+        groupBy: {
+          args: Prisma.CrdCategoriaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CrdCategoriaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CrdCategoriaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CrdCategoriaCountAggregateOutputType> | number
+        }
+      }
+    }
+    CrdItem: {
+      payload: Prisma.$CrdItemPayload<ExtArgs>
+      fields: Prisma.CrdItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CrdItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CrdItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdItemPayload>
+        }
+        findFirst: {
+          args: Prisma.CrdItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CrdItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdItemPayload>
+        }
+        findMany: {
+          args: Prisma.CrdItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdItemPayload>[]
+        }
+        create: {
+          args: Prisma.CrdItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdItemPayload>
+        }
+        createMany: {
+          args: Prisma.CrdItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CrdItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdItemPayload>
+        }
+        update: {
+          args: Prisma.CrdItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.CrdItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CrdItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CrdItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdItemPayload>
+        }
+        aggregate: {
+          args: Prisma.CrdItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCrdItem>
+        }
+        groupBy: {
+          args: Prisma.CrdItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CrdItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CrdItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CrdItemCountAggregateOutputType> | number
         }
       }
     }
@@ -3380,6 +3715,84 @@ export const CadEventoScalarFieldEnum = {
 export type CadEventoScalarFieldEnum = (typeof CadEventoScalarFieldEnum)[keyof typeof CadEventoScalarFieldEnum]
 
 
+export const ParParceiroScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  slug: 'slug',
+  nome: 'nome',
+  descricao: 'descricao',
+  ativo: 'ativo',
+  visivel_publico: 'visivel_publico',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type ParParceiroScalarFieldEnum = (typeof ParParceiroScalarFieldEnum)[keyof typeof ParParceiroScalarFieldEnum]
+
+
+export const ParParceiroUsuarioScalarFieldEnum = {
+  id: 'id',
+  par_parceiro_id: 'par_parceiro_id',
+  sys_usuario_id: 'sys_usuario_id',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ParParceiroUsuarioScalarFieldEnum = (typeof ParParceiroUsuarioScalarFieldEnum)[keyof typeof ParParceiroUsuarioScalarFieldEnum]
+
+
+export const ParParceiroTemaScalarFieldEnum = {
+  id: 'id',
+  par_parceiro_id: 'par_parceiro_id',
+  logo_sys_arquivo_id: 'logo_sys_arquivo_id',
+  banner_sys_arquivo_id: 'banner_sys_arquivo_id',
+  cor_primaria: 'cor_primaria',
+  cor_secundaria: 'cor_secundaria',
+  cor_fundo: 'cor_fundo',
+  cor_texto: 'cor_texto',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ParParceiroTemaScalarFieldEnum = (typeof ParParceiroTemaScalarFieldEnum)[keyof typeof ParParceiroTemaScalarFieldEnum]
+
+
+export const CrdCategoriaScalarFieldEnum = {
+  id: 'id',
+  par_parceiro_id: 'par_parceiro_id',
+  nome: 'nome',
+  descricao: 'descricao',
+  ordem: 'ordem',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type CrdCategoriaScalarFieldEnum = (typeof CrdCategoriaScalarFieldEnum)[keyof typeof CrdCategoriaScalarFieldEnum]
+
+
+export const CrdItemScalarFieldEnum = {
+  id: 'id',
+  par_parceiro_id: 'par_parceiro_id',
+  crd_categoria_id: 'crd_categoria_id',
+  imagem_sys_arquivo_id: 'imagem_sys_arquivo_id',
+  nome: 'nome',
+  descricao: 'descricao',
+  preco: 'preco',
+  ordem: 'ordem',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type CrdItemScalarFieldEnum = (typeof CrdItemScalarFieldEnum)[keyof typeof CrdItemScalarFieldEnum]
+
+
 export const PrdProdutoTipoScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
@@ -3982,6 +4395,42 @@ export const CadEventoOrderByRelevanceFieldEnum = {
 export type CadEventoOrderByRelevanceFieldEnum = (typeof CadEventoOrderByRelevanceFieldEnum)[keyof typeof CadEventoOrderByRelevanceFieldEnum]
 
 
+export const ParParceiroOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  slug: 'slug',
+  nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type ParParceiroOrderByRelevanceFieldEnum = (typeof ParParceiroOrderByRelevanceFieldEnum)[keyof typeof ParParceiroOrderByRelevanceFieldEnum]
+
+
+export const ParParceiroTemaOrderByRelevanceFieldEnum = {
+  cor_primaria: 'cor_primaria',
+  cor_secundaria: 'cor_secundaria',
+  cor_fundo: 'cor_fundo',
+  cor_texto: 'cor_texto'
+} as const
+
+export type ParParceiroTemaOrderByRelevanceFieldEnum = (typeof ParParceiroTemaOrderByRelevanceFieldEnum)[keyof typeof ParParceiroTemaOrderByRelevanceFieldEnum]
+
+
+export const CrdCategoriaOrderByRelevanceFieldEnum = {
+  nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type CrdCategoriaOrderByRelevanceFieldEnum = (typeof CrdCategoriaOrderByRelevanceFieldEnum)[keyof typeof CrdCategoriaOrderByRelevanceFieldEnum]
+
+
+export const CrdItemOrderByRelevanceFieldEnum = {
+  nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type CrdItemOrderByRelevanceFieldEnum = (typeof CrdItemOrderByRelevanceFieldEnum)[keyof typeof CrdItemOrderByRelevanceFieldEnum]
+
+
 export const PrdProdutoTipoOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   nome: 'nome',
@@ -4411,6 +4860,11 @@ export type GlobalOmitConfig = {
   sysArquivo?: Prisma.SysArquivoOmit
   cadLink?: Prisma.CadLinkOmit
   cadEvento?: Prisma.CadEventoOmit
+  parParceiro?: Prisma.ParParceiroOmit
+  parParceiroUsuario?: Prisma.ParParceiroUsuarioOmit
+  parParceiroTema?: Prisma.ParParceiroTemaOmit
+  crdCategoria?: Prisma.CrdCategoriaOmit
+  crdItem?: Prisma.CrdItemOmit
   prdProdutoTipo?: Prisma.PrdProdutoTipoOmit
   prdProduto?: Prisma.PrdProdutoOmit
   prdProdutoImagem?: Prisma.PrdProdutoImagemOmit

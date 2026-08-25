@@ -1,6 +1,8 @@
 import {
     BarChart3,
     CalendarDays,
+    Building2,
+
     CircleDollarSign,
     CreditCard,
     Eye,
@@ -73,6 +75,13 @@ const adminOptions = [
             "Consulte e gerencie os sócios e suas associações.",
         href: "/admin/socios",
         icon: UsersRound,
+    },
+    {
+        title: "Parceiros",
+        description:
+            "Gerencie estabelecimentos parceiros, responsáveis e identidade visual.",
+        href: "/admin/parceiros",
+        icon: Building2,
     },
 ];
 

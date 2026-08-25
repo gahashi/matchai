@@ -242,7 +242,11 @@
 
 @media (max-width: 720px) {
     .bp-modal-backdrop {
-        padding: 10px;
+        padding:
+                10px
+                10px
+                calc(88px + env(safe-area-inset-bottom))
+                10px;
     }
 
     .bp-modal-xl,
@@ -250,7 +254,12 @@
     .bp-modal-md,
     .bp-modal-sm {
         width: 100%;
-        max-height: calc(100vh - 20px);
+        max-height:
+                calc(
+                        100dvh -
+                        108px -
+                        env(safe-area-inset-bottom)
+                );
     }
 
     .bp-product-grid,

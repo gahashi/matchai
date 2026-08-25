@@ -58,6 +58,12 @@ export const publicNavigationItems: NavigationItem[] = [
 ];
 
 export const adminNavigationItems: NavigationItem[] = [
+
+    {
+        label: "Inicio",
+        href: "/admin",
+        icon: Home,
+    },
     {
         label: "Produtos",
         href: "/admin/produtos",

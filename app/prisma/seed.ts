@@ -148,6 +148,21 @@ async function main() {
         ativo: 1,
     });
 
+    await upsertByCodigo(prisma.sysArquivoTipo, "parceiro_logo", {
+        nome: "Logo de parceiro",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoTipo, "parceiro_banner", {
+        nome: "Banner de parceiro",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoTipo, "cardapio_item_imagem", {
+        nome: "Imagem de item do cardápio",
+        ativo: 1,
+    });
+
     // =====================================================
     // PRD — TIPOS DE PRODUTO
     // =====================================================

@@ -1,0 +1,454 @@
+.bp-cardapio-public {
+    --cardapio-primary: #9cd91a;
+    --cardapio-secondary: #f5f2e8;
+    --cardapio-background: #141414;
+    --cardapio-text: #f5f2e8;
+
+    min-height: 100dvh;
+
+    background:
+            radial-gradient(
+                    circle at top right,
+                    color-mix(
+                            in srgb,
+                            var(--cardapio-primary) 10%,
+                            transparent
+                    ),
+                    transparent 32rem
+            ),
+            var(--cardapio-background);
+
+    color: var(--cardapio-text);
+}
+
+.bp-cardapio-container {
+    width: min(
+            1120px,
+            calc(100% - 32px)
+    );
+    margin-inline: auto;
+}
+
+
+/* HERO */
+
+.bp-cardapio-hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    align-items: flex-end;
+    border-bottom:
+            1px solid
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 12%,
+                    transparent
+            );
+}
+
+.bp-cardapio-hero-banner {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bp-cardapio-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+            linear-gradient(
+                    90deg,
+                    var(--cardapio-background) 4%,
+                    color-mix(
+                            in srgb,
+                            var(--cardapio-background) 88%,
+                            transparent
+                    ) 48%,
+                    color-mix(
+                            in srgb,
+                            var(--cardapio-background) 58%,
+                            transparent
+                    )
+            ),
+            linear-gradient(
+                    0deg,
+                    var(--cardapio-background),
+                    transparent 75%
+            );
+}
+
+.bp-cardapio-hero-content {
+    position: relative;
+    z-index: 1;
+    padding-block: 56px 40px;
+}
+
+.bp-cardapio-brand {
+    max-width: 760px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.bp-cardapio-logo {
+    width: 92px;
+    height: 92px;
+    flex: 0 0 92px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 24px;
+    border:
+            2px solid
+            color-mix(
+                    in srgb,
+                    var(--cardapio-secondary) 55%,
+                    transparent
+            );
+    background: var(--cardapio-primary);
+    color: var(--cardapio-background);
+    box-shadow:
+            0 18px 55px
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 16%,
+                    transparent
+            );
+}
+
+.bp-cardapio-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.bp-cardapio-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--cardapio-primary);
+    font-size: 12px;
+    font-weight: 850;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.bp-cardapio-brand h1 {
+    margin: 7px 0 0;
+    font-size:
+            clamp(
+                    30px,
+                    6vw,
+                    48px
+            );
+    line-height: 1;
+    letter-spacing: -0.045em;
+}
+
+.bp-cardapio-brand p {
+    max-width: 650px;
+    margin: 12px 0 0;
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 72%,
+                    transparent
+            );
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+
+/* CONTEÚDO */
+
+.bp-cardapio-content {
+    padding-block: 42px 64px;
+}
+
+.bp-cardapio-category +
+.bp-cardapio-category {
+    margin-top: 52px;
+}
+
+.bp-cardapio-category-head {
+    margin-bottom: 18px;
+}
+
+.bp-cardapio-category-head h2 {
+    margin: 7px 0 0;
+    font-size:
+            clamp(
+                    23px,
+                    3vw,
+                    30px
+            );
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+}
+
+.bp-cardapio-category-head p {
+    max-width: 680px;
+    margin: 8px 0 0;
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 65%,
+                    transparent
+            );
+    line-height: 1.55;
+}
+
+.bp-cardapio-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+    gap: 14px;
+}
+
+
+/* ITEM */
+
+.bp-cardapio-item {
+    min-width: 0;
+    display: grid;
+    grid-template-columns:
+        112px minmax(0, 1fr);
+    overflow: hidden;
+    border-radius: 18px;
+    border:
+            1px solid
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 11%,
+                    transparent
+            );
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 4%,
+                    var(--cardapio-background)
+            );
+}
+
+.bp-cardapio-item-image {
+    min-height: 112px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 8%,
+                    var(--cardapio-background)
+            );
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 65%,
+                    var(--cardapio-text)
+            );
+}
+
+.bp-cardapio-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bp-cardapio-item-body {
+    min-width: 0;
+    padding: 16px;
+}
+
+.bp-cardapio-item-title {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.bp-cardapio-item-title h3 {
+    min-width: 0;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.25;
+}
+
+.bp-cardapio-item-title strong {
+    flex: 0 0 auto;
+    color: var(--cardapio-primary);
+    font-size: 16px;
+}
+
+.bp-cardapio-item-body p {
+    margin: 8px 0 0;
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 65%,
+                    transparent
+            );
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* EMPTY */
+
+.bp-cardapio-empty {
+    min-height: 280px;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 9px;
+    text-align: center;
+    border-radius: 22px;
+    border:
+            1px dashed
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 18%,
+                    transparent
+            );
+}
+
+.bp-cardapio-empty svg {
+    color: var(--cardapio-primary);
+}
+
+.bp-cardapio-empty span {
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 60%,
+                    transparent
+            );
+    font-size: 13px;
+}
+
+
+/* FOOTER */
+
+.bp-cardapio-footer {
+    border-top:
+            1px solid
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 10%,
+                    transparent
+            );
+}
+
+.bp-cardapio-footer .bp-cardapio-container {
+    min-height: 86px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.bp-cardapio-footer span {
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 55%,
+                    transparent
+            );
+    font-size: 12px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 720px) {
+    .bp-cardapio-container {
+        width:
+                min(
+                        100% - 24px,
+                        1120px
+                );
+    }
+
+    .bp-cardapio-hero {
+        min-height: 250px;
+    }
+
+    .bp-cardapio-hero-content {
+        padding-block:
+                38px 28px;
+    }
+
+    .bp-cardapio-brand {
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .bp-cardapio-logo {
+        width: 68px;
+        height: 68px;
+        flex-basis: 68px;
+        border-radius: 18px;
+    }
+
+    .bp-cardapio-brand h1 {
+        font-size: 28px;
+    }
+
+    .bp-cardapio-brand p {
+        font-size: 13px;
+    }
+
+    .bp-cardapio-content {
+        padding-block:
+                30px 48px;
+    }
+
+    .bp-cardapio-category +
+    .bp-cardapio-category {
+        margin-top: 38px;
+    }
+
+    .bp-cardapio-grid {
+        grid-template-columns:
+            1fr;
+        gap: 10px;
+    }
+
+    .bp-cardapio-item {
+        grid-template-columns:
+            88px minmax(0, 1fr);
+        border-radius: 15px;
+    }
+
+    .bp-cardapio-item-image {
+        min-height: 96px;
+    }
+
+    .bp-cardapio-item-body {
+        padding: 13px;
+    }
+
+    .bp-cardapio-item-title {
+        gap: 10px;
+    }
+
+    .bp-cardapio-item-title h3,
+    .bp-cardapio-item-title strong {
+        font-size: 14px;
+    }
+
+    .bp-cardapio-item-body p {
+        font-size: 12px;
+    }
+
+    .bp-cardapio-footer
+    .bp-cardapio-container {
+        min-height: 72px;
+    }
+}

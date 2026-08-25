@@ -332,6 +332,9 @@ export type SysArquivoWhereInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemListRelationFilter
   cad_eventos_banner?: Prisma.CadEventoListRelationFilter
   soc_planos_banner?: Prisma.SocPlanoListRelationFilter
+  par_parceiros_logo?: Prisma.ParParceiroTemaListRelationFilter
+  par_parceiros_banner?: Prisma.ParParceiroTemaListRelationFilter
+  crd_itens_imagem?: Prisma.CrdItemListRelationFilter
 }
 
 export type SysArquivoOrderByWithRelationInput = {
@@ -359,6 +362,9 @@ export type SysArquivoOrderByWithRelationInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemOrderByRelationAggregateInput
   cad_eventos_banner?: Prisma.CadEventoOrderByRelationAggregateInput
   soc_planos_banner?: Prisma.SocPlanoOrderByRelationAggregateInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaOrderByRelationAggregateInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaOrderByRelationAggregateInput
+  crd_itens_imagem?: Prisma.CrdItemOrderByRelationAggregateInput
   _relevance?: Prisma.SysArquivoOrderByRelevanceInput
 }
 
@@ -390,6 +396,9 @@ export type SysArquivoWhereUniqueInput = Prisma.AtLeast<{
   prd_produto_imagens?: Prisma.PrdProdutoImagemListRelationFilter
   cad_eventos_banner?: Prisma.CadEventoListRelationFilter
   soc_planos_banner?: Prisma.SocPlanoListRelationFilter
+  par_parceiros_logo?: Prisma.ParParceiroTemaListRelationFilter
+  par_parceiros_banner?: Prisma.ParParceiroTemaListRelationFilter
+  crd_itens_imagem?: Prisma.CrdItemListRelationFilter
 }, "id">
 
 export type SysArquivoOrderByWithAggregationInput = {
@@ -458,6 +467,9 @@ export type SysArquivoCreateInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemCreateNestedManyWithoutSys_arquivoInput
   cad_eventos_banner?: Prisma.CadEventoCreateNestedManyWithoutBanner_sys_arquivoInput
   soc_planos_banner?: Prisma.SocPlanoCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateInput = {
@@ -481,6 +493,9 @@ export type SysArquivoUncheckedCreateInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedCreateNestedManyWithoutSys_arquivoInput
   cad_eventos_banner?: Prisma.CadEventoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   soc_planos_banner?: Prisma.SocPlanoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoUpdateInput = {
@@ -503,6 +518,9 @@ export type SysArquivoUpdateInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUpdateManyWithoutSys_arquivoNestedInput
   cad_eventos_banner?: Prisma.CadEventoUpdateManyWithoutBanner_sys_arquivoNestedInput
   soc_planos_banner?: Prisma.SocPlanoUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateInput = {
@@ -526,6 +544,9 @@ export type SysArquivoUncheckedUpdateInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedUpdateManyWithoutSys_arquivoNestedInput
   cad_eventos_banner?: Prisma.CadEventoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   soc_planos_banner?: Prisma.SocPlanoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoCreateManyInput = {
@@ -881,6 +902,54 @@ export type SysArquivoUpdateOneWithoutCad_eventos_bannerNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SysArquivoUpdateToOneWithWhereWithoutCad_eventos_bannerInput, Prisma.SysArquivoUpdateWithoutCad_eventos_bannerInput>, Prisma.SysArquivoUncheckedUpdateWithoutCad_eventos_bannerInput>
 }
 
+export type SysArquivoCreateNestedOneWithoutPar_parceiros_logoInput = {
+  create?: Prisma.XOR<Prisma.SysArquivoCreateWithoutPar_parceiros_logoInput, Prisma.SysArquivoUncheckedCreateWithoutPar_parceiros_logoInput>
+  connectOrCreate?: Prisma.SysArquivoCreateOrConnectWithoutPar_parceiros_logoInput
+  connect?: Prisma.SysArquivoWhereUniqueInput
+}
+
+export type SysArquivoCreateNestedOneWithoutPar_parceiros_bannerInput = {
+  create?: Prisma.XOR<Prisma.SysArquivoCreateWithoutPar_parceiros_bannerInput, Prisma.SysArquivoUncheckedCreateWithoutPar_parceiros_bannerInput>
+  connectOrCreate?: Prisma.SysArquivoCreateOrConnectWithoutPar_parceiros_bannerInput
+  connect?: Prisma.SysArquivoWhereUniqueInput
+}
+
+export type SysArquivoUpdateOneWithoutPar_parceiros_logoNestedInput = {
+  create?: Prisma.XOR<Prisma.SysArquivoCreateWithoutPar_parceiros_logoInput, Prisma.SysArquivoUncheckedCreateWithoutPar_parceiros_logoInput>
+  connectOrCreate?: Prisma.SysArquivoCreateOrConnectWithoutPar_parceiros_logoInput
+  upsert?: Prisma.SysArquivoUpsertWithoutPar_parceiros_logoInput
+  disconnect?: Prisma.SysArquivoWhereInput | boolean
+  delete?: Prisma.SysArquivoWhereInput | boolean
+  connect?: Prisma.SysArquivoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SysArquivoUpdateToOneWithWhereWithoutPar_parceiros_logoInput, Prisma.SysArquivoUpdateWithoutPar_parceiros_logoInput>, Prisma.SysArquivoUncheckedUpdateWithoutPar_parceiros_logoInput>
+}
+
+export type SysArquivoUpdateOneWithoutPar_parceiros_bannerNestedInput = {
+  create?: Prisma.XOR<Prisma.SysArquivoCreateWithoutPar_parceiros_bannerInput, Prisma.SysArquivoUncheckedCreateWithoutPar_parceiros_bannerInput>
+  connectOrCreate?: Prisma.SysArquivoCreateOrConnectWithoutPar_parceiros_bannerInput
+  upsert?: Prisma.SysArquivoUpsertWithoutPar_parceiros_bannerInput
+  disconnect?: Prisma.SysArquivoWhereInput | boolean
+  delete?: Prisma.SysArquivoWhereInput | boolean
+  connect?: Prisma.SysArquivoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SysArquivoUpdateToOneWithWhereWithoutPar_parceiros_bannerInput, Prisma.SysArquivoUpdateWithoutPar_parceiros_bannerInput>, Prisma.SysArquivoUncheckedUpdateWithoutPar_parceiros_bannerInput>
+}
+
+export type SysArquivoCreateNestedOneWithoutCrd_itens_imagemInput = {
+  create?: Prisma.XOR<Prisma.SysArquivoCreateWithoutCrd_itens_imagemInput, Prisma.SysArquivoUncheckedCreateWithoutCrd_itens_imagemInput>
+  connectOrCreate?: Prisma.SysArquivoCreateOrConnectWithoutCrd_itens_imagemInput
+  connect?: Prisma.SysArquivoWhereUniqueInput
+}
+
+export type SysArquivoUpdateOneWithoutCrd_itens_imagemNestedInput = {
+  create?: Prisma.XOR<Prisma.SysArquivoCreateWithoutCrd_itens_imagemInput, Prisma.SysArquivoUncheckedCreateWithoutCrd_itens_imagemInput>
+  connectOrCreate?: Prisma.SysArquivoCreateOrConnectWithoutCrd_itens_imagemInput
+  upsert?: Prisma.SysArquivoUpsertWithoutCrd_itens_imagemInput
+  disconnect?: Prisma.SysArquivoWhereInput | boolean
+  delete?: Prisma.SysArquivoWhereInput | boolean
+  connect?: Prisma.SysArquivoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SysArquivoUpdateToOneWithWhereWithoutCrd_itens_imagemInput, Prisma.SysArquivoUpdateWithoutCrd_itens_imagemInput>, Prisma.SysArquivoUncheckedUpdateWithoutCrd_itens_imagemInput>
+}
+
 export type SysArquivoCreateNestedOneWithoutPrd_produto_imagensInput = {
   create?: Prisma.XOR<Prisma.SysArquivoCreateWithoutPrd_produto_imagensInput, Prisma.SysArquivoUncheckedCreateWithoutPrd_produto_imagensInput>
   connectOrCreate?: Prisma.SysArquivoCreateOrConnectWithoutPrd_produto_imagensInput
@@ -930,6 +999,9 @@ export type SysArquivoCreateWithoutSys_usuarios_avatarInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemCreateNestedManyWithoutSys_arquivoInput
   cad_eventos_banner?: Prisma.CadEventoCreateNestedManyWithoutBanner_sys_arquivoInput
   soc_planos_banner?: Prisma.SocPlanoCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutSys_usuarios_avatarInput = {
@@ -952,6 +1024,9 @@ export type SysArquivoUncheckedCreateWithoutSys_usuarios_avatarInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedCreateNestedManyWithoutSys_arquivoInput
   cad_eventos_banner?: Prisma.CadEventoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   soc_planos_banner?: Prisma.SocPlanoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutSys_usuarios_avatarInput = {
@@ -978,6 +1053,9 @@ export type SysArquivoCreateWithoutCreated_by_sys_usuarioInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemCreateNestedManyWithoutSys_arquivoInput
   cad_eventos_banner?: Prisma.CadEventoCreateNestedManyWithoutBanner_sys_arquivoInput
   soc_planos_banner?: Prisma.SocPlanoCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutCreated_by_sys_usuarioInput = {
@@ -1000,6 +1078,9 @@ export type SysArquivoUncheckedCreateWithoutCreated_by_sys_usuarioInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedCreateNestedManyWithoutSys_arquivoInput
   cad_eventos_banner?: Prisma.CadEventoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   soc_planos_banner?: Prisma.SocPlanoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutCreated_by_sys_usuarioInput = {
@@ -1042,6 +1123,9 @@ export type SysArquivoUpdateWithoutSys_usuarios_avatarInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUpdateManyWithoutSys_arquivoNestedInput
   cad_eventos_banner?: Prisma.CadEventoUpdateManyWithoutBanner_sys_arquivoNestedInput
   soc_planos_banner?: Prisma.SocPlanoUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutSys_usuarios_avatarInput = {
@@ -1064,6 +1148,9 @@ export type SysArquivoUncheckedUpdateWithoutSys_usuarios_avatarInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedUpdateManyWithoutSys_arquivoNestedInput
   cad_eventos_banner?: Prisma.CadEventoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   soc_planos_banner?: Prisma.SocPlanoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoUpsertWithWhereUniqueWithoutCreated_by_sys_usuarioInput = {
@@ -1123,6 +1210,9 @@ export type SysArquivoCreateWithoutSys_arquivo_discoInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemCreateNestedManyWithoutSys_arquivoInput
   cad_eventos_banner?: Prisma.CadEventoCreateNestedManyWithoutBanner_sys_arquivoInput
   soc_planos_banner?: Prisma.SocPlanoCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutSys_arquivo_discoInput = {
@@ -1145,6 +1235,9 @@ export type SysArquivoUncheckedCreateWithoutSys_arquivo_discoInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedCreateNestedManyWithoutSys_arquivoInput
   cad_eventos_banner?: Prisma.CadEventoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   soc_planos_banner?: Prisma.SocPlanoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutSys_arquivo_discoInput = {
@@ -1192,6 +1285,9 @@ export type SysArquivoCreateWithoutSys_arquivo_visibilidadeInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemCreateNestedManyWithoutSys_arquivoInput
   cad_eventos_banner?: Prisma.CadEventoCreateNestedManyWithoutBanner_sys_arquivoInput
   soc_planos_banner?: Prisma.SocPlanoCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutSys_arquivo_visibilidadeInput = {
@@ -1214,6 +1310,9 @@ export type SysArquivoUncheckedCreateWithoutSys_arquivo_visibilidadeInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedCreateNestedManyWithoutSys_arquivoInput
   cad_eventos_banner?: Prisma.CadEventoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   soc_planos_banner?: Prisma.SocPlanoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutSys_arquivo_visibilidadeInput = {
@@ -1261,6 +1360,9 @@ export type SysArquivoCreateWithoutSys_arquivo_tipoInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemCreateNestedManyWithoutSys_arquivoInput
   cad_eventos_banner?: Prisma.CadEventoCreateNestedManyWithoutBanner_sys_arquivoInput
   soc_planos_banner?: Prisma.SocPlanoCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutSys_arquivo_tipoInput = {
@@ -1283,6 +1385,9 @@ export type SysArquivoUncheckedCreateWithoutSys_arquivo_tipoInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedCreateNestedManyWithoutSys_arquivoInput
   cad_eventos_banner?: Prisma.CadEventoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   soc_planos_banner?: Prisma.SocPlanoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutSys_arquivo_tipoInput = {
@@ -1330,6 +1435,9 @@ export type SysArquivoCreateWithoutCad_eventos_bannerInput = {
   sys_usuarios_avatar?: Prisma.SysUsuarioCreateNestedManyWithoutAvatar_sys_arquivoInput
   prd_produto_imagens?: Prisma.PrdProdutoImagemCreateNestedManyWithoutSys_arquivoInput
   soc_planos_banner?: Prisma.SocPlanoCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutCad_eventos_bannerInput = {
@@ -1352,6 +1460,9 @@ export type SysArquivoUncheckedCreateWithoutCad_eventos_bannerInput = {
   sys_usuarios_avatar?: Prisma.SysUsuarioUncheckedCreateNestedManyWithoutAvatar_sys_arquivoInput
   prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedCreateNestedManyWithoutSys_arquivoInput
   soc_planos_banner?: Prisma.SocPlanoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutCad_eventos_bannerInput = {
@@ -1389,6 +1500,9 @@ export type SysArquivoUpdateWithoutCad_eventos_bannerInput = {
   sys_usuarios_avatar?: Prisma.SysUsuarioUpdateManyWithoutAvatar_sys_arquivoNestedInput
   prd_produto_imagens?: Prisma.PrdProdutoImagemUpdateManyWithoutSys_arquivoNestedInput
   soc_planos_banner?: Prisma.SocPlanoUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutCad_eventos_bannerInput = {
@@ -1411,6 +1525,351 @@ export type SysArquivoUncheckedUpdateWithoutCad_eventos_bannerInput = {
   sys_usuarios_avatar?: Prisma.SysUsuarioUncheckedUpdateManyWithoutAvatar_sys_arquivoNestedInput
   prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedUpdateManyWithoutSys_arquivoNestedInput
   soc_planos_banner?: Prisma.SocPlanoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
+}
+
+export type SysArquivoCreateWithoutPar_parceiros_logoInput = {
+  bucket?: string | null
+  file_key: string
+  public_url?: string | null
+  original_name: string
+  mime_type: string
+  size_bytes: number
+  content_hash?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
+  sys_arquivo_disco: Prisma.SysArquivoDiscoCreateNestedOneWithoutSys_arquivosInput
+  sys_arquivo_visibilidade: Prisma.SysArquivoVisibilidadeCreateNestedOneWithoutSys_arquivosInput
+  sys_arquivo_tipo?: Prisma.SysArquivoTipoCreateNestedOneWithoutSys_arquivosInput
+  created_by_sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSys_arquivos_criadosInput
+  sys_usuarios_avatar?: Prisma.SysUsuarioCreateNestedManyWithoutAvatar_sys_arquivoInput
+  prd_produto_imagens?: Prisma.PrdProdutoImagemCreateNestedManyWithoutSys_arquivoInput
+  cad_eventos_banner?: Prisma.CadEventoCreateNestedManyWithoutBanner_sys_arquivoInput
+  soc_planos_banner?: Prisma.SocPlanoCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
+}
+
+export type SysArquivoUncheckedCreateWithoutPar_parceiros_logoInput = {
+  id?: number
+  sys_arquivo_disco_id: number
+  sys_arquivo_visibilidade_id: number
+  sys_arquivo_tipo_id?: number | null
+  bucket?: string | null
+  file_key: string
+  public_url?: string | null
+  original_name: string
+  mime_type: string
+  size_bytes: number
+  content_hash?: string | null
+  created_by_sys_usuario_id?: number | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
+  sys_usuarios_avatar?: Prisma.SysUsuarioUncheckedCreateNestedManyWithoutAvatar_sys_arquivoInput
+  prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedCreateNestedManyWithoutSys_arquivoInput
+  cad_eventos_banner?: Prisma.CadEventoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  soc_planos_banner?: Prisma.SocPlanoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
+}
+
+export type SysArquivoCreateOrConnectWithoutPar_parceiros_logoInput = {
+  where: Prisma.SysArquivoWhereUniqueInput
+  create: Prisma.XOR<Prisma.SysArquivoCreateWithoutPar_parceiros_logoInput, Prisma.SysArquivoUncheckedCreateWithoutPar_parceiros_logoInput>
+}
+
+export type SysArquivoCreateWithoutPar_parceiros_bannerInput = {
+  bucket?: string | null
+  file_key: string
+  public_url?: string | null
+  original_name: string
+  mime_type: string
+  size_bytes: number
+  content_hash?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
+  sys_arquivo_disco: Prisma.SysArquivoDiscoCreateNestedOneWithoutSys_arquivosInput
+  sys_arquivo_visibilidade: Prisma.SysArquivoVisibilidadeCreateNestedOneWithoutSys_arquivosInput
+  sys_arquivo_tipo?: Prisma.SysArquivoTipoCreateNestedOneWithoutSys_arquivosInput
+  created_by_sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSys_arquivos_criadosInput
+  sys_usuarios_avatar?: Prisma.SysUsuarioCreateNestedManyWithoutAvatar_sys_arquivoInput
+  prd_produto_imagens?: Prisma.PrdProdutoImagemCreateNestedManyWithoutSys_arquivoInput
+  cad_eventos_banner?: Prisma.CadEventoCreateNestedManyWithoutBanner_sys_arquivoInput
+  soc_planos_banner?: Prisma.SocPlanoCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaCreateNestedManyWithoutLogo_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
+}
+
+export type SysArquivoUncheckedCreateWithoutPar_parceiros_bannerInput = {
+  id?: number
+  sys_arquivo_disco_id: number
+  sys_arquivo_visibilidade_id: number
+  sys_arquivo_tipo_id?: number | null
+  bucket?: string | null
+  file_key: string
+  public_url?: string | null
+  original_name: string
+  mime_type: string
+  size_bytes: number
+  content_hash?: string | null
+  created_by_sys_usuario_id?: number | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
+  sys_usuarios_avatar?: Prisma.SysUsuarioUncheckedCreateNestedManyWithoutAvatar_sys_arquivoInput
+  prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedCreateNestedManyWithoutSys_arquivoInput
+  cad_eventos_banner?: Prisma.CadEventoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  soc_planos_banner?: Prisma.SocPlanoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutLogo_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
+}
+
+export type SysArquivoCreateOrConnectWithoutPar_parceiros_bannerInput = {
+  where: Prisma.SysArquivoWhereUniqueInput
+  create: Prisma.XOR<Prisma.SysArquivoCreateWithoutPar_parceiros_bannerInput, Prisma.SysArquivoUncheckedCreateWithoutPar_parceiros_bannerInput>
+}
+
+export type SysArquivoUpsertWithoutPar_parceiros_logoInput = {
+  update: Prisma.XOR<Prisma.SysArquivoUpdateWithoutPar_parceiros_logoInput, Prisma.SysArquivoUncheckedUpdateWithoutPar_parceiros_logoInput>
+  create: Prisma.XOR<Prisma.SysArquivoCreateWithoutPar_parceiros_logoInput, Prisma.SysArquivoUncheckedCreateWithoutPar_parceiros_logoInput>
+  where?: Prisma.SysArquivoWhereInput
+}
+
+export type SysArquivoUpdateToOneWithWhereWithoutPar_parceiros_logoInput = {
+  where?: Prisma.SysArquivoWhereInput
+  data: Prisma.XOR<Prisma.SysArquivoUpdateWithoutPar_parceiros_logoInput, Prisma.SysArquivoUncheckedUpdateWithoutPar_parceiros_logoInput>
+}
+
+export type SysArquivoUpdateWithoutPar_parceiros_logoInput = {
+  bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_key?: Prisma.StringFieldUpdateOperationsInput | string
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  original_name?: Prisma.StringFieldUpdateOperationsInput | string
+  mime_type?: Prisma.StringFieldUpdateOperationsInput | string
+  size_bytes?: Prisma.IntFieldUpdateOperationsInput | number
+  content_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_arquivo_disco?: Prisma.SysArquivoDiscoUpdateOneRequiredWithoutSys_arquivosNestedInput
+  sys_arquivo_visibilidade?: Prisma.SysArquivoVisibilidadeUpdateOneRequiredWithoutSys_arquivosNestedInput
+  sys_arquivo_tipo?: Prisma.SysArquivoTipoUpdateOneWithoutSys_arquivosNestedInput
+  created_by_sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutSys_arquivos_criadosNestedInput
+  sys_usuarios_avatar?: Prisma.SysUsuarioUpdateManyWithoutAvatar_sys_arquivoNestedInput
+  prd_produto_imagens?: Prisma.PrdProdutoImagemUpdateManyWithoutSys_arquivoNestedInput
+  cad_eventos_banner?: Prisma.CadEventoUpdateManyWithoutBanner_sys_arquivoNestedInput
+  soc_planos_banner?: Prisma.SocPlanoUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
+}
+
+export type SysArquivoUncheckedUpdateWithoutPar_parceiros_logoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_arquivo_disco_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_arquivo_visibilidade_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_arquivo_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_key?: Prisma.StringFieldUpdateOperationsInput | string
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  original_name?: Prisma.StringFieldUpdateOperationsInput | string
+  mime_type?: Prisma.StringFieldUpdateOperationsInput | string
+  size_bytes?: Prisma.IntFieldUpdateOperationsInput | number
+  content_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_usuarios_avatar?: Prisma.SysUsuarioUncheckedUpdateManyWithoutAvatar_sys_arquivoNestedInput
+  prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedUpdateManyWithoutSys_arquivoNestedInput
+  cad_eventos_banner?: Prisma.CadEventoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  soc_planos_banner?: Prisma.SocPlanoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
+}
+
+export type SysArquivoUpsertWithoutPar_parceiros_bannerInput = {
+  update: Prisma.XOR<Prisma.SysArquivoUpdateWithoutPar_parceiros_bannerInput, Prisma.SysArquivoUncheckedUpdateWithoutPar_parceiros_bannerInput>
+  create: Prisma.XOR<Prisma.SysArquivoCreateWithoutPar_parceiros_bannerInput, Prisma.SysArquivoUncheckedCreateWithoutPar_parceiros_bannerInput>
+  where?: Prisma.SysArquivoWhereInput
+}
+
+export type SysArquivoUpdateToOneWithWhereWithoutPar_parceiros_bannerInput = {
+  where?: Prisma.SysArquivoWhereInput
+  data: Prisma.XOR<Prisma.SysArquivoUpdateWithoutPar_parceiros_bannerInput, Prisma.SysArquivoUncheckedUpdateWithoutPar_parceiros_bannerInput>
+}
+
+export type SysArquivoUpdateWithoutPar_parceiros_bannerInput = {
+  bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_key?: Prisma.StringFieldUpdateOperationsInput | string
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  original_name?: Prisma.StringFieldUpdateOperationsInput | string
+  mime_type?: Prisma.StringFieldUpdateOperationsInput | string
+  size_bytes?: Prisma.IntFieldUpdateOperationsInput | number
+  content_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_arquivo_disco?: Prisma.SysArquivoDiscoUpdateOneRequiredWithoutSys_arquivosNestedInput
+  sys_arquivo_visibilidade?: Prisma.SysArquivoVisibilidadeUpdateOneRequiredWithoutSys_arquivosNestedInput
+  sys_arquivo_tipo?: Prisma.SysArquivoTipoUpdateOneWithoutSys_arquivosNestedInput
+  created_by_sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutSys_arquivos_criadosNestedInput
+  sys_usuarios_avatar?: Prisma.SysUsuarioUpdateManyWithoutAvatar_sys_arquivoNestedInput
+  prd_produto_imagens?: Prisma.PrdProdutoImagemUpdateManyWithoutSys_arquivoNestedInput
+  cad_eventos_banner?: Prisma.CadEventoUpdateManyWithoutBanner_sys_arquivoNestedInput
+  soc_planos_banner?: Prisma.SocPlanoUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUpdateManyWithoutLogo_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
+}
+
+export type SysArquivoUncheckedUpdateWithoutPar_parceiros_bannerInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_arquivo_disco_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_arquivo_visibilidade_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_arquivo_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_key?: Prisma.StringFieldUpdateOperationsInput | string
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  original_name?: Prisma.StringFieldUpdateOperationsInput | string
+  mime_type?: Prisma.StringFieldUpdateOperationsInput | string
+  size_bytes?: Prisma.IntFieldUpdateOperationsInput | number
+  content_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_usuarios_avatar?: Prisma.SysUsuarioUncheckedUpdateManyWithoutAvatar_sys_arquivoNestedInput
+  prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedUpdateManyWithoutSys_arquivoNestedInput
+  cad_eventos_banner?: Prisma.CadEventoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  soc_planos_banner?: Prisma.SocPlanoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutLogo_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
+}
+
+export type SysArquivoCreateWithoutCrd_itens_imagemInput = {
+  bucket?: string | null
+  file_key: string
+  public_url?: string | null
+  original_name: string
+  mime_type: string
+  size_bytes: number
+  content_hash?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
+  sys_arquivo_disco: Prisma.SysArquivoDiscoCreateNestedOneWithoutSys_arquivosInput
+  sys_arquivo_visibilidade: Prisma.SysArquivoVisibilidadeCreateNestedOneWithoutSys_arquivosInput
+  sys_arquivo_tipo?: Prisma.SysArquivoTipoCreateNestedOneWithoutSys_arquivosInput
+  created_by_sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSys_arquivos_criadosInput
+  sys_usuarios_avatar?: Prisma.SysUsuarioCreateNestedManyWithoutAvatar_sys_arquivoInput
+  prd_produto_imagens?: Prisma.PrdProdutoImagemCreateNestedManyWithoutSys_arquivoInput
+  cad_eventos_banner?: Prisma.CadEventoCreateNestedManyWithoutBanner_sys_arquivoInput
+  soc_planos_banner?: Prisma.SocPlanoCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
+}
+
+export type SysArquivoUncheckedCreateWithoutCrd_itens_imagemInput = {
+  id?: number
+  sys_arquivo_disco_id: number
+  sys_arquivo_visibilidade_id: number
+  sys_arquivo_tipo_id?: number | null
+  bucket?: string | null
+  file_key: string
+  public_url?: string | null
+  original_name: string
+  mime_type: string
+  size_bytes: number
+  content_hash?: string | null
+  created_by_sys_usuario_id?: number | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
+  sys_usuarios_avatar?: Prisma.SysUsuarioUncheckedCreateNestedManyWithoutAvatar_sys_arquivoInput
+  prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedCreateNestedManyWithoutSys_arquivoInput
+  cad_eventos_banner?: Prisma.CadEventoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  soc_planos_banner?: Prisma.SocPlanoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+}
+
+export type SysArquivoCreateOrConnectWithoutCrd_itens_imagemInput = {
+  where: Prisma.SysArquivoWhereUniqueInput
+  create: Prisma.XOR<Prisma.SysArquivoCreateWithoutCrd_itens_imagemInput, Prisma.SysArquivoUncheckedCreateWithoutCrd_itens_imagemInput>
+}
+
+export type SysArquivoUpsertWithoutCrd_itens_imagemInput = {
+  update: Prisma.XOR<Prisma.SysArquivoUpdateWithoutCrd_itens_imagemInput, Prisma.SysArquivoUncheckedUpdateWithoutCrd_itens_imagemInput>
+  create: Prisma.XOR<Prisma.SysArquivoCreateWithoutCrd_itens_imagemInput, Prisma.SysArquivoUncheckedCreateWithoutCrd_itens_imagemInput>
+  where?: Prisma.SysArquivoWhereInput
+}
+
+export type SysArquivoUpdateToOneWithWhereWithoutCrd_itens_imagemInput = {
+  where?: Prisma.SysArquivoWhereInput
+  data: Prisma.XOR<Prisma.SysArquivoUpdateWithoutCrd_itens_imagemInput, Prisma.SysArquivoUncheckedUpdateWithoutCrd_itens_imagemInput>
+}
+
+export type SysArquivoUpdateWithoutCrd_itens_imagemInput = {
+  bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_key?: Prisma.StringFieldUpdateOperationsInput | string
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  original_name?: Prisma.StringFieldUpdateOperationsInput | string
+  mime_type?: Prisma.StringFieldUpdateOperationsInput | string
+  size_bytes?: Prisma.IntFieldUpdateOperationsInput | number
+  content_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_arquivo_disco?: Prisma.SysArquivoDiscoUpdateOneRequiredWithoutSys_arquivosNestedInput
+  sys_arquivo_visibilidade?: Prisma.SysArquivoVisibilidadeUpdateOneRequiredWithoutSys_arquivosNestedInput
+  sys_arquivo_tipo?: Prisma.SysArquivoTipoUpdateOneWithoutSys_arquivosNestedInput
+  created_by_sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutSys_arquivos_criadosNestedInput
+  sys_usuarios_avatar?: Prisma.SysUsuarioUpdateManyWithoutAvatar_sys_arquivoNestedInput
+  prd_produto_imagens?: Prisma.PrdProdutoImagemUpdateManyWithoutSys_arquivoNestedInput
+  cad_eventos_banner?: Prisma.CadEventoUpdateManyWithoutBanner_sys_arquivoNestedInput
+  soc_planos_banner?: Prisma.SocPlanoUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
+}
+
+export type SysArquivoUncheckedUpdateWithoutCrd_itens_imagemInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_arquivo_disco_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_arquivo_visibilidade_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_arquivo_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_key?: Prisma.StringFieldUpdateOperationsInput | string
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  original_name?: Prisma.StringFieldUpdateOperationsInput | string
+  mime_type?: Prisma.StringFieldUpdateOperationsInput | string
+  size_bytes?: Prisma.IntFieldUpdateOperationsInput | number
+  content_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_usuarios_avatar?: Prisma.SysUsuarioUncheckedUpdateManyWithoutAvatar_sys_arquivoNestedInput
+  prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedUpdateManyWithoutSys_arquivoNestedInput
+  cad_eventos_banner?: Prisma.CadEventoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  soc_planos_banner?: Prisma.SocPlanoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
 }
 
 export type SysArquivoCreateWithoutPrd_produto_imagensInput = {
@@ -1432,6 +1891,9 @@ export type SysArquivoCreateWithoutPrd_produto_imagensInput = {
   sys_usuarios_avatar?: Prisma.SysUsuarioCreateNestedManyWithoutAvatar_sys_arquivoInput
   cad_eventos_banner?: Prisma.CadEventoCreateNestedManyWithoutBanner_sys_arquivoInput
   soc_planos_banner?: Prisma.SocPlanoCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutPrd_produto_imagensInput = {
@@ -1454,6 +1916,9 @@ export type SysArquivoUncheckedCreateWithoutPrd_produto_imagensInput = {
   sys_usuarios_avatar?: Prisma.SysUsuarioUncheckedCreateNestedManyWithoutAvatar_sys_arquivoInput
   cad_eventos_banner?: Prisma.CadEventoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   soc_planos_banner?: Prisma.SocPlanoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutPrd_produto_imagensInput = {
@@ -1491,6 +1956,9 @@ export type SysArquivoUpdateWithoutPrd_produto_imagensInput = {
   sys_usuarios_avatar?: Prisma.SysUsuarioUpdateManyWithoutAvatar_sys_arquivoNestedInput
   cad_eventos_banner?: Prisma.CadEventoUpdateManyWithoutBanner_sys_arquivoNestedInput
   soc_planos_banner?: Prisma.SocPlanoUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutPrd_produto_imagensInput = {
@@ -1513,6 +1981,9 @@ export type SysArquivoUncheckedUpdateWithoutPrd_produto_imagensInput = {
   sys_usuarios_avatar?: Prisma.SysUsuarioUncheckedUpdateManyWithoutAvatar_sys_arquivoNestedInput
   cad_eventos_banner?: Prisma.CadEventoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   soc_planos_banner?: Prisma.SocPlanoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoCreateWithoutSoc_planos_bannerInput = {
@@ -1534,6 +2005,9 @@ export type SysArquivoCreateWithoutSoc_planos_bannerInput = {
   sys_usuarios_avatar?: Prisma.SysUsuarioCreateNestedManyWithoutAvatar_sys_arquivoInput
   prd_produto_imagens?: Prisma.PrdProdutoImagemCreateNestedManyWithoutSys_arquivoInput
   cad_eventos_banner?: Prisma.CadEventoCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutSoc_planos_bannerInput = {
@@ -1556,6 +2030,9 @@ export type SysArquivoUncheckedCreateWithoutSoc_planos_bannerInput = {
   sys_usuarios_avatar?: Prisma.SysUsuarioUncheckedCreateNestedManyWithoutAvatar_sys_arquivoInput
   prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedCreateNestedManyWithoutSys_arquivoInput
   cad_eventos_banner?: Prisma.CadEventoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutSoc_planos_bannerInput = {
@@ -1593,6 +2070,9 @@ export type SysArquivoUpdateWithoutSoc_planos_bannerInput = {
   sys_usuarios_avatar?: Prisma.SysUsuarioUpdateManyWithoutAvatar_sys_arquivoNestedInput
   prd_produto_imagens?: Prisma.PrdProdutoImagemUpdateManyWithoutSys_arquivoNestedInput
   cad_eventos_banner?: Prisma.CadEventoUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutSoc_planos_bannerInput = {
@@ -1615,6 +2095,9 @@ export type SysArquivoUncheckedUpdateWithoutSoc_planos_bannerInput = {
   sys_usuarios_avatar?: Prisma.SysUsuarioUncheckedUpdateManyWithoutAvatar_sys_arquivoNestedInput
   prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedUpdateManyWithoutSys_arquivoNestedInput
   cad_eventos_banner?: Prisma.CadEventoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoCreateManyCreated_by_sys_usuarioInput = {
@@ -1654,6 +2137,9 @@ export type SysArquivoUpdateWithoutCreated_by_sys_usuarioInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUpdateManyWithoutSys_arquivoNestedInput
   cad_eventos_banner?: Prisma.CadEventoUpdateManyWithoutBanner_sys_arquivoNestedInput
   soc_planos_banner?: Prisma.SocPlanoUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutCreated_by_sys_usuarioInput = {
@@ -1676,6 +2162,9 @@ export type SysArquivoUncheckedUpdateWithoutCreated_by_sys_usuarioInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedUpdateManyWithoutSys_arquivoNestedInput
   cad_eventos_banner?: Prisma.CadEventoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   soc_planos_banner?: Prisma.SocPlanoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateManyWithoutCreated_by_sys_usuarioInput = {
@@ -1733,6 +2222,9 @@ export type SysArquivoUpdateWithoutSys_arquivo_discoInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUpdateManyWithoutSys_arquivoNestedInput
   cad_eventos_banner?: Prisma.CadEventoUpdateManyWithoutBanner_sys_arquivoNestedInput
   soc_planos_banner?: Prisma.SocPlanoUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutSys_arquivo_discoInput = {
@@ -1755,6 +2247,9 @@ export type SysArquivoUncheckedUpdateWithoutSys_arquivo_discoInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedUpdateManyWithoutSys_arquivoNestedInput
   cad_eventos_banner?: Prisma.CadEventoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   soc_planos_banner?: Prisma.SocPlanoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateManyWithoutSys_arquivo_discoInput = {
@@ -1812,6 +2307,9 @@ export type SysArquivoUpdateWithoutSys_arquivo_visibilidadeInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUpdateManyWithoutSys_arquivoNestedInput
   cad_eventos_banner?: Prisma.CadEventoUpdateManyWithoutBanner_sys_arquivoNestedInput
   soc_planos_banner?: Prisma.SocPlanoUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutSys_arquivo_visibilidadeInput = {
@@ -1834,6 +2332,9 @@ export type SysArquivoUncheckedUpdateWithoutSys_arquivo_visibilidadeInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedUpdateManyWithoutSys_arquivoNestedInput
   cad_eventos_banner?: Prisma.CadEventoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   soc_planos_banner?: Prisma.SocPlanoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateManyWithoutSys_arquivo_visibilidadeInput = {
@@ -1891,6 +2392,9 @@ export type SysArquivoUpdateWithoutSys_arquivo_tipoInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUpdateManyWithoutSys_arquivoNestedInput
   cad_eventos_banner?: Prisma.CadEventoUpdateManyWithoutBanner_sys_arquivoNestedInput
   soc_planos_banner?: Prisma.SocPlanoUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutSys_arquivo_tipoInput = {
@@ -1913,6 +2417,9 @@ export type SysArquivoUncheckedUpdateWithoutSys_arquivo_tipoInput = {
   prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedUpdateManyWithoutSys_arquivoNestedInput
   cad_eventos_banner?: Prisma.CadEventoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   soc_planos_banner?: Prisma.SocPlanoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateManyWithoutSys_arquivo_tipoInput = {
@@ -1943,6 +2450,9 @@ export type SysArquivoCountOutputType = {
   prd_produto_imagens: number
   cad_eventos_banner: number
   soc_planos_banner: number
+  par_parceiros_logo: number
+  par_parceiros_banner: number
+  crd_itens_imagem: number
 }
 
 export type SysArquivoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1950,6 +2460,9 @@ export type SysArquivoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   prd_produto_imagens?: boolean | SysArquivoCountOutputTypeCountPrd_produto_imagensArgs
   cad_eventos_banner?: boolean | SysArquivoCountOutputTypeCountCad_eventos_bannerArgs
   soc_planos_banner?: boolean | SysArquivoCountOutputTypeCountSoc_planos_bannerArgs
+  par_parceiros_logo?: boolean | SysArquivoCountOutputTypeCountPar_parceiros_logoArgs
+  par_parceiros_banner?: boolean | SysArquivoCountOutputTypeCountPar_parceiros_bannerArgs
+  crd_itens_imagem?: boolean | SysArquivoCountOutputTypeCountCrd_itens_imagemArgs
 }
 
 /**
@@ -1990,6 +2503,27 @@ export type SysArquivoCountOutputTypeCountSoc_planos_bannerArgs<ExtArgs extends 
   where?: Prisma.SocPlanoWhereInput
 }
 
+/**
+ * SysArquivoCountOutputType without action
+ */
+export type SysArquivoCountOutputTypeCountPar_parceiros_logoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ParParceiroTemaWhereInput
+}
+
+/**
+ * SysArquivoCountOutputType without action
+ */
+export type SysArquivoCountOutputTypeCountPar_parceiros_bannerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ParParceiroTemaWhereInput
+}
+
+/**
+ * SysArquivoCountOutputType without action
+ */
+export type SysArquivoCountOutputTypeCountCrd_itens_imagemArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CrdItemWhereInput
+}
+
 
 export type SysArquivoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2016,6 +2550,9 @@ export type SysArquivoSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   prd_produto_imagens?: boolean | Prisma.SysArquivo$prd_produto_imagensArgs<ExtArgs>
   cad_eventos_banner?: boolean | Prisma.SysArquivo$cad_eventos_bannerArgs<ExtArgs>
   soc_planos_banner?: boolean | Prisma.SysArquivo$soc_planos_bannerArgs<ExtArgs>
+  par_parceiros_logo?: boolean | Prisma.SysArquivo$par_parceiros_logoArgs<ExtArgs>
+  par_parceiros_banner?: boolean | Prisma.SysArquivo$par_parceiros_bannerArgs<ExtArgs>
+  crd_itens_imagem?: boolean | Prisma.SysArquivo$crd_itens_imagemArgs<ExtArgs>
   _count?: boolean | Prisma.SysArquivoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sysArquivo"]>
 
@@ -2050,6 +2587,9 @@ export type SysArquivoInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   prd_produto_imagens?: boolean | Prisma.SysArquivo$prd_produto_imagensArgs<ExtArgs>
   cad_eventos_banner?: boolean | Prisma.SysArquivo$cad_eventos_bannerArgs<ExtArgs>
   soc_planos_banner?: boolean | Prisma.SysArquivo$soc_planos_bannerArgs<ExtArgs>
+  par_parceiros_logo?: boolean | Prisma.SysArquivo$par_parceiros_logoArgs<ExtArgs>
+  par_parceiros_banner?: boolean | Prisma.SysArquivo$par_parceiros_bannerArgs<ExtArgs>
+  crd_itens_imagem?: boolean | Prisma.SysArquivo$crd_itens_imagemArgs<ExtArgs>
   _count?: boolean | Prisma.SysArquivoCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -2064,6 +2604,9 @@ export type $SysArquivoPayload<ExtArgs extends runtime.Types.Extensions.Internal
     prd_produto_imagens: Prisma.$PrdProdutoImagemPayload<ExtArgs>[]
     cad_eventos_banner: Prisma.$CadEventoPayload<ExtArgs>[]
     soc_planos_banner: Prisma.$SocPlanoPayload<ExtArgs>[]
+    par_parceiros_logo: Prisma.$ParParceiroTemaPayload<ExtArgs>[]
+    par_parceiros_banner: Prisma.$ParParceiroTemaPayload<ExtArgs>[]
+    crd_itens_imagem: Prisma.$CrdItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2430,6 +2973,9 @@ export interface Prisma__SysArquivoClient<T, Null = never, ExtArgs extends runti
   prd_produto_imagens<T extends Prisma.SysArquivo$prd_produto_imagensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivo$prd_produto_imagensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PrdProdutoImagemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cad_eventos_banner<T extends Prisma.SysArquivo$cad_eventos_bannerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivo$cad_eventos_bannerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CadEventoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   soc_planos_banner<T extends Prisma.SysArquivo$soc_planos_bannerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivo$soc_planos_bannerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SocPlanoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  par_parceiros_logo<T extends Prisma.SysArquivo$par_parceiros_logoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivo$par_parceiros_logoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ParParceiroTemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  par_parceiros_banner<T extends Prisma.SysArquivo$par_parceiros_bannerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivo$par_parceiros_bannerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ParParceiroTemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  crd_itens_imagem<T extends Prisma.SysArquivo$crd_itens_imagemArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivo$crd_itens_imagemArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CrdItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2954,6 +3500,78 @@ export type SysArquivo$soc_planos_bannerArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.SocPlanoScalarFieldEnum | Prisma.SocPlanoScalarFieldEnum[]
+}
+
+/**
+ * SysArquivo.par_parceiros_logo
+ */
+export type SysArquivo$par_parceiros_logoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ParParceiroTema
+   */
+  select?: Prisma.ParParceiroTemaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ParParceiroTema
+   */
+  omit?: Prisma.ParParceiroTemaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ParParceiroTemaInclude<ExtArgs> | null
+  where?: Prisma.ParParceiroTemaWhereInput
+  orderBy?: Prisma.ParParceiroTemaOrderByWithRelationInput | Prisma.ParParceiroTemaOrderByWithRelationInput[]
+  cursor?: Prisma.ParParceiroTemaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ParParceiroTemaScalarFieldEnum | Prisma.ParParceiroTemaScalarFieldEnum[]
+}
+
+/**
+ * SysArquivo.par_parceiros_banner
+ */
+export type SysArquivo$par_parceiros_bannerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ParParceiroTema
+   */
+  select?: Prisma.ParParceiroTemaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ParParceiroTema
+   */
+  omit?: Prisma.ParParceiroTemaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ParParceiroTemaInclude<ExtArgs> | null
+  where?: Prisma.ParParceiroTemaWhereInput
+  orderBy?: Prisma.ParParceiroTemaOrderByWithRelationInput | Prisma.ParParceiroTemaOrderByWithRelationInput[]
+  cursor?: Prisma.ParParceiroTemaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ParParceiroTemaScalarFieldEnum | Prisma.ParParceiroTemaScalarFieldEnum[]
+}
+
+/**
+ * SysArquivo.crd_itens_imagem
+ */
+export type SysArquivo$crd_itens_imagemArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CrdItem
+   */
+  select?: Prisma.CrdItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CrdItem
+   */
+  omit?: Prisma.CrdItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CrdItemInclude<ExtArgs> | null
+  where?: Prisma.CrdItemWhereInput
+  orderBy?: Prisma.CrdItemOrderByWithRelationInput | Prisma.CrdItemOrderByWithRelationInput[]
+  cursor?: Prisma.CrdItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CrdItemScalarFieldEnum | Prisma.CrdItemScalarFieldEnum[]
 }
 
 /**

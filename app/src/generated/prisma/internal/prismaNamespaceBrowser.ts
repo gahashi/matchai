@@ -66,6 +66,11 @@ export const ModelName = {
   SysArquivo: 'SysArquivo',
   CadLink: 'CadLink',
   CadEvento: 'CadEvento',
+  ParParceiro: 'ParParceiro',
+  ParParceiroUsuario: 'ParParceiroUsuario',
+  ParParceiroTema: 'ParParceiroTema',
+  CrdCategoria: 'CrdCategoria',
+  CrdItem: 'CrdItem',
   PrdProdutoTipo: 'PrdProdutoTipo',
   PrdProduto: 'PrdProduto',
   PrdProdutoImagem: 'PrdProdutoImagem',
@@ -352,6 +357,84 @@ export const CadEventoScalarFieldEnum = {
 } as const
 
 export type CadEventoScalarFieldEnum = (typeof CadEventoScalarFieldEnum)[keyof typeof CadEventoScalarFieldEnum]
+
+
+export const ParParceiroScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  slug: 'slug',
+  nome: 'nome',
+  descricao: 'descricao',
+  ativo: 'ativo',
+  visivel_publico: 'visivel_publico',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type ParParceiroScalarFieldEnum = (typeof ParParceiroScalarFieldEnum)[keyof typeof ParParceiroScalarFieldEnum]
+
+
+export const ParParceiroUsuarioScalarFieldEnum = {
+  id: 'id',
+  par_parceiro_id: 'par_parceiro_id',
+  sys_usuario_id: 'sys_usuario_id',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ParParceiroUsuarioScalarFieldEnum = (typeof ParParceiroUsuarioScalarFieldEnum)[keyof typeof ParParceiroUsuarioScalarFieldEnum]
+
+
+export const ParParceiroTemaScalarFieldEnum = {
+  id: 'id',
+  par_parceiro_id: 'par_parceiro_id',
+  logo_sys_arquivo_id: 'logo_sys_arquivo_id',
+  banner_sys_arquivo_id: 'banner_sys_arquivo_id',
+  cor_primaria: 'cor_primaria',
+  cor_secundaria: 'cor_secundaria',
+  cor_fundo: 'cor_fundo',
+  cor_texto: 'cor_texto',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ParParceiroTemaScalarFieldEnum = (typeof ParParceiroTemaScalarFieldEnum)[keyof typeof ParParceiroTemaScalarFieldEnum]
+
+
+export const CrdCategoriaScalarFieldEnum = {
+  id: 'id',
+  par_parceiro_id: 'par_parceiro_id',
+  nome: 'nome',
+  descricao: 'descricao',
+  ordem: 'ordem',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type CrdCategoriaScalarFieldEnum = (typeof CrdCategoriaScalarFieldEnum)[keyof typeof CrdCategoriaScalarFieldEnum]
+
+
+export const CrdItemScalarFieldEnum = {
+  id: 'id',
+  par_parceiro_id: 'par_parceiro_id',
+  crd_categoria_id: 'crd_categoria_id',
+  imagem_sys_arquivo_id: 'imagem_sys_arquivo_id',
+  nome: 'nome',
+  descricao: 'descricao',
+  preco: 'preco',
+  ordem: 'ordem',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type CrdItemScalarFieldEnum = (typeof CrdItemScalarFieldEnum)[keyof typeof CrdItemScalarFieldEnum]
 
 
 export const PrdProdutoTipoScalarFieldEnum = {
@@ -954,6 +1037,42 @@ export const CadEventoOrderByRelevanceFieldEnum = {
 } as const
 
 export type CadEventoOrderByRelevanceFieldEnum = (typeof CadEventoOrderByRelevanceFieldEnum)[keyof typeof CadEventoOrderByRelevanceFieldEnum]
+
+
+export const ParParceiroOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  slug: 'slug',
+  nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type ParParceiroOrderByRelevanceFieldEnum = (typeof ParParceiroOrderByRelevanceFieldEnum)[keyof typeof ParParceiroOrderByRelevanceFieldEnum]
+
+
+export const ParParceiroTemaOrderByRelevanceFieldEnum = {
+  cor_primaria: 'cor_primaria',
+  cor_secundaria: 'cor_secundaria',
+  cor_fundo: 'cor_fundo',
+  cor_texto: 'cor_texto'
+} as const
+
+export type ParParceiroTemaOrderByRelevanceFieldEnum = (typeof ParParceiroTemaOrderByRelevanceFieldEnum)[keyof typeof ParParceiroTemaOrderByRelevanceFieldEnum]
+
+
+export const CrdCategoriaOrderByRelevanceFieldEnum = {
+  nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type CrdCategoriaOrderByRelevanceFieldEnum = (typeof CrdCategoriaOrderByRelevanceFieldEnum)[keyof typeof CrdCategoriaOrderByRelevanceFieldEnum]
+
+
+export const CrdItemOrderByRelevanceFieldEnum = {
+  nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type CrdItemOrderByRelevanceFieldEnum = (typeof CrdItemOrderByRelevanceFieldEnum)[keyof typeof CrdItemOrderByRelevanceFieldEnum]
 
 
 export const PrdProdutoTipoOrderByRelevanceFieldEnum = {

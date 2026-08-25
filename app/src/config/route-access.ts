@@ -29,6 +29,10 @@ export const routeAccessRules: RouteAccessRule[] = [
         access: "public",
     },
     {
+        path: "/cardapio",
+        access: "public",
+    },
+    {
         path: "/login",
         access: "guest",
     },

@@ -117,6 +117,31 @@ export type CadLink = Prisma.CadLinkModel
  */
 export type CadEvento = Prisma.CadEventoModel
 /**
+ * Model ParParceiro
+ * 
+ */
+export type ParParceiro = Prisma.ParParceiroModel
+/**
+ * Model ParParceiroUsuario
+ * 
+ */
+export type ParParceiroUsuario = Prisma.ParParceiroUsuarioModel
+/**
+ * Model ParParceiroTema
+ * 
+ */
+export type ParParceiroTema = Prisma.ParParceiroTemaModel
+/**
+ * Model CrdCategoria
+ * 
+ */
+export type CrdCategoria = Prisma.CrdCategoriaModel
+/**
+ * Model CrdItem
+ * 
+ */
+export type CrdItem = Prisma.CrdItemModel
+/**
  * Model PrdProdutoTipo
  * 
  */
