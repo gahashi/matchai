@@ -236,3 +236,8 @@ export type FinPagamentoMetodo = Prisma.FinPagamentoMetodoModel
  * 
  */
 export type FinPagamento = Prisma.FinPagamentoModel
+/**
+ * Model SysAnalyticsEvento
+ * 
+ */
+export type SysAnalyticsEvento = Prisma.SysAnalyticsEventoModel

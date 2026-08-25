@@ -314,6 +314,7 @@ export type SysUsuarioWhereInput = {
   deleted_at?: Prisma.DateTimeNullableFilter<"SysUsuario"> | Date | string | null
   sys_usuario_tipo?: Prisma.XOR<Prisma.SysUsuarioTipoScalarRelationFilter, Prisma.SysUsuarioTipoWhereInput>
   avatar_sys_arquivo?: Prisma.XOR<Prisma.SysArquivoNullableScalarRelationFilter, Prisma.SysArquivoWhereInput> | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoListRelationFilter
   sys_auth_user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   sys_auth_login_logs?: Prisma.SysAuthLoginLogListRelationFilter
   sys_email_logs?: Prisma.SysEmailLogListRelationFilter
@@ -342,6 +343,7 @@ export type SysUsuarioOrderByWithRelationInput = {
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   sys_usuario_tipo?: Prisma.SysUsuarioTipoOrderByWithRelationInput
   avatar_sys_arquivo?: Prisma.SysArquivoOrderByWithRelationInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoOrderByRelationAggregateInput
   sys_auth_user?: Prisma.UserOrderByWithRelationInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogOrderByRelationAggregateInput
   sys_email_logs?: Prisma.SysEmailLogOrderByRelationAggregateInput
@@ -374,6 +376,7 @@ export type SysUsuarioWhereUniqueInput = Prisma.AtLeast<{
   deleted_at?: Prisma.DateTimeNullableFilter<"SysUsuario"> | Date | string | null
   sys_usuario_tipo?: Prisma.XOR<Prisma.SysUsuarioTipoScalarRelationFilter, Prisma.SysUsuarioTipoWhereInput>
   avatar_sys_arquivo?: Prisma.XOR<Prisma.SysArquivoNullableScalarRelationFilter, Prisma.SysArquivoWhereInput> | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoListRelationFilter
   sys_auth_user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   sys_auth_login_logs?: Prisma.SysAuthLoginLogListRelationFilter
   sys_email_logs?: Prisma.SysEmailLogListRelationFilter
@@ -443,6 +446,7 @@ export type SysUsuarioCreateInput = {
   deleted_at?: Date | string | null
   sys_usuario_tipo: Prisma.SysUsuarioTipoCreateNestedOneWithoutSys_usuariosInput
   avatar_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutSys_usuarios_avatarInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
@@ -469,6 +473,7 @@ export type SysUsuarioUncheckedCreateInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
@@ -494,6 +499,7 @@ export type SysUsuarioUpdateInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_tipo?: Prisma.SysUsuarioTipoUpdateOneRequiredWithoutSys_usuariosNestedInput
   avatar_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutSys_usuarios_avatarNestedInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
@@ -520,6 +526,7 @@ export type SysUsuarioUncheckedUpdateInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
@@ -893,6 +900,22 @@ export type SysUsuarioUpdateOneWithoutVnd_pedido_historicos_operadosNestedInput 
   update?: Prisma.XOR<Prisma.XOR<Prisma.SysUsuarioUpdateToOneWithWhereWithoutVnd_pedido_historicos_operadosInput, Prisma.SysUsuarioUpdateWithoutVnd_pedido_historicos_operadosInput>, Prisma.SysUsuarioUncheckedUpdateWithoutVnd_pedido_historicos_operadosInput>
 }
 
+export type SysUsuarioCreateNestedOneWithoutSys_analytics_eventosInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioCreateWithoutSys_analytics_eventosInput, Prisma.SysUsuarioUncheckedCreateWithoutSys_analytics_eventosInput>
+  connectOrCreate?: Prisma.SysUsuarioCreateOrConnectWithoutSys_analytics_eventosInput
+  connect?: Prisma.SysUsuarioWhereUniqueInput
+}
+
+export type SysUsuarioUpdateOneWithoutSys_analytics_eventosNestedInput = {
+  create?: Prisma.XOR<Prisma.SysUsuarioCreateWithoutSys_analytics_eventosInput, Prisma.SysUsuarioUncheckedCreateWithoutSys_analytics_eventosInput>
+  connectOrCreate?: Prisma.SysUsuarioCreateOrConnectWithoutSys_analytics_eventosInput
+  upsert?: Prisma.SysUsuarioUpsertWithoutSys_analytics_eventosInput
+  disconnect?: Prisma.SysUsuarioWhereInput | boolean
+  delete?: Prisma.SysUsuarioWhereInput | boolean
+  connect?: Prisma.SysUsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SysUsuarioUpdateToOneWithWhereWithoutSys_analytics_eventosInput, Prisma.SysUsuarioUpdateWithoutSys_analytics_eventosInput>, Prisma.SysUsuarioUncheckedUpdateWithoutSys_analytics_eventosInput>
+}
+
 export type SysUsuarioCreateWithoutSys_usuario_tipoInput = {
   nome: string
   nickname: string
@@ -907,6 +930,7 @@ export type SysUsuarioCreateWithoutSys_usuario_tipoInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   avatar_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutSys_usuarios_avatarInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
@@ -932,6 +956,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_usuario_tipoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
@@ -1004,6 +1029,7 @@ export type SysUsuarioCreateWithoutSys_auth_userInput = {
   deleted_at?: Date | string | null
   sys_usuario_tipo: Prisma.SysUsuarioTipoCreateNestedOneWithoutSys_usuariosInput
   avatar_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutSys_usuarios_avatarInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoCreateNestedManyWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeCreateNestedManyWithoutSys_usuarioInput
@@ -1029,6 +1055,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_auth_userInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUncheckedCreateNestedManyWithoutSys_usuarioInput
@@ -1069,6 +1096,7 @@ export type SysUsuarioUpdateWithoutSys_auth_userInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_tipo?: Prisma.SysUsuarioTipoUpdateOneRequiredWithoutSys_usuariosNestedInput
   avatar_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutSys_usuarios_avatarNestedInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUpdateManyWithoutSys_usuarioNestedInput
@@ -1094,6 +1122,7 @@ export type SysUsuarioUncheckedUpdateWithoutSys_auth_userInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUncheckedUpdateManyWithoutSys_usuarioNestedInput
@@ -1118,6 +1147,7 @@ export type SysUsuarioCreateWithoutSys_auth_login_logsInput = {
   deleted_at?: Date | string | null
   sys_usuario_tipo: Prisma.SysUsuarioTipoCreateNestedOneWithoutSys_usuariosInput
   avatar_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutSys_usuarios_avatarInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeCreateNestedManyWithoutSys_usuarioInput
@@ -1143,6 +1173,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_auth_login_logsInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUncheckedCreateNestedManyWithoutSys_usuarioInput
@@ -1183,6 +1214,7 @@ export type SysUsuarioUpdateWithoutSys_auth_login_logsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_tipo?: Prisma.SysUsuarioTipoUpdateOneRequiredWithoutSys_usuariosNestedInput
   avatar_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutSys_usuarios_avatarNestedInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUpdateManyWithoutSys_usuarioNestedInput
@@ -1208,6 +1240,7 @@ export type SysUsuarioUncheckedUpdateWithoutSys_auth_login_logsInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUncheckedUpdateManyWithoutSys_usuarioNestedInput
@@ -1232,6 +1265,7 @@ export type SysUsuarioCreateWithoutSys_email_logsInput = {
   deleted_at?: Date | string | null
   sys_usuario_tipo: Prisma.SysUsuarioTipoCreateNestedOneWithoutSys_usuariosInput
   avatar_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutSys_usuarios_avatarInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeCreateNestedManyWithoutSys_usuarioInput
@@ -1257,6 +1291,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_email_logsInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUncheckedCreateNestedManyWithoutSys_usuarioInput
@@ -1297,6 +1332,7 @@ export type SysUsuarioUpdateWithoutSys_email_logsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_tipo?: Prisma.SysUsuarioTipoUpdateOneRequiredWithoutSys_usuariosNestedInput
   avatar_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutSys_usuarios_avatarNestedInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUpdateManyWithoutSys_usuarioNestedInput
@@ -1322,6 +1358,7 @@ export type SysUsuarioUncheckedUpdateWithoutSys_email_logsInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUncheckedUpdateManyWithoutSys_usuarioNestedInput
@@ -1346,6 +1383,7 @@ export type SysUsuarioCreateWithoutSys_email_verification_codesInput = {
   deleted_at?: Date | string | null
   sys_usuario_tipo: Prisma.SysUsuarioTipoCreateNestedOneWithoutSys_usuariosInput
   avatar_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutSys_usuarios_avatarInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
@@ -1371,6 +1409,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_email_verification_codesInput = 
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
@@ -1411,6 +1450,7 @@ export type SysUsuarioUpdateWithoutSys_email_verification_codesInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_tipo?: Prisma.SysUsuarioTipoUpdateOneRequiredWithoutSys_usuariosNestedInput
   avatar_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutSys_usuarios_avatarNestedInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
@@ -1436,6 +1476,7 @@ export type SysUsuarioUncheckedUpdateWithoutSys_email_verification_codesInput = 
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
@@ -1460,6 +1501,7 @@ export type SysUsuarioCreateWithoutSys_arquivos_criadosInput = {
   deleted_at?: Date | string | null
   sys_usuario_tipo: Prisma.SysUsuarioTipoCreateNestedOneWithoutSys_usuariosInput
   avatar_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutSys_usuarios_avatarInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
@@ -1485,6 +1527,7 @@ export type SysUsuarioUncheckedCreateWithoutSys_arquivos_criadosInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
@@ -1513,6 +1556,7 @@ export type SysUsuarioCreateWithoutAvatar_sys_arquivoInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   sys_usuario_tipo: Prisma.SysUsuarioTipoCreateNestedOneWithoutSys_usuariosInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
@@ -1538,6 +1582,7 @@ export type SysUsuarioUncheckedCreateWithoutAvatar_sys_arquivoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
@@ -1584,6 +1629,7 @@ export type SysUsuarioUpdateWithoutSys_arquivos_criadosInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_tipo?: Prisma.SysUsuarioTipoUpdateOneRequiredWithoutSys_usuariosNestedInput
   avatar_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutSys_usuarios_avatarNestedInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
@@ -1609,6 +1655,7 @@ export type SysUsuarioUncheckedUpdateWithoutSys_arquivos_criadosInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
@@ -1649,6 +1696,7 @@ export type SysUsuarioCreateWithoutSoc_sociosInput = {
   deleted_at?: Date | string | null
   sys_usuario_tipo: Prisma.SysUsuarioTipoCreateNestedOneWithoutSys_usuariosInput
   avatar_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutSys_usuarios_avatarInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
@@ -1674,6 +1722,7 @@ export type SysUsuarioUncheckedCreateWithoutSoc_sociosInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
@@ -1714,6 +1763,7 @@ export type SysUsuarioUpdateWithoutSoc_sociosInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_tipo?: Prisma.SysUsuarioTipoUpdateOneRequiredWithoutSys_usuariosNestedInput
   avatar_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutSys_usuarios_avatarNestedInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
@@ -1739,6 +1789,7 @@ export type SysUsuarioUncheckedUpdateWithoutSoc_sociosInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
@@ -1763,6 +1814,7 @@ export type SysUsuarioCreateWithoutVnd_pedidosInput = {
   deleted_at?: Date | string | null
   sys_usuario_tipo: Prisma.SysUsuarioTipoCreateNestedOneWithoutSys_usuariosInput
   avatar_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutSys_usuarios_avatarInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
@@ -1788,6 +1840,7 @@ export type SysUsuarioUncheckedCreateWithoutVnd_pedidosInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
@@ -1828,6 +1881,7 @@ export type SysUsuarioUpdateWithoutVnd_pedidosInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_tipo?: Prisma.SysUsuarioTipoUpdateOneRequiredWithoutSys_usuariosNestedInput
   avatar_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutSys_usuarios_avatarNestedInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
@@ -1853,6 +1907,7 @@ export type SysUsuarioUncheckedUpdateWithoutVnd_pedidosInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
@@ -1877,6 +1932,7 @@ export type SysUsuarioCreateWithoutVnd_pedido_historicos_operadosInput = {
   deleted_at?: Date | string | null
   sys_usuario_tipo: Prisma.SysUsuarioTipoCreateNestedOneWithoutSys_usuariosInput
   avatar_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutSys_usuarios_avatarInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
@@ -1902,6 +1958,7 @@ export type SysUsuarioUncheckedCreateWithoutVnd_pedido_historicos_operadosInput 
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
@@ -1942,6 +1999,7 @@ export type SysUsuarioUpdateWithoutVnd_pedido_historicos_operadosInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_tipo?: Prisma.SysUsuarioTipoUpdateOneRequiredWithoutSys_usuariosNestedInput
   avatar_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutSys_usuarios_avatarNestedInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
@@ -1967,6 +2025,7 @@ export type SysUsuarioUncheckedUpdateWithoutVnd_pedido_historicos_operadosInput 
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
@@ -1974,6 +2033,124 @@ export type SysUsuarioUncheckedUpdateWithoutVnd_pedido_historicos_operadosInput 
   sys_arquivos_criados?: Prisma.SysArquivoUncheckedUpdateManyWithoutCreated_by_sys_usuarioNestedInput
   vnd_pedidos?: Prisma.VndPedidoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   soc_socios?: Prisma.SocSocioUncheckedUpdateManyWithoutSys_usuarioNestedInput
+}
+
+export type SysUsuarioCreateWithoutSys_analytics_eventosInput = {
+  nome: string
+  nickname: string
+  email: string
+  telefone?: string | null
+  documento?: string | null
+  ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_usuario_tipo: Prisma.SysUsuarioTipoCreateNestedOneWithoutSys_usuariosInput
+  avatar_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutSys_usuarios_avatarInput
+  sys_auth_user?: Prisma.UserCreateNestedOneWithoutSys_usuarioInput
+  sys_auth_login_logs?: Prisma.SysAuthLoginLogCreateNestedManyWithoutSys_usuarioInput
+  sys_email_logs?: Prisma.SysEmailLogCreateNestedManyWithoutSys_usuarioInput
+  sys_email_verification_codes?: Prisma.SysEmailVerificationCodeCreateNestedManyWithoutSys_usuarioInput
+  sys_arquivos_criados?: Prisma.SysArquivoCreateNestedManyWithoutCreated_by_sys_usuarioInput
+  vnd_pedidos?: Prisma.VndPedidoCreateNestedManyWithoutSys_usuarioInput
+  soc_socios?: Prisma.SocSocioCreateNestedManyWithoutSys_usuarioInput
+  vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoCreateNestedManyWithoutSys_usuario_operadorInput
+}
+
+export type SysUsuarioUncheckedCreateWithoutSys_analytics_eventosInput = {
+  id?: number
+  sys_usuario_tipo_id: number
+  nome: string
+  nickname: string
+  email: string
+  telefone?: string | null
+  documento?: string | null
+  avatar_sys_arquivo_id?: number | null
+  ativo?: number
+  perfil_completo?: number
+  email_verificado_at?: Date | string | null
+  ultimo_login_at?: Date | string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  sys_auth_user?: Prisma.UserUncheckedCreateNestedOneWithoutSys_usuarioInput
+  sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_email_logs?: Prisma.SysEmailLogUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUncheckedCreateNestedManyWithoutSys_usuarioInput
+  sys_arquivos_criados?: Prisma.SysArquivoUncheckedCreateNestedManyWithoutCreated_by_sys_usuarioInput
+  vnd_pedidos?: Prisma.VndPedidoUncheckedCreateNestedManyWithoutSys_usuarioInput
+  soc_socios?: Prisma.SocSocioUncheckedCreateNestedManyWithoutSys_usuarioInput
+  vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedCreateNestedManyWithoutSys_usuario_operadorInput
+}
+
+export type SysUsuarioCreateOrConnectWithoutSys_analytics_eventosInput = {
+  where: Prisma.SysUsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.SysUsuarioCreateWithoutSys_analytics_eventosInput, Prisma.SysUsuarioUncheckedCreateWithoutSys_analytics_eventosInput>
+}
+
+export type SysUsuarioUpsertWithoutSys_analytics_eventosInput = {
+  update: Prisma.XOR<Prisma.SysUsuarioUpdateWithoutSys_analytics_eventosInput, Prisma.SysUsuarioUncheckedUpdateWithoutSys_analytics_eventosInput>
+  create: Prisma.XOR<Prisma.SysUsuarioCreateWithoutSys_analytics_eventosInput, Prisma.SysUsuarioUncheckedCreateWithoutSys_analytics_eventosInput>
+  where?: Prisma.SysUsuarioWhereInput
+}
+
+export type SysUsuarioUpdateToOneWithWhereWithoutSys_analytics_eventosInput = {
+  where?: Prisma.SysUsuarioWhereInput
+  data: Prisma.XOR<Prisma.SysUsuarioUpdateWithoutSys_analytics_eventosInput, Prisma.SysUsuarioUncheckedUpdateWithoutSys_analytics_eventosInput>
+}
+
+export type SysUsuarioUpdateWithoutSys_analytics_eventosInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  nickname?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_usuario_tipo?: Prisma.SysUsuarioTipoUpdateOneRequiredWithoutSys_usuariosNestedInput
+  avatar_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutSys_usuarios_avatarNestedInput
+  sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
+  sys_auth_login_logs?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
+  sys_email_logs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
+  sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUpdateManyWithoutSys_usuarioNestedInput
+  sys_arquivos_criados?: Prisma.SysArquivoUpdateManyWithoutCreated_by_sys_usuarioNestedInput
+  vnd_pedidos?: Prisma.VndPedidoUpdateManyWithoutSys_usuarioNestedInput
+  soc_socios?: Prisma.SocSocioUpdateManyWithoutSys_usuarioNestedInput
+  vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUpdateManyWithoutSys_usuario_operadorNestedInput
+}
+
+export type SysUsuarioUncheckedUpdateWithoutSys_analytics_eventosInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_usuario_tipo_id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  nickname?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  perfil_completo?: Prisma.IntFieldUpdateOperationsInput | number
+  email_verificado_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ultimo_login_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
+  sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_email_logs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_email_verification_codes?: Prisma.SysEmailVerificationCodeUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  sys_arquivos_criados?: Prisma.SysArquivoUncheckedUpdateManyWithoutCreated_by_sys_usuarioNestedInput
+  vnd_pedidos?: Prisma.VndPedidoUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  soc_socios?: Prisma.SocSocioUncheckedUpdateManyWithoutSys_usuarioNestedInput
+  vnd_pedido_historicos_operados?: Prisma.VndPedidoHistoricoUncheckedUpdateManyWithoutSys_usuario_operadorNestedInput
 }
 
 export type SysUsuarioCreateManySys_usuario_tipoInput = {
@@ -2007,6 +2184,7 @@ export type SysUsuarioUpdateWithoutSys_usuario_tipoInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   avatar_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutSys_usuarios_avatarNestedInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
@@ -2032,6 +2210,7 @@ export type SysUsuarioUncheckedUpdateWithoutSys_usuario_tipoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
@@ -2090,6 +2269,7 @@ export type SysUsuarioUpdateWithoutAvatar_sys_arquivoInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sys_usuario_tipo?: Prisma.SysUsuarioTipoUpdateOneRequiredWithoutSys_usuariosNestedInput
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUpdateManyWithoutSys_usuarioNestedInput
@@ -2115,6 +2295,7 @@ export type SysUsuarioUncheckedUpdateWithoutAvatar_sys_arquivoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_analytics_eventos?: Prisma.SysAnalyticsEventoUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_auth_user?: Prisma.UserUncheckedUpdateOneWithoutSys_usuarioNestedInput
   sys_auth_login_logs?: Prisma.SysAuthLoginLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
   sys_email_logs?: Prisma.SysEmailLogUncheckedUpdateManyWithoutSys_usuarioNestedInput
@@ -2148,6 +2329,7 @@ export type SysUsuarioUncheckedUpdateManyWithoutAvatar_sys_arquivoInput = {
  */
 
 export type SysUsuarioCountOutputType = {
+  sys_analytics_eventos: number
   sys_auth_login_logs: number
   sys_email_logs: number
   sys_email_verification_codes: number
@@ -2158,6 +2340,7 @@ export type SysUsuarioCountOutputType = {
 }
 
 export type SysUsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  sys_analytics_eventos?: boolean | SysUsuarioCountOutputTypeCountSys_analytics_eventosArgs
   sys_auth_login_logs?: boolean | SysUsuarioCountOutputTypeCountSys_auth_login_logsArgs
   sys_email_logs?: boolean | SysUsuarioCountOutputTypeCountSys_email_logsArgs
   sys_email_verification_codes?: boolean | SysUsuarioCountOutputTypeCountSys_email_verification_codesArgs
@@ -2175,6 +2358,13 @@ export type SysUsuarioCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.E
    * Select specific fields to fetch from the SysUsuarioCountOutputType
    */
   select?: Prisma.SysUsuarioCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * SysUsuarioCountOutputType without action
+ */
+export type SysUsuarioCountOutputTypeCountSys_analytics_eventosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SysAnalyticsEventoWhereInput
 }
 
 /**
@@ -2245,6 +2435,7 @@ export type SysUsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   deleted_at?: boolean
   sys_usuario_tipo?: boolean | Prisma.SysUsuarioTipoDefaultArgs<ExtArgs>
   avatar_sys_arquivo?: boolean | Prisma.SysUsuario$avatar_sys_arquivoArgs<ExtArgs>
+  sys_analytics_eventos?: boolean | Prisma.SysUsuario$sys_analytics_eventosArgs<ExtArgs>
   sys_auth_user?: boolean | Prisma.SysUsuario$sys_auth_userArgs<ExtArgs>
   sys_auth_login_logs?: boolean | Prisma.SysUsuario$sys_auth_login_logsArgs<ExtArgs>
   sys_email_logs?: boolean | Prisma.SysUsuario$sys_email_logsArgs<ExtArgs>
@@ -2280,6 +2471,7 @@ export type SysUsuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type SysUsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sys_usuario_tipo?: boolean | Prisma.SysUsuarioTipoDefaultArgs<ExtArgs>
   avatar_sys_arquivo?: boolean | Prisma.SysUsuario$avatar_sys_arquivoArgs<ExtArgs>
+  sys_analytics_eventos?: boolean | Prisma.SysUsuario$sys_analytics_eventosArgs<ExtArgs>
   sys_auth_user?: boolean | Prisma.SysUsuario$sys_auth_userArgs<ExtArgs>
   sys_auth_login_logs?: boolean | Prisma.SysUsuario$sys_auth_login_logsArgs<ExtArgs>
   sys_email_logs?: boolean | Prisma.SysUsuario$sys_email_logsArgs<ExtArgs>
@@ -2296,6 +2488,7 @@ export type $SysUsuarioPayload<ExtArgs extends runtime.Types.Extensions.Internal
   objects: {
     sys_usuario_tipo: Prisma.$SysUsuarioTipoPayload<ExtArgs>
     avatar_sys_arquivo: Prisma.$SysArquivoPayload<ExtArgs> | null
+    sys_analytics_eventos: Prisma.$SysAnalyticsEventoPayload<ExtArgs>[]
     sys_auth_user: Prisma.$UserPayload<ExtArgs> | null
     sys_auth_login_logs: Prisma.$SysAuthLoginLogPayload<ExtArgs>[]
     sys_email_logs: Prisma.$SysEmailLogPayload<ExtArgs>[]
@@ -2663,6 +2856,7 @@ export interface Prisma__SysUsuarioClient<T, Null = never, ExtArgs extends runti
   readonly [Symbol.toStringTag]: "PrismaPromise"
   sys_usuario_tipo<T extends Prisma.SysUsuarioTipoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuarioTipoDefaultArgs<ExtArgs>>): Prisma.Prisma__SysUsuarioTipoClient<runtime.Types.Result.GetResult<Prisma.$SysUsuarioTipoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   avatar_sys_arquivo<T extends Prisma.SysUsuario$avatar_sys_arquivoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$avatar_sys_arquivoArgs<ExtArgs>>): Prisma.Prisma__SysArquivoClient<runtime.Types.Result.GetResult<Prisma.$SysArquivoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  sys_analytics_eventos<T extends Prisma.SysUsuario$sys_analytics_eventosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$sys_analytics_eventosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysAnalyticsEventoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sys_auth_user<T extends Prisma.SysUsuario$sys_auth_userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$sys_auth_userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   sys_auth_login_logs<T extends Prisma.SysUsuario$sys_auth_login_logsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$sys_auth_login_logsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysAuthLoginLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sys_email_logs<T extends Prisma.SysUsuario$sys_email_logsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysUsuario$sys_email_logsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SysEmailLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3079,6 +3273,30 @@ export type SysUsuario$avatar_sys_arquivoArgs<ExtArgs extends runtime.Types.Exte
    */
   include?: Prisma.SysArquivoInclude<ExtArgs> | null
   where?: Prisma.SysArquivoWhereInput
+}
+
+/**
+ * SysUsuario.sys_analytics_eventos
+ */
+export type SysUsuario$sys_analytics_eventosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SysAnalyticsEvento
+   */
+  select?: Prisma.SysAnalyticsEventoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SysAnalyticsEvento
+   */
+  omit?: Prisma.SysAnalyticsEventoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SysAnalyticsEventoInclude<ExtArgs> | null
+  where?: Prisma.SysAnalyticsEventoWhereInput
+  orderBy?: Prisma.SysAnalyticsEventoOrderByWithRelationInput | Prisma.SysAnalyticsEventoOrderByWithRelationInput[]
+  cursor?: Prisma.SysAnalyticsEventoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SysAnalyticsEventoScalarFieldEnum | Prisma.SysAnalyticsEventoScalarFieldEnum[]
 }
 
 /**

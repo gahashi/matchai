@@ -435,7 +435,8 @@ export const ModelName = {
   VndPedidoHistorico: 'VndPedidoHistorico',
   FinPagamentoStatus: 'FinPagamentoStatus',
   FinPagamentoMetodo: 'FinPagamentoMetodo',
-  FinPagamento: 'FinPagamento'
+  FinPagamento: 'FinPagamento',
+  SysAnalyticsEvento: 'SysAnalyticsEvento'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -451,7 +452,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "sysUsuarioTipo" | "sysUsuario" | "user" | "session" | "account" | "verification" | "sysAuthLoginLog" | "sysEmailLog" | "sysEmailVerificationCode" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivo" | "cadLink" | "cadEvento" | "prdProdutoTipo" | "prdProduto" | "prdProdutoImagem" | "prdProdutoVariacao" | "prdProdutoComponente" | "prdProdutoCampo" | "vndCampanhaStatus" | "vndCampanha" | "vndCampanhaProduto" | "socSocioStatus" | "socSocioOrigem" | "socPlano" | "socSocio" | "vndPedidoStatus" | "vndEntregaTipo" | "vndPedido" | "vndPedidoItem" | "vndPedidoItemComponente" | "vndPedidoItemCampo" | "vndEstoqueReserva" | "vndPedidoHistorico" | "finPagamentoStatus" | "finPagamentoMetodo" | "finPagamento"
+    modelProps: "sysUsuarioTipo" | "sysUsuario" | "user" | "session" | "account" | "verification" | "sysAuthLoginLog" | "sysEmailLog" | "sysEmailVerificationCode" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivo" | "cadLink" | "cadEvento" | "prdProdutoTipo" | "prdProduto" | "prdProdutoImagem" | "prdProdutoVariacao" | "prdProdutoComponente" | "prdProdutoCampo" | "vndCampanhaStatus" | "vndCampanha" | "vndCampanhaProduto" | "socSocioStatus" | "socSocioOrigem" | "socPlano" | "socSocio" | "vndPedidoStatus" | "vndEntregaTipo" | "vndPedido" | "vndPedidoItem" | "vndPedidoItemComponente" | "vndPedidoItemCampo" | "vndEstoqueReserva" | "vndPedidoHistorico" | "finPagamentoStatus" | "finPagamentoMetodo" | "finPagamento" | "sysAnalyticsEvento"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3029,6 +3030,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SysAnalyticsEvento: {
+      payload: Prisma.$SysAnalyticsEventoPayload<ExtArgs>
+      fields: Prisma.SysAnalyticsEventoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SysAnalyticsEventoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAnalyticsEventoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SysAnalyticsEventoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAnalyticsEventoPayload>
+        }
+        findFirst: {
+          args: Prisma.SysAnalyticsEventoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAnalyticsEventoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SysAnalyticsEventoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAnalyticsEventoPayload>
+        }
+        findMany: {
+          args: Prisma.SysAnalyticsEventoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAnalyticsEventoPayload>[]
+        }
+        create: {
+          args: Prisma.SysAnalyticsEventoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAnalyticsEventoPayload>
+        }
+        createMany: {
+          args: Prisma.SysAnalyticsEventoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SysAnalyticsEventoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAnalyticsEventoPayload>
+        }
+        update: {
+          args: Prisma.SysAnalyticsEventoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAnalyticsEventoPayload>
+        }
+        deleteMany: {
+          args: Prisma.SysAnalyticsEventoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SysAnalyticsEventoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SysAnalyticsEventoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SysAnalyticsEventoPayload>
+        }
+        aggregate: {
+          args: Prisma.SysAnalyticsEventoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSysAnalyticsEvento>
+        }
+        groupBy: {
+          args: Prisma.SysAnalyticsEventoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysAnalyticsEventoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SysAnalyticsEventoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SysAnalyticsEventoCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3724,6 +3791,22 @@ export const FinPagamentoScalarFieldEnum = {
 export type FinPagamentoScalarFieldEnum = (typeof FinPagamentoScalarFieldEnum)[keyof typeof FinPagamentoScalarFieldEnum]
 
 
+export const SysAnalyticsEventoScalarFieldEnum = {
+  id: 'id',
+  sys_usuario_id: 'sys_usuario_id',
+  session_id: 'session_id',
+  tipo: 'tipo',
+  nome: 'nome',
+  rota: 'rota',
+  rota_anterior: 'rota_anterior',
+  entidade_tipo: 'entidade_tipo',
+  entidade_id: 'entidade_id',
+  created_at: 'created_at'
+} as const
+
+export type SysAnalyticsEventoScalarFieldEnum = (typeof SysAnalyticsEventoScalarFieldEnum)[keyof typeof SysAnalyticsEventoScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -4103,6 +4186,18 @@ export const FinPagamentoOrderByRelevanceFieldEnum = {
 export type FinPagamentoOrderByRelevanceFieldEnum = (typeof FinPagamentoOrderByRelevanceFieldEnum)[keyof typeof FinPagamentoOrderByRelevanceFieldEnum]
 
 
+export const SysAnalyticsEventoOrderByRelevanceFieldEnum = {
+  session_id: 'session_id',
+  tipo: 'tipo',
+  nome: 'nome',
+  rota: 'rota',
+  rota_anterior: 'rota_anterior',
+  entidade_tipo: 'entidade_tipo'
+} as const
+
+export type SysAnalyticsEventoOrderByRelevanceFieldEnum = (typeof SysAnalyticsEventoOrderByRelevanceFieldEnum)[keyof typeof SysAnalyticsEventoOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -4340,6 +4435,7 @@ export type GlobalOmitConfig = {
   finPagamentoStatus?: Prisma.FinPagamentoStatusOmit
   finPagamentoMetodo?: Prisma.FinPagamentoMetodoOmit
   finPagamento?: Prisma.FinPagamentoOmit
+  sysAnalyticsEvento?: Prisma.SysAnalyticsEventoOmit
 }
 
 /* Types for Logging */

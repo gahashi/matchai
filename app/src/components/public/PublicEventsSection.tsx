@@ -12,6 +12,9 @@ import {
 import type {
     PublicEvento,
 } from "@/lib/cad/evento-public-types";
+import {
+    trackAnalyticsClick,
+} from "@/lib/analytics/track-analytics-click";
 
 function formatEventDate(value: string | null) {
     if (!value) return "Data em breve";
@@ -166,6 +169,18 @@ export function PublicEventsSection({
                                 rel="noreferrer noopener"
                                 className="bp-public-event-card is-link"
                                 aria-label={`Acessar evento ${evento.titulo}`}
+                                onClick={() => {
+                                    trackAnalyticsClick({
+                                        nome:
+                                            "evento_click",
+
+                                        entidadeTipo:
+                                            "evento",
+
+                                        entidadeId:
+                                        evento.id,
+                                    });
+                                }}
                             >
                                 <EventCardContent
                                     evento={evento}

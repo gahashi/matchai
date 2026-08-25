@@ -20,6 +20,7 @@ import {
 import type {
     PublicPlanoSocio,
 } from "@/lib/soc/plano-public-types";
+import {trackAnalyticsClick} from "@/lib/analytics/track-analytics-click";
 
 type MembershipState = {
     isAuthenticated: boolean;
@@ -145,9 +146,20 @@ export function PublicPlansSection({
                                     key={plano.id}
                                     type="button"
                                     className="bp-public-plan-card"
-                                    onClick={() =>
-                                        setSelected(plano)
-                                    }
+                                    onClick={() => {
+                                        trackAnalyticsClick({
+                                            nome:
+                                                "plano_click",
+
+                                            entidadeTipo:
+                                                "plano",
+
+                                            entidadeId:
+                                            plano.id,
+                                        });
+
+                                        setSelected(plano);
+                                    }}
                                 >
                                     <div className="bp-public-plan-media">
                                         {plano.imagem_publica_url ? (

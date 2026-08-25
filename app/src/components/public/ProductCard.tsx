@@ -28,6 +28,9 @@ import type {
     PublicProdutoCampo,
     PublicProdutoComponente,
 } from "@/lib/prd/produto-public-types";
+import {
+    trackAnalyticsClick,
+} from "@/lib/analytics/track-analytics-click";
 
 function money(value: number) {
     return new Intl.NumberFormat("pt-BR", {
@@ -395,6 +398,17 @@ export function ProductCard({
     }
 
     function openPreview() {
+        trackAnalyticsClick({
+            nome:
+                "produto_click",
+
+            entidadeTipo:
+                "produto",
+
+            entidadeId:
+            produto.id,
+        });
+
         resetSelection();
         setPreviewOpen(true);
     }

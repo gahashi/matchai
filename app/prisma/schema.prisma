@@ -48,6 +48,7 @@ model SysUsuario {
 
   avatar_sys_arquivo SysArquivo? @relation("SysUsuarioAvatar", fields: [avatar_sys_arquivo_id], references: [id], onDelete: SetNull, onUpdate: Restrict)
 
+  sys_analytics_eventos        SysAnalyticsEvento[]
   sys_auth_user                User?
   sys_auth_login_logs          SysAuthLoginLog[]
   sys_email_logs               SysEmailLog[]
@@ -1133,4 +1134,34 @@ model FinPagamento {
   @@index([provider, external_id])
   @@index([created_at])
   @@map("fin_pagamento")
+}
+
+model SysAnalyticsEvento {
+  id Int @id @default(autoincrement())
+
+  sys_usuario_id Int?
+
+  session_id String @db.VarChar(100)
+
+  tipo String  @db.VarChar(40)
+  nome String? @db.VarChar(100)
+
+  rota          String  @db.VarChar(500)
+  rota_anterior String? @db.VarChar(500)
+
+  entidade_tipo String? @db.VarChar(50)
+  entidade_id   Int?
+
+  created_at DateTime @default(now()) @db.DateTime(0)
+
+  sys_usuario SysUsuario? @relation(fields: [sys_usuario_id], references: [id], onDelete: SetNull, onUpdate: Restrict)
+
+  @@index([sys_usuario_id])
+  @@index([session_id])
+  @@index([tipo])
+  @@index([nome])
+  @@index([rota])
+  @@index([entidade_tipo, entidade_id])
+  @@index([created_at])
+  @@map("sys_analytics_evento")
 }

@@ -89,7 +89,8 @@ export const ModelName = {
   VndPedidoHistorico: 'VndPedidoHistorico',
   FinPagamentoStatus: 'FinPagamentoStatus',
   FinPagamentoMetodo: 'FinPagamentoMetodo',
-  FinPagamento: 'FinPagamento'
+  FinPagamento: 'FinPagamento',
+  SysAnalyticsEvento: 'SysAnalyticsEvento'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -764,6 +765,22 @@ export const FinPagamentoScalarFieldEnum = {
 export type FinPagamentoScalarFieldEnum = (typeof FinPagamentoScalarFieldEnum)[keyof typeof FinPagamentoScalarFieldEnum]
 
 
+export const SysAnalyticsEventoScalarFieldEnum = {
+  id: 'id',
+  sys_usuario_id: 'sys_usuario_id',
+  session_id: 'session_id',
+  tipo: 'tipo',
+  nome: 'nome',
+  rota: 'rota',
+  rota_anterior: 'rota_anterior',
+  entidade_tipo: 'entidade_tipo',
+  entidade_id: 'entidade_id',
+  created_at: 'created_at'
+} as const
+
+export type SysAnalyticsEventoScalarFieldEnum = (typeof SysAnalyticsEventoScalarFieldEnum)[keyof typeof SysAnalyticsEventoScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1141,4 +1158,16 @@ export const FinPagamentoOrderByRelevanceFieldEnum = {
 } as const
 
 export type FinPagamentoOrderByRelevanceFieldEnum = (typeof FinPagamentoOrderByRelevanceFieldEnum)[keyof typeof FinPagamentoOrderByRelevanceFieldEnum]
+
+
+export const SysAnalyticsEventoOrderByRelevanceFieldEnum = {
+  session_id: 'session_id',
+  tipo: 'tipo',
+  nome: 'nome',
+  rota: 'rota',
+  rota_anterior: 'rota_anterior',
+  entidade_tipo: 'entidade_tipo'
+} as const
+
+export type SysAnalyticsEventoOrderByRelevanceFieldEnum = (typeof SysAnalyticsEventoOrderByRelevanceFieldEnum)[keyof typeof SysAnalyticsEventoOrderByRelevanceFieldEnum]
 
