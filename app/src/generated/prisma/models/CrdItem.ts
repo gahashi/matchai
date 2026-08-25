@@ -299,6 +299,7 @@ export type CrdItemWhereInput = {
   par_parceiro?: Prisma.XOR<Prisma.ParParceiroScalarRelationFilter, Prisma.ParParceiroWhereInput>
   crd_categoria?: Prisma.XOR<Prisma.CrdCategoriaScalarRelationFilter, Prisma.CrdCategoriaWhereInput>
   imagem_sys_arquivo?: Prisma.XOR<Prisma.SysArquivoNullableScalarRelationFilter, Prisma.SysArquivoWhereInput> | null
+  crd_promocao_itens?: Prisma.CrdPromocaoItemListRelationFilter
 }
 
 export type CrdItemOrderByWithRelationInput = {
@@ -317,6 +318,7 @@ export type CrdItemOrderByWithRelationInput = {
   par_parceiro?: Prisma.ParParceiroOrderByWithRelationInput
   crd_categoria?: Prisma.CrdCategoriaOrderByWithRelationInput
   imagem_sys_arquivo?: Prisma.SysArquivoOrderByWithRelationInput
+  crd_promocao_itens?: Prisma.CrdPromocaoItemOrderByRelationAggregateInput
   _relevance?: Prisma.CrdItemOrderByRelevanceInput
 }
 
@@ -339,6 +341,7 @@ export type CrdItemWhereUniqueInput = Prisma.AtLeast<{
   par_parceiro?: Prisma.XOR<Prisma.ParParceiroScalarRelationFilter, Prisma.ParParceiroWhereInput>
   crd_categoria?: Prisma.XOR<Prisma.CrdCategoriaScalarRelationFilter, Prisma.CrdCategoriaWhereInput>
   imagem_sys_arquivo?: Prisma.XOR<Prisma.SysArquivoNullableScalarRelationFilter, Prisma.SysArquivoWhereInput> | null
+  crd_promocao_itens?: Prisma.CrdPromocaoItemListRelationFilter
 }, "id">
 
 export type CrdItemOrderByWithAggregationInput = {
@@ -391,6 +394,7 @@ export type CrdItemCreateInput = {
   par_parceiro: Prisma.ParParceiroCreateNestedOneWithoutCrd_itensInput
   crd_categoria: Prisma.CrdCategoriaCreateNestedOneWithoutCrd_itensInput
   imagem_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutCrd_itens_imagemInput
+  crd_promocao_itens?: Prisma.CrdPromocaoItemCreateNestedManyWithoutCrd_itemInput
 }
 
 export type CrdItemUncheckedCreateInput = {
@@ -406,6 +410,7 @@ export type CrdItemUncheckedCreateInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedCreateNestedManyWithoutCrd_itemInput
 }
 
 export type CrdItemUpdateInput = {
@@ -420,6 +425,7 @@ export type CrdItemUpdateInput = {
   par_parceiro?: Prisma.ParParceiroUpdateOneRequiredWithoutCrd_itensNestedInput
   crd_categoria?: Prisma.CrdCategoriaUpdateOneRequiredWithoutCrd_itensNestedInput
   imagem_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutCrd_itens_imagemNestedInput
+  crd_promocao_itens?: Prisma.CrdPromocaoItemUpdateManyWithoutCrd_itemNestedInput
 }
 
 export type CrdItemUncheckedUpdateInput = {
@@ -435,6 +441,7 @@ export type CrdItemUncheckedUpdateInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedUpdateManyWithoutCrd_itemNestedInput
 }
 
 export type CrdItemCreateManyInput = {
@@ -557,6 +564,11 @@ export type CrdItemSumOrderByAggregateInput = {
   preco?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
+}
+
+export type CrdItemScalarRelationFilter = {
+  is?: Prisma.CrdItemWhereInput
+  isNot?: Prisma.CrdItemWhereInput
 }
 
 export type CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput = {
@@ -693,6 +705,20 @@ export type DecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type CrdItemCreateNestedOneWithoutCrd_promocao_itensInput = {
+  create?: Prisma.XOR<Prisma.CrdItemCreateWithoutCrd_promocao_itensInput, Prisma.CrdItemUncheckedCreateWithoutCrd_promocao_itensInput>
+  connectOrCreate?: Prisma.CrdItemCreateOrConnectWithoutCrd_promocao_itensInput
+  connect?: Prisma.CrdItemWhereUniqueInput
+}
+
+export type CrdItemUpdateOneRequiredWithoutCrd_promocao_itensNestedInput = {
+  create?: Prisma.XOR<Prisma.CrdItemCreateWithoutCrd_promocao_itensInput, Prisma.CrdItemUncheckedCreateWithoutCrd_promocao_itensInput>
+  connectOrCreate?: Prisma.CrdItemCreateOrConnectWithoutCrd_promocao_itensInput
+  upsert?: Prisma.CrdItemUpsertWithoutCrd_promocao_itensInput
+  connect?: Prisma.CrdItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CrdItemUpdateToOneWithWhereWithoutCrd_promocao_itensInput, Prisma.CrdItemUpdateWithoutCrd_promocao_itensInput>, Prisma.CrdItemUncheckedUpdateWithoutCrd_promocao_itensInput>
+}
+
 export type CrdItemCreateWithoutImagem_sys_arquivoInput = {
   nome: string
   descricao?: string | null
@@ -704,6 +730,7 @@ export type CrdItemCreateWithoutImagem_sys_arquivoInput = {
   deleted_at?: Date | string | null
   par_parceiro: Prisma.ParParceiroCreateNestedOneWithoutCrd_itensInput
   crd_categoria: Prisma.CrdCategoriaCreateNestedOneWithoutCrd_itensInput
+  crd_promocao_itens?: Prisma.CrdPromocaoItemCreateNestedManyWithoutCrd_itemInput
 }
 
 export type CrdItemUncheckedCreateWithoutImagem_sys_arquivoInput = {
@@ -718,6 +745,7 @@ export type CrdItemUncheckedCreateWithoutImagem_sys_arquivoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedCreateNestedManyWithoutCrd_itemInput
 }
 
 export type CrdItemCreateOrConnectWithoutImagem_sys_arquivoInput = {
@@ -775,6 +803,7 @@ export type CrdItemCreateWithoutPar_parceiroInput = {
   deleted_at?: Date | string | null
   crd_categoria: Prisma.CrdCategoriaCreateNestedOneWithoutCrd_itensInput
   imagem_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutCrd_itens_imagemInput
+  crd_promocao_itens?: Prisma.CrdPromocaoItemCreateNestedManyWithoutCrd_itemInput
 }
 
 export type CrdItemUncheckedCreateWithoutPar_parceiroInput = {
@@ -789,6 +818,7 @@ export type CrdItemUncheckedCreateWithoutPar_parceiroInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedCreateNestedManyWithoutCrd_itemInput
 }
 
 export type CrdItemCreateOrConnectWithoutPar_parceiroInput = {
@@ -828,6 +858,7 @@ export type CrdItemCreateWithoutCrd_categoriaInput = {
   deleted_at?: Date | string | null
   par_parceiro: Prisma.ParParceiroCreateNestedOneWithoutCrd_itensInput
   imagem_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutCrd_itens_imagemInput
+  crd_promocao_itens?: Prisma.CrdPromocaoItemCreateNestedManyWithoutCrd_itemInput
 }
 
 export type CrdItemUncheckedCreateWithoutCrd_categoriaInput = {
@@ -842,6 +873,7 @@ export type CrdItemUncheckedCreateWithoutCrd_categoriaInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedCreateNestedManyWithoutCrd_itemInput
 }
 
 export type CrdItemCreateOrConnectWithoutCrd_categoriaInput = {
@@ -870,6 +902,80 @@ export type CrdItemUpdateManyWithWhereWithoutCrd_categoriaInput = {
   data: Prisma.XOR<Prisma.CrdItemUpdateManyMutationInput, Prisma.CrdItemUncheckedUpdateManyWithoutCrd_categoriaInput>
 }
 
+export type CrdItemCreateWithoutCrd_promocao_itensInput = {
+  nome: string
+  descricao?: string | null
+  preco: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ordem?: number
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  par_parceiro: Prisma.ParParceiroCreateNestedOneWithoutCrd_itensInput
+  crd_categoria: Prisma.CrdCategoriaCreateNestedOneWithoutCrd_itensInput
+  imagem_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutCrd_itens_imagemInput
+}
+
+export type CrdItemUncheckedCreateWithoutCrd_promocao_itensInput = {
+  id?: number
+  par_parceiro_id: number
+  crd_categoria_id: number
+  imagem_sys_arquivo_id?: number | null
+  nome: string
+  descricao?: string | null
+  preco: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ordem?: number
+  ativo?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+}
+
+export type CrdItemCreateOrConnectWithoutCrd_promocao_itensInput = {
+  where: Prisma.CrdItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.CrdItemCreateWithoutCrd_promocao_itensInput, Prisma.CrdItemUncheckedCreateWithoutCrd_promocao_itensInput>
+}
+
+export type CrdItemUpsertWithoutCrd_promocao_itensInput = {
+  update: Prisma.XOR<Prisma.CrdItemUpdateWithoutCrd_promocao_itensInput, Prisma.CrdItemUncheckedUpdateWithoutCrd_promocao_itensInput>
+  create: Prisma.XOR<Prisma.CrdItemCreateWithoutCrd_promocao_itensInput, Prisma.CrdItemUncheckedCreateWithoutCrd_promocao_itensInput>
+  where?: Prisma.CrdItemWhereInput
+}
+
+export type CrdItemUpdateToOneWithWhereWithoutCrd_promocao_itensInput = {
+  where?: Prisma.CrdItemWhereInput
+  data: Prisma.XOR<Prisma.CrdItemUpdateWithoutCrd_promocao_itensInput, Prisma.CrdItemUncheckedUpdateWithoutCrd_promocao_itensInput>
+}
+
+export type CrdItemUpdateWithoutCrd_promocao_itensInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preco?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  par_parceiro?: Prisma.ParParceiroUpdateOneRequiredWithoutCrd_itensNestedInput
+  crd_categoria?: Prisma.CrdCategoriaUpdateOneRequiredWithoutCrd_itensNestedInput
+  imagem_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutCrd_itens_imagemNestedInput
+}
+
+export type CrdItemUncheckedUpdateWithoutCrd_promocao_itensInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  par_parceiro_id?: Prisma.IntFieldUpdateOperationsInput | number
+  crd_categoria_id?: Prisma.IntFieldUpdateOperationsInput | number
+  imagem_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preco?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
 export type CrdItemCreateManyImagem_sys_arquivoInput = {
   id?: number
   par_parceiro_id: number
@@ -895,6 +1001,7 @@ export type CrdItemUpdateWithoutImagem_sys_arquivoInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   par_parceiro?: Prisma.ParParceiroUpdateOneRequiredWithoutCrd_itensNestedInput
   crd_categoria?: Prisma.CrdCategoriaUpdateOneRequiredWithoutCrd_itensNestedInput
+  crd_promocao_itens?: Prisma.CrdPromocaoItemUpdateManyWithoutCrd_itemNestedInput
 }
 
 export type CrdItemUncheckedUpdateWithoutImagem_sys_arquivoInput = {
@@ -909,6 +1016,7 @@ export type CrdItemUncheckedUpdateWithoutImagem_sys_arquivoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedUpdateManyWithoutCrd_itemNestedInput
 }
 
 export type CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoInput = {
@@ -950,6 +1058,7 @@ export type CrdItemUpdateWithoutPar_parceiroInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   crd_categoria?: Prisma.CrdCategoriaUpdateOneRequiredWithoutCrd_itensNestedInput
   imagem_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutCrd_itens_imagemNestedInput
+  crd_promocao_itens?: Prisma.CrdPromocaoItemUpdateManyWithoutCrd_itemNestedInput
 }
 
 export type CrdItemUncheckedUpdateWithoutPar_parceiroInput = {
@@ -964,6 +1073,7 @@ export type CrdItemUncheckedUpdateWithoutPar_parceiroInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedUpdateManyWithoutCrd_itemNestedInput
 }
 
 export type CrdItemUncheckedUpdateManyWithoutPar_parceiroInput = {
@@ -1005,6 +1115,7 @@ export type CrdItemUpdateWithoutCrd_categoriaInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   par_parceiro?: Prisma.ParParceiroUpdateOneRequiredWithoutCrd_itensNestedInput
   imagem_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutCrd_itens_imagemNestedInput
+  crd_promocao_itens?: Prisma.CrdPromocaoItemUpdateManyWithoutCrd_itemNestedInput
 }
 
 export type CrdItemUncheckedUpdateWithoutCrd_categoriaInput = {
@@ -1019,6 +1130,7 @@ export type CrdItemUncheckedUpdateWithoutCrd_categoriaInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedUpdateManyWithoutCrd_itemNestedInput
 }
 
 export type CrdItemUncheckedUpdateManyWithoutCrd_categoriaInput = {
@@ -1035,6 +1147,35 @@ export type CrdItemUncheckedUpdateManyWithoutCrd_categoriaInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
+
+/**
+ * Count Type CrdItemCountOutputType
+ */
+
+export type CrdItemCountOutputType = {
+  crd_promocao_itens: number
+}
+
+export type CrdItemCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  crd_promocao_itens?: boolean | CrdItemCountOutputTypeCountCrd_promocao_itensArgs
+}
+
+/**
+ * CrdItemCountOutputType without action
+ */
+export type CrdItemCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CrdItemCountOutputType
+   */
+  select?: Prisma.CrdItemCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * CrdItemCountOutputType without action
+ */
+export type CrdItemCountOutputTypeCountCrd_promocao_itensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CrdPromocaoItemWhereInput
+}
 
 
 export type CrdItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1053,6 +1194,8 @@ export type CrdItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   par_parceiro?: boolean | Prisma.ParParceiroDefaultArgs<ExtArgs>
   crd_categoria?: boolean | Prisma.CrdCategoriaDefaultArgs<ExtArgs>
   imagem_sys_arquivo?: boolean | Prisma.CrdItem$imagem_sys_arquivoArgs<ExtArgs>
+  crd_promocao_itens?: boolean | Prisma.CrdItem$crd_promocao_itensArgs<ExtArgs>
+  _count?: boolean | Prisma.CrdItemCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["crdItem"]>
 
 
@@ -1077,6 +1220,8 @@ export type CrdItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   par_parceiro?: boolean | Prisma.ParParceiroDefaultArgs<ExtArgs>
   crd_categoria?: boolean | Prisma.CrdCategoriaDefaultArgs<ExtArgs>
   imagem_sys_arquivo?: boolean | Prisma.CrdItem$imagem_sys_arquivoArgs<ExtArgs>
+  crd_promocao_itens?: boolean | Prisma.CrdItem$crd_promocao_itensArgs<ExtArgs>
+  _count?: boolean | Prisma.CrdItemCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $CrdItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1085,6 +1230,7 @@ export type $CrdItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     par_parceiro: Prisma.$ParParceiroPayload<ExtArgs>
     crd_categoria: Prisma.$CrdCategoriaPayload<ExtArgs>
     imagem_sys_arquivo: Prisma.$SysArquivoPayload<ExtArgs> | null
+    crd_promocao_itens: Prisma.$CrdPromocaoItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1442,6 +1588,7 @@ export interface Prisma__CrdItemClient<T, Null = never, ExtArgs extends runtime.
   par_parceiro<T extends Prisma.ParParceiroDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ParParceiroDefaultArgs<ExtArgs>>): Prisma.Prisma__ParParceiroClient<runtime.Types.Result.GetResult<Prisma.$ParParceiroPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   crd_categoria<T extends Prisma.CrdCategoriaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CrdCategoriaDefaultArgs<ExtArgs>>): Prisma.Prisma__CrdCategoriaClient<runtime.Types.Result.GetResult<Prisma.$CrdCategoriaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   imagem_sys_arquivo<T extends Prisma.CrdItem$imagem_sys_arquivoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CrdItem$imagem_sys_arquivoArgs<ExtArgs>>): Prisma.Prisma__SysArquivoClient<runtime.Types.Result.GetResult<Prisma.$SysArquivoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  crd_promocao_itens<T extends Prisma.CrdItem$crd_promocao_itensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CrdItem$crd_promocao_itensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CrdPromocaoItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1847,6 +1994,30 @@ export type CrdItem$imagem_sys_arquivoArgs<ExtArgs extends runtime.Types.Extensi
    */
   include?: Prisma.SysArquivoInclude<ExtArgs> | null
   where?: Prisma.SysArquivoWhereInput
+}
+
+/**
+ * CrdItem.crd_promocao_itens
+ */
+export type CrdItem$crd_promocao_itensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CrdPromocaoItem
+   */
+  select?: Prisma.CrdPromocaoItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CrdPromocaoItem
+   */
+  omit?: Prisma.CrdPromocaoItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CrdPromocaoItemInclude<ExtArgs> | null
+  where?: Prisma.CrdPromocaoItemWhereInput
+  orderBy?: Prisma.CrdPromocaoItemOrderByWithRelationInput | Prisma.CrdPromocaoItemOrderByWithRelationInput[]
+  cursor?: Prisma.CrdPromocaoItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CrdPromocaoItemScalarFieldEnum | Prisma.CrdPromocaoItemScalarFieldEnum[]
 }
 
 /**

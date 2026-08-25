@@ -123,6 +123,21 @@ export type CrdCategoria = Prisma.CrdCategoriaModel
  */
 export type CrdItem = Prisma.CrdItemModel
 /**
+ * Model CrdPromocao
+ * 
+ */
+export type CrdPromocao = Prisma.CrdPromocaoModel
+/**
+ * Model CrdPromocaoItem
+ * 
+ */
+export type CrdPromocaoItem = Prisma.CrdPromocaoItemModel
+/**
+ * Model CrdPromocaoHorario
+ * 
+ */
+export type CrdPromocaoHorario = Prisma.CrdPromocaoHorarioModel
+/**
  * Model PrdProdutoTipo
  * 
  */

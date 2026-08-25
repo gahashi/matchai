@@ -28,6 +28,12 @@ import {
 } from "@/components/public/CardapioView";
 
 import {
+    ParceiroPromocoesSection,
+    type Promocao,
+} from "./ParceiroPromocoesSection";
+
+
+import {
     Badge,
 } from "@/components/ui/Badge";
 
@@ -115,6 +121,7 @@ type Item = {
 type CardapioData = {
     categorias: Categoria[];
     itens: Item[];
+    promocoes: Promocao[];
 };
 
 
@@ -1794,7 +1801,7 @@ export default function ParceiroCardapioClient({
         <>
             <PageHeader
                 title="Cardápio"
-                subtitle={`Gerencie categorias e itens do cardápio de ${parceiro.nome}.`}
+                subtitle={`Gerencie categorias, itens e promoções do cardápio de ${parceiro.nome}.`}
                 actions={
                     <div
                         style={{
@@ -2700,6 +2707,19 @@ export default function ParceiroCardapioClient({
                     </>
                 )}
             </section>
+
+
+            <ParceiroPromocoesSection
+                parceiroId={
+                    parceiro.id
+                }
+                itens={
+                    data.itens
+                }
+                initialPromocoes={
+                    data.promocoes
+                }
+            />
 
 
             <Modal

@@ -393,7 +393,7 @@
 
 .bp-snackbar-wrap {
     position: fixed;
-    z-index: 80;
+    z-index:140;
     pointer-events: none;
     width: min(520px, calc(100vw - 32px));
 }

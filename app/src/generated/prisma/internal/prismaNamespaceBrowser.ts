@@ -72,6 +72,9 @@ export const ModelName = {
   ParParceiroTema: 'ParParceiroTema',
   CrdCategoria: 'CrdCategoria',
   CrdItem: 'CrdItem',
+  CrdPromocao: 'CrdPromocao',
+  CrdPromocaoItem: 'CrdPromocaoItem',
+  CrdPromocaoHorario: 'CrdPromocaoHorario',
   PrdProdutoTipo: 'PrdProdutoTipo',
   PrdProduto: 'PrdProduto',
   PrdProdutoImagem: 'PrdProdutoImagem',
@@ -450,6 +453,51 @@ export const CrdItemScalarFieldEnum = {
 } as const
 
 export type CrdItemScalarFieldEnum = (typeof CrdItemScalarFieldEnum)[keyof typeof CrdItemScalarFieldEnum]
+
+
+export const CrdPromocaoScalarFieldEnum = {
+  id: 'id',
+  par_parceiro_id: 'par_parceiro_id',
+  imagem_sys_arquivo_id: 'imagem_sys_arquivo_id',
+  titulo: 'titulo',
+  descricao: 'descricao',
+  preco_promocional: 'preco_promocional',
+  validade_inicio: 'validade_inicio',
+  validade_fim: 'validade_fim',
+  ordem: 'ordem',
+  ativo: 'ativo',
+  exibir_tv: 'exibir_tv',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type CrdPromocaoScalarFieldEnum = (typeof CrdPromocaoScalarFieldEnum)[keyof typeof CrdPromocaoScalarFieldEnum]
+
+
+export const CrdPromocaoItemScalarFieldEnum = {
+  id: 'id',
+  crd_promocao_id: 'crd_promocao_id',
+  crd_item_id: 'crd_item_id',
+  ordem: 'ordem',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CrdPromocaoItemScalarFieldEnum = (typeof CrdPromocaoItemScalarFieldEnum)[keyof typeof CrdPromocaoItemScalarFieldEnum]
+
+
+export const CrdPromocaoHorarioScalarFieldEnum = {
+  id: 'id',
+  crd_promocao_id: 'crd_promocao_id',
+  dia_semana: 'dia_semana',
+  hora_inicio: 'hora_inicio',
+  hora_fim: 'hora_fim',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CrdPromocaoHorarioScalarFieldEnum = (typeof CrdPromocaoHorarioScalarFieldEnum)[keyof typeof CrdPromocaoHorarioScalarFieldEnum]
 
 
 export const PrdProdutoTipoScalarFieldEnum = {
@@ -1097,6 +1145,14 @@ export const CrdItemOrderByRelevanceFieldEnum = {
 } as const
 
 export type CrdItemOrderByRelevanceFieldEnum = (typeof CrdItemOrderByRelevanceFieldEnum)[keyof typeof CrdItemOrderByRelevanceFieldEnum]
+
+
+export const CrdPromocaoOrderByRelevanceFieldEnum = {
+  titulo: 'titulo',
+  descricao: 'descricao'
+} as const
+
+export type CrdPromocaoOrderByRelevanceFieldEnum = (typeof CrdPromocaoOrderByRelevanceFieldEnum)[keyof typeof CrdPromocaoOrderByRelevanceFieldEnum]
 
 
 export const PrdProdutoTipoOrderByRelevanceFieldEnum = {

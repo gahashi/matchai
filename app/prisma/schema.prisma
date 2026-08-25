@@ -323,6 +323,7 @@ model SysArquivo {
   par_parceiros_logo   ParParceiroTema[] @relation("ParParceiroTemaLogo")
   par_parceiros_banner ParParceiroTema[] @relation("ParParceiroTemaBanner")
   crd_itens_imagem     CrdItem[]         @relation("CrdItemImagem")
+  crd_promocoes_imagem CrdPromocao[]      @relation("CrdPromocaoImagem")
 
   @@index([sys_arquivo_disco_id])
   @@index([sys_arquivo_visibilidade_id])
@@ -422,6 +423,7 @@ model ParParceiro {
   par_parceiro_tema     ParParceiroTema?
   crd_categorias        CrdCategoria[]
   crd_itens             CrdItem[]
+  crd_promocoes         CrdPromocao[]
 
   @@index([ativo])
   @@index([ativo, visivel_publico])
@@ -557,6 +559,8 @@ model CrdItem {
 
   imagem_sys_arquivo SysArquivo? @relation("CrdItemImagem", fields: [imagem_sys_arquivo_id], references: [id], onDelete: SetNull, onUpdate: Restrict)
 
+  crd_promocao_itens CrdPromocaoItem[]
+
   @@index([par_parceiro_id])
   @@index([crd_categoria_id])
   @@index([imagem_sys_arquivo_id])
@@ -566,6 +570,86 @@ model CrdItem {
   @@index([deleted_at])
   @@map("crd_item")
 }
+
+model CrdPromocao {
+  id Int @id @default(autoincrement())
+
+  par_parceiro_id       Int
+  imagem_sys_arquivo_id Int?
+
+  titulo    String  @db.VarChar(150)
+  descricao String? @db.Text
+
+  preco_promocional Decimal? @db.Decimal(10, 2)
+
+  validade_inicio DateTime? @db.Date
+  validade_fim    DateTime? @db.Date
+
+  ordem     Int @default(0)
+  ativo     Int @default(1)
+  exibir_tv Int @default(1)
+
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+  deleted_at DateTime? @db.DateTime(0)
+
+  par_parceiro ParParceiro @relation(fields: [par_parceiro_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  imagem_sys_arquivo SysArquivo? @relation("CrdPromocaoImagem", fields: [imagem_sys_arquivo_id], references: [id], onDelete: SetNull, onUpdate: Restrict)
+
+  crd_promocao_itens    CrdPromocaoItem[]
+  crd_promocao_horarios CrdPromocaoHorario[]
+
+  @@index([par_parceiro_id])
+  @@index([imagem_sys_arquivo_id])
+  @@index([par_parceiro_id, ativo])
+  @@index([par_parceiro_id, ativo, exibir_tv])
+  @@index([validade_inicio, validade_fim])
+  @@index([ordem])
+  @@index([deleted_at])
+  @@map("crd_promocao")
+}
+
+model CrdPromocaoItem {
+  id Int @id @default(autoincrement())
+
+  crd_promocao_id Int
+  crd_item_id      Int
+
+  ordem Int @default(0)
+
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  crd_promocao CrdPromocao @relation(fields: [crd_promocao_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  crd_item      CrdItem      @relation(fields: [crd_item_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@unique([crd_promocao_id, crd_item_id])
+  @@index([crd_promocao_id, ordem])
+  @@index([crd_item_id])
+  @@map("crd_promocao_item")
+}
+
+model CrdPromocaoHorario {
+  id Int @id @default(autoincrement())
+
+  crd_promocao_id Int
+
+  dia_semana Int
+
+  hora_inicio DateTime @db.Time(0)
+  hora_fim    DateTime @db.Time(0)
+
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  crd_promocao CrdPromocao @relation(fields: [crd_promocao_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@index([crd_promocao_id])
+  @@index([dia_semana, hora_inicio, hora_fim])
+  @@map("crd_promocao_horario")
+}
+
 
 // =========================================================
 // PRD — PRODUTOS

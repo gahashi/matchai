@@ -189,6 +189,11 @@ async function main() {
         ativo: 1,
     });
 
+    await upsertByCodigo(prisma.sysArquivoTipo, "cardapio_promocao_imagem", {
+        nome: "Imagem de promoção do cardápio",
+        ativo: 1,
+    });
+
     // =====================================================
     // PRD — TIPOS DE PRODUTO
     // =====================================================

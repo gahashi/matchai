@@ -268,6 +268,7 @@ export type ParParceiroWhereInput = {
   par_parceiro_tema?: Prisma.XOR<Prisma.ParParceiroTemaNullableScalarRelationFilter, Prisma.ParParceiroTemaWhereInput> | null
   crd_categorias?: Prisma.CrdCategoriaListRelationFilter
   crd_itens?: Prisma.CrdItemListRelationFilter
+  crd_promocoes?: Prisma.CrdPromocaoListRelationFilter
 }
 
 export type ParParceiroOrderByWithRelationInput = {
@@ -285,6 +286,7 @@ export type ParParceiroOrderByWithRelationInput = {
   par_parceiro_tema?: Prisma.ParParceiroTemaOrderByWithRelationInput
   crd_categorias?: Prisma.CrdCategoriaOrderByRelationAggregateInput
   crd_itens?: Prisma.CrdItemOrderByRelationAggregateInput
+  crd_promocoes?: Prisma.CrdPromocaoOrderByRelationAggregateInput
   _relevance?: Prisma.ParParceiroOrderByRelevanceInput
 }
 
@@ -306,6 +308,7 @@ export type ParParceiroWhereUniqueInput = Prisma.AtLeast<{
   par_parceiro_tema?: Prisma.XOR<Prisma.ParParceiroTemaNullableScalarRelationFilter, Prisma.ParParceiroTemaWhereInput> | null
   crd_categorias?: Prisma.CrdCategoriaListRelationFilter
   crd_itens?: Prisma.CrdItemListRelationFilter
+  crd_promocoes?: Prisma.CrdPromocaoListRelationFilter
 }, "id" | "codigo" | "slug">
 
 export type ParParceiroOrderByWithAggregationInput = {
@@ -356,6 +359,7 @@ export type ParParceiroCreateInput = {
   par_parceiro_tema?: Prisma.ParParceiroTemaCreateNestedOneWithoutPar_parceiroInput
   crd_categorias?: Prisma.CrdCategoriaCreateNestedManyWithoutPar_parceiroInput
   crd_itens?: Prisma.CrdItemCreateNestedManyWithoutPar_parceiroInput
+  crd_promocoes?: Prisma.CrdPromocaoCreateNestedManyWithoutPar_parceiroInput
 }
 
 export type ParParceiroUncheckedCreateInput = {
@@ -373,6 +377,7 @@ export type ParParceiroUncheckedCreateInput = {
   par_parceiro_tema?: Prisma.ParParceiroTemaUncheckedCreateNestedOneWithoutPar_parceiroInput
   crd_categorias?: Prisma.CrdCategoriaUncheckedCreateNestedManyWithoutPar_parceiroInput
   crd_itens?: Prisma.CrdItemUncheckedCreateNestedManyWithoutPar_parceiroInput
+  crd_promocoes?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutPar_parceiroInput
 }
 
 export type ParParceiroUpdateInput = {
@@ -389,6 +394,7 @@ export type ParParceiroUpdateInput = {
   par_parceiro_tema?: Prisma.ParParceiroTemaUpdateOneWithoutPar_parceiroNestedInput
   crd_categorias?: Prisma.CrdCategoriaUpdateManyWithoutPar_parceiroNestedInput
   crd_itens?: Prisma.CrdItemUpdateManyWithoutPar_parceiroNestedInput
+  crd_promocoes?: Prisma.CrdPromocaoUpdateManyWithoutPar_parceiroNestedInput
 }
 
 export type ParParceiroUncheckedUpdateInput = {
@@ -406,6 +412,7 @@ export type ParParceiroUncheckedUpdateInput = {
   par_parceiro_tema?: Prisma.ParParceiroTemaUncheckedUpdateOneWithoutPar_parceiroNestedInput
   crd_categorias?: Prisma.CrdCategoriaUncheckedUpdateManyWithoutPar_parceiroNestedInput
   crd_itens?: Prisma.CrdItemUncheckedUpdateManyWithoutPar_parceiroNestedInput
+  crd_promocoes?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutPar_parceiroNestedInput
 }
 
 export type ParParceiroCreateManyInput = {
@@ -564,6 +571,20 @@ export type ParParceiroUpdateOneRequiredWithoutCrd_itensNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ParParceiroUpdateToOneWithWhereWithoutCrd_itensInput, Prisma.ParParceiroUpdateWithoutCrd_itensInput>, Prisma.ParParceiroUncheckedUpdateWithoutCrd_itensInput>
 }
 
+export type ParParceiroCreateNestedOneWithoutCrd_promocoesInput = {
+  create?: Prisma.XOR<Prisma.ParParceiroCreateWithoutCrd_promocoesInput, Prisma.ParParceiroUncheckedCreateWithoutCrd_promocoesInput>
+  connectOrCreate?: Prisma.ParParceiroCreateOrConnectWithoutCrd_promocoesInput
+  connect?: Prisma.ParParceiroWhereUniqueInput
+}
+
+export type ParParceiroUpdateOneRequiredWithoutCrd_promocoesNestedInput = {
+  create?: Prisma.XOR<Prisma.ParParceiroCreateWithoutCrd_promocoesInput, Prisma.ParParceiroUncheckedCreateWithoutCrd_promocoesInput>
+  connectOrCreate?: Prisma.ParParceiroCreateOrConnectWithoutCrd_promocoesInput
+  upsert?: Prisma.ParParceiroUpsertWithoutCrd_promocoesInput
+  connect?: Prisma.ParParceiroWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ParParceiroUpdateToOneWithWhereWithoutCrd_promocoesInput, Prisma.ParParceiroUpdateWithoutCrd_promocoesInput>, Prisma.ParParceiroUncheckedUpdateWithoutCrd_promocoesInput>
+}
+
 export type ParParceiroCreateWithoutPar_parceiro_usuariosInput = {
   codigo: string
   slug: string
@@ -577,6 +598,7 @@ export type ParParceiroCreateWithoutPar_parceiro_usuariosInput = {
   par_parceiro_tema?: Prisma.ParParceiroTemaCreateNestedOneWithoutPar_parceiroInput
   crd_categorias?: Prisma.CrdCategoriaCreateNestedManyWithoutPar_parceiroInput
   crd_itens?: Prisma.CrdItemCreateNestedManyWithoutPar_parceiroInput
+  crd_promocoes?: Prisma.CrdPromocaoCreateNestedManyWithoutPar_parceiroInput
 }
 
 export type ParParceiroUncheckedCreateWithoutPar_parceiro_usuariosInput = {
@@ -593,6 +615,7 @@ export type ParParceiroUncheckedCreateWithoutPar_parceiro_usuariosInput = {
   par_parceiro_tema?: Prisma.ParParceiroTemaUncheckedCreateNestedOneWithoutPar_parceiroInput
   crd_categorias?: Prisma.CrdCategoriaUncheckedCreateNestedManyWithoutPar_parceiroInput
   crd_itens?: Prisma.CrdItemUncheckedCreateNestedManyWithoutPar_parceiroInput
+  crd_promocoes?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutPar_parceiroInput
 }
 
 export type ParParceiroCreateOrConnectWithoutPar_parceiro_usuariosInput = {
@@ -624,6 +647,7 @@ export type ParParceiroUpdateWithoutPar_parceiro_usuariosInput = {
   par_parceiro_tema?: Prisma.ParParceiroTemaUpdateOneWithoutPar_parceiroNestedInput
   crd_categorias?: Prisma.CrdCategoriaUpdateManyWithoutPar_parceiroNestedInput
   crd_itens?: Prisma.CrdItemUpdateManyWithoutPar_parceiroNestedInput
+  crd_promocoes?: Prisma.CrdPromocaoUpdateManyWithoutPar_parceiroNestedInput
 }
 
 export type ParParceiroUncheckedUpdateWithoutPar_parceiro_usuariosInput = {
@@ -640,6 +664,7 @@ export type ParParceiroUncheckedUpdateWithoutPar_parceiro_usuariosInput = {
   par_parceiro_tema?: Prisma.ParParceiroTemaUncheckedUpdateOneWithoutPar_parceiroNestedInput
   crd_categorias?: Prisma.CrdCategoriaUncheckedUpdateManyWithoutPar_parceiroNestedInput
   crd_itens?: Prisma.CrdItemUncheckedUpdateManyWithoutPar_parceiroNestedInput
+  crd_promocoes?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutPar_parceiroNestedInput
 }
 
 export type ParParceiroCreateWithoutPar_parceiro_temaInput = {
@@ -655,6 +680,7 @@ export type ParParceiroCreateWithoutPar_parceiro_temaInput = {
   par_parceiro_usuarios?: Prisma.ParParceiroUsuarioCreateNestedManyWithoutPar_parceiroInput
   crd_categorias?: Prisma.CrdCategoriaCreateNestedManyWithoutPar_parceiroInput
   crd_itens?: Prisma.CrdItemCreateNestedManyWithoutPar_parceiroInput
+  crd_promocoes?: Prisma.CrdPromocaoCreateNestedManyWithoutPar_parceiroInput
 }
 
 export type ParParceiroUncheckedCreateWithoutPar_parceiro_temaInput = {
@@ -671,6 +697,7 @@ export type ParParceiroUncheckedCreateWithoutPar_parceiro_temaInput = {
   par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedCreateNestedManyWithoutPar_parceiroInput
   crd_categorias?: Prisma.CrdCategoriaUncheckedCreateNestedManyWithoutPar_parceiroInput
   crd_itens?: Prisma.CrdItemUncheckedCreateNestedManyWithoutPar_parceiroInput
+  crd_promocoes?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutPar_parceiroInput
 }
 
 export type ParParceiroCreateOrConnectWithoutPar_parceiro_temaInput = {
@@ -702,6 +729,7 @@ export type ParParceiroUpdateWithoutPar_parceiro_temaInput = {
   par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUpdateManyWithoutPar_parceiroNestedInput
   crd_categorias?: Prisma.CrdCategoriaUpdateManyWithoutPar_parceiroNestedInput
   crd_itens?: Prisma.CrdItemUpdateManyWithoutPar_parceiroNestedInput
+  crd_promocoes?: Prisma.CrdPromocaoUpdateManyWithoutPar_parceiroNestedInput
 }
 
 export type ParParceiroUncheckedUpdateWithoutPar_parceiro_temaInput = {
@@ -718,6 +746,7 @@ export type ParParceiroUncheckedUpdateWithoutPar_parceiro_temaInput = {
   par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutPar_parceiroNestedInput
   crd_categorias?: Prisma.CrdCategoriaUncheckedUpdateManyWithoutPar_parceiroNestedInput
   crd_itens?: Prisma.CrdItemUncheckedUpdateManyWithoutPar_parceiroNestedInput
+  crd_promocoes?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutPar_parceiroNestedInput
 }
 
 export type ParParceiroCreateWithoutCrd_categoriasInput = {
@@ -733,6 +762,7 @@ export type ParParceiroCreateWithoutCrd_categoriasInput = {
   par_parceiro_usuarios?: Prisma.ParParceiroUsuarioCreateNestedManyWithoutPar_parceiroInput
   par_parceiro_tema?: Prisma.ParParceiroTemaCreateNestedOneWithoutPar_parceiroInput
   crd_itens?: Prisma.CrdItemCreateNestedManyWithoutPar_parceiroInput
+  crd_promocoes?: Prisma.CrdPromocaoCreateNestedManyWithoutPar_parceiroInput
 }
 
 export type ParParceiroUncheckedCreateWithoutCrd_categoriasInput = {
@@ -749,6 +779,7 @@ export type ParParceiroUncheckedCreateWithoutCrd_categoriasInput = {
   par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedCreateNestedManyWithoutPar_parceiroInput
   par_parceiro_tema?: Prisma.ParParceiroTemaUncheckedCreateNestedOneWithoutPar_parceiroInput
   crd_itens?: Prisma.CrdItemUncheckedCreateNestedManyWithoutPar_parceiroInput
+  crd_promocoes?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutPar_parceiroInput
 }
 
 export type ParParceiroCreateOrConnectWithoutCrd_categoriasInput = {
@@ -780,6 +811,7 @@ export type ParParceiroUpdateWithoutCrd_categoriasInput = {
   par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUpdateManyWithoutPar_parceiroNestedInput
   par_parceiro_tema?: Prisma.ParParceiroTemaUpdateOneWithoutPar_parceiroNestedInput
   crd_itens?: Prisma.CrdItemUpdateManyWithoutPar_parceiroNestedInput
+  crd_promocoes?: Prisma.CrdPromocaoUpdateManyWithoutPar_parceiroNestedInput
 }
 
 export type ParParceiroUncheckedUpdateWithoutCrd_categoriasInput = {
@@ -796,6 +828,7 @@ export type ParParceiroUncheckedUpdateWithoutCrd_categoriasInput = {
   par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutPar_parceiroNestedInput
   par_parceiro_tema?: Prisma.ParParceiroTemaUncheckedUpdateOneWithoutPar_parceiroNestedInput
   crd_itens?: Prisma.CrdItemUncheckedUpdateManyWithoutPar_parceiroNestedInput
+  crd_promocoes?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutPar_parceiroNestedInput
 }
 
 export type ParParceiroCreateWithoutCrd_itensInput = {
@@ -811,6 +844,7 @@ export type ParParceiroCreateWithoutCrd_itensInput = {
   par_parceiro_usuarios?: Prisma.ParParceiroUsuarioCreateNestedManyWithoutPar_parceiroInput
   par_parceiro_tema?: Prisma.ParParceiroTemaCreateNestedOneWithoutPar_parceiroInput
   crd_categorias?: Prisma.CrdCategoriaCreateNestedManyWithoutPar_parceiroInput
+  crd_promocoes?: Prisma.CrdPromocaoCreateNestedManyWithoutPar_parceiroInput
 }
 
 export type ParParceiroUncheckedCreateWithoutCrd_itensInput = {
@@ -827,6 +861,7 @@ export type ParParceiroUncheckedCreateWithoutCrd_itensInput = {
   par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedCreateNestedManyWithoutPar_parceiroInput
   par_parceiro_tema?: Prisma.ParParceiroTemaUncheckedCreateNestedOneWithoutPar_parceiroInput
   crd_categorias?: Prisma.CrdCategoriaUncheckedCreateNestedManyWithoutPar_parceiroInput
+  crd_promocoes?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutPar_parceiroInput
 }
 
 export type ParParceiroCreateOrConnectWithoutCrd_itensInput = {
@@ -858,6 +893,7 @@ export type ParParceiroUpdateWithoutCrd_itensInput = {
   par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUpdateManyWithoutPar_parceiroNestedInput
   par_parceiro_tema?: Prisma.ParParceiroTemaUpdateOneWithoutPar_parceiroNestedInput
   crd_categorias?: Prisma.CrdCategoriaUpdateManyWithoutPar_parceiroNestedInput
+  crd_promocoes?: Prisma.CrdPromocaoUpdateManyWithoutPar_parceiroNestedInput
 }
 
 export type ParParceiroUncheckedUpdateWithoutCrd_itensInput = {
@@ -874,6 +910,89 @@ export type ParParceiroUncheckedUpdateWithoutCrd_itensInput = {
   par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutPar_parceiroNestedInput
   par_parceiro_tema?: Prisma.ParParceiroTemaUncheckedUpdateOneWithoutPar_parceiroNestedInput
   crd_categorias?: Prisma.CrdCategoriaUncheckedUpdateManyWithoutPar_parceiroNestedInput
+  crd_promocoes?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutPar_parceiroNestedInput
+}
+
+export type ParParceiroCreateWithoutCrd_promocoesInput = {
+  codigo: string
+  slug: string
+  nome: string
+  descricao?: string | null
+  ativo?: number
+  visivel_publico?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioCreateNestedManyWithoutPar_parceiroInput
+  par_parceiro_tema?: Prisma.ParParceiroTemaCreateNestedOneWithoutPar_parceiroInput
+  crd_categorias?: Prisma.CrdCategoriaCreateNestedManyWithoutPar_parceiroInput
+  crd_itens?: Prisma.CrdItemCreateNestedManyWithoutPar_parceiroInput
+}
+
+export type ParParceiroUncheckedCreateWithoutCrd_promocoesInput = {
+  id?: number
+  codigo: string
+  slug: string
+  nome: string
+  descricao?: string | null
+  ativo?: number
+  visivel_publico?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedCreateNestedManyWithoutPar_parceiroInput
+  par_parceiro_tema?: Prisma.ParParceiroTemaUncheckedCreateNestedOneWithoutPar_parceiroInput
+  crd_categorias?: Prisma.CrdCategoriaUncheckedCreateNestedManyWithoutPar_parceiroInput
+  crd_itens?: Prisma.CrdItemUncheckedCreateNestedManyWithoutPar_parceiroInput
+}
+
+export type ParParceiroCreateOrConnectWithoutCrd_promocoesInput = {
+  where: Prisma.ParParceiroWhereUniqueInput
+  create: Prisma.XOR<Prisma.ParParceiroCreateWithoutCrd_promocoesInput, Prisma.ParParceiroUncheckedCreateWithoutCrd_promocoesInput>
+}
+
+export type ParParceiroUpsertWithoutCrd_promocoesInput = {
+  update: Prisma.XOR<Prisma.ParParceiroUpdateWithoutCrd_promocoesInput, Prisma.ParParceiroUncheckedUpdateWithoutCrd_promocoesInput>
+  create: Prisma.XOR<Prisma.ParParceiroCreateWithoutCrd_promocoesInput, Prisma.ParParceiroUncheckedCreateWithoutCrd_promocoesInput>
+  where?: Prisma.ParParceiroWhereInput
+}
+
+export type ParParceiroUpdateToOneWithWhereWithoutCrd_promocoesInput = {
+  where?: Prisma.ParParceiroWhereInput
+  data: Prisma.XOR<Prisma.ParParceiroUpdateWithoutCrd_promocoesInput, Prisma.ParParceiroUncheckedUpdateWithoutCrd_promocoesInput>
+}
+
+export type ParParceiroUpdateWithoutCrd_promocoesInput = {
+  codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUpdateManyWithoutPar_parceiroNestedInput
+  par_parceiro_tema?: Prisma.ParParceiroTemaUpdateOneWithoutPar_parceiroNestedInput
+  crd_categorias?: Prisma.CrdCategoriaUpdateManyWithoutPar_parceiroNestedInput
+  crd_itens?: Prisma.CrdItemUpdateManyWithoutPar_parceiroNestedInput
+}
+
+export type ParParceiroUncheckedUpdateWithoutCrd_promocoesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  par_parceiro_usuarios?: Prisma.ParParceiroUsuarioUncheckedUpdateManyWithoutPar_parceiroNestedInput
+  par_parceiro_tema?: Prisma.ParParceiroTemaUncheckedUpdateOneWithoutPar_parceiroNestedInput
+  crd_categorias?: Prisma.CrdCategoriaUncheckedUpdateManyWithoutPar_parceiroNestedInput
+  crd_itens?: Prisma.CrdItemUncheckedUpdateManyWithoutPar_parceiroNestedInput
 }
 
 
@@ -885,12 +1004,14 @@ export type ParParceiroCountOutputType = {
   par_parceiro_usuarios: number
   crd_categorias: number
   crd_itens: number
+  crd_promocoes: number
 }
 
 export type ParParceiroCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   par_parceiro_usuarios?: boolean | ParParceiroCountOutputTypeCountPar_parceiro_usuariosArgs
   crd_categorias?: boolean | ParParceiroCountOutputTypeCountCrd_categoriasArgs
   crd_itens?: boolean | ParParceiroCountOutputTypeCountCrd_itensArgs
+  crd_promocoes?: boolean | ParParceiroCountOutputTypeCountCrd_promocoesArgs
 }
 
 /**
@@ -924,6 +1045,13 @@ export type ParParceiroCountOutputTypeCountCrd_itensArgs<ExtArgs extends runtime
   where?: Prisma.CrdItemWhereInput
 }
 
+/**
+ * ParParceiroCountOutputType without action
+ */
+export type ParParceiroCountOutputTypeCountCrd_promocoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CrdPromocaoWhereInput
+}
+
 
 export type ParParceiroSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -940,6 +1068,7 @@ export type ParParceiroSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   par_parceiro_tema?: boolean | Prisma.ParParceiro$par_parceiro_temaArgs<ExtArgs>
   crd_categorias?: boolean | Prisma.ParParceiro$crd_categoriasArgs<ExtArgs>
   crd_itens?: boolean | Prisma.ParParceiro$crd_itensArgs<ExtArgs>
+  crd_promocoes?: boolean | Prisma.ParParceiro$crd_promocoesArgs<ExtArgs>
   _count?: boolean | Prisma.ParParceiroCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["parParceiro"]>
 
@@ -964,6 +1093,7 @@ export type ParParceiroInclude<ExtArgs extends runtime.Types.Extensions.Internal
   par_parceiro_tema?: boolean | Prisma.ParParceiro$par_parceiro_temaArgs<ExtArgs>
   crd_categorias?: boolean | Prisma.ParParceiro$crd_categoriasArgs<ExtArgs>
   crd_itens?: boolean | Prisma.ParParceiro$crd_itensArgs<ExtArgs>
+  crd_promocoes?: boolean | Prisma.ParParceiro$crd_promocoesArgs<ExtArgs>
   _count?: boolean | Prisma.ParParceiroCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -974,6 +1104,7 @@ export type $ParParceiroPayload<ExtArgs extends runtime.Types.Extensions.Interna
     par_parceiro_tema: Prisma.$ParParceiroTemaPayload<ExtArgs> | null
     crd_categorias: Prisma.$CrdCategoriaPayload<ExtArgs>[]
     crd_itens: Prisma.$CrdItemPayload<ExtArgs>[]
+    crd_promocoes: Prisma.$CrdPromocaoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1330,6 +1461,7 @@ export interface Prisma__ParParceiroClient<T, Null = never, ExtArgs extends runt
   par_parceiro_tema<T extends Prisma.ParParceiro$par_parceiro_temaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ParParceiro$par_parceiro_temaArgs<ExtArgs>>): Prisma.Prisma__ParParceiroTemaClient<runtime.Types.Result.GetResult<Prisma.$ParParceiroTemaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   crd_categorias<T extends Prisma.ParParceiro$crd_categoriasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ParParceiro$crd_categoriasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CrdCategoriaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   crd_itens<T extends Prisma.ParParceiro$crd_itensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ParParceiro$crd_itensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CrdItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  crd_promocoes<T extends Prisma.ParParceiro$crd_promocoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ParParceiro$crd_promocoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CrdPromocaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1805,6 +1937,30 @@ export type ParParceiro$crd_itensArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.CrdItemScalarFieldEnum | Prisma.CrdItemScalarFieldEnum[]
+}
+
+/**
+ * ParParceiro.crd_promocoes
+ */
+export type ParParceiro$crd_promocoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CrdPromocao
+   */
+  select?: Prisma.CrdPromocaoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CrdPromocao
+   */
+  omit?: Prisma.CrdPromocaoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CrdPromocaoInclude<ExtArgs> | null
+  where?: Prisma.CrdPromocaoWhereInput
+  orderBy?: Prisma.CrdPromocaoOrderByWithRelationInput | Prisma.CrdPromocaoOrderByWithRelationInput[]
+  cursor?: Prisma.CrdPromocaoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CrdPromocaoScalarFieldEnum | Prisma.CrdPromocaoScalarFieldEnum[]
 }
 
 /**

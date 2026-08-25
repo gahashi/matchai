@@ -418,6 +418,9 @@ export const ModelName = {
   ParParceiroTema: 'ParParceiroTema',
   CrdCategoria: 'CrdCategoria',
   CrdItem: 'CrdItem',
+  CrdPromocao: 'CrdPromocao',
+  CrdPromocaoItem: 'CrdPromocaoItem',
+  CrdPromocaoHorario: 'CrdPromocaoHorario',
   PrdProdutoTipo: 'PrdProdutoTipo',
   PrdProduto: 'PrdProduto',
   PrdProdutoImagem: 'PrdProdutoImagem',
@@ -458,7 +461,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "sysUsuarioTipo" | "sysUsuario" | "user" | "session" | "account" | "verification" | "sysAuthLoginLog" | "sysEmailLog" | "sysEmailVerificationCode" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivo" | "cadLink" | "cadEvento" | "parParceiro" | "parParceiroUsuarioTipo" | "parParceiroUsuario" | "parParceiroTema" | "crdCategoria" | "crdItem" | "prdProdutoTipo" | "prdProduto" | "prdProdutoImagem" | "prdProdutoVariacao" | "prdProdutoComponente" | "prdProdutoCampo" | "vndCampanhaStatus" | "vndCampanha" | "vndCampanhaProduto" | "socSocioStatus" | "socSocioOrigem" | "socPlano" | "socSocio" | "vndPedidoStatus" | "vndEntregaTipo" | "vndPedido" | "vndPedidoItem" | "vndPedidoItemComponente" | "vndPedidoItemCampo" | "vndEstoqueReserva" | "vndPedidoHistorico" | "finPagamentoStatus" | "finPagamentoMetodo" | "finPagamento" | "sysAnalyticsEvento"
+    modelProps: "sysUsuarioTipo" | "sysUsuario" | "user" | "session" | "account" | "verification" | "sysAuthLoginLog" | "sysEmailLog" | "sysEmailVerificationCode" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivo" | "cadLink" | "cadEvento" | "parParceiro" | "parParceiroUsuarioTipo" | "parParceiroUsuario" | "parParceiroTema" | "crdCategoria" | "crdItem" | "crdPromocao" | "crdPromocaoItem" | "crdPromocaoHorario" | "prdProdutoTipo" | "prdProduto" | "prdProdutoImagem" | "prdProdutoVariacao" | "prdProdutoComponente" | "prdProdutoCampo" | "vndCampanhaStatus" | "vndCampanha" | "vndCampanhaProduto" | "socSocioStatus" | "socSocioOrigem" | "socPlano" | "socSocio" | "vndPedidoStatus" | "vndEntregaTipo" | "vndPedido" | "vndPedidoItem" | "vndPedidoItemComponente" | "vndPedidoItemCampo" | "vndEstoqueReserva" | "vndPedidoHistorico" | "finPagamentoStatus" | "finPagamentoMetodo" | "finPagamento" | "sysAnalyticsEvento"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1845,6 +1848,204 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CrdItemCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CrdItemCountAggregateOutputType> | number
+        }
+      }
+    }
+    CrdPromocao: {
+      payload: Prisma.$CrdPromocaoPayload<ExtArgs>
+      fields: Prisma.CrdPromocaoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CrdPromocaoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CrdPromocaoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoPayload>
+        }
+        findFirst: {
+          args: Prisma.CrdPromocaoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CrdPromocaoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoPayload>
+        }
+        findMany: {
+          args: Prisma.CrdPromocaoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoPayload>[]
+        }
+        create: {
+          args: Prisma.CrdPromocaoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoPayload>
+        }
+        createMany: {
+          args: Prisma.CrdPromocaoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CrdPromocaoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoPayload>
+        }
+        update: {
+          args: Prisma.CrdPromocaoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoPayload>
+        }
+        deleteMany: {
+          args: Prisma.CrdPromocaoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CrdPromocaoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CrdPromocaoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoPayload>
+        }
+        aggregate: {
+          args: Prisma.CrdPromocaoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCrdPromocao>
+        }
+        groupBy: {
+          args: Prisma.CrdPromocaoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CrdPromocaoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CrdPromocaoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CrdPromocaoCountAggregateOutputType> | number
+        }
+      }
+    }
+    CrdPromocaoItem: {
+      payload: Prisma.$CrdPromocaoItemPayload<ExtArgs>
+      fields: Prisma.CrdPromocaoItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CrdPromocaoItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CrdPromocaoItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoItemPayload>
+        }
+        findFirst: {
+          args: Prisma.CrdPromocaoItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CrdPromocaoItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoItemPayload>
+        }
+        findMany: {
+          args: Prisma.CrdPromocaoItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoItemPayload>[]
+        }
+        create: {
+          args: Prisma.CrdPromocaoItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoItemPayload>
+        }
+        createMany: {
+          args: Prisma.CrdPromocaoItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CrdPromocaoItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoItemPayload>
+        }
+        update: {
+          args: Prisma.CrdPromocaoItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.CrdPromocaoItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CrdPromocaoItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CrdPromocaoItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoItemPayload>
+        }
+        aggregate: {
+          args: Prisma.CrdPromocaoItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCrdPromocaoItem>
+        }
+        groupBy: {
+          args: Prisma.CrdPromocaoItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CrdPromocaoItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CrdPromocaoItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CrdPromocaoItemCountAggregateOutputType> | number
+        }
+      }
+    }
+    CrdPromocaoHorario: {
+      payload: Prisma.$CrdPromocaoHorarioPayload<ExtArgs>
+      fields: Prisma.CrdPromocaoHorarioFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CrdPromocaoHorarioFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoHorarioPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CrdPromocaoHorarioFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoHorarioPayload>
+        }
+        findFirst: {
+          args: Prisma.CrdPromocaoHorarioFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoHorarioPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CrdPromocaoHorarioFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoHorarioPayload>
+        }
+        findMany: {
+          args: Prisma.CrdPromocaoHorarioFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoHorarioPayload>[]
+        }
+        create: {
+          args: Prisma.CrdPromocaoHorarioCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoHorarioPayload>
+        }
+        createMany: {
+          args: Prisma.CrdPromocaoHorarioCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CrdPromocaoHorarioDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoHorarioPayload>
+        }
+        update: {
+          args: Prisma.CrdPromocaoHorarioUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoHorarioPayload>
+        }
+        deleteMany: {
+          args: Prisma.CrdPromocaoHorarioDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CrdPromocaoHorarioUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CrdPromocaoHorarioUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CrdPromocaoHorarioPayload>
+        }
+        aggregate: {
+          args: Prisma.CrdPromocaoHorarioAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCrdPromocaoHorario>
+        }
+        groupBy: {
+          args: Prisma.CrdPromocaoHorarioGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CrdPromocaoHorarioGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CrdPromocaoHorarioCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CrdPromocaoHorarioCountAggregateOutputType> | number
         }
       }
     }
@@ -3874,6 +4075,51 @@ export const CrdItemScalarFieldEnum = {
 export type CrdItemScalarFieldEnum = (typeof CrdItemScalarFieldEnum)[keyof typeof CrdItemScalarFieldEnum]
 
 
+export const CrdPromocaoScalarFieldEnum = {
+  id: 'id',
+  par_parceiro_id: 'par_parceiro_id',
+  imagem_sys_arquivo_id: 'imagem_sys_arquivo_id',
+  titulo: 'titulo',
+  descricao: 'descricao',
+  preco_promocional: 'preco_promocional',
+  validade_inicio: 'validade_inicio',
+  validade_fim: 'validade_fim',
+  ordem: 'ordem',
+  ativo: 'ativo',
+  exibir_tv: 'exibir_tv',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type CrdPromocaoScalarFieldEnum = (typeof CrdPromocaoScalarFieldEnum)[keyof typeof CrdPromocaoScalarFieldEnum]
+
+
+export const CrdPromocaoItemScalarFieldEnum = {
+  id: 'id',
+  crd_promocao_id: 'crd_promocao_id',
+  crd_item_id: 'crd_item_id',
+  ordem: 'ordem',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CrdPromocaoItemScalarFieldEnum = (typeof CrdPromocaoItemScalarFieldEnum)[keyof typeof CrdPromocaoItemScalarFieldEnum]
+
+
+export const CrdPromocaoHorarioScalarFieldEnum = {
+  id: 'id',
+  crd_promocao_id: 'crd_promocao_id',
+  dia_semana: 'dia_semana',
+  hora_inicio: 'hora_inicio',
+  hora_fim: 'hora_fim',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CrdPromocaoHorarioScalarFieldEnum = (typeof CrdPromocaoHorarioScalarFieldEnum)[keyof typeof CrdPromocaoHorarioScalarFieldEnum]
+
+
 export const PrdProdutoTipoScalarFieldEnum = {
   id: 'id',
   codigo: 'codigo',
@@ -4521,6 +4767,14 @@ export const CrdItemOrderByRelevanceFieldEnum = {
 export type CrdItemOrderByRelevanceFieldEnum = (typeof CrdItemOrderByRelevanceFieldEnum)[keyof typeof CrdItemOrderByRelevanceFieldEnum]
 
 
+export const CrdPromocaoOrderByRelevanceFieldEnum = {
+  titulo: 'titulo',
+  descricao: 'descricao'
+} as const
+
+export type CrdPromocaoOrderByRelevanceFieldEnum = (typeof CrdPromocaoOrderByRelevanceFieldEnum)[keyof typeof CrdPromocaoOrderByRelevanceFieldEnum]
+
+
 export const PrdProdutoTipoOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   nome: 'nome',
@@ -4956,6 +5210,9 @@ export type GlobalOmitConfig = {
   parParceiroTema?: Prisma.ParParceiroTemaOmit
   crdCategoria?: Prisma.CrdCategoriaOmit
   crdItem?: Prisma.CrdItemOmit
+  crdPromocao?: Prisma.CrdPromocaoOmit
+  crdPromocaoItem?: Prisma.CrdPromocaoItemOmit
+  crdPromocaoHorario?: Prisma.CrdPromocaoHorarioOmit
   prdProdutoTipo?: Prisma.PrdProdutoTipoOmit
   prdProduto?: Prisma.PrdProdutoOmit
   prdProdutoImagem?: Prisma.PrdProdutoImagemOmit

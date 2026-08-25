@@ -921,14 +921,6 @@ export type PrdProdutoUncheckedUpdateManyWithoutPrd_produto_tipoNestedInput = {
   deleteMany?: Prisma.PrdProdutoScalarWhereInput | Prisma.PrdProdutoScalarWhereInput[]
 }
 
-export type NullableDecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
 export type PrdProdutoCreateNestedOneWithoutPrd_produto_imagensInput = {
   create?: Prisma.XOR<Prisma.PrdProdutoCreateWithoutPrd_produto_imagensInput, Prisma.PrdProdutoUncheckedCreateWithoutPrd_produto_imagensInput>
   connectOrCreate?: Prisma.PrdProdutoCreateOrConnectWithoutPrd_produto_imagensInput

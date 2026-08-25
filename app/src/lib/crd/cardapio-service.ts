@@ -6,6 +6,11 @@ import {
     arquivoService,
 } from "@/lib/storage/arquivo-service";
 
+import {
+    promocaoService,
+} from "@/lib/crd/promocao-service";
+
+
 
 type CategoriaInput = {
     parceiroId: number;
@@ -330,6 +335,7 @@ class CardapioService {
         const [
             categorias,
             itens,
+            promocoes,
         ] =
             await Promise.all([
                 prisma
@@ -398,6 +404,11 @@ class CardapioService {
                             },
                         ],
                     }),
+
+                promocaoService
+                    .listByParceiro(
+                        parceiroId,
+                    ),
             ]);
 
         return {
@@ -410,6 +421,8 @@ class CardapioService {
                 itens.map(
                     serializeItem,
                 ),
+
+            promocoes,
         };
     }
 
