@@ -1,6 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import { arquivoService } from "@/lib/storage/arquivo-service";
 
+import {
+    tvProgramacaoService,
+} from "@/lib/tv/tv-programacao-service";
+
 type EventoWriteInput = {
     titulo: string;
     descricao?: string | null;
@@ -12,6 +16,7 @@ type EventoWriteInput = {
     destaque: boolean;
     ativo: boolean;
     visivelPublico: boolean;
+    exibirTv: boolean;
 };
 
 type CreateEventoInput = EventoWriteInput & {
@@ -133,6 +138,14 @@ const eventoSelect = {
             original_name: true,
         },
     },
+
+    tv_exibicao: {
+        select: {
+            id: true,
+            ativo: true,
+            deleted_at: true,
+        },
+    },
 };
 
 function serializeEvento(evento: any) {
@@ -160,6 +173,16 @@ function serializeEvento(evento: any) {
         destaque: evento.destaque,
         ativo: evento.ativo,
         visivel_publico: evento.visivel_publico,
+        exibir_tv:
+            evento.tv_exibicao &&
+            !evento
+                .tv_exibicao
+                .deleted_at &&
+            evento
+                .tv_exibicao
+                .ativo
+                ? 1
+                : 0,
         created_at: evento.created_at,
         updated_at: evento.updated_at,
         status: getEventoStatus(evento),
@@ -242,6 +265,26 @@ class EventoService {
                     },
                 });
             }
+
+            try {
+                await tvProgramacaoService
+                    .syncEvento({
+                        eventoId:
+                            evento.id,
+
+                        exibirTv:
+                            input
+                                .exibirTv,
+                    });
+            } catch (
+                syncError
+            ) {
+                console.error(
+                    "[evento.create.tv.sync]",
+                    syncError,
+                );
+            }
+
 
             return this.findById(evento.id);
         } catch (error) {
@@ -348,6 +391,26 @@ class EventoService {
                 });
             }
 
+            try {
+                await tvProgramacaoService
+                    .syncEvento({
+                        eventoId:
+                            input.id,
+
+                        exibirTv:
+                            input
+                                .exibirTv,
+                    });
+            } catch (
+                syncError
+            ) {
+                console.error(
+                    "[evento.update.tv.sync]",
+                    syncError,
+                );
+            }
+
+
             return this.findById(input.id);
         } catch (error) {
             if (novoArquivoId) {
@@ -359,6 +422,55 @@ class EventoService {
             throw error;
         }
     }
+
+    async setExibirTv(
+        id:
+            number,
+
+        exibirTv:
+            boolean,
+    ) {
+        const existente =
+            await prisma
+                .cadEvento
+                .findFirst({
+                    where: {
+                        id,
+
+                        deleted_at:
+                            null,
+                    },
+
+                    select: {
+                        id:
+                            true,
+                    },
+                });
+
+
+        if (
+            !existente
+        ) {
+            throw new Error(
+                "Evento não encontrado.",
+            );
+        }
+
+
+        await tvProgramacaoService
+            .syncEvento({
+                eventoId:
+                    id,
+
+                exibirTv,
+            });
+
+
+        return this.findById(
+            id,
+        );
+    }
+
 
     async setAtivo(
         id: number,
@@ -429,6 +541,22 @@ class EventoService {
                 existente.banner_sys_arquivo_id,
             });
         }
+
+
+        try {
+            await tvProgramacaoService
+                .removeEventoSource(
+                    id,
+                );
+        } catch (
+            syncError
+        ) {
+            console.error(
+                "[evento.delete.tv.sync]",
+                syncError,
+            );
+        }
+
 
         return {
             id,

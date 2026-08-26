@@ -97,6 +97,9 @@ function parseEventoFormData(
         visivelPublico: booleanValue(
             formData.get("visivel_publico"),
         ),
+        exibirTv: booleanValue(
+            formData.get("exibir_tv"),
+        ),
         removerBanner: booleanValue(
             formData.get("remover_banner"),
         ),
@@ -159,36 +162,67 @@ export async function PATCH(
                 await request.json();
 
             if (
-                body?.action !==
+                body?.action ===
                 "set_ativo"
             ) {
-                return NextResponse.json(
-                    {
-                        ok: false,
-                        message:
-                            "Ação inválida.",
+                const evento =
+                    await eventoService.setAtivo(
+                        eventoId,
+                        Boolean(
+                            body.ativo,
+                        ),
+                    );
+
+                return NextResponse.json({
+                    ok: true,
+                    message: body.ativo
+                        ? "Evento ativado com sucesso."
+                        : "Evento desativado com sucesso.",
+                    data: {
+                        evento,
                     },
-                    {
-                        status: 400,
-                    },
-                );
+                });
             }
 
-            const evento =
-                await eventoService.setAtivo(
-                    eventoId,
-                    Boolean(body.ativo),
-                );
 
-            return NextResponse.json({
-                ok: true,
-                message: body.ativo
-                    ? "Evento ativado com sucesso."
-                    : "Evento desativado com sucesso.",
-                data: {
-                    evento,
+            if (
+                body?.action ===
+                "set_tv"
+            ) {
+                const evento =
+                    await eventoService
+                        .setExibirTv(
+                            eventoId,
+                            Boolean(
+                                body
+                                    .exibir_tv,
+                            ),
+                        );
+
+                return NextResponse.json({
+                    ok: true,
+                    message:
+                        body
+                            .exibir_tv
+                            ? "Evento adicionado à programação da TV."
+                            : "Evento pausado na TV.",
+                    data: {
+                        evento,
+                    },
+                });
+            }
+
+
+            return NextResponse.json(
+                {
+                    ok: false,
+                    message:
+                        "Ação inválida.",
                 },
-            });
+                {
+                    status: 400,
+                },
+            );
         }
 
         const formData =

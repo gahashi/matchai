@@ -222,13 +222,10 @@ export const adminNavigationItems: NavigationItem[] = [
             "TV",
 
         href:
-            "/tv",
+            "/admin/tv",
 
         icon:
             MonitorPlay,
-
-        newTab:
-            true,
 
         mobileHidden:
             true,

@@ -97,6 +97,9 @@ function parseEventoFormData(
         visivelPublico: booleanValue(
             formData.get("visivel_publico"),
         ),
+        exibirTv: booleanValue(
+            formData.get("exibir_tv"),
+        ),
         banner:
             bannerValue instanceof File &&
             bannerValue.size > 0

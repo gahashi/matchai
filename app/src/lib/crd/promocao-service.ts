@@ -6,6 +6,10 @@ import {
     arquivoService,
 } from "@/lib/storage/arquivo-service";
 
+import {
+    tvProgramacaoService,
+} from "@/lib/tv/tv-programacao-service";
+
 
 export type PromocaoHorarioInput = {
     diaSemana: number;
@@ -36,18 +40,18 @@ type PromocaoBaseInput = {
 
 type CreatePromocaoInput =
     PromocaoBaseInput & {
-    imagem?: File | null;
-    sysUsuarioId: number;
-};
+        imagem?: File | null;
+        sysUsuarioId: number;
+    };
 
 
 type UpdatePromocaoInput =
     PromocaoBaseInput & {
-    id: number;
-    imagem?: File | null;
-    removerImagem: boolean;
-    sysUsuarioId: number;
-};
+        id: number;
+        imagem?: File | null;
+        removerImagem: boolean;
+        sysUsuarioId: number;
+    };
 
 
 function optionalText(
@@ -230,7 +234,7 @@ function validateInput(
     for (
         const horario
         of input.horarios
-        ) {
+    ) {
         if (
             !Number.isInteger(
                 horario.diaSemana,
@@ -393,7 +397,7 @@ const promocaoSelect = {
         },
 
         orderBy:
-        promocaoItemOrderBy,
+            promocaoItemOrderBy,
     },
 
     crd_promocao_horarios: {
@@ -405,7 +409,7 @@ const promocaoSelect = {
         },
 
         orderBy:
-        promocaoHorarioOrderBy,
+            promocaoHorarioOrderBy,
     },
 } as const;
 
@@ -421,21 +425,21 @@ function serializePromocao(
                     vinculo: any,
                 ) => ({
                     id:
-                    vinculo.id,
+                        vinculo.id,
 
                     ordem:
-                    vinculo.ordem,
+                        vinculo.ordem,
 
                     item: {
                         id:
-                        vinculo
-                            .crd_item
-                            .id,
+                            vinculo
+                                .crd_item
+                                .id,
 
                         nome:
-                        vinculo
-                            .crd_item
-                            .nome,
+                            vinculo
+                                .crd_item
+                                .nome,
 
                         preco:
                             Number(
@@ -445,9 +449,9 @@ function serializePromocao(
                             ),
 
                         ativo:
-                        vinculo
-                            .crd_item
-                            .ativo,
+                            vinculo
+                                .crd_item
+                                .ativo,
 
                         removido:
                             Boolean(
@@ -458,16 +462,16 @@ function serializePromocao(
 
                         categoria: {
                             id:
-                            vinculo
-                                .crd_item
-                                .crd_categoria
-                                .id,
+                                vinculo
+                                    .crd_item
+                                    .crd_categoria
+                                    .id,
 
                             nome:
-                            vinculo
-                                .crd_item
-                                .crd_categoria
-                                .nome,
+                                vinculo
+                                    .crd_item
+                                    .crd_categoria
+                                    .nome,
                         },
 
                         imagem_url:
@@ -498,18 +502,18 @@ function serializePromocao(
 
     return {
         id:
-        promocao.id,
+            promocao.id,
 
         titulo:
-        promocao.titulo,
+            promocao.titulo,
 
         descricao:
-        promocao.descricao,
+            promocao.descricao,
 
         preco_promocional:
             promocao
                 .preco_promocional ===
-            null
+                null
                 ? null
                 : Number(
                     promocao
@@ -541,32 +545,32 @@ function serializePromocao(
                 : null,
 
         ordem:
-        promocao.ordem,
+            promocao.ordem,
 
         ativo:
-        promocao.ativo,
+            promocao.ativo,
 
         exibir_tv:
-        promocao.exibir_tv,
+            promocao.exibir_tv,
 
         imagem:
             promocao
                 .imagem_sys_arquivo
                 ? {
                     sys_arquivo_id:
-                    promocao
-                        .imagem_sys_arquivo
-                        .id,
+                        promocao
+                            .imagem_sys_arquivo
+                            .id,
 
                     public_url:
-                    promocao
-                        .imagem_sys_arquivo
-                        .public_url,
+                        promocao
+                            .imagem_sys_arquivo
+                            .public_url,
 
                     original_name:
-                    promocao
-                        .imagem_sys_arquivo
-                        .original_name,
+                        promocao
+                            .imagem_sys_arquivo
+                            .original_name,
                 }
                 : null,
 
@@ -586,10 +590,10 @@ function serializePromocao(
                         horario: any,
                     ) => ({
                         id:
-                        horario.id,
+                            horario.id,
 
                         dia_semana:
-                        horario.dia_semana,
+                            horario.dia_semana,
 
                         hora_inicio:
                             serializeTime(
@@ -604,10 +608,10 @@ function serializePromocao(
                 ),
 
         created_at:
-        promocao.created_at,
+            promocao.created_at,
 
         updated_at:
-        promocao.updated_at,
+            promocao.updated_at,
     };
 }
 
@@ -622,14 +626,14 @@ class PromocaoService {
                 .findMany({
                     where: {
                         par_parceiro_id:
-                        parceiroId,
+                            parceiroId,
 
                         deleted_at:
                             null,
                     },
 
                     select:
-                    promocaoSelect,
+                        promocaoSelect,
 
                     orderBy: [
                         {
@@ -659,7 +663,7 @@ class PromocaoService {
 
     async create(
         input:
-        CreatePromocaoInput,
+            CreatePromocaoInput,
     ) {
         validateInput(
             input,
@@ -684,8 +688,8 @@ class PromocaoService {
                                 .create({
                                     data: {
                                         par_parceiro_id:
-                                        input
-                                            .parceiroId,
+                                            input
+                                                .parceiroId,
 
                                         titulo:
                                             input
@@ -714,8 +718,8 @@ class PromocaoService {
                                             null,
 
                                         ordem:
-                                        input
-                                            .ordem,
+                                            input
+                                                .ordem,
 
                                         ativo:
                                             input
@@ -752,13 +756,13 @@ class PromocaoService {
                                             index,
                                         ) => ({
                                             crd_promocao_id:
-                                            created.id,
+                                                created.id,
 
                                             crd_item_id:
-                                            itemId,
+                                                itemId,
 
                                             ordem:
-                                            index,
+                                                index,
 
                                             created_at:
                                                 new Date(),
@@ -780,11 +784,11 @@ class PromocaoService {
                                                 horario,
                                             ) => ({
                                                 crd_promocao_id:
-                                                created.id,
+                                                    created.id,
 
                                                 dia_semana:
-                                                horario
-                                                    .diaSemana,
+                                                    horario
+                                                        .diaSemana,
 
                                                 hora_inicio:
                                                     parseTime(
@@ -823,7 +827,7 @@ class PromocaoService {
                     await arquivoService
                         .uploadPublicImage({
                             file:
-                            input.imagem,
+                                input.imagem,
 
                             folder:
                                 `parceiros/${input.parceiroId}/cardapio/promocoes`,
@@ -835,8 +839,8 @@ class PromocaoService {
                                 "cardapio_promocao_imagem",
 
                             createdBySysUsuarioId:
-                            input
-                                .sysUsuarioId,
+                                input
+                                    .sysUsuarioId,
                         });
 
                 arquivoId =
@@ -849,12 +853,12 @@ class PromocaoService {
                     .update({
                         where: {
                             id:
-                            promocao.id,
+                                promocao.id,
                         },
 
                         data: {
                             imagem_sys_arquivo_id:
-                            arquivoId,
+                                arquivoId,
 
                             updated_at:
                                 new Date(),
@@ -862,13 +866,41 @@ class PromocaoService {
                     });
             }
 
+            try {
+                await tvProgramacaoService
+                    .syncPromocao({
+                        promocaoId:
+                            promocao.id,
+
+                        parceiroId:
+                            input
+                                .parceiroId,
+
+                        exibirTv:
+                            input
+                                .exibirTv,
+
+                        ordem:
+                            input
+                                .ordem,
+                    });
+            } catch (
+                syncError
+            ) {
+                console.error(
+                    "[cardapio.promocao.create.tv.sync]",
+                    syncError,
+                );
+            }
+
+
             return this.findById(
                 input.parceiroId,
                 promocao.id,
             );
         } catch (
             error
-            ) {
+        ) {
             if (
                 arquivoId
             ) {
@@ -879,7 +911,7 @@ class PromocaoService {
                         });
                 } catch (
                     cleanupError
-                    ) {
+                ) {
                     console.error(
                         "[cardapio.promocao.create.file.cleanup]",
                         cleanupError,
@@ -894,7 +926,7 @@ class PromocaoService {
                         .deleteMany({
                             where: {
                                 crd_promocao_id:
-                                promocao.id,
+                                    promocao.id,
                             },
                         }),
 
@@ -903,7 +935,7 @@ class PromocaoService {
                         .deleteMany({
                             where: {
                                 crd_promocao_id:
-                                promocao.id,
+                                    promocao.id,
                             },
                         }),
 
@@ -912,7 +944,7 @@ class PromocaoService {
                         .delete({
                             where: {
                                 id:
-                                promocao.id,
+                                    promocao.id,
                             },
                         }),
                 ]);
@@ -924,7 +956,7 @@ class PromocaoService {
 
     async update(
         input:
-        UpdatePromocaoInput,
+            UpdatePromocaoInput,
     ) {
         validateInput(
             input,
@@ -955,7 +987,7 @@ class PromocaoService {
                 await arquivoService
                     .uploadPublicImage({
                         file:
-                        input.imagem,
+                            input.imagem,
 
                         folder:
                             `parceiros/${input.parceiroId}/cardapio/promocoes`,
@@ -967,8 +999,8 @@ class PromocaoService {
                             "cardapio_promocao_imagem",
 
                         createdBySysUsuarioId:
-                        input
-                            .sysUsuarioId,
+                            input
+                                .sysUsuarioId,
                     });
 
             novaImagemId =
@@ -997,7 +1029,7 @@ class PromocaoService {
                             .update({
                                 where: {
                                     id:
-                                    input.id,
+                                        input.id,
                                 },
 
                                 data: {
@@ -1028,8 +1060,8 @@ class PromocaoService {
                                         null,
 
                                     ordem:
-                                    input
-                                        .ordem,
+                                        input
+                                            .ordem,
 
                                     ativo:
                                         input
@@ -1044,7 +1076,7 @@ class PromocaoService {
                                             : 0,
 
                                     imagem_sys_arquivo_id:
-                                    imagemFinalId,
+                                        imagemFinalId,
 
                                     updated_at:
                                         new Date(),
@@ -1056,7 +1088,7 @@ class PromocaoService {
                             .deleteMany({
                                 where: {
                                     crd_promocao_id:
-                                    input.id,
+                                        input.id,
                                 },
                             });
 
@@ -1070,13 +1102,13 @@ class PromocaoService {
                                             index,
                                         ) => ({
                                             crd_promocao_id:
-                                            input.id,
+                                                input.id,
 
                                             crd_item_id:
-                                            itemId,
+                                                itemId,
 
                                             ordem:
-                                            index,
+                                                index,
 
                                             created_at:
                                                 new Date(),
@@ -1092,7 +1124,7 @@ class PromocaoService {
                             .deleteMany({
                                 where: {
                                     crd_promocao_id:
-                                    input.id,
+                                        input.id,
                                 },
                             });
 
@@ -1107,11 +1139,11 @@ class PromocaoService {
                                                 horario,
                                             ) => ({
                                                 crd_promocao_id:
-                                                input.id,
+                                                    input.id,
 
                                                 dia_semana:
-                                                horario
-                                                    .diaSemana,
+                                                    horario
+                                                        .diaSemana,
 
                                                 hora_inicio:
                                                     parseTime(
@@ -1147,12 +1179,12 @@ class PromocaoService {
                     await arquivoService
                         .marcarComoRemovido({
                             arquivoId:
-                            existente
-                                .imagem_sys_arquivo_id,
+                                existente
+                                    .imagem_sys_arquivo_id,
                         });
                 } catch (
                     cleanupError
-                    ) {
+                ) {
                     console.error(
                         "[cardapio.promocao.update.old-file.cleanup]",
                         cleanupError,
@@ -1160,13 +1192,41 @@ class PromocaoService {
                 }
             }
 
+            try {
+                await tvProgramacaoService
+                    .syncPromocao({
+                        promocaoId:
+                            input.id,
+
+                        parceiroId:
+                            input
+                                .parceiroId,
+
+                        exibirTv:
+                            input
+                                .exibirTv,
+
+                        ordem:
+                            input
+                                .ordem,
+                    });
+            } catch (
+                syncError
+            ) {
+                console.error(
+                    "[cardapio.promocao.update.tv.sync]",
+                    syncError,
+                );
+            }
+
+
             return this.findById(
                 input.parceiroId,
                 input.id,
             );
         } catch (
             error
-            ) {
+        ) {
             if (
                 novaImagemId
             ) {
@@ -1174,11 +1234,11 @@ class PromocaoService {
                     await arquivoService
                         .marcarComoRemovido({
                             arquivoId:
-                            novaImagemId,
+                                novaImagemId,
                         });
                 } catch (
                     cleanupError
-                    ) {
+                ) {
                     console.error(
                         "[cardapio.promocao.update.new-file.cleanup]",
                         cleanupError,
@@ -1206,7 +1266,7 @@ class PromocaoService {
             .update({
                 where: {
                     id:
-                    promocaoId,
+                        promocaoId,
                 },
 
                 data: {
@@ -1243,11 +1303,14 @@ class PromocaoService {
             .update({
                 where: {
                     id:
-                    promocaoId,
+                        promocaoId,
                 },
 
                 data: {
                     ativo:
+                        0,
+
+                    exibir_tv:
                         0,
 
                     deleted_at:
@@ -1266,12 +1329,12 @@ class PromocaoService {
                 await arquivoService
                     .marcarComoRemovido({
                         arquivoId:
-                        promocao
-                            .imagem_sys_arquivo_id,
+                            promocao
+                                .imagem_sys_arquivo_id,
                     });
             } catch (
                 cleanupError
-                ) {
+            ) {
                 console.error(
                     "[cardapio.promocao.delete.file.cleanup]",
                     cleanupError,
@@ -1279,9 +1342,25 @@ class PromocaoService {
             }
         }
 
+        try {
+            await tvProgramacaoService
+                .removePromocaoSource(
+                    promocaoId,
+                    parceiroId,
+                );
+        } catch (
+            syncError
+        ) {
+            console.error(
+                "[cardapio.promocao.delete.tv.sync]",
+                syncError,
+            );
+        }
+
+
         return {
             id:
-            promocaoId,
+                promocaoId,
         };
     }
 
@@ -1296,17 +1375,17 @@ class PromocaoService {
                 .findFirst({
                     where: {
                         id:
-                        promocaoId,
+                            promocaoId,
 
                         par_parceiro_id:
-                        parceiroId,
+                            parceiroId,
 
                         deleted_at:
                             null,
                     },
 
                     select:
-                    promocaoSelect,
+                        promocaoSelect,
                 });
 
         return promocao
@@ -1327,10 +1406,10 @@ class PromocaoService {
                 .findFirst({
                     where: {
                         id:
-                        promocaoId,
+                            promocaoId,
 
                         par_parceiro_id:
-                        parceiroId,
+                            parceiroId,
 
                         deleted_at:
                             null,
@@ -1375,11 +1454,11 @@ class PromocaoService {
                     where: {
                         id: {
                             in:
-                            itemIds,
+                                itemIds,
                         },
 
                         par_parceiro_id:
-                        parceiroId,
+                            parceiroId,
 
                         deleted_at:
                             null,

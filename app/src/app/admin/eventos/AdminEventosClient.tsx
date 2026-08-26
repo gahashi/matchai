@@ -15,6 +15,7 @@ import {
     ImagePlus,
     LayoutGrid,
     List,
+    MonitorPlay,
     Pencil,
     Plus,
     Power,
@@ -92,6 +93,7 @@ type Evento = {
     destaque: number;
     ativo: number;
     visivel_publico: number;
+    exibir_tv: number;
     status: EventoStatus;
 };
 
@@ -114,6 +116,7 @@ type EventoFormState = {
     destaque: boolean;
     ativo: boolean;
     visivel_publico: boolean;
+    exibir_tv: boolean;
 };
 
 const emptyForm: EventoFormState = {
@@ -127,6 +130,7 @@ const emptyForm: EventoFormState = {
     destaque: false,
     ativo: true,
     visivel_publico: true,
+    exibir_tv: false,
 };
 
 function toDateTimeLocal(
@@ -227,6 +231,10 @@ function eventoToForm(
         visivel_publico:
             Boolean(
                 evento.visivel_publico,
+            ),
+        exibir_tv:
+            Boolean(
+                evento.exibir_tv,
             ),
     };
 }
@@ -486,6 +494,12 @@ export default function AdminEventosClient({
                 : "0",
         );
         payload.set(
+            "exibir_tv",
+            form.exibir_tv
+                ? "1"
+                : "0",
+        );
+        payload.set(
             "remover_banner",
             removerBanner
                 ? "1"
@@ -686,6 +700,136 @@ export default function AdminEventosClient({
         }
     }
 
+    async function alternarTv(
+        evento:
+            Evento,
+    ) {
+        try {
+            setAlterandoEventoId(
+                evento.id,
+            );
+
+            setSnackbar(
+                null,
+            );
+
+
+            const exibirTv =
+                !Boolean(
+                    evento
+                        .exibir_tv,
+                );
+
+
+            const response =
+                await fetch(
+                    `/api/admin/eventos/${evento.id}`,
+                    {
+                        method:
+                            "PATCH",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json",
+
+                            Accept:
+                                "application/json",
+                        },
+
+                        body:
+                            JSON.stringify({
+                                action:
+                                    "set_tv",
+
+                                exibir_tv:
+                                    exibirTv,
+                            }),
+                    },
+                );
+
+
+            const result =
+                await response
+                    .json();
+
+
+            if (
+                !response.ok ||
+                !result.ok
+            ) {
+                throw new Error(
+                    result.message ||
+                    "Não foi possível alterar a exibição do evento na TV.",
+                );
+            }
+
+
+            const atualizado =
+                result
+                    .data
+                    .evento as Evento;
+
+
+            setData(
+                (
+                    current,
+                ) => ({
+                    ...current,
+
+                    eventos:
+                        current
+                            .eventos
+                            .map(
+                                (
+                                    item,
+                                ) =>
+                                    item.id ===
+                                    atualizado.id
+                                        ? atualizado
+                                        : item,
+                            ),
+                }),
+            );
+
+
+            setSnackbar({
+                color:
+                    "success",
+
+                title:
+                    exibirTv
+                        ? "Evento adicionado à TV"
+                        : "Evento pausado na TV",
+
+                message:
+                    result.message,
+            });
+        } catch (
+            error
+        ) {
+            setSnackbar({
+                color:
+                    "danger",
+
+                title:
+                    "Erro ao alterar TV",
+
+                message:
+                    error instanceof Error
+                        ? error.message
+                        : "Não foi possível alterar a exibição do evento na TV.",
+
+                autoClose:
+                    false,
+            });
+        } finally {
+            setAlterandoEventoId(
+                null,
+            );
+        }
+    }
+
+
     async function excluirEvento(
         evento: Evento,
     ) {
@@ -875,6 +1019,7 @@ export default function AdminEventosClient({
                             "Exibição",
                             "Ordem",
                             "Status",
+                            "TV",
                             "Ações",
                         ]}
                     >
@@ -990,6 +1135,21 @@ export default function AdminEventosClient({
                                         </td>
 
                                         <td>
+                                            <Badge
+                                                color={
+                                                    evento
+                                                        .exibir_tv
+                                                        ? "success"
+                                                        : "secondary"
+                                                }
+                                            >
+                                                {evento.exibir_tv
+                                                    ? "Na TV"
+                                                    : "Fora da TV"}
+                                            </Badge>
+                                        </td>
+
+                                        <td>
                                             <div className="bp-event-row-actions">
                                                 <Button
                                                     color="secondary"
@@ -1046,6 +1206,35 @@ export default function AdminEventosClient({
                                                     {evento.ativo
                                                         ? "Desativar"
                                                         : "Ativar"}
+                                                </Button>
+
+                                                <Button
+                                                    color={
+                                                        evento
+                                                            .exibir_tv
+                                                            ? "warning"
+                                                            : "success"
+                                                    }
+                                                    variant="ghost"
+                                                    size="sm"
+                                                    onClick={() =>
+                                                        alternarTv(
+                                                            evento,
+                                                        )
+                                                    }
+                                                    disabled={
+                                                        busy
+                                                    }
+                                                >
+                                                    <MonitorPlay
+                                                        size={
+                                                            16
+                                                        }
+                                                    />
+
+                                                    {evento.exibir_tv
+                                                        ? "Pausar na TV"
+                                                        : "Ativar na TV"}
                                                 </Button>
 
                                                 <Button
@@ -1217,6 +1406,17 @@ export default function AdminEventosClient({
                                                             : "Não"}
                                                     </strong>
                                                 </div>
+
+                                                <div>
+                                                    <span>
+                                                        TV
+                                                    </span>
+                                                    <strong>
+                                                        {evento.exibir_tv
+                                                            ? "Exibindo"
+                                                            : "Não"}
+                                                    </strong>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -1240,6 +1440,35 @@ export default function AdminEventosClient({
                                                     }
                                                 />
                                                 Ver
+                                            </Button>
+
+                                            <Button
+                                                color={
+                                                    evento
+                                                        .exibir_tv
+                                                        ? "warning"
+                                                        : "success"
+                                                }
+                                                variant="soft"
+                                                size="sm"
+                                                onClick={() =>
+                                                    alternarTv(
+                                                        evento,
+                                                    )
+                                                }
+                                                disabled={
+                                                    busy
+                                                }
+                                            >
+                                                <MonitorPlay
+                                                    size={
+                                                        16
+                                                    }
+                                                />
+
+                                                {evento.exibir_tv
+                                                    ? "Pausar na TV"
+                                                    : "Ativar na TV"}
                                             </Button>
 
                                             <Button
@@ -1822,6 +2051,26 @@ export default function AdminEventosClient({
                                     }
                                 />
                                 Visível publicamente
+                            </label>
+
+                            <label className="bp-check">
+                                <input
+                                    type="checkbox"
+                                    checked={
+                                        form.exibir_tv
+                                    }
+                                    onChange={(
+                                        event,
+                                    ) =>
+                                        updateForm(
+                                            "exibir_tv",
+                                            event
+                                                .target
+                                                .checked,
+                                        )
+                                    }
+                                />
+                                Exibir na TV
                             </label>
 
                             <label className="bp-check">

@@ -548,6 +548,18 @@ export function TvPlayer({
             ];
 
 
+    const currentImageDurationMs =
+        currentItem
+            ?.duracao_segundos &&
+        currentItem
+            .duracao_segundos >
+        0
+            ? currentItem
+                .duracao_segundos *
+            1000
+            : TEMPO_PADRAO_IMAGEM_MS;
+
+
     const navigate =
         useCallback(
             (
@@ -796,7 +808,7 @@ export function TvPlayer({
         () => {
             imageTimerRemainingRef
                 .current =
-                TEMPO_PADRAO_IMAGEM_MS;
+                currentImageDurationMs;
 
             imageTimerStartedAtRef
                 .current =
@@ -819,6 +831,7 @@ export function TvPlayer({
             }
         },
         [
+            currentImageDurationMs,
             currentItem?.id,
         ],
     );
@@ -868,7 +881,7 @@ export function TvPlayer({
 
                         imageTimerRemainingRef
                             .current =
-                            TEMPO_PADRAO_IMAGEM_MS;
+                            currentImageDurationMs;
 
                         advance();
                     },
@@ -922,6 +935,7 @@ export function TvPlayer({
         },
         [
             advance,
+            currentImageDurationMs,
             currentItem,
             data.itens.length,
             paused,

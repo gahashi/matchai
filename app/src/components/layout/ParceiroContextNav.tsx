@@ -35,7 +35,6 @@ export function ParceiroContextNav({
     const baseHref =
         `/parceiro/${slug}`;
 
-
     const items = [
         {
             label:
@@ -75,6 +74,17 @@ export function ParceiroContextNav({
 
         {
             label:
+                "TV",
+
+            href:
+                `${baseHref}/tv`,
+
+            icon:
+                MonitorPlay,
+        },
+
+        {
+            label:
                 "Informações",
 
             href:
@@ -105,22 +115,7 @@ export function ParceiroContextNav({
             icon:
                 UsersRound,
         },
-
-        {
-            label:
-                "TV",
-
-            href:
-                `/tv/${slug}`,
-
-            icon:
-                MonitorPlay,
-
-            external:
-                true,
-        },
     ];
-
 
     return (
         <div className="bp-partner-context-wrap bp-mb-5">
@@ -136,13 +131,11 @@ export function ParceiroContextNav({
                             item.icon;
 
                         const active =
-                            item.external
-                                ? false
-                                : item.exact
-                                    ? pathname ===
+                            item.exact
+                                ? pathname ===
                                     item.href
-                                    : pathname ===
-                                        item.href ||
+                                : pathname ===
+                                    item.href ||
                                     pathname.startsWith(
                                         `${item.href}/`,
                                     );
@@ -177,24 +170,14 @@ export function ParceiroContextNav({
                                 }
                             >
                                 <Icon
-                                    size={15}
+                                    size={
+                                        15
+                                    }
                                 />
 
                                 {
                                     item.label
                                 }
-
-                                {item.external ? (
-                                    <span
-                                        aria-hidden="true"
-                                        style={{
-                                            opacity:
-                                                0.58,
-                                        }}
-                                    >
-                                        ↗
-                                    </span>
-                                ) : null}
                             </AppLink>
                         );
                     },
@@ -208,7 +191,9 @@ export function ParceiroContextNav({
                 size="sm"
             >
                 <ArrowLeftRight
-                    size={15}
+                    size={
+                        15
+                    }
                 />
 
                 Trocar parceiro
