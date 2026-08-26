@@ -29,6 +29,7 @@ export type AggregateCadEvento = {
 export type CadEventoAvgAggregateOutputType = {
   id: number | null
   banner_sys_arquivo_id: number | null
+  par_parceiro_id: number | null
   ordem: number | null
   destaque: number | null
   ativo: number | null
@@ -38,6 +39,7 @@ export type CadEventoAvgAggregateOutputType = {
 export type CadEventoSumAggregateOutputType = {
   id: number | null
   banner_sys_arquivo_id: number | null
+  par_parceiro_id: number | null
   ordem: number | null
   destaque: number | null
   ativo: number | null
@@ -50,6 +52,7 @@ export type CadEventoMinAggregateOutputType = {
   descricao: string | null
   url: string | null
   banner_sys_arquivo_id: number | null
+  par_parceiro_id: number | null
   evento_at: Date | null
   inicio_exibicao: Date | null
   fim_exibicao: Date | null
@@ -68,6 +71,7 @@ export type CadEventoMaxAggregateOutputType = {
   descricao: string | null
   url: string | null
   banner_sys_arquivo_id: number | null
+  par_parceiro_id: number | null
   evento_at: Date | null
   inicio_exibicao: Date | null
   fim_exibicao: Date | null
@@ -86,6 +90,7 @@ export type CadEventoCountAggregateOutputType = {
   descricao: number
   url: number
   banner_sys_arquivo_id: number
+  par_parceiro_id: number
   evento_at: number
   inicio_exibicao: number
   fim_exibicao: number
@@ -103,6 +108,7 @@ export type CadEventoCountAggregateOutputType = {
 export type CadEventoAvgAggregateInputType = {
   id?: true
   banner_sys_arquivo_id?: true
+  par_parceiro_id?: true
   ordem?: true
   destaque?: true
   ativo?: true
@@ -112,6 +118,7 @@ export type CadEventoAvgAggregateInputType = {
 export type CadEventoSumAggregateInputType = {
   id?: true
   banner_sys_arquivo_id?: true
+  par_parceiro_id?: true
   ordem?: true
   destaque?: true
   ativo?: true
@@ -124,6 +131,7 @@ export type CadEventoMinAggregateInputType = {
   descricao?: true
   url?: true
   banner_sys_arquivo_id?: true
+  par_parceiro_id?: true
   evento_at?: true
   inicio_exibicao?: true
   fim_exibicao?: true
@@ -142,6 +150,7 @@ export type CadEventoMaxAggregateInputType = {
   descricao?: true
   url?: true
   banner_sys_arquivo_id?: true
+  par_parceiro_id?: true
   evento_at?: true
   inicio_exibicao?: true
   fim_exibicao?: true
@@ -160,6 +169,7 @@ export type CadEventoCountAggregateInputType = {
   descricao?: true
   url?: true
   banner_sys_arquivo_id?: true
+  par_parceiro_id?: true
   evento_at?: true
   inicio_exibicao?: true
   fim_exibicao?: true
@@ -265,6 +275,7 @@ export type CadEventoGroupByOutputType = {
   descricao: string | null
   url: string | null
   banner_sys_arquivo_id: number | null
+  par_parceiro_id: number | null
   evento_at: Date | null
   inicio_exibicao: Date | null
   fim_exibicao: Date | null
@@ -306,6 +317,7 @@ export type CadEventoWhereInput = {
   descricao?: Prisma.StringNullableFilter<"CadEvento"> | string | null
   url?: Prisma.StringNullableFilter<"CadEvento"> | string | null
   banner_sys_arquivo_id?: Prisma.IntNullableFilter<"CadEvento"> | number | null
+  par_parceiro_id?: Prisma.IntNullableFilter<"CadEvento"> | number | null
   evento_at?: Prisma.DateTimeNullableFilter<"CadEvento"> | Date | string | null
   inicio_exibicao?: Prisma.DateTimeNullableFilter<"CadEvento"> | Date | string | null
   fim_exibicao?: Prisma.DateTimeNullableFilter<"CadEvento"> | Date | string | null
@@ -317,6 +329,8 @@ export type CadEventoWhereInput = {
   updated_at?: Prisma.DateTimeNullableFilter<"CadEvento"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableFilter<"CadEvento"> | Date | string | null
   banner_sys_arquivo?: Prisma.XOR<Prisma.SysArquivoNullableScalarRelationFilter, Prisma.SysArquivoWhereInput> | null
+  par_parceiro?: Prisma.XOR<Prisma.ParParceiroNullableScalarRelationFilter, Prisma.ParParceiroWhereInput> | null
+  tv_exibicao?: Prisma.XOR<Prisma.TvExibicaoNullableScalarRelationFilter, Prisma.TvExibicaoWhereInput> | null
 }
 
 export type CadEventoOrderByWithRelationInput = {
@@ -325,6 +339,7 @@ export type CadEventoOrderByWithRelationInput = {
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
   url?: Prisma.SortOrderInput | Prisma.SortOrder
   banner_sys_arquivo_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  par_parceiro_id?: Prisma.SortOrderInput | Prisma.SortOrder
   evento_at?: Prisma.SortOrderInput | Prisma.SortOrder
   inicio_exibicao?: Prisma.SortOrderInput | Prisma.SortOrder
   fim_exibicao?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -336,6 +351,8 @@ export type CadEventoOrderByWithRelationInput = {
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   banner_sys_arquivo?: Prisma.SysArquivoOrderByWithRelationInput
+  par_parceiro?: Prisma.ParParceiroOrderByWithRelationInput
+  tv_exibicao?: Prisma.TvExibicaoOrderByWithRelationInput
   _relevance?: Prisma.CadEventoOrderByRelevanceInput
 }
 
@@ -348,6 +365,7 @@ export type CadEventoWhereUniqueInput = Prisma.AtLeast<{
   descricao?: Prisma.StringNullableFilter<"CadEvento"> | string | null
   url?: Prisma.StringNullableFilter<"CadEvento"> | string | null
   banner_sys_arquivo_id?: Prisma.IntNullableFilter<"CadEvento"> | number | null
+  par_parceiro_id?: Prisma.IntNullableFilter<"CadEvento"> | number | null
   evento_at?: Prisma.DateTimeNullableFilter<"CadEvento"> | Date | string | null
   inicio_exibicao?: Prisma.DateTimeNullableFilter<"CadEvento"> | Date | string | null
   fim_exibicao?: Prisma.DateTimeNullableFilter<"CadEvento"> | Date | string | null
@@ -359,6 +377,8 @@ export type CadEventoWhereUniqueInput = Prisma.AtLeast<{
   updated_at?: Prisma.DateTimeNullableFilter<"CadEvento"> | Date | string | null
   deleted_at?: Prisma.DateTimeNullableFilter<"CadEvento"> | Date | string | null
   banner_sys_arquivo?: Prisma.XOR<Prisma.SysArquivoNullableScalarRelationFilter, Prisma.SysArquivoWhereInput> | null
+  par_parceiro?: Prisma.XOR<Prisma.ParParceiroNullableScalarRelationFilter, Prisma.ParParceiroWhereInput> | null
+  tv_exibicao?: Prisma.XOR<Prisma.TvExibicaoNullableScalarRelationFilter, Prisma.TvExibicaoWhereInput> | null
 }, "id">
 
 export type CadEventoOrderByWithAggregationInput = {
@@ -367,6 +387,7 @@ export type CadEventoOrderByWithAggregationInput = {
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
   url?: Prisma.SortOrderInput | Prisma.SortOrder
   banner_sys_arquivo_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  par_parceiro_id?: Prisma.SortOrderInput | Prisma.SortOrder
   evento_at?: Prisma.SortOrderInput | Prisma.SortOrder
   inicio_exibicao?: Prisma.SortOrderInput | Prisma.SortOrder
   fim_exibicao?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -393,6 +414,7 @@ export type CadEventoScalarWhereWithAggregatesInput = {
   descricao?: Prisma.StringNullableWithAggregatesFilter<"CadEvento"> | string | null
   url?: Prisma.StringNullableWithAggregatesFilter<"CadEvento"> | string | null
   banner_sys_arquivo_id?: Prisma.IntNullableWithAggregatesFilter<"CadEvento"> | number | null
+  par_parceiro_id?: Prisma.IntNullableWithAggregatesFilter<"CadEvento"> | number | null
   evento_at?: Prisma.DateTimeNullableWithAggregatesFilter<"CadEvento"> | Date | string | null
   inicio_exibicao?: Prisma.DateTimeNullableWithAggregatesFilter<"CadEvento"> | Date | string | null
   fim_exibicao?: Prisma.DateTimeNullableWithAggregatesFilter<"CadEvento"> | Date | string | null
@@ -420,6 +442,8 @@ export type CadEventoCreateInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   banner_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutCad_eventos_bannerInput
+  par_parceiro?: Prisma.ParParceiroCreateNestedOneWithoutCad_eventosInput
+  tv_exibicao?: Prisma.TvExibicaoCreateNestedOneWithoutCad_eventoInput
 }
 
 export type CadEventoUncheckedCreateInput = {
@@ -428,6 +452,7 @@ export type CadEventoUncheckedCreateInput = {
   descricao?: string | null
   url?: string | null
   banner_sys_arquivo_id?: number | null
+  par_parceiro_id?: number | null
   evento_at?: Date | string | null
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
@@ -438,6 +463,7 @@ export type CadEventoUncheckedCreateInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  tv_exibicao?: Prisma.TvExibicaoUncheckedCreateNestedOneWithoutCad_eventoInput
 }
 
 export type CadEventoUpdateInput = {
@@ -455,6 +481,8 @@ export type CadEventoUpdateInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banner_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutCad_eventos_bannerNestedInput
+  par_parceiro?: Prisma.ParParceiroUpdateOneWithoutCad_eventosNestedInput
+  tv_exibicao?: Prisma.TvExibicaoUpdateOneWithoutCad_eventoNestedInput
 }
 
 export type CadEventoUncheckedUpdateInput = {
@@ -463,6 +491,7 @@ export type CadEventoUncheckedUpdateInput = {
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   banner_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  par_parceiro_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   evento_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -473,6 +502,7 @@ export type CadEventoUncheckedUpdateInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tv_exibicao?: Prisma.TvExibicaoUncheckedUpdateOneWithoutCad_eventoNestedInput
 }
 
 export type CadEventoCreateManyInput = {
@@ -481,6 +511,7 @@ export type CadEventoCreateManyInput = {
   descricao?: string | null
   url?: string | null
   banner_sys_arquivo_id?: number | null
+  par_parceiro_id?: number | null
   evento_at?: Date | string | null
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
@@ -515,6 +546,7 @@ export type CadEventoUncheckedUpdateManyInput = {
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   banner_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  par_parceiro_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   evento_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -549,6 +581,7 @@ export type CadEventoCountOrderByAggregateInput = {
   descricao?: Prisma.SortOrder
   url?: Prisma.SortOrder
   banner_sys_arquivo_id?: Prisma.SortOrder
+  par_parceiro_id?: Prisma.SortOrder
   evento_at?: Prisma.SortOrder
   inicio_exibicao?: Prisma.SortOrder
   fim_exibicao?: Prisma.SortOrder
@@ -564,6 +597,7 @@ export type CadEventoCountOrderByAggregateInput = {
 export type CadEventoAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   banner_sys_arquivo_id?: Prisma.SortOrder
+  par_parceiro_id?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   destaque?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
@@ -576,6 +610,7 @@ export type CadEventoMaxOrderByAggregateInput = {
   descricao?: Prisma.SortOrder
   url?: Prisma.SortOrder
   banner_sys_arquivo_id?: Prisma.SortOrder
+  par_parceiro_id?: Prisma.SortOrder
   evento_at?: Prisma.SortOrder
   inicio_exibicao?: Prisma.SortOrder
   fim_exibicao?: Prisma.SortOrder
@@ -594,6 +629,7 @@ export type CadEventoMinOrderByAggregateInput = {
   descricao?: Prisma.SortOrder
   url?: Prisma.SortOrder
   banner_sys_arquivo_id?: Prisma.SortOrder
+  par_parceiro_id?: Prisma.SortOrder
   evento_at?: Prisma.SortOrder
   inicio_exibicao?: Prisma.SortOrder
   fim_exibicao?: Prisma.SortOrder
@@ -609,10 +645,16 @@ export type CadEventoMinOrderByAggregateInput = {
 export type CadEventoSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   banner_sys_arquivo_id?: Prisma.SortOrder
+  par_parceiro_id?: Prisma.SortOrder
   ordem?: Prisma.SortOrder
   destaque?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   visivel_publico?: Prisma.SortOrder
+}
+
+export type CadEventoNullableScalarRelationFilter = {
+  is?: Prisma.CadEventoWhereInput | null
+  isNot?: Prisma.CadEventoWhereInput | null
 }
 
 export type CadEventoCreateNestedManyWithoutBanner_sys_arquivoInput = {
@@ -657,6 +699,64 @@ export type CadEventoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput = {
   deleteMany?: Prisma.CadEventoScalarWhereInput | Prisma.CadEventoScalarWhereInput[]
 }
 
+export type CadEventoCreateNestedManyWithoutPar_parceiroInput = {
+  create?: Prisma.XOR<Prisma.CadEventoCreateWithoutPar_parceiroInput, Prisma.CadEventoUncheckedCreateWithoutPar_parceiroInput> | Prisma.CadEventoCreateWithoutPar_parceiroInput[] | Prisma.CadEventoUncheckedCreateWithoutPar_parceiroInput[]
+  connectOrCreate?: Prisma.CadEventoCreateOrConnectWithoutPar_parceiroInput | Prisma.CadEventoCreateOrConnectWithoutPar_parceiroInput[]
+  createMany?: Prisma.CadEventoCreateManyPar_parceiroInputEnvelope
+  connect?: Prisma.CadEventoWhereUniqueInput | Prisma.CadEventoWhereUniqueInput[]
+}
+
+export type CadEventoUncheckedCreateNestedManyWithoutPar_parceiroInput = {
+  create?: Prisma.XOR<Prisma.CadEventoCreateWithoutPar_parceiroInput, Prisma.CadEventoUncheckedCreateWithoutPar_parceiroInput> | Prisma.CadEventoCreateWithoutPar_parceiroInput[] | Prisma.CadEventoUncheckedCreateWithoutPar_parceiroInput[]
+  connectOrCreate?: Prisma.CadEventoCreateOrConnectWithoutPar_parceiroInput | Prisma.CadEventoCreateOrConnectWithoutPar_parceiroInput[]
+  createMany?: Prisma.CadEventoCreateManyPar_parceiroInputEnvelope
+  connect?: Prisma.CadEventoWhereUniqueInput | Prisma.CadEventoWhereUniqueInput[]
+}
+
+export type CadEventoUpdateManyWithoutPar_parceiroNestedInput = {
+  create?: Prisma.XOR<Prisma.CadEventoCreateWithoutPar_parceiroInput, Prisma.CadEventoUncheckedCreateWithoutPar_parceiroInput> | Prisma.CadEventoCreateWithoutPar_parceiroInput[] | Prisma.CadEventoUncheckedCreateWithoutPar_parceiroInput[]
+  connectOrCreate?: Prisma.CadEventoCreateOrConnectWithoutPar_parceiroInput | Prisma.CadEventoCreateOrConnectWithoutPar_parceiroInput[]
+  upsert?: Prisma.CadEventoUpsertWithWhereUniqueWithoutPar_parceiroInput | Prisma.CadEventoUpsertWithWhereUniqueWithoutPar_parceiroInput[]
+  createMany?: Prisma.CadEventoCreateManyPar_parceiroInputEnvelope
+  set?: Prisma.CadEventoWhereUniqueInput | Prisma.CadEventoWhereUniqueInput[]
+  disconnect?: Prisma.CadEventoWhereUniqueInput | Prisma.CadEventoWhereUniqueInput[]
+  delete?: Prisma.CadEventoWhereUniqueInput | Prisma.CadEventoWhereUniqueInput[]
+  connect?: Prisma.CadEventoWhereUniqueInput | Prisma.CadEventoWhereUniqueInput[]
+  update?: Prisma.CadEventoUpdateWithWhereUniqueWithoutPar_parceiroInput | Prisma.CadEventoUpdateWithWhereUniqueWithoutPar_parceiroInput[]
+  updateMany?: Prisma.CadEventoUpdateManyWithWhereWithoutPar_parceiroInput | Prisma.CadEventoUpdateManyWithWhereWithoutPar_parceiroInput[]
+  deleteMany?: Prisma.CadEventoScalarWhereInput | Prisma.CadEventoScalarWhereInput[]
+}
+
+export type CadEventoUncheckedUpdateManyWithoutPar_parceiroNestedInput = {
+  create?: Prisma.XOR<Prisma.CadEventoCreateWithoutPar_parceiroInput, Prisma.CadEventoUncheckedCreateWithoutPar_parceiroInput> | Prisma.CadEventoCreateWithoutPar_parceiroInput[] | Prisma.CadEventoUncheckedCreateWithoutPar_parceiroInput[]
+  connectOrCreate?: Prisma.CadEventoCreateOrConnectWithoutPar_parceiroInput | Prisma.CadEventoCreateOrConnectWithoutPar_parceiroInput[]
+  upsert?: Prisma.CadEventoUpsertWithWhereUniqueWithoutPar_parceiroInput | Prisma.CadEventoUpsertWithWhereUniqueWithoutPar_parceiroInput[]
+  createMany?: Prisma.CadEventoCreateManyPar_parceiroInputEnvelope
+  set?: Prisma.CadEventoWhereUniqueInput | Prisma.CadEventoWhereUniqueInput[]
+  disconnect?: Prisma.CadEventoWhereUniqueInput | Prisma.CadEventoWhereUniqueInput[]
+  delete?: Prisma.CadEventoWhereUniqueInput | Prisma.CadEventoWhereUniqueInput[]
+  connect?: Prisma.CadEventoWhereUniqueInput | Prisma.CadEventoWhereUniqueInput[]
+  update?: Prisma.CadEventoUpdateWithWhereUniqueWithoutPar_parceiroInput | Prisma.CadEventoUpdateWithWhereUniqueWithoutPar_parceiroInput[]
+  updateMany?: Prisma.CadEventoUpdateManyWithWhereWithoutPar_parceiroInput | Prisma.CadEventoUpdateManyWithWhereWithoutPar_parceiroInput[]
+  deleteMany?: Prisma.CadEventoScalarWhereInput | Prisma.CadEventoScalarWhereInput[]
+}
+
+export type CadEventoCreateNestedOneWithoutTv_exibicaoInput = {
+  create?: Prisma.XOR<Prisma.CadEventoCreateWithoutTv_exibicaoInput, Prisma.CadEventoUncheckedCreateWithoutTv_exibicaoInput>
+  connectOrCreate?: Prisma.CadEventoCreateOrConnectWithoutTv_exibicaoInput
+  connect?: Prisma.CadEventoWhereUniqueInput
+}
+
+export type CadEventoUpdateOneWithoutTv_exibicaoNestedInput = {
+  create?: Prisma.XOR<Prisma.CadEventoCreateWithoutTv_exibicaoInput, Prisma.CadEventoUncheckedCreateWithoutTv_exibicaoInput>
+  connectOrCreate?: Prisma.CadEventoCreateOrConnectWithoutTv_exibicaoInput
+  upsert?: Prisma.CadEventoUpsertWithoutTv_exibicaoInput
+  disconnect?: Prisma.CadEventoWhereInput | boolean
+  delete?: Prisma.CadEventoWhereInput | boolean
+  connect?: Prisma.CadEventoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CadEventoUpdateToOneWithWhereWithoutTv_exibicaoInput, Prisma.CadEventoUpdateWithoutTv_exibicaoInput>, Prisma.CadEventoUncheckedUpdateWithoutTv_exibicaoInput>
+}
+
 export type CadEventoCreateWithoutBanner_sys_arquivoInput = {
   titulo: string
   descricao?: string | null
@@ -671,6 +771,8 @@ export type CadEventoCreateWithoutBanner_sys_arquivoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  par_parceiro?: Prisma.ParParceiroCreateNestedOneWithoutCad_eventosInput
+  tv_exibicao?: Prisma.TvExibicaoCreateNestedOneWithoutCad_eventoInput
 }
 
 export type CadEventoUncheckedCreateWithoutBanner_sys_arquivoInput = {
@@ -678,6 +780,7 @@ export type CadEventoUncheckedCreateWithoutBanner_sys_arquivoInput = {
   titulo: string
   descricao?: string | null
   url?: string | null
+  par_parceiro_id?: number | null
   evento_at?: Date | string | null
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
@@ -688,6 +791,7 @@ export type CadEventoUncheckedCreateWithoutBanner_sys_arquivoInput = {
   created_at?: Date | string | null
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
+  tv_exibicao?: Prisma.TvExibicaoUncheckedCreateNestedOneWithoutCad_eventoInput
 }
 
 export type CadEventoCreateOrConnectWithoutBanner_sys_arquivoInput = {
@@ -725,6 +829,7 @@ export type CadEventoScalarWhereInput = {
   descricao?: Prisma.StringNullableFilter<"CadEvento"> | string | null
   url?: Prisma.StringNullableFilter<"CadEvento"> | string | null
   banner_sys_arquivo_id?: Prisma.IntNullableFilter<"CadEvento"> | number | null
+  par_parceiro_id?: Prisma.IntNullableFilter<"CadEvento"> | number | null
   evento_at?: Prisma.DateTimeNullableFilter<"CadEvento"> | Date | string | null
   inicio_exibicao?: Prisma.DateTimeNullableFilter<"CadEvento"> | Date | string | null
   fim_exibicao?: Prisma.DateTimeNullableFilter<"CadEvento"> | Date | string | null
@@ -737,11 +842,165 @@ export type CadEventoScalarWhereInput = {
   deleted_at?: Prisma.DateTimeNullableFilter<"CadEvento"> | Date | string | null
 }
 
+export type CadEventoCreateWithoutPar_parceiroInput = {
+  titulo: string
+  descricao?: string | null
+  url?: string | null
+  evento_at?: Date | string | null
+  inicio_exibicao?: Date | string | null
+  fim_exibicao?: Date | string | null
+  ordem?: number
+  destaque?: number
+  ativo?: number
+  visivel_publico?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  banner_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutCad_eventos_bannerInput
+  tv_exibicao?: Prisma.TvExibicaoCreateNestedOneWithoutCad_eventoInput
+}
+
+export type CadEventoUncheckedCreateWithoutPar_parceiroInput = {
+  id?: number
+  titulo: string
+  descricao?: string | null
+  url?: string | null
+  banner_sys_arquivo_id?: number | null
+  evento_at?: Date | string | null
+  inicio_exibicao?: Date | string | null
+  fim_exibicao?: Date | string | null
+  ordem?: number
+  destaque?: number
+  ativo?: number
+  visivel_publico?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  tv_exibicao?: Prisma.TvExibicaoUncheckedCreateNestedOneWithoutCad_eventoInput
+}
+
+export type CadEventoCreateOrConnectWithoutPar_parceiroInput = {
+  where: Prisma.CadEventoWhereUniqueInput
+  create: Prisma.XOR<Prisma.CadEventoCreateWithoutPar_parceiroInput, Prisma.CadEventoUncheckedCreateWithoutPar_parceiroInput>
+}
+
+export type CadEventoCreateManyPar_parceiroInputEnvelope = {
+  data: Prisma.CadEventoCreateManyPar_parceiroInput | Prisma.CadEventoCreateManyPar_parceiroInput[]
+  skipDuplicates?: boolean
+}
+
+export type CadEventoUpsertWithWhereUniqueWithoutPar_parceiroInput = {
+  where: Prisma.CadEventoWhereUniqueInput
+  update: Prisma.XOR<Prisma.CadEventoUpdateWithoutPar_parceiroInput, Prisma.CadEventoUncheckedUpdateWithoutPar_parceiroInput>
+  create: Prisma.XOR<Prisma.CadEventoCreateWithoutPar_parceiroInput, Prisma.CadEventoUncheckedCreateWithoutPar_parceiroInput>
+}
+
+export type CadEventoUpdateWithWhereUniqueWithoutPar_parceiroInput = {
+  where: Prisma.CadEventoWhereUniqueInput
+  data: Prisma.XOR<Prisma.CadEventoUpdateWithoutPar_parceiroInput, Prisma.CadEventoUncheckedUpdateWithoutPar_parceiroInput>
+}
+
+export type CadEventoUpdateManyWithWhereWithoutPar_parceiroInput = {
+  where: Prisma.CadEventoScalarWhereInput
+  data: Prisma.XOR<Prisma.CadEventoUpdateManyMutationInput, Prisma.CadEventoUncheckedUpdateManyWithoutPar_parceiroInput>
+}
+
+export type CadEventoCreateWithoutTv_exibicaoInput = {
+  titulo: string
+  descricao?: string | null
+  url?: string | null
+  evento_at?: Date | string | null
+  inicio_exibicao?: Date | string | null
+  fim_exibicao?: Date | string | null
+  ordem?: number
+  destaque?: number
+  ativo?: number
+  visivel_publico?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  banner_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutCad_eventos_bannerInput
+  par_parceiro?: Prisma.ParParceiroCreateNestedOneWithoutCad_eventosInput
+}
+
+export type CadEventoUncheckedCreateWithoutTv_exibicaoInput = {
+  id?: number
+  titulo: string
+  descricao?: string | null
+  url?: string | null
+  banner_sys_arquivo_id?: number | null
+  par_parceiro_id?: number | null
+  evento_at?: Date | string | null
+  inicio_exibicao?: Date | string | null
+  fim_exibicao?: Date | string | null
+  ordem?: number
+  destaque?: number
+  ativo?: number
+  visivel_publico?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+}
+
+export type CadEventoCreateOrConnectWithoutTv_exibicaoInput = {
+  where: Prisma.CadEventoWhereUniqueInput
+  create: Prisma.XOR<Prisma.CadEventoCreateWithoutTv_exibicaoInput, Prisma.CadEventoUncheckedCreateWithoutTv_exibicaoInput>
+}
+
+export type CadEventoUpsertWithoutTv_exibicaoInput = {
+  update: Prisma.XOR<Prisma.CadEventoUpdateWithoutTv_exibicaoInput, Prisma.CadEventoUncheckedUpdateWithoutTv_exibicaoInput>
+  create: Prisma.XOR<Prisma.CadEventoCreateWithoutTv_exibicaoInput, Prisma.CadEventoUncheckedCreateWithoutTv_exibicaoInput>
+  where?: Prisma.CadEventoWhereInput
+}
+
+export type CadEventoUpdateToOneWithWhereWithoutTv_exibicaoInput = {
+  where?: Prisma.CadEventoWhereInput
+  data: Prisma.XOR<Prisma.CadEventoUpdateWithoutTv_exibicaoInput, Prisma.CadEventoUncheckedUpdateWithoutTv_exibicaoInput>
+}
+
+export type CadEventoUpdateWithoutTv_exibicaoInput = {
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  evento_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  destaque?: Prisma.IntFieldUpdateOperationsInput | number
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banner_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutCad_eventos_bannerNestedInput
+  par_parceiro?: Prisma.ParParceiroUpdateOneWithoutCad_eventosNestedInput
+}
+
+export type CadEventoUncheckedUpdateWithoutTv_exibicaoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banner_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  par_parceiro_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  evento_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  destaque?: Prisma.IntFieldUpdateOperationsInput | number
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
 export type CadEventoCreateManyBanner_sys_arquivoInput = {
   id?: number
   titulo: string
   descricao?: string | null
   url?: string | null
+  par_parceiro_id?: number | null
   evento_at?: Date | string | null
   inicio_exibicao?: Date | string | null
   fim_exibicao?: Date | string | null
@@ -768,10 +1027,66 @@ export type CadEventoUpdateWithoutBanner_sys_arquivoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  par_parceiro?: Prisma.ParParceiroUpdateOneWithoutCad_eventosNestedInput
+  tv_exibicao?: Prisma.TvExibicaoUpdateOneWithoutCad_eventoNestedInput
 }
 
 export type CadEventoUncheckedUpdateWithoutBanner_sys_arquivoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  par_parceiro_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  evento_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  destaque?: Prisma.IntFieldUpdateOperationsInput | number
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tv_exibicao?: Prisma.TvExibicaoUncheckedUpdateOneWithoutCad_eventoNestedInput
+}
+
+export type CadEventoUncheckedUpdateManyWithoutBanner_sys_arquivoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  par_parceiro_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  evento_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  destaque?: Prisma.IntFieldUpdateOperationsInput | number
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type CadEventoCreateManyPar_parceiroInput = {
+  id?: number
+  titulo: string
+  descricao?: string | null
+  url?: string | null
+  banner_sys_arquivo_id?: number | null
+  evento_at?: Date | string | null
+  inicio_exibicao?: Date | string | null
+  fim_exibicao?: Date | string | null
+  ordem?: number
+  destaque?: number
+  ativo?: number
+  visivel_publico?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+}
+
+export type CadEventoUpdateWithoutPar_parceiroInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -785,13 +1100,35 @@ export type CadEventoUncheckedUpdateWithoutBanner_sys_arquivoInput = {
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banner_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutCad_eventos_bannerNestedInput
+  tv_exibicao?: Prisma.TvExibicaoUpdateOneWithoutCad_eventoNestedInput
 }
 
-export type CadEventoUncheckedUpdateManyWithoutBanner_sys_arquivoInput = {
+export type CadEventoUncheckedUpdateWithoutPar_parceiroInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banner_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  evento_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  destaque?: Prisma.IntFieldUpdateOperationsInput | number
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tv_exibicao?: Prisma.TvExibicaoUncheckedUpdateOneWithoutCad_eventoNestedInput
+}
+
+export type CadEventoUncheckedUpdateManyWithoutPar_parceiroInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banner_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   evento_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   inicio_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fim_exibicao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -812,6 +1149,7 @@ export type CadEventoSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   descricao?: boolean
   url?: boolean
   banner_sys_arquivo_id?: boolean
+  par_parceiro_id?: boolean
   evento_at?: boolean
   inicio_exibicao?: boolean
   fim_exibicao?: boolean
@@ -823,6 +1161,8 @@ export type CadEventoSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   updated_at?: boolean
   deleted_at?: boolean
   banner_sys_arquivo?: boolean | Prisma.CadEvento$banner_sys_arquivoArgs<ExtArgs>
+  par_parceiro?: boolean | Prisma.CadEvento$par_parceiroArgs<ExtArgs>
+  tv_exibicao?: boolean | Prisma.CadEvento$tv_exibicaoArgs<ExtArgs>
 }, ExtArgs["result"]["cadEvento"]>
 
 
@@ -833,6 +1173,7 @@ export type CadEventoSelectScalar = {
   descricao?: boolean
   url?: boolean
   banner_sys_arquivo_id?: boolean
+  par_parceiro_id?: boolean
   evento_at?: boolean
   inicio_exibicao?: boolean
   fim_exibicao?: boolean
@@ -845,15 +1186,19 @@ export type CadEventoSelectScalar = {
   deleted_at?: boolean
 }
 
-export type CadEventoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titulo" | "descricao" | "url" | "banner_sys_arquivo_id" | "evento_at" | "inicio_exibicao" | "fim_exibicao" | "ordem" | "destaque" | "ativo" | "visivel_publico" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["cadEvento"]>
+export type CadEventoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titulo" | "descricao" | "url" | "banner_sys_arquivo_id" | "par_parceiro_id" | "evento_at" | "inicio_exibicao" | "fim_exibicao" | "ordem" | "destaque" | "ativo" | "visivel_publico" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["cadEvento"]>
 export type CadEventoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   banner_sys_arquivo?: boolean | Prisma.CadEvento$banner_sys_arquivoArgs<ExtArgs>
+  par_parceiro?: boolean | Prisma.CadEvento$par_parceiroArgs<ExtArgs>
+  tv_exibicao?: boolean | Prisma.CadEvento$tv_exibicaoArgs<ExtArgs>
 }
 
 export type $CadEventoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CadEvento"
   objects: {
     banner_sys_arquivo: Prisma.$SysArquivoPayload<ExtArgs> | null
+    par_parceiro: Prisma.$ParParceiroPayload<ExtArgs> | null
+    tv_exibicao: Prisma.$TvExibicaoPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -861,6 +1206,7 @@ export type $CadEventoPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     descricao: string | null
     url: string | null
     banner_sys_arquivo_id: number | null
+    par_parceiro_id: number | null
     evento_at: Date | null
     inicio_exibicao: Date | null
     fim_exibicao: Date | null
@@ -1212,6 +1558,8 @@ readonly fields: CadEventoFieldRefs;
 export interface Prisma__CadEventoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   banner_sys_arquivo<T extends Prisma.CadEvento$banner_sys_arquivoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CadEvento$banner_sys_arquivoArgs<ExtArgs>>): Prisma.Prisma__SysArquivoClient<runtime.Types.Result.GetResult<Prisma.$SysArquivoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  par_parceiro<T extends Prisma.CadEvento$par_parceiroArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CadEvento$par_parceiroArgs<ExtArgs>>): Prisma.Prisma__ParParceiroClient<runtime.Types.Result.GetResult<Prisma.$ParParceiroPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  tv_exibicao<T extends Prisma.CadEvento$tv_exibicaoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CadEvento$tv_exibicaoArgs<ExtArgs>>): Prisma.Prisma__TvExibicaoClient<runtime.Types.Result.GetResult<Prisma.$TvExibicaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1246,6 +1594,7 @@ export interface CadEventoFieldRefs {
   readonly descricao: Prisma.FieldRef<"CadEvento", 'String'>
   readonly url: Prisma.FieldRef<"CadEvento", 'String'>
   readonly banner_sys_arquivo_id: Prisma.FieldRef<"CadEvento", 'Int'>
+  readonly par_parceiro_id: Prisma.FieldRef<"CadEvento", 'Int'>
   readonly evento_at: Prisma.FieldRef<"CadEvento", 'DateTime'>
   readonly inicio_exibicao: Prisma.FieldRef<"CadEvento", 'DateTime'>
   readonly fim_exibicao: Prisma.FieldRef<"CadEvento", 'DateTime'>
@@ -1620,6 +1969,44 @@ export type CadEvento$banner_sys_arquivoArgs<ExtArgs extends runtime.Types.Exten
    */
   include?: Prisma.SysArquivoInclude<ExtArgs> | null
   where?: Prisma.SysArquivoWhereInput
+}
+
+/**
+ * CadEvento.par_parceiro
+ */
+export type CadEvento$par_parceiroArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ParParceiro
+   */
+  select?: Prisma.ParParceiroSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ParParceiro
+   */
+  omit?: Prisma.ParParceiroOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ParParceiroInclude<ExtArgs> | null
+  where?: Prisma.ParParceiroWhereInput
+}
+
+/**
+ * CadEvento.tv_exibicao
+ */
+export type CadEvento$tv_exibicaoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TvExibicao
+   */
+  select?: Prisma.TvExibicaoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TvExibicao
+   */
+  omit?: Prisma.TvExibicaoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TvExibicaoInclude<ExtArgs> | null
+  where?: Prisma.TvExibicaoWhereInput
 }
 
 /**

@@ -421,6 +421,9 @@ export const ModelName = {
   CrdPromocao: 'CrdPromocao',
   CrdPromocaoItem: 'CrdPromocaoItem',
   CrdPromocaoHorario: 'CrdPromocaoHorario',
+  TvExibicaoTipo: 'TvExibicaoTipo',
+  TvExibicao: 'TvExibicao',
+  TvExibicaoHorario: 'TvExibicaoHorario',
   PrdProdutoTipo: 'PrdProdutoTipo',
   PrdProduto: 'PrdProduto',
   PrdProdutoImagem: 'PrdProdutoImagem',
@@ -461,7 +464,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "sysUsuarioTipo" | "sysUsuario" | "user" | "session" | "account" | "verification" | "sysAuthLoginLog" | "sysEmailLog" | "sysEmailVerificationCode" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivo" | "cadLink" | "cadEvento" | "parParceiro" | "parParceiroUsuarioTipo" | "parParceiroUsuario" | "parParceiroTema" | "crdCategoria" | "crdItem" | "crdPromocao" | "crdPromocaoItem" | "crdPromocaoHorario" | "prdProdutoTipo" | "prdProduto" | "prdProdutoImagem" | "prdProdutoVariacao" | "prdProdutoComponente" | "prdProdutoCampo" | "vndCampanhaStatus" | "vndCampanha" | "vndCampanhaProduto" | "socSocioStatus" | "socSocioOrigem" | "socPlano" | "socSocio" | "vndPedidoStatus" | "vndEntregaTipo" | "vndPedido" | "vndPedidoItem" | "vndPedidoItemComponente" | "vndPedidoItemCampo" | "vndEstoqueReserva" | "vndPedidoHistorico" | "finPagamentoStatus" | "finPagamentoMetodo" | "finPagamento" | "sysAnalyticsEvento"
+    modelProps: "sysUsuarioTipo" | "sysUsuario" | "user" | "session" | "account" | "verification" | "sysAuthLoginLog" | "sysEmailLog" | "sysEmailVerificationCode" | "sysArquivoDisco" | "sysArquivoVisibilidade" | "sysArquivoTipo" | "sysArquivo" | "cadLink" | "cadEvento" | "parParceiro" | "parParceiroUsuarioTipo" | "parParceiroUsuario" | "parParceiroTema" | "crdCategoria" | "crdItem" | "crdPromocao" | "crdPromocaoItem" | "crdPromocaoHorario" | "tvExibicaoTipo" | "tvExibicao" | "tvExibicaoHorario" | "prdProdutoTipo" | "prdProduto" | "prdProdutoImagem" | "prdProdutoVariacao" | "prdProdutoComponente" | "prdProdutoCampo" | "vndCampanhaStatus" | "vndCampanha" | "vndCampanhaProduto" | "socSocioStatus" | "socSocioOrigem" | "socPlano" | "socSocio" | "vndPedidoStatus" | "vndEntregaTipo" | "vndPedido" | "vndPedidoItem" | "vndPedidoItemComponente" | "vndPedidoItemCampo" | "vndEstoqueReserva" | "vndPedidoHistorico" | "finPagamentoStatus" | "finPagamentoMetodo" | "finPagamento" | "sysAnalyticsEvento"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2046,6 +2049,204 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CrdPromocaoHorarioCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CrdPromocaoHorarioCountAggregateOutputType> | number
+        }
+      }
+    }
+    TvExibicaoTipo: {
+      payload: Prisma.$TvExibicaoTipoPayload<ExtArgs>
+      fields: Prisma.TvExibicaoTipoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TvExibicaoTipoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoTipoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TvExibicaoTipoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoTipoPayload>
+        }
+        findFirst: {
+          args: Prisma.TvExibicaoTipoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoTipoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TvExibicaoTipoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoTipoPayload>
+        }
+        findMany: {
+          args: Prisma.TvExibicaoTipoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoTipoPayload>[]
+        }
+        create: {
+          args: Prisma.TvExibicaoTipoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoTipoPayload>
+        }
+        createMany: {
+          args: Prisma.TvExibicaoTipoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.TvExibicaoTipoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoTipoPayload>
+        }
+        update: {
+          args: Prisma.TvExibicaoTipoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoTipoPayload>
+        }
+        deleteMany: {
+          args: Prisma.TvExibicaoTipoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TvExibicaoTipoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.TvExibicaoTipoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoTipoPayload>
+        }
+        aggregate: {
+          args: Prisma.TvExibicaoTipoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTvExibicaoTipo>
+        }
+        groupBy: {
+          args: Prisma.TvExibicaoTipoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TvExibicaoTipoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TvExibicaoTipoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TvExibicaoTipoCountAggregateOutputType> | number
+        }
+      }
+    }
+    TvExibicao: {
+      payload: Prisma.$TvExibicaoPayload<ExtArgs>
+      fields: Prisma.TvExibicaoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TvExibicaoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TvExibicaoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoPayload>
+        }
+        findFirst: {
+          args: Prisma.TvExibicaoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TvExibicaoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoPayload>
+        }
+        findMany: {
+          args: Prisma.TvExibicaoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoPayload>[]
+        }
+        create: {
+          args: Prisma.TvExibicaoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoPayload>
+        }
+        createMany: {
+          args: Prisma.TvExibicaoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.TvExibicaoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoPayload>
+        }
+        update: {
+          args: Prisma.TvExibicaoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoPayload>
+        }
+        deleteMany: {
+          args: Prisma.TvExibicaoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TvExibicaoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.TvExibicaoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoPayload>
+        }
+        aggregate: {
+          args: Prisma.TvExibicaoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTvExibicao>
+        }
+        groupBy: {
+          args: Prisma.TvExibicaoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TvExibicaoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TvExibicaoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TvExibicaoCountAggregateOutputType> | number
+        }
+      }
+    }
+    TvExibicaoHorario: {
+      payload: Prisma.$TvExibicaoHorarioPayload<ExtArgs>
+      fields: Prisma.TvExibicaoHorarioFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TvExibicaoHorarioFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoHorarioPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TvExibicaoHorarioFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoHorarioPayload>
+        }
+        findFirst: {
+          args: Prisma.TvExibicaoHorarioFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoHorarioPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TvExibicaoHorarioFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoHorarioPayload>
+        }
+        findMany: {
+          args: Prisma.TvExibicaoHorarioFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoHorarioPayload>[]
+        }
+        create: {
+          args: Prisma.TvExibicaoHorarioCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoHorarioPayload>
+        }
+        createMany: {
+          args: Prisma.TvExibicaoHorarioCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.TvExibicaoHorarioDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoHorarioPayload>
+        }
+        update: {
+          args: Prisma.TvExibicaoHorarioUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoHorarioPayload>
+        }
+        deleteMany: {
+          args: Prisma.TvExibicaoHorarioDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TvExibicaoHorarioUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.TvExibicaoHorarioUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TvExibicaoHorarioPayload>
+        }
+        aggregate: {
+          args: Prisma.TvExibicaoHorarioAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTvExibicaoHorario>
+        }
+        groupBy: {
+          args: Prisma.TvExibicaoHorarioGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TvExibicaoHorarioGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TvExibicaoHorarioCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TvExibicaoHorarioCountAggregateOutputType> | number
         }
       }
     }
@@ -3968,6 +4169,7 @@ export const CadEventoScalarFieldEnum = {
   descricao: 'descricao',
   url: 'url',
   banner_sys_arquivo_id: 'banner_sys_arquivo_id',
+  par_parceiro_id: 'par_parceiro_id',
   evento_at: 'evento_at',
   inicio_exibicao: 'inicio_exibicao',
   fim_exibicao: 'fim_exibicao',
@@ -4118,6 +4320,57 @@ export const CrdPromocaoHorarioScalarFieldEnum = {
 } as const
 
 export type CrdPromocaoHorarioScalarFieldEnum = (typeof CrdPromocaoHorarioScalarFieldEnum)[keyof typeof CrdPromocaoHorarioScalarFieldEnum]
+
+
+export const TvExibicaoTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type TvExibicaoTipoScalarFieldEnum = (typeof TvExibicaoTipoScalarFieldEnum)[keyof typeof TvExibicaoTipoScalarFieldEnum]
+
+
+export const TvExibicaoScalarFieldEnum = {
+  id: 'id',
+  tv_exibicao_tipo_id: 'tv_exibicao_tipo_id',
+  par_parceiro_id: 'par_parceiro_id',
+  cad_evento_id: 'cad_evento_id',
+  crd_promocao_id: 'crd_promocao_id',
+  midia_sys_arquivo_id: 'midia_sys_arquivo_id',
+  titulo: 'titulo',
+  descricao: 'descricao',
+  link: 'link',
+  kicker: 'kicker',
+  cor_destaque: 'cor_destaque',
+  duracao_segundos: 'duracao_segundos',
+  ordem: 'ordem',
+  ativo: 'ativo',
+  inicio_exibicao: 'inicio_exibicao',
+  fim_exibicao: 'fim_exibicao',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type TvExibicaoScalarFieldEnum = (typeof TvExibicaoScalarFieldEnum)[keyof typeof TvExibicaoScalarFieldEnum]
+
+
+export const TvExibicaoHorarioScalarFieldEnum = {
+  id: 'id',
+  tv_exibicao_id: 'tv_exibicao_id',
+  dia_semana: 'dia_semana',
+  hora_inicio: 'hora_inicio',
+  hora_fim: 'hora_fim',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type TvExibicaoHorarioScalarFieldEnum = (typeof TvExibicaoHorarioScalarFieldEnum)[keyof typeof TvExibicaoHorarioScalarFieldEnum]
 
 
 export const PrdProdutoTipoScalarFieldEnum = {
@@ -4775,6 +5028,26 @@ export const CrdPromocaoOrderByRelevanceFieldEnum = {
 export type CrdPromocaoOrderByRelevanceFieldEnum = (typeof CrdPromocaoOrderByRelevanceFieldEnum)[keyof typeof CrdPromocaoOrderByRelevanceFieldEnum]
 
 
+export const TvExibicaoTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type TvExibicaoTipoOrderByRelevanceFieldEnum = (typeof TvExibicaoTipoOrderByRelevanceFieldEnum)[keyof typeof TvExibicaoTipoOrderByRelevanceFieldEnum]
+
+
+export const TvExibicaoOrderByRelevanceFieldEnum = {
+  titulo: 'titulo',
+  descricao: 'descricao',
+  link: 'link',
+  kicker: 'kicker',
+  cor_destaque: 'cor_destaque'
+} as const
+
+export type TvExibicaoOrderByRelevanceFieldEnum = (typeof TvExibicaoOrderByRelevanceFieldEnum)[keyof typeof TvExibicaoOrderByRelevanceFieldEnum]
+
+
 export const PrdProdutoTipoOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   nome: 'nome',
@@ -5213,6 +5486,9 @@ export type GlobalOmitConfig = {
   crdPromocao?: Prisma.CrdPromocaoOmit
   crdPromocaoItem?: Prisma.CrdPromocaoItemOmit
   crdPromocaoHorario?: Prisma.CrdPromocaoHorarioOmit
+  tvExibicaoTipo?: Prisma.TvExibicaoTipoOmit
+  tvExibicao?: Prisma.TvExibicaoOmit
+  tvExibicaoHorario?: Prisma.TvExibicaoHorarioOmit
   prdProdutoTipo?: Prisma.PrdProdutoTipoOmit
   prdProduto?: Prisma.PrdProdutoOmit
   prdProdutoImagem?: Prisma.PrdProdutoImagemOmit

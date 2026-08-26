@@ -162,6 +162,21 @@ export type CrdPromocaoItem = Prisma.CrdPromocaoItemModel
  */
 export type CrdPromocaoHorario = Prisma.CrdPromocaoHorarioModel
 /**
+ * Model TvExibicaoTipo
+ * 
+ */
+export type TvExibicaoTipo = Prisma.TvExibicaoTipoModel
+/**
+ * Model TvExibicao
+ * 
+ */
+export type TvExibicao = Prisma.TvExibicaoModel
+/**
+ * Model TvExibicaoHorario
+ * 
+ */
+export type TvExibicaoHorario = Prisma.TvExibicaoHorarioModel
+/**
  * Model PrdProdutoTipo
  * 
  */

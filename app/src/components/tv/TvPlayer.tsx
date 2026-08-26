@@ -5,6 +5,7 @@ import {
     useCallback,
     useEffect,
     useMemo,
+    useRef,
     useState,
 } from "react";
 
@@ -261,17 +262,71 @@ function TvDescription({
 function TvMedia({
                      item,
                      background = false,
+                     paused = false,
                      onEnded,
                      onFormatDetected,
                  }: {
     item: TvPlaylistItem;
     background?: boolean;
+    paused?: boolean;
     onEnded?: () => void;
     onFormatDetected?: (
         format: FrameFormat,
         aspectRatio: number,
     ) => void;
 }) {
+    const videoRef =
+        useRef<HTMLVideoElement | null>(
+            null,
+        );
+
+
+    useEffect(
+        () => {
+            if (
+                item.media_tipo !==
+                "video"
+            ) {
+                return;
+            }
+
+
+            const video =
+                videoRef.current;
+
+
+            if (
+                !video
+            ) {
+                return;
+            }
+
+
+            if (
+                paused
+            ) {
+                video.pause();
+
+                return;
+            }
+
+
+            void video
+                .play()
+                .catch(
+                    () => {
+                        // Autoplay pode ser bloqueado até o navegador permitir mídia.
+                    },
+                );
+        },
+        [
+            item.media_tipo,
+            item.media_url,
+            paused,
+        ],
+    );
+
+
     if (
         !item.media_url
     ) {
@@ -284,6 +339,9 @@ function TvMedia({
     ) {
         return (
             <video
+                ref={
+                    videoRef
+                }
                 key={
                     item.media_url
                 }
@@ -452,6 +510,37 @@ export function TvPlayer({
             false,
         );
 
+
+    const [
+        paused,
+        setPaused,
+    ] =
+        useState(
+            false,
+        );
+
+
+    const imageTimerRef =
+        useRef<number | null>(
+            null,
+        );
+
+    const imageTimerStartedAtRef =
+        useRef<number | null>(
+            null,
+        );
+
+    const imageTimerRemainingRef =
+        useRef(
+            TEMPO_PADRAO_IMAGEM_MS,
+        );
+
+    const transitionTimerRef =
+        useRef<number | null>(
+            null,
+        );
+
+
     const currentItem =
         data
             .itens[
@@ -459,9 +548,13 @@ export function TvPlayer({
             ];
 
 
-    const advance =
+    const navigate =
         useCallback(
-            () => {
+            (
+                direction:
+                    1 |
+                    -1,
+            ) => {
                 if (
                     data
                         .itens
@@ -471,34 +564,94 @@ export function TvPlayer({
                     return;
                 }
 
+
+                if (
+                    transitionTimerRef
+                        .current !==
+                    null
+                ) {
+                    window.clearTimeout(
+                        transitionTimerRef
+                            .current,
+                    );
+                }
+
+
                 setVisible(
                     false,
                 );
 
-                window.setTimeout(
-                    () => {
-                        setCurrentIndex(
-                            (
-                                index,
-                            ) =>
-                                (
-                                    index +
-                                    1
-                                ) %
-                                data
-                                    .itens
-                                    .length,
-                        );
 
-                        setVisible(
-                            true,
-                        );
-                    },
-                    350,
-                );
+                transitionTimerRef
+                    .current =
+                    window.setTimeout(
+                        () => {
+                            setCurrentIndex(
+                                (
+                                    index,
+                                ) =>
+                                    (
+                                        index +
+                                        direction +
+                                        data
+                                            .itens
+                                            .length
+                                    ) %
+                                    data
+                                        .itens
+                                        .length,
+                            );
+
+
+                            imageTimerRemainingRef
+                                .current =
+                                TEMPO_PADRAO_IMAGEM_MS;
+
+                            imageTimerStartedAtRef
+                                .current =
+                                null;
+
+
+                            setVisible(
+                                true,
+                            );
+
+
+                            transitionTimerRef
+                                .current =
+                                null;
+                        },
+                        350,
+                    );
             },
             [
                 data.itens.length,
+            ],
+        );
+
+
+    const advance =
+        useCallback(
+            () => {
+                navigate(
+                    1,
+                );
+            },
+            [
+                navigate,
+            ],
+        );
+
+
+    const previous =
+        useCallback(
+            () => {
+                navigate(
+                    -1,
+                );
+            },
+            [
+                navigate,
             ],
         );
 
@@ -641,6 +794,38 @@ export function TvPlayer({
 
     useEffect(
         () => {
+            imageTimerRemainingRef
+                .current =
+                TEMPO_PADRAO_IMAGEM_MS;
+
+            imageTimerStartedAtRef
+                .current =
+                null;
+
+
+            if (
+                imageTimerRef
+                    .current !==
+                null
+            ) {
+                window.clearTimeout(
+                    imageTimerRef
+                        .current,
+                );
+
+                imageTimerRef
+                    .current =
+                    null;
+            }
+        },
+        [
+            currentItem?.id,
+        ],
+    );
+
+
+    useEffect(
+        () => {
             if (
                 !currentItem ||
                 data
@@ -649,27 +834,201 @@ export function TvPlayer({
                 1 ||
                 currentItem
                     .media_tipo ===
-                "video"
+                "video" ||
+                paused
             ) {
                 return;
             }
 
-            const timeout =
-                window.setTimeout(
-                    advance,
-                    TEMPO_PADRAO_IMAGEM_MS,
+
+            const remaining =
+                Math.max(
+                    0,
+                    imageTimerRemainingRef
+                        .current,
                 );
 
-            return () =>
-                window.clearTimeout(
-                    timeout,
+
+            imageTimerStartedAtRef
+                .current =
+                Date.now();
+
+
+            imageTimerRef
+                .current =
+                window.setTimeout(
+                    () => {
+                        imageTimerRef
+                            .current =
+                            null;
+
+                        imageTimerStartedAtRef
+                            .current =
+                            null;
+
+                        imageTimerRemainingRef
+                            .current =
+                            TEMPO_PADRAO_IMAGEM_MS;
+
+                        advance();
+                    },
+                    remaining,
                 );
+
+
+            return () => {
+                if (
+                    imageTimerRef
+                        .current !==
+                    null
+                ) {
+                    window.clearTimeout(
+                        imageTimerRef
+                            .current,
+                    );
+
+                    imageTimerRef
+                        .current =
+                        null;
+                }
+
+
+                if (
+                    imageTimerStartedAtRef
+                        .current !==
+                    null
+                ) {
+                    const elapsed =
+                        Date.now() -
+                        imageTimerStartedAtRef
+                            .current;
+
+
+                    imageTimerRemainingRef
+                        .current =
+                        Math.max(
+                            0,
+                            imageTimerRemainingRef
+                                .current -
+                            elapsed,
+                        );
+
+
+                    imageTimerStartedAtRef
+                        .current =
+                        null;
+                }
+            };
         },
         [
             advance,
             currentItem,
             data.itens.length,
+            paused,
         ],
+    );
+
+
+    useEffect(
+        () => {
+            function handleKeyDown(
+                event:
+                    KeyboardEvent,
+            ) {
+                const target =
+                    event.target as HTMLElement | null;
+
+
+                if (
+                    target &&
+                    [
+                        "INPUT",
+                        "TEXTAREA",
+                        "SELECT",
+                        "BUTTON",
+                    ].includes(
+                        target.tagName,
+                    )
+                ) {
+                    return;
+                }
+
+
+                if (
+                    event.code ===
+                    "Space"
+                ) {
+                    event.preventDefault();
+
+                    setPaused(
+                        (
+                            current,
+                        ) =>
+                            !current,
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    event.key ===
+                    "ArrowRight"
+                ) {
+                    event.preventDefault();
+
+                    advance();
+
+                    return;
+                }
+
+
+                if (
+                    event.key ===
+                    "ArrowLeft"
+                ) {
+                    event.preventDefault();
+
+                    previous();
+                }
+            }
+
+
+            window.addEventListener(
+                "keydown",
+                handleKeyDown,
+            );
+
+
+            return () =>
+                window.removeEventListener(
+                    "keydown",
+                    handleKeyDown,
+                );
+        },
+        [
+            advance,
+            previous,
+        ],
+    );
+
+
+    useEffect(
+        () => {
+            return () => {
+                if (
+                    transitionTimerRef
+                        .current !==
+                    null
+                ) {
+                    window.clearTimeout(
+                        transitionTimerRef
+                            .current,
+                    );
+                }
+            };
+        },
+        [],
     );
 
 
@@ -976,6 +1335,9 @@ export function TvPlayer({
                             currentItem
                         }
                         background
+                        paused={
+                            paused
+                        }
                     />
                 </div>
             ) : (
@@ -997,6 +1359,9 @@ export function TvPlayer({
                     <TvMedia
                         item={
                             currentItem
+                        }
+                        paused={
+                            paused
                         }
                         onEnded={
                             advance

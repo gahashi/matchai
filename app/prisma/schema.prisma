@@ -324,6 +324,7 @@ model SysArquivo {
   par_parceiros_banner ParParceiroTema[] @relation("ParParceiroTemaBanner")
   crd_itens_imagem     CrdItem[]         @relation("CrdItemImagem")
   crd_promocoes_imagem CrdPromocao[]      @relation("CrdPromocaoImagem")
+  tv_exibicoes_midia   TvExibicao[]       @relation("TvExibicaoMidia")
 
   @@index([sys_arquivo_disco_id])
   @@index([sys_arquivo_visibilidade_id])
@@ -373,6 +374,7 @@ model CadEvento {
   url       String? @db.VarChar(1000)
 
   banner_sys_arquivo_id Int?
+  par_parceiro_id       Int?
 
   evento_at DateTime? @db.DateTime(0)
 
@@ -390,6 +392,12 @@ model CadEvento {
 
   banner_sys_arquivo SysArquivo? @relation("CadEventoBanner", fields: [banner_sys_arquivo_id], references: [id], onDelete: SetNull, onUpdate: Restrict)
 
+  par_parceiro ParParceiro? @relation(fields: [par_parceiro_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  tv_exibicao TvExibicao?
+
+  @@index([par_parceiro_id])
+  @@index([par_parceiro_id, ativo])
   @@index([ativo])
   @@index([ativo, visivel_publico])
   @@index([inicio_exibicao, fim_exibicao])
@@ -424,6 +432,8 @@ model ParParceiro {
   crd_categorias        CrdCategoria[]
   crd_itens             CrdItem[]
   crd_promocoes         CrdPromocao[]
+  cad_eventos           CadEvento[]
+  tv_exibicoes          TvExibicao[]
 
   @@index([ativo])
   @@index([ativo, visivel_publico])
@@ -600,6 +610,8 @@ model CrdPromocao {
   crd_promocao_itens    CrdPromocaoItem[]
   crd_promocao_horarios CrdPromocaoHorario[]
 
+  tv_exibicao TvExibicao?
+
   @@index([par_parceiro_id])
   @@index([imagem_sys_arquivo_id])
   @@index([par_parceiro_id, ativo])
@@ -648,6 +660,115 @@ model CrdPromocaoHorario {
   @@index([crd_promocao_id])
   @@index([dia_semana, hora_inicio, hora_fim])
   @@map("crd_promocao_horario")
+}
+
+
+// =========================================================
+// TV — PROGRAMAÇÃO
+// =========================================================
+
+model TvExibicaoTipo {
+  id Int @id @default(autoincrement())
+
+  codigo    String  @unique @db.VarChar(50)
+  nome      String  @db.VarChar(100)
+  descricao String? @db.VarChar(255)
+
+  ativo Int @default(1)
+
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  tv_exibicoes TvExibicao[]
+
+  @@index([ativo])
+  @@map("tv_exibicao_tipo")
+}
+
+model TvExibicao {
+  id Int @id @default(autoincrement())
+
+  tv_exibicao_tipo_id Int
+
+  // null = conteúdo da AAACCU.
+  // preenchido = conteúdo pertencente ao parceiro.
+  // /tv geral agrega automaticamente AAACCU + parceiros.
+  par_parceiro_id Int?
+
+  // Fontes existentes. No máximo uma delas deve ser preenchida.
+  // Para tipo "divulgacao", ambas permanecem null e os campos próprios
+  // abaixo representam o conteúdo.
+  cad_evento_id    Int? @unique
+  crd_promocao_id Int? @unique
+
+  // Opcional: sobrescreve a mídia da fonte ou é a mídia da divulgação.
+  midia_sys_arquivo_id Int?
+
+  // Campos de apresentação.
+  // Quando null em evento/promoção, a TV usa os dados da fonte.
+  titulo    String? @db.VarChar(150)
+  descricao String? @db.Text
+  link      String? @db.VarChar(1000)
+  kicker    String? @db.VarChar(120)
+
+  cor_destaque String? @db.VarChar(20)
+
+  // null mantém o padrão da TV (18s para imagem).
+  // Vídeo continua avançando naturalmente ao terminar.
+  duracao_segundos Int?
+
+  ordem Int @default(0)
+  ativo Int @default(1)
+
+  // Janela específica da TV, independente da validade/publicação da fonte.
+  inicio_exibicao DateTime? @db.DateTime(0)
+  fim_exibicao    DateTime? @db.DateTime(0)
+
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+  deleted_at DateTime? @db.DateTime(0)
+
+  tv_exibicao_tipo TvExibicaoTipo @relation(fields: [tv_exibicao_tipo_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  par_parceiro ParParceiro? @relation(fields: [par_parceiro_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  cad_evento CadEvento? @relation(fields: [cad_evento_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  crd_promocao CrdPromocao? @relation(fields: [crd_promocao_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  midia_sys_arquivo SysArquivo? @relation("TvExibicaoMidia", fields: [midia_sys_arquivo_id], references: [id], onDelete: SetNull, onUpdate: Restrict)
+
+  tv_exibicao_horarios TvExibicaoHorario[]
+
+  @@index([tv_exibicao_tipo_id])
+  @@index([par_parceiro_id])
+  @@index([par_parceiro_id, ativo])
+  @@index([midia_sys_arquivo_id])
+  @@index([inicio_exibicao, fim_exibicao])
+  @@index([ordem])
+  @@index([deleted_at])
+  @@map("tv_exibicao")
+}
+
+model TvExibicaoHorario {
+  id Int @id @default(autoincrement())
+
+  tv_exibicao_id Int
+
+  dia_semana Int
+
+  hora_inicio DateTime @db.Time(0)
+  hora_fim    DateTime @db.Time(0)
+
+  created_at DateTime? @db.DateTime(0)
+  updated_at DateTime? @db.DateTime(0)
+
+  tv_exibicao TvExibicao @relation(fields: [tv_exibicao_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@unique([tv_exibicao_id, dia_semana, hora_inicio, hora_fim])
+  @@index([tv_exibicao_id])
+  @@index([dia_semana, hora_inicio, hora_fim])
+  @@map("tv_exibicao_horario")
 }
 
 

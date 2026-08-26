@@ -33,6 +33,10 @@ export const routeAccessRules: RouteAccessRule[] = [
         access: "public",
     },
     {
+        path: "/tv",
+        access: "public",
+    },
+    {
         path: "/login",
         access: "guest",
     },

@@ -316,6 +316,7 @@ export type CrdPromocaoWhereInput = {
   imagem_sys_arquivo?: Prisma.XOR<Prisma.SysArquivoNullableScalarRelationFilter, Prisma.SysArquivoWhereInput> | null
   crd_promocao_itens?: Prisma.CrdPromocaoItemListRelationFilter
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioListRelationFilter
+  tv_exibicao?: Prisma.XOR<Prisma.TvExibicaoNullableScalarRelationFilter, Prisma.TvExibicaoWhereInput> | null
 }
 
 export type CrdPromocaoOrderByWithRelationInput = {
@@ -337,6 +338,7 @@ export type CrdPromocaoOrderByWithRelationInput = {
   imagem_sys_arquivo?: Prisma.SysArquivoOrderByWithRelationInput
   crd_promocao_itens?: Prisma.CrdPromocaoItemOrderByRelationAggregateInput
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioOrderByRelationAggregateInput
+  tv_exibicao?: Prisma.TvExibicaoOrderByWithRelationInput
   _relevance?: Prisma.CrdPromocaoOrderByRelevanceInput
 }
 
@@ -362,6 +364,7 @@ export type CrdPromocaoWhereUniqueInput = Prisma.AtLeast<{
   imagem_sys_arquivo?: Prisma.XOR<Prisma.SysArquivoNullableScalarRelationFilter, Prisma.SysArquivoWhereInput> | null
   crd_promocao_itens?: Prisma.CrdPromocaoItemListRelationFilter
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioListRelationFilter
+  tv_exibicao?: Prisma.XOR<Prisma.TvExibicaoNullableScalarRelationFilter, Prisma.TvExibicaoWhereInput> | null
 }, "id">
 
 export type CrdPromocaoOrderByWithAggregationInput = {
@@ -422,6 +425,7 @@ export type CrdPromocaoCreateInput = {
   imagem_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutCrd_promocoes_imagemInput
   crd_promocao_itens?: Prisma.CrdPromocaoItemCreateNestedManyWithoutCrd_promocaoInput
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioCreateNestedManyWithoutCrd_promocaoInput
+  tv_exibicao?: Prisma.TvExibicaoCreateNestedOneWithoutCrd_promocaoInput
 }
 
 export type CrdPromocaoUncheckedCreateInput = {
@@ -441,6 +445,7 @@ export type CrdPromocaoUncheckedCreateInput = {
   deleted_at?: Date | string | null
   crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedCreateNestedManyWithoutCrd_promocaoInput
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioUncheckedCreateNestedManyWithoutCrd_promocaoInput
+  tv_exibicao?: Prisma.TvExibicaoUncheckedCreateNestedOneWithoutCrd_promocaoInput
 }
 
 export type CrdPromocaoUpdateInput = {
@@ -459,6 +464,7 @@ export type CrdPromocaoUpdateInput = {
   imagem_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutCrd_promocoes_imagemNestedInput
   crd_promocao_itens?: Prisma.CrdPromocaoItemUpdateManyWithoutCrd_promocaoNestedInput
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioUpdateManyWithoutCrd_promocaoNestedInput
+  tv_exibicao?: Prisma.TvExibicaoUpdateOneWithoutCrd_promocaoNestedInput
 }
 
 export type CrdPromocaoUncheckedUpdateInput = {
@@ -478,6 +484,7 @@ export type CrdPromocaoUncheckedUpdateInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedUpdateManyWithoutCrd_promocaoNestedInput
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioUncheckedUpdateManyWithoutCrd_promocaoNestedInput
+  tv_exibicao?: Prisma.TvExibicaoUncheckedUpdateOneWithoutCrd_promocaoNestedInput
 }
 
 export type CrdPromocaoCreateManyInput = {
@@ -620,6 +627,11 @@ export type CrdPromocaoScalarRelationFilter = {
   isNot?: Prisma.CrdPromocaoWhereInput
 }
 
+export type CrdPromocaoNullableScalarRelationFilter = {
+  is?: Prisma.CrdPromocaoWhereInput | null
+  isNot?: Prisma.CrdPromocaoWhereInput | null
+}
+
 export type CrdPromocaoCreateNestedManyWithoutImagem_sys_arquivoInput = {
   create?: Prisma.XOR<Prisma.CrdPromocaoCreateWithoutImagem_sys_arquivoInput, Prisma.CrdPromocaoUncheckedCreateWithoutImagem_sys_arquivoInput> | Prisma.CrdPromocaoCreateWithoutImagem_sys_arquivoInput[] | Prisma.CrdPromocaoUncheckedCreateWithoutImagem_sys_arquivoInput[]
   connectOrCreate?: Prisma.CrdPromocaoCreateOrConnectWithoutImagem_sys_arquivoInput | Prisma.CrdPromocaoCreateOrConnectWithoutImagem_sys_arquivoInput[]
@@ -740,6 +752,22 @@ export type CrdPromocaoUpdateOneRequiredWithoutCrd_promocao_horariosNestedInput 
   update?: Prisma.XOR<Prisma.XOR<Prisma.CrdPromocaoUpdateToOneWithWhereWithoutCrd_promocao_horariosInput, Prisma.CrdPromocaoUpdateWithoutCrd_promocao_horariosInput>, Prisma.CrdPromocaoUncheckedUpdateWithoutCrd_promocao_horariosInput>
 }
 
+export type CrdPromocaoCreateNestedOneWithoutTv_exibicaoInput = {
+  create?: Prisma.XOR<Prisma.CrdPromocaoCreateWithoutTv_exibicaoInput, Prisma.CrdPromocaoUncheckedCreateWithoutTv_exibicaoInput>
+  connectOrCreate?: Prisma.CrdPromocaoCreateOrConnectWithoutTv_exibicaoInput
+  connect?: Prisma.CrdPromocaoWhereUniqueInput
+}
+
+export type CrdPromocaoUpdateOneWithoutTv_exibicaoNestedInput = {
+  create?: Prisma.XOR<Prisma.CrdPromocaoCreateWithoutTv_exibicaoInput, Prisma.CrdPromocaoUncheckedCreateWithoutTv_exibicaoInput>
+  connectOrCreate?: Prisma.CrdPromocaoCreateOrConnectWithoutTv_exibicaoInput
+  upsert?: Prisma.CrdPromocaoUpsertWithoutTv_exibicaoInput
+  disconnect?: Prisma.CrdPromocaoWhereInput | boolean
+  delete?: Prisma.CrdPromocaoWhereInput | boolean
+  connect?: Prisma.CrdPromocaoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CrdPromocaoUpdateToOneWithWhereWithoutTv_exibicaoInput, Prisma.CrdPromocaoUpdateWithoutTv_exibicaoInput>, Prisma.CrdPromocaoUncheckedUpdateWithoutTv_exibicaoInput>
+}
+
 export type CrdPromocaoCreateWithoutImagem_sys_arquivoInput = {
   titulo: string
   descricao?: string | null
@@ -755,6 +783,7 @@ export type CrdPromocaoCreateWithoutImagem_sys_arquivoInput = {
   par_parceiro: Prisma.ParParceiroCreateNestedOneWithoutCrd_promocoesInput
   crd_promocao_itens?: Prisma.CrdPromocaoItemCreateNestedManyWithoutCrd_promocaoInput
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioCreateNestedManyWithoutCrd_promocaoInput
+  tv_exibicao?: Prisma.TvExibicaoCreateNestedOneWithoutCrd_promocaoInput
 }
 
 export type CrdPromocaoUncheckedCreateWithoutImagem_sys_arquivoInput = {
@@ -773,6 +802,7 @@ export type CrdPromocaoUncheckedCreateWithoutImagem_sys_arquivoInput = {
   deleted_at?: Date | string | null
   crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedCreateNestedManyWithoutCrd_promocaoInput
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioUncheckedCreateNestedManyWithoutCrd_promocaoInput
+  tv_exibicao?: Prisma.TvExibicaoUncheckedCreateNestedOneWithoutCrd_promocaoInput
 }
 
 export type CrdPromocaoCreateOrConnectWithoutImagem_sys_arquivoInput = {
@@ -836,6 +866,7 @@ export type CrdPromocaoCreateWithoutPar_parceiroInput = {
   imagem_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutCrd_promocoes_imagemInput
   crd_promocao_itens?: Prisma.CrdPromocaoItemCreateNestedManyWithoutCrd_promocaoInput
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioCreateNestedManyWithoutCrd_promocaoInput
+  tv_exibicao?: Prisma.TvExibicaoCreateNestedOneWithoutCrd_promocaoInput
 }
 
 export type CrdPromocaoUncheckedCreateWithoutPar_parceiroInput = {
@@ -854,6 +885,7 @@ export type CrdPromocaoUncheckedCreateWithoutPar_parceiroInput = {
   deleted_at?: Date | string | null
   crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedCreateNestedManyWithoutCrd_promocaoInput
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioUncheckedCreateNestedManyWithoutCrd_promocaoInput
+  tv_exibicao?: Prisma.TvExibicaoUncheckedCreateNestedOneWithoutCrd_promocaoInput
 }
 
 export type CrdPromocaoCreateOrConnectWithoutPar_parceiroInput = {
@@ -897,6 +929,7 @@ export type CrdPromocaoCreateWithoutCrd_promocao_itensInput = {
   par_parceiro: Prisma.ParParceiroCreateNestedOneWithoutCrd_promocoesInput
   imagem_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutCrd_promocoes_imagemInput
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioCreateNestedManyWithoutCrd_promocaoInput
+  tv_exibicao?: Prisma.TvExibicaoCreateNestedOneWithoutCrd_promocaoInput
 }
 
 export type CrdPromocaoUncheckedCreateWithoutCrd_promocao_itensInput = {
@@ -915,6 +948,7 @@ export type CrdPromocaoUncheckedCreateWithoutCrd_promocao_itensInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioUncheckedCreateNestedManyWithoutCrd_promocaoInput
+  tv_exibicao?: Prisma.TvExibicaoUncheckedCreateNestedOneWithoutCrd_promocaoInput
 }
 
 export type CrdPromocaoCreateOrConnectWithoutCrd_promocao_itensInput = {
@@ -948,6 +982,7 @@ export type CrdPromocaoUpdateWithoutCrd_promocao_itensInput = {
   par_parceiro?: Prisma.ParParceiroUpdateOneRequiredWithoutCrd_promocoesNestedInput
   imagem_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutCrd_promocoes_imagemNestedInput
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioUpdateManyWithoutCrd_promocaoNestedInput
+  tv_exibicao?: Prisma.TvExibicaoUpdateOneWithoutCrd_promocaoNestedInput
 }
 
 export type CrdPromocaoUncheckedUpdateWithoutCrd_promocao_itensInput = {
@@ -966,6 +1001,7 @@ export type CrdPromocaoUncheckedUpdateWithoutCrd_promocao_itensInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioUncheckedUpdateManyWithoutCrd_promocaoNestedInput
+  tv_exibicao?: Prisma.TvExibicaoUncheckedUpdateOneWithoutCrd_promocaoNestedInput
 }
 
 export type CrdPromocaoCreateWithoutCrd_promocao_horariosInput = {
@@ -983,6 +1019,7 @@ export type CrdPromocaoCreateWithoutCrd_promocao_horariosInput = {
   par_parceiro: Prisma.ParParceiroCreateNestedOneWithoutCrd_promocoesInput
   imagem_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutCrd_promocoes_imagemInput
   crd_promocao_itens?: Prisma.CrdPromocaoItemCreateNestedManyWithoutCrd_promocaoInput
+  tv_exibicao?: Prisma.TvExibicaoCreateNestedOneWithoutCrd_promocaoInput
 }
 
 export type CrdPromocaoUncheckedCreateWithoutCrd_promocao_horariosInput = {
@@ -1001,6 +1038,7 @@ export type CrdPromocaoUncheckedCreateWithoutCrd_promocao_horariosInput = {
   updated_at?: Date | string | null
   deleted_at?: Date | string | null
   crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedCreateNestedManyWithoutCrd_promocaoInput
+  tv_exibicao?: Prisma.TvExibicaoUncheckedCreateNestedOneWithoutCrd_promocaoInput
 }
 
 export type CrdPromocaoCreateOrConnectWithoutCrd_promocao_horariosInput = {
@@ -1034,6 +1072,7 @@ export type CrdPromocaoUpdateWithoutCrd_promocao_horariosInput = {
   par_parceiro?: Prisma.ParParceiroUpdateOneRequiredWithoutCrd_promocoesNestedInput
   imagem_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutCrd_promocoes_imagemNestedInput
   crd_promocao_itens?: Prisma.CrdPromocaoItemUpdateManyWithoutCrd_promocaoNestedInput
+  tv_exibicao?: Prisma.TvExibicaoUpdateOneWithoutCrd_promocaoNestedInput
 }
 
 export type CrdPromocaoUncheckedUpdateWithoutCrd_promocao_horariosInput = {
@@ -1052,6 +1091,97 @@ export type CrdPromocaoUncheckedUpdateWithoutCrd_promocao_horariosInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedUpdateManyWithoutCrd_promocaoNestedInput
+  tv_exibicao?: Prisma.TvExibicaoUncheckedUpdateOneWithoutCrd_promocaoNestedInput
+}
+
+export type CrdPromocaoCreateWithoutTv_exibicaoInput = {
+  titulo: string
+  descricao?: string | null
+  preco_promocional?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  validade_inicio?: Date | string | null
+  validade_fim?: Date | string | null
+  ordem?: number
+  ativo?: number
+  exibir_tv?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  par_parceiro: Prisma.ParParceiroCreateNestedOneWithoutCrd_promocoesInput
+  imagem_sys_arquivo?: Prisma.SysArquivoCreateNestedOneWithoutCrd_promocoes_imagemInput
+  crd_promocao_itens?: Prisma.CrdPromocaoItemCreateNestedManyWithoutCrd_promocaoInput
+  crd_promocao_horarios?: Prisma.CrdPromocaoHorarioCreateNestedManyWithoutCrd_promocaoInput
+}
+
+export type CrdPromocaoUncheckedCreateWithoutTv_exibicaoInput = {
+  id?: number
+  par_parceiro_id: number
+  imagem_sys_arquivo_id?: number | null
+  titulo: string
+  descricao?: string | null
+  preco_promocional?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  validade_inicio?: Date | string | null
+  validade_fim?: Date | string | null
+  ordem?: number
+  ativo?: number
+  exibir_tv?: number
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedCreateNestedManyWithoutCrd_promocaoInput
+  crd_promocao_horarios?: Prisma.CrdPromocaoHorarioUncheckedCreateNestedManyWithoutCrd_promocaoInput
+}
+
+export type CrdPromocaoCreateOrConnectWithoutTv_exibicaoInput = {
+  where: Prisma.CrdPromocaoWhereUniqueInput
+  create: Prisma.XOR<Prisma.CrdPromocaoCreateWithoutTv_exibicaoInput, Prisma.CrdPromocaoUncheckedCreateWithoutTv_exibicaoInput>
+}
+
+export type CrdPromocaoUpsertWithoutTv_exibicaoInput = {
+  update: Prisma.XOR<Prisma.CrdPromocaoUpdateWithoutTv_exibicaoInput, Prisma.CrdPromocaoUncheckedUpdateWithoutTv_exibicaoInput>
+  create: Prisma.XOR<Prisma.CrdPromocaoCreateWithoutTv_exibicaoInput, Prisma.CrdPromocaoUncheckedCreateWithoutTv_exibicaoInput>
+  where?: Prisma.CrdPromocaoWhereInput
+}
+
+export type CrdPromocaoUpdateToOneWithWhereWithoutTv_exibicaoInput = {
+  where?: Prisma.CrdPromocaoWhereInput
+  data: Prisma.XOR<Prisma.CrdPromocaoUpdateWithoutTv_exibicaoInput, Prisma.CrdPromocaoUncheckedUpdateWithoutTv_exibicaoInput>
+}
+
+export type CrdPromocaoUpdateWithoutTv_exibicaoInput = {
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preco_promocional?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  validade_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validade_fim?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  exibir_tv?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  par_parceiro?: Prisma.ParParceiroUpdateOneRequiredWithoutCrd_promocoesNestedInput
+  imagem_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutCrd_promocoes_imagemNestedInput
+  crd_promocao_itens?: Prisma.CrdPromocaoItemUpdateManyWithoutCrd_promocaoNestedInput
+  crd_promocao_horarios?: Prisma.CrdPromocaoHorarioUpdateManyWithoutCrd_promocaoNestedInput
+}
+
+export type CrdPromocaoUncheckedUpdateWithoutTv_exibicaoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  par_parceiro_id?: Prisma.IntFieldUpdateOperationsInput | number
+  imagem_sys_arquivo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preco_promocional?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  validade_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validade_fim?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  ativo?: Prisma.IntFieldUpdateOperationsInput | number
+  exibir_tv?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedUpdateManyWithoutCrd_promocaoNestedInput
+  crd_promocao_horarios?: Prisma.CrdPromocaoHorarioUncheckedUpdateManyWithoutCrd_promocaoNestedInput
 }
 
 export type CrdPromocaoCreateManyImagem_sys_arquivoInput = {
@@ -1085,6 +1215,7 @@ export type CrdPromocaoUpdateWithoutImagem_sys_arquivoInput = {
   par_parceiro?: Prisma.ParParceiroUpdateOneRequiredWithoutCrd_promocoesNestedInput
   crd_promocao_itens?: Prisma.CrdPromocaoItemUpdateManyWithoutCrd_promocaoNestedInput
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioUpdateManyWithoutCrd_promocaoNestedInput
+  tv_exibicao?: Prisma.TvExibicaoUpdateOneWithoutCrd_promocaoNestedInput
 }
 
 export type CrdPromocaoUncheckedUpdateWithoutImagem_sys_arquivoInput = {
@@ -1103,6 +1234,7 @@ export type CrdPromocaoUncheckedUpdateWithoutImagem_sys_arquivoInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedUpdateManyWithoutCrd_promocaoNestedInput
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioUncheckedUpdateManyWithoutCrd_promocaoNestedInput
+  tv_exibicao?: Prisma.TvExibicaoUncheckedUpdateOneWithoutCrd_promocaoNestedInput
 }
 
 export type CrdPromocaoUncheckedUpdateManyWithoutImagem_sys_arquivoInput = {
@@ -1152,6 +1284,7 @@ export type CrdPromocaoUpdateWithoutPar_parceiroInput = {
   imagem_sys_arquivo?: Prisma.SysArquivoUpdateOneWithoutCrd_promocoes_imagemNestedInput
   crd_promocao_itens?: Prisma.CrdPromocaoItemUpdateManyWithoutCrd_promocaoNestedInput
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioUpdateManyWithoutCrd_promocaoNestedInput
+  tv_exibicao?: Prisma.TvExibicaoUpdateOneWithoutCrd_promocaoNestedInput
 }
 
 export type CrdPromocaoUncheckedUpdateWithoutPar_parceiroInput = {
@@ -1170,6 +1303,7 @@ export type CrdPromocaoUncheckedUpdateWithoutPar_parceiroInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   crd_promocao_itens?: Prisma.CrdPromocaoItemUncheckedUpdateManyWithoutCrd_promocaoNestedInput
   crd_promocao_horarios?: Prisma.CrdPromocaoHorarioUncheckedUpdateManyWithoutCrd_promocaoNestedInput
+  tv_exibicao?: Prisma.TvExibicaoUncheckedUpdateOneWithoutCrd_promocaoNestedInput
 }
 
 export type CrdPromocaoUncheckedUpdateManyWithoutPar_parceiroInput = {
@@ -1247,6 +1381,7 @@ export type CrdPromocaoSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   imagem_sys_arquivo?: boolean | Prisma.CrdPromocao$imagem_sys_arquivoArgs<ExtArgs>
   crd_promocao_itens?: boolean | Prisma.CrdPromocao$crd_promocao_itensArgs<ExtArgs>
   crd_promocao_horarios?: boolean | Prisma.CrdPromocao$crd_promocao_horariosArgs<ExtArgs>
+  tv_exibicao?: boolean | Prisma.CrdPromocao$tv_exibicaoArgs<ExtArgs>
   _count?: boolean | Prisma.CrdPromocaoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["crdPromocao"]>
 
@@ -1275,6 +1410,7 @@ export type CrdPromocaoInclude<ExtArgs extends runtime.Types.Extensions.Internal
   imagem_sys_arquivo?: boolean | Prisma.CrdPromocao$imagem_sys_arquivoArgs<ExtArgs>
   crd_promocao_itens?: boolean | Prisma.CrdPromocao$crd_promocao_itensArgs<ExtArgs>
   crd_promocao_horarios?: boolean | Prisma.CrdPromocao$crd_promocao_horariosArgs<ExtArgs>
+  tv_exibicao?: boolean | Prisma.CrdPromocao$tv_exibicaoArgs<ExtArgs>
   _count?: boolean | Prisma.CrdPromocaoCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1285,6 +1421,7 @@ export type $CrdPromocaoPayload<ExtArgs extends runtime.Types.Extensions.Interna
     imagem_sys_arquivo: Prisma.$SysArquivoPayload<ExtArgs> | null
     crd_promocao_itens: Prisma.$CrdPromocaoItemPayload<ExtArgs>[]
     crd_promocao_horarios: Prisma.$CrdPromocaoHorarioPayload<ExtArgs>[]
+    tv_exibicao: Prisma.$TvExibicaoPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1645,6 +1782,7 @@ export interface Prisma__CrdPromocaoClient<T, Null = never, ExtArgs extends runt
   imagem_sys_arquivo<T extends Prisma.CrdPromocao$imagem_sys_arquivoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CrdPromocao$imagem_sys_arquivoArgs<ExtArgs>>): Prisma.Prisma__SysArquivoClient<runtime.Types.Result.GetResult<Prisma.$SysArquivoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   crd_promocao_itens<T extends Prisma.CrdPromocao$crd_promocao_itensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CrdPromocao$crd_promocao_itensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CrdPromocaoItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   crd_promocao_horarios<T extends Prisma.CrdPromocao$crd_promocao_horariosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CrdPromocao$crd_promocao_horariosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CrdPromocaoHorarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tv_exibicao<T extends Prisma.CrdPromocao$tv_exibicaoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CrdPromocao$tv_exibicaoArgs<ExtArgs>>): Prisma.Prisma__TvExibicaoClient<runtime.Types.Result.GetResult<Prisma.$TvExibicaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2100,6 +2238,25 @@ export type CrdPromocao$crd_promocao_horariosArgs<ExtArgs extends runtime.Types.
   take?: number
   skip?: number
   distinct?: Prisma.CrdPromocaoHorarioScalarFieldEnum | Prisma.CrdPromocaoHorarioScalarFieldEnum[]
+}
+
+/**
+ * CrdPromocao.tv_exibicao
+ */
+export type CrdPromocao$tv_exibicaoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TvExibicao
+   */
+  select?: Prisma.TvExibicaoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TvExibicao
+   */
+  omit?: Prisma.TvExibicaoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TvExibicaoInclude<ExtArgs> | null
+  where?: Prisma.TvExibicaoWhereInput
 }
 
 /**

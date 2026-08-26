@@ -336,6 +336,7 @@ export type SysArquivoWhereInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaListRelationFilter
   crd_itens_imagem?: Prisma.CrdItemListRelationFilter
   crd_promocoes_imagem?: Prisma.CrdPromocaoListRelationFilter
+  tv_exibicoes_midia?: Prisma.TvExibicaoListRelationFilter
 }
 
 export type SysArquivoOrderByWithRelationInput = {
@@ -367,6 +368,7 @@ export type SysArquivoOrderByWithRelationInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaOrderByRelationAggregateInput
   crd_itens_imagem?: Prisma.CrdItemOrderByRelationAggregateInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoOrderByRelationAggregateInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoOrderByRelationAggregateInput
   _relevance?: Prisma.SysArquivoOrderByRelevanceInput
 }
 
@@ -402,6 +404,7 @@ export type SysArquivoWhereUniqueInput = Prisma.AtLeast<{
   par_parceiros_banner?: Prisma.ParParceiroTemaListRelationFilter
   crd_itens_imagem?: Prisma.CrdItemListRelationFilter
   crd_promocoes_imagem?: Prisma.CrdPromocaoListRelationFilter
+  tv_exibicoes_midia?: Prisma.TvExibicaoListRelationFilter
 }, "id">
 
 export type SysArquivoOrderByWithAggregationInput = {
@@ -474,6 +477,7 @@ export type SysArquivoCreateInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateInput = {
@@ -501,6 +505,7 @@ export type SysArquivoUncheckedCreateInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoUpdateInput = {
@@ -527,6 +532,7 @@ export type SysArquivoUpdateInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateInput = {
@@ -554,6 +560,7 @@ export type SysArquivoUncheckedUpdateInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoCreateManyInput = {
@@ -973,6 +980,22 @@ export type SysArquivoUpdateOneWithoutCrd_promocoes_imagemNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SysArquivoUpdateToOneWithWhereWithoutCrd_promocoes_imagemInput, Prisma.SysArquivoUpdateWithoutCrd_promocoes_imagemInput>, Prisma.SysArquivoUncheckedUpdateWithoutCrd_promocoes_imagemInput>
 }
 
+export type SysArquivoCreateNestedOneWithoutTv_exibicoes_midiaInput = {
+  create?: Prisma.XOR<Prisma.SysArquivoCreateWithoutTv_exibicoes_midiaInput, Prisma.SysArquivoUncheckedCreateWithoutTv_exibicoes_midiaInput>
+  connectOrCreate?: Prisma.SysArquivoCreateOrConnectWithoutTv_exibicoes_midiaInput
+  connect?: Prisma.SysArquivoWhereUniqueInput
+}
+
+export type SysArquivoUpdateOneWithoutTv_exibicoes_midiaNestedInput = {
+  create?: Prisma.XOR<Prisma.SysArquivoCreateWithoutTv_exibicoes_midiaInput, Prisma.SysArquivoUncheckedCreateWithoutTv_exibicoes_midiaInput>
+  connectOrCreate?: Prisma.SysArquivoCreateOrConnectWithoutTv_exibicoes_midiaInput
+  upsert?: Prisma.SysArquivoUpsertWithoutTv_exibicoes_midiaInput
+  disconnect?: Prisma.SysArquivoWhereInput | boolean
+  delete?: Prisma.SysArquivoWhereInput | boolean
+  connect?: Prisma.SysArquivoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SysArquivoUpdateToOneWithWhereWithoutTv_exibicoes_midiaInput, Prisma.SysArquivoUpdateWithoutTv_exibicoes_midiaInput>, Prisma.SysArquivoUncheckedUpdateWithoutTv_exibicoes_midiaInput>
+}
+
 export type SysArquivoCreateNestedOneWithoutPrd_produto_imagensInput = {
   create?: Prisma.XOR<Prisma.SysArquivoCreateWithoutPrd_produto_imagensInput, Prisma.SysArquivoUncheckedCreateWithoutPrd_produto_imagensInput>
   connectOrCreate?: Prisma.SysArquivoCreateOrConnectWithoutPrd_produto_imagensInput
@@ -1026,6 +1049,7 @@ export type SysArquivoCreateWithoutSys_usuarios_avatarInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutSys_usuarios_avatarInput = {
@@ -1052,6 +1076,7 @@ export type SysArquivoUncheckedCreateWithoutSys_usuarios_avatarInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutSys_usuarios_avatarInput = {
@@ -1082,6 +1107,7 @@ export type SysArquivoCreateWithoutCreated_by_sys_usuarioInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutCreated_by_sys_usuarioInput = {
@@ -1108,6 +1134,7 @@ export type SysArquivoUncheckedCreateWithoutCreated_by_sys_usuarioInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutCreated_by_sys_usuarioInput = {
@@ -1154,6 +1181,7 @@ export type SysArquivoUpdateWithoutSys_usuarios_avatarInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutSys_usuarios_avatarInput = {
@@ -1180,6 +1208,7 @@ export type SysArquivoUncheckedUpdateWithoutSys_usuarios_avatarInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUpsertWithWhereUniqueWithoutCreated_by_sys_usuarioInput = {
@@ -1243,6 +1272,7 @@ export type SysArquivoCreateWithoutSys_arquivo_discoInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutSys_arquivo_discoInput = {
@@ -1269,6 +1299,7 @@ export type SysArquivoUncheckedCreateWithoutSys_arquivo_discoInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutSys_arquivo_discoInput = {
@@ -1320,6 +1351,7 @@ export type SysArquivoCreateWithoutSys_arquivo_visibilidadeInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutSys_arquivo_visibilidadeInput = {
@@ -1346,6 +1378,7 @@ export type SysArquivoUncheckedCreateWithoutSys_arquivo_visibilidadeInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutSys_arquivo_visibilidadeInput = {
@@ -1397,6 +1430,7 @@ export type SysArquivoCreateWithoutSys_arquivo_tipoInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutSys_arquivo_tipoInput = {
@@ -1423,6 +1457,7 @@ export type SysArquivoUncheckedCreateWithoutSys_arquivo_tipoInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutSys_arquivo_tipoInput = {
@@ -1474,6 +1509,7 @@ export type SysArquivoCreateWithoutCad_eventos_bannerInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutCad_eventos_bannerInput = {
@@ -1500,6 +1536,7 @@ export type SysArquivoUncheckedCreateWithoutCad_eventos_bannerInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutCad_eventos_bannerInput = {
@@ -1541,6 +1578,7 @@ export type SysArquivoUpdateWithoutCad_eventos_bannerInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutCad_eventos_bannerInput = {
@@ -1567,6 +1605,7 @@ export type SysArquivoUncheckedUpdateWithoutCad_eventos_bannerInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoCreateWithoutPar_parceiros_logoInput = {
@@ -1592,6 +1631,7 @@ export type SysArquivoCreateWithoutPar_parceiros_logoInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutPar_parceiros_logoInput = {
@@ -1618,6 +1658,7 @@ export type SysArquivoUncheckedCreateWithoutPar_parceiros_logoInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutPar_parceiros_logoInput = {
@@ -1648,6 +1689,7 @@ export type SysArquivoCreateWithoutPar_parceiros_bannerInput = {
   par_parceiros_logo?: Prisma.ParParceiroTemaCreateNestedManyWithoutLogo_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutPar_parceiros_bannerInput = {
@@ -1674,6 +1716,7 @@ export type SysArquivoUncheckedCreateWithoutPar_parceiros_bannerInput = {
   par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutLogo_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutPar_parceiros_bannerInput = {
@@ -1715,6 +1758,7 @@ export type SysArquivoUpdateWithoutPar_parceiros_logoInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutPar_parceiros_logoInput = {
@@ -1741,6 +1785,7 @@ export type SysArquivoUncheckedUpdateWithoutPar_parceiros_logoInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUpsertWithoutPar_parceiros_bannerInput = {
@@ -1777,6 +1822,7 @@ export type SysArquivoUpdateWithoutPar_parceiros_bannerInput = {
   par_parceiros_logo?: Prisma.ParParceiroTemaUpdateManyWithoutLogo_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutPar_parceiros_bannerInput = {
@@ -1803,6 +1849,7 @@ export type SysArquivoUncheckedUpdateWithoutPar_parceiros_bannerInput = {
   par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutLogo_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoCreateWithoutCrd_itens_imagemInput = {
@@ -1828,6 +1875,7 @@ export type SysArquivoCreateWithoutCrd_itens_imagemInput = {
   par_parceiros_logo?: Prisma.ParParceiroTemaCreateNestedManyWithoutLogo_sys_arquivoInput
   par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutCrd_itens_imagemInput = {
@@ -1854,6 +1902,7 @@ export type SysArquivoUncheckedCreateWithoutCrd_itens_imagemInput = {
   par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutLogo_sys_arquivoInput
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutCrd_itens_imagemInput = {
@@ -1895,6 +1944,7 @@ export type SysArquivoUpdateWithoutCrd_itens_imagemInput = {
   par_parceiros_logo?: Prisma.ParParceiroTemaUpdateManyWithoutLogo_sys_arquivoNestedInput
   par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutCrd_itens_imagemInput = {
@@ -1921,6 +1971,7 @@ export type SysArquivoUncheckedUpdateWithoutCrd_itens_imagemInput = {
   par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutLogo_sys_arquivoNestedInput
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoCreateWithoutCrd_promocoes_imagemInput = {
@@ -1946,6 +1997,7 @@ export type SysArquivoCreateWithoutCrd_promocoes_imagemInput = {
   par_parceiros_logo?: Prisma.ParParceiroTemaCreateNestedManyWithoutLogo_sys_arquivoInput
   par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutCrd_promocoes_imagemInput = {
@@ -1972,6 +2024,7 @@ export type SysArquivoUncheckedCreateWithoutCrd_promocoes_imagemInput = {
   par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutLogo_sys_arquivoInput
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutCrd_promocoes_imagemInput = {
@@ -2013,6 +2066,7 @@ export type SysArquivoUpdateWithoutCrd_promocoes_imagemInput = {
   par_parceiros_logo?: Prisma.ParParceiroTemaUpdateManyWithoutLogo_sys_arquivoNestedInput
   par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutCrd_promocoes_imagemInput = {
@@ -2039,6 +2093,129 @@ export type SysArquivoUncheckedUpdateWithoutCrd_promocoes_imagemInput = {
   par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutLogo_sys_arquivoNestedInput
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedUpdateManyWithoutMidia_sys_arquivoNestedInput
+}
+
+export type SysArquivoCreateWithoutTv_exibicoes_midiaInput = {
+  bucket?: string | null
+  file_key: string
+  public_url?: string | null
+  original_name: string
+  mime_type: string
+  size_bytes: number
+  content_hash?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
+  sys_arquivo_disco: Prisma.SysArquivoDiscoCreateNestedOneWithoutSys_arquivosInput
+  sys_arquivo_visibilidade: Prisma.SysArquivoVisibilidadeCreateNestedOneWithoutSys_arquivosInput
+  sys_arquivo_tipo?: Prisma.SysArquivoTipoCreateNestedOneWithoutSys_arquivosInput
+  created_by_sys_usuario?: Prisma.SysUsuarioCreateNestedOneWithoutSys_arquivos_criadosInput
+  sys_usuarios_avatar?: Prisma.SysUsuarioCreateNestedManyWithoutAvatar_sys_arquivoInput
+  prd_produto_imagens?: Prisma.PrdProdutoImagemCreateNestedManyWithoutSys_arquivoInput
+  cad_eventos_banner?: Prisma.CadEventoCreateNestedManyWithoutBanner_sys_arquivoInput
+  soc_planos_banner?: Prisma.SocPlanoCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
+  crd_promocoes_imagem?: Prisma.CrdPromocaoCreateNestedManyWithoutImagem_sys_arquivoInput
+}
+
+export type SysArquivoUncheckedCreateWithoutTv_exibicoes_midiaInput = {
+  id?: number
+  sys_arquivo_disco_id: number
+  sys_arquivo_visibilidade_id: number
+  sys_arquivo_tipo_id?: number | null
+  bucket?: string | null
+  file_key: string
+  public_url?: string | null
+  original_name: string
+  mime_type: string
+  size_bytes: number
+  content_hash?: string | null
+  created_by_sys_usuario_id?: number | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  deleted_at?: Date | string | null
+  storage_deleted_at?: Date | string | null
+  sys_usuarios_avatar?: Prisma.SysUsuarioUncheckedCreateNestedManyWithoutAvatar_sys_arquivoInput
+  prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedCreateNestedManyWithoutSys_arquivoInput
+  cad_eventos_banner?: Prisma.CadEventoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  soc_planos_banner?: Prisma.SocPlanoUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutLogo_sys_arquivoInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
+  crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
+}
+
+export type SysArquivoCreateOrConnectWithoutTv_exibicoes_midiaInput = {
+  where: Prisma.SysArquivoWhereUniqueInput
+  create: Prisma.XOR<Prisma.SysArquivoCreateWithoutTv_exibicoes_midiaInput, Prisma.SysArquivoUncheckedCreateWithoutTv_exibicoes_midiaInput>
+}
+
+export type SysArquivoUpsertWithoutTv_exibicoes_midiaInput = {
+  update: Prisma.XOR<Prisma.SysArquivoUpdateWithoutTv_exibicoes_midiaInput, Prisma.SysArquivoUncheckedUpdateWithoutTv_exibicoes_midiaInput>
+  create: Prisma.XOR<Prisma.SysArquivoCreateWithoutTv_exibicoes_midiaInput, Prisma.SysArquivoUncheckedCreateWithoutTv_exibicoes_midiaInput>
+  where?: Prisma.SysArquivoWhereInput
+}
+
+export type SysArquivoUpdateToOneWithWhereWithoutTv_exibicoes_midiaInput = {
+  where?: Prisma.SysArquivoWhereInput
+  data: Prisma.XOR<Prisma.SysArquivoUpdateWithoutTv_exibicoes_midiaInput, Prisma.SysArquivoUncheckedUpdateWithoutTv_exibicoes_midiaInput>
+}
+
+export type SysArquivoUpdateWithoutTv_exibicoes_midiaInput = {
+  bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_key?: Prisma.StringFieldUpdateOperationsInput | string
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  original_name?: Prisma.StringFieldUpdateOperationsInput | string
+  mime_type?: Prisma.StringFieldUpdateOperationsInput | string
+  size_bytes?: Prisma.IntFieldUpdateOperationsInput | number
+  content_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_arquivo_disco?: Prisma.SysArquivoDiscoUpdateOneRequiredWithoutSys_arquivosNestedInput
+  sys_arquivo_visibilidade?: Prisma.SysArquivoVisibilidadeUpdateOneRequiredWithoutSys_arquivosNestedInput
+  sys_arquivo_tipo?: Prisma.SysArquivoTipoUpdateOneWithoutSys_arquivosNestedInput
+  created_by_sys_usuario?: Prisma.SysUsuarioUpdateOneWithoutSys_arquivos_criadosNestedInput
+  sys_usuarios_avatar?: Prisma.SysUsuarioUpdateManyWithoutAvatar_sys_arquivoNestedInput
+  prd_produto_imagens?: Prisma.PrdProdutoImagemUpdateManyWithoutSys_arquivoNestedInput
+  cad_eventos_banner?: Prisma.CadEventoUpdateManyWithoutBanner_sys_arquivoNestedInput
+  soc_planos_banner?: Prisma.SocPlanoUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
+  crd_promocoes_imagem?: Prisma.CrdPromocaoUpdateManyWithoutImagem_sys_arquivoNestedInput
+}
+
+export type SysArquivoUncheckedUpdateWithoutTv_exibicoes_midiaInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_arquivo_disco_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_arquivo_visibilidade_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sys_arquivo_tipo_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_key?: Prisma.StringFieldUpdateOperationsInput | string
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  original_name?: Prisma.StringFieldUpdateOperationsInput | string
+  mime_type?: Prisma.StringFieldUpdateOperationsInput | string
+  size_bytes?: Prisma.IntFieldUpdateOperationsInput | number
+  content_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by_sys_usuario_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  storage_deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sys_usuarios_avatar?: Prisma.SysUsuarioUncheckedUpdateManyWithoutAvatar_sys_arquivoNestedInput
+  prd_produto_imagens?: Prisma.PrdProdutoImagemUncheckedUpdateManyWithoutSys_arquivoNestedInput
+  cad_eventos_banner?: Prisma.CadEventoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  soc_planos_banner?: Prisma.SocPlanoUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  par_parceiros_logo?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutLogo_sys_arquivoNestedInput
+  par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
+  crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
+  crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
 }
 
 export type SysArquivoCreateWithoutPrd_produto_imagensInput = {
@@ -2064,6 +2241,7 @@ export type SysArquivoCreateWithoutPrd_produto_imagensInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutPrd_produto_imagensInput = {
@@ -2090,6 +2268,7 @@ export type SysArquivoUncheckedCreateWithoutPrd_produto_imagensInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutPrd_produto_imagensInput = {
@@ -2131,6 +2310,7 @@ export type SysArquivoUpdateWithoutPrd_produto_imagensInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutPrd_produto_imagensInput = {
@@ -2157,6 +2337,7 @@ export type SysArquivoUncheckedUpdateWithoutPrd_produto_imagensInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoCreateWithoutSoc_planos_bannerInput = {
@@ -2182,6 +2363,7 @@ export type SysArquivoCreateWithoutSoc_planos_bannerInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoUncheckedCreateWithoutSoc_planos_bannerInput = {
@@ -2208,6 +2390,7 @@ export type SysArquivoUncheckedCreateWithoutSoc_planos_bannerInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedCreateNestedManyWithoutBanner_sys_arquivoInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedCreateNestedManyWithoutImagem_sys_arquivoInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedCreateNestedManyWithoutMidia_sys_arquivoInput
 }
 
 export type SysArquivoCreateOrConnectWithoutSoc_planos_bannerInput = {
@@ -2249,6 +2432,7 @@ export type SysArquivoUpdateWithoutSoc_planos_bannerInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutSoc_planos_bannerInput = {
@@ -2275,6 +2459,7 @@ export type SysArquivoUncheckedUpdateWithoutSoc_planos_bannerInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoCreateManyCreated_by_sys_usuarioInput = {
@@ -2318,6 +2503,7 @@ export type SysArquivoUpdateWithoutCreated_by_sys_usuarioInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutCreated_by_sys_usuarioInput = {
@@ -2344,6 +2530,7 @@ export type SysArquivoUncheckedUpdateWithoutCreated_by_sys_usuarioInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateManyWithoutCreated_by_sys_usuarioInput = {
@@ -2405,6 +2592,7 @@ export type SysArquivoUpdateWithoutSys_arquivo_discoInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutSys_arquivo_discoInput = {
@@ -2431,6 +2619,7 @@ export type SysArquivoUncheckedUpdateWithoutSys_arquivo_discoInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateManyWithoutSys_arquivo_discoInput = {
@@ -2492,6 +2681,7 @@ export type SysArquivoUpdateWithoutSys_arquivo_visibilidadeInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutSys_arquivo_visibilidadeInput = {
@@ -2518,6 +2708,7 @@ export type SysArquivoUncheckedUpdateWithoutSys_arquivo_visibilidadeInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateManyWithoutSys_arquivo_visibilidadeInput = {
@@ -2579,6 +2770,7 @@ export type SysArquivoUpdateWithoutSys_arquivo_tipoInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateWithoutSys_arquivo_tipoInput = {
@@ -2605,6 +2797,7 @@ export type SysArquivoUncheckedUpdateWithoutSys_arquivo_tipoInput = {
   par_parceiros_banner?: Prisma.ParParceiroTemaUncheckedUpdateManyWithoutBanner_sys_arquivoNestedInput
   crd_itens_imagem?: Prisma.CrdItemUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
   crd_promocoes_imagem?: Prisma.CrdPromocaoUncheckedUpdateManyWithoutImagem_sys_arquivoNestedInput
+  tv_exibicoes_midia?: Prisma.TvExibicaoUncheckedUpdateManyWithoutMidia_sys_arquivoNestedInput
 }
 
 export type SysArquivoUncheckedUpdateManyWithoutSys_arquivo_tipoInput = {
@@ -2639,6 +2832,7 @@ export type SysArquivoCountOutputType = {
   par_parceiros_banner: number
   crd_itens_imagem: number
   crd_promocoes_imagem: number
+  tv_exibicoes_midia: number
 }
 
 export type SysArquivoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2650,6 +2844,7 @@ export type SysArquivoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   par_parceiros_banner?: boolean | SysArquivoCountOutputTypeCountPar_parceiros_bannerArgs
   crd_itens_imagem?: boolean | SysArquivoCountOutputTypeCountCrd_itens_imagemArgs
   crd_promocoes_imagem?: boolean | SysArquivoCountOutputTypeCountCrd_promocoes_imagemArgs
+  tv_exibicoes_midia?: boolean | SysArquivoCountOutputTypeCountTv_exibicoes_midiaArgs
 }
 
 /**
@@ -2718,6 +2913,13 @@ export type SysArquivoCountOutputTypeCountCrd_promocoes_imagemArgs<ExtArgs exten
   where?: Prisma.CrdPromocaoWhereInput
 }
 
+/**
+ * SysArquivoCountOutputType without action
+ */
+export type SysArquivoCountOutputTypeCountTv_exibicoes_midiaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TvExibicaoWhereInput
+}
+
 
 export type SysArquivoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2748,6 +2950,7 @@ export type SysArquivoSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   par_parceiros_banner?: boolean | Prisma.SysArquivo$par_parceiros_bannerArgs<ExtArgs>
   crd_itens_imagem?: boolean | Prisma.SysArquivo$crd_itens_imagemArgs<ExtArgs>
   crd_promocoes_imagem?: boolean | Prisma.SysArquivo$crd_promocoes_imagemArgs<ExtArgs>
+  tv_exibicoes_midia?: boolean | Prisma.SysArquivo$tv_exibicoes_midiaArgs<ExtArgs>
   _count?: boolean | Prisma.SysArquivoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sysArquivo"]>
 
@@ -2786,6 +2989,7 @@ export type SysArquivoInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   par_parceiros_banner?: boolean | Prisma.SysArquivo$par_parceiros_bannerArgs<ExtArgs>
   crd_itens_imagem?: boolean | Prisma.SysArquivo$crd_itens_imagemArgs<ExtArgs>
   crd_promocoes_imagem?: boolean | Prisma.SysArquivo$crd_promocoes_imagemArgs<ExtArgs>
+  tv_exibicoes_midia?: boolean | Prisma.SysArquivo$tv_exibicoes_midiaArgs<ExtArgs>
   _count?: boolean | Prisma.SysArquivoCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -2804,6 +3008,7 @@ export type $SysArquivoPayload<ExtArgs extends runtime.Types.Extensions.Internal
     par_parceiros_banner: Prisma.$ParParceiroTemaPayload<ExtArgs>[]
     crd_itens_imagem: Prisma.$CrdItemPayload<ExtArgs>[]
     crd_promocoes_imagem: Prisma.$CrdPromocaoPayload<ExtArgs>[]
+    tv_exibicoes_midia: Prisma.$TvExibicaoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -3174,6 +3379,7 @@ export interface Prisma__SysArquivoClient<T, Null = never, ExtArgs extends runti
   par_parceiros_banner<T extends Prisma.SysArquivo$par_parceiros_bannerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivo$par_parceiros_bannerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ParParceiroTemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   crd_itens_imagem<T extends Prisma.SysArquivo$crd_itens_imagemArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivo$crd_itens_imagemArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CrdItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   crd_promocoes_imagem<T extends Prisma.SysArquivo$crd_promocoes_imagemArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivo$crd_promocoes_imagemArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CrdPromocaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tv_exibicoes_midia<T extends Prisma.SysArquivo$tv_exibicoes_midiaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SysArquivo$tv_exibicoes_midiaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TvExibicaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3794,6 +4000,30 @@ export type SysArquivo$crd_promocoes_imagemArgs<ExtArgs extends runtime.Types.Ex
   take?: number
   skip?: number
   distinct?: Prisma.CrdPromocaoScalarFieldEnum | Prisma.CrdPromocaoScalarFieldEnum[]
+}
+
+/**
+ * SysArquivo.tv_exibicoes_midia
+ */
+export type SysArquivo$tv_exibicoes_midiaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TvExibicao
+   */
+  select?: Prisma.TvExibicaoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TvExibicao
+   */
+  omit?: Prisma.TvExibicaoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TvExibicaoInclude<ExtArgs> | null
+  where?: Prisma.TvExibicaoWhereInput
+  orderBy?: Prisma.TvExibicaoOrderByWithRelationInput | Prisma.TvExibicaoOrderByWithRelationInput[]
+  cursor?: Prisma.TvExibicaoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TvExibicaoScalarFieldEnum | Prisma.TvExibicaoScalarFieldEnum[]
 }
 
 /**

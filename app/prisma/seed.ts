@@ -136,6 +136,30 @@ async function main() {
 
 
     // =====================================================
+    // TV — TIPOS DE EXIBIÇÃO
+    // =====================================================
+
+    await upsertByCodigo(prisma.tvExibicaoTipo, "evento", {
+        nome: "Evento",
+        descricao: "Exibição vinculada a um evento cadastrado.",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.tvExibicaoTipo, "promocao", {
+        nome: "Promoção",
+        descricao: "Exibição vinculada a uma promoção do cardápio.",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.tvExibicaoTipo, "divulgacao", {
+        nome: "Divulgação",
+        descricao:
+            "Conteúdo livre criado diretamente para a programação da TV.",
+        ativo: 1,
+    });
+
+
+    // =====================================================
     // SYS — STORAGE
     // =====================================================
 
@@ -191,6 +215,11 @@ async function main() {
 
     await upsertByCodigo(prisma.sysArquivoTipo, "cardapio_promocao_imagem", {
         nome: "Imagem de promoção do cardápio",
+        ativo: 1,
+    });
+
+    await upsertByCodigo(prisma.sysArquivoTipo, "tv_exibicao_midia", {
+        nome: "Mídia de exibição da TV",
         ativo: 1,
     });
 

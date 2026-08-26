@@ -45,9 +45,9 @@ type PublicUser = {
 
 
 export async function PublicStoreShell({
-                                           children,
-                                           user,
-                                       }: {
+    children,
+    user,
+}: {
     children:
         ReactNode;
 
@@ -91,13 +91,13 @@ export async function PublicStoreShell({
                 parceiro,
             ) => ({
                 id:
-                parceiro.id,
+                    parceiro.id,
 
                 slug:
-                parceiro.slug,
+                    parceiro.slug,
 
                 nome:
-                parceiro.nome,
+                    parceiro.nome,
 
                 logoUrl:
                     parceiro
@@ -151,6 +151,11 @@ export async function PublicStoreShell({
                         mode="public"
                         user={
                             navigationUser
+                        }
+                        hasPartners={
+                            navigationPartners
+                                .length >
+                            0
                         }
                     />
                 </div>

@@ -68,6 +68,77 @@ async function requireSession(
 }
 
 
+export async function listParceirosNavigationForUser(
+    sysUsuarioId:
+        number,
+) {
+    const vinculos =
+        await prisma
+            .parParceiroUsuario
+            .findMany({
+                where: {
+                    sys_usuario_id:
+                        sysUsuarioId,
+
+                    ativo:
+                        1,
+
+                    par_parceiro: {
+                        ativo:
+                            1,
+
+                        deleted_at:
+                            null,
+                    },
+                },
+
+                select: {
+                    par_parceiro: {
+                        select: {
+                            id:
+                                true,
+
+                            slug:
+                                true,
+
+                            nome:
+                                true,
+
+                            par_parceiro_tema: {
+                                select: {
+                                    cor_primaria:
+                                        true,
+
+                                    logo_sys_arquivo: {
+                                        select: {
+                                            public_url:
+                                                true,
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+
+                orderBy: {
+                    par_parceiro: {
+                        nome:
+                            "asc",
+                    },
+                },
+            });
+
+    return vinculos.map(
+        (
+            vinculo,
+        ) =>
+            vinculo
+                .par_parceiro,
+    );
+}
+
+
 export async function requireParceiroListPageAccess(
     pathname: string,
 ) {

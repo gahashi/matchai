@@ -75,6 +75,9 @@ export const ModelName = {
   CrdPromocao: 'CrdPromocao',
   CrdPromocaoItem: 'CrdPromocaoItem',
   CrdPromocaoHorario: 'CrdPromocaoHorario',
+  TvExibicaoTipo: 'TvExibicaoTipo',
+  TvExibicao: 'TvExibicao',
+  TvExibicaoHorario: 'TvExibicaoHorario',
   PrdProdutoTipo: 'PrdProdutoTipo',
   PrdProduto: 'PrdProduto',
   PrdProdutoImagem: 'PrdProdutoImagem',
@@ -348,6 +351,7 @@ export const CadEventoScalarFieldEnum = {
   descricao: 'descricao',
   url: 'url',
   banner_sys_arquivo_id: 'banner_sys_arquivo_id',
+  par_parceiro_id: 'par_parceiro_id',
   evento_at: 'evento_at',
   inicio_exibicao: 'inicio_exibicao',
   fim_exibicao: 'fim_exibicao',
@@ -498,6 +502,57 @@ export const CrdPromocaoHorarioScalarFieldEnum = {
 } as const
 
 export type CrdPromocaoHorarioScalarFieldEnum = (typeof CrdPromocaoHorarioScalarFieldEnum)[keyof typeof CrdPromocaoHorarioScalarFieldEnum]
+
+
+export const TvExibicaoTipoScalarFieldEnum = {
+  id: 'id',
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao',
+  ativo: 'ativo',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type TvExibicaoTipoScalarFieldEnum = (typeof TvExibicaoTipoScalarFieldEnum)[keyof typeof TvExibicaoTipoScalarFieldEnum]
+
+
+export const TvExibicaoScalarFieldEnum = {
+  id: 'id',
+  tv_exibicao_tipo_id: 'tv_exibicao_tipo_id',
+  par_parceiro_id: 'par_parceiro_id',
+  cad_evento_id: 'cad_evento_id',
+  crd_promocao_id: 'crd_promocao_id',
+  midia_sys_arquivo_id: 'midia_sys_arquivo_id',
+  titulo: 'titulo',
+  descricao: 'descricao',
+  link: 'link',
+  kicker: 'kicker',
+  cor_destaque: 'cor_destaque',
+  duracao_segundos: 'duracao_segundos',
+  ordem: 'ordem',
+  ativo: 'ativo',
+  inicio_exibicao: 'inicio_exibicao',
+  fim_exibicao: 'fim_exibicao',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type TvExibicaoScalarFieldEnum = (typeof TvExibicaoScalarFieldEnum)[keyof typeof TvExibicaoScalarFieldEnum]
+
+
+export const TvExibicaoHorarioScalarFieldEnum = {
+  id: 'id',
+  tv_exibicao_id: 'tv_exibicao_id',
+  dia_semana: 'dia_semana',
+  hora_inicio: 'hora_inicio',
+  hora_fim: 'hora_fim',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type TvExibicaoHorarioScalarFieldEnum = (typeof TvExibicaoHorarioScalarFieldEnum)[keyof typeof TvExibicaoHorarioScalarFieldEnum]
 
 
 export const PrdProdutoTipoScalarFieldEnum = {
@@ -1153,6 +1208,26 @@ export const CrdPromocaoOrderByRelevanceFieldEnum = {
 } as const
 
 export type CrdPromocaoOrderByRelevanceFieldEnum = (typeof CrdPromocaoOrderByRelevanceFieldEnum)[keyof typeof CrdPromocaoOrderByRelevanceFieldEnum]
+
+
+export const TvExibicaoTipoOrderByRelevanceFieldEnum = {
+  codigo: 'codigo',
+  nome: 'nome',
+  descricao: 'descricao'
+} as const
+
+export type TvExibicaoTipoOrderByRelevanceFieldEnum = (typeof TvExibicaoTipoOrderByRelevanceFieldEnum)[keyof typeof TvExibicaoTipoOrderByRelevanceFieldEnum]
+
+
+export const TvExibicaoOrderByRelevanceFieldEnum = {
+  titulo: 'titulo',
+  descricao: 'descricao',
+  link: 'link',
+  kicker: 'kicker',
+  cor_destaque: 'cor_destaque'
+} as const
+
+export type TvExibicaoOrderByRelevanceFieldEnum = (typeof TvExibicaoOrderByRelevanceFieldEnum)[keyof typeof TvExibicaoOrderByRelevanceFieldEnum]
 
 
 export const PrdProdutoTipoOrderByRelevanceFieldEnum = {

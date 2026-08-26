@@ -157,6 +157,8 @@ type Props = {
     parceiroId: number;
     itens: PromocaoCardapioItem[];
     initialPromocoes: Promocao[];
+
+    standalone?: boolean;
 };
 
 
@@ -205,6 +207,57 @@ type PromocaoVisualStatus =
     | "encerrada"
     | "exibindo"
     | "fora_horario";
+
+
+type PromocaoListFilter =
+    | "todas"
+    | "ativas"
+    | "inativas"
+    | "na_tv"
+    | "fora_tv";
+
+
+const promocaoFilterOptions = [
+    {
+        value:
+            "todas",
+
+        label:
+            "Todas",
+    },
+
+    {
+        value:
+            "ativas",
+
+        label:
+            "Ativas",
+    },
+
+    {
+        value:
+            "inativas",
+
+        label:
+            "Inativas",
+    },
+
+    {
+        value:
+            "na_tv",
+
+        label:
+            "Na TV",
+    },
+
+    {
+        value:
+            "fora_tv",
+
+        label:
+            "Fora da TV",
+    },
+];
 
 
 const diasSemana = [
@@ -738,6 +791,7 @@ export function ParceiroPromocoesSection({
     parceiroId,
     itens,
     initialPromocoes,
+    standalone = false,
 }: Props) {
     const apiBase =
         `/api/parceiro/${parceiroId}/cardapio/promocoes`;
@@ -827,6 +881,24 @@ export function ParceiroPromocoesSection({
         );
 
 
+    const [
+        busca,
+        setBusca,
+    ] =
+        useState(
+            "",
+        );
+
+
+    const [
+        listFilter,
+        setListFilter,
+    ] =
+        useState<PromocaoListFilter>(
+            "todas",
+        );
+
+
     const itensDisponiveis =
         useMemo(
             () =>
@@ -846,6 +918,120 @@ export function ParceiroPromocoesSection({
             [
                 form.item_ids,
                 itens,
+            ],
+        );
+
+
+    const promocoesVisiveis =
+        useMemo(
+            () => {
+                if (
+                    !standalone
+                ) {
+                    return promocoes;
+                }
+
+
+                const query =
+                    busca
+                        .trim()
+                        .toLocaleLowerCase(
+                            "pt-BR",
+                        );
+
+
+                return promocoes.filter(
+                    (
+                        promocao,
+                    ) => {
+                        const matchesFilter =
+                            listFilter ===
+                            "todas" ||
+                            (
+                                listFilter ===
+                                "ativas" &&
+                                Boolean(
+                                    promocao.ativo,
+                                )
+                            ) ||
+                            (
+                                listFilter ===
+                                "inativas" &&
+                                !promocao.ativo
+                            ) ||
+                            (
+                                listFilter ===
+                                "na_tv" &&
+                                Boolean(
+                                    promocao.exibir_tv,
+                                )
+                            ) ||
+                            (
+                                listFilter ===
+                                "fora_tv" &&
+                                !promocao.exibir_tv
+                            );
+
+
+                        if (
+                            !matchesFilter
+                        ) {
+                            return false;
+                        }
+
+
+                        if (
+                            !query
+                        ) {
+                            return true;
+                        }
+
+
+                        const searchableText =
+                            [
+                                promocao.titulo,
+                                promocao.descricao ??
+                                    "",
+
+                                ...promocao
+                                    .itens
+                                    .filter(
+                                        (
+                                            vinculo,
+                                        ) =>
+                                            !vinculo
+                                                .item
+                                                .removido,
+                                    )
+                                    .map(
+                                        (
+                                            vinculo,
+                                        ) =>
+                                            vinculo
+                                                .item
+                                                .nome,
+                                    ),
+                            ]
+                                .join(
+                                    " ",
+                                )
+                                .toLocaleLowerCase(
+                                    "pt-BR",
+                                );
+
+
+                        return searchableText
+                            .includes(
+                                query,
+                            );
+                    },
+                );
+            },
+            [
+                busca,
+                listFilter,
+                promocoes,
+                standalone,
             ],
         );
 
@@ -1899,7 +2085,9 @@ export function ParceiroPromocoesSection({
             <section
                 style={{
                     marginTop:
-                        32,
+                        standalone
+                            ? 0
+                            : 32,
                 }}
             >
                 <div
@@ -1929,7 +2117,7 @@ export function ParceiroPromocoesSection({
                         </h2>
 
                         <p className="bp-section-subtitle">
-                            Programe ofertas dos itens do cardápio e escolha quando elas entram na TV.
+                            Gerencie ofertas dos itens do cardápio, agenda, disponibilidade e exibição na TV.
                         </p>
                     </div>
 
@@ -1967,6 +2155,73 @@ export function ParceiroPromocoesSection({
                 </div>
 
 
+                {standalone ? (
+                    <div
+                        style={{
+                            display:
+                                "grid",
+
+                            gridTemplateColumns:
+                                "minmax(220px, 1fr) minmax(160px, 220px) auto",
+
+                            gap:
+                                10,
+
+                            alignItems:
+                                "end",
+
+                            marginBottom:
+                                16,
+                        }}
+                    >
+                        <Input
+                            label="Buscar"
+                            value={
+                                busca
+                            }
+                            onChange={(
+                                event,
+                            ) =>
+                                setBusca(
+                                    event
+                                        .target
+                                        .value,
+                                )
+                            }
+                            placeholder="Título, descrição ou item"
+                        />
+
+                        <SelectMenu
+                            label="Status"
+                            options={
+                                promocaoFilterOptions
+                            }
+                            value={
+                                listFilter
+                            }
+                            onChange={(
+                                value,
+                            ) =>
+                                setListFilter(
+                                    value as PromocaoListFilter,
+                                )
+                            }
+                        />
+
+                        <Badge color="secondary">
+                            {
+                                promocoesVisiveis
+                                    .length
+                            } de{" "}
+                            {
+                                promocoes
+                                    .length
+                            }
+                        </Badge>
+                    </div>
+                ) : null}
+
+
                 {promocoes.length ===
                 0 ? (
                     <EmptyState
@@ -1991,6 +2246,17 @@ export function ParceiroPromocoesSection({
                             </Button>
                         }
                     />
+                ) : promocoesVisiveis.length ===
+                0 ? (
+                    <EmptyState
+                        icon={
+                            <Tags
+                                size={24}
+                            />
+                        }
+                        title="Nenhuma promoção encontrada"
+                        description="Ajuste a busca ou o filtro para visualizar outras promoções."
+                    />
                 ) : (
                     <>
                         <Table
@@ -2003,7 +2269,7 @@ export function ParceiroPromocoesSection({
                                 "Ações",
                             ]}
                         >
-                            {promocoes.map(
+                            {promocoesVisiveis.map(
                                 (
                                     promocao,
                                 ) => {
@@ -2248,7 +2514,7 @@ export function ParceiroPromocoesSection({
 
 
                         <div className="bp-product-admin-mobile-list">
-                            {promocoes.map(
+                            {promocoesVisiveis.map(
                                 (
                                     promocao,
                                 ) => {

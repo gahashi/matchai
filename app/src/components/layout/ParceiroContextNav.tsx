@@ -1,8 +1,14 @@
 "use client";
 
 import {
-    ArrowLeft,
     ArrowLeftRight,
+    BookOpen,
+    Info,
+    LayoutDashboard,
+    MonitorPlay,
+    Palette,
+    Tags,
+    UsersRound,
 } from "lucide-react";
 
 import {
@@ -15,69 +21,198 @@ import {
 
 
 type ParceiroContextNavProps = {
-    slug: string;
+    slug:
+        string;
 };
 
 
 export function ParceiroContextNav({
-                                       slug,
-                                   }: ParceiroContextNavProps) {
+    slug,
+}: ParceiroContextNavProps) {
     const pathname =
         usePathname();
 
     const baseHref =
         `/parceiro/${slug}`;
 
-    const naRaizDoParceiro =
-        pathname ===
-        baseHref;
+
+    const items = [
+        {
+            label:
+                "Visão geral",
+
+            href:
+                baseHref,
+
+            icon:
+                LayoutDashboard,
+
+            exact:
+                true,
+        },
+
+        {
+            label:
+                "Cardápio",
+
+            href:
+                `${baseHref}/cardapio`,
+
+            icon:
+                BookOpen,
+        },
+
+        {
+            label:
+                "Promoções",
+
+            href:
+                `${baseHref}/promocoes`,
+
+            icon:
+                Tags,
+        },
+
+        {
+            label:
+                "Informações",
+
+            href:
+                `${baseHref}/informacoes`,
+
+            icon:
+                Info,
+        },
+
+        {
+            label:
+                "Aparência",
+
+            href:
+                `${baseHref}/aparencia`,
+
+            icon:
+                Palette,
+        },
+
+        {
+            label:
+                "Membros",
+
+            href:
+                `${baseHref}/membros`,
+
+            icon:
+                UsersRound,
+        },
+
+        {
+            label:
+                "TV",
+
+            href:
+                `/tv/${slug}`,
+
+            icon:
+                MonitorPlay,
+
+            external:
+                true,
+        },
+    ];
 
 
     return (
-        <div
-            className="bp-action-row bp-mb-5"
-            style={{
-                justifyContent:
-                    "space-between",
+        <div className="bp-partner-context-wrap bp-mb-5">
+            <nav
+                className="bp-inbox-filter-tabs"
+                aria-label="Navegação do parceiro"
+            >
+                {items.map(
+                    (
+                        item,
+                    ) => {
+                        const Icon =
+                            item.icon;
 
-                alignItems:
-                    "center",
+                        const active =
+                            item.external
+                                ? false
+                                : item.exact
+                                    ? pathname ===
+                                    item.href
+                                    : pathname ===
+                                        item.href ||
+                                    pathname.startsWith(
+                                        `${item.href}/`,
+                                    );
 
-                flexWrap:
-                    "wrap",
-            }}
-        >
+                        return (
+                            <AppLink
+                                key={
+                                    item.href
+                                }
+                                href={
+                                    item.href
+                                }
+                                color="secondary"
+                                variant="ghost"
+                                className={[
+                                    "bp-inbox-filter-tab",
+
+                                    active
+                                        ? "active"
+                                        : "",
+                                ]
+                                    .filter(
+                                        Boolean,
+                                    )
+                                    .join(
+                                        " ",
+                                    )}
+                                aria-current={
+                                    active
+                                        ? "page"
+                                        : undefined
+                                }
+                            >
+                                <Icon
+                                    size={15}
+                                />
+
+                                {
+                                    item.label
+                                }
+
+                                {item.external ? (
+                                    <span
+                                        aria-hidden="true"
+                                        style={{
+                                            opacity:
+                                                0.58,
+                                        }}
+                                    >
+                                        ↗
+                                    </span>
+                                ) : null}
+                            </AppLink>
+                        );
+                    },
+                )}
+            </nav>
+
             <AppLink
-                href={
-                    naRaizDoParceiro
-                        ? "/parceiro"
-                        : baseHref
-                }
+                href="/parceiro"
                 color="secondary"
                 variant="ghost"
+                size="sm"
             >
-                <ArrowLeft
-                    size={16}
+                <ArrowLeftRight
+                    size={15}
                 />
 
-                {naRaizDoParceiro
-                    ? "Meus parceiros"
-                    : "Perfil do parceiro"}
+                Trocar parceiro
             </AppLink>
-
-            {!naRaizDoParceiro ? (
-                <AppLink
-                    href="/parceiro"
-                    color="secondary"
-                    variant="ghost"
-                >
-                    <ArrowLeftRight
-                        size={16}
-                    />
-
-                    Trocar parceiro
-                </AppLink>
-            ) : null}
         </div>
     );
 }
