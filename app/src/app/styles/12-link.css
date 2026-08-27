@@ -1,0 +1,104 @@
+.bp-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: fit-content;
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--ui-color);
+    text-decoration: none;
+    font-weight: 750;
+    line-height: 1;
+    transition:
+            color var(--transition-fast),
+            background var(--transition-fast),
+            border-color var(--transition-fast),
+            opacity var(--transition-fast),
+            transform var(--transition-fast);
+}
+
+.bp-link:hover {
+    opacity: 0.84;
+}
+
+.bp-link:focus-visible {
+    outline: 2px solid var(--ui-color);
+    outline-offset: 3px;
+}
+
+.bp-link-sm {
+    min-height: 32px;
+    font-size: 13px;
+}
+
+.bp-link-md {
+    min-height: 38px;
+    font-size: 14px;
+}
+
+.bp-link-lg {
+    min-height: 44px;
+    font-size: 15px;
+}
+
+.bp-link-full {
+    width: 100%;
+}
+
+.bp-link-text {
+    min-height: auto;
+    padding: 0;
+    color: var(--ui-color);
+}
+
+.bp-link-solid {
+    padding: 0 14px;
+    background: var(--ui-color);
+    border-color: var(--ui-color);
+    color: var(--ui-color-foreground);
+}
+
+.bp-link-solid:hover {
+    background: var(--ui-color-hover);
+    border-color: var(--ui-color-hover);
+    color: var(--ui-color-foreground);
+    opacity: 1;
+}
+
+.bp-link-soft {
+    padding: 0 14px;
+    background: var(--ui-color-soft);
+    border-color: var(--ui-color-border);
+    color: var(--ui-color);
+}
+.bp-link-soft:hover {
+        background: var(--ui-color-soft);
+        opacity: 0.86;
+    }
+
+.bp-link-outline {
+    padding: 0 14px;
+    background: transparent;
+    border-color: var(--ui-color-border);
+    color: var(--ui-color);
+}
+
+.bp-link-outline:hover {
+    background: var(--ui-color-soft);
+    border-color: var(--ui-color);
+    opacity: 1;
+}
+
+.bp-link-ghost {
+    padding: 0 14px;
+    background: transparent;
+    border-color: transparent;
+    color: var(--ui-color);
+}
+
+.bp-link-ghost:hover {
+    background: var(--ui-color-soft);
+    opacity: 1;
+}
