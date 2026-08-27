@@ -11,6 +11,18 @@ type UpdateParceiroInformacoesInput = {
     descricao?: string | null;
 
     slug: string;
+
+    emailContato?: string | null;
+    telefone?: string | null;
+    whatsapp?: string | null;
+
+    endereco?: string | null;
+    googleMapsUrl?: string | null;
+
+    instagramUrl?: string | null;
+    siteUrl?: string | null;
+
+    horarioFuncionamento?: string | null;
 };
 
 type UpdateParceiroAparenciaInput = {
@@ -39,6 +51,109 @@ function normalizeOptional(
     return normalized
         ? normalized
         : null;
+}
+
+function normalizeLimitedText(
+    value: string | null | undefined,
+    maxLength: number,
+    label: string,
+) {
+    const normalized =
+        normalizeOptional(
+            value,
+        );
+
+    if (
+        normalized &&
+        normalized.length >
+        maxLength
+    ) {
+        throw new Error(
+            `${label} deve possuir no máximo ${maxLength} caracteres.`,
+        );
+    }
+
+    return normalized;
+}
+
+
+function normalizeEmail(
+    value?: string | null,
+) {
+    const email =
+        normalizeLimitedText(
+            value,
+            190,
+            "O e-mail",
+        );
+
+    if (
+        !email
+    ) {
+        return null;
+    }
+
+    if (
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+            email,
+        )
+    ) {
+        throw new Error(
+            "Informe um e-mail de contato válido.",
+        );
+    }
+
+    return email;
+}
+
+
+function normalizeExternalUrl(
+    value:
+        string |
+        null |
+        undefined,
+
+    label: string,
+) {
+    const normalized =
+        normalizeLimitedText(
+            value,
+            1000,
+            label,
+        );
+
+    if (
+        !normalized
+    ) {
+        return null;
+    }
+
+    let url:
+        URL;
+
+    try {
+        url =
+            new URL(
+                normalized,
+            );
+    } catch {
+        throw new Error(
+            `Informe uma URL válida para ${label.toLowerCase()}.`,
+        );
+    }
+
+    if (
+        url.protocol !==
+        "http:" &&
+        url.protocol !==
+        "https:"
+    ) {
+        throw new Error(
+            `${label} deve utilizar http:// ou https://.`,
+        );
+    }
+
+    return normalized;
 }
 
 function normalizeColor(
@@ -119,9 +234,66 @@ class ParceiroConfigService {
             slug.length > 150
         ) {
             throw new Error(
-                "Informe um endereço público válido.",
+                "Informe uma URL pública válida.",
             );
         }
+
+
+        const descricao =
+            normalizeOptional(
+                input.descricao,
+            );
+
+        const emailContato =
+            normalizeEmail(
+                input.emailContato,
+            );
+
+        const telefone =
+            normalizeLimitedText(
+                input.telefone,
+                30,
+                "O telefone",
+            );
+
+        const whatsapp =
+            normalizeLimitedText(
+                input.whatsapp,
+                30,
+                "O WhatsApp",
+            );
+
+        const endereco =
+            normalizeLimitedText(
+                input.endereco,
+                500,
+                "O endereço",
+            );
+
+        const googleMapsUrl =
+            normalizeExternalUrl(
+                input.googleMapsUrl,
+                "O link do Google Maps",
+            );
+
+        const instagramUrl =
+            normalizeExternalUrl(
+                input.instagramUrl,
+                "O Instagram",
+            );
+
+        const siteUrl =
+            normalizeExternalUrl(
+                input.siteUrl,
+                "O site",
+            );
+
+        const horarioFuncionamento =
+            normalizeLimitedText(
+                input.horarioFuncionamento,
+                4000,
+                "O horário de funcionamento",
+            );
 
 
         const parceiro =
@@ -132,18 +304,23 @@ class ParceiroConfigService {
                         id:
                         input.parceiroId,
 
-                        ativo: 1,
+                        ativo:
+                            1,
 
                         deleted_at:
                             null,
                     },
 
                     select: {
-                        id: true,
+                        id:
+                            true,
                     },
                 });
 
-        if (!parceiro) {
+
+        if (
+            !parceiro
+        ) {
             throw new Error(
                 "Parceiro não encontrado.",
             );
@@ -167,13 +344,17 @@ class ParceiroConfigService {
                     },
 
                     select: {
-                        id: true,
+                        id:
+                            true,
                     },
                 });
 
-        if (slugEmUso) {
+
+        if (
+            slugEmUso
+        ) {
             throw new Error(
-                "Este endereço público já está sendo utilizado.",
+                "Esta URL pública já está sendo utilizada.",
             );
         }
 
@@ -189,33 +370,78 @@ class ParceiroConfigService {
 
                     data: {
                         nome,
-
-                        descricao:
-                            normalizeOptional(
-                                input.descricao,
-                            ),
-
+                        descricao,
                         slug,
+
+                        email_contato:
+                        emailContato,
+
+                        telefone,
+                        whatsapp,
+
+                        endereco,
+
+                        google_maps_url:
+                        googleMapsUrl,
+
+                        instagram_url:
+                        instagramUrl,
+
+                        site_url:
+                        siteUrl,
+
+                        horario_funcionamento:
+                        horarioFuncionamento,
 
                         updated_at:
                             new Date(),
                     },
 
                     select: {
-                        id: true,
+                        id:
+                            true,
 
-                        codigo: true,
-                        slug: true,
+                        codigo:
+                            true,
 
-                        nome: true,
-                        descricao: true,
+                        slug:
+                            true,
+
+                        nome:
+                            true,
+
+                        descricao:
+                            true,
+
+                        email_contato:
+                            true,
+
+                        telefone:
+                            true,
+
+                        whatsapp:
+                            true,
+
+                        endereco:
+                            true,
+
+                        google_maps_url:
+                            true,
+
+                        instagram_url:
+                            true,
+
+                        site_url:
+                            true,
+
+                        horario_funcionamento:
+                            true,
                     },
                 });
 
 
         return atualizado;
     }
-
     async updateAparencia(
         input: UpdateParceiroAparenciaInput,
     ) {

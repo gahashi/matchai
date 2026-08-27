@@ -32,6 +32,7 @@ export default async function ParceiroInformacoesPage({
     } =
         await params;
 
+
     const {
         parceiro,
     } =
@@ -39,6 +40,7 @@ export default async function ParceiroInformacoesPage({
             `/parceiro/${slug}/informacoes`,
             slug,
         );
+
 
     return (
         <EntityThemeScope
@@ -70,6 +72,31 @@ export default async function ParceiroInformacoesPage({
 
                         descricao:
                         parceiro.descricao,
+
+                        email_contato:
+                        parceiro.email_contato,
+
+                        telefone:
+                        parceiro.telefone,
+
+                        whatsapp:
+                        parceiro.whatsapp,
+
+                        endereco:
+                        parceiro.endereco,
+
+                        google_maps_url:
+                        parceiro.google_maps_url,
+
+                        instagram_url:
+                        parceiro.instagram_url,
+
+                        site_url:
+                        parceiro.site_url,
+
+                        horario_funcionamento:
+                        parceiro
+                            .horario_funcionamento,
                     }}
                 />
             </AppShell>

@@ -79,11 +79,36 @@ function EventCardContent({
     );
 }
 
-export function PublicEventsSection({
-    eventos,
-}: {
+type PublicEventsSectionProps = {
     eventos: PublicEvento[];
-}) {
+
+    title?: string;
+    description?: string;
+
+    ariaLabel?: string;
+
+    containerClassName?: string;
+    className?: string;
+};
+
+export function PublicEventsSection({
+                                        eventos,
+
+                                        title =
+                                        "O que está acontecendo",
+
+                                        description =
+                                        "Fique por dentro dos próximos eventos da Computaria.",
+
+                                        ariaLabel =
+                                        "Eventos da Computaria",
+
+                                        containerClassName =
+                                        "bp-public-container",
+
+                                        className =
+                                        "",
+                                    }: PublicEventsSectionProps) {
     const trackRef =
         useRef<HTMLDivElement | null>(null);
 
@@ -112,9 +137,23 @@ export function PublicEventsSection({
     return (
         <section
             id="eventos"
-            className="bp-public-section bp-public-events-section"
+            className={[
+                "bp-public-section",
+                "bp-public-events-section",
+                className,
+            ]
+                .filter(
+                    Boolean,
+                )
+                .join(
+                    " ",
+                )}
         >
-            <div className="bp-public-container">
+            <div
+                className={
+                    containerClassName
+                }
+            >
                 <div className="bp-public-section-head bp-public-events-head">
                     <div>
                         <span className="bp-public-kicker">
@@ -122,11 +161,11 @@ export function PublicEventsSection({
                         </span>
 
                         <h2>
-                            O que está acontecendo
+                            {title}
                         </h2>
 
                         <p>
-                            Fique por dentro dos próximos eventos da Computaria.
+                            {description}
                         </p>
                     </div>
 
@@ -158,8 +197,9 @@ export function PublicEventsSection({
                     ref={trackRef}
                     className="bp-public-events-track"
                     tabIndex={0}
-                    aria-label="Eventos da Computaria"
-                >
+                    aria-label={
+                        ariaLabel
+                    }                >
                     {eventos.map((evento) =>
                         evento.url ? (
                             <a

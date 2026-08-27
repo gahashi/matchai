@@ -323,8 +323,8 @@ model SysArquivo {
   par_parceiros_logo   ParParceiroTema[] @relation("ParParceiroTemaLogo")
   par_parceiros_banner ParParceiroTema[] @relation("ParParceiroTemaBanner")
   crd_itens_imagem     CrdItem[]         @relation("CrdItemImagem")
-  crd_promocoes_imagem CrdPromocao[]      @relation("CrdPromocaoImagem")
-  tv_exibicoes_midia   TvExibicao[]       @relation("TvExibicaoMidia")
+  crd_promocoes_imagem CrdPromocao[]     @relation("CrdPromocaoImagem")
+  tv_exibicoes_midia   TvExibicao[]      @relation("TvExibicaoMidia")
 
   @@index([sys_arquivo_disco_id])
   @@index([sys_arquivo_visibilidade_id])
@@ -419,6 +419,18 @@ model ParParceiro {
 
   nome      String  @db.VarChar(150)
   descricao String? @db.Text
+
+  email_contato String? @db.VarChar(190)
+  telefone      String? @db.VarChar(30)
+  whatsapp      String? @db.VarChar(30)
+
+  endereco        String? @db.VarChar(500)
+  google_maps_url String? @db.VarChar(1000)
+
+  instagram_url String? @db.VarChar(1000)
+  site_url      String? @db.VarChar(1000)
+
+  horario_funcionamento String? @db.Text
 
   ativo           Int @default(1)
   visivel_publico Int @default(1)
@@ -626,7 +638,7 @@ model CrdPromocaoItem {
   id Int @id @default(autoincrement())
 
   crd_promocao_id Int
-  crd_item_id      Int
+  crd_item_id     Int
 
   ordem Int @default(0)
 
@@ -634,7 +646,7 @@ model CrdPromocaoItem {
   updated_at DateTime? @db.DateTime(0)
 
   crd_promocao CrdPromocao @relation(fields: [crd_promocao_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  crd_item      CrdItem      @relation(fields: [crd_item_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  crd_item     CrdItem     @relation(fields: [crd_item_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
   @@unique([crd_promocao_id, crd_item_id])
   @@index([crd_promocao_id, ordem])
@@ -661,7 +673,6 @@ model CrdPromocaoHorario {
   @@index([dia_semana, hora_inicio, hora_fim])
   @@map("crd_promocao_horario")
 }
-
 
 // =========================================================
 // TV — PROGRAMAÇÃO
@@ -698,7 +709,7 @@ model TvExibicao {
   // Fontes existentes. No máximo uma delas deve ser preenchida.
   // Para tipo "divulgacao", ambas permanecem null e os campos próprios
   // abaixo representam o conteúdo.
-  cad_evento_id    Int? @unique
+  cad_evento_id   Int? @unique
   crd_promocao_id Int? @unique
 
   // Opcional: sobrescreve a mídia da fonte ou é a mídia da divulgação.
@@ -770,7 +781,6 @@ model TvExibicaoHorario {
   @@index([dia_semana, hora_inicio, hora_fim])
   @@map("tv_exibicao_horario")
 }
-
 
 // =========================================================
 // PRD — PRODUTOS

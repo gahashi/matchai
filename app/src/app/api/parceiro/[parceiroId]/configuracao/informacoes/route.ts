@@ -19,6 +19,23 @@ type RouteParams = {
 };
 
 
+function optionalString(
+    value: unknown,
+) {
+    if (
+        value === null ||
+        value === undefined ||
+        value === ""
+    ) {
+        return null;
+    }
+
+    return String(
+        value,
+    );
+}
+
+
 export async function PATCH(
     request: NextRequest,
     {
@@ -30,13 +47,17 @@ export async function PATCH(
     } =
         await params;
 
+
     const access =
         await requireParceiroApiAccess(
             request,
             parceiroId,
         );
 
-    if (!access.ok) {
+
+    if (
+        !access.ok
+    ) {
         return access.response;
     }
 
@@ -45,11 +66,14 @@ export async function PATCH(
         const body =
             await request.json();
 
+
         const parceiro =
             await parceiroConfigService
                 .updateInformacoes({
                     parceiroId:
-                    access.parceiro.id,
+                    access
+                        .parceiro
+                        .id,
 
                     nome:
                         String(
@@ -58,21 +82,61 @@ export async function PATCH(
                         ),
 
                     descricao:
-                        body?.descricao
-                            ? String(
-                                body.descricao,
-                            )
-                            : null,
+                        optionalString(
+                            body?.descricao,
+                        ),
 
                     slug:
                         String(
                             body?.slug ??
                             "",
                         ),
+
+                    emailContato:
+                        optionalString(
+                            body?.email_contato,
+                        ),
+
+                    telefone:
+                        optionalString(
+                            body?.telefone,
+                        ),
+
+                    whatsapp:
+                        optionalString(
+                            body?.whatsapp,
+                        ),
+
+                    endereco:
+                        optionalString(
+                            body?.endereco,
+                        ),
+
+                    googleMapsUrl:
+                        optionalString(
+                            body?.google_maps_url,
+                        ),
+
+                    instagramUrl:
+                        optionalString(
+                            body?.instagram_url,
+                        ),
+
+                    siteUrl:
+                        optionalString(
+                            body?.site_url,
+                        ),
+
+                    horarioFuncionamento:
+                        optionalString(
+                            body?.horario_funcionamento,
+                        ),
                 });
 
+
         return NextResponse.json({
-            ok: true,
+            ok:
+                true,
 
             message:
                 "Informações atualizadas com sucesso.",
@@ -81,15 +145,19 @@ export async function PATCH(
                 parceiro,
             },
         });
-    } catch (error) {
+    } catch (
+        error
+        ) {
         console.error(
             "[parceiro.configuracao.informacoes.update]",
             error,
         );
 
+
         return NextResponse.json(
             {
-                ok: false,
+                ok:
+                    false,
 
                 message:
                     error instanceof Error
@@ -97,7 +165,8 @@ export async function PATCH(
                         : "Não foi possível atualizar as informações.",
             },
             {
-                status: 400,
+                status:
+                    400,
             },
         );
     }

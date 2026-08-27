@@ -4191,6 +4191,14 @@ export const ParParceiroScalarFieldEnum = {
   slug: 'slug',
   nome: 'nome',
   descricao: 'descricao',
+  email_contato: 'email_contato',
+  telefone: 'telefone',
+  whatsapp: 'whatsapp',
+  endereco: 'endereco',
+  google_maps_url: 'google_maps_url',
+  instagram_url: 'instagram_url',
+  site_url: 'site_url',
+  horario_funcionamento: 'horario_funcionamento',
   ativo: 'ativo',
   visivel_publico: 'visivel_publico',
   created_at: 'created_at',
@@ -4979,7 +4987,15 @@ export const ParParceiroOrderByRelevanceFieldEnum = {
   codigo: 'codigo',
   slug: 'slug',
   nome: 'nome',
-  descricao: 'descricao'
+  descricao: 'descricao',
+  email_contato: 'email_contato',
+  telefone: 'telefone',
+  whatsapp: 'whatsapp',
+  endereco: 'endereco',
+  google_maps_url: 'google_maps_url',
+  instagram_url: 'instagram_url',
+  site_url: 'site_url',
+  horario_funcionamento: 'horario_funcionamento'
 } as const
 
 export type ParParceiroOrderByRelevanceFieldEnum = (typeof ParParceiroOrderByRelevanceFieldEnum)[keyof typeof ParParceiroOrderByRelevanceFieldEnum]

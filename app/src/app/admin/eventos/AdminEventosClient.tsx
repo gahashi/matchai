@@ -76,6 +76,14 @@ type Evento = {
     titulo: string;
     descricao: string | null;
     url: string | null;
+    par_parceiro_id:
+        number | null;
+
+    parceiro: {
+        id: number;
+        slug: string;
+        nome: string;
+    } | null;
     banner_sys_arquivo_id:
         | number
         | null;
@@ -99,6 +107,12 @@ type Evento = {
 
 type AdminEventosData = {
     eventos: Evento[];
+
+    parceiros: Array<{
+        id: number;
+        nome: string;
+        slug: string;
+    }>;
 };
 
 type AdminEventosClientProps = {
@@ -109,6 +123,8 @@ type EventoFormState = {
     titulo: string;
     descricao: string;
     url: string;
+    par_parceiro_id:
+        string;
     evento_at: string;
     inicio_exibicao: string;
     fim_exibicao: string;
@@ -123,6 +139,7 @@ const emptyForm: EventoFormState = {
     titulo: "",
     descricao: "",
     url: "",
+    par_parceiro_id:"",
     evento_at: "",
     inicio_exibicao: "",
     fim_exibicao: "",
@@ -211,6 +228,14 @@ function eventoToForm(
         descricao:
             evento.descricao ?? "",
         url: evento.url ?? "",
+        par_parceiro_id:
+            evento
+                .par_parceiro_id
+                ? String(
+                    evento
+                        .par_parceiro_id,
+                )
+                : "",
         evento_at:
             toDateTimeLocal(
                 evento.evento_at,
@@ -458,6 +483,10 @@ export default function AdminEventosClient({
         payload.set(
             "url",
             form.url,
+        );
+        payload.set(
+            "par_parceiro_id",
+            form.par_parceiro_id,
         );
         payload.set(
             "evento_at",
@@ -1078,6 +1107,16 @@ export default function AdminEventosClient({
                                                             evento.titulo
                                                         }
                                                     </strong>
+
+                                                    {evento.parceiro ? (
+                                                        <div className="bp-event-table-meta">
+                                                            {
+                                                                evento
+                                                                    .parceiro
+                                                                    .nome
+                                                            }
+                                                        </div>
+                                                    ) : null}
 
                                                     {evento.destaque ? (
                                                         <div className="bp-event-table-meta">
@@ -1907,7 +1946,61 @@ export default function AdminEventosClient({
                                 helperText="Opcional. Instagram, WhatsApp, formulário, Sympla ou outro site."
                             />
                         </div>
+                        <div>
+                            <label
+                                htmlFor="evento-parceiro"
+                                className="bp-label"
+                            >
+                                Parceiro
+                            </label>
 
+                            <select
+                                id="evento-parceiro"
+                                className="bp-select"
+                                value={
+                                    form
+                                        .par_parceiro_id
+                                }
+                                onChange={
+                                    (
+                                        event,
+                                    ) =>
+                                        updateForm(
+                                            "par_parceiro_id",
+                                            event
+                                                .target
+                                                .value,
+                                        )
+                                }
+                            >
+                                <option value="">
+                                    AAACCU / sem parceiro
+                                </option>
+
+                                {data.parceiros.map(
+                                    (
+                                        parceiro,
+                                    ) => (
+                                        <option
+                                            key={
+                                                parceiro.id
+                                            }
+                                            value={
+                                                parceiro.id
+                                            }
+                                        >
+                                            {
+                                                parceiro.nome
+                                            }
+                                        </option>
+                                    ),
+                                )}
+                            </select>
+
+                            <span className="bp-helper">
+        Opcional. Vincule quando o evento pertencer a um parceiro específico.
+    </span>
+                        </div>
                         <Textarea
                             label="Descrição"
                             helperText="Suporta Markdown: **negrito**, *itálico*, listas, títulos, links, tabelas e código."

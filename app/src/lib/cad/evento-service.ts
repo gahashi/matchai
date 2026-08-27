@@ -9,6 +9,7 @@ type EventoWriteInput = {
     titulo: string;
     descricao?: string | null;
     url?: string | null;
+    parceiroId?: number | null;
     eventoAt?: Date | null;
     inicioExibicao?: Date | null;
     fimExibicao?: Date | null;
@@ -63,6 +64,62 @@ function validateExternalUrl(url?: string | null) {
     }
 
     return parsed.toString();
+}
+
+async function validateParceiroId(
+    parceiroId?: number | null,
+) {
+    if (
+        parceiroId === null ||
+        parceiroId === undefined
+    ) {
+        return null;
+    }
+
+    if (
+        !Number.isInteger(
+            parceiroId,
+        ) ||
+        parceiroId <= 0
+    ) {
+        throw new Error(
+            "Parceiro inválido.",
+        );
+    }
+
+
+    const parceiro =
+        await prisma
+            .parParceiro
+            .findFirst({
+                where: {
+                    id:
+                    parceiroId,
+
+                    ativo:
+                        1,
+
+                    deleted_at:
+                        null,
+                },
+
+                select: {
+                    id:
+                        true,
+                },
+            });
+
+
+    if (
+        !parceiro
+    ) {
+        throw new Error(
+            "Parceiro não encontrado ou inativo.",
+        );
+    }
+
+
+    return parceiro.id;
 }
 
 function validateEventoInput(input: EventoWriteInput) {
@@ -120,6 +177,21 @@ const eventoSelect = {
     titulo: true,
     descricao: true,
     url: true,
+    par_parceiro_id:
+        true,
+
+    par_parceiro: {
+        select: {
+            id:
+                true,
+
+            slug:
+                true,
+
+            nome:
+                true,
+        },
+    },
     banner_sys_arquivo_id: true,
     evento_at: true,
     inicio_exibicao: true,
@@ -154,6 +226,29 @@ function serializeEvento(evento: any) {
         titulo: evento.titulo,
         descricao: evento.descricao,
         url: evento.url,
+        par_parceiro_id:
+        evento
+            .par_parceiro_id,
+
+        parceiro:
+            evento.par_parceiro
+                ? {
+                    id:
+                    evento
+                        .par_parceiro
+                        .id,
+
+                    slug:
+                    evento
+                        .par_parceiro
+                        .slug,
+
+                    nome:
+                    evento
+                        .par_parceiro
+                        .nome,
+                }
+                : null,
         banner_sys_arquivo_id:
         evento.banner_sys_arquivo_id,
         banner: evento.banner_sys_arquivo
@@ -191,21 +286,85 @@ function serializeEvento(evento: any) {
 
 class EventoService {
     async listAdminData() {
-        const eventos = await prisma.cadEvento.findMany({
-            where: {
-                deleted_at: null,
-            },
-            select: eventoSelect,
-            orderBy: [
-                { ativo: "desc" },
-                { ordem: "asc" },
-                { evento_at: "desc" },
-                { id: "desc" },
-            ],
-        });
+        const [
+            eventos,
+            parceiros,
+        ] =
+            await Promise.all([
+                prisma
+                    .cadEvento
+                    .findMany({
+                        where: {
+                            deleted_at:
+                                null,
+                        },
+
+                        select:
+                        eventoSelect,
+
+                        orderBy: [
+                            {
+                                ativo:
+                                    "desc",
+                            },
+                            {
+                                ordem:
+                                    "asc",
+                            },
+                            {
+                                evento_at:
+                                    "desc",
+                            },
+                            {
+                                id:
+                                    "desc",
+                            },
+                        ],
+                    }),
+
+                prisma
+                    .parParceiro
+                    .findMany({
+                        where: {
+                            ativo:
+                                1,
+
+                            deleted_at:
+                                null,
+                        },
+
+                        select: {
+                            id:
+                                true,
+
+                            nome:
+                                true,
+
+                            slug:
+                                true,
+                        },
+
+                        orderBy: [
+                            {
+                                nome:
+                                    "asc",
+                            },
+                            {
+                                id:
+                                    "asc",
+                            },
+                        ],
+                    }),
+            ]);
+
 
         return {
-            eventos: eventos.map(serializeEvento),
+            eventos:
+                eventos.map(
+                    serializeEvento,
+                ),
+
+            parceiros,
         };
     }
 
@@ -214,12 +373,19 @@ class EventoService {
 
         const url = validateExternalUrl(input.url);
 
+        const parceiroId =
+            await validateParceiroId(
+                input.parceiroId,
+            );
+
         const evento = await prisma.cadEvento.create({
             data: {
                 titulo: input.titulo.trim(),
                 descricao:
                     normalizeOptional(input.descricao),
                 url,
+                par_parceiro_id:
+                parceiroId,
                 evento_at: input.eventoAt ?? null,
                 inicio_exibicao:
                     input.inicioExibicao ?? null,
@@ -324,7 +490,10 @@ class EventoService {
         }
 
         const url = validateExternalUrl(input.url);
-
+        const parceiroId =
+            await validateParceiroId(
+                input.parceiroId,
+            );
         let novoArquivoId: number | null = null;
 
         try {
@@ -357,6 +526,8 @@ class EventoService {
                             input.descricao,
                         ),
                     url,
+                    par_parceiro_id:
+                    parceiroId,
                     evento_at:
                         input.eventoAt ?? null,
                     inicio_exibicao:

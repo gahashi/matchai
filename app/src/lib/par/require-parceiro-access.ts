@@ -20,6 +20,18 @@ const parceiroSelect = {
     nome: true,
     descricao: true,
 
+    email_contato: true,
+    telefone: true,
+    whatsapp: true,
+
+    endereco: true,
+    google_maps_url: true,
+
+    instagram_url: true,
+    site_url: true,
+
+    horario_funcionamento: true,
+
     ativo: true,
     visivel_publico: true,
 

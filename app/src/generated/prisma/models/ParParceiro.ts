@@ -44,6 +44,14 @@ export type ParParceiroMinAggregateOutputType = {
   slug: string | null
   nome: string | null
   descricao: string | null
+  email_contato: string | null
+  telefone: string | null
+  whatsapp: string | null
+  endereco: string | null
+  google_maps_url: string | null
+  instagram_url: string | null
+  site_url: string | null
+  horario_funcionamento: string | null
   ativo: number | null
   visivel_publico: number | null
   created_at: Date | null
@@ -57,6 +65,14 @@ export type ParParceiroMaxAggregateOutputType = {
   slug: string | null
   nome: string | null
   descricao: string | null
+  email_contato: string | null
+  telefone: string | null
+  whatsapp: string | null
+  endereco: string | null
+  google_maps_url: string | null
+  instagram_url: string | null
+  site_url: string | null
+  horario_funcionamento: string | null
   ativo: number | null
   visivel_publico: number | null
   created_at: Date | null
@@ -70,6 +86,14 @@ export type ParParceiroCountAggregateOutputType = {
   slug: number
   nome: number
   descricao: number
+  email_contato: number
+  telefone: number
+  whatsapp: number
+  endereco: number
+  google_maps_url: number
+  instagram_url: number
+  site_url: number
+  horario_funcionamento: number
   ativo: number
   visivel_publico: number
   created_at: number
@@ -97,6 +121,14 @@ export type ParParceiroMinAggregateInputType = {
   slug?: true
   nome?: true
   descricao?: true
+  email_contato?: true
+  telefone?: true
+  whatsapp?: true
+  endereco?: true
+  google_maps_url?: true
+  instagram_url?: true
+  site_url?: true
+  horario_funcionamento?: true
   ativo?: true
   visivel_publico?: true
   created_at?: true
@@ -110,6 +142,14 @@ export type ParParceiroMaxAggregateInputType = {
   slug?: true
   nome?: true
   descricao?: true
+  email_contato?: true
+  telefone?: true
+  whatsapp?: true
+  endereco?: true
+  google_maps_url?: true
+  instagram_url?: true
+  site_url?: true
+  horario_funcionamento?: true
   ativo?: true
   visivel_publico?: true
   created_at?: true
@@ -123,6 +163,14 @@ export type ParParceiroCountAggregateInputType = {
   slug?: true
   nome?: true
   descricao?: true
+  email_contato?: true
+  telefone?: true
+  whatsapp?: true
+  endereco?: true
+  google_maps_url?: true
+  instagram_url?: true
+  site_url?: true
+  horario_funcionamento?: true
   ativo?: true
   visivel_publico?: true
   created_at?: true
@@ -223,6 +271,14 @@ export type ParParceiroGroupByOutputType = {
   slug: string
   nome: string
   descricao: string | null
+  email_contato: string | null
+  telefone: string | null
+  whatsapp: string | null
+  endereco: string | null
+  google_maps_url: string | null
+  instagram_url: string | null
+  site_url: string | null
+  horario_funcionamento: string | null
   ativo: number
   visivel_publico: number
   created_at: Date | null
@@ -259,6 +315,14 @@ export type ParParceiroWhereInput = {
   slug?: Prisma.StringFilter<"ParParceiro"> | string
   nome?: Prisma.StringFilter<"ParParceiro"> | string
   descricao?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
+  email_contato?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
+  telefone?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
+  whatsapp?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
+  endereco?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
+  google_maps_url?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
+  instagram_url?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
+  site_url?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
+  horario_funcionamento?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
   ativo?: Prisma.IntFilter<"ParParceiro"> | number
   visivel_publico?: Prisma.IntFilter<"ParParceiro"> | number
   created_at?: Prisma.DateTimeNullableFilter<"ParParceiro"> | Date | string | null
@@ -279,6 +343,14 @@ export type ParParceiroOrderByWithRelationInput = {
   slug?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
+  email_contato?: Prisma.SortOrderInput | Prisma.SortOrder
+  telefone?: Prisma.SortOrderInput | Prisma.SortOrder
+  whatsapp?: Prisma.SortOrderInput | Prisma.SortOrder
+  endereco?: Prisma.SortOrderInput | Prisma.SortOrder
+  google_maps_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  instagram_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  site_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  horario_funcionamento?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
   visivel_publico?: Prisma.SortOrder
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -303,6 +375,14 @@ export type ParParceiroWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ParParceiroWhereInput | Prisma.ParParceiroWhereInput[]
   nome?: Prisma.StringFilter<"ParParceiro"> | string
   descricao?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
+  email_contato?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
+  telefone?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
+  whatsapp?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
+  endereco?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
+  google_maps_url?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
+  instagram_url?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
+  site_url?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
+  horario_funcionamento?: Prisma.StringNullableFilter<"ParParceiro"> | string | null
   ativo?: Prisma.IntFilter<"ParParceiro"> | number
   visivel_publico?: Prisma.IntFilter<"ParParceiro"> | number
   created_at?: Prisma.DateTimeNullableFilter<"ParParceiro"> | Date | string | null
@@ -323,6 +403,14 @@ export type ParParceiroOrderByWithAggregationInput = {
   slug?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
+  email_contato?: Prisma.SortOrderInput | Prisma.SortOrder
+  telefone?: Prisma.SortOrderInput | Prisma.SortOrder
+  whatsapp?: Prisma.SortOrderInput | Prisma.SortOrder
+  endereco?: Prisma.SortOrderInput | Prisma.SortOrder
+  google_maps_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  instagram_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  site_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  horario_funcionamento?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
   visivel_publico?: Prisma.SortOrder
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -344,6 +432,14 @@ export type ParParceiroScalarWhereWithAggregatesInput = {
   slug?: Prisma.StringWithAggregatesFilter<"ParParceiro"> | string
   nome?: Prisma.StringWithAggregatesFilter<"ParParceiro"> | string
   descricao?: Prisma.StringNullableWithAggregatesFilter<"ParParceiro"> | string | null
+  email_contato?: Prisma.StringNullableWithAggregatesFilter<"ParParceiro"> | string | null
+  telefone?: Prisma.StringNullableWithAggregatesFilter<"ParParceiro"> | string | null
+  whatsapp?: Prisma.StringNullableWithAggregatesFilter<"ParParceiro"> | string | null
+  endereco?: Prisma.StringNullableWithAggregatesFilter<"ParParceiro"> | string | null
+  google_maps_url?: Prisma.StringNullableWithAggregatesFilter<"ParParceiro"> | string | null
+  instagram_url?: Prisma.StringNullableWithAggregatesFilter<"ParParceiro"> | string | null
+  site_url?: Prisma.StringNullableWithAggregatesFilter<"ParParceiro"> | string | null
+  horario_funcionamento?: Prisma.StringNullableWithAggregatesFilter<"ParParceiro"> | string | null
   ativo?: Prisma.IntWithAggregatesFilter<"ParParceiro"> | number
   visivel_publico?: Prisma.IntWithAggregatesFilter<"ParParceiro"> | number
   created_at?: Prisma.DateTimeNullableWithAggregatesFilter<"ParParceiro"> | Date | string | null
@@ -356,6 +452,14 @@ export type ParParceiroCreateInput = {
   slug: string
   nome: string
   descricao?: string | null
+  email_contato?: string | null
+  telefone?: string | null
+  whatsapp?: string | null
+  endereco?: string | null
+  google_maps_url?: string | null
+  instagram_url?: string | null
+  site_url?: string | null
+  horario_funcionamento?: string | null
   ativo?: number
   visivel_publico?: number
   created_at?: Date | string | null
@@ -376,6 +480,14 @@ export type ParParceiroUncheckedCreateInput = {
   slug: string
   nome: string
   descricao?: string | null
+  email_contato?: string | null
+  telefone?: string | null
+  whatsapp?: string | null
+  endereco?: string | null
+  google_maps_url?: string | null
+  instagram_url?: string | null
+  site_url?: string | null
+  horario_funcionamento?: string | null
   ativo?: number
   visivel_publico?: number
   created_at?: Date | string | null
@@ -395,6 +507,14 @@ export type ParParceiroUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -415,6 +535,14 @@ export type ParParceiroUncheckedUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -435,6 +563,14 @@ export type ParParceiroCreateManyInput = {
   slug: string
   nome: string
   descricao?: string | null
+  email_contato?: string | null
+  telefone?: string | null
+  whatsapp?: string | null
+  endereco?: string | null
+  google_maps_url?: string | null
+  instagram_url?: string | null
+  site_url?: string | null
+  horario_funcionamento?: string | null
   ativo?: number
   visivel_publico?: number
   created_at?: Date | string | null
@@ -447,6 +583,14 @@ export type ParParceiroUpdateManyMutationInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -460,6 +604,14 @@ export type ParParceiroUncheckedUpdateManyInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -484,6 +636,14 @@ export type ParParceiroCountOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
+  email_contato?: Prisma.SortOrder
+  telefone?: Prisma.SortOrder
+  whatsapp?: Prisma.SortOrder
+  endereco?: Prisma.SortOrder
+  google_maps_url?: Prisma.SortOrder
+  instagram_url?: Prisma.SortOrder
+  site_url?: Prisma.SortOrder
+  horario_funcionamento?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   visivel_publico?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -503,6 +663,14 @@ export type ParParceiroMaxOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
+  email_contato?: Prisma.SortOrder
+  telefone?: Prisma.SortOrder
+  whatsapp?: Prisma.SortOrder
+  endereco?: Prisma.SortOrder
+  google_maps_url?: Prisma.SortOrder
+  instagram_url?: Prisma.SortOrder
+  site_url?: Prisma.SortOrder
+  horario_funcionamento?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   visivel_publico?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -516,6 +684,14 @@ export type ParParceiroMinOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
+  email_contato?: Prisma.SortOrder
+  telefone?: Prisma.SortOrder
+  whatsapp?: Prisma.SortOrder
+  endereco?: Prisma.SortOrder
+  google_maps_url?: Prisma.SortOrder
+  instagram_url?: Prisma.SortOrder
+  site_url?: Prisma.SortOrder
+  horario_funcionamento?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   visivel_publico?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -641,6 +817,14 @@ export type ParParceiroCreateWithoutCad_eventosInput = {
   slug: string
   nome: string
   descricao?: string | null
+  email_contato?: string | null
+  telefone?: string | null
+  whatsapp?: string | null
+  endereco?: string | null
+  google_maps_url?: string | null
+  instagram_url?: string | null
+  site_url?: string | null
+  horario_funcionamento?: string | null
   ativo?: number
   visivel_publico?: number
   created_at?: Date | string | null
@@ -660,6 +844,14 @@ export type ParParceiroUncheckedCreateWithoutCad_eventosInput = {
   slug: string
   nome: string
   descricao?: string | null
+  email_contato?: string | null
+  telefone?: string | null
+  whatsapp?: string | null
+  endereco?: string | null
+  google_maps_url?: string | null
+  instagram_url?: string | null
+  site_url?: string | null
+  horario_funcionamento?: string | null
   ativo?: number
   visivel_publico?: number
   created_at?: Date | string | null
@@ -694,6 +886,14 @@ export type ParParceiroUpdateWithoutCad_eventosInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -713,6 +913,14 @@ export type ParParceiroUncheckedUpdateWithoutCad_eventosInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -731,6 +939,14 @@ export type ParParceiroCreateWithoutPar_parceiro_usuariosInput = {
   slug: string
   nome: string
   descricao?: string | null
+  email_contato?: string | null
+  telefone?: string | null
+  whatsapp?: string | null
+  endereco?: string | null
+  google_maps_url?: string | null
+  instagram_url?: string | null
+  site_url?: string | null
+  horario_funcionamento?: string | null
   ativo?: number
   visivel_publico?: number
   created_at?: Date | string | null
@@ -750,6 +966,14 @@ export type ParParceiroUncheckedCreateWithoutPar_parceiro_usuariosInput = {
   slug: string
   nome: string
   descricao?: string | null
+  email_contato?: string | null
+  telefone?: string | null
+  whatsapp?: string | null
+  endereco?: string | null
+  google_maps_url?: string | null
+  instagram_url?: string | null
+  site_url?: string | null
+  horario_funcionamento?: string | null
   ativo?: number
   visivel_publico?: number
   created_at?: Date | string | null
@@ -784,6 +1008,14 @@ export type ParParceiroUpdateWithoutPar_parceiro_usuariosInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -803,6 +1035,14 @@ export type ParParceiroUncheckedUpdateWithoutPar_parceiro_usuariosInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -821,6 +1061,14 @@ export type ParParceiroCreateWithoutPar_parceiro_temaInput = {
   slug: string
   nome: string
   descricao?: string | null
+  email_contato?: string | null
+  telefone?: string | null
+  whatsapp?: string | null
+  endereco?: string | null
+  google_maps_url?: string | null
+  instagram_url?: string | null
+  site_url?: string | null
+  horario_funcionamento?: string | null
   ativo?: number
   visivel_publico?: number
   created_at?: Date | string | null
@@ -840,6 +1088,14 @@ export type ParParceiroUncheckedCreateWithoutPar_parceiro_temaInput = {
   slug: string
   nome: string
   descricao?: string | null
+  email_contato?: string | null
+  telefone?: string | null
+  whatsapp?: string | null
+  endereco?: string | null
+  google_maps_url?: string | null
+  instagram_url?: string | null
+  site_url?: string | null
+  horario_funcionamento?: string | null
   ativo?: number
   visivel_publico?: number
   created_at?: Date | string | null
@@ -874,6 +1130,14 @@ export type ParParceiroUpdateWithoutPar_parceiro_temaInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -893,6 +1157,14 @@ export type ParParceiroUncheckedUpdateWithoutPar_parceiro_temaInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -911,6 +1183,14 @@ export type ParParceiroCreateWithoutCrd_categoriasInput = {
   slug: string
   nome: string
   descricao?: string | null
+  email_contato?: string | null
+  telefone?: string | null
+  whatsapp?: string | null
+  endereco?: string | null
+  google_maps_url?: string | null
+  instagram_url?: string | null
+  site_url?: string | null
+  horario_funcionamento?: string | null
   ativo?: number
   visivel_publico?: number
   created_at?: Date | string | null
@@ -930,6 +1210,14 @@ export type ParParceiroUncheckedCreateWithoutCrd_categoriasInput = {
   slug: string
   nome: string
   descricao?: string | null
+  email_contato?: string | null
+  telefone?: string | null
+  whatsapp?: string | null
+  endereco?: string | null
+  google_maps_url?: string | null
+  instagram_url?: string | null
+  site_url?: string | null
+  horario_funcionamento?: string | null
   ativo?: number
   visivel_publico?: number
   created_at?: Date | string | null
@@ -964,6 +1252,14 @@ export type ParParceiroUpdateWithoutCrd_categoriasInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -983,6 +1279,14 @@ export type ParParceiroUncheckedUpdateWithoutCrd_categoriasInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1001,6 +1305,14 @@ export type ParParceiroCreateWithoutCrd_itensInput = {
   slug: string
   nome: string
   descricao?: string | null
+  email_contato?: string | null
+  telefone?: string | null
+  whatsapp?: string | null
+  endereco?: string | null
+  google_maps_url?: string | null
+  instagram_url?: string | null
+  site_url?: string | null
+  horario_funcionamento?: string | null
   ativo?: number
   visivel_publico?: number
   created_at?: Date | string | null
@@ -1020,6 +1332,14 @@ export type ParParceiroUncheckedCreateWithoutCrd_itensInput = {
   slug: string
   nome: string
   descricao?: string | null
+  email_contato?: string | null
+  telefone?: string | null
+  whatsapp?: string | null
+  endereco?: string | null
+  google_maps_url?: string | null
+  instagram_url?: string | null
+  site_url?: string | null
+  horario_funcionamento?: string | null
   ativo?: number
   visivel_publico?: number
   created_at?: Date | string | null
@@ -1054,6 +1374,14 @@ export type ParParceiroUpdateWithoutCrd_itensInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1073,6 +1401,14 @@ export type ParParceiroUncheckedUpdateWithoutCrd_itensInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1091,6 +1427,14 @@ export type ParParceiroCreateWithoutCrd_promocoesInput = {
   slug: string
   nome: string
   descricao?: string | null
+  email_contato?: string | null
+  telefone?: string | null
+  whatsapp?: string | null
+  endereco?: string | null
+  google_maps_url?: string | null
+  instagram_url?: string | null
+  site_url?: string | null
+  horario_funcionamento?: string | null
   ativo?: number
   visivel_publico?: number
   created_at?: Date | string | null
@@ -1110,6 +1454,14 @@ export type ParParceiroUncheckedCreateWithoutCrd_promocoesInput = {
   slug: string
   nome: string
   descricao?: string | null
+  email_contato?: string | null
+  telefone?: string | null
+  whatsapp?: string | null
+  endereco?: string | null
+  google_maps_url?: string | null
+  instagram_url?: string | null
+  site_url?: string | null
+  horario_funcionamento?: string | null
   ativo?: number
   visivel_publico?: number
   created_at?: Date | string | null
@@ -1144,6 +1496,14 @@ export type ParParceiroUpdateWithoutCrd_promocoesInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1163,6 +1523,14 @@ export type ParParceiroUncheckedUpdateWithoutCrd_promocoesInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1181,6 +1549,14 @@ export type ParParceiroCreateWithoutTv_exibicoesInput = {
   slug: string
   nome: string
   descricao?: string | null
+  email_contato?: string | null
+  telefone?: string | null
+  whatsapp?: string | null
+  endereco?: string | null
+  google_maps_url?: string | null
+  instagram_url?: string | null
+  site_url?: string | null
+  horario_funcionamento?: string | null
   ativo?: number
   visivel_publico?: number
   created_at?: Date | string | null
@@ -1200,6 +1576,14 @@ export type ParParceiroUncheckedCreateWithoutTv_exibicoesInput = {
   slug: string
   nome: string
   descricao?: string | null
+  email_contato?: string | null
+  telefone?: string | null
+  whatsapp?: string | null
+  endereco?: string | null
+  google_maps_url?: string | null
+  instagram_url?: string | null
+  site_url?: string | null
+  horario_funcionamento?: string | null
   ativo?: number
   visivel_publico?: number
   created_at?: Date | string | null
@@ -1234,6 +1618,14 @@ export type ParParceiroUpdateWithoutTv_exibicoesInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1253,6 +1645,14 @@ export type ParParceiroUncheckedUpdateWithoutTv_exibicoesInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_contato?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endereco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  google_maps_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  horario_funcionamento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1348,6 +1748,14 @@ export type ParParceiroSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   slug?: boolean
   nome?: boolean
   descricao?: boolean
+  email_contato?: boolean
+  telefone?: boolean
+  whatsapp?: boolean
+  endereco?: boolean
+  google_maps_url?: boolean
+  instagram_url?: boolean
+  site_url?: boolean
+  horario_funcionamento?: boolean
   ativo?: boolean
   visivel_publico?: boolean
   created_at?: boolean
@@ -1371,6 +1779,14 @@ export type ParParceiroSelectScalar = {
   slug?: boolean
   nome?: boolean
   descricao?: boolean
+  email_contato?: boolean
+  telefone?: boolean
+  whatsapp?: boolean
+  endereco?: boolean
+  google_maps_url?: boolean
+  instagram_url?: boolean
+  site_url?: boolean
+  horario_funcionamento?: boolean
   ativo?: boolean
   visivel_publico?: boolean
   created_at?: boolean
@@ -1378,7 +1794,7 @@ export type ParParceiroSelectScalar = {
   deleted_at?: boolean
 }
 
-export type ParParceiroOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "codigo" | "slug" | "nome" | "descricao" | "ativo" | "visivel_publico" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["parParceiro"]>
+export type ParParceiroOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "codigo" | "slug" | "nome" | "descricao" | "email_contato" | "telefone" | "whatsapp" | "endereco" | "google_maps_url" | "instagram_url" | "site_url" | "horario_funcionamento" | "ativo" | "visivel_publico" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["parParceiro"]>
 export type ParParceiroInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   par_parceiro_usuarios?: boolean | Prisma.ParParceiro$par_parceiro_usuariosArgs<ExtArgs>
   par_parceiro_tema?: boolean | Prisma.ParParceiro$par_parceiro_temaArgs<ExtArgs>
@@ -1407,6 +1823,14 @@ export type $ParParceiroPayload<ExtArgs extends runtime.Types.Extensions.Interna
     slug: string
     nome: string
     descricao: string | null
+    email_contato: string | null
+    telefone: string | null
+    whatsapp: string | null
+    endereco: string | null
+    google_maps_url: string | null
+    instagram_url: string | null
+    site_url: string | null
+    horario_funcionamento: string | null
     ativo: number
     visivel_publico: number
     created_at: Date | null
@@ -1793,6 +2217,14 @@ export interface ParParceiroFieldRefs {
   readonly slug: Prisma.FieldRef<"ParParceiro", 'String'>
   readonly nome: Prisma.FieldRef<"ParParceiro", 'String'>
   readonly descricao: Prisma.FieldRef<"ParParceiro", 'String'>
+  readonly email_contato: Prisma.FieldRef<"ParParceiro", 'String'>
+  readonly telefone: Prisma.FieldRef<"ParParceiro", 'String'>
+  readonly whatsapp: Prisma.FieldRef<"ParParceiro", 'String'>
+  readonly endereco: Prisma.FieldRef<"ParParceiro", 'String'>
+  readonly google_maps_url: Prisma.FieldRef<"ParParceiro", 'String'>
+  readonly instagram_url: Prisma.FieldRef<"ParParceiro", 'String'>
+  readonly site_url: Prisma.FieldRef<"ParParceiro", 'String'>
+  readonly horario_funcionamento: Prisma.FieldRef<"ParParceiro", 'String'>
   readonly ativo: Prisma.FieldRef<"ParParceiro", 'Int'>
   readonly visivel_publico: Prisma.FieldRef<"ParParceiro", 'Int'>
   readonly created_at: Prisma.FieldRef<"ParParceiro", 'DateTime'>

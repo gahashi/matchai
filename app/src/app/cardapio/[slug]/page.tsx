@@ -13,6 +13,12 @@ import {
 import {
     cardapioPublicService,
 } from "@/lib/crd/cardapio-public-service";
+import {
+    eventoPublicService,
+} from "@/lib/cad/evento-public-service";
+
+export const dynamic =
+    "force-dynamic";
 
 
 type PageProps = {
@@ -71,11 +77,23 @@ export default async function CardapioPublicPage({
     if (!parceiro) {
         notFound();
     }
+    const eventos =
+        await eventoPublicService
+            .listPartnerEvents({
+                parceiroId:
+                parceiro.id,
+
+                limit:
+                    8,
+            });
 
     return (
         <CardapioView
             parceiro={
                 parceiro
+            }
+            eventos={
+                eventos
             }
         />
     );

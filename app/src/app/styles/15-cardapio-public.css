@@ -168,6 +168,613 @@
     padding-block: 42px 64px;
 }
 
+/* PESQUISA + NAVEGAÇÃO POR CATEGORIAS */
+.bp-cardapio-tools {
+    position: sticky;
+    top: 58px;
+    z-index: 20;
+
+    border-bottom:
+            1px solid
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 10%,
+                    transparent
+            );
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-background) 92%,
+                    transparent
+            );
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.bp-cardapio-tools-inner {
+    min-height: 78px;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding-block: 12px;
+}
+
+.bp-cardapio-search {
+    position: relative;
+    flex: 0 0 310px;
+}
+
+.bp-cardapio-search > svg {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 55%,
+                    transparent
+            );
+
+    pointer-events: none;
+}
+
+.bp-cardapio-search input {
+    width: 100%;
+    height: 44px;
+
+    padding:
+            0
+            42px
+            0
+            42px;
+
+    border:
+            1px solid
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 14%,
+                    transparent
+            );
+
+    border-radius: 14px;
+
+    outline: none;
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 5%,
+                    var(--cardapio-background)
+            );
+
+    color:
+            var(--cardapio-text);
+
+    transition:
+            border-color 160ms ease,
+            box-shadow 160ms ease,
+            background 160ms ease;
+}
+
+.bp-cardapio-search input::placeholder {
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 48%,
+                    transparent
+            );
+}
+
+.bp-cardapio-search input:focus {
+    border-color:
+            var(--cardapio-primary);
+
+    box-shadow:
+            0 0 0 3px
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 15%,
+                    transparent
+            );
+}
+
+.bp-cardapio-search input::-webkit-search-cancel-button {
+    display: none;
+}
+
+.bp-cardapio-search button {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+
+    width: 30px;
+    height: 30px;
+
+    display: grid;
+    place-items: center;
+
+    transform: translateY(-50%);
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 9px;
+
+    background: transparent;
+
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 60%,
+                    transparent
+            );
+
+    cursor: pointer;
+}
+
+.bp-cardapio-search button:hover {
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 8%,
+                    transparent
+            );
+
+    color:
+            var(--cardapio-text);
+}
+
+.bp-cardapio-category-nav {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+}
+
+.bp-cardapio-category-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.bp-cardapio-category-nav button {
+    flex: 0 0 auto;
+
+    min-height: 38px;
+
+    padding:
+            0
+            14px;
+
+    border:
+            1px solid
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 12%,
+                    transparent
+            );
+
+    border-radius: 999px;
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 4%,
+                    var(--cardapio-background)
+            );
+
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 78%,
+                    transparent
+            );
+
+    font-size: 13px;
+    font-weight: 750;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+            color 160ms ease,
+            background 160ms ease,
+            border-color 160ms ease;
+}
+
+.bp-cardapio-category-nav button:hover {
+    color:
+            var(--cardapio-primary);
+
+    border-color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 40%,
+                    transparent
+            );
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 10%,
+                    var(--cardapio-background)
+            );
+}
+
+.bp-cardapio-category {
+    scroll-margin-top: 156px;
+}
+
+/* No preview administrativo não precisamos prender a navegação. */
+.bp-cardapio-preview .bp-cardapio-tools {
+    position: static;
+    top: 58px;
+}
+
+/* PROMOÇÕES */
+
+.bp-cardapio-promotions {
+    padding-block: 42px;
+
+    border-bottom:
+            1px solid
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 10%,
+                    transparent
+            );
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 4%,
+                    var(--cardapio-background)
+            );
+}
+
+.bp-cardapio-promotions {
+    scroll-margin-top: 90px;
+}
+
+.bp-cardapio-promotions-head {
+    margin-bottom: 20px;
+}
+
+.bp-cardapio-promotions-head h2 {
+    margin: 7px 0 0;
+
+    font-size:
+            clamp(
+                    24px,
+                    3vw,
+                    32px
+            );
+
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+}
+
+.bp-cardapio-promotions-head p {
+    margin: 8px 0 0;
+
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 65%,
+                    transparent
+            );
+}
+
+.bp-cardapio-promotion-grid {
+    display: grid;
+
+    grid-template-columns:
+            repeat(
+                    2,
+                    minmax(0, 1fr)
+            );
+
+    gap: 14px;
+}
+
+.bp-cardapio-promotion {
+    min-width: 0;
+
+    display: grid;
+
+    grid-template-columns:
+            180px
+            minmax(0, 1fr);
+
+    overflow: hidden;
+
+    border:
+            1px solid
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 24%,
+                    transparent
+            );
+
+    border-radius: 20px;
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 5%,
+                    var(--cardapio-background)
+            );
+
+    scroll-margin-top: 100px;
+}
+
+.bp-cardapio-promotion-image {
+    min-height: 190px;
+
+    display: grid;
+    place-items: center;
+
+    overflow: hidden;
+
+    color:
+            var(--cardapio-primary);
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 10%,
+                    var(--cardapio-background)
+            );
+}
+
+.bp-cardapio-promotion-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.bp-cardapio-promotion-body {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 18px;
+}
+
+.bp-cardapio-promotion-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
+.bp-cardapio-promotion-meta span {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 5px;
+
+    padding:
+            5px
+            8px;
+
+    border-radius: 999px;
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 6%,
+                    transparent
+            );
+
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 68%,
+                    transparent
+            );
+
+    font-size: 11px;
+    font-weight: 750;
+}
+
+.bp-cardapio-promotion-meta .is-active {
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 12%,
+                    transparent
+            );
+
+    color:
+            var(--cardapio-primary);
+}
+
+.bp-cardapio-promotion-body h3 {
+    margin:
+            14px
+            0
+            0;
+
+    font-size: 20px;
+    line-height: 1.15;
+
+    letter-spacing: -0.035em;
+}
+
+.bp-cardapio-promotion-body > p {
+    margin:
+            8px
+            0
+            0;
+
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 65%,
+                    transparent
+            );
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.bp-cardapio-promotion-price {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 14px;
+
+    margin-top: 16px;
+}
+
+.bp-cardapio-promotion-price span {
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 58%,
+                    transparent
+            );
+
+    font-size: 11px;
+}
+
+.bp-cardapio-promotion-price strong {
+    color:
+            var(--cardapio-primary);
+
+    font-size: 19px;
+}
+
+.bp-cardapio-promotion-items {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    margin-top: auto;
+    padding-top: 16px;
+}
+
+.bp-cardapio-promotion-items span {
+    padding:
+            5px
+            8px;
+
+    border:
+            1px solid
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 10%,
+                    transparent
+            );
+
+    border-radius: 999px;
+
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 65%,
+                    transparent
+            );
+
+    font-size: 11px;
+}
+
+
+/* PROMOÇÃO VINCULADA AO PRODUTO */
+
+.bp-cardapio-item-promotions {
+    display: grid;
+
+    gap: 6px;
+
+    margin-top: 12px;
+}
+
+.bp-cardapio-item-promotions a {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    padding:
+            7px
+            9px;
+
+    border:
+            1px solid
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 24%,
+                    transparent
+            );
+
+    border-radius: 10px;
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 8%,
+                    transparent
+            );
+
+    color:
+            var(--cardapio-primary);
+
+    font-size: 11px;
+    font-weight: 750;
+
+    text-decoration: none;
+}
+
+.bp-cardapio-item-promotions a:hover {
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 13%,
+                    transparent
+            );
+}
+
+.bp-cardapio-item-promotions a span {
+    min-width: 0;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bp-cardapio-item-promotions a strong {
+    flex: 0 0 auto;
+
+    margin-left: auto;
+
+    color:
+            var(--cardapio-primary);
+
+    font-size: 11px;
+}
+
 .bp-cardapio-category +
 .bp-cardapio-category {
     margin-top: 52px;
@@ -332,6 +939,404 @@
     font-size: 13px;
 }
 
+/* EVENTOS DO PARCEIRO */
+
+.bp-cardapio-events {
+    --color-primary:
+            var(--cardapio-primary);
+
+    --color-primary-border:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 28%,
+                    transparent
+            );
+
+    --color-primary-soft:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 10%,
+                    transparent
+            );
+
+    --color-text:
+            var(--cardapio-text);
+
+    --color-text-muted:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 68%,
+                    transparent
+            );
+
+    --color-text-soft:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 52%,
+                    transparent
+            );
+
+    --color-border:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 11%,
+                    transparent
+            );
+
+    --color-surface-2:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 5%,
+                    var(--cardapio-background)
+            );
+
+    --color-background-2:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 3%,
+                    var(--cardapio-background)
+            );
+
+    --transition-fast:
+            160ms ease;
+
+    padding-block:
+            54px 64px;
+
+    border-top:
+            1px solid
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 10%,
+                    transparent
+            );
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 2%,
+                    var(--cardapio-background)
+            );
+
+    scroll-margin-top:
+            72px;
+}
+
+
+.bp-cardapio-events
+.bp-public-kicker {
+    color:
+            var(--cardapio-primary);
+}
+
+
+.bp-cardapio-events
+.bp-public-section-head h2 {
+    color:
+            var(--cardapio-text);
+}
+
+
+.bp-cardapio-events
+.bp-public-section-head p {
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 65%,
+                    transparent
+            );
+}
+
+
+.bp-cardapio-events
+.bp-public-event-card {
+    border-color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 11%,
+                    transparent
+            );
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 4%,
+                    var(--cardapio-background)
+            );
+
+    color:
+            var(--cardapio-text);
+}
+
+
+.bp-cardapio-events
+.bp-public-event-card.is-link:hover {
+    border-color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 34%,
+                    transparent
+            );
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 6%,
+                    var(--cardapio-background)
+            );
+}
+
+/* INFORMAÇÕES DO PARCEIRO */
+
+.bp-cardapio-info {
+    padding-block: 54px 64px;
+
+    border-top:
+            1px solid
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 10%,
+                    transparent
+            );
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 2%,
+                    var(--cardapio-background)
+            );
+
+    scroll-margin-top: 72px;
+}
+
+.bp-cardapio-info-head {
+    margin-bottom: 22px;
+}
+
+.bp-cardapio-info-head h2 {
+    margin: 7px 0 0;
+
+    font-size:
+            clamp(
+                    24px,
+                    3vw,
+                    32px
+            );
+
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+}
+
+
+.bp-cardapio-info-grid {
+    display: grid;
+
+    grid-template-columns:
+            repeat(
+                    2,
+                    minmax(0, 1fr)
+            );
+
+    gap: 14px;
+}
+
+
+.bp-cardapio-info-card {
+    min-width: 0;
+
+    padding: 20px;
+
+    border:
+            1px solid
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 10%,
+                    transparent
+            );
+
+    border-radius: 18px;
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 4%,
+                    var(--cardapio-background)
+            );
+}
+
+
+.bp-cardapio-info-card h3 {
+    margin:
+            0
+            0
+            14px;
+
+    font-size: 15px;
+    font-weight: 850;
+}
+
+
+.bp-cardapio-info-links {
+    display: grid;
+    gap: 7px;
+}
+
+
+.bp-cardapio-info-links a {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px;
+
+    border-radius: 12px;
+
+    color:
+            var(--cardapio-text);
+
+    text-decoration: none;
+
+    transition:
+            background 160ms ease,
+            color 160ms ease;
+}
+
+
+.bp-cardapio-info-links a:hover {
+    color:
+            var(--cardapio-primary);
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 8%,
+                    transparent
+            );
+}
+
+
+.bp-cardapio-info-links a > svg:first-child {
+    flex: 0 0 auto;
+
+    color:
+            var(--cardapio-primary);
+}
+
+
+.bp-cardapio-info-links a > svg:last-child {
+    flex: 0 0 auto;
+
+    margin-left: auto;
+
+    opacity: 0.55;
+}
+
+
+.bp-cardapio-info-links a span {
+    min-width: 0;
+
+    display: grid;
+    gap: 2px;
+}
+
+
+.bp-cardapio-info-links small {
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 52%,
+                    transparent
+            );
+
+    font-size: 10px;
+}
+
+
+.bp-cardapio-info-links strong {
+    min-width: 0;
+
+    overflow-wrap: anywhere;
+
+    font-size: 13px;
+}
+
+
+.bp-cardapio-info-text {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 10px;
+
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 72%,
+                    transparent
+            );
+
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+
+.bp-cardapio-info-text svg {
+    flex: 0 0 auto;
+
+    margin-top: 2px;
+
+    color:
+            var(--cardapio-primary);
+}
+
+
+.bp-cardapio-info-hours {
+    white-space: pre-line;
+}
+
+
+.bp-cardapio-info-action {
+    width: fit-content;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 16px;
+
+    padding:
+            8px
+            11px;
+
+    border:
+            1px solid
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 26%,
+                    transparent
+            );
+
+    border-radius: 10px;
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 8%,
+                    transparent
+            );
+
+    color:
+            var(--cardapio-primary);
+
+    font-size: 12px;
+    font-weight: 800;
+
+    text-decoration: none;
+}
+
 
 /* FOOTER */
 
@@ -367,6 +1372,13 @@
 /* MOBILE */
 
 @media (max-width: 720px) {
+    .bp-cardapio-events {
+        padding-block:
+                36px 48px;
+
+        scroll-margin-top:
+                64px;
+    }
     .bp-cardapio-container {
         width:
                 min(
@@ -407,6 +1419,89 @@
     .bp-cardapio-content {
         padding-block:
                 30px 48px;
+    }
+    .bp-cardapio-tools-inner {
+        min-height: auto;
+
+        display: grid;
+        gap: 10px;
+
+        padding-block: 10px;
+    }
+
+    .bp-cardapio-search {
+        width: 100%;
+        flex-basis: auto;
+    }
+
+    .bp-cardapio-search input {
+        height: 42px;
+        font-size: 13px;
+    }
+
+    .bp-cardapio-category-nav {
+        width: calc(100% + 12px);
+        margin-right: -12px;
+        padding-right: 12px;
+    }
+
+    .bp-cardapio-category-nav button {
+        min-height: 35px;
+        padding-inline: 12px;
+        font-size: 12px;
+    }
+
+    .bp-cardapio-promotions {
+        padding-block: 30px;
+    }
+
+    .bp-cardapio-promotion-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .bp-cardapio-promotion {
+        grid-template-columns:
+            108px
+            minmax(0, 1fr);
+
+        border-radius: 16px;
+    }
+
+    .bp-cardapio-promotion-image {
+        min-height: 150px;
+    }
+
+    .bp-cardapio-promotion-body {
+        padding: 13px;
+    }
+
+    .bp-cardapio-promotion-body h3 {
+        font-size: 16px;
+    }
+
+    .bp-cardapio-promotion-body > p {
+        font-size: 12px;
+    }
+
+    .bp-cardapio-promotion-price {
+        margin-top: 12px;
+    }
+
+    .bp-cardapio-promotion-price strong {
+        font-size: 16px;
+    }
+
+    .bp-cardapio-promotion-items {
+        padding-top: 12px;
+    }
+
+    .bp-cardapio-item-promotions {
+        margin-top: 9px;
+    }
+
+    .bp-cardapio-category {
+        scroll-margin-top: 168px;
     }
 
     .bp-cardapio-category +
@@ -451,6 +1546,22 @@
     .bp-cardapio-container {
         min-height: 72px;
     }
+
+    .bp-cardapio-info {
+        padding-block: 36px 48px;
+        scroll-margin-top: 64px;
+    }
+
+    .bp-cardapio-info-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .bp-cardapio-info-card {
+        padding: 16px;
+        border-radius: 15px;
+    }
+
 }
 
 /* PREVIEW ADMINISTRATIVO */
@@ -485,5 +1596,127 @@
     .bp-cardapio-hero {
         min-height: 230px;
     }
+    .bp-cardapio-main-nav-inner {
+        min-height: 52px;
+
+        width:
+                calc(
+                        100% + 12px
+                );
+
+        margin-right: -12px;
+        padding-right: 12px;
+    }
+
+    .bp-cardapio-main-nav button {
+        min-height: 34px;
+
+        padding-inline: 12px;
+
+        font-size: 12px;
+    }
+
+    .bp-cardapio-tools {
+        top: 52px;
+    }
+
+    .bp-cardapio-section-anchor {
+        scroll-margin-top: 64px;
+    }
 }
 
+/* NAVEGAÇÃO PRINCIPAL DA PÁGINA PÚBLICA */
+
+.bp-cardapio-main-nav {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+
+    border-bottom:
+            1px solid
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 10%,
+                    transparent
+            );
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-background) 94%,
+                    transparent
+            );
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.bp-cardapio-main-nav-inner {
+    min-height: 58px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+}
+
+.bp-cardapio-main-nav-inner::-webkit-scrollbar {
+    display: none;
+}
+
+.bp-cardapio-main-nav button {
+    flex: 0 0 auto;
+
+    min-height: 38px;
+
+    padding:
+            0
+            14px;
+
+    border: 0;
+    border-radius: 12px;
+
+    background: transparent;
+
+    color:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-text) 70%,
+                    transparent
+            );
+
+    font-size: 13px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+            color 160ms ease,
+            background 160ms ease;
+}
+
+.bp-cardapio-main-nav button:hover {
+    color:
+            var(--cardapio-primary);
+
+    background:
+            color-mix(
+                    in srgb,
+                    var(--cardapio-primary) 10%,
+                    transparent
+            );
+}
+
+
+/* Âncora do início do cardápio */
+
+.bp-cardapio-section-anchor {
+    height: 0;
+    scroll-margin-top: 72px;
+}

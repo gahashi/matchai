@@ -75,6 +75,13 @@ function parseEventoFormData(
         url: String(
             formData.get("url") || "",
         ),
+        parceiroId:
+            optionalInteger(
+                formData.get(
+                    "par_parceiro_id",
+                ),
+            ),
+
         eventoAt: optionalDate(
             formData.get("evento_at"),
         ),
