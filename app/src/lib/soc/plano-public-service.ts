@@ -102,10 +102,13 @@ class PlanoPublicService {
     ): Promise<PublicPlanoSocio[]> {
         const now = new Date();
 
-        const limit = Math.min(
-            Math.max(options.limit ?? 3, 1),
-            6,
-        );
+        const limit =
+            options.limit !== undefined
+                ? Math.min(
+                    Math.max(options.limit, 1),
+                    100,
+                )
+                : undefined;
 
         const planos =
             await prisma.socPlano.findMany({
@@ -149,8 +152,11 @@ class PlanoPublicService {
                     { id: "desc" },
                 ],
 
-                take: limit,
-            });
+                ...(limit !== undefined
+                    ? {
+                        take: limit,
+                    }
+                    : {}),            });
 
         return planos.map((plano) => {
             const ended = Boolean(

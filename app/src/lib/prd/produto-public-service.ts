@@ -1011,10 +1011,13 @@ class ProdutoPublicService {
     ) {
         const now = new Date();
 
-        const limit = Math.min(
-            Math.max(options.limit ?? 4, 1),
-            12,
-        );
+        const limit =
+            options.limit !== undefined
+                ? Math.min(
+                    Math.max(options.limit, 1),
+                    100,
+                )
+                : undefined;
 
         const produtos =
             await prisma.prdProduto.findMany({
@@ -1028,7 +1031,11 @@ class ProdutoPublicService {
                     { created_at: "desc" },
                     { id: "desc" },
                 ],
-                take: limit,
+                ...(limit !== undefined
+                    ? {
+                        take: limit,
+                    }
+                    : {}),
             });
 
         const reservations =

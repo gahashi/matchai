@@ -726,6 +726,20 @@
     flex: 0 0 auto;
 }
 
+.bp-modal-scroll-body {
+    min-height: 0;
+}
+
+.bp-modal-footer {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+.bp-modal-body {
+    min-height: 0;
+}
+
 .bp-modal-scroll-body .bp-modal-body {
     flex: 1 1 auto;
     min-height: 0;
@@ -761,12 +775,28 @@
 @media (max-width: 720px) {
     .bp-modal-footer {
         display: grid;
-        grid-template-columns: 1fr;
-        padding: 14px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+
+        padding:
+                14px
+                14px
+                max(14px, env(safe-area-inset-bottom));
+
+        background: var(--color-surface);
     }
 
     .bp-modal-footer > * {
         width: 100%;
+        min-width: 0;
+    }
+
+    .bp-modal-footer > :first-child {
+        justify-self: start;
+    }
+
+    .bp-modal-footer > :last-child {
+        justify-self: end;
     }
 }
 

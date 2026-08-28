@@ -41,6 +41,10 @@ import {
     socioPublicService,
 } from "@/lib/soc/socio-public-service";
 
+import {
+    cardapioPublicService,
+} from "@/lib/crd/cardapio-public-service";
+
 export const metadata: Metadata = {
     title: "AAACCU | Computaria",
     description:
@@ -64,19 +68,17 @@ export default async function HomePage() {
         eventos,
         produtos,
         planos,
+        parceiros,
     ] = await Promise.all([
-        eventoPublicService.listHomeEvents({
-            limit: 8,
-        }),
+        eventoPublicService.listHomeEvents(),
 
         produtoPublicService.listHomeProducts({
             isSocio: socio.isSocio,
-            limit: 4,
         }),
 
-        planoPublicService.listHomePlans({
-            limit: 3,
-        }),
+        planoPublicService.listHomePlans(),
+
+        cardapioPublicService.listPublicPartners(),
     ]);
 
     return (
@@ -196,6 +198,112 @@ export default async function HomePage() {
             <PublicEventsSection
                 eventos={eventos}
             />
+
+            {parceiros.length > 0 ? (
+                <section
+                    id="parceiros"
+                    className="bp-public-section"
+                >
+                    <div className="bp-public-container">
+                        <div className="bp-public-section-head">
+                            <div>
+                    <span className="bp-public-kicker">
+                        Parceiros
+                    </span>
+
+                                <h2>
+                                    Conheça nossos parceiros
+                                </h2>
+
+                                <p>
+                                    Acesse informações, cardápios,
+                                    promoções e eventos dos nossos
+                                    estabelecimentos parceiros.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="bp-public-product-grid">
+                            {parceiros.map(
+                                (parceiro) => (
+                                    <Link
+                                        key={
+                                            parceiro.id
+                                        }
+                                        href={
+                                            `/cardapio/${parceiro.slug}`
+                                        }
+                                        className="bp-admin-option-link"
+                                    >
+                                        <article className="bp-public-products-empty">
+                                            <div
+                                                style={{
+                                                    width: 72,
+                                                    height: 72,
+                                                    borderRadius: 18,
+                                                    overflow:
+                                                        "hidden",
+                                                    display:
+                                                        "grid",
+                                                    placeItems:
+                                                        "center",
+                                                    border:
+                                                        "1px solid var(--color-border)",
+                                                }}
+                                            >
+                                                {parceiro.logo_url ? (
+                                                    // eslint-disable-next-line @next/next/no-img-element
+                                                    <img
+                                                        src={
+                                                            parceiro.logo_url
+                                                        }
+                                                        alt={
+                                                            parceiro.nome
+                                                        }
+                                                        style={{
+                                                            width:
+                                                                "100%",
+                                                            height:
+                                                                "100%",
+                                                            objectFit:
+                                                                "contain",
+                                                        }}
+                                                    />
+                                                ) : (
+                                                    <Building2
+                                                        size={
+                                                            28
+                                                        }
+                                                    />
+                                                )}
+                                            </div>
+
+                                            <strong>
+                                                {
+                                                    parceiro.nome
+                                                }
+                                            </strong>
+
+                                            {parceiro
+                                                .descricao ? (
+                                                <span>
+                                        {
+                                            parceiro.descricao
+                                        }
+                                    </span>
+                                            ) : null}
+
+                                            <span>
+                                    Ver estabelecimento
+                                </span>
+                                        </article>
+                                    </Link>
+                                ),
+                            )}
+                        </div>
+                    </div>
+                </section>
+            ) : null}
 
             <section
                 id="quem-somos"

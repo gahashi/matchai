@@ -13,6 +13,7 @@ import {
     TrendingUp,
     UsersRound,
     WalletCards,
+    UserRound,
 } from "lucide-react";
 
 import {
@@ -82,6 +83,13 @@ const adminOptions = [
             "Gerencie estabelecimentos parceiros, responsáveis e identidade visual.",
         href: "/admin/parceiros",
         icon: Building2,
+    },
+    {
+        title: "Usuários",
+        description:
+            "Gerencie usuários e defina quem possui acesso administrativo.",
+        href: "/admin/usuarios",
+        icon: UserRound,
     },
 ];
 
@@ -882,6 +890,7 @@ export default async function AdminPage() {
             quantidadePedidosPagos,
             icon:
             TrendingUp,
+
         },
     ];
 

@@ -344,6 +344,66 @@ function promocaoAtivaAgora(
 
 
 class CardapioPublicService {
+    async listPublicPartners() {
+        const parceiros =
+            await prisma.parParceiro.findMany({
+                where: {
+                    ativo: 1,
+                    visivel_publico: 1,
+                    deleted_at: null,
+                },
+
+                select: {
+                    id: true,
+                    slug: true,
+                    nome: true,
+                    descricao: true,
+
+                    par_parceiro_tema: {
+                        select: {
+                            ativo: true,
+
+                            logo_sys_arquivo: {
+                                select: {
+                                    public_url: true,
+                                },
+                            },
+                        },
+                    },
+                },
+
+                orderBy: [
+                    {
+                        nome: "asc",
+                    },
+                    {
+                        id: "asc",
+                    },
+                ],
+            });
+
+        return parceiros.map(
+            (parceiro) => ({
+                id: parceiro.id,
+                slug: parceiro.slug,
+                nome: parceiro.nome,
+                descricao:
+                parceiro.descricao,
+
+                logo_url:
+                    parceiro
+                        .par_parceiro_tema
+                        ?.ativo
+                        ? parceiro
+                            .par_parceiro_tema
+                            .logo_sys_arquivo
+                            ?.public_url ??
+                        null
+                        : null,
+            }),
+        );
+    }
+
     async getByParceiroSlug(
         slug: string,
     ) {

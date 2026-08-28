@@ -55,14 +55,12 @@ class EventoPublicService {
 
 
         const limit =
-            Math.min(
-                Math.max(
-                    options.limit ??
-                    8,
-                    1,
-                ),
-                12,
-            );
+            options.limit !== undefined
+                ? Math.min(
+                    Math.max(options.limit, 1),
+                    100,
+                )
+                : undefined;
 
 
         const eventos =
@@ -137,8 +135,11 @@ class EventoPublicService {
                         },
                     ],
 
-                    take:
-                    limit,
+                    ...(limit !== undefined
+                        ? {
+                            take: limit,
+                        }
+                        : {}),
                 });
 
 

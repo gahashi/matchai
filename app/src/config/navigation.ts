@@ -230,6 +230,19 @@ export const adminNavigationItems: NavigationItem[] = [
         mobileHidden:
             true,
     },
+    {
+        label:
+            "Usuários",
+
+        href:
+            "/admin/usuarios",
+
+        icon:
+        UserRound,
+
+        mobileHidden:
+            true,
+    },
 ];
 
 
