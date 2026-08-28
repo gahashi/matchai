@@ -172,7 +172,7 @@ export default async function ParceiroPage({
                 `/parceiro/${parceiro.slug}/cardapio`,
 
             status:
-                null,
+                "Destaque",
         },
 
         {
@@ -180,33 +180,33 @@ export default async function ParceiroPage({
                 "Promoções",
 
             description:
-                "Defina ofertas com dias e horários específicos de exibição.",
+                "Crie e gerencie ofertas com produtos, validade e horários específicos.",
 
             icon:
             CalendarClock,
 
             href:
-                null,
+                `/parceiro/${parceiro.slug}/promocoes`,
 
             status:
-                "Em breve",
+                null,
         },
 
         {
             title:
-                "Divulgações",
+                "TV e divulgações",
 
             description:
-                "Gerencie conteúdos do parceiro que poderão aparecer nas TVs.",
+                "Gerencie conteúdos, promoções e divulgações exibidos nas TVs.",
 
             icon:
             Megaphone,
 
             href:
-                null,
+                `/parceiro/${parceiro.slug}/tv`,
 
             status:
-                "Em breve",
+                null,
         },
     ];
 
