@@ -20,8 +20,8 @@ import type {
 const TEMPO_PADRAO_IMAGEM_MS =
     18000;
 
-const REFRESH_PLAYLIST_MS =
-    60000;
+// const REFRESH_PLAYLIST_MS =
+//     60000;
 
 const LOGO_BRAVA_PASS =
     "/brand/brava-pass-symbol-dark.png";
@@ -640,20 +640,136 @@ export function TvPlayer({
                 data.itens.length,
             ],
         );
+    const refreshPlaylist =
+        useCallback(
+            async () => {
+                try {
+                    const query =
+                        slug
+                            ? `?slug=${encodeURIComponent(
+                                slug,
+                            )}`
+                            : "";
 
+                    const response =
+                        await fetch(
+                            `/api/tv/playlist${query}`,
+                            {
+                                cache:
+                                    "no-store",
+
+                                headers: {
+                                    Accept:
+                                        "application/json",
+                                },
+                            },
+                        );
+
+                    const result =
+                        await response
+                            .json();
+
+                    if (
+                        !response.ok ||
+                        !result.ok ||
+                        !result.data
+                    ) {
+                        throw new Error(
+                            result.message ||
+                            "Não foi possível atualizar a playlist.",
+                        );
+                    }
+
+                    const nextData =
+                        result
+                            .data as TvPlaylistData;
+
+                    setRefreshFailed(
+                        false,
+                    );
+
+                    setData(
+                        nextData,
+                    );
+
+                    setCurrentIndex(
+                        0,
+                    );
+
+                    return true;
+                } catch {
+                    setRefreshFailed(
+                        true,
+                    );
+
+                    return false;
+                }
+            },
+            [
+                slug,
+            ],
+        );
 
     const advance =
         useCallback(
             () => {
-                navigate(
-                    1,
+                const total =
+                    data
+                        .itens
+                        .length;
+
+                if (
+                    total === 0
+                ) {
+                    return;
+                }
+
+                const ultimoItem =
+                    currentIndex >=
+                    total - 1;
+
+                setVisible(
+                    false,
+                );
+
+                window.setTimeout(
+                    async () => {
+                        if (
+                            ultimoItem
+                        ) {
+                            const atualizado =
+                                await refreshPlaylist();
+
+                            if (
+                                !atualizado
+                            ) {
+                                setCurrentIndex(
+                                    0,
+                                );
+                            }
+                        } else {
+                            setCurrentIndex(
+                                (
+                                    index,
+                                ) =>
+                                    index +
+                                    1,
+                            );
+                        }
+
+                        setVisible(
+                            true,
+                        );
+                    },
+                    350,
                 );
             },
             [
-                navigate,
+                currentIndex,
+                data.itens.length,
+                refreshPlaylist,
             ],
         );
-
 
     const previous =
         useCallback(
@@ -841,14 +957,10 @@ export function TvPlayer({
         () => {
             if (
                 !currentItem ||
-                data
-                    .itens
-                    .length <=
-                1 ||
+                paused ||
                 currentItem
                     .media_tipo ===
-                "video" ||
-                paused
+                "video"
             ) {
                 return;
             }
@@ -942,7 +1054,33 @@ export function TvPlayer({
         ],
     );
 
+    useEffect(
+        () => {
+            if (
+                data
+                    .itens
+                    .length >
+                0
+            ) {
+                return;
+            }
 
+            const interval =
+                window.setInterval(
+                    refreshPlaylist,
+                    60000,
+                );
+
+            return () =>
+                window.clearInterval(
+                    interval,
+                );
+        },
+        [
+            data.itens.length,
+            refreshPlaylist,
+        ],
+    );
     useEffect(
         () => {
             function handleKeyDown(
@@ -1046,141 +1184,7 @@ export function TvPlayer({
     );
 
 
-    useEffect(
-        () => {
-            let active =
-                true;
 
-            async function refreshPlaylist() {
-                try {
-                    const query =
-                        slug
-                            ? `?slug=${encodeURIComponent(
-                                slug,
-                            )}`
-                            : "";
-
-                    const response =
-                        await fetch(
-                            `/api/tv/playlist${query}`,
-                            {
-                                cache:
-                                    "no-store",
-
-                                headers: {
-                                    Accept:
-                                        "application/json",
-                                },
-                            },
-                        );
-
-                    const result =
-                        await response
-                            .json();
-
-                    if (
-                        !response.ok ||
-                        !result.ok ||
-                        !result.data
-                    ) {
-                        throw new Error(
-                            result.message ||
-                            "Não foi possível atualizar a playlist.",
-                        );
-                    }
-
-                    if (
-                        !active
-                    ) {
-                        return;
-                    }
-
-                    setRefreshFailed(
-                        false,
-                    );
-
-                    setData(
-                        (
-                            current,
-                        ) => {
-                            const currentId =
-                                current
-                                    .itens[
-                                    currentIndex
-                                    ]
-                                    ?.id;
-
-                            const nextData =
-                                result
-                                    .data as TvPlaylistData;
-
-                            if (
-                                nextData
-                                    .itens
-                                    .length ===
-                                0
-                            ) {
-                                setCurrentIndex(
-                                    0,
-                                );
-
-                                return nextData;
-                            }
-
-                            const nextIndex =
-                                currentId
-                                    ? nextData
-                                        .itens
-                                        .findIndex(
-                                            (
-                                                item,
-                                            ) =>
-                                                item.id ===
-                                                currentId,
-                                        )
-                                    : -1;
-
-                            setCurrentIndex(
-                                nextIndex >=
-                                0
-                                    ? nextIndex
-                                    : 0,
-                            );
-
-                            return nextData;
-                        },
-                    );
-                } catch {
-                    if (
-                        active
-                    ) {
-                        setRefreshFailed(
-                            true,
-                        );
-                    }
-                }
-            }
-
-            const interval =
-                window.setInterval(
-                    refreshPlaylist,
-                    REFRESH_PLAYLIST_MS,
-                );
-
-            return () => {
-                active =
-                    false;
-
-                window.clearInterval(
-                    interval,
-                );
-            };
-        },
-        [
-            currentIndex,
-            slug,
-        ],
-    );
 
 
     if (
