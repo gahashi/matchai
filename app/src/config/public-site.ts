@@ -7,7 +7,16 @@ export const publicSiteConfig = {
     // Preencha quando os dados oficiais forem confirmados.
     foundationYear: 2025,
     headquarters: "D6 | sala 104",
+    email:
+        "atletica.computacao.univali@gmail.com",
 
+    phone: {
+        label:
+            "(47) 99130-0265",
+
+        value:
+            "5547991300265",
+    },
     about:
         "A AAACCU — Computaria — é a atlética dos cursos de Computação da UNIVALI. Nosso objetivo é aproximar os estudantes, fortalecer a comunidade acadêmica e criar experiências por meio de eventos, esportes, produtos e ações para os cursos de computação.",
 

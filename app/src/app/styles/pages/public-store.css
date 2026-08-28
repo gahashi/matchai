@@ -708,8 +708,10 @@
 
 .bp-public-footer-links {
     display: flex;
-    gap: 16px;
+    justify-content: flex-end;
+    gap: 10px 18px;
     flex-wrap: wrap;
+    max-width: 680px;
 }
 
 .bp-public-footer-links a,
@@ -723,6 +725,20 @@
 
 .bp-public-footer-links a:hover {
     color: var(--color-primary);
+}
+
+@media (max-width: 760px) {
+    .bp-public-footer-inner {
+        padding-top: 24px;
+        padding-bottom: 24px;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .bp-public-footer-links {
+        justify-content: flex-start;
+        width: 100%;
+    }
 }
 
 /* Carrinho */
