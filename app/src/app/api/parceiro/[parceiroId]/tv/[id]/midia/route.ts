@@ -146,7 +146,7 @@ export async function POST(
 
         const exibicao =
             await tvProgramacaoService
-                .setMidiaImagem({
+                .setMidia({
                     id:
                         exibicaoId,
 

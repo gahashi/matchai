@@ -174,7 +174,65 @@ class ArquivoService {
         }
     }
 
+    async uploadPublicTvMedia(
+        input: UploadArquivoPublicoInput,
+    ) {
+        const uploadedFile =
+            await storageService
+                .uploadPublicTvMedia({
+                    file:
+                    input.file,
 
+                    folder:
+                    input.folder,
+
+                    filenamePrefix:
+                    input.filenamePrefix,
+                });
+
+        try {
+            const arquivo =
+                await this.registrarArquivo({
+                    uploadedFile,
+
+                    tipoCodigo:
+                    input.tipoCodigo,
+
+                    createdBySysUsuarioId:
+                    input
+                        .createdBySysUsuarioId,
+                });
+
+            return {
+                uploadedFile,
+                arquivo,
+            };
+        } catch (
+            error
+            ) {
+            try {
+                await storageService
+                    .delete(
+                        uploadedFile.fileKey,
+                    );
+            } catch (
+                rollbackError
+                ) {
+                console.error(
+                    "[arquivo.tv-media.upload.rollback]",
+                    {
+                        fileKey:
+                        uploadedFile
+                            .fileKey,
+
+                        rollbackError,
+                    },
+                );
+            }
+
+            throw error;
+        }
+    }
     async marcarComoRemovido(
         input: MarcarComoRemovidoInput,
     ) {

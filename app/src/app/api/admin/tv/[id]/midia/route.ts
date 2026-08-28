@@ -93,7 +93,7 @@ export async function POST(
                 {
                     ok: false,
                     message:
-                        "Selecione uma imagem válida.",
+                        "Selecione uma mídia válida.",
                 },
                 {
                     status: 400,
@@ -103,7 +103,7 @@ export async function POST(
 
         const exibicao =
             await tvProgramacaoService
-                .setMidiaImagem({
+                .setMidia({
                     id:
                         exibicaoId,
 
@@ -119,7 +119,7 @@ export async function POST(
         return NextResponse.json({
             ok: true,
             message:
-                "Imagem da TV atualizada com sucesso.",
+                "Midia da TV atualizada com sucesso.",
             data: {
                 exibicao,
             },
@@ -135,7 +135,7 @@ export async function POST(
         const message =
             error instanceof Error
                 ? error.message
-                : "Não foi possível atualizar a imagem da TV.";
+                : "Não foi possível atualizar a midia da TV.";
 
         return NextResponse.json(
             {
@@ -209,7 +209,7 @@ export async function DELETE(
         return NextResponse.json({
             ok: true,
             message:
-                "Imagem própria removida. A TV voltou a usar a mídia da fonte quando existir.",
+                "Midia própria removida. A TV voltou a usar a mídia da fonte quando existir.",
             data: {
                 exibicao,
             },

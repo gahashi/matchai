@@ -669,14 +669,25 @@ export function TvProgramacaoManager({
 
     const midiaAtualUrl =
         midiaPreview ??
-        (
-            editing
-                ?.media_tipo ===
-            "imagem"
-                ? editing
-                    .media_url
-                : null
-        );
+        editing
+            ?.media_url ??
+        null;
+
+
+    const midiaAtualTipo:
+        "imagem" |
+        "video" =
+        midiaFile
+            ?.type
+            .startsWith(
+                "video/",
+            )
+            ? "video"
+            : midiaFile
+                ? "imagem"
+                : editing
+                    ?.media_tipo ??
+                "imagem";
 
 
     const midiaAtualEhFonte =
@@ -1017,73 +1028,118 @@ export function TvProgramacaoManager({
                 "";
         }
     }
-
-
     function handleMidiaChange(
         event:
-            ChangeEvent<HTMLInputElement>,
+        ChangeEvent<HTMLInputElement>,
     ) {
-        const file =
+        const selectedFile =
             event
                 .target
                 .files
-                ?.[0] ??
-            null;
-
+                ?.[0];
 
         if (
-            !file
+            !selectedFile
         ) {
             return;
         }
 
+        const file:
+            File =
+            selectedFile;
 
-        if (
-            !file.type
+
+        const isImage =
+            file.type
                 .startsWith(
                     "image/",
-                )
+                );
+
+        const isVideo =
+            file.type ===
+            "video/mp4" ||
+            file.type ===
+            "video/webm";
+
+
+        if (
+            !isImage &&
+            !isVideo
         ) {
             setSnackbar({
                 color:
                     "danger",
 
                 title:
-                    "Imagem inválida",
+                    "Mídia inválida",
 
                 message:
-                    "Selecione um arquivo de imagem.",
+                    "Selecione uma imagem, vídeo MP4 ou WebM.",
 
                 autoClose:
                     false,
             });
 
+            event.target.value =
+                "";
+
             return;
         }
+
+
+        const maxSize =
+            isVideo
+                ? 250 *
+                1024 *
+                1024
+                : 5 *
+                1024 *
+                1024;
 
 
         if (
             file.size >
-            5 *
-            1024 *
-            1024
+            maxSize
         ) {
             setSnackbar({
                 color:
                     "danger",
 
                 title:
-                    "Imagem muito grande",
+                    "Arquivo muito grande",
 
                 message:
-                    "A imagem ultrapassa o limite de 5MB.",
+                    isVideo
+                        ? "O vídeo ultrapassa o limite de 250MB."
+                        : "A imagem ultrapassa o limite de 5MB.",
 
                 autoClose:
                     false,
             });
 
+            event.target.value =
+                "";
+
             return;
         }
+
+
+        if (
+            midiaPreview
+                ?.startsWith(
+                    "blob:",
+                )
+        ) {
+            URL.revokeObjectURL(
+                midiaPreview,
+            );
+        }
+
+
+        const previewUrl =
+            URL.createObjectURL(
+                file,
+            );
 
 
         setMidiaFile(
@@ -1091,9 +1147,7 @@ export function TvProgramacaoManager({
         );
 
         setMidiaPreview(
-            URL.createObjectURL(
-                file,
-            ),
+            previewUrl,
         );
 
         setRemoverMidia(
@@ -3064,7 +3118,7 @@ export function TvProgramacaoManager({
                                 fileInputRef
                             }
                             type="file"
-                            accept="image/*"
+                            accept="image/*,video/mp4,video/webm"
                             hidden
                             onChange={
                                 handleMidiaChange
@@ -3091,15 +3145,16 @@ export function TvProgramacaoManager({
                         >
                             <div>
                                 <strong>
-                                    Imagem da TV
+                                    Mídia da TV
                                 </strong>
 
                                 <div className="bp-field-help">
-                                    Opcional · máximo 5MB. Sem imagem própria, evento e promoção continuam usando a mídia da fonte.
+                                    Imagem até 10MB ou vídeo MP4/WebM até 250MB.
+                                    Sem mídia própria, eventos e promoções continuam usando a mídia original.
                                 </div>
                             </div>
 
-                            <ImagePlus
+                            <MonitorPlay
                                 size={
                                     20
                                 }
@@ -3108,17 +3163,40 @@ export function TvProgramacaoManager({
 
                         {midiaAtualUrl ? (
                             <div className="bp-event-banner-editor">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src={
-                                        midiaAtualUrl
-                                    }
-                                    alt="Imagem da exibição da TV"
-                                    style={{
-                                        objectFit:
-                                            "contain",
-                                    }}
-                                />
+                                {midiaAtualTipo ===
+                                "video" ? (
+                                    <video
+                                        src={
+                                            midiaAtualUrl
+                                        }
+                                        controls
+                                        playsInline
+                                        style={{
+                                            width:
+                                                "100%",
+
+                                            maxHeight:
+                                                420,
+
+                                            objectFit:
+                                                "contain",
+                                        }}
+                                    />
+                                ) : (
+                                    <>
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img
+                                            src={
+                                                midiaAtualUrl
+                                            }
+                                            alt="Mídia da exibição da TV"
+                                            style={{
+                                                objectFit:
+                                                    "contain",
+                                            }}
+                                        />
+                                    </>
+                                )}
 
                                 <div className="bp-event-banner-editor-actions">
                                     <Button
@@ -3138,11 +3216,7 @@ export function TvProgramacaoManager({
                                             }
                                         />
 
-                                        {midiaFile ||
-                                        editing
-                                            ?.midia_propria
-                                            ? "Trocar imagem"
-                                            : "Adicionar imagem"}
+                                        Trocar mídia
                                     </Button>
 
                                     {midiaFile ||
@@ -3163,57 +3237,17 @@ export function TvProgramacaoManager({
                                                 }
                                             />
 
-                                            Remover imagem própria
+                                            Remover mídia própria
                                         </Button>
                                     ) : null}
                                 </div>
 
                                 {midiaAtualEhFonte ? (
                                     <div className="bp-field-help">
-                                        Esta é a mídia original da fonte. Enviar uma imagem cria um override somente para a TV.
+                                        Esta é a mídia original da fonte.
+                                        Enviar outra mídia cria um override somente para a TV.
                                     </div>
                                 ) : null}
-                            </div>
-                        ) : editing
-                            ?.media_tipo ===
-                        "video" &&
-                        editing
-                            .media_url &&
-                        !midiaFile ? (
-                            <div className="bp-product-dropzone">
-                                <MonitorPlay
-                                    size={
-                                        28
-                                    }
-                                />
-
-                                <strong>
-                                    A fonte atual usa vídeo
-                                </strong>
-
-                                <span className="bp-field-help">
-                                    Você pode manter o vídeo ou enviar uma imagem para sobrescrever somente a exibição da TV.
-                                </span>
-
-                                <Button
-                                    type="button"
-                                    color="secondary"
-                                    variant="soft"
-                                    size="sm"
-                                    onClick={() =>
-                                        fileInputRef
-                                            .current
-                                            ?.click()
-                                    }
-                                >
-                                    <Upload
-                                        size={
-                                            15
-                                        }
-                                    />
-
-                                    Enviar imagem
-                                </Button>
                             </div>
                         ) : (
                             <div
@@ -3232,9 +3266,9 @@ export function TvProgramacaoManager({
                                 ) => {
                                     if (
                                         event.key ===
-                                            "Enter" ||
+                                        "Enter" ||
                                         event.key ===
-                                            " "
+                                        " "
                                     ) {
                                         event.preventDefault();
 
@@ -3244,19 +3278,19 @@ export function TvProgramacaoManager({
                                     }
                                 }}
                             >
-                                <ImagePlus
+                                <MonitorPlay
                                     size={
                                         28
                                     }
                                 />
 
                                 <strong>
-                                    Adicionar imagem à TV
+                                    Adicionar mídia à TV
                                 </strong>
 
                                 <span className="bp-field-help">
-                                    Clique para selecionar uma imagem.
-                                </span>
+                Clique para selecionar uma imagem ou vídeo.
+            </span>
                             </div>
                         )}
                     </div>

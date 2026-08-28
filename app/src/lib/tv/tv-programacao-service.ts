@@ -3319,7 +3319,7 @@ class TvProgramacaoService {
     }
 
 
-    async setMidiaImagem(
+    async setMidia(
         input: {
             id:
                 number;
@@ -3345,7 +3345,7 @@ class TvProgramacaoService {
 
         const upload =
             await arquivoService
-                .uploadPublicImage({
+                .uploadPublicTvMedia({
                     file:
                         input.file,
 
