@@ -1414,6 +1414,184 @@ export default function AdminPedidosClient({
                             ),
                         )}
                     </Table>
+
+                {/*  START  */}
+                    <div className="bp-hidden-desktop">
+                        <div className="bp-grid">
+                            {data.pedidos.map(
+                                (pedido) => (
+                                    <div
+                                        key={
+                                            pedido.id
+                                        }
+                                        className="bp-card"
+                                    >
+                                        <div className="bp-card-body">
+                                            <div className="bp-row-between bp-mb-3">
+                                                <div className="bp-row">
+                                                    <label
+                                                        className="bp-check"
+                                                        title={`Selecionar pedido ${pedido.codigo}`}
+                                                    >
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={selecionados.includes(
+                                                                pedido.id,
+                                                            )}
+                                                            onChange={() =>
+                                                                alternarPedidoSelecionado(
+                                                                    pedido.id,
+                                                                )
+                                                            }
+                                                            aria-label={`Selecionar pedido ${pedido.codigo}`}
+                                                        />
+                                                    </label>
+
+                                                    <div>
+                                                        <strong>
+                                                            {
+                                                                pedido.codigo
+                                                            }
+                                                        </strong>
+
+                                                        <div className="bp-section-subtitle">
+                                                            {
+                                                                pedido
+                                                                    .cliente
+                                                                    .nome
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <Badge
+                                                    color={normalizeBadgeColor(
+                                                        pedido
+                                                            .status
+                                                            .color,
+                                                    )}
+                                                >
+                                                    {
+                                                        pedido
+                                                            .status
+                                                            .descricao
+                                                    }
+                                                </Badge>
+                                            </div>
+
+
+                                            <div className="bp-grid">
+                                                <div className="bp-row-between">
+                                                    <span className="bp-section-subtitle">
+                                                        Data
+                                                    </span>
+
+                                                    <strong>
+                                                        {formatDate(
+                                                            getPedidoDate(
+                                                                pedido,
+                                                            ),
+                                                        )}
+                                                    </strong>
+                                                </div>
+
+                                                <div className="bp-row-between">
+                                                    <span className="bp-section-subtitle">
+                                                        Valor
+                                                    </span>
+
+                                                    <strong>
+                                                        {money(
+                                                            pedido.valor_total,
+                                                        )}
+                                                    </strong>
+                                                </div>
+
+                                                <div className="bp-row-between">
+                                                    <span className="bp-section-subtitle">
+                                                        Itens
+                                                    </span>
+
+                                                    <strong>
+                                                        {
+                                                            pedido.quantidade_itens
+                                                        }
+                                                    </strong>
+                                                </div>
+
+                                                <div className="bp-row-between">
+                                                    <span className="bp-section-subtitle">
+                                                        Origem
+                                                    </span>
+
+                                                    <Badge
+                                                        color={getOrigemColor(
+                                                            pedido.origem,
+                                                        )}
+                                                    >
+                                                        {getOrigemLabel(
+                                                            pedido.origem,
+                                                        )}
+                                                    </Badge>
+                                                </div>
+
+                                                <div className="bp-row-between">
+                                                    <span className="bp-section-subtitle">
+                                                        Pagamento
+                                                    </span>
+
+                                                    {pedido.pagamento ? (
+                                                        <Badge
+                                                            color={normalizeBadgeColor(
+                                                                pedido
+                                                                    .pagamento
+                                                                    .status
+                                                                    .color,
+                                                            )}
+                                                        >
+                                                            {
+                                                                pedido
+                                                                    .pagamento
+                                                                    .status
+                                                                    .descricao
+                                                            }
+                                                        </Badge>
+                                                    ) : (
+                                                        <Badge color="secondary">
+                                                            Sem pagamento
+                                                        </Badge>
+                                                    )}
+                                                </div>
+                                            </div>
+
+
+                                            <div className="bp-action-row bp-mt-3">
+                                                <Button
+                                                    color="secondary"
+                                                    variant="soft"
+                                                    size="sm"
+                                                    onClick={() =>
+                                                        setPedidoDetalheId(
+                                                            pedido.id,
+                                                        )
+                                                    }
+                                                >
+                                                    <Eye
+                                                        size={
+                                                            16
+                                                        }
+                                                    />
+
+                                                    Ver pedido
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ),
+                            )}
+                        </div>
+                    </div>
+                {/*  END  */}
                 </div>
             </div>
 

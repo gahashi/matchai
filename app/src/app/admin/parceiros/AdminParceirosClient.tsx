@@ -1256,7 +1256,8 @@ export default function AdminParceirosClient({
                     }
                 />
             ) : (
-                <Table
+                <>
+                    <Table
                     headers={[
                         "Parceiro",
                         "Endereço",
@@ -1634,9 +1635,327 @@ export default function AdminParceirosClient({
                             );
                         },
                     )}
-                </Table>
-            )}
+                    </Table>
 
+                    <div className="bp-hidden-desktop">
+                        <div className="bp-grid">
+                            {data.parceiros.map(
+                                (parceiro) => {
+                                    const busy =
+                                        alterandoId ===
+                                        parceiro.id;
+
+                                    return (
+                                        <article
+                                            key={
+                                                parceiro.id
+                                            }
+                                            className="bp-card"
+                                        >
+                                            <div className="bp-card-body">
+                                                <div className="bp-row-between bp-mb-3">
+                                                    <div className="bp-row">
+                                                        <div
+                                                            style={{
+                                                                width: 48,
+                                                                height: 48,
+                                                                flex: "0 0 48px",
+                                                                display:
+                                                                    "grid",
+                                                                placeItems:
+                                                                    "center",
+                                                                overflow:
+                                                                    "hidden",
+                                                                borderRadius:
+                                                                    12,
+                                                                border:
+                                                                    "1px solid var(--color-border)",
+                                                            }}
+                                                        >
+                                                            {parceiro
+                                                                .tema
+                                                                ?.logo
+                                                                ?.public_url ? (
+                                                                // eslint-disable-next-line @next/next/no-img-element
+                                                                <img
+                                                                    src={
+                                                                        parceiro
+                                                                            .tema
+                                                                            .logo
+                                                                            .public_url
+                                                                    }
+                                                                    alt=""
+                                                                    style={{
+                                                                        width:
+                                                                            "100%",
+                                                                        height:
+                                                                            "100%",
+                                                                        objectFit:
+                                                                            "contain",
+                                                                    }}
+                                                                />
+                                                            ) : (
+                                                                <Building2
+                                                                    size={
+                                                                        20
+                                                                    }
+                                                                />
+                                                            )}
+                                                        </div>
+
+                                                        <div
+                                                            style={{
+                                                                minWidth:
+                                                                    0,
+                                                            }}
+                                                        >
+                                                            <strong>
+                                                                {
+                                                                    parceiro.nome
+                                                                }
+                                                            </strong>
+
+                                                            <div className="bp-section-subtitle">
+                                                                {
+                                                                    parceiro.codigo
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <Badge
+                                                        color={
+                                                            parceiro.ativo
+                                                                ? "success"
+                                                                : "danger"
+                                                        }
+                                                    >
+                                                        {parceiro.ativo
+                                                            ? "Ativo"
+                                                            : "Inativo"}
+                                                    </Badge>
+                                                </div>
+
+
+                                                <div className="bp-grid">
+                                                    <div className="bp-row-between">
+                                                        <span className="bp-section-subtitle">
+                                                            Endereço
+                                                        </span>
+
+                                                        <strong>
+                                                            /parceiro/
+                                                            {
+                                                                parceiro.slug
+                                                            }
+                                                        </strong>
+                                                    </div>
+
+                                                    <div className="bp-row-between">
+                                                        <span className="bp-section-subtitle">
+                                                            Visibilidade
+                                                        </span>
+
+                                                        <Badge
+                                                            color={
+                                                                parceiro.visivel_publico
+                                                                    ? "success"
+                                                                    : "secondary"
+                                                            }
+                                                        >
+                                                            {parceiro.visivel_publico
+                                                                ? "Público"
+                                                                : "Oculto"}
+                                                        </Badge>
+                                                    </div>
+
+                                                    <div className="bp-row-between">
+                                                        <span className="bp-section-subtitle">
+                                                            Usuários
+                                                        </span>
+
+                                                        <strong>
+                                                            {
+                                                                parceiro
+                                                                    .usuarios
+                                                                    .length
+                                                            }
+                                                        </strong>
+                                                    </div>
+
+                                                    {parceiro
+                                                        .usuarios
+                                                        .length >
+                                                    0 ? (
+                                                        <div>
+                                                            <span className="bp-section-subtitle">
+                                                                Responsáveis
+                                                            </span>
+
+                                                            <div
+                                                                style={{
+                                                                    marginTop:
+                                                                        4,
+                                                                    overflowWrap:
+                                                                        "anywhere",
+                                                                }}
+                                                            >
+                                                                {parceiro.usuarios
+                                                                    .map(
+                                                                        (
+                                                                            usuario,
+                                                                        ) =>
+                                                                            usuario.nome,
+                                                                    )
+                                                                    .join(
+                                                                        ", ",
+                                                                    )}
+                                                            </div>
+                                                        </div>
+                                                    ) : null}
+
+                                                    <div className="bp-row-between">
+                                                        <span className="bp-section-subtitle">
+                                                            Tema
+                                                        </span>
+
+                                                        {parceiro.tema ? (
+                                                            <div className="bp-row">
+                                                                {[
+                                                                    parceiro
+                                                                        .tema
+                                                                        .cor_primaria,
+                                                                    parceiro
+                                                                        .tema
+                                                                        .cor_secundaria,
+                                                                    parceiro
+                                                                        .tema
+                                                                        .cor_fundo,
+                                                                ]
+                                                                    .filter(
+                                                                        Boolean,
+                                                                    )
+                                                                    .map(
+                                                                        (
+                                                                            color,
+                                                                        ) => (
+                                                                            <span
+                                                                                key={
+                                                                                    color
+                                                                                }
+                                                                                style={{
+                                                                                    width: 20,
+                                                                                    height: 20,
+                                                                                    borderRadius:
+                                                                                        6,
+                                                                                    background:
+                                                                                        color!,
+                                                                                    border:
+                                                                                        "1px solid var(--color-border)",
+                                                                                }}
+                                                                            />
+                                                                        ),
+                                                                    )}
+                                                            </div>
+                                                        ) : (
+                                                            <strong>
+                                                                Padrão
+                                                            </strong>
+                                                        )}
+                                                    </div>
+                                                </div>
+
+
+                                                <div className="bp-action-row bp-mt-3">
+                                                    <Button
+                                                        color="secondary"
+                                                        variant="soft"
+                                                        size="sm"
+                                                        disabled={
+                                                            busy
+                                                        }
+                                                        onClick={() =>
+                                                            abrirEdicao(
+                                                                parceiro,
+                                                            )
+                                                        }
+                                                    >
+                                                        <Pencil
+                                                            size={
+                                                                16
+                                                            }
+                                                        />
+
+                                                        Editar
+                                                    </Button>
+
+                                                    <Button
+                                                        color={
+                                                            parceiro.ativo
+                                                                ? "warning"
+                                                                : "success"
+                                                        }
+                                                        variant="soft"
+                                                        size="sm"
+                                                        disabled={
+                                                            busy
+                                                        }
+                                                        onClick={() =>
+                                                            alternarAtivo(
+                                                                parceiro,
+                                                            )
+                                                        }
+                                                    >
+                                                        {parceiro.ativo ? (
+                                                            <PowerOff
+                                                                size={
+                                                                    16
+                                                                }
+                                                            />
+                                                        ) : (
+                                                            <Power
+                                                                size={
+                                                                    16
+                                                                }
+                                                            />
+                                                        )}
+
+                                                        {parceiro.ativo
+                                                            ? "Desativar"
+                                                            : "Ativar"}
+                                                    </Button>
+
+                                                    <Button
+                                                        color="danger"
+                                                        variant="soft"
+                                                        size="sm"
+                                                        disabled={
+                                                            busy
+                                                        }
+                                                        onClick={() =>
+                                                            excluirParceiro(
+                                                                parceiro,
+                                                            )
+                                                        }
+                                                    >
+                                                        <Trash2
+                                                            size={
+                                                                16
+                                                            }
+                                                        />
+
+                                                        Excluir
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    );
+                                },
+                            )}
+                        </div>
+                    </div>
+                </>
+            )}
 
             <Modal
                 open={modalOpen}

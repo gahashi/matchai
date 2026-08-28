@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import {
     type CSSProperties,
     useMemo,
@@ -114,15 +114,21 @@ export type CardapioViewParceiro = {
 };
 
 
+type CardapioNavigationUser = {
+    isAuthenticated: boolean;
+    isAdmin: boolean;
+};
+
+
 type Props = {
-    parceiro:
-        CardapioViewParceiro;
+    parceiro: CardapioViewParceiro;
 
-    eventos?:
-        PublicEvento[];
+    eventos?: PublicEvento[];
 
-    preview?:
-        boolean;
+    preview?: boolean;
+
+    navigationUser?:
+        CardapioNavigationUser;
 };
 
 
@@ -254,11 +260,11 @@ function formatDate(
 
 export function CardapioView({
                                  parceiro,
-
                                  eventos = [],
-
                                  preview = false,
+                                 navigationUser,
                              }: Props) {
+
     const [
         search,
         setSearch,
@@ -1443,15 +1449,65 @@ export function CardapioView({
 
             <footer className="bp-cardapio-footer">
                 <div className="bp-cardapio-container">
-                    <strong>
-                        {
-                            parceiro.nome
-                        }
-                    </strong>
+                    <div className="bp-cardapio-footer-brand">
+                        <strong>
+                            {
+                                parceiro.nome
+                            }
+                        </strong>
 
-                    <span>
-                        Cardápio digital
-                    </span>
+                        <span>
+                Cardápio digital
+            </span>
+                    </div>
+
+
+                    {!preview ? (
+                        <nav
+                            className="bp-cardapio-footer-nav"
+                            aria-label="Voltar ao Brava Pass"
+                        >
+                            <Link href="/">
+                                Início
+                            </Link>
+
+                            <Link href="/#produtos">
+                                Produtos
+                            </Link>
+
+                            <Link href="/#eventos">
+                                Eventos
+                            </Link>
+
+                            <Link href="/#planos-socio">
+                                Planos
+                            </Link>
+
+                            <Link href="/acompanhar-pedido">
+                                Consultar pedido
+                            </Link>
+
+
+                            {navigationUser
+                                ?.isAuthenticated ? (
+                                <Link href="/perfil">
+                                    Minha conta
+                                </Link>
+                            ) : (
+                                <Link href="/login">
+                                    Entrar
+                                </Link>
+                            )}
+
+
+                            {navigationUser
+                                ?.isAdmin ? (
+                                <Link href="/admin">
+                                    Administração
+                                </Link>
+                            ) : null}
+                        </nav>
+                    ) : null}
                 </div>
             </footer>
         </main>

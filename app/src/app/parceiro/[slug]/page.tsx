@@ -318,67 +318,40 @@ export default async function ParceiroPage({
                     }
                 />
 
+                {/* Hero desktop */}
                 <section
+                    className="bp-hidden-mobile"
                     style={{
-                        overflow:
-                            "hidden",
-
-                        position:
-                            "relative",
-
-                        minHeight:
-                            250,
-
-                        borderRadius:
-                            20,
-
+                        overflow: "hidden",
+                        position: "relative",
+                        minHeight: 250,
+                        borderRadius: 20,
                         border:
                             "1px solid var(--color-border)",
-
-                        background:
-                        corFundo,
-
-                        color:
-                        corTexto,
+                        background: corFundo,
+                        color: corTexto,
                     }}
                 >
                     {bannerUrl ? (
                         <>
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                                src={
-                                    bannerUrl
-                                }
+                                src={bannerUrl}
                                 alt=""
                                 style={{
-                                    position:
-                                        "absolute",
-
-                                    inset:
-                                        0,
-
-                                    width:
-                                        "100%",
-
-                                    height:
-                                        "100%",
-
-                                    objectFit:
-                                        "cover",
-
-                                    opacity:
-                                        0.28,
+                                    position: "absolute",
+                                    inset: 0,
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                    opacity: 0.28,
                                 }}
                             />
 
                             <div
                                 style={{
-                                    position:
-                                        "absolute",
-
-                                    inset:
-                                        0,
-
+                                    position: "absolute",
+                                    inset: 0,
                                     background:
                                         `linear-gradient(90deg, ${corFundo} 18%, ${corFundo}E6 48%, transparent 100%)`,
                                 }}
@@ -388,60 +361,26 @@ export default async function ParceiroPage({
 
                     <div
                         style={{
-                            position:
-                                "relative",
-
-                            zIndex:
-                                1,
-
-                            minHeight:
-                                250,
-
-                            display:
-                                "flex",
-
-                            alignItems:
-                                "center",
-
-                            gap:
-                                22,
-
-                            padding:
-                                28,
-
-                            flexWrap:
-                                "wrap",
+                            position: "relative",
+                            zIndex: 1,
+                            minHeight: 250,
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 22,
+                            padding: 28,
                         }}
                     >
                         <div
                             style={{
-                                width:
-                                    104,
-
-                                height:
-                                    104,
-
-                                borderRadius:
-                                    24,
-
-                                flexShrink:
-                                    0,
-
-                                display:
-                                    "grid",
-
-                                placeItems:
-                                    "center",
-
-                                overflow:
-                                    "hidden",
-
-                                background:
-                                corPrimaria,
-
-                                color:
-                                corFundo,
-
+                                width: 104,
+                                height: 104,
+                                borderRadius: 24,
+                                flexShrink: 0,
+                                display: "grid",
+                                placeItems: "center",
+                                overflow: "hidden",
+                                background: corPrimaria,
+                                color: corFundo,
                                 border:
                                     `2px solid ${corSecundaria}`,
                             }}
@@ -449,21 +388,12 @@ export default async function ParceiroPage({
                             {logoUrl ? (
                                 // eslint-disable-next-line @next/next/no-img-element
                                 <img
-                                    src={
-                                        logoUrl
-                                    }
-                                    alt={
-                                        parceiro.nome
-                                    }
+                                    src={logoUrl}
+                                    alt={parceiro.nome}
                                     style={{
-                                        width:
-                                            "100%",
-
-                                        height:
-                                            "100%",
-
-                                        objectFit:
-                                            "contain",
+                                        width: "100%",
+                                        height: "100%",
+                                        objectFit: "contain",
                                     }}
                                 />
                             ) : (
@@ -475,29 +405,17 @@ export default async function ParceiroPage({
 
                         <div
                             style={{
-                                minWidth:
-                                    0,
-
-                                flex:
-                                    1,
+                                minWidth: 0,
+                                flex: 1,
                             }}
                         >
                             <div
                                 style={{
-                                    display:
-                                        "flex",
-
-                                    gap:
-                                        8,
-
-                                    alignItems:
-                                        "center",
-
-                                    flexWrap:
-                                        "wrap",
-
-                                    marginBottom:
-                                        8,
+                                    display: "flex",
+                                    gap: 8,
+                                    alignItems: "center",
+                                    flexWrap: "wrap",
+                                    marginBottom: 8,
                                 }}
                             >
                                 <Badge color="success">
@@ -506,34 +424,22 @@ export default async function ParceiroPage({
 
                                 <span
                                     style={{
-                                        fontSize:
-                                            12,
-
-                                        color:
-                                        corSecundaria,
+                                        fontSize: 12,
+                                        color: corSecundaria,
                                     }}
                                 >
-                                    {
-                                        parceiro.codigo
-                                    }
-                                </span>
+                    {parceiro.codigo}
+                </span>
                             </div>
 
                             <h1
                                 style={{
-                                    margin:
-                                        0,
-
-                                    fontSize:
-                                        30,
-
-                                    lineHeight:
-                                        1.15,
+                                    margin: 0,
+                                    fontSize: 30,
+                                    lineHeight: 1.15,
                                 }}
                             >
-                                {
-                                    parceiro.nome
-                                }
+                                {parceiro.nome}
                             </h1>
 
                             {parceiro.descricao ? (
@@ -541,57 +447,37 @@ export default async function ParceiroPage({
                                     style={{
                                         margin:
                                             "10px 0 0",
-
-                                        maxWidth:
-                                            700,
-
-                                        lineHeight:
-                                            1.6,
-
+                                        maxWidth: 700,
+                                        lineHeight: 1.6,
                                         color:
                                         corSecundaria,
                                     }}
                                 >
-                                    {
-                                        parceiro.descricao
-                                    }
+                                    {parceiro.descricao}
                                 </p>
                             ) : null}
 
                             <div
                                 style={{
-                                    marginTop:
-                                        16,
-
-                                    display:
-                                        "flex",
-
-                                    gap:
-                                        8,
-
-                                    alignItems:
-                                        "center",
-
-                                    flexWrap:
-                                        "wrap",
+                                    marginTop: 16,
+                                    display: "flex",
+                                    gap: 8,
+                                    alignItems: "center",
+                                    flexWrap: "wrap",
                                 }}
                             >
-                                <span
-                                    style={{
-                                        fontSize:
-                                            13,
-
-                                        color:
-                                        corSecundaria,
-                                    }}
-                                >
-                                    Cardápio público:
-                                </span>
+                <span
+                    style={{
+                        fontSize: 13,
+                        color:
+                        corSecundaria,
+                    }}
+                >
+                    Cardápio público:
+                </span>
 
                                 <AppLink
-                                    href={
-                                        `/cardapio/${parceiro.slug}`
-                                    }
+                                    href={`/cardapio/${parceiro.slug}`}
                                     color="secondary"
                                     variant="ghost"
                                 >
@@ -602,6 +488,154 @@ export default async function ParceiroPage({
                     </div>
                 </section>
 
+
+                {/* Hero mobile */}
+                <section
+                    className="bp-hidden-desktop"
+                    style={{
+                        position: "relative",
+                        overflow: "hidden",
+                        borderRadius: 18,
+                        border:
+                            "1px solid var(--color-border)",
+                        background: corFundo,
+                        color: corTexto,
+                    }}
+                >
+                    {bannerUrl ? (
+                        <>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                                src={bannerUrl}
+                                alt=""
+                                style={{
+                                    position: "absolute",
+                                    inset: 0,
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                    opacity: 0.18,
+                                }}
+                            />
+
+                            <div
+                                style={{
+                                    position: "absolute",
+                                    inset: 0,
+                                    background:
+                                        `linear-gradient(180deg, ${corFundo}CC 0%, ${corFundo}F5 65%, ${corFundo} 100%)`,
+                                }}
+                            />
+                        </>
+                    ) : null}
+
+                    <div
+                        style={{
+                            position: "relative",
+                            zIndex: 1,
+                            display: "grid",
+                            gap: 18,
+                            padding: 20,
+                        }}
+                    >
+                        <div className="bp-row-between">
+                            <div
+                                style={{
+                                    width: 72,
+                                    height: 72,
+                                    flex: "0 0 72px",
+                                    borderRadius: 18,
+                                    display: "grid",
+                                    placeItems: "center",
+                                    overflow: "hidden",
+                                    background:
+                                    corPrimaria,
+                                    color: corFundo,
+                                    border:
+                                        `2px solid ${corSecundaria}`,
+                                }}
+                            >
+                                {logoUrl ? (
+                                    // eslint-disable-next-line @next/next/no-img-element
+                                    <img
+                                        src={logoUrl}
+                                        alt={
+                                            parceiro.nome
+                                        }
+                                        style={{
+                                            width: "100%",
+                                            height: "100%",
+                                            objectFit:
+                                                "contain",
+                                        }}
+                                    />
+                                ) : (
+                                    <Building2
+                                        size={30}
+                                    />
+                                )}
+                            </div>
+
+                            <Badge color="success">
+                                Parceiro ativo
+                            </Badge>
+                        </div>
+
+                        <div>
+            <span
+                style={{
+                    display: "block",
+                    marginBottom: 6,
+                    color:
+                    corSecundaria,
+                    fontSize: 12,
+                }}
+            >
+                {parceiro.codigo}
+            </span>
+
+                            <h1
+                                style={{
+                                    margin: 0,
+                                    fontSize: 28,
+                                    lineHeight: 1.1,
+                                    overflowWrap:
+                                        "anywhere",
+                                }}
+                            >
+                                {parceiro.nome}
+                            </h1>
+
+                            {parceiro.descricao ? (
+                                <p
+                                    style={{
+                                        margin:
+                                            "10px 0 0",
+                                        color:
+                                        corSecundaria,
+                                        fontSize: 14,
+                                        lineHeight: 1.55,
+                                    }}
+                                >
+                                    {
+                                        parceiro.descricao
+                                    }
+                                </p>
+                            ) : null}
+                        </div>
+
+                        <AppLink
+                            href={`/cardapio/${parceiro.slug}`}
+                            color="secondary"
+                            variant="soft"
+                            fullWidth
+                        >
+                            <Store size={17} />
+
+                            Abrir cardápio público
+                        </AppLink>
+                    </div>
+                </section>
 
                 <section
                     style={{

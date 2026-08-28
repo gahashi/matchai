@@ -188,6 +188,44 @@ export async function PATCH(
             );
         }
 
+        if (
+            usuario
+                .sys_usuario_tipo
+                .codigo ===
+            "admin" &&
+            tipoCodigo ===
+            "cliente"
+        ) {
+            const totalAdmins =
+                await prisma.sysUsuario.count({
+                    where: {
+                        ativo: 1,
+
+                        deleted_at:
+                            null,
+
+                        sys_usuario_tipo: {
+                            codigo:
+                                "admin",
+                        },
+                    },
+                });
+
+            if (totalAdmins <= 1) {
+                return NextResponse.json(
+                    {
+                        ok: false,
+
+                        message:
+                            "Não é possível remover o último administrador do sistema.",
+                    },
+                    {
+                        status: 400,
+                    },
+                );
+            }
+        }
+
 
         const tipo =
             await prisma.sysUsuarioTipo.findFirst({

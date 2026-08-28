@@ -16,6 +16,9 @@ import {
 import {
     eventoPublicService,
 } from "@/lib/cad/evento-public-service";
+import {
+    getAuthSession,
+} from "@/lib/auth/session";
 
 export const dynamic =
     "force-dynamic";
@@ -68,6 +71,9 @@ export default async function CardapioPublicPage({
     } =
         await params;
 
+    const session =
+        await getAuthSession();
+
     const parceiro =
         await cardapioPublicService
             .getByParceiroSlug(
@@ -95,6 +101,19 @@ export default async function CardapioPublicPage({
             eventos={
                 eventos
             }
+            navigationUser={{
+                isAuthenticated:
+                    Boolean(
+                        session,
+                    ),
+
+                isAdmin:
+                    session
+                        ?.user
+                        .sys_usuario_tipo
+                        .codigo ===
+                    "admin",
+            }}
         />
     );
 }
