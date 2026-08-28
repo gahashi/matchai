@@ -2293,6 +2293,13 @@ class PedidoPublicService {
     ) {
         const now = new Date();
 
+        const expirouAntesDe =
+            new Date(
+                now.getTime() -
+                getStockReservationMinutes() *
+                60_000,
+            );
+
         return prisma.finPagamento.findMany({
             where: {
                 provider:
@@ -2303,20 +2310,9 @@ class PedidoPublicService {
                         "pendente",
                 },
 
-                vnd_pedido: {
-                    vnd_estoque_reservas: {
-                        some: {
-                            expira_at: {
-                                lte: now,
-                            },
-
-                            consumida_at:
-                                null,
-
-                            liberada_at:
-                                null,
-                        },
-                    },
+                created_at: {
+                    lte:
+                    expirouAntesDe,
                 },
             },
 
