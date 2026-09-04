@@ -239,6 +239,14 @@ function parseProdutoFormData(formData: FormData) {
                 value instanceof File && value.size > 0,
         );
 
+    const imagemOrdemRefs =
+        parseJsonArray<string>(
+            formData.get("imagem_ordem_refs"),
+            "imagem_ordem_refs",
+        )
+            .map((ref) => String(ref).trim())
+            .filter(Boolean);
+
     return {
         prdProdutoTipoId: Number(
             formData.get("prd_produto_tipo_id"),
@@ -296,9 +304,7 @@ function parseProdutoFormData(formData: FormData) {
 
         novasImagens,
         removerImagemIds,
-        principalRef:
-            String(formData.get("imagem_principal_ref") || "").trim() ||
-            null,
+        imagemOrdemRefs,
     };
 }
 

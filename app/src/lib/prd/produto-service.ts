@@ -60,7 +60,7 @@ type ProdutoWriteInput = {
 type ImagemSyncInput = {
     novasImagens: File[];
     removerImagemIds: number[];
-    principalRef?: string | null;
+    imagemOrdemRefs: string[];
 };
 
 type CreateProdutoInput = ProdutoWriteInput &
@@ -423,8 +423,9 @@ const produtoSelect = {
                 deleted_at: null,
             },
         },
-        orderBy: [{ principal: "desc" as const }, { ordem: "asc" as const }],
-        select: {
+        orderBy: {
+            ordem: "asc" as const,
+        },        select: {
             id: true,
             sys_arquivo_id: true,
             ordem: true,
@@ -709,15 +710,16 @@ class ProdutoService {
                 await this.syncCampos(produto.id, input.campos);
             }
 
-            if (input.novasImagens.length > 0) {
-                await this.syncImagens({
-                    prdProdutoId: produto.id,
-                    novasImagens: input.novasImagens,
-                    removerImagemIds: [],
-                    principalRef: input.principalRef,
-                    sysUsuarioId: input.createdBySysUsuarioId,
-                });
-            }
+            await this.syncImagens({
+                prdProdutoId: produto.id,
+                novasImagens: input.novasImagens,
+                removerImagemIds: [],
+                imagemOrdemRefs:
+                input.imagemOrdemRefs,
+                sysUsuarioId:
+                input.createdBySysUsuarioId,
+            });
+
         } catch (error) {
             await prisma.prdProdutoComponente.deleteMany({
                 where: { prd_produto_id: produto.id },
@@ -830,10 +832,14 @@ class ProdutoService {
 
         await this.syncImagens({
             prdProdutoId: input.id,
-            novasImagens: input.novasImagens,
-            removerImagemIds: input.removerImagemIds,
-            principalRef: input.principalRef,
-            sysUsuarioId: input.updatedBySysUsuarioId,
+            novasImagens:
+            input.novasImagens,
+            removerImagemIds:
+            input.removerImagemIds,
+            imagemOrdemRefs:
+            input.imagemOrdemRefs,
+            sysUsuarioId:
+            input.updatedBySysUsuarioId,
         });
 
         return this.findById(input.id);
@@ -1179,152 +1185,440 @@ class ProdutoService {
         prdProdutoId: number;
         novasImagens: File[];
         removerImagemIds: number[];
-        principalRef?: string | null;
+        imagemOrdemRefs: string[];
         sysUsuarioId: number;
     }) {
-        const atuais = await prisma.prdProdutoImagem.findMany({
-            where: {
-                prd_produto_id: params.prdProdutoId,
-            },
-            select: {
-                id: true,
-                sys_arquivo_id: true,
-                principal: true,
-                ordem: true,
-            },
-            orderBy: [{ principal: "desc" }, { ordem: "asc" }],
-        });
+        const atuais =
+            await prisma.prdProdutoImagem.findMany({
+                where: {
+                    prd_produto_id:
+                    params.prdProdutoId,
+                },
+                select: {
+                    id: true,
+                    sys_arquivo_id: true,
+                    ordem: true,
+                    principal: true,
+                },
+                orderBy: {
+                    ordem: "asc",
+                },
+            });
 
-        const idsAtuais = new Set(atuais.map((imagem) => imagem.id));
-        const removerIds = params.removerImagemIds.filter((id) =>
-            idsAtuais.has(id),
+        const atuaisById = new Map(
+            atuais.map((imagem) => [
+                imagem.id,
+                imagem,
+            ]),
         );
 
+        const refs = params.imagemOrdemRefs;
+
+        /*
+         * A lista recebida representa exatamente
+         * o estado final das imagens.
+         *
+         * Exemplo:
+         * [
+         *   "existing:15",
+         *   "new:0",
+         *   "existing:9",
+         *   "new:1"
+         * ]
+         */
+        const refsUnicas = new Set(refs);
+
+        if (refsUnicas.size !== refs.length) {
+            throw new Error(
+                "A ordem das imagens contém itens repetidos.",
+            );
+        }
+
+        const existingIdsNaOrdem =
+            new Set<number>();
+
+        const newIndexesNaOrdem =
+            new Set<number>();
+
+        for (const ref of refs) {
+            if (
+                ref.startsWith(
+                    "existing:",
+                )
+            ) {
+                const id = Number(
+                    ref.replace(
+                        "existing:",
+                        "",
+                    ),
+                );
+
+                if (
+                    !Number.isInteger(id) ||
+                    id <= 0 ||
+                    !atuaisById.has(id)
+                ) {
+                    throw new Error(
+                        "Uma das imagens existentes é inválida.",
+                    );
+                }
+
+                existingIdsNaOrdem.add(id);
+                continue;
+            }
+
+            if (
+                ref.startsWith(
+                    "new:",
+                )
+            ) {
+                const index = Number(
+                    ref.replace(
+                        "new:",
+                        "",
+                    ),
+                );
+
+                if (
+                    !Number.isInteger(index) ||
+                    index < 0 ||
+                    index >=
+                    params.novasImagens.length
+                ) {
+                    throw new Error(
+                        "Uma das novas imagens é inválida.",
+                    );
+                }
+
+                newIndexesNaOrdem.add(index);
+                continue;
+            }
+
+            throw new Error(
+                "Referência de imagem inválida.",
+            );
+        }
+
+        /*
+         * Toda imagem nova enviada precisa aparecer
+         * exatamente uma vez na ordem final.
+         */
+        if (
+            newIndexesNaOrdem.size !==
+            params.novasImagens.length
+        ) {
+            throw new Error(
+                "A ordem das imagens novas está incompleta.",
+            );
+        }
+
+        /*
+         * Compatibilidade com remover_imagem_ids:
+         * um id marcado explicitamente para remoção
+         * nunca pode continuar na ordem final.
+         */
+        const removerExplicitamente =
+            new Set(
+                params.removerImagemIds.filter(
+                    (id) =>
+                        Number.isInteger(id) &&
+                        atuaisById.has(id),
+                ),
+            );
+
+        for (
+            const id of
+            removerExplicitamente
+            ) {
+            if (
+                existingIdsNaOrdem.has(id)
+            ) {
+                throw new Error(
+                    "Uma imagem marcada para remoção ainda aparece na ordem final.",
+                );
+            }
+        }
+
+        /*
+         * Qualquer imagem existente que não esteja
+         * na lista final deve ser removida.
+         *
+         * Isso também cobre o caso de editar/cropar
+         * uma imagem já salva: a antiga deixa de ser
+         * existing:X e entra no payload como new:Y.
+         */
+        const imagensRemover =
+            atuais.filter(
+                (imagem) =>
+                    removerExplicitamente.has(
+                        imagem.id,
+                    ) ||
+                    !existingIdsNaOrdem.has(
+                        imagem.id,
+                    ),
+            );
+
         const uploads: Array<{
+            index: number;
             arquivoId: number;
             relationId?: number;
         }> = [];
 
         try {
-            for (const file of params.novasImagens) {
-                const result = await arquivoService.uploadPublicImage({
+            /*
+             * Upload primeiro.
+             *
+             * A ordem de uploads corresponde aos
+             * índices new:0, new:1, ...
+             */
+            for (
+                const [
+                    index,
                     file,
-                    folder: `produtos/${params.prdProdutoId}`,
-                    filenamePrefix: "produto",
-                    tipoCodigo: "produto_imagem",
-                    createdBySysUsuarioId: params.sysUsuarioId,
-                });
+                ] of
+                params.novasImagens.entries()
+                ) {
+                const result =
+                    await arquivoService
+                        .uploadPublicImage({
+                            file,
+                            folder:
+                                `produtos/${params.prdProdutoId}`,
+                            filenamePrefix:
+                                "produto",
+                            tipoCodigo:
+                                "produto_imagem",
+                            createdBySysUsuarioId:
+                            params.sysUsuarioId,
+                        });
 
                 uploads.push({
-                    arquivoId: result.arquivo.id,
+                    index,
+                    arquivoId:
+                    result.arquivo.id,
                 });
             }
 
-            await prisma.$transaction(async (tx) => {
-                if (removerIds.length > 0) {
-                    await tx.prdProdutoImagem.deleteMany({
-                        where: {
-                            prd_produto_id: params.prdProdutoId,
-                            id: { in: removerIds },
-                        },
-                    });
-                }
+            await prisma.$transaction(
+                async (tx) => {
+                    if (
+                        imagensRemover.length >
+                        0
+                    ) {
+                        await tx
+                            .prdProdutoImagem
+                            .deleteMany({
+                                where: {
+                                    prd_produto_id:
+                                    params.prdProdutoId,
 
-                const restantes = atuais.filter(
-                    (imagem) => !removerIds.includes(imagem.id),
-                );
+                                    id: {
+                                        in: imagensRemover.map(
+                                            (
+                                                imagem,
+                                            ) =>
+                                                imagem.id,
+                                        ),
+                                    },
+                                },
+                            });
+                    }
 
-                for (const [index, upload] of uploads.entries()) {
-                    const created = await tx.prdProdutoImagem.create({
-                        data: {
-                            prd_produto_id: params.prdProdutoId,
-                            sys_arquivo_id: upload.arquivoId,
-                            ordem: restantes.length + index,
-                            principal: 0,
-                            created_at: new Date(),
-                            updated_at: new Date(),
-                        },
-                        select: { id: true },
-                    });
+                    /*
+                     * Cria relações das novas imagens.
+                     *
+                     * A ordem real ainda será aplicada
+                     * logo abaixo usando imagemOrdemRefs.
+                     */
+                    for (
+                        const upload of uploads
+                        ) {
+                        const created =
+                            await tx
+                                .prdProdutoImagem
+                                .create({
+                                    data: {
+                                        prd_produto_id:
+                                        params.prdProdutoId,
 
-                    upload.relationId = created.id;
-                }
+                                        sys_arquivo_id:
+                                        upload.arquivoId,
 
-                const todasIds = [
-                    ...restantes.map((imagem) => imagem.id),
-                    ...uploads
-                        .map((upload) => upload.relationId)
-                        .filter((id): id is number => Boolean(id)),
-                ];
+                                        ordem: 0,
+                                        principal: 0,
 
-                let principalId: number | null = null;
+                                        created_at:
+                                            new Date(),
 
-                if (params.principalRef?.startsWith("existing:")) {
-                    const id = Number(
-                        params.principalRef.replace("existing:", ""),
-                    );
-                    if (todasIds.includes(id)) principalId = id;
-                }
+                                        updated_at:
+                                            new Date(),
+                                    },
 
-                if (
-                    principalId === null &&
-                    params.principalRef?.startsWith("new:")
-                ) {
-                    const index = Number(
-                        params.principalRef.replace("new:", ""),
-                    );
-                    principalId = uploads[index]?.relationId ?? null;
-                }
+                                    select: {
+                                        id: true,
+                                    },
+                                });
 
-                if (principalId === null) {
-                    const principalAtual = restantes.find(
-                        (imagem) => Boolean(imagem.principal),
-                    );
-                    principalId =
-                        principalAtual?.id ??
-                        restantes[0]?.id ??
-                        uploads[0]?.relationId ??
-                        null;
-                }
+                        upload.relationId =
+                            created.id;
+                    }
 
-                if (todasIds.length > 0) {
-                    await tx.prdProdutoImagem.updateMany({
-                        where: {
-                            prd_produto_id: params.prdProdutoId,
-                        },
-                        data: {
-                            principal: 0,
-                            updated_at: new Date(),
-                        },
-                    });
+                    const uploadByIndex =
+                        new Map(
+                            uploads.map(
+                                (upload) => [
+                                    upload.index,
+                                    upload,
+                                ],
+                            ),
+                        );
 
-                    if (principalId) {
-                        await tx.prdProdutoImagem.update({
-                            where: { id: principalId },
+                    /*
+                     * Resolve:
+                     *
+                     * existing:15 -> relação 15
+                     * new:0       -> relação recém-criada
+                     */
+                    const orderedRelationIds:
+                        number[] = [];
+
+                    for (const ref of refs) {
+                        if (
+                            ref.startsWith(
+                                "existing:",
+                            )
+                        ) {
+                            orderedRelationIds.push(
+                                Number(
+                                    ref.replace(
+                                        "existing:",
+                                        "",
+                                    ),
+                                ),
+                            );
+
+                            continue;
+                        }
+
+                        const index = Number(
+                            ref.replace(
+                                "new:",
+                                "",
+                            ),
+                        );
+
+                        const relationId =
+                            uploadByIndex.get(
+                                index,
+                            )?.relationId;
+
+                        if (!relationId) {
+                            throw new Error(
+                                "Não foi possível relacionar uma nova imagem ao produto.",
+                            );
+                        }
+
+                        orderedRelationIds.push(
+                            relationId,
+                        );
+                    }
+
+                    /*
+                     * Segurança:
+                     * primeiro zera principal de todas.
+                     */
+                    await tx
+                        .prdProdutoImagem
+                        .updateMany({
+                            where: {
+                                prd_produto_id:
+                                params.prdProdutoId,
+                            },
                             data: {
-                                principal: 1,
-                                updated_at: new Date(),
+                                principal: 0,
+                                updated_at:
+                                    new Date(),
                             },
                         });
-                    }
-                }
-            });
 
-            const removidas = atuais.filter((imagem) =>
-                removerIds.includes(imagem.id),
+                    /*
+                     * A posição define tanto:
+                     *
+                     * ordem = 0, 1, 2...
+                     * principal = 1 somente na posição 0
+                     */
+                    for (
+                        const [
+                            ordem,
+                            relationId,
+                        ] of
+                        orderedRelationIds.entries()
+                        ) {
+                        await tx
+                            .prdProdutoImagem
+                            .update({
+                                where: {
+                                    id: relationId,
+                                },
+                                data: {
+                                    ordem,
+                                    principal:
+                                        ordem === 0
+                                            ? 1
+                                            : 0,
+
+                                    updated_at:
+                                        new Date(),
+                                },
+                            });
+                    }
+                },
             );
 
-            for (const imagem of removidas) {
-                await arquivoService.marcarComoRemovido({
-                    arquivoId: imagem.sys_arquivo_id,
-                });
+            /*
+             * O vínculo do produto já foi removido.
+             * Agora marcamos os SysArquivo antigos
+             * para a rotina de limpeza.
+             */
+            for (
+                const imagem of
+                imagensRemover
+                ) {
+                await arquivoService
+                    .marcarComoRemovido({
+                        arquivoId:
+                        imagem.sys_arquivo_id,
+                    });
             }
         } catch (error) {
-            for (const upload of uploads) {
-                await arquivoService.marcarComoRemovido({
-                    arquivoId: upload.arquivoId,
-                });
+            /*
+             * Se qualquer etapa posterior ao upload
+             * falhar, os uploads novos não devem
+             * ficar órfãos.
+             */
+            for (
+                const upload of uploads
+                ) {
+                try {
+                    await arquivoService
+                        .marcarComoRemovido({
+                            arquivoId:
+                            upload.arquivoId,
+                        });
+                } catch (
+                    rollbackError
+                    ) {
+                    console.error(
+                        "[produto.imagens.rollback]",
+                        {
+                            arquivoId:
+                            upload.arquivoId,
+                            rollbackError,
+                        },
+                    );
+                }
             }
+
             throw error;
         }
     }

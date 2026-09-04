@@ -1,16 +1,14 @@
 "use client";
 
 import {
-    ChangeEvent,
-    DragEvent,
     FormEvent,
     useMemo,
-    useRef,
     useState,
 } from "react";
+
+
 import {
     Eye,
-    ImagePlus,
     LayoutGrid,
     List,
     Package,
@@ -19,10 +17,7 @@ import {
     Power,
     PowerOff,
     ShoppingCart,
-    Star,
     Trash2,
-    Upload,
-    X,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/Badge";
@@ -38,6 +33,13 @@ import {
 } from "@/components/ui/Snackbar";
 import { Table } from "@/components/ui/Table";
 import { Textarea } from "@/components/ui/Textarea";
+import {
+    ImageManager,
+} from "@/components/media/ImageManager";
+
+import type {
+    ManagedImage,
+} from "@/components/media/media-types";
 
 type ProdutoTipo = {
     id: number;
@@ -205,11 +207,11 @@ type CampoForm = {
     ativo: boolean;
 };
 
-type NovaImagem = {
-    key: string;
-    file: File;
-    previewUrl: string;
-};
+// type NovaImagem = {
+//     key: string;
+//     file: File;
+//     previewUrl: string;
+// };
 
 const emptyForm: ProdutoFormState = {
     prd_produto_tipo_id: "",
@@ -414,7 +416,7 @@ function produtoCamposToForm(
 export default function AdminProdutosClient({
                                                 initialData,
                                             }: AdminProdutosClientProps) {
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
+    // const fileInputRef = useRef<HTMLInputElement | null>(null);
 
     const [data, setData] = useState(initialData);
     const [modalOpen, setModalOpen] = useState(false);
@@ -424,13 +426,21 @@ export default function AdminProdutosClient({
         useState<ProdutoFormState>(emptyForm);
     const [codigoManual, setCodigoManual] = useState(false);
 
-    const [novasImagens, setNovasImagens] =
-        useState<NovaImagem[]>([]);
+    // const [novasImagens, setNovasImagens] =
+    //     useState<NovaImagem[]>([]);
+
+    // const [imagemIdsRemover, setImagemIdsRemover] =
+    //     useState<number[]>([]);
+    // const [principalImageKey, setPrincipalImageKey] =
+    //     useState<string | null>(null);
+    // const [dragging, setDragging] = useState(false);
+
+    const [managedImages, setManagedImages] =
+        useState<ManagedImage[]>([]);
+
     const [imagemIdsRemover, setImagemIdsRemover] =
         useState<number[]>([]);
-    const [principalImageKey, setPrincipalImageKey] =
-        useState<string | null>(null);
-    const [dragging, setDragging] = useState(false);
+
 
     const [variacoes, setVariacoes] =
         useState<VariacaoForm[]>([]);
@@ -479,16 +489,16 @@ export default function AdminProdutosClient({
 
     const ehKit = componentes.length > 0;
 
-    const imagensExistentesVisiveis = useMemo(
-        () =>
-            (editingProduto?.imagens ?? []).filter(
-                (imagem) =>
-                    !imagemIdsRemover.includes(
-                        imagem.prd_produto_imagem_id,
-                    ),
-            ),
-        [editingProduto, imagemIdsRemover],
-    );
+    // const imagensExistentesVisiveis = useMemo(
+    //     () =>
+    //         (editingProduto?.imagens ?? []).filter(
+    //             (imagem) =>
+    //                 !imagemIdsRemover.includes(
+    //                     imagem.prd_produto_imagem_id,
+    //                 ),
+    //         ),
+    //     [editingProduto, imagemIdsRemover],
+    // );
 
     function updateForm<K extends keyof ProdutoFormState>(
         key: K,
@@ -500,22 +510,41 @@ export default function AdminProdutosClient({
         }));
     }
 
-    function limparNovasImagens() {
-        for (const imagem of novasImagens) {
-            URL.revokeObjectURL(imagem.previewUrl);
-        }
-
-        setNovasImagens([]);
-    }
+    // function limparNovasImagens() {
+    //     for (const imagem of novasImagens) {
+    //         URL.revokeObjectURL(imagem.previewUrl);
+    //     }
+    //
+    //     setNovasImagens([]);
+    // }
+    //
+    // function resetImagens() {
+    //     limparNovasImagens();
+    //     setImagemIdsRemover([]);
+    //     setPrincipalImageKey(null);
+    //
+    //     if (fileInputRef.current) {
+    //         fileInputRef.current.value = "";
+    //     }
+    // }
 
     function resetImagens() {
-        limparNovasImagens();
-        setImagemIdsRemover([]);
-        setPrincipalImageKey(null);
+        setManagedImages((current) => {
+            for (const image of current) {
+                if (
+                    image.source === "new" &&
+                    image.previewUrl
+                ) {
+                    URL.revokeObjectURL(
+                        image.previewUrl,
+                    );
+                }
+            }
 
-        if (fileInputRef.current) {
-            fileInputRef.current.value = "";
-        }
+            return [];
+        });
+
+        setImagemIdsRemover([]);
     }
 
     function abrirCriacao() {
@@ -549,15 +578,37 @@ export default function AdminProdutosClient({
         );
         setCodigoManual(true);
         setForm(produtoToForm(produto));
-        setPrincipalImageKey(
-            produto.imagem_principal
-                ? `existing:${produto.imagem_principal.prd_produto_imagem_id}`
-                : produto.imagens[0]
-                    ? `existing:${produto.imagens[0].prd_produto_imagem_id}`
-                    : null,
-        );
+        // setPrincipalImageKey(
+        //     produto.imagem_principal
+        //         ? `existing:${produto.imagem_principal.prd_produto_imagem_id}`
+        //         : produto.imagens[0]
+        //             ? `existing:${produto.imagens[0].prd_produto_imagem_id}`
+        //             : null,
+        // );
         setSnackbar(null);
         setModalOpen(true);
+
+        setManagedImages(
+            (produto.imagens ?? [])
+                .slice()
+                .sort(
+                    (a, b) =>
+                        a.ordem - b.ordem,
+                )
+                .map((imagem) => ({
+                    key:
+                        `existing:${imagem.prd_produto_imagem_id}`,
+                    source: "existing" as const,
+                    existingId:
+                    imagem.prd_produto_imagem_id,
+                    sysArquivoId:
+                    imagem.sys_arquivo_id,
+                    previewUrl:
+                        imagem.public_url ?? "",
+                    originalName:
+                        `produto-${imagem.prd_produto_imagem_id}`,
+                })),
+        );
     }
 
     function fecharModal() {
@@ -594,126 +645,151 @@ export default function AdminProdutosClient({
         );
     }
 
-    function selecionarImagens(files: File[]) {
-        const validas: NovaImagem[] = [];
+    // function selecionarImagens(files: File[]) {
+    //     const validas: NovaImagem[] = [];
+    //
+    //     for (const file of files) {
+    //         if (!file.type.startsWith("image/")) {
+    //             setSnackbar({
+    //                 color: "danger",
+    //                 title: "Imagem inválida",
+    //                 message: `${file.name} não é uma imagem válida.`,
+    //             });
+    //             continue;
+    //         }
+    //
+    //         if (file.size > 5 * 1024 * 1024) {
+    //             setSnackbar({
+    //                 color: "warning",
+    //                 title: "Arquivo muito grande",
+    //                 message: `${file.name} ultrapassa o limite de 5MB.`,
+    //             });
+    //             continue;
+    //         }
+    //
+    //         validas.push({
+    //             key: createClientKey("imagem"),
+    //             file,
+    //             previewUrl: URL.createObjectURL(file),
+    //         });
+    //     }
+    //
+    //     if (validas.length === 0) return;
+    //
+    //     setNovasImagens((current) => {
+    //         const next = [...current, ...validas];
+    //
+    //         if (!principalImageKey && next[0]) {
+    //             setPrincipalImageKey(`new:${next[0].key}`);
+    //         }
+    //
+    //         return next;
+    //     });
+    // }
+    //
+    // function handleFileChange(
+    //     event: ChangeEvent<HTMLInputElement>,
+    // ) {
+    //     selecionarImagens(
+    //         Array.from(event.target.files ?? []),
+    //     );
+    //     event.target.value = "";
+    // }
+    //
+    // function handleDrop(event: DragEvent<HTMLDivElement>) {
+    //     event.preventDefault();
+    //     setDragging(false);
+    //
+    //     selecionarImagens(
+    //         Array.from(event.dataTransfer.files ?? []),
+    //     );
+    // }
+    //
+    // function definirPrincipal(key: string) {
+    //     setPrincipalImageKey(key);
+    // }
+    //
+    // function removerImagemExistente(imagem: ProdutoImagem) {
+    //     const key =
+    //         `existing:${imagem.prd_produto_imagem_id}`;
+    //
+    //     setImagemIdsRemover((current) => [
+    //         ...current,
+    //         imagem.prd_produto_imagem_id,
+    //     ]);
+    //
+    //     if (principalImageKey === key) {
+    //         const outraExistente =
+    //             imagensExistentesVisiveis.find(
+    //                 (item) =>
+    //                     item.prd_produto_imagem_id !==
+    //                     imagem.prd_produto_imagem_id,
+    //             );
+    //
+    //         if (outraExistente) {
+    //             setPrincipalImageKey(
+    //                 `existing:${outraExistente.prd_produto_imagem_id}`,
+    //             );
+    //         } else if (novasImagens[0]) {
+    //             setPrincipalImageKey(
+    //                 `new:${novasImagens[0].key}`,
+    //             );
+    //         } else {
+    //             setPrincipalImageKey(null);
+    //         }
+    //     }
+    // }
+    //
+    // function removerNovaImagem(imagem: NovaImagem) {
+    //     URL.revokeObjectURL(imagem.previewUrl);
+    //
+    //     const restantes = novasImagens.filter(
+    //         (item) => item.key !== imagem.key,
+    //     );
+    //
+    //     setNovasImagens(restantes);
+    //
+    //     if (principalImageKey === `new:${imagem.key}`) {
+    //         const existente = imagensExistentesVisiveis[0];
+    //
+    //         if (existente) {
+    //             setPrincipalImageKey(
+    //                 `existing:${existente.prd_produto_imagem_id}`,
+    //             );
+    //         } else if (restantes[0]) {
+    //             setPrincipalImageKey(
+    //                 `new:${restantes[0].key}`,
+    //             );
+    //         } else {
+    //             setPrincipalImageKey(null);
+    //         }
+    //     }
+    // }
 
-        for (const file of files) {
-            if (!file.type.startsWith("image/")) {
-                setSnackbar({
-                    color: "danger",
-                    title: "Imagem inválida",
-                    message: `${file.name} não é uma imagem válida.`,
-                });
-                continue;
-            }
-
-            if (file.size > 5 * 1024 * 1024) {
-                setSnackbar({
-                    color: "warning",
-                    title: "Arquivo muito grande",
-                    message: `${file.name} ultrapassa o limite de 5MB.`,
-                });
-                continue;
-            }
-
-            validas.push({
-                key: createClientKey("imagem"),
-                file,
-                previewUrl: URL.createObjectURL(file),
-            });
+    function handleRemoveExistingImage(
+        image: ManagedImage,
+    ) {
+        if (!image.existingId) {
+            return;
         }
 
-        if (validas.length === 0) return;
-
-        setNovasImagens((current) => {
-            const next = [...current, ...validas];
-
-            if (!principalImageKey && next[0]) {
-                setPrincipalImageKey(`new:${next[0].key}`);
+        setImagemIdsRemover((current) => {
+            if (
+                current.includes(
+                    image.existingId!,
+                )
+            ) {
+                return current;
             }
 
-            return next;
+            return [
+                ...current,
+                image.existingId!,
+            ];
         });
     }
 
-    function handleFileChange(
-        event: ChangeEvent<HTMLInputElement>,
-    ) {
-        selecionarImagens(
-            Array.from(event.target.files ?? []),
-        );
-        event.target.value = "";
-    }
-
-    function handleDrop(event: DragEvent<HTMLDivElement>) {
-        event.preventDefault();
-        setDragging(false);
-
-        selecionarImagens(
-            Array.from(event.dataTransfer.files ?? []),
-        );
-    }
-
-    function definirPrincipal(key: string) {
-        setPrincipalImageKey(key);
-    }
-
-    function removerImagemExistente(imagem: ProdutoImagem) {
-        const key =
-            `existing:${imagem.prd_produto_imagem_id}`;
-
-        setImagemIdsRemover((current) => [
-            ...current,
-            imagem.prd_produto_imagem_id,
-        ]);
-
-        if (principalImageKey === key) {
-            const outraExistente =
-                imagensExistentesVisiveis.find(
-                    (item) =>
-                        item.prd_produto_imagem_id !==
-                        imagem.prd_produto_imagem_id,
-                );
-
-            if (outraExistente) {
-                setPrincipalImageKey(
-                    `existing:${outraExistente.prd_produto_imagem_id}`,
-                );
-            } else if (novasImagens[0]) {
-                setPrincipalImageKey(
-                    `new:${novasImagens[0].key}`,
-                );
-            } else {
-                setPrincipalImageKey(null);
-            }
-        }
-    }
-
-    function removerNovaImagem(imagem: NovaImagem) {
-        URL.revokeObjectURL(imagem.previewUrl);
-
-        const restantes = novasImagens.filter(
-            (item) => item.key !== imagem.key,
-        );
-
-        setNovasImagens(restantes);
-
-        if (principalImageKey === `new:${imagem.key}`) {
-            const existente = imagensExistentesVisiveis[0];
-
-            if (existente) {
-                setPrincipalImageKey(
-                    `existing:${existente.prd_produto_imagem_id}`,
-                );
-            } else if (restantes[0]) {
-                setPrincipalImageKey(
-                    `new:${restantes[0].key}`,
-                );
-            } else {
-                setPrincipalImageKey(null);
-            }
-        }
-    }
+    //===========
 
     function adicionarVariacao() {
         setVariacoes((current) => [
@@ -840,20 +916,20 @@ export default function AdminProdutosClient({
         );
     }
 
-    function buildPrincipalRef() {
-        if (!principalImageKey) return "";
-
-        if (principalImageKey.startsWith("existing:")) {
-            return principalImageKey;
-        }
-
-        const key = principalImageKey.replace("new:", "");
-        const index = novasImagens.findIndex(
-            (imagem) => imagem.key === key,
-        );
-
-        return index >= 0 ? `new:${index}` : "";
-    }
+    // function buildPrincipalRef() {
+    //     if (!principalImageKey) return "";
+    //
+    //     if (principalImageKey.startsWith("existing:")) {
+    //         return principalImageKey;
+    //     }
+    //
+    //     const key = principalImageKey.replace("new:", "");
+    //     const index = novasImagens.findIndex(
+    //         (imagem) => imagem.key === key,
+    //     );
+    //
+    //     return index >= 0 ? `new:${index}` : "";
+    // }
 
     function buildFormData() {
         const payload = new FormData();
@@ -979,13 +1055,68 @@ export default function AdminProdutosClient({
             "remover_imagem_ids",
             JSON.stringify(imagemIdsRemover),
         );
-        payload.set(
-            "imagem_principal_ref",
-            buildPrincipalRef(),
+        const newImages =
+            managedImages.filter(
+                (image) =>
+                    image.source === "new" &&
+                    image.file,
+            );
+
+        const newImageIndexByKey =
+            new Map<string, number>();
+
+        newImages.forEach(
+            (image, index) => {
+                newImageIndexByKey.set(
+                    image.key,
+                    index,
+                );
+            },
         );
 
-        for (const imagem of novasImagens) {
-            payload.append("imagens", imagem.file);
+        const imageOrderRefs =
+            managedImages
+                .map((image) => {
+                    if (
+                        image.source ===
+                        "existing"
+                    ) {
+                        return image.existingId
+                            ? `existing:${image.existingId}`
+                            : null;
+                    }
+
+                    const index =
+                        newImageIndexByKey.get(
+                            image.key,
+                        );
+
+                    return index === undefined
+                        ? null
+                        : `new:${index}`;
+                })
+                .filter(
+                    (value): value is string =>
+                        Boolean(value),
+                );
+
+        payload.set(
+            "imagem_ordem_refs",
+            JSON.stringify(
+                imageOrderRefs,
+            ),
+        );
+
+        payload.set(
+            "imagem_principal_ref",
+            imageOrderRefs[0] ?? "",
+        );
+
+        for (const imagem of newImages) {
+            payload.append(
+                "imagens",
+                imagem.file!,
+            );
         }
 
         return payload;
@@ -1921,239 +2052,31 @@ export default function AdminProdutosClient({
                                 <h3 className="bp-product-section-title">
                                     Imagens do produto
                                 </h3>
+
                                 <span className="bp-field-help">
-                                    A imagem marcada como principal
-                                    será usada nas listagens.
-                                </span>
+                Arraste as imagens para definir a ordem
+                de exibição. A primeira será usada como
+                principal.
+            </span>
                             </div>
-                            <ImagePlus size={20} />
                         </div>
 
-                        <input
-                            ref={fileInputRef}
-                            type="file"
-                            accept="image/*"
-                            multiple
-                            onChange={handleFileChange}
-                            hidden
+                        <ImageManager
+                            images={managedImages}
+                            onChange={setManagedImages}
+                            onRemoveExisting={
+                                handleRemoveExistingImage
+                            }
+                            aspect={1}
+                            maxImages={10}
+                            maxSizeBytes={
+                                10 * 1024 * 1024
+                            }
+                            showGrid
+                            firstIsPrimary
+                            label="Imagens"
+                            helperText="Clique no lápis para ajustar o enquadramento e o zoom."
                         />
-
-                        <div
-                            role="button"
-                            tabIndex={0}
-                            className={`bp-product-dropzone ${
-                                dragging
-                                    ? "is-dragging"
-                                    : ""
-                            }`}
-                            onClick={() =>
-                                fileInputRef.current?.click()
-                            }
-                            onKeyDown={(event) => {
-                                if (
-                                    event.key === "Enter" ||
-                                    event.key === " "
-                                ) {
-                                    event.preventDefault();
-                                    fileInputRef.current?.click();
-                                }
-                            }}
-                            onDragEnter={(event) => {
-                                event.preventDefault();
-                                setDragging(true);
-                            }}
-                            onDragOver={(event) => {
-                                event.preventDefault();
-                                setDragging(true);
-                            }}
-                            onDragLeave={() =>
-                                setDragging(false)
-                            }
-                            onDrop={handleDrop}
-                        >
-                            <div className="bp-product-dropzone-content">
-                                <Upload size={26} />
-                                <strong>
-                                    Arraste imagens aqui ou clique
-                                    para selecionar
-                                </strong>
-                                <span>
-                                    Você pode selecionar várias
-                                    imagens. Máximo de 5MB por
-                                    arquivo.
-                                </span>
-                            </div>
-                        </div>
-
-                        {(imagensExistentesVisiveis.length >
-                            0 ||
-                            novasImagens.length > 0) && (
-                            <div className="bp-product-image-grid">
-                                {imagensExistentesVisiveis.map(
-                                    (imagem) => {
-                                        const key =
-                                            `existing:${imagem.prd_produto_imagem_id}`;
-                                        const principal =
-                                            principalImageKey ===
-                                            key;
-
-                                        return (
-                                            <div
-                                                key={key}
-                                                className={`bp-product-image-card ${
-                                                    principal
-                                                        ? "is-principal"
-                                                        : ""
-                                                }`}
-                                            >
-                                                {imagem.public_url ? (
-                                                    // eslint-disable-next-line @next/next/no-img-element
-                                                    <img
-                                                        src={
-                                                            imagem.public_url
-                                                        }
-                                                        alt=""
-                                                    />
-                                                ) : (
-                                                    <div
-                                                        style={{
-                                                            minHeight:
-                                                                128,
-                                                            display:
-                                                                "grid",
-                                                            placeItems:
-                                                                "center",
-                                                        }}
-                                                    >
-                                                        <Package
-                                                            size={
-                                                                24
-                                                            }
-                                                        />
-                                                    </div>
-                                                )}
-
-                                                <div className="bp-product-image-actions">
-                                                    <button
-                                                        type="button"
-                                                        className={`bp-product-image-chip ${
-                                                            principal
-                                                                ? "is-active"
-                                                                : ""
-                                                        }`}
-                                                        onClick={() =>
-                                                            definirPrincipal(
-                                                                key,
-                                                            )
-                                                        }
-                                                    >
-                                                        <Star
-                                                            size={
-                                                                12
-                                                            }
-                                                        />{" "}
-                                                        {principal
-                                                            ? "Principal"
-                                                            : "Definir"}
-                                                    </button>
-
-                                                    <button
-                                                        type="button"
-                                                        className="bp-product-image-remove"
-                                                        onClick={() =>
-                                                            removerImagemExistente(
-                                                                imagem,
-                                                            )
-                                                        }
-                                                        aria-label="Remover imagem"
-                                                    >
-                                                        <X
-                                                            size={
-                                                                14
-                                                            }
-                                                        />
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        );
-                                    },
-                                )}
-
-                                {novasImagens.map(
-                                    (imagem) => {
-                                        const key =
-                                            `new:${imagem.key}`;
-                                        const principal =
-                                            principalImageKey ===
-                                            key;
-
-                                        return (
-                                            <div
-                                                key={imagem.key}
-                                                className={`bp-product-image-card ${
-                                                    principal
-                                                        ? "is-principal"
-                                                        : ""
-                                                }`}
-                                            >
-                                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                                <img
-                                                    src={
-                                                        imagem.previewUrl
-                                                    }
-                                                    alt={
-                                                        imagem.file
-                                                            .name
-                                                    }
-                                                />
-
-                                                <div className="bp-product-image-actions">
-                                                    <button
-                                                        type="button"
-                                                        className={`bp-product-image-chip ${
-                                                            principal
-                                                                ? "is-active"
-                                                                : ""
-                                                        }`}
-                                                        onClick={() =>
-                                                            definirPrincipal(
-                                                                key,
-                                                            )
-                                                        }
-                                                    >
-                                                        <Star
-                                                            size={
-                                                                12
-                                                            }
-                                                        />{" "}
-                                                        {principal
-                                                            ? "Principal"
-                                                            : "Definir"}
-                                                    </button>
-
-                                                    <button
-                                                        type="button"
-                                                        className="bp-product-image-remove"
-                                                        onClick={() =>
-                                                            removerNovaImagem(
-                                                                imagem,
-                                                            )
-                                                        }
-                                                        aria-label="Remover imagem"
-                                                    >
-                                                        <X
-                                                            size={
-                                                                14
-                                                            }
-                                                        />
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        );
-                                    },
-                                )}
-                            </div>
-                        )}
                     </section>
 
                     <section className="bp-product-section">
