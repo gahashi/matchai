@@ -32,6 +32,8 @@ type ValidatedItem = {
         preco_socio: number | null;
         preco_aplicado: number;
         socio_aplicado: boolean;
+        compra_unica_por_usuario:boolean;
+        somente_socio:boolean;
     }
         | null;
     variacao?: {
@@ -49,6 +51,14 @@ function money(value: number) {
         style: "currency",
         currency: "BRL",
     }).format(value);
+}
+
+function productPrice(
+    value: number,
+) {
+    return value === 0
+        ? "Grátis"
+        : money(value);
 }
 
 export function CartPageClient() {
@@ -230,6 +240,11 @@ export function CartPageClient() {
                         const available = authoritative
                             ? authoritative.disponivel
                             : true;
+                        const compraUnica =
+                            Boolean(
+                                produto
+                                    ?.compra_unica_por_usuario,
+                            );
                         const imageUrl =
                             produto?.imagem_principal?.public_url ?? item.imagemUrl;
 
@@ -340,11 +355,23 @@ export function CartPageClient() {
                                             Preço de sócio aplicado
                                         </span>
                                     ) : null}
+                                    {produto
+                                        ?.compra_unica_por_usuario ? (
+                                        <span className="bp-public-cart-member">
+        Limitado a 1 por conta
+    </span>
+                                    ) : null}
+
+                                    {produto?.somente_socio ? (
+                                        <span className="bp-public-cart-member">
+        Exclusivo para sócios
+    </span>
+                                    ) : null}
                                 </div>
 
                                 <div className="bp-public-cart-item-side">
                                     <strong>
-                                        {money(
+                                        {productPrice(
                                             authoritative?.preco_unitario ??
                                             item.precoVisual,
                                         )}
@@ -353,6 +380,9 @@ export function CartPageClient() {
                                     <div className="bp-public-quantity">
                                         <button
                                             type="button"
+                                            disabled={
+                                                compraUnica
+                                            }
                                             onClick={() =>
                                                 setQuantity(
                                                     item.lineKey,
@@ -366,6 +396,9 @@ export function CartPageClient() {
                                         <span>{item.quantidade}</span>
                                         <button
                                             type="button"
+                                            disabled={
+                                                compraUnica
+                                            }
                                             onClick={() =>
                                                 setQuantity(
                                                     item.lineKey,

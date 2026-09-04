@@ -174,6 +174,10 @@ export async function POST(
                 {
                     isSocio:
                     socio.isSocio,
+
+                    sysUsuarioId:
+                        session?.user.id ??
+                        null,
                 },
             );
 

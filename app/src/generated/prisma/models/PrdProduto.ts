@@ -34,6 +34,8 @@ export type PrdProdutoAvgAggregateOutputType = {
   preco_socio: runtime.Decimal | null
   controla_estoque: number | null
   estoque_atual: number | null
+  compra_unica_por_usuario: number | null
+  somente_socio: number | null
   ativo: number | null
   destaque: number | null
   visivel_publico: number | null
@@ -48,6 +50,8 @@ export type PrdProdutoSumAggregateOutputType = {
   preco_socio: runtime.Decimal | null
   controla_estoque: number | null
   estoque_atual: number | null
+  compra_unica_por_usuario: number | null
+  somente_socio: number | null
   ativo: number | null
   destaque: number | null
   visivel_publico: number | null
@@ -67,6 +71,8 @@ export type PrdProdutoMinAggregateOutputType = {
   modalidade_venda: string | null
   controla_estoque: number | null
   estoque_atual: number | null
+  compra_unica_por_usuario: number | null
+  somente_socio: number | null
   ativo: number | null
   destaque: number | null
   visivel_publico: number | null
@@ -92,6 +98,8 @@ export type PrdProdutoMaxAggregateOutputType = {
   modalidade_venda: string | null
   controla_estoque: number | null
   estoque_atual: number | null
+  compra_unica_por_usuario: number | null
+  somente_socio: number | null
   ativo: number | null
   destaque: number | null
   visivel_publico: number | null
@@ -117,6 +125,8 @@ export type PrdProdutoCountAggregateOutputType = {
   modalidade_venda: number
   controla_estoque: number
   estoque_atual: number
+  compra_unica_por_usuario: number
+  somente_socio: number
   ativo: number
   destaque: number
   visivel_publico: number
@@ -139,6 +149,8 @@ export type PrdProdutoAvgAggregateInputType = {
   preco_socio?: true
   controla_estoque?: true
   estoque_atual?: true
+  compra_unica_por_usuario?: true
+  somente_socio?: true
   ativo?: true
   destaque?: true
   visivel_publico?: true
@@ -153,6 +165,8 @@ export type PrdProdutoSumAggregateInputType = {
   preco_socio?: true
   controla_estoque?: true
   estoque_atual?: true
+  compra_unica_por_usuario?: true
+  somente_socio?: true
   ativo?: true
   destaque?: true
   visivel_publico?: true
@@ -172,6 +186,8 @@ export type PrdProdutoMinAggregateInputType = {
   modalidade_venda?: true
   controla_estoque?: true
   estoque_atual?: true
+  compra_unica_por_usuario?: true
+  somente_socio?: true
   ativo?: true
   destaque?: true
   visivel_publico?: true
@@ -197,6 +213,8 @@ export type PrdProdutoMaxAggregateInputType = {
   modalidade_venda?: true
   controla_estoque?: true
   estoque_atual?: true
+  compra_unica_por_usuario?: true
+  somente_socio?: true
   ativo?: true
   destaque?: true
   visivel_publico?: true
@@ -222,6 +240,8 @@ export type PrdProdutoCountAggregateInputType = {
   modalidade_venda?: true
   controla_estoque?: true
   estoque_atual?: true
+  compra_unica_por_usuario?: true
+  somente_socio?: true
   ativo?: true
   destaque?: true
   visivel_publico?: true
@@ -334,6 +354,8 @@ export type PrdProdutoGroupByOutputType = {
   modalidade_venda: string
   controla_estoque: number
   estoque_atual: number | null
+  compra_unica_por_usuario: number
+  somente_socio: number
   ativo: number
   destaque: number
   visivel_publico: number
@@ -382,6 +404,8 @@ export type PrdProdutoWhereInput = {
   modalidade_venda?: Prisma.StringFilter<"PrdProduto"> | string
   controla_estoque?: Prisma.IntFilter<"PrdProduto"> | number
   estoque_atual?: Prisma.IntNullableFilter<"PrdProduto"> | number | null
+  compra_unica_por_usuario?: Prisma.IntFilter<"PrdProduto"> | number
+  somente_socio?: Prisma.IntFilter<"PrdProduto"> | number
   ativo?: Prisma.IntFilter<"PrdProduto"> | number
   destaque?: Prisma.IntFilter<"PrdProduto"> | number
   visivel_publico?: Prisma.IntFilter<"PrdProduto"> | number
@@ -418,6 +442,8 @@ export type PrdProdutoOrderByWithRelationInput = {
   modalidade_venda?: Prisma.SortOrder
   controla_estoque?: Prisma.SortOrder
   estoque_atual?: Prisma.SortOrderInput | Prisma.SortOrder
+  compra_unica_por_usuario?: Prisma.SortOrder
+  somente_socio?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   destaque?: Prisma.SortOrder
   visivel_publico?: Prisma.SortOrder
@@ -458,6 +484,8 @@ export type PrdProdutoWhereUniqueInput = Prisma.AtLeast<{
   modalidade_venda?: Prisma.StringFilter<"PrdProduto"> | string
   controla_estoque?: Prisma.IntFilter<"PrdProduto"> | number
   estoque_atual?: Prisma.IntNullableFilter<"PrdProduto"> | number | null
+  compra_unica_por_usuario?: Prisma.IntFilter<"PrdProduto"> | number
+  somente_socio?: Prisma.IntFilter<"PrdProduto"> | number
   ativo?: Prisma.IntFilter<"PrdProduto"> | number
   destaque?: Prisma.IntFilter<"PrdProduto"> | number
   visivel_publico?: Prisma.IntFilter<"PrdProduto"> | number
@@ -494,6 +522,8 @@ export type PrdProdutoOrderByWithAggregationInput = {
   modalidade_venda?: Prisma.SortOrder
   controla_estoque?: Prisma.SortOrder
   estoque_atual?: Prisma.SortOrderInput | Prisma.SortOrder
+  compra_unica_por_usuario?: Prisma.SortOrder
+  somente_socio?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   destaque?: Prisma.SortOrder
   visivel_publico?: Prisma.SortOrder
@@ -527,6 +557,8 @@ export type PrdProdutoScalarWhereWithAggregatesInput = {
   modalidade_venda?: Prisma.StringWithAggregatesFilter<"PrdProduto"> | string
   controla_estoque?: Prisma.IntWithAggregatesFilter<"PrdProduto"> | number
   estoque_atual?: Prisma.IntNullableWithAggregatesFilter<"PrdProduto"> | number | null
+  compra_unica_por_usuario?: Prisma.IntWithAggregatesFilter<"PrdProduto"> | number
+  somente_socio?: Prisma.IntWithAggregatesFilter<"PrdProduto"> | number
   ativo?: Prisma.IntWithAggregatesFilter<"PrdProduto"> | number
   destaque?: Prisma.IntWithAggregatesFilter<"PrdProduto"> | number
   visivel_publico?: Prisma.IntWithAggregatesFilter<"PrdProduto"> | number
@@ -550,6 +582,8 @@ export type PrdProdutoCreateInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -586,6 +620,8 @@ export type PrdProdutoUncheckedCreateInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -619,6 +655,8 @@ export type PrdProdutoUpdateInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -655,6 +693,8 @@ export type PrdProdutoUncheckedUpdateInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -690,6 +730,8 @@ export type PrdProdutoCreateManyInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -713,6 +755,8 @@ export type PrdProdutoUpdateManyMutationInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -738,6 +782,8 @@ export type PrdProdutoUncheckedUpdateManyInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -779,6 +825,8 @@ export type PrdProdutoCountOrderByAggregateInput = {
   modalidade_venda?: Prisma.SortOrder
   controla_estoque?: Prisma.SortOrder
   estoque_atual?: Prisma.SortOrder
+  compra_unica_por_usuario?: Prisma.SortOrder
+  somente_socio?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   destaque?: Prisma.SortOrder
   visivel_publico?: Prisma.SortOrder
@@ -799,6 +847,8 @@ export type PrdProdutoAvgOrderByAggregateInput = {
   preco_socio?: Prisma.SortOrder
   controla_estoque?: Prisma.SortOrder
   estoque_atual?: Prisma.SortOrder
+  compra_unica_por_usuario?: Prisma.SortOrder
+  somente_socio?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   destaque?: Prisma.SortOrder
   visivel_publico?: Prisma.SortOrder
@@ -818,6 +868,8 @@ export type PrdProdutoMaxOrderByAggregateInput = {
   modalidade_venda?: Prisma.SortOrder
   controla_estoque?: Prisma.SortOrder
   estoque_atual?: Prisma.SortOrder
+  compra_unica_por_usuario?: Prisma.SortOrder
+  somente_socio?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   destaque?: Prisma.SortOrder
   visivel_publico?: Prisma.SortOrder
@@ -843,6 +895,8 @@ export type PrdProdutoMinOrderByAggregateInput = {
   modalidade_venda?: Prisma.SortOrder
   controla_estoque?: Prisma.SortOrder
   estoque_atual?: Prisma.SortOrder
+  compra_unica_por_usuario?: Prisma.SortOrder
+  somente_socio?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   destaque?: Prisma.SortOrder
   visivel_publico?: Prisma.SortOrder
@@ -863,6 +917,8 @@ export type PrdProdutoSumOrderByAggregateInput = {
   preco_socio?: Prisma.SortOrder
   controla_estoque?: Prisma.SortOrder
   estoque_atual?: Prisma.SortOrder
+  compra_unica_por_usuario?: Prisma.SortOrder
+  somente_socio?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   destaque?: Prisma.SortOrder
   visivel_publico?: Prisma.SortOrder
@@ -1078,6 +1134,8 @@ export type PrdProdutoCreateWithoutPrd_produto_tipoInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -1112,6 +1170,8 @@ export type PrdProdutoUncheckedCreateWithoutPrd_produto_tipoInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -1176,6 +1236,8 @@ export type PrdProdutoScalarWhereInput = {
   modalidade_venda?: Prisma.StringFilter<"PrdProduto"> | string
   controla_estoque?: Prisma.IntFilter<"PrdProduto"> | number
   estoque_atual?: Prisma.IntNullableFilter<"PrdProduto"> | number | null
+  compra_unica_por_usuario?: Prisma.IntFilter<"PrdProduto"> | number
+  somente_socio?: Prisma.IntFilter<"PrdProduto"> | number
   ativo?: Prisma.IntFilter<"PrdProduto"> | number
   destaque?: Prisma.IntFilter<"PrdProduto"> | number
   visivel_publico?: Prisma.IntFilter<"PrdProduto"> | number
@@ -1199,6 +1261,8 @@ export type PrdProdutoCreateWithoutPrd_produto_imagensInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -1234,6 +1298,8 @@ export type PrdProdutoUncheckedCreateWithoutPrd_produto_imagensInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -1282,6 +1348,8 @@ export type PrdProdutoUpdateWithoutPrd_produto_imagensInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1317,6 +1385,8 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_produto_imagensInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1349,6 +1419,8 @@ export type PrdProdutoCreateWithoutPrd_produto_variacoesInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -1384,6 +1456,8 @@ export type PrdProdutoUncheckedCreateWithoutPrd_produto_variacoesInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -1432,6 +1506,8 @@ export type PrdProdutoUpdateWithoutPrd_produto_variacoesInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1467,6 +1543,8 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_produto_variacoesInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1499,6 +1577,8 @@ export type PrdProdutoCreateWithoutPrd_produto_componentesInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -1534,6 +1614,8 @@ export type PrdProdutoUncheckedCreateWithoutPrd_produto_componentesInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -1571,6 +1653,8 @@ export type PrdProdutoCreateWithoutPrd_componente_de_kitsInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -1606,6 +1690,8 @@ export type PrdProdutoUncheckedCreateWithoutPrd_componente_de_kitsInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -1654,6 +1740,8 @@ export type PrdProdutoUpdateWithoutPrd_produto_componentesInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1689,6 +1777,8 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_produto_componentesInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1732,6 +1822,8 @@ export type PrdProdutoUpdateWithoutPrd_componente_de_kitsInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1767,6 +1859,8 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_componente_de_kitsInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1799,6 +1893,8 @@ export type PrdProdutoCreateWithoutPrd_produto_camposInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -1834,6 +1930,8 @@ export type PrdProdutoUncheckedCreateWithoutPrd_produto_camposInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -1882,6 +1980,8 @@ export type PrdProdutoUpdateWithoutPrd_produto_camposInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1917,6 +2017,8 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_produto_camposInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1949,6 +2051,8 @@ export type PrdProdutoCreateWithoutVnd_campanha_produtosInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -1984,6 +2088,8 @@ export type PrdProdutoUncheckedCreateWithoutVnd_campanha_produtosInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -2032,6 +2138,8 @@ export type PrdProdutoUpdateWithoutVnd_campanha_produtosInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2067,6 +2175,8 @@ export type PrdProdutoUncheckedUpdateWithoutVnd_campanha_produtosInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2099,6 +2209,8 @@ export type PrdProdutoCreateWithoutSoc_planosInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -2134,6 +2246,8 @@ export type PrdProdutoUncheckedCreateWithoutSoc_planosInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -2182,6 +2296,8 @@ export type PrdProdutoUpdateWithoutSoc_planosInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2217,6 +2333,8 @@ export type PrdProdutoUncheckedUpdateWithoutSoc_planosInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2249,6 +2367,8 @@ export type PrdProdutoCreateWithoutVnd_pedido_itensInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -2284,6 +2404,8 @@ export type PrdProdutoUncheckedCreateWithoutVnd_pedido_itensInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -2332,6 +2454,8 @@ export type PrdProdutoUpdateWithoutVnd_pedido_itensInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2367,6 +2491,8 @@ export type PrdProdutoUncheckedUpdateWithoutVnd_pedido_itensInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2399,6 +2525,8 @@ export type PrdProdutoCreateWithoutVnd_pedido_item_componentesInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -2434,6 +2562,8 @@ export type PrdProdutoUncheckedCreateWithoutVnd_pedido_item_componentesInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -2482,6 +2612,8 @@ export type PrdProdutoUpdateWithoutVnd_pedido_item_componentesInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2517,6 +2649,8 @@ export type PrdProdutoUncheckedUpdateWithoutVnd_pedido_item_componentesInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2549,6 +2683,8 @@ export type PrdProdutoCreateWithoutVnd_estoque_reservasInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -2584,6 +2720,8 @@ export type PrdProdutoUncheckedCreateWithoutVnd_estoque_reservasInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -2632,6 +2770,8 @@ export type PrdProdutoUpdateWithoutVnd_estoque_reservasInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2667,6 +2807,8 @@ export type PrdProdutoUncheckedUpdateWithoutVnd_estoque_reservasInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2700,6 +2842,8 @@ export type PrdProdutoCreateManyPrd_produto_tipoInput = {
   modalidade_venda?: string
   controla_estoque?: number
   estoque_atual?: number | null
+  compra_unica_por_usuario?: number
+  somente_socio?: number
   ativo?: number
   destaque?: number
   visivel_publico?: number
@@ -2723,6 +2867,8 @@ export type PrdProdutoUpdateWithoutPrd_produto_tipoInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2757,6 +2903,8 @@ export type PrdProdutoUncheckedUpdateWithoutPrd_produto_tipoInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2791,6 +2939,8 @@ export type PrdProdutoUncheckedUpdateManyWithoutPrd_produto_tipoInput = {
   modalidade_venda?: Prisma.StringFieldUpdateOperationsInput | string
   controla_estoque?: Prisma.IntFieldUpdateOperationsInput | number
   estoque_atual?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  compra_unica_por_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  somente_socio?: Prisma.IntFieldUpdateOperationsInput | number
   ativo?: Prisma.IntFieldUpdateOperationsInput | number
   destaque?: Prisma.IntFieldUpdateOperationsInput | number
   visivel_publico?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2928,6 +3078,8 @@ export type PrdProdutoSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   modalidade_venda?: boolean
   controla_estoque?: boolean
   estoque_atual?: boolean
+  compra_unica_por_usuario?: boolean
+  somente_socio?: boolean
   ativo?: boolean
   destaque?: boolean
   visivel_publico?: boolean
@@ -2967,6 +3119,8 @@ export type PrdProdutoSelectScalar = {
   modalidade_venda?: boolean
   controla_estoque?: boolean
   estoque_atual?: boolean
+  compra_unica_por_usuario?: boolean
+  somente_socio?: boolean
   ativo?: boolean
   destaque?: boolean
   visivel_publico?: boolean
@@ -2979,7 +3133,7 @@ export type PrdProdutoSelectScalar = {
   deleted_at?: boolean
 }
 
-export type PrdProdutoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "prd_produto_tipo_id" | "codigo" | "slug" | "nome" | "descricao" | "preco_custo" | "preco_normal" | "preco_socio" | "modalidade_venda" | "controla_estoque" | "estoque_atual" | "ativo" | "destaque" | "visivel_publico" | "inicio_exibicao" | "fim_exibicao" | "previsao_entrega" | "exibir_apos_encerramento" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["prdProduto"]>
+export type PrdProdutoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "prd_produto_tipo_id" | "codigo" | "slug" | "nome" | "descricao" | "preco_custo" | "preco_normal" | "preco_socio" | "modalidade_venda" | "controla_estoque" | "estoque_atual" | "compra_unica_por_usuario" | "somente_socio" | "ativo" | "destaque" | "visivel_publico" | "inicio_exibicao" | "fim_exibicao" | "previsao_entrega" | "exibir_apos_encerramento" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["prdProduto"]>
 export type PrdProdutoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   prd_produto_tipo?: boolean | Prisma.PrdProdutoTipoDefaultArgs<ExtArgs>
   prd_produto_imagens?: boolean | Prisma.PrdProduto$prd_produto_imagensArgs<ExtArgs>
@@ -3023,6 +3177,8 @@ export type $PrdProdutoPayload<ExtArgs extends runtime.Types.Extensions.Internal
     modalidade_venda: string
     controla_estoque: number
     estoque_atual: number | null
+    compra_unica_por_usuario: number
+    somente_socio: number
     ativo: number
     destaque: number
     visivel_publico: number
@@ -3425,6 +3581,8 @@ export interface PrdProdutoFieldRefs {
   readonly modalidade_venda: Prisma.FieldRef<"PrdProduto", 'String'>
   readonly controla_estoque: Prisma.FieldRef<"PrdProduto", 'Int'>
   readonly estoque_atual: Prisma.FieldRef<"PrdProduto", 'Int'>
+  readonly compra_unica_por_usuario: Prisma.FieldRef<"PrdProduto", 'Int'>
+  readonly somente_socio: Prisma.FieldRef<"PrdProduto", 'Int'>
   readonly ativo: Prisma.FieldRef<"PrdProduto", 'Int'>
   readonly destaque: Prisma.FieldRef<"PrdProduto", 'Int'>
   readonly visivel_publico: Prisma.FieldRef<"PrdProduto", 'Int'>

@@ -3,6 +3,7 @@ import type {
 } from "next";
 import Link from "next/link";
 import {
+    ImageOff,
     Package,
     ShoppingBag,
 } from "lucide-react";
@@ -77,6 +78,10 @@ function money(value: number) {
             currency: "BRL",
         },
     ).format(value);
+}
+
+function productPrice(value: number) {
+    return value === 0 ? "Grátis" : money(value);
 }
 
 function formatDate(
@@ -388,161 +393,192 @@ export default async function MinhasComprasPage({
                                 </div>
                             </div>
                         ) : (
-                            <div className="bp-grid bp-grid-2">
-                                {pedidosExibidos.map(
-                                    (
-                                        pedido,
-                                    ) => (
+                            <div className="bp-grid" style={{ gap: 14 }}>
+                                {pedidosExibidos.map((pedido) => {
+                                    const primeiroItem = pedido.primeiro_item;
+
+                                    return (
                                         <Link
-                                            key={
-                                                pedido.id
-                                            }
+                                            key={pedido.id}
                                             href={`/minhas-compras/${pedido.codigo}`}
                                             className="bp-card"
                                             style={{
-                                                textDecoration:
-                                                    "none",
-                                                color:
-                                                    "inherit",
+                                                textDecoration: "none",
+                                                color: "inherit",
                                             }}
                                         >
                                             <div
                                                 className="bp-card-body"
                                                 style={{
-                                                    minHeight:
-                                                        "100%",
-                                                    display:
-                                                        "grid",
-                                                    alignContent:
-                                                        "space-between",
+                                                    display: "grid",
+                                                    gridTemplateColumns:
+                                                        "88px minmax(0, 1fr)",
                                                     gap: 16,
+                                                    alignItems: "center",
                                                 }}
                                             >
                                                 <div
-                                                    className="bp-row-between"
                                                     style={{
-                                                        alignItems:
-                                                            "flex-start",
+                                                        width: 88,
+                                                        aspectRatio: "1 / 1",
+                                                        borderRadius: 12,
+                                                        overflow: "hidden",
+                                                        border:
+                                                            "1px solid var(--color-border-soft)",
+                                                        background:
+                                                            "var(--color-surface-soft)",
+                                                        display: "grid",
+                                                        placeItems: "center",
                                                     }}
                                                 >
-                                                    <div>
-                                                        <div
+                                                    {primeiroItem?.imagem_url ? (
+                                                        // eslint-disable-next-line @next/next/no-img-element
+                                                        <img
+                                                            src={primeiroItem.imagem_url}
+                                                            alt={primeiroItem.produto_nome}
                                                             style={{
-                                                                color:
-                                                                    "var(--color-text-soft)",
-                                                                fontSize:
-                                                                    11,
-                                                                marginBottom:
-                                                                    3,
+                                                                width: "100%",
+                                                                height: "100%",
+                                                                objectFit: "cover",
                                                             }}
-                                                        >
-                                                            Pedido
-                                                        </div>
-
-                                                        <strong
-                                                            style={{
-                                                                fontSize:
-                                                                    16,
-                                                            }}
-                                                        >
-                                                            {
-                                                                pedido.codigo
-                                                            }
-                                                        </strong>
-                                                    </div>
-
-                                                    <Badge
-                                                        color={normalizeBadgeColor(
-                                                            pedido
-                                                                .status
-                                                                .color,
-                                                        )}
-                                                    >
-                                                        {
-                                                            pedido
-                                                                .status
-                                                                .descricao
-                                                        }
-                                                    </Badge>
+                                                        />
+                                                    ) : (
+                                                        <ImageOff size={24} />
+                                                    )}
                                                 </div>
 
                                                 <div
-                                                    className="bp-grid"
                                                     style={{
-                                                        gap: 6,
+                                                        minWidth: 0,
+                                                        display: "grid",
+                                                        gap: 10,
                                                     }}
                                                 >
-                                                    <strong
+                                                    <div
+                                                        className="bp-row-between"
                                                         style={{
-                                                            fontSize:
-                                                                13,
+                                                            alignItems: "flex-start",
+                                                            gap: 12,
                                                         }}
                                                     >
-                                                        {pedido
-                                                                .primeiro_item
-                                                                ?.produto_nome ??
-                                                            "Pedido"}
-                                                        {pedido
-                                                            .quantidade_itens >
-                                                        1
-                                                            ? ` + ${pedido.quantidade_itens - 1} item(ns)`
-                                                            : ""}
-                                                    </strong>
+                                                        <div>
+                                                            <div
+                                                                style={{
+                                                                    color:
+                                                                        "var(--color-text-soft)",
+                                                                    fontSize: 11,
+                                                                    marginBottom: 3,
+                                                                }}
+                                                            >
+                                                                Pedido
+                                                            </div>
+                                                            <strong style={{ fontSize: 16 }}>
+                                                                {pedido.codigo}
+                                                            </strong>
+                                                        </div>
 
-                                                    <span
-                                                        style={{
-                                                            color:
-                                                                "var(--color-text-muted)",
-                                                            fontSize:
-                                                                12,
-                                                        }}
-                                                    >
-                                                        {formatDate(
-                                                            pedido.created_at,
-                                                        )}
-                                                        {" • "}
-                                                        {money(
-                                                            pedido.valor_total,
-                                                        )}
-                                                    </span>
+                                                        <Badge
+                                                            color={normalizeBadgeColor(
+                                                                pedido.status.color,
+                                                            )}
+                                                        >
+                                                            {pedido.status.descricao}
+                                                        </Badge>
+                                                    </div>
 
-                                                    {pedido.previsao_entrega ? (
+                                                    <div style={{ display: "grid", gap: 4 }}>
+                                                        <strong style={{ fontSize: 14 }}>
+                                                            {primeiroItem?.produto_nome ?? "Pedido"}
+                                                        </strong>
+
+                                                        {primeiroItem?.variacao ? (
+                                                            <span
+                                                                style={{
+                                                                    color:
+                                                                        "var(--color-text-muted)",
+                                                                    fontSize: 12,
+                                                                }}
+                                                            >
+                                                                {primeiroItem.variacao}
+                                                            </span>
+                                                        ) : null}
+
                                                         <span
                                                             style={{
                                                                 color:
                                                                     "var(--color-text-muted)",
-                                                                fontSize:
-                                                                    12,
+                                                                fontSize: 12,
                                                             }}
                                                         >
-                                                            Previsão:{" "}
-                                                            {formatDate(
-                                                                pedido.previsao_entrega,
-                                                            )}
+                                                            {primeiroItem
+                                                                ? `${primeiroItem.quantidade} un.`
+                                                                : ""}
+                                                            {pedido.quantidade_itens > 1
+                                                                ? ` • + ${pedido.quantidade_itens - 1} item(ns)`
+                                                                : ""}
                                                         </span>
-                                                    ) : null}
-                                                </div>
+                                                    </div>
 
-                                                <div
-                                                    className="bp-row"
-                                                    style={{
-                                                        fontSize:
-                                                            12,
-                                                        fontWeight:
-                                                            700,
-                                                    }}
-                                                >
-                                                    <Package
-                                                        size={
-                                                            15
-                                                        }
-                                                    />
-                                                    Ver detalhes
+                                                    <div
+                                                        className="bp-row-between"
+                                                        style={{
+                                                            alignItems: "end",
+                                                            gap: 12,
+                                                        }}
+                                                    >
+                                                        <div
+                                                            style={{
+                                                                display: "grid",
+                                                                gap: 3,
+                                                                color:
+                                                                    "var(--color-text-muted)",
+                                                                fontSize: 12,
+                                                            }}
+                                                        >
+                                                            <span>
+                                                                {formatDate(pedido.created_at)}
+                                                            </span>
+
+                                                            {pedido.previsao_entrega ? (
+                                                                <span>
+                                                                    Previsão:{" "}
+                                                                    {formatDate(
+                                                                        pedido.previsao_entrega,
+                                                                    )}
+                                                                </span>
+                                                            ) : null}
+                                                        </div>
+
+                                                        <div
+                                                            style={{
+                                                                display: "grid",
+                                                                justifyItems: "end",
+                                                                gap: 6,
+                                                            }}
+                                                        >
+                                                            <strong style={{ fontSize: 16 }}>
+                                                                {productPrice(
+                                                                    pedido.valor_total,
+                                                                )}
+                                                            </strong>
+
+                                                            <span
+                                                                className="bp-row"
+                                                                style={{
+                                                                    fontSize: 12,
+                                                                    fontWeight: 700,
+                                                                }}
+                                                            >
+                                                                <Package size={15} />
+                                                                Ver detalhes
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </Link>
-                                    ),
-                                )}
+                                    );
+                                })}
                             </div>
                         )}
                     </>

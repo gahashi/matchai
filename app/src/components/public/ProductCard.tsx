@@ -20,9 +20,9 @@ import {
     type PublicCartCampoValor,
     type PublicCartComponente,
 } from "@/components/public/PublicCartProvider";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
-import { Modal } from "@/components/ui/Modal";
+import {Button} from "@/components/ui/Button";
+import {Input} from "@/components/ui/Input";
+import {Modal} from "@/components/ui/Modal";
 import type {
     PublicProduto,
     PublicProdutoCampo,
@@ -37,6 +37,14 @@ function money(value: number) {
         style: "currency",
         currency: "BRL",
     }).format(value);
+}
+
+function productPrice(
+    value: number,
+) {
+    return value === 0
+        ? "Grátis"
+        : money(value);
 }
 
 function formatDate(value: string) {
@@ -143,7 +151,7 @@ export function ProductCard({
                             }: {
     produto: PublicProduto;
 }) {
-    const { addItem } =
+    const {addItem} =
         usePublicCart();
 
     const [previewOpen, setPreviewOpen] =
@@ -505,6 +513,13 @@ export function ProductCard({
     }
 
     function increaseQuantity() {
+        if (
+            produto
+                .compra_unica_por_usuario
+        ) {
+            return;
+        }
+
         setQuantidade((current) => {
             const next =
                 current + 1;
@@ -723,7 +738,7 @@ export function ProductCard({
                                     : "Preço"}
                             </span>
                             <strong>
-                                {money(
+                                {productPrice(
                                     produto.preco_aplicado,
                                 )}
                             </strong>
@@ -762,6 +777,36 @@ export function ProductCard({
                             </div>
                         ) : null}
                     </div>
+                    {produto.somente_socio ||
+                    produto.compra_unica_por_usuario ? (
+                        <div
+                            style={{
+                                display: "flex",
+                                flexWrap: "wrap",
+                                gap: 6,
+                                marginTop: 8,
+                                fontSize: 12,
+                            }}
+                        >
+                            {produto.somente_socio ? (
+                                <span className="bp-public-member-price">
+                <Sparkles
+                    size={
+                        13
+                    }
+                />
+                Exclusivo para sócios
+            </span>
+                            ) : null}
+
+                            {produto
+                                .compra_unica_por_usuario ? (
+                                <span className="bp-public-member-price">
+                1 por conta
+            </span>
+                            ) : null}
+                        </div>
+                    ) : null}
                 </div>
             </button>
 
@@ -983,7 +1028,7 @@ export function ProductCard({
                                     : "Preço"}
                             </span>
                             <strong>
-                                {money(
+                                {productPrice(
                                     produto.preco_aplicado,
                                 )}
                             </strong>
@@ -995,7 +1040,7 @@ export function ProductCard({
                                     Sócio
                                     paga{" "}
                                     <strong>
-                                        {money(
+                                        {productPrice(
                                             produto.preco_socio,
                                         )}
                                     </strong>
@@ -1340,20 +1385,20 @@ export function ProductCard({
                                 <strong>
                                     Quantidade
                                 </strong>
-                                {estoqueMaximo !==
+                                {produto
+                                    .compra_unica_por_usuario ? (
+                                    <span>
+        Limitado a 1 por conta.
+    </span>
+                                ) : estoqueMaximo !==
                                 null ? (
                                     <span>
-                                        {
-                                            estoqueMaximo
-                                        }{" "}
-                                        disponível(is)
-                                    </span>
+        {estoqueMaximo} disponível(is)
+    </span>
                                 ) : (
                                     <span>
-                                        Escolha
-                                        a
-                                        quantidade.
-                                    </span>
+        Escolha a quantidade.
+    </span>
                                 )}
                             </div>
 
@@ -1388,10 +1433,14 @@ export function ProductCard({
                                         increaseQuantity
                                     }
                                     disabled={
-                                        estoqueMaximo !==
-                                        null &&
-                                        quantidade >=
-                                        estoqueMaximo
+                                        produto
+                                            .compra_unica_por_usuario ||
+                                        (
+                                            estoqueMaximo !==
+                                            null &&
+                                            quantidade >=
+                                            estoqueMaximo
+                                        )
                                     }
                                     aria-label="Aumentar quantidade"
                                 >
@@ -1406,10 +1455,12 @@ export function ProductCard({
 
                         {!produto.disponivel_compra ? (
                             <div className="bp-public-product-unavailable">
-                                {produto.status ===
-                                "encerrado"
-                                    ? "A venda deste produto foi encerrada."
-                                    : "Este produto está esgotado no momento."}
+                                {produto.somente_socio
+                                    ? "Este produto é exclusivo para sócios ativos."
+                                    : produto.status ===
+                                    "encerrado"
+                                        ? "A venda deste produto foi encerrada."
+                                        : "Este produto está esgotado no momento."}
                             </div>
                         ) : null}
                     </section>

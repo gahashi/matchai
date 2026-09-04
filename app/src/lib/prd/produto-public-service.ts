@@ -59,6 +59,8 @@ const publicProdutoSelect = {
     previsao_entrega: true,
     controla_estoque: true,
     estoque_atual: true,
+    compra_unica_por_usuario: true,
+    somente_socio: true,
     destaque: true,
     inicio_exibicao: true,
     fim_exibicao: true,
@@ -581,6 +583,15 @@ function serializePublicProduto(
         options.isSocio &&
         precoSocio !== null;
 
+    const somenteSocio =
+        Boolean(
+            produto.somente_socio,
+        );
+
+    const permitidoPorSocio =
+        !somenteSocio ||
+        options.isSocio;
+
     return {
         id: produto.id,
         codigo: produto.codigo,
@@ -601,6 +612,15 @@ function serializePublicProduto(
             ? precoSocio!
             : precoNormal,
         socio_aplicado: socioAplicado,
+        compra_unica_por_usuario:
+            Boolean(
+                produto.compra_unica_por_usuario,
+            ),
+
+        somente_socio:
+            Boolean(
+                produto.somente_socio,
+            ),
         modalidade_venda: modalidadeVenda,
         previsao_entrega:
             isPreVenda && produto.previsao_entrega
@@ -657,7 +677,8 @@ function serializePublicProduto(
 
         status,
         disponivel_compra:
-            status === "disponivel",
+            status === "disponivel" &&
+            permitidoPorSocio,
     };
 }
 
@@ -1057,6 +1078,7 @@ class ProdutoPublicService {
         items: ValidateCartInput[],
         options: {
             isSocio: boolean;
+            sysUsuarioId?: number | null;
         },
     ) {
         const now = new Date();
@@ -1090,6 +1112,76 @@ class ProdutoPublicService {
                 produto,
             ]),
         );
+
+        const produtosCompraUnicaIds =
+            produtos
+                .filter(
+                    (produto) =>
+                        Boolean(
+                            produto
+                                .compra_unica_por_usuario,
+                        ),
+                )
+                .map(
+                    (produto) =>
+                        produto.id,
+                );
+
+        const produtosJaComprados =
+            new Set<number>();
+
+        if (
+            options.sysUsuarioId &&
+            produtosCompraUnicaIds.length >
+            0
+        ) {
+            const itensComprados =
+                await prisma
+                    .vndPedidoItem
+                    .findMany({
+                        where: {
+                            prd_produto_id: {
+                                in:
+                                produtosCompraUnicaIds,
+                            },
+
+                            vnd_pedido: {
+                                sys_usuario_id:
+                                options
+                                    .sysUsuarioId,
+
+                                vnd_pedido_status: {
+                                    codigo: {
+                                        not:
+                                            "cancelado",
+                                    },
+                                },
+                            },
+                        },
+
+                        select: {
+                            prd_produto_id:
+                                true,
+                        },
+
+                        distinct: [
+                            "prd_produto_id",
+                        ],
+                    });
+
+            for (
+                const item of
+                itensComprados
+                ) {
+                if (
+                    item.prd_produto_id
+                ) {
+                    produtosJaComprados.add(
+                        item.prd_produto_id,
+                    );
+                }
+            }
+        }
 
         const reservations =
             await loadActiveReservationTotals(
@@ -1129,6 +1221,80 @@ class ProdutoPublicService {
                     now,
                     reservations,
                 });
+
+            if (
+                produto.somente_socio &&
+                !options.isSocio
+            ) {
+                return {
+                    ...base,
+
+                    disponivel:
+                        false,
+
+                    motivo:
+                        "Este produto é exclusivo para sócios ativos.",
+
+                    produto,
+                };
+            }
+
+            if (
+                produto
+                    .compra_unica_por_usuario &&
+                !options.sysUsuarioId
+            ) {
+                return {
+                    ...base,
+
+                    disponivel:
+                        false,
+
+                    motivo:
+                        "Entre na sua conta para adquirir este produto.",
+
+                    produto,
+                };
+            }
+
+            if (
+                produto
+                    .compra_unica_por_usuario &&
+                item.quantidade >
+                1
+            ) {
+                return {
+                    ...base,
+
+                    disponivel:
+                        false,
+
+                    motivo:
+                        "Este produto permite apenas 1 unidade por conta.",
+
+                    produto,
+                };
+            }
+
+            if (
+                produto
+                    .compra_unica_por_usuario &&
+                produtosJaComprados.has(
+                    produto.id,
+                )
+            ) {
+                return {
+                    ...base,
+
+                    disponivel:
+                        false,
+
+                    motivo:
+                        "Você já adquiriu este produto.",
+
+                    produto,
+                };
+            }
 
             if (
                 !Number.isInteger(

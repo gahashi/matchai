@@ -47,8 +47,13 @@ export type CheckoutValidatedItem = {
         preco_normal: number;
         preco_aplicado: number;
         socio_aplicado: boolean;
+        compra_unica_por_usuario: boolean;
+        somente_socio: boolean;
         modalidade_venda: "estoque" | "pre_venda";
         previsao_entrega: string | null;
+        imagem_principal: {
+            public_url: string | null;
+        } | null;
     } | null;
     variacao?: {
         id: number;
@@ -383,6 +388,60 @@ async function releaseOrderReservations(
     });
 }
 
+async function assertSinglePurchaseAvailability(
+    tx: any,
+    sysUsuarioId: number | null,
+    items: CheckoutValidatedItem[],
+) {
+    const produtoIds = Array.from(
+        new Set(
+            items
+                .filter(
+                    (item) =>
+                        item.produto?.compra_unica_por_usuario === true,
+                )
+                .map((item) => item.produto_id),
+        ),
+    );
+
+    if (produtoIds.length === 0) return;
+
+    if (!sysUsuarioId) {
+        throw new Error(
+            "Entre na sua conta para adquirir este produto.",
+        );
+    }
+
+    await tx.$queryRawUnsafe(
+        "SELECT id FROM sys_usuario WHERE id = ? FOR UPDATE",
+        sysUsuarioId,
+    );
+
+    const existente = await tx.vndPedidoItem.findFirst({
+        where: {
+            prd_produto_id: { in: produtoIds },
+            vnd_pedido: {
+                sys_usuario_id: sysUsuarioId,
+                vnd_pedido_status: {
+                    codigo: { not: "cancelado" },
+                },
+            },
+        },
+        select: {
+            prd_produto_id: true,
+            produto_nome_snapshot: true,
+        },
+    });
+
+    if (existente) {
+        throw new Error(
+            existente.produto_nome_snapshot
+                ? `Você já adquiriu "${existente.produto_nome_snapshot}".`
+                : "Você já adquiriu este produto.",
+        );
+    }
+}
+
 function normalizePublicPhone(
     value: string,
 ) {
@@ -683,6 +742,12 @@ class PedidoPublicService {
             getReservationExpiration(now);
 
         return prisma.$transaction(async (tx) => {
+            await assertSinglePurchaseAvailability(
+                tx,
+                input.sysUsuarioId,
+                input.items,
+            );
+
             const pedido = await tx.vndPedido.create({
                 data: {
                     codigo,
@@ -736,6 +801,11 @@ class PedidoPublicService {
                                         `${item.produto.previsao_entrega}T12:00:00`,
                                     )
                                     : null,
+                            imagem_url_snapshot:
+                                item.produto
+                                    ?.imagem_principal
+                                    ?.public_url ??
+                                null,
                             quantidade:
                             item.quantidade,
                             preco_tabela:
@@ -951,6 +1021,330 @@ class PedidoPublicService {
                 total,
                 reservaExpiraAt,
                 pagamentoExpiraAt: reservaExpiraAt,
+            };
+        });
+    }
+
+    async createFreeOrder(input: {
+        sysUsuarioId: number | null;
+        customer: CheckoutCustomer;
+        items: CheckoutValidatedItem[];
+    }) {
+        const unavailable = input.items.find(
+            (item) => !item.disponivel,
+        );
+
+        if (unavailable) {
+            throw new Error(
+                unavailable.motivo ?? "Existe um item indisponível no carrinho.",
+            );
+        }
+
+        if (input.items.length === 0) {
+            throw new Error("O carrinho está vazio.");
+        }
+
+        const total = roundMoney(
+            input.items.reduce(
+                (sum, item) => sum + (item.subtotal ?? 0),
+                0,
+            ),
+        );
+
+        if (total !== 0) {
+            throw new Error("Este pedido não é gratuito.");
+        }
+
+        const [pedidoStatus, entregaTipo] =
+            await Promise.all([
+                prisma.vndPedidoStatus.findUnique({
+                    where: { codigo: "confirmado" },
+                    select: { id: true },
+                }),
+                prisma.vndEntregaTipo.findUnique({
+                    where: { codigo: "retirada" },
+                    select: { id: true },
+                }),
+            ]);
+
+        if (!pedidoStatus) {
+            throw new Error(
+                "Status confirmado não encontrado. Execute o seed.",
+            );
+        }
+
+        if (!entregaTipo) {
+            throw new Error(
+                "Tipo de entrega retirada não encontrado. Execute o seed.",
+            );
+        }
+
+        const codigo = await generateUniqueOrderCode();
+        const now = new Date();
+        const reservaExpiraAt = now;
+
+        return prisma.$transaction(async (tx) => {
+            await assertSinglePurchaseAvailability(
+                tx,
+                input.sysUsuarioId,
+                input.items,
+            );
+
+            const pedido = await tx.vndPedido.create({
+                data: {
+                    codigo,
+                    sys_usuario_id: input.sysUsuarioId,
+                    vnd_campanha_id: null,
+                    vnd_pedido_status_id: pedidoStatus.id,
+                    vnd_entrega_tipo_id: entregaTipo.id,
+                    cliente_nome: input.customer.nome,
+                    cliente_email: input.customer.email,
+                    cliente_telefone: input.customer.telefone,
+                    entrega_endereco: null,
+                    retirada_local: null,
+                    observacao_cliente: null,
+                    valor_produtos: total,
+                    valor_desconto: 0,
+                    valor_frete: 0,
+                    valor_acrescimo: 0,
+                    valor_total: total,
+                    created_at: now,
+                    updated_at: now,
+                },
+                select: {
+                    id: true,
+                    codigo: true,
+                    valor_total: true,
+                },
+            });
+
+            for (const item of input.items) {
+                const pedidoItem =
+                    await tx.vndPedidoItem.create({
+                        data: {
+                            vnd_pedido_id: pedido.id,
+                            prd_produto_id:
+                            item.produto_id,
+                            prd_produto_variacao_id:
+                            item.variacao_id,
+                            vnd_campanha_id: null,
+                            produto_codigo_snapshot:
+                                item.produto?.codigo ??
+                                String(item.produto_id),
+                            produto_nome_snapshot:
+                                item.produto?.nome ??
+                                "Produto",
+                            variacao_snapshot:
+                                item.variacao?.nome ??
+                                null,
+                            previsao_entrega_snapshot:
+                                item.produto?.previsao_entrega
+                                    ? new Date(
+                                        `${item.produto.previsao_entrega}T12:00:00`,
+                                    )
+                                    : null,
+                            imagem_url_snapshot:
+                                item.produto
+                                    ?.imagem_principal
+                                    ?.public_url ??
+                                null,
+                            quantidade:
+                            item.quantidade,
+                            preco_tabela:
+                                item.preco_tabela ??
+                                item.produto
+                                    ?.preco_normal ??
+                                0,
+                            preco_unitario:
+                                item.preco_unitario ??
+                                item.produto
+                                    ?.preco_aplicado ??
+                                0,
+                            valor_desconto: 0,
+                            subtotal:
+                                item.subtotal ?? 0,
+                            socio_aplicado:
+                                item.socio_aplicado ||
+                                item.produto
+                                    ?.socio_aplicado
+                                    ? 1
+                                    : 0,
+
+                            // Campos legados preservados até o novo
+                            // modelo de personalização substituir todos
+                            // os consumidores antigos.
+                            personalizacao_nome: null,
+                            personalizacao_numero: null,
+
+                            observacao: null,
+                            created_at: now,
+                        },
+                        select: {
+                            id: true,
+                        },
+                    });
+
+                const itemCampos =
+                    item.campos ?? [];
+
+                if (itemCampos.length > 0) {
+                    await tx.vndPedidoItemCampo.createMany({
+                        data: itemCampos.map(
+                            (campo) => ({
+                                vnd_pedido_item_id:
+                                pedidoItem.id,
+                                vnd_pedido_item_componente_id:
+                                    null,
+                                prd_produto_campo_id:
+                                campo.campo_id,
+                                campo_codigo_snapshot:
+                                campo.codigo,
+                                campo_nome_snapshot:
+                                campo.nome,
+                                campo_tipo_snapshot:
+                                campo.tipo,
+                                valor: campo.valor,
+                                valor_normalizado:
+                                campo.valor_normalizado,
+                                created_at: now,
+                            }),
+                        ),
+                    });
+                }
+
+                const componentes =
+                    item.componentes ?? [];
+
+                // Produto normal reserva o próprio estoque.
+                // Kit reserva somente os componentes reais.
+                const isPreVenda =
+                    item.produto?.modalidade_venda === "pre_venda";
+
+                if (componentes.length === 0 && !isPreVenda) {
+                    await createStockReservation(
+                        tx,
+                        {
+                            pedidoId: pedido.id,
+                            pedidoItemId:
+                            pedidoItem.id,
+                            pedidoItemComponenteId:
+                                null,
+                            produtoId:
+                            item.produto_id,
+                            variacaoId:
+                            item.variacao_id,
+                            quantidade:
+                            item.quantidade,
+                            expiraAt:
+                            reservaExpiraAt,
+                        },
+                        now,
+                    );
+                }
+
+                for (const componente of
+                    componentes) {
+                    const pedidoItemComponente =
+                        await tx.vndPedidoItemComponente.create(
+                            {
+                                data: {
+                                    vnd_pedido_item_id:
+                                    pedidoItem.id,
+                                    prd_produto_id:
+                                    componente.produto_id,
+                                    prd_produto_variacao_id:
+                                    componente.variacao_id,
+                                    produto_codigo_snapshot:
+                                    componente.produto_codigo,
+                                    produto_nome_snapshot:
+                                    componente.produto_nome,
+                                    variacao_snapshot:
+                                    componente.variacao_nome,
+                                    quantidade:
+                                    componente.quantidade_por_kit,
+                                    created_at: now,
+                                },
+                                select: {
+                                    id: true,
+                                },
+                            },
+                        );
+
+                    if (
+                        componente.campos.length > 0
+                    ) {
+                        await tx.vndPedidoItemCampo.createMany(
+                            {
+                                data: componente.campos.map(
+                                    (campo) => ({
+                                        vnd_pedido_item_id:
+                                        pedidoItem.id,
+                                        vnd_pedido_item_componente_id:
+                                        pedidoItemComponente.id,
+                                        prd_produto_campo_id:
+                                        campo.campo_id,
+                                        campo_codigo_snapshot:
+                                        campo.codigo,
+                                        campo_nome_snapshot:
+                                        campo.nome,
+                                        campo_tipo_snapshot:
+                                        campo.tipo,
+                                        valor:
+                                        campo.valor,
+                                        valor_normalizado:
+                                        campo.valor_normalizado,
+                                        created_at: now,
+                                    }),
+                                ),
+                            },
+                        );
+                    }
+
+                    if (!isPreVenda) {
+                        await createStockReservation(
+                            tx,
+                            {
+                                pedidoId: pedido.id,
+                                pedidoItemId:
+                                pedidoItem.id,
+                                pedidoItemComponenteId:
+                                pedidoItemComponente.id,
+                                produtoId:
+                                componente.produto_id,
+                                variacaoId:
+                                componente.variacao_id,
+                                quantidade:
+                                    item.quantidade *
+                                    componente.quantidade_por_kit,
+                                expiraAt:
+                                reservaExpiraAt,
+                            },
+                            now,
+                        );
+                    }
+                }
+            }
+
+            await consumeOrderReservations(
+                tx,
+                pedido.id,
+                now,
+            );
+
+            await tx.vndPedidoHistorico.create({
+                data: {
+                    vnd_pedido_id: pedido.id,
+                    vnd_pedido_status_id: pedidoStatus.id,
+                    sys_usuario_id: input.sysUsuarioId,
+                    observacao:
+                        "Pedido gratuito confirmado pelo checkout.",
+                    created_at: now,
+                },
+            });
+
+            return {
+                pedido,
+                total,
             };
         });
     }
@@ -1893,8 +2287,49 @@ class PedidoPublicService {
                             produto_nome_snapshot:
                                 true,
 
+                            variacao_snapshot:
+                                true,
+
+                            imagem_url_snapshot:
+                                true,
+
+                            quantidade:
+                                true,
+
                             previsao_entrega_snapshot:
                                 true,
+
+                            prd_produto: {
+                                select: {
+                                    prd_produto_imagens: {
+                                        orderBy: [
+                                            {
+                                                principal:
+                                                    "desc",
+                                            },
+                                            {
+                                                ordem:
+                                                    "asc",
+                                            },
+                                            {
+                                                id:
+                                                    "asc",
+                                            },
+                                        ],
+
+                                        take: 1,
+
+                                        select: {
+                                            sys_arquivo: {
+                                                select: {
+                                                    public_url:
+                                                        true,
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
+                            },
                         },
                     },
 
@@ -1972,6 +2407,24 @@ class PedidoPublicService {
                                 produto_nome:
                                 primeiroItem
                                     .produto_nome_snapshot,
+
+                                variacao:
+                                primeiroItem
+                                    .variacao_snapshot,
+
+                                quantidade:
+                                primeiroItem
+                                    .quantidade,
+
+                                imagem_url:
+                                    primeiroItem
+                                        .imagem_url_snapshot ??
+                                    primeiroItem
+                                        .prd_produto
+                                        ?.prd_produto_imagens[0]
+                                        ?.sys_arquivo
+                                        .public_url ??
+                                    null,
                             }
                             : null,
 
@@ -2034,11 +2487,50 @@ class PedidoPublicService {
                             variacao_snapshot:
                                 true,
 
-                            quantidade:
+                            imagem_url_snapshot:
                                 true,
 
+                            quantidade:
+                                true,
+                            preco_unitario:
+                                true,
+
+                            subtotal:
+                                true,
                             previsao_entrega_snapshot:
                                 true,
+
+                            prd_produto: {
+                                select: {
+                                    prd_produto_imagens: {
+                                        orderBy: [
+                                            {
+                                                principal:
+                                                    "desc",
+                                            },
+                                            {
+                                                ordem:
+                                                    "asc",
+                                            },
+                                            {
+                                                id:
+                                                    "asc",
+                                            },
+                                        ],
+
+                                        take: 1,
+
+                                        select: {
+                                            sys_arquivo: {
+                                                select: {
+                                                    public_url:
+                                                        true,
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
+                            },
 
                             vnd_pedido_item_componentes:
                                 {
@@ -2172,12 +2664,32 @@ class PedidoPublicService {
                         item
                             .produto_nome_snapshot,
 
+                        imagem_url:
+                            item
+                                .imagem_url_snapshot ??
+                            item
+                                .prd_produto
+                                ?.prd_produto_imagens[0]
+                                ?.sys_arquivo
+                                .public_url ??
+                            null,
+
                         variacao:
                         item
                             .variacao_snapshot,
 
                         quantidade:
                         item.quantidade,
+
+                        preco_unitario:
+                            Number(
+                                item.preco_unitario,
+                            ),
+
+                        subtotal:
+                            Number(
+                                item.subtotal,
+                            ),
 
                         previsao_entrega:
                         item

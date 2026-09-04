@@ -248,110 +248,34 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        if (!process.env.MERCADO_PAGO_ACCESS_TOKEN?.trim()) {
-            return NextResponse.json(
-                {
-                    ok: false,
-                    message:
-                        "Mercado Pago ainda não está configurado no servidor.",
-                },
-                { status: 503 },
-            );
-        }
-
-        const mercadoPagoPayload =
-            parsed.data.mercado_pago as MercadoPagoBrickPayload;
-        const formData = mercadoPagoPayload?.formData;
-        const selectedPaymentMethod = nonEmptyString(
-            mercadoPagoPayload?.selectedPaymentMethod,
-        );
-        const paymentMethodId = nonEmptyString(
-            formData?.payment_method_id,
-        );
-
-        if (!paymentMethodId) {
-            return NextResponse.json(
-                {
-                    ok: false,
-                    message: "Selecione uma forma de pagamento válida.",
-                },
-                { status: 400 },
-            );
-        }
-
-        if (
-            !selectedPaymentMethod ||
-            (selectedPaymentMethod !== "credit_card" &&
-                selectedPaymentMethod !== "bank_transfer")
-        ) {
-            return NextResponse.json(
-                {
-                    ok: false,
-                    message:
-                        "Use PIX ou cartão de crédito para concluir a compra.",
-                },
-                { status: 400 },
-            );
-        }
-
-        const method: CheckoutPaymentMethod =
-            paymentMethodId === "pix" ||
-            selectedPaymentMethod === "bank_transfer"
-                ? "pix"
-                : "cartao";
-
-        if (method === "pix" && paymentMethodId !== "pix") {
-            return NextResponse.json(
-                {
-                    ok: false,
-                    message: "Forma de pagamento PIX inválida.",
-                },
-                { status: 400 },
-            );
-        }
-
-        const token = nonEmptyString(formData?.token);
-        const installments = optionalPositiveInteger(
-            formData?.installments,
-        );
-        const issuerId = optionalStringOrNumber(
-            formData?.issuer_id,
-        );
-
-        if (method === "cartao" && !token) {
-            return NextResponse.json(
-                {
-                    ok: false,
-                    message:
-                        "Os dados do cartão não foram tokenizados corretamente.",
-                },
-                { status: 400 },
-            );
-        }
-
         const session = await getAuthSession({
             headers: request.headers,
         });
 
-        const [socio, authenticatedCustomer] = await Promise.all([
-            session
-                ? socioPublicService.getSocioAtual(session.user.id)
-                : Promise.resolve({
-                    isSocio: false as const,
-                    socio: null,
-                }),
-            session
-                ? pedidoPublicService.getCheckoutCustomer(
-                    session.user.id,
-                )
-                : Promise.resolve(null),
-        ]);
+        const [socio, authenticatedCustomer] =
+            await Promise.all([
+                session
+                    ? socioPublicService.getSocioAtual(
+                        session.user.id,
+                    )
+                    : Promise.resolve({
+                        isSocio: false as const,
+                        socio: null,
+                    }),
+
+                session
+                    ? pedidoPublicService.getCheckoutCustomer(
+                        session.user.id,
+                    )
+                    : Promise.resolve(null),
+            ]);
 
         if (session && !authenticatedCustomer) {
             return NextResponse.json(
                 {
                     ok: false,
-                    message: "Não foi possível localizar sua conta.",
+                    message:
+                        "Não foi possível localizar sua conta.",
                 },
                 { status: 401 },
             );
@@ -359,11 +283,18 @@ export async function POST(request: NextRequest) {
 
         const customer = authenticatedCustomer
             ? {
-                nome: authenticatedCustomer.nome,
-                email: authenticatedCustomer.email,
+                nome:
+                authenticatedCustomer.nome,
+
+                email:
+                authenticatedCustomer.email,
+
                 telefone:
-                    authenticatedCustomer.telefone?.trim() ||
-                    parsed.data.cliente.telefone,
+                    authenticatedCustomer
+                        .telefone
+                        ?.trim() ||
+                    parsed.data.cliente
+                        .telefone,
             }
             : parsed.data.cliente;
 
@@ -378,26 +309,339 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const idempotencyKey = `checkout:${parsed.data.attempt_id}`;
-        let existingAttempt =
-            await pedidoPublicService.getPaymentAttemptByIdempotencyKey(
-                idempotencyKey,
+        /*
+         * O carrinho é sempre revalidado antes de decidir
+         * se o pedido é gratuito ou pago.
+         *
+         * Isso também reaplica:
+         * - estoque
+         * - somente sócio
+         * - compra única por usuário
+         * - campos personalizados
+         * - componentes de kit
+         */
+        const validatedItems =
+            await produtoPublicService.validateCart(
+                parsed.data.items.map(
+                    (item) => ({
+                        lineKey:
+                        item.line_key,
+
+                        produtoId:
+                        item.produto_id,
+
+                        variacaoId:
+                        item.variacao_id,
+
+                        quantidade:
+                        item.quantidade,
+
+                        campos:
+                            item.campos.map(
+                                (campo) => ({
+                                    campoId:
+                                    campo.campo_id,
+
+                                    valor:
+                                    campo.valor,
+                                }),
+                            ),
+
+                        componentes:
+                            item.componentes.map(
+                                (
+                                    componente,
+                                ) => ({
+                                    componenteId:
+                                    componente
+                                        .componente_id,
+
+                                    variacaoId:
+                                    componente
+                                        .variacao_id,
+
+                                    campos:
+                                        componente.campos.map(
+                                            (
+                                                campo,
+                                            ) => ({
+                                                campoId:
+                                                campo.campo_id,
+
+                                                valor:
+                                                campo.valor,
+                                            }),
+                                        ),
+                                }),
+                            ),
+                    }),
+                ),
+                {
+                    isSocio:
+                    socio.isSocio,
+
+                    sysUsuarioId:
+                        session?.user.id ??
+                        null,
+                },
+            ) as CheckoutValidatedItem[];
+
+        const unavailable =
+            validatedItems.find(
+                (item) =>
+                    !item.disponivel,
+            );
+
+        if (unavailable) {
+            return NextResponse.json(
+                {
+                    ok: false,
+                    message:
+                        unavailable.motivo ??
+                        "Um item do carrinho não está mais disponível.",
+                },
+                { status: 409 },
+            );
+        }
+
+        const total = Number(
+            validatedItems
+                .reduce(
+                    (sum, item) =>
+                        sum +
+                        (item.subtotal ??
+                            0),
+                    0,
+                )
+                .toFixed(2),
+        );
+
+        /*
+         * PEDIDO GRATUITO
+         *
+         * Não valida token/configuração do Mercado Pago.
+         * Não cria FinPagamento.
+         * O service cria o pedido como confirmado e
+         * consome o estoque dentro da própria transação.
+         */
+        if (total === 0) {
+            const freeOrder =
+                await withDeadlockRetry(
+                    () =>
+                        pedidoPublicService
+                            .createFreeOrder({
+                                sysUsuarioId:
+                                    session
+                                        ?.user
+                                        .id ??
+                                    null,
+
+                                customer,
+
+                                items:
+                                validatedItems,
+                            }),
+                );
+
+            return NextResponse.json({
+                ok: true,
+                data: {
+                    pedido_codigo:
+                    freeOrder
+                        .pedido
+                        .codigo,
+
+                    pagamento_id:
+                        null,
+
+                    metodo:
+                        "gratis",
+
+                    status:
+                        "approved",
+
+                    status_detail:
+                        "free_order",
+
+                    qr_code_text:
+                        null,
+
+                    qr_code_base64:
+                        null,
+
+                    payment_url:
+                        null,
+                },
+            });
+        }
+
+        if (total < 0) {
+            return NextResponse.json(
+                {
+                    ok: false,
+                    message:
+                        "O total do pedido é inválido.",
+                },
+                { status: 400 },
+            );
+        }
+
+        /*
+         * Daqui para baixo o pedido é pago.
+         * Somente agora Mercado Pago passa a ser obrigatório.
+         */
+        if (
+            !process.env
+                .MERCADO_PAGO_ACCESS_TOKEN
+                ?.trim()
+        ) {
+            return NextResponse.json(
+                {
+                    ok: false,
+                    message:
+                        "Mercado Pago ainda não está configurado no servidor.",
+                },
+                { status: 503 },
+            );
+        }
+
+        const mercadoPagoPayload =
+            parsed.data
+                .mercado_pago as MercadoPagoBrickPayload;
+
+        const formData =
+            mercadoPagoPayload?.formData;
+
+        const selectedPaymentMethod =
+            nonEmptyString(
+                mercadoPagoPayload
+                    ?.selectedPaymentMethod,
+            );
+
+        const paymentMethodId =
+            nonEmptyString(
+                formData
+                    ?.payment_method_id,
+            );
+
+        if (!paymentMethodId) {
+            return NextResponse.json(
+                {
+                    ok: false,
+                    message:
+                        "Selecione uma forma de pagamento válida.",
+                },
+                { status: 400 },
+            );
+        }
+
+        if (
+            !selectedPaymentMethod ||
+            (
+                selectedPaymentMethod !==
+                "credit_card" &&
+                selectedPaymentMethod !==
+                "bank_transfer"
+            )
+        ) {
+            return NextResponse.json(
+                {
+                    ok: false,
+                    message:
+                        "Use PIX ou cartão de crédito para concluir a compra.",
+                },
+                { status: 400 },
+            );
+        }
+
+        const method:
+            CheckoutPaymentMethod =
+            paymentMethodId === "pix" ||
+            selectedPaymentMethod ===
+            "bank_transfer"
+                ? "pix"
+                : "cartao";
+
+        if (
+            method === "pix" &&
+            paymentMethodId !== "pix"
+        ) {
+            return NextResponse.json(
+                {
+                    ok: false,
+                    message:
+                        "Forma de pagamento PIX inválida.",
+                },
+                { status: 400 },
+            );
+        }
+
+        const token =
+            nonEmptyString(
+                formData?.token,
+            );
+
+        const installments =
+            optionalPositiveInteger(
+                formData
+                    ?.installments,
+            );
+
+        const issuerId =
+            optionalStringOrNumber(
+                formData?.issuer_id,
             );
 
         if (
-            existingAttempt &&
-            existingAttempt.fin_pagamento_metodo.codigo !== method
+            method === "cartao" &&
+            !token
         ) {
-            await withDeadlockRetry(() =>
-                pedidoPublicService.applyMercadoPagoPayment({
-                    finPagamentoId: existingAttempt!.id,
-                    payment: {
-                        status: "cancelled",
-                        status_detail: "payment_method_changed",
-                    },
-                    qrCodeText: null,
-                    paymentUrl: null,
-                }),
+            return NextResponse.json(
+                {
+                    ok: false,
+                    message:
+                        "Os dados do cartão não foram tokenizados corretamente.",
+                },
+                { status: 400 },
+            );
+        }
+
+        const idempotencyKey =
+            `checkout:${parsed.data.attempt_id}`;
+
+        let existingAttempt =
+            await pedidoPublicService
+                .getPaymentAttemptByIdempotencyKey(
+                    idempotencyKey,
+                );
+
+        if (
+            existingAttempt &&
+            existingAttempt
+                .fin_pagamento_metodo
+                .codigo !== method
+        ) {
+            await withDeadlockRetry(
+                () =>
+                    pedidoPublicService
+                        .applyMercadoPagoPayment({
+                            finPagamentoId:
+                            existingAttempt!.id,
+
+                            payment: {
+                                status:
+                                    "cancelled",
+
+                                status_detail:
+                                    "payment_method_changed",
+                            },
+
+                            qrCodeText:
+                                null,
+
+                            paymentUrl:
+                                null,
+                        }),
             );
 
             return NextResponse.json(
@@ -406,94 +650,57 @@ export async function POST(request: NextRequest) {
                     message:
                         "A forma de pagamento mudou. Envie novamente para iniciar uma nova tentativa.",
                     data: {
-                        reset_attempt: true,
+                        reset_attempt:
+                            true,
                     },
                 },
                 { status: 409 },
             );
         }
 
-        if (existingAttempt?.external_id) {
+        if (
+            existingAttempt
+                ?.external_id
+        ) {
             return NextResponse.json({
                 ok: true,
                 data: {
                     pedido_codigo:
-                    existingAttempt.vnd_pedido.codigo,
+                    existingAttempt
+                        .vnd_pedido
+                        .codigo,
+
                     pagamento_id:
-                    existingAttempt.external_id,
+                    existingAttempt
+                        .external_id,
+
                     metodo:
-                    existingAttempt.fin_pagamento_metodo.codigo,
-                    status: localStatusToClient(
-                        existingAttempt.fin_pagamento_status.codigo,
-                    ),
-                    status_detail: null,
+                    existingAttempt
+                        .fin_pagamento_metodo
+                        .codigo,
+
+                    status:
+                        localStatusToClient(
+                            existingAttempt
+                                .fin_pagamento_status
+                                .codigo,
+                        ),
+
+                    status_detail:
+                        null,
+
                     qr_code_text:
-                    existingAttempt.qr_code_text,
-                    qr_code_base64: null,
+                    existingAttempt
+                        .qr_code_text,
+
+                    qr_code_base64:
+                        null,
+
                     payment_url:
-                    existingAttempt.payment_url,
+                    existingAttempt
+                        .payment_url,
                 },
             });
-        }
-
-        let validatedItems: CheckoutValidatedItem[] = [];
-
-        /*
-         * Uma tentativa já criada possui a própria reserva de estoque.
-         * Revalidar o carrinho aqui faria a repetição idempotente
-         * enxergar a própria reserva como estoque indisponível.
-         *
-         * Por isso a validação de estoque só acontece quando ainda
-         * precisamos criar uma nova tentativa local.
-         */
-        if (!existingAttempt) {
-            validatedItems =
-                await produtoPublicService.validateCart(
-                    parsed.data.items.map((item) => ({
-                        lineKey: item.line_key,
-                        produtoId: item.produto_id,
-                        variacaoId: item.variacao_id,
-                        quantidade: item.quantidade,
-                        campos: item.campos.map((campo) => ({
-                            campoId: campo.campo_id,
-                            valor: campo.valor,
-                        })),
-                        componentes: item.componentes.map(
-                            (componente) => ({
-                                componenteId:
-                                componente.componente_id,
-                                variacaoId:
-                                componente.variacao_id,
-                                campos: componente.campos.map(
-                                    (campo) => ({
-                                        campoId:
-                                        campo.campo_id,
-                                        valor: campo.valor,
-                                    }),
-                                ),
-                            }),
-                        ),
-                    })),
-                    {
-                        isSocio: socio.isSocio,
-                    },
-                ) as CheckoutValidatedItem[];
-
-            const unavailable = validatedItems.find(
-                (item) => !item.disponivel,
-            );
-
-            if (unavailable) {
-                return NextResponse.json(
-                    {
-                        ok: false,
-                        message:
-                            unavailable.motivo ??
-                            "Um item do carrinho não está mais disponível.",
-                    },
-                    { status: 409 },
-                );
-            }
         }
 
         let attempt;
@@ -501,11 +708,13 @@ export async function POST(request: NextRequest) {
         if (existingAttempt) {
             attempt = {
                 pedido:
-                existingAttempt.vnd_pedido,
+                existingAttempt
+                    .vnd_pedido,
 
                 pagamento: {
                     id:
-                    existingAttempt.id,
+                    existingAttempt
+                        .id,
                 },
 
                 total:
@@ -516,7 +725,8 @@ export async function POST(request: NextRequest) {
                     ),
             };
         } else {
-            let createError: unknown = null;
+            let createError:
+                unknown = null;
 
             for (
                 let createAttempt = 1;
@@ -525,30 +735,38 @@ export async function POST(request: NextRequest) {
             ) {
                 try {
                     attempt =
-                        await pedidoPublicService.createPaymentAttempt({
-                            sysUsuarioId:
-                                session?.user.id ??
-                                null,
+                        await pedidoPublicService
+                            .createPaymentAttempt({
+                                sysUsuarioId:
+                                    session
+                                        ?.user
+                                        .id ??
+                                    null,
 
-                            customer,
+                                customer,
 
-                            items:
-                            validatedItems,
+                                items:
+                                validatedItems,
 
-                            method,
+                                method,
 
-                            idempotencyKey,
-                        });
+                                idempotencyKey,
+                            });
 
                     break;
                 } catch (error) {
-                    createError = error;
+                    createError =
+                        error;
 
                     const uniqueConstraint =
-                        isPrismaUniqueConstraintError(error);
+                        isPrismaUniqueConstraintError(
+                            error,
+                        );
 
                     const deadlock =
-                        isDatabaseDeadlockError(error);
+                        isDatabaseDeadlockError(
+                            error,
+                        );
 
                     if (
                         !uniqueConstraint &&
@@ -557,13 +775,9 @@ export async function POST(request: NextRequest) {
                         throw error;
                     }
 
-                    /*
-                     * Em concorrência, a outra requisição pode ter
-                     * vencido a criação da tentativa. Damos tempo
-                     * para o COMMIT e buscamos pela chave idempotente.
-                     */
                     await waitForRetry(
-                        createAttempt * 100,
+                        createAttempt *
+                        100,
                     );
 
                     existingAttempt =
@@ -572,52 +786,72 @@ export async function POST(request: NextRequest) {
                                 idempotencyKey,
                             );
 
-                    if (existingAttempt) {
+                    if (
+                        existingAttempt
+                    ) {
                         break;
                     }
 
-                    /*
-                     * P2002 sem uma tentativa com esta chave pode vir
-                     * de outra constraint unique, como código do pedido.
-                     */
-                    if (uniqueConstraint) {
+                    if (
+                        uniqueConstraint
+                    ) {
                         throw error;
                     }
 
-                    if (createAttempt === 3) {
+                    if (
+                        createAttempt ===
+                        3
+                    ) {
                         throw error;
                     }
                 }
             }
 
-            if (!attempt && !existingAttempt) {
-                throw createError ??
-                new Error(
-                    "Não foi possível criar a tentativa de pagamento.",
+            if (
+                !attempt &&
+                !existingAttempt
+            ) {
+                throw (
+                    createError ??
+                    new Error(
+                        "Não foi possível criar a tentativa de pagamento.",
+                    )
                 );
             }
 
-            if (!attempt && existingAttempt) {
+            if (
+                !attempt &&
+                existingAttempt
+            ) {
                 if (
                     existingAttempt
                         .fin_pagamento_metodo
-                        .codigo !== method
+                        .codigo !==
+                    method
                 ) {
-                    await withDeadlockRetry(() =>
-                        pedidoPublicService
-                            .applyMercadoPagoPayment({
-                                finPagamentoId:
-                                existingAttempt!.id,
+                    await withDeadlockRetry(
+                        () =>
+                            pedidoPublicService
+                                .applyMercadoPagoPayment(
+                                    {
+                                        finPagamentoId:
+                                        existingAttempt!.id,
 
-                                payment: {
-                                    status: "cancelled",
-                                    status_detail:
-                                        "payment_method_changed",
-                                },
+                                        payment: {
+                                            status:
+                                                "cancelled",
 
-                                qrCodeText: null,
-                                paymentUrl: null,
-                            }),
+                                            status_detail:
+                                                "payment_method_changed",
+                                        },
+
+                                        qrCodeText:
+                                            null,
+
+                                        paymentUrl:
+                                            null,
+                                    },
+                                ),
                     );
 
                     return NextResponse.json(
@@ -626,57 +860,81 @@ export async function POST(request: NextRequest) {
                             message:
                                 "A forma de pagamento mudou. Envie novamente para iniciar uma nova tentativa.",
                             data: {
-                                reset_attempt: true,
+                                reset_attempt:
+                                    true,
                             },
                         },
-                        { status: 409 },
+                        {
+                            status:
+                                409,
+                        },
                     );
                 }
 
-                if (existingAttempt.external_id) {
-                    return NextResponse.json({
-                        ok: true,
-                        data: {
-                            pedido_codigo:
-                            existingAttempt
-                                .vnd_pedido
-                                .codigo,
-                            pagamento_id:
-                            existingAttempt
-                                .external_id,
-                            metodo:
-                            existingAttempt
-                                .fin_pagamento_metodo
-                                .codigo,
-                            status:
-                                localStatusToClient(
-                                    existingAttempt
-                                        .fin_pagamento_status
-                                        .codigo,
-                                ),
-                            status_detail: null,
-                            qr_code_text:
-                            existingAttempt
-                                .qr_code_text,
-                            qr_code_base64: null,
-                            payment_url:
-                            existingAttempt
-                                .payment_url,
+                if (
+                    existingAttempt
+                        .external_id
+                ) {
+                    return NextResponse.json(
+                        {
+                            ok: true,
+                            data: {
+                                pedido_codigo:
+                                existingAttempt
+                                    .vnd_pedido
+                                    .codigo,
+
+                                pagamento_id:
+                                existingAttempt
+                                    .external_id,
+
+                                metodo:
+                                existingAttempt
+                                    .fin_pagamento_metodo
+                                    .codigo,
+
+                                status:
+                                    localStatusToClient(
+                                        existingAttempt
+                                            .fin_pagamento_status
+                                            .codigo,
+                                    ),
+
+                                status_detail:
+                                    null,
+
+                                qr_code_text:
+                                existingAttempt
+                                    .qr_code_text,
+
+                                qr_code_base64:
+                                    null,
+
+                                payment_url:
+                                existingAttempt
+                                    .payment_url,
+                            },
                         },
-                    });
+                    );
                 }
 
                 attempt = {
                     pedido:
-                    existingAttempt.vnd_pedido,
+                    existingAttempt
+                        .vnd_pedido,
+
                     pagamento: {
-                        id: existingAttempt.id,
-                    },
-                    total: Number(
+                        id:
                         existingAttempt
-                            .vnd_pedido
-                            .valor_total,
-                    ),
+                            .id,
+                    },
+
+                    total:
+                        Number(
+                            existingAttempt
+                                .vnd_pedido
+                                .valor_total,
+                        ),
                 };
             }
         }
@@ -691,61 +949,125 @@ export async function POST(request: NextRequest) {
             attempt.pagamento.id;
 
         const payerIdentification =
-            formData?.payer?.identification;
-        const identificationType = nonEmptyString(
-            payerIdentification?.type,
-        );
-        const identificationNumber = nonEmptyString(
-            payerIdentification?.number,
-        );
-        const { firstName, lastName } = splitName(
+            formData
+                ?.payer
+                ?.identification;
+
+        const identificationType =
+            nonEmptyString(
+                payerIdentification
+                    ?.type,
+            );
+
+        const identificationNumber =
+            nonEmptyString(
+                payerIdentification
+                    ?.number,
+            );
+
+        const {
+            firstName,
+            lastName,
+        } = splitName(
             customer.nome,
         );
 
         const mercadoPagoRequest = {
-            transaction_amount: attempt.total,
-            description: `Pedido ${attempt.pedido.codigo} - AAACCU`,
-            payment_method_id: paymentMethodId,
-            external_reference: attempt.pedido.codigo,
-            ...(token ? { token } : {}),
+            transaction_amount:
+            attempt.total,
+
+            description:
+                `Pedido ${attempt.pedido.codigo} - AAACCU`,
+
+            payment_method_id:
+            paymentMethodId,
+
+            external_reference:
+            attempt.pedido.codigo,
+
+            ...(token
+                ? { token }
+                : {}),
+
             ...(installments
-                ? { installments }
+                ? {
+                    installments,
+                }
                 : {}),
+
             ...(issuerId
-                ? { issuer_id: issuerId }
+                ? {
+                    issuer_id:
+                    issuerId,
+                }
                 : {}),
+
             payer: {
-                email: customer.email,
-                first_name: firstName,
+                email:
+                customer.email,
+
+                first_name:
+                firstName,
+
                 ...(lastName
-                    ? { last_name: lastName }
+                    ? {
+                        last_name:
+                        lastName,
+                    }
                     : {}),
-                ...(identificationType && identificationNumber
+
+                ...(identificationType &&
+                identificationNumber
                     ? {
                         identification: {
-                            type: identificationType,
-                            number: identificationNumber,
+                            type:
+                            identificationType,
+
+                            number:
+                            identificationNumber,
                         },
                     }
                     : {}),
             },
-            ...(validatedItems.length > 0
+
+            ...(validatedItems.length >
+            0
                 ? {
                     additional_info: {
-                        items: validatedItems.map((item) => ({
-                            id: String(item.produto_id),
-                            title:
-                                item.produto?.nome ??
-                                "Produto AAACCU",
-                            description:
-                                item.variacao?.nome ??
-                                undefined,
-                            quantity: item.quantidade,
-                            unit_price:
-                                item.preco_unitario ??
-                                item.produto?.preco_aplicado ??
-                                0,
-                        })),
+                        items:
+                            validatedItems.map(
+                                (
+                                    item,
+                                ) => ({
+                                    id:
+                                        String(
+                                            item.produto_id,
+                                        ),
+
+                                    title:
+                                        item
+                                            .produto
+                                            ?.nome ??
+                                        "Produto AAACCU",
+
+                                    description:
+                                        item
+                                            .variacao
+                                            ?.nome ??
+                                        undefined,
+
+                                    quantity:
+                                    item.quantidade,
+
+                                    unit_price:
+                                        item
+                                            .preco_unitario ??
+                                        item
+                                            .produto
+                                            ?.preco_aplicado ??
+                                        0,
+                                }),
+                            ),
                     },
                 }
                 : {}),
@@ -753,7 +1075,11 @@ export async function POST(request: NextRequest) {
 
         let mercadoPagoPayment;
 
-        for (let mpAttempt = 1; mpAttempt <= 4; mpAttempt += 1) {
+        for (
+            let mpAttempt = 1;
+            mpAttempt <= 4;
+            mpAttempt += 1
+        ) {
             try {
                 mercadoPagoPayment =
                     await createMercadoPagoPayment(
@@ -763,17 +1089,25 @@ export async function POST(request: NextRequest) {
 
                 break;
             } catch (error) {
-                if (!isMercadoPagoIdempotencyConflict(error)) {
+                if (
+                    !isMercadoPagoIdempotencyConflict(
+                        error,
+                    )
+                ) {
                     throw error;
                 }
 
-                /*
-                 * Outra requisição com a mesma chave pode estar criando
-                 * exatamente este pagamento no Mercado Pago. Esperamos
-                 * a vencedora salvar o external_id antes de tentar de novo.
-                 */
-                for (let recoveryAttempt = 1; recoveryAttempt <= 5; recoveryAttempt += 1) {
-                    await waitForRetry(recoveryAttempt * 100);
+                for (
+                    let recoveryAttempt = 1;
+                    recoveryAttempt <=
+                    5;
+                    recoveryAttempt +=
+                        1
+                ) {
+                    await waitForRetry(
+                        recoveryAttempt *
+                        100,
+                    );
 
                     const recoveredAttempt =
                         await pedidoPublicService
@@ -781,116 +1115,202 @@ export async function POST(request: NextRequest) {
                                 idempotencyKey,
                             );
 
-                    if (recoveredAttempt?.external_id) {
-                        return NextResponse.json({
-                            ok: true,
-                            data: {
-                                pedido_codigo:
-                                recoveredAttempt.vnd_pedido.codigo,
-                                pagamento_id:
-                                recoveredAttempt.external_id,
-                                metodo:
-                                recoveredAttempt.fin_pagamento_metodo.codigo,
-                                status:
-                                    localStatusToClient(
-                                        recoveredAttempt
-                                            .fin_pagamento_status
-                                            .codigo,
-                                    ),
-                                status_detail: null,
-                                qr_code_text:
-                                recoveredAttempt.qr_code_text,
-                                qr_code_base64: null,
-                                payment_url:
-                                recoveredAttempt.payment_url,
+                    if (
+                        recoveredAttempt
+                            ?.external_id
+                    ) {
+                        return NextResponse.json(
+                            {
+                                ok: true,
+                                data: {
+                                    pedido_codigo:
+                                    recoveredAttempt
+                                        .vnd_pedido
+                                        .codigo,
+
+                                    pagamento_id:
+                                    recoveredAttempt
+                                        .external_id,
+
+                                    metodo:
+                                    recoveredAttempt
+                                        .fin_pagamento_metodo
+                                        .codigo,
+
+                                    status:
+                                        localStatusToClient(
+                                            recoveredAttempt
+                                                .fin_pagamento_status
+                                                .codigo,
+                                        ),
+
+                                    status_detail:
+                                        null,
+
+                                    qr_code_text:
+                                    recoveredAttempt
+                                        .qr_code_text,
+
+                                    qr_code_base64:
+                                        null,
+
+                                    payment_url:
+                                    recoveredAttempt
+                                        .payment_url,
+                                },
                             },
-                        });
+                        );
                     }
                 }
 
-                if (mpAttempt === 4) {
+                if (
+                    mpAttempt === 4
+                ) {
                     return NextResponse.json(
                         {
                             ok: false,
                             message:
                                 "O pagamento ainda está sendo processado. Tente novamente em instantes.",
                             data: {
-                                reset_attempt: false,
+                                reset_attempt:
+                                    false,
                             },
                         },
-                        { status: 503 },
+                        {
+                            status:
+                                503,
+                        },
                     );
                 }
 
-                await waitForRetry(mpAttempt * 250);
+                await waitForRetry(
+                    mpAttempt *
+                    250,
+                );
             }
         }
 
-        if (!mercadoPagoPayment) {
+        if (
+            !mercadoPagoPayment
+        ) {
             throw new Error(
                 "Não foi possível recuperar o pagamento do Mercado Pago.",
             );
         }
 
-        const pix = getMercadoPagoPixData(
-            mercadoPagoPayment,
-        );
+        const pix =
+            getMercadoPagoPixData(
+                mercadoPagoPayment,
+            );
 
-        await withDeadlockRetry(() =>
-            pedidoPublicService.applyMercadoPagoPayment({
-                finPagamentoId: attempt.pagamento.id,
-                payment: mercadoPagoPayment,
-                qrCodeText: pix.qrCodeText,
-                paymentUrl: pix.ticketUrl,
-            }),
+        await withDeadlockRetry(
+            () =>
+                pedidoPublicService
+                    .applyMercadoPagoPayment({
+                        finPagamentoId:
+                        attempt.pagamento
+                            .id,
+
+                        payment:
+                        mercadoPagoPayment,
+
+                        qrCodeText:
+                        pix.qrCodeText,
+
+                        paymentUrl:
+                        pix.ticketUrl,
+                    }),
         );
 
         return NextResponse.json({
             ok: true,
             data: {
-                pedido_codigo: attempt.pedido.codigo,
+                pedido_codigo:
+                attempt.pedido.codigo,
+
                 pagamento_id:
-                    mercadoPagoPayment.id !== undefined
-                        ? String(mercadoPagoPayment.id)
+                    mercadoPagoPayment
+                        .id !==
+                    undefined
+                        ? String(
+                            mercadoPagoPayment
+                                .id,
+                        )
                         : null,
-                metodo: method,
+
+                metodo:
+                method,
+
                 status:
-                    mercadoPagoPayment.status ??
+                    mercadoPagoPayment
+                        .status ??
                     "pending",
+
                 status_detail:
-                    mercadoPagoPayment.status_detail ??
+                    mercadoPagoPayment
+                        .status_detail ??
                     null,
-                qr_code_text: pix.qrCodeText,
-                qr_code_base64: pix.qrCodeBase64,
-                payment_url: pix.ticketUrl,
+
+                qr_code_text:
+                pix.qrCodeText,
+
+                qr_code_base64:
+                pix.qrCodeBase64,
+
+                payment_url:
+                pix.ticketUrl,
             },
         });
     } catch (error) {
-        console.error("[public.checkout.pay]", error);
+        console.error(
+            "[public.checkout.pay]",
+            error,
+        );
 
         const idempotencyConflict =
-            isMercadoPagoIdempotencyConflict(error);
+            isMercadoPagoIdempotencyConflict(
+                error,
+            );
 
         const rejectedByMercadoPago =
-            error instanceof MercadoPagoApiError &&
+            error instanceof
+            MercadoPagoApiError &&
             error.status >= 400 &&
             error.status < 500 &&
             !idempotencyConflict;
 
-        if (localPaymentId && rejectedByMercadoPago) {
+        if (
+            localPaymentId &&
+            rejectedByMercadoPago
+        ) {
             try {
-                await withDeadlockRetry(() =>
-                    pedidoPublicService.applyMercadoPagoPayment({
-                        finPagamentoId: localPaymentId!,
-                        payment: {
-                            status: "rejected",
-                            status_detail: error.message,
-                        },
-                        qrCodeText: null,
-                        paymentUrl: null,
-                    }),
+                await withDeadlockRetry(
+                    () =>
+                        pedidoPublicService
+                            .applyMercadoPagoPayment(
+                                {
+                                    finPagamentoId:
+                                        localPaymentId!,
+
+                                    payment: {
+                                        status:
+                                            "rejected",
+
+                                        status_detail:
+                                        error.message,
+                                    },
+
+                                    qrCodeText:
+                                        null,
+
+                                    paymentUrl:
+                                        null,
+                                },
+                            ),
                 );
-            } catch (statusError) {
+            } catch (
+                statusError
+                ) {
                 console.error(
                     "[public.checkout.pay.status]",
                     statusError,
@@ -902,17 +1322,20 @@ export async function POST(request: NextRequest) {
             {
                 ok: false,
                 message:
-                    error instanceof Error
+                    error instanceof
+                    Error
                         ? error.message
-                        : "Não foi possível processar o pagamento.",
+                        : "Não foi possível processar o pedido.",
                 data: {
-                    reset_attempt: rejectedByMercadoPago,
+                    reset_attempt:
+                    rejectedByMercadoPago,
                 },
             },
             {
-                status: rejectedByMercadoPago
-                    ? 400
-                    : 502,
+                status:
+                    rejectedByMercadoPago
+                        ? 400
+                        : 502,
             },
         );
     }

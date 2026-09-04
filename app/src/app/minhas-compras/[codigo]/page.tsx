@@ -5,6 +5,7 @@ import Link from "next/link";
 import {
     ArrowLeft,
     Clock3,
+    ImageOff,
     Package,
     ReceiptText,
 } from "lucide-react";
@@ -71,6 +72,10 @@ function money(value: number) {
             currency: "BRL",
         },
     ).format(value);
+}
+
+function productPrice(value: number) {
+    return value === 0 ? "Grátis" : money(value);
 }
 
 function formatDate(
@@ -274,7 +279,7 @@ export default async function MinhaCompraDetalhePage({
                                     pedido.created_at,
                                 )}
                                 {" • "}
-                                {money(
+                                {productPrice(
                                     pedido.valor_total,
                                 )}
                             </span>
@@ -299,78 +304,137 @@ export default async function MinhaCompraDetalhePage({
                                 </strong>
                             </div>
 
-                            {pedido.itens.map(
-                                (item) => (
+                            {pedido.itens.map((item) => (
+                                <div
+                                    key={item.id}
+                                    className="bp-card"
+                                >
                                     <div
-                                        key={
-                                            item.id
-                                        }
-                                        className="bp-card"
+                                        className="bp-card-body"
+                                        style={{
+                                            display: "grid",
+                                            gridTemplateColumns:
+                                                "112px minmax(0, 1fr)",
+                                            gap: 16,
+                                            alignItems: "start",
+                                        }}
                                     >
                                         <div
-                                            className="bp-card-body"
                                             style={{
-                                                display:
-                                                    "grid",
+                                                width: 112,
+                                                aspectRatio: "1 / 1",
+                                                borderRadius: 12,
+                                                overflow: "hidden",
+                                                border:
+                                                    "1px solid var(--color-border-soft)",
+                                                background:
+                                                    "var(--color-surface-soft)",
+                                                display: "grid",
+                                                placeItems: "center",
+                                            }}
+                                        >
+                                            {item.imagem_url ? (
+                                                // eslint-disable-next-line @next/next/no-img-element
+                                                <img
+                                                    src={item.imagem_url}
+                                                    alt={item.produto_nome}
+                                                    style={{
+                                                        width: "100%",
+                                                        height: "100%",
+                                                        objectFit: "cover",
+                                                    }}
+                                                />
+                                            ) : (
+                                                <ImageOff size={28} />
+                                            )}
+                                        </div>
+
+                                        <div
+                                            style={{
+                                                minWidth: 0,
+                                                display: "grid",
                                                 gap: 12,
                                             }}
                                         >
                                             <div
                                                 className="bp-row-between"
                                                 style={{
-                                                    alignItems:
-                                                        "flex-start",
+                                                    alignItems: "flex-start",
+                                                    gap: 12,
                                                 }}
                                             >
-                                                <div
-                                                    style={{
-                                                        minWidth:
-                                                            0,
-                                                    }}
-                                                >
-                                                    <strong>
-                                                        {
-                                                            item.produto_nome
-                                                        }
+                                                <div>
+                                                    <strong style={{ fontSize: 16 }}>
+                                                        {item.produto_nome}
                                                     </strong>
 
                                                     {item.variacao ? (
                                                         <div
                                                             style={{
-                                                                marginTop:
-                                                                    3,
+                                                                marginTop: 4,
                                                                 color:
                                                                     "var(--color-text-muted)",
-                                                                fontSize:
-                                                                    12,
+                                                                fontSize: 12,
                                                             }}
                                                         >
-                                                            {
-                                                                item.variacao
-                                                            }
+                                                            {item.variacao}
                                                         </div>
                                                     ) : null}
                                                 </div>
 
                                                 <Badge color="secondary">
-                                                    {
-                                                        item.quantidade
-                                                    }{" "}
-                                                    un.
+                                                    {item.quantidade} un.
                                                 </Badge>
+                                            </div>
+
+                                            <div
+                                                style={{
+                                                    display: "grid",
+                                                    gridTemplateColumns:
+                                                        "repeat(2, minmax(0, 1fr))",
+                                                    gap: 10,
+                                                }}
+                                            >
+                                                <div style={{ display: "grid", gap: 3 }}>
+                                                    <span
+                                                        style={{
+                                                            color:
+                                                                "var(--color-text-soft)",
+                                                            fontSize: 11,
+                                                        }}
+                                                    >
+                                                        Valor unitário
+                                                    </span>
+                                                    <strong>
+                                                        {productPrice(item.preco_unitario)}
+                                                    </strong>
+                                                </div>
+
+                                                <div style={{ display: "grid", gap: 3 }}>
+                                                    <span
+                                                        style={{
+                                                            color:
+                                                                "var(--color-text-soft)",
+                                                            fontSize: 11,
+                                                        }}
+                                                    >
+                                                        Subtotal
+                                                    </span>
+                                                    <strong>
+                                                        {productPrice(item.subtotal)}
+                                                    </strong>
+                                                </div>
                                             </div>
 
                                             {item.previsao_entrega ? (
                                                 <div
                                                     style={{
-                                                        paddingTop:
-                                                            10,
+                                                        paddingTop: 10,
                                                         borderTop:
                                                             "1px solid var(--color-border-soft)",
                                                         color:
                                                             "var(--color-text-muted)",
-                                                        fontSize:
-                                                            12,
+                                                        fontSize: 12,
                                                     }}
                                                 >
                                                     Previsão de entrega:{" "}
@@ -387,39 +451,27 @@ export default async function MinhaCompraDetalhePage({
                                                 </div>
                                             ) : null}
 
-                                            {item.componentes.length >
-                                            0 ? (
+                                            {item.componentes.length > 0 ? (
                                                 <div
                                                     style={{
-                                                        paddingTop:
-                                                            10,
+                                                        paddingTop: 10,
                                                         borderTop:
                                                             "1px solid var(--color-border-soft)",
-                                                        display:
-                                                            "grid",
+                                                        display: "grid",
                                                         gap: 8,
-                                                        fontSize:
-                                                            12,
+                                                        fontSize: 12,
                                                     }}
                                                 >
-                                                    <strong>
-                                                        Itens do kit
-                                                    </strong>
+                                                    <strong>Itens do kit</strong>
 
                                                     {item.componentes.map(
-                                                        (
-                                                            componente,
-                                                        ) => (
+                                                        (componente) => (
                                                             <div
-                                                                key={
-                                                                    componente.id
-                                                                }
+                                                                key={componente.id}
                                                                 className="bp-row-between"
                                                             >
                                                                 <span>
-                                                                    {
-                                                                        componente.produto_nome
-                                                                    }
+                                                                    {componente.produto_nome}
                                                                     {componente.variacao
                                                                         ? ` • ${componente.variacao}`
                                                                         : ""}
@@ -431,10 +483,7 @@ export default async function MinhaCompraDetalhePage({
                                                                             "var(--color-text-muted)",
                                                                     }}
                                                                 >
-                                                                    {
-                                                                        componente.quantidade
-                                                                    }{" "}
-                                                                    un.
+                                                                    {componente.quantidade} un.
                                                                 </span>
                                                             </div>
                                                         ),
@@ -443,8 +492,8 @@ export default async function MinhaCompraDetalhePage({
                                             ) : null}
                                         </div>
                                     </div>
-                                ),
-                            )}
+                                </div>
+                            ))}
                         </section>
 
                         <aside
@@ -549,7 +598,7 @@ export default async function MinhaCompraDetalhePage({
                                                             20,
                                                     }}
                                                 >
-                                                    {money(
+                                                    {productPrice(
                                                         pedido
                                                             .pagamento
                                                             .valor,
@@ -566,7 +615,9 @@ export default async function MinhaCompraDetalhePage({
                                                     13,
                                             }}
                                         >
-                                            Nenhum pagamento registrado.
+                                            {pedido.valor_total === 0
+                                                ? "Pedido gratuito — nenhuma cobrança foi necessária."
+                                                : "Nenhum pagamento registrado."}
                                         </span>
                                     )}
                                 </div>

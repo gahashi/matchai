@@ -91,7 +91,7 @@ type ValidatedItem = {
 type CheckoutPaymentResult = {
     pedido_codigo: string;
     pagamento_id: string | null;
-    metodo: "pix" | "cartao";
+    metodo: "pix" | "cartao" | "gratis";
     status: string;
     status_detail: string | null;
     qr_code_text: string | null;
@@ -108,6 +108,12 @@ function money(value: number) {
         style: "currency",
         currency: "BRL",
     }).format(value);
+}
+
+function productPrice(value: number) {
+    return value === 0
+        ? "Grátis"
+        : money(value);
 }
 
 function onlyDigits(value: string) {
@@ -587,6 +593,141 @@ export function CheckoutClient({
         [clearCart, customer, items],
     );
 
+    async function submitFreeOrder() {
+        if (!customerIsValid(customer)) {
+            setBrickError(
+                "Confira nome, e-mail e telefone antes de finalizar.",
+            );
+            return;
+        }
+
+        try {
+            setProcessing(true);
+            setBrickError(null);
+
+            if (!attemptIdRef.current) {
+                attemptIdRef.current =
+                    window.crypto.randomUUID();
+            }
+
+            const response = await fetch(
+                "/api/public/checkout/pagar",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type":
+                            "application/json",
+                        Accept:
+                            "application/json",
+                    },
+                    body: JSON.stringify({
+                        attempt_id:
+                        attemptIdRef.current,
+
+                        cliente: {
+                            nome:
+                                customer.nome.trim(),
+
+                            email:
+                                customer.email.trim(),
+
+                            telefone:
+                                customer.telefone.trim(),
+                        },
+
+                        items:
+                            items.map(
+                                (item) => ({
+                                    line_key:
+                                    item.lineKey,
+
+                                    produto_id:
+                                    item.produtoId,
+
+                                    variacao_id:
+                                    item.variacaoId,
+
+                                    quantidade:
+                                    item.quantidade,
+
+                                    campos:
+                                        item.campos.map(
+                                            (
+                                                campo,
+                                            ) => ({
+                                                campo_id:
+                                                campo.campoId,
+
+                                                valor:
+                                                campo.valor,
+                                            }),
+                                        ),
+
+                                    componentes:
+                                        item.componentes.map(
+                                            (
+                                                componente,
+                                            ) => ({
+                                                componente_id:
+                                                componente
+                                                    .componenteId,
+
+                                                variacao_id:
+                                                componente
+                                                    .variacaoId,
+
+                                                campos:
+                                                    componente.campos.map(
+                                                        (
+                                                            campo,
+                                                        ) => ({
+                                                            campo_id:
+                                                            campo.campoId,
+
+                                                            valor:
+                                                            campo.valor,
+                                                        }),
+                                                    ),
+                                            }),
+                                        ),
+                                }),
+                            ),
+
+                        mercado_pago:
+                            null,
+                    }),
+                },
+            );
+
+            const result =
+                await response.json();
+
+            if (
+                !response.ok ||
+                !result.ok
+            ) {
+                throw new Error(
+                    result.message ||
+                    "Não foi possível confirmar o pedido gratuito.",
+                );
+            }
+
+            setPaymentResult(
+                result.data as CheckoutPaymentResult,
+            );
+
+            clearCart();
+        } catch (error) {
+            setBrickError(
+                error instanceof Error
+                    ? error.message
+                    : "Não foi possível confirmar o pedido gratuito.",
+            );
+        } finally {
+            setProcessing(false);
+        }
+    }
+
     function confirmCustomer() {
         if (!customerIsValid(customer)) {
             setBrickError(
@@ -638,7 +779,9 @@ export function CheckoutClient({
                                 : "is-pending"
                     }`}
                 >
-                    {paymentResult.metodo === "pix" ? (
+                    {paymentResult.metodo === "gratis" ? (
+                        <CheckCircle2 size={30} />
+                    ) : paymentResult.metodo === "pix" ? (
                         <QrCode size={30} />
                     ) : (
                         <CreditCard size={30} />
@@ -650,11 +793,13 @@ export function CheckoutClient({
                 </span>
 
                 <h1>
-                    {approved
-                        ? "Pagamento aprovado"
-                        : rejected
-                            ? "Pagamento não aprovado"
-                            : "Pagamento aguardando confirmação"}
+                    {paymentResult.metodo === "gratis"
+                        ? "Pedido confirmado"
+                        : approved
+                            ? "Pagamento aprovado"
+                            : rejected
+                                ? "Pagamento não aprovado"
+                                : "Pagamento aguardando confirmação"}
                 </h1>
 
                 {pending ? (
@@ -710,9 +855,9 @@ export function CheckoutClient({
                     </>
                 ) : approved ? (
                     <p>
-                        Seu pedido foi registrado e pago. Quando os produtos
-                        estiverem disponíveis, a atlética informará o dia e o
-                        local da retirada.
+                        {paymentResult.metodo === "gratis"
+                            ? "Seu pedido gratuito foi confirmado. Quando os produtos estiverem disponíveis, a atlética informará o dia e o local da retirada."
+                            : "Seu pedido foi registrado e pago. Quando os produtos estiverem disponíveis, a atlética informará o dia e o local da retirada."}
                     </p>
                 ) : rejected ? (
                     <p>
@@ -787,9 +932,9 @@ export function CheckoutClient({
                 </span>
                 <h1>Finalizar compra</h1>
                 <p>
-                    Pagamento por PIX ou cartão de crédito. A retirada será
-                    combinada pela atlética quando os produtos estiverem
-                    disponíveis.
+                    {total === 0
+                        ? "Revise seus dados e confirme o pedido gratuito. A retirada será combinada pela atlética quando os produtos estiverem disponíveis."
+                        : "Pagamento por PIX ou cartão de crédito. A retirada será combinada pela atlética quando os produtos estiverem disponíveis."}
                 </p>
             </header>
 
@@ -904,7 +1049,9 @@ export function CheckoutClient({
                                         onClick={confirmCustomer}
                                     >
                                         <CheckCircle2 size={16} />
-                                        Continuar para pagamento
+                                        {total === 0
+                                            ? "Continuar"
+                                            : "Continuar para pagamento"}
                                     </Button>
                                 </div>
                             </div>
@@ -916,9 +1063,15 @@ export function CheckoutClient({
                             <div>
                                 <span>2</span>
                                 <div>
-                                    <strong>Pagamento</strong>
+                                    <strong>
+                                        {total === 0
+                                            ? "Confirmação"
+                                            : "Pagamento"}
+                                    </strong>
                                     <small>
-                                        Escolha PIX ou cartão de crédito.
+                                        {total === 0
+                                            ? "Nenhuma cobrança será realizada."
+                                            : "Escolha PIX ou cartão de crédito."}
                                     </small>
                                 </div>
                             </div>
@@ -936,14 +1089,40 @@ export function CheckoutClient({
                         ) : hasUnavailable ? (
                             <div className="bp-public-checkout-locked is-danger">
                                 Existe um item indisponível. Volte ao carrinho
-                                e ajuste antes de pagar.
+                                e ajuste antes de finalizar.
+                            </div>
+                        ) : total === 0 ? (
+                            <div className="bp-public-payment-brick">
+                                <div className="bp-public-checkout-locked">
+                                    <CheckCircle2 size={18} />
+                                    Este pedido é gratuito. Nenhum pagamento será solicitado.
+                                </div>
+
+                                <Button
+                                    type="button"
+                                    fullWidth
+                                    disabled={processing}
+                                    onClick={submitFreeOrder}
+                                >
+                                    {processing ? (
+                                        <>
+                                            <Loader2 size={17} />
+                                            Confirmando pedido...
+                                        </>
+                                    ) : (
+                                        <>
+                                            <CheckCircle2 size={17} />
+                                            Confirmar pedido gratuito
+                                        </>
+                                    )}
+                                </Button>
                             </div>
                         ) : !publicKey ? (
                             <div className="bp-public-checkout-locked is-danger">
                                 A chave pública do Mercado Pago ainda não está
                                 configurada.
                             </div>
-                        ) : sdkReady && total > 0 ? (
+                        ) : sdkReady ? (
                             <div className="bp-public-payment-brick">
                                 {!brickReady ? (
                                     <div className="bp-public-checkout-brick-loading">
@@ -1032,7 +1211,7 @@ export function CheckoutClient({
                                     ) : null}
                                 </div>
                                 <strong>
-                                    {money(item.subtotal ?? 0)}
+                                    {productPrice(item.subtotal ?? 0)}
                                 </strong>
                             </div>
                         ))}
@@ -1040,7 +1219,7 @@ export function CheckoutClient({
 
                     <div className="bp-public-cart-summary-total">
                         <span>Total</span>
-                        <strong>{money(total)}</strong>
+                        <strong>{productPrice(total)}</strong>
                     </div>
 
                     <div className="bp-public-checkout-withdrawal">

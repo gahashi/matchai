@@ -818,6 +818,9 @@ model PrdProduto {
   controla_estoque Int    @default(0)
   estoque_atual    Int?
 
+  compra_unica_por_usuario Int @default(0)
+  somente_socio            Int @default(0)
+
   ativo    Int @default(1)
   destaque Int @default(0)
 
@@ -1279,8 +1282,8 @@ model VndPedidoItem {
   produto_nome_snapshot     String    @db.VarChar(150)
   variacao_snapshot         String?   @db.VarChar(120)
   previsao_entrega_snapshot DateTime? @db.Date
-
-  quantidade Int
+  imagem_url_snapshot       String?   @db.VarChar(500)
+  quantidade                Int
 
   preco_tabela   Decimal @db.Decimal(10, 2)
   preco_unitario Decimal @db.Decimal(10, 2)

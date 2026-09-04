@@ -258,6 +258,19 @@ function parseProdutoFormData(formData: FormData) {
         estoqueAtual: optionalInteger(
             formData.get("estoque_atual"),
         ),
+        compraUnicaPorUsuario:
+            booleanValue(
+                formData.get(
+                    "compra_unica_por_usuario",
+                ),
+            ),
+
+        somenteSocio:
+            booleanValue(
+                formData.get(
+                    "somente_socio",
+                ),
+            ),
         ativo: booleanValue(formData.get("ativo")),
         destaque: booleanValue(formData.get("destaque")),
         visivelPublico: booleanValue(

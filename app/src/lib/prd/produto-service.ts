@@ -40,6 +40,8 @@ type ProdutoWriteInput = {
     modalidadeVenda: "estoque" | "pre_venda";
     controlaEstoque: boolean;
     estoqueAtual?: number | null;
+    compraUnicaPorUsuario: boolean;
+    somenteSocio: boolean;
     ativo: boolean;
     destaque: boolean;
     visivelPublico: boolean;
@@ -395,6 +397,8 @@ const produtoSelect = {
     modalidade_venda: true,
     controla_estoque: true,
     estoque_atual: true,
+    compra_unica_por_usuario: true,
+    somente_socio: true,
     ativo: true,
     destaque: true,
     visivel_publico: true,
@@ -536,6 +540,8 @@ function serializeProduto(produto: any) {
         modalidade_venda: produto.modalidade_venda,
         controla_estoque: produto.controla_estoque,
         estoque_atual: produto.estoque_atual,
+        compra_unica_por_usuario:produto.compra_unica_por_usuario,
+        somente_socio:produto.somente_socio,
         ativo: produto.ativo,
         destaque: produto.destaque,
         visivel_publico: produto.visivel_publico,
@@ -666,6 +672,15 @@ class ProdutoService {
                     input.variacoes.length === 0
                         ? input.estoqueAtual ?? 0
                         : null,
+                compra_unica_por_usuario:
+                    input.compraUnicaPorUsuario
+                        ? 1
+                        : 0,
+
+                somente_socio:
+                    input.somenteSocio
+                        ? 1
+                        : 0,
                 ativo: input.ativo ? 1 : 0,
                 destaque: input.destaque ? 1 : 0,
                 visivel_publico: input.visivelPublico ? 1 : 0,
@@ -779,6 +794,15 @@ class ProdutoService {
                     input.variacoes.length === 0
                         ? input.estoqueAtual ?? 0
                         : null,
+                compra_unica_por_usuario:
+                    input.compraUnicaPorUsuario
+                        ? 1
+                        : 0,
+
+                somente_socio:
+                    input.somenteSocio
+                        ? 1
+                        : 0,
                 ativo: input.ativo ? 1 : 0,
                 destaque: input.destaque ? 1 : 0,
                 visivel_publico: input.visivelPublico ? 1 : 0,

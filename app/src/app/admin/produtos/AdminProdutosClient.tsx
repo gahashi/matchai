@@ -112,6 +112,8 @@ type Produto = {
     modalidade_venda: "estoque" | "pre_venda";
     controla_estoque: number;
     estoque_atual: number | null;
+    compra_unica_por_usuario: number;
+    somente_socio: number;
     ativo: number;
     destaque: number;
     visivel_publico: number;
@@ -161,6 +163,8 @@ type ProdutoFormState = {
     modalidade_venda: "estoque" | "pre_venda";
     controla_estoque: boolean;
     estoque_atual: string;
+    compra_unica_por_usuario: boolean;
+    somente_socio: boolean;
     ativo: boolean;
     destaque: boolean;
     visivel_publico: boolean;
@@ -218,6 +222,8 @@ const emptyForm: ProdutoFormState = {
     modalidade_venda: "estoque",
     controla_estoque: false,
     estoque_atual: "",
+    compra_unica_por_usuario: false,
+    somente_socio: false,
     ativo: true,
     destaque: false,
     visivel_publico: true,
@@ -269,6 +275,14 @@ function money(value: number) {
         style: "currency",
         currency: "BRL",
     }).format(value);
+}
+
+function productPrice(
+    value: number,
+) {
+    return value === 0
+        ? "Grátis"
+        : money(value);
 }
 
 function suggestProductCode(nome: string) {
@@ -326,6 +340,17 @@ function produtoToForm(produto: Produto): ProdutoFormState {
             produto.estoque_atual !== null
                 ? String(produto.estoque_atual)
                 : "",
+        compra_unica_por_usuario:
+            Boolean(
+                produto
+                    .compra_unica_por_usuario,
+            ),
+
+        somente_socio:
+            Boolean(
+                produto
+                    .somente_socio,
+            ),
         ativo: Boolean(produto.ativo),
         destaque: Boolean(produto.destaque),
         visivel_publico: Boolean(produto.visivel_publico),
@@ -860,6 +885,19 @@ export default function AdminProdutosClient({
             ehKit || variacoes.length > 0
                 ? ""
                 : form.estoque_atual,
+        );
+        payload.set(
+            "compra_unica_por_usuario",
+            form.compra_unica_por_usuario
+                ? "1"
+                : "0",
+        );
+
+        payload.set(
+            "somente_socio",
+            form.somente_socio
+                ? "1"
+                : "0",
         );
         payload.set("ativo", form.ativo ? "1" : "0");
         payload.set(
@@ -1423,7 +1461,7 @@ export default function AdminProdutosClient({
                                     <td>
                                         <div>
                                             <strong>
-                                                {money(
+                                                {productPrice(
                                                     produto.preco_normal,
                                                 )}
                                             </strong>
@@ -1614,7 +1652,7 @@ export default function AdminProdutosClient({
                                         <div>
                                             <span>Preço</span>
                                             <strong>
-                                                {money(
+                                                {productPrice(
                                                     produto.preco_normal,
                                                 )}
                                             </strong>
@@ -1809,7 +1847,7 @@ export default function AdminProdutosClient({
 
                                     <div className="bp-store-product-price">
                                         <strong>
-                                            {money(
+                                            {productPrice(
                                                 produto.preco_normal,
                                             )}
                                         </strong>
@@ -2944,7 +2982,52 @@ export default function AdminProdutosClient({
                                     ) : null}
                                 </span>
                             </label>
+                            <label className="bp-check">
+                                <input
+                                    type="checkbox"
+                                    checked={
+                                        form
+                                            .compra_unica_por_usuario
+                                    }
+                                    onChange={(event) =>
+                                        updateForm(
+                                            "compra_unica_por_usuario",
+                                            event.target.checked,
+                                        )
+                                    }
+                                />
 
+                                <span>
+        Compra única por usuário
+
+        <span className="bp-field-help">
+            Cada conta poderá adquirir este produto apenas uma vez.
+        </span>
+    </span>
+                            </label>
+
+                            <label className="bp-check">
+                                <input
+                                    type="checkbox"
+                                    checked={
+                                        form.somente_socio
+                                    }
+                                    onChange={(event) =>
+                                        updateForm(
+                                            "somente_socio",
+                                            event.target.checked,
+                                        )
+                                    }
+                                />
+
+                                <span>
+        Exclusivo para sócios
+
+        <span className="bp-field-help">
+            Somente usuários com associação ativa poderão comprar este produto.
+        </span>
+    </span>
+                            </label>
                             <label className="bp-check">
                                 <input
                                     type="checkbox"
@@ -3116,7 +3199,7 @@ export default function AdminProdutosClient({
 
                             <div className="bp-store-preview-price">
                                 <strong>
-                                    {money(
+                                    {productPrice(
                                         previewProduto.preco_normal,
                                     )}
                                 </strong>
