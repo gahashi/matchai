@@ -580,10 +580,21 @@ function serializePedidoResumo(pedido: any) {
         pagamento: pagamento
             ? {
                 id: pagamento.id,
+
                 valor:
                     serializeMoney(
                         pagamento.valor,
                     ) ?? 0,
+
+                taxa_gateway:
+                    serializeMoney(
+                        pagamento.taxa_gateway,
+                    ),
+
+                valor_liquido:
+                    serializeMoney(
+                        pagamento.valor_liquido,
+                    ),
 
                 status: {
                     codigo:
@@ -984,6 +995,8 @@ const pedidoResumoSelect = {
             valor: true,
             provider: true,
             aprovado_at: true,
+            taxa_gateway: true,
+            valor_liquido: true,
 
             fin_pagamento_status: {
                 select: {

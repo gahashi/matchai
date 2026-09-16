@@ -63,6 +63,8 @@ type PedidoStatus = {
 type PedidoPagamento = {
     id: number;
     valor: number;
+    taxa_gateway: number | null;
+    valor_liquido: number | null;
 
     status: {
         codigo: string;
@@ -1289,29 +1291,76 @@ export default function AdminPedidosClient({
                                     </td>
 
                                     <td>
-                                        <strong>
-                                            {money(
-                                                pedido.valor_total,
-                                            )}
-                                        </strong>
-
                                         <div
                                             style={{
-                                                marginTop:
-                                                    3,
-                                                color:
-                                                    "var(--color-text-soft)",
-                                                fontSize:
-                                                    11,
+                                                display: "grid",
+                                                gap: 3,
                                             }}
                                         >
-                                            {
-                                                pedido.quantidade_itens
-                                            }{" "}
-                                            item(ns)
+                                            <div>
+            <span
+                style={{
+                    color:
+                        "var(--color-text-soft)",
+                    fontSize: 11,
+                }}
+            >
+                Bruto
+            </span>
+
+                                                <strong
+                                                    style={{
+                                                        display: "block",
+                                                    }}
+                                                >
+                                                    {money(
+                                                        pedido.valor_total,
+                                                    )}
+                                                </strong>
+                                            </div>
+
+                                            {pedido.pagamento
+                                                ?.valor_liquido !== null &&
+                                            pedido.pagamento
+                                                ?.valor_liquido !==
+                                            undefined ? (
+                                                <div>
+                <span
+                    style={{
+                        color:
+                            "var(--color-text-soft)",
+                        fontSize: 11,
+                    }}
+                >
+                    Líquido
+                </span>
+
+                                                    <strong
+                                                        style={{
+                                                            display: "block",
+                                                        }}
+                                                    >
+                                                        {money(
+                                                            pedido.pagamento
+                                                                .valor_liquido,
+                                                        )}
+                                                    </strong>
+                                                </div>
+                                            ) : null}
+
+                                            <div
+                                                style={{
+                                                    marginTop: 3,
+                                                    color:
+                                                        "var(--color-text-soft)",
+                                                    fontSize: 11,
+                                                }}
+                                            >
+                                                {pedido.quantidade_itens}{" "}
+                                                item(ns)
+                                            </div>
                                         </div>
                                     </td>
-
                                     <td>
                                         {pedido.pagamento ? (
                                             <div
@@ -1496,9 +1545,9 @@ export default function AdminPedidosClient({
                                                 </div>
 
                                                 <div className="bp-row-between">
-                                                    <span className="bp-section-subtitle">
-                                                        Valor
-                                                    </span>
+    <span className="bp-section-subtitle">
+        Valor bruto
+    </span>
 
                                                     <strong>
                                                         {money(
@@ -1507,6 +1556,24 @@ export default function AdminPedidosClient({
                                                     </strong>
                                                 </div>
 
+                                                {pedido.pagamento
+                                                    ?.valor_liquido !== null &&
+                                                pedido.pagamento
+                                                    ?.valor_liquido !==
+                                                undefined ? (
+                                                    <div className="bp-row-between">
+        <span className="bp-section-subtitle">
+            Valor líquido
+        </span>
+
+                                                        <strong>
+                                                            {money(
+                                                                pedido.pagamento
+                                                                    .valor_liquido,
+                                                            )}
+                                                        </strong>
+                                                    </div>
+                                                ) : null}
                                                 <div className="bp-row-between">
                                                     <span className="bp-section-subtitle">
                                                         Itens
