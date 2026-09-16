@@ -2506,3 +2506,112 @@ button.bp-public-product-card:focus-visible {
 .bp-public-checkout-status-refresh svg {
     animation: bp-spin 0.9s linear infinite;
 }
+.bp-public-payment-method-choice {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.bp-public-payment-method-choice > button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+    min-height: 76px;
+    padding: 14px 16px;
+
+    color: inherit;
+    text-align: left;
+
+    background: transparent;
+    border: 1px solid var(--bp-border);
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition:
+            border-color 0.15s ease,
+            background-color 0.15s ease;
+}
+
+.bp-public-payment-method-choice > button:hover:not(:disabled) {
+    border-color: var(--bp-primary);
+}
+
+.bp-public-payment-method-choice > button.is-active {
+    border-color: var(--bp-primary);
+    background: color-mix(
+            in srgb,
+            var(--bp-primary) 8%,
+            transparent
+    );
+}
+
+.bp-public-payment-method-choice > button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.bp-public-payment-method-choice > button > div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.bp-public-payment-method-choice strong {
+    font-size: 0.95rem;
+}
+
+.bp-public-payment-method-choice span {
+    color: var(--bp-text-muted);
+    font-size: 0.8rem;
+}
+
+.bp-public-payment-fee-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    margin-bottom: 16px;
+    padding: 14px 16px;
+
+    border: 1px solid var(--bp-border);
+    border-radius: 12px;
+}
+
+.bp-public-payment-fee-preview > span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    color: var(--bp-text-muted);
+    font-size: 0.88rem;
+}
+
+.bp-public-payment-fee-preview > span strong {
+    color: var(--bp-text);
+    white-space: nowrap;
+}
+
+.bp-public-payment-fee-preview > span:last-child {
+    margin-top: 4px;
+    padding-top: 10px;
+
+    color: var(--bp-text);
+    font-size: 0.95rem;
+
+    border-top: 1px solid var(--bp-border);
+}
+
+.bp-public-payment-fee-preview > span:last-child strong {
+    font-size: 1rem;
+}
+
+@media (max-width: 640px) {
+    .bp-public-payment-method-choice {
+        grid-template-columns: 1fr;
+    }
+}

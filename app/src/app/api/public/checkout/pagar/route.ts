@@ -717,6 +717,20 @@ export async function POST(request: NextRequest) {
                         .id,
                 },
 
+                subtotal:
+                    Number(
+                        existingAttempt
+                            .vnd_pedido
+                            .valor_produtos,
+                    ),
+
+                taxaPagamento:
+                    Number(
+                        existingAttempt
+                            .vnd_pedido
+                            .valor_acrescimo,
+                    ),
+
                 total:
                     Number(
                         existingAttempt
@@ -724,7 +738,7 @@ export async function POST(request: NextRequest) {
                             .valor_total,
                     ),
             };
-        } else {
+        }else {
             let createError:
                 unknown = null;
 
@@ -929,6 +943,20 @@ export async function POST(request: NextRequest) {
                             .id,
                     },
 
+                    subtotal:
+                        Number(
+                            existingAttempt
+                                .vnd_pedido
+                                .valor_produtos,
+                        ),
+
+                    taxaPagamento:
+                        Number(
+                            existingAttempt
+                                .vnd_pedido
+                                .valor_acrescimo,
+                        ),
+
                     total:
                         Number(
                             existingAttempt
@@ -1034,11 +1062,9 @@ export async function POST(request: NextRequest) {
             0
                 ? {
                     additional_info: {
-                        items:
-                            validatedItems.map(
-                                (
-                                    item,
-                                ) => ({
+                        items: [
+                            ...validatedItems.map(
+                                (item) => ({
                                     id:
                                         String(
                                             item.produto_id,
@@ -1068,6 +1094,28 @@ export async function POST(request: NextRequest) {
                                         0,
                                 }),
                             ),
+
+                            ...(attempt.taxaPagamento > 0
+                                ? [
+                                    {
+                                        id: "payment_fee",
+
+                                        title:
+                                            "Taxa de pagamento",
+
+                                        description:
+                                            method === "pix"
+                                                ? "Taxa de pagamento PIX"
+                                                : "Taxa de pagamento cartão",
+
+                                        quantity: 1,
+
+                                        unit_price:
+                                        attempt.taxaPagamento,
+                                    },
+                                ]
+                                : []),
+                        ],
                     },
                 }
                 : {}),

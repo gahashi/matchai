@@ -5,6 +5,9 @@ import type {
     MercadoPagoPaymentResponse,
 } from "@/lib/fin/mercado-pago";
 import {
+    calculatePaymentFee,
+} from "@/lib/fin/payment-fee";
+import {
     getPedidoAcompanhamentoUrl,
     sendPedidoCanceladoEmail,
     sendPedidoPagamentoAprovadoEmail,
@@ -647,6 +650,8 @@ class PedidoPublicService {
                         id: true,
                         codigo: true,
                         valor_total: true,
+                        valor_produtos: true,
+                        valor_acrescimo: true,
                         vnd_estoque_reservas: {
                             where: {
                                 consumida_at: null,
@@ -687,16 +692,28 @@ class PedidoPublicService {
             throw new Error("O carrinho está vazio.");
         }
 
-        const total = roundMoney(
+        const subtotal = roundMoney(
             input.items.reduce(
-                (sum, item) => sum + (item.subtotal ?? 0),
+                (sum, item) =>
+                    sum + (item.subtotal ?? 0),
                 0,
             ),
         );
 
-        if (total <= 0) {
-            throw new Error("O total do pedido é inválido.");
+        if (subtotal <= 0) {
+            throw new Error(
+                "O total do pedido é inválido.",
+            );
         }
+
+        const paymentFee =
+            calculatePaymentFee(
+                subtotal,
+                input.method,
+            );
+
+        const total =
+            paymentFee.total;
 
         const [pedidoStatus, entregaTipo, pagamentoStatus, pagamentoMetodo] =
             await Promise.all([
@@ -761,11 +778,11 @@ class PedidoPublicService {
                     entrega_endereco: null,
                     retirada_local: null,
                     observacao_cliente: null,
-                    valor_produtos: total,
+                    valor_produtos:paymentFee.subtotal,
                     valor_desconto: 0,
                     valor_frete: 0,
-                    valor_acrescimo: 0,
-                    valor_total: total,
+                    valor_acrescimo:paymentFee.feeAmount,
+                    valor_total:paymentFee.total,
                     created_at: now,
                     updated_at: now,
                 },
@@ -1018,9 +1035,15 @@ class PedidoPublicService {
             return {
                 pedido,
                 pagamento,
-                total,
+                subtotal:
+                paymentFee.subtotal,
+                taxaPagamento:
+                paymentFee.feeAmount,
+                total:
+                paymentFee.total,
                 reservaExpiraAt,
-                pagamentoExpiraAt: reservaExpiraAt,
+                pagamentoExpiraAt:
+                reservaExpiraAt,
             };
         });
     }

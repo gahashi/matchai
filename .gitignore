@@ -18,15 +18,14 @@ app/tsconfig.tsbuildinfo
 app/.env
 .env.local
 .env.*.local
-app/.env
 app/.env.local
 app/.env.*.local
 
 # Local service data
 services/minio/data/
 services/backups/
+services/mariadb/data/
 
-# Local uploads/storage
 # Local uploads/storage
 /storage/
 /uploads/

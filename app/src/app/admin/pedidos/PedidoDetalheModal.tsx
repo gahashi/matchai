@@ -925,7 +925,6 @@ export function PedidoDetalheModal({
                     ) : null}
 
 
-                    <div className="bp-grid-2">
                         <section className="bp-card bp-card-outline">
                             <div
                                 className="bp-card-body"
@@ -1112,7 +1111,7 @@ export function PedidoDetalheModal({
                                 </div>
                             </div>
                         </section>
-                    </div>
+
 
 
                     <section
@@ -1402,7 +1401,6 @@ export function PedidoDetalheModal({
                     </section>
 
 
-                    <div className="bp-grid-2">
                         <section className="bp-card bp-card-outline">
                             <div
                                 className="bp-card-body"
@@ -1489,6 +1487,27 @@ export function PedidoDetalheModal({
                                                                     .descricao
                                                             }
                                                         </span>
+                                                        {pagamento.taxa_gateway !== null ? (
+                                                            <span>
+        Taxa do gateway:{" "}
+                                                                <strong>
+            {money(
+                pagamento.taxa_gateway,
+            )}
+        </strong>
+    </span>
+                                                        ) : null}
+
+                                                        {pagamento.valor_liquido !== null ? (
+                                                            <span>
+        Valor líquido:{" "}
+                                                                <strong>
+            {money(
+                pagamento.valor_liquido,
+            )}
+        </strong>
+    </span>
+                                                        ) : null}
 
                                                         {pagamento.provider ? (
                                                             <span>
@@ -1599,7 +1618,7 @@ export function PedidoDetalheModal({
 
                                     <div className="bp-row-between">
                                         <span>
-                                            Acréscimo
+                                            Taxa cobrada do cliente
                                         </span>
                                         <strong>
                                             {money(
@@ -1631,7 +1650,7 @@ export function PedidoDetalheModal({
                                 </div>
                             </div>
                         </section>
-                    </div>
+
                     {emails.length > 0 ? (
                         <section className="bp-card bp-card-outline">
                             <div
@@ -1648,7 +1667,7 @@ export function PedidoDetalheModal({
                                         gap: 8,
                                     }}
                                 >
-                                    <Mail size={17} />
+                                    <Mail size={17}/>
 
                                     <strong>
                                         E-mails do pedido

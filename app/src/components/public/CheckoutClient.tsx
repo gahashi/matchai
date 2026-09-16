@@ -28,6 +28,10 @@ import {
 import {
     Button,
 } from "@/components/ui/Button";
+import {
+    calculatePaymentFee,
+    type PaymentFeeMethod,
+} from "@/lib/fin/payment-fee";
 
 export type CheckoutInitialCustomer = {
     isAuthenticated: boolean;
@@ -194,6 +198,8 @@ export function CheckoutClient({
     const [processing, setProcessing] = useState(false);
     const [paymentResult, setPaymentResult] =
         useState<CheckoutPaymentResult | null>(null);
+    const [selectedPaymentMethod, setSelectedPaymentMethod] =
+        useState<PaymentFeeMethod | null>(null);
     const [paymentRenderKey, setPaymentRenderKey] = useState(0);
     const attemptIdRef = useRef<string | null>(null);
 
@@ -429,6 +435,23 @@ export function CheckoutClient({
         [validated],
     );
 
+    const paymentFee = useMemo(
+        () =>
+            selectedPaymentMethod
+                ? calculatePaymentFee(
+                    total,
+                    selectedPaymentMethod,
+                )
+                : {
+                    subtotal: total,
+                    feeRate: 0,
+                    feePercent: 0,
+                    feeAmount: 0,
+                    total,
+                },
+        [selectedPaymentMethod, total],
+    );
+
     const hasUnavailable = validated.some(
         (item) => !item.disponivel,
     );
@@ -455,7 +478,7 @@ export function CheckoutClient({
 
     const initialization = useMemo(
         () => ({
-            amount: total,
+            amount: paymentFee.total,
             payer: {
                 email: customer.email.trim(),
                 ...(identification
@@ -463,24 +486,52 @@ export function CheckoutClient({
                     : {}),
             },
         }),
-        [customer.email, identification, total],
+        [customer.email, identification, paymentFee.total],
     );
 
     const customization = useMemo(
         () => ({
-            paymentMethods: {
-                creditCard: "all" as const,
-                bankTransfer: ["pix"],
-                maxInstallments: 12,
-            },
+            paymentMethods:
+                selectedPaymentMethod === "pix"
+                    ? {
+                        creditCard: [] as string[],
+                        bankTransfer: ["pix"],
+                        maxInstallments: 1,
+                    }
+                    : {
+                        creditCard: "all" as const,
+                        bankTransfer: [] as string[],
+                        maxInstallments: 12,
+                    },
+
             visual: {
                 style: {
                     theme: "dark" as const,
                 },
             },
         }),
-        [],
+        [selectedPaymentMethod],
     );
+
+    function selectPaymentMethod(
+        method: PaymentFeeMethod,
+    ) {
+        if (
+            processing ||
+            selectedPaymentMethod === method
+        ) {
+            return;
+        }
+
+        setSelectedPaymentMethod(method);
+        setBrickReady(false);
+        setBrickError(null);
+        setPaymentRenderKey(
+            (current) => current + 1,
+        );
+
+        attemptIdRef.current = null;
+    }
 
     const onSubmit = useCallback(
         async (mercadoPagoData: unknown) => {
@@ -1124,40 +1175,130 @@ export function CheckoutClient({
                             </div>
                         ) : sdkReady ? (
                             <div className="bp-public-payment-brick">
-                                {!brickReady ? (
-                                    <div className="bp-public-checkout-brick-loading">
-                                        <Loader2 size={18} />
-                                        Carregando formas de pagamento...
-                                    </div>
-                                ) : null}
+                                <div className="bp-public-payment-method-choice">
+                                    <button
+                                        type="button"
+                                        className={
+                                            selectedPaymentMethod === "pix"
+                                                ? "is-active"
+                                                : ""
+                                        }
+                                        disabled={processing}
+                                        onClick={() =>
+                                            selectPaymentMethod("pix")
+                                        }
+                                    >
+                                        <QrCode size={20} />
 
-                                <Payment
-                                    key={paymentRenderKey}
-                                    initialization={initialization}
-                                    customization={customization}
-                                    locale="pt-BR"
-                                    onReady={() => {
-                                        setBrickReady(true);
-                                        setBrickError(null);
-                                    }}
-                                    onError={(error) => {
-                                        console.error(
-                                            "[mercado-pago.brick]",
-                                            error,
-                                        );
-                                        setBrickError(
-                                            "Não foi possível carregar o formulário de pagamento.",
-                                        );
-                                    }}
-                                    onSubmit={onSubmit}
-                                />
+                                        <div>
+                                            <strong>PIX</strong>
+                                            <span>
+                        Taxa de 0,99%
+                    </span>
+                                        </div>
+                                    </button>
 
-                                {processing ? (
-                                    <div className="bp-public-checkout-processing">
-                                        <Loader2 size={18} />
-                                        Processando pagamento...
+                                    <button
+                                        type="button"
+                                        className={
+                                            selectedPaymentMethod === "cartao"
+                                                ? "is-active"
+                                                : ""
+                                        }
+                                        disabled={processing}
+                                        onClick={() =>
+                                            selectPaymentMethod("cartao")
+                                        }
+                                    >
+                                        <CreditCard size={20} />
+
+                                        <div>
+                                            <strong>
+                                                Cartão de crédito
+                                            </strong>
+                                            <span>
+                        Taxa de 4,98%
+                    </span>
+                                        </div>
+                                    </button>
+                                </div>
+
+                                {selectedPaymentMethod ? (
+                                    <>
+                                        <div className="bp-public-payment-fee-preview">
+                    <span>
+                        Produtos
+                        <strong>
+                            {money(
+                                paymentFee.subtotal,
+                            )}
+                        </strong>
+                    </span>
+
+                                            <span>
+                        Taxa de pagamento (
+                                                {paymentFee.feePercent
+                                                    .toFixed(2)
+                                                    .replace(".", ",")}
+                                                %)
+                        <strong>
+                            {money(
+                                paymentFee.feeAmount,
+                            )}
+                        </strong>
+                    </span>
+
+                                            <span>
+                        Total
+                        <strong>
+                            {money(
+                                paymentFee.total,
+                            )}
+                        </strong>
+                    </span>
+                                        </div>
+
+                                        {!brickReady ? (
+                                            <div className="bp-public-checkout-brick-loading">
+                                                <Loader2 size={18} />
+                                                Carregando forma de pagamento...
+                                            </div>
+                                        ) : null}
+
+                                        <Payment
+                                            key={paymentRenderKey}
+                                            initialization={initialization}
+                                            customization={customization}
+                                            locale="pt-BR"
+                                            onReady={() => {
+                                                setBrickReady(true);
+                                                setBrickError(null);
+                                            }}
+                                            onError={(error) => {
+                                                console.error(
+                                                    "[mercado-pago.brick]",
+                                                    error,
+                                                );
+
+                                                setBrickError(
+                                                    "Não foi possível carregar o formulário de pagamento.",
+                                                );
+                                            }}
+                                            onSubmit={onSubmit}
+                                        />
+
+                                        {processing ? (
+                                            <div className="bp-public-checkout-processing">
+                                                <Loader2 size={18} />
+                                                Processando pagamento...
+                                            </div>
+                                        ) : null}
+                                    </>
+                                ) : (
+                                    <div className="bp-public-checkout-locked">
+                                        Escolha PIX ou cartão de crédito para continuar.
                                     </div>
-                                ) : null}
+                                )}
                             </div>
                         ) : (
                             <div className="bp-public-checkout-locked">
@@ -1217,9 +1358,35 @@ export function CheckoutClient({
                         ))}
                     </div>
 
+                    {total > 0 && selectedPaymentMethod ? (
+                        <>
+                            <div className="bp-public-cart-summary-row">
+                                <span>Produtos</span>
+                                <strong>
+                                    {money(paymentFee.subtotal)}
+                                </strong>
+                            </div>
+
+                            <div className="bp-public-cart-summary-row">
+            <span>
+                Taxa de pagamento
+            </span>
+                                <strong>
+                                    {money(paymentFee.feeAmount)}
+                                </strong>
+                            </div>
+                        </>
+                    ) : null}
+
                     <div className="bp-public-cart-summary-total">
                         <span>Total</span>
-                        <strong>{productPrice(total)}</strong>
+                        <strong>
+                            {productPrice(
+                                selectedPaymentMethod
+                                    ? paymentFee.total
+                                    : total,
+                            )}
+                        </strong>
                     </div>
 
                     <div className="bp-public-checkout-withdrawal">
