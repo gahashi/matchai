@@ -26,6 +26,21 @@ function sanitizePathPart(value: string): string {
         .replace(/^\/+|\/+$/g, "");
 }
 
+function sanitizeMetadataValue(
+    value: string,
+): string {
+    const sanitized = value
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[\r\n\t]/g, " ")
+        .replace(/[^\x20-\x7E]/g, "-")
+        .replace(/\s+/g, " ")
+        .replace(/-+/g, "-")
+        .trim();
+
+    return sanitized.slice(0, 255);
+}
+
 function buildFileKey(input: UploadFileInput): string {
     const folder = sanitizePathPart(input.folder);
     const prefix = sanitizePathPart(input.filenamePrefix || "arquivo");
@@ -78,7 +93,9 @@ export class S3StorageProvider implements StorageProvider {
                 Body: body,
                 ContentType: input.file.type,
                 Metadata: {
-                    originalName: input.file.name,
+                    originalName: sanitizeMetadataValue(
+                        input.file.name,
+                    ),
                     visibility,
                 },
             }),
