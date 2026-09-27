@@ -1,28 +1,88 @@
+name: matchai
 services:
+  mariadb:
+    image: mariadb:11
+    container_name: matchai-mariadb
+    restart: unless-stopped
+
+    ports:
+      - "${MARIADB_PORT:-3309}:3306"
+
+    environment:
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+
+    volumes:
+      - matchai_mariadb_data:/var/lib/mysql
+
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "healthcheck.sh",
+          "--connect",
+          "--innodb_initialized"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+
   minio:
     image: minio/minio:latest
-    container_name: brava-pass-minio
-    command: server /data --console-address ":9001"
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    environment:
-      MINIO_ROOT_USER: bravapass
-      MINIO_ROOT_PASSWORD: bravapass123
-    volumes:
-      - ./minio/data:/data
+    container_name: matchai-minio
     restart: unless-stopped
+
+    command: server /data --console-address ":9001"
+
+    ports:
+      - "${MINIO_API_PORT:-9010}:9000"
+      - "${MINIO_CONSOLE_PORT:-9011}:9001"
+
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+
+    volumes:
+      - matchai_minio_data:/data
+
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "http://localhost:9000/minio/health/live"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
 
   minio-init:
     image: minio/mc:latest
-    container_name: brava-pass-minio-init
+    container_name: matchai-minio-init
+
     depends_on:
-      - minio
+      minio:
+        condition: service_healthy
+
     entrypoint: >
       /bin/sh -c "
-      sleep 5;
-      mc alias set local http://minio:9000 bravapass bravapass123;
-      mc mb -p local/brava-pass-dev;
-      mc anonymous set download local/brava-pass-dev;
+      mc alias set local http://minio:9000 $${MINIO_ROOT_USER} $${MINIO_ROOT_PASSWORD};
+      mc mb -p local/$${MINIO_BUCKET} || true;
+      mc anonymous set download local/$${MINIO_BUCKET};
       exit 0;
       "
+
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      MINIO_BUCKET: ${MINIO_BUCKET}
+
+
+volumes:
+  matchai_mariadb_data:
+  matchai_minio_data:
