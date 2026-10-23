@@ -1,0 +1,23 @@
+# Compose separado: não remove nem altera o MariaDB/MinIO da base atual.
+name: matchai-rustfs-dev
+services:
+  rustfs:
+    image: rustfs/rustfs:latest
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    command: ["/data"]
+    ports:
+      - "127.0.0.1:9020:9000"
+      - "127.0.0.1:9021:9001"
+    environment:
+      RUSTFS_ACCESS_KEY: ${RUSTFS_ACCESS_KEY:?Configure RUSTFS_ACCESS_KEY}
+      RUSTFS_SECRET_KEY: ${RUSTFS_SECRET_KEY:?Configure RUSTFS_SECRET_KEY}
+      RUSTFS_ADDRESS: ":9000"
+      RUSTFS_CONSOLE_ADDRESS: ":9001"
+      RUSTFS_CONSOLE_ENABLE: "true"
+      RUSTFS_OBS_LOGGER_LEVEL: error
+    volumes:
+      - rustfs_data:/data
+volumes:
+  rustfs_data:
