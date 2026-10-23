@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">MatchAI — ícone</title>
+  <desc id="desc">Ícone amarelo de cantos arredondados, monograma M preto e ponto preto no canto superior direito.</desc>
+  <rect x="112" y="112" width="800" height="800" rx="184" fill="#FFD400"/>
+  <path d="M302 704 V385 L512 566 L722 385 V704" fill="none" stroke="#090909" stroke-width="104" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="799" cy="214" r="73" fill="#090909"/>
+</svg>
